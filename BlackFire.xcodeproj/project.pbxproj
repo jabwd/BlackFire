@@ -1,0 +1,293 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; };
+		3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3616F666145F0E5500E5066D /* InfoPlist.strings */; };
+		3616F66A145F0E5500E5066D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F669145F0E5500E5066D /* main.m */; };
+		3616F66E145F0E5500E5066D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3616F66C145F0E5500E5066D /* Credits.rtf */; };
+		3616F671145F0E5500E5066D /* ADAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F670145F0E5500E5066D /* ADAppDelegate.m */; };
+		3616F674145F0E5500E5066D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3616F672145F0E5500E5066D /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3616F659145F0E5500E5066D /* BlackFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3616F65D145F0E5500E5066D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		3616F660145F0E5500E5066D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3616F661145F0E5500E5066D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3616F662145F0E5500E5066D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3616F665145F0E5500E5066D /* BlackFire-Info.plist */ = {isa = PBXFileReference; path = "BlackFire-Info.plist"; sourceTree = "<group>"; };
+		3616F667145F0E5500E5066D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3616F669145F0E5500E5066D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3616F66B145F0E5500E5066D /* BlackFire-Prefix.pch */ = {isa = PBXFileReference; path = "BlackFire-Prefix.pch"; sourceTree = "<group>"; };
+		3616F66D145F0E5500E5066D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		3616F66F145F0E5500E5066D /* ADAppDelegate.h */ = {isa = PBXFileReference; path = ADAppDelegate.h; sourceTree = "<group>"; };
+		3616F670145F0E5500E5066D /* ADAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADAppDelegate.m; sourceTree = "<group>"; };
+		3616F673145F0E5500E5066D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3616F656145F0E5500E5066D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3616F64E145F0E5400E5066D = {
+			isa = PBXGroup;
+			children = (
+				3616F663145F0E5500E5066D /* BlackFire */,
+				3616F65C145F0E5500E5066D /* Frameworks */,
+				3616F65A145F0E5500E5066D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3616F65A145F0E5500E5066D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3616F659145F0E5500E5066D /* BlackFire.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3616F65C145F0E5500E5066D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3616F65D145F0E5500E5066D /* Cocoa.framework */,
+				3616F65F145F0E5500E5066D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3616F65F145F0E5500E5066D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3616F660145F0E5500E5066D /* AppKit.framework */,
+				3616F661145F0E5500E5066D /* CoreData.framework */,
+				3616F662145F0E5500E5066D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3616F663145F0E5500E5066D /* BlackFire */ = {
+			isa = PBXGroup;
+			children = (
+				3616F66F145F0E5500E5066D /* ADAppDelegate.h */,
+				3616F670145F0E5500E5066D /* ADAppDelegate.m */,
+				3616F672145F0E5500E5066D /* MainMenu.xib */,
+				3616F664145F0E5500E5066D /* Supporting Files */,
+			);
+			path = BlackFire;
+			sourceTree = "<group>";
+		};
+		3616F664145F0E5500E5066D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3616F665145F0E5500E5066D /* BlackFire-Info.plist */,
+				3616F666145F0E5500E5066D /* InfoPlist.strings */,
+				3616F669145F0E5500E5066D /* main.m */,
+				3616F66B145F0E5500E5066D /* BlackFire-Prefix.pch */,
+				3616F66C145F0E5500E5066D /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3616F658145F0E5500E5066D /* BlackFire */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3616F677145F0E5500E5066D /* Build configuration list for PBXNativeTarget "BlackFire" */;
+			buildPhases = (
+				3616F655145F0E5500E5066D /* Sources */,
+				3616F656145F0E5500E5066D /* Frameworks */,
+				3616F657145F0E5500E5066D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlackFire;
+			productName = BlackFire;
+			productReference = 3616F659145F0E5500E5066D /* BlackFire.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3616F650145F0E5400E5066D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 3616F653145F0E5400E5066D /* Build configuration list for PBXProject "BlackFire" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3616F64E145F0E5400E5066D;
+			productRefGroup = 3616F65A145F0E5500E5066D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3616F658145F0E5500E5066D /* BlackFire */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3616F657145F0E5500E5066D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */,
+				3616F66E145F0E5500E5066D /* Credits.rtf in Resources */,
+				3616F674145F0E5500E5066D /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3616F655145F0E5500E5066D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3616F66A145F0E5500E5066D /* main.m in Sources */,
+				3616F671145F0E5500E5066D /* ADAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3616F666145F0E5500E5066D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3616F667145F0E5500E5066D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3616F66C145F0E5500E5066D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3616F66D145F0E5500E5066D /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		3616F672145F0E5500E5066D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3616F673145F0E5500E5066D /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3616F675145F0E5500E5066D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3616F676145F0E5500E5066D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3616F678145F0E5500E5066D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
+				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3616F679145F0E5500E5066D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
+				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3616F653145F0E5400E5066D /* Build configuration list for PBXProject "BlackFire" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3616F675145F0E5500E5066D /* Debug */,
+				3616F676145F0E5500E5066D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3616F677145F0E5500E5066D /* Build configuration list for PBXNativeTarget "BlackFire" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3616F678145F0E5500E5066D /* Debug */,
+				3616F679145F0E5500E5066D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3616F650145F0E5400E5066D /* Project object */;
+}
