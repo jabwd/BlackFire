@@ -10,4 +10,11 @@
 
 @implementation XFSession
 
+@synthesize status = _status;
+
+- (void)setStatus:(XFSessionStatus)newStatus
+{
+	_status = newStatus;
+}
+
 @end
