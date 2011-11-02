@@ -22,7 +22,20 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 @implementation XFSession
 
+@synthesize tcpConnection = _tcpConnection;
+@synthesize loginIdentity = _loginIdentity;
+
 @synthesize status = _status;
+
+- (void)dealloc
+{
+	[_tcpConnection release];
+	_tcpConnection = nil;
+	[_loginIdentity release];
+	_loginIdentity = nil;
+	_status = XFSessionStatusOffline;
+	[super dealloc];
+}
 
 - (void)setStatus:(XFSessionStatus)newStatus
 {

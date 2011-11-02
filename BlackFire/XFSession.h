@@ -36,16 +36,24 @@ typedef enum
 } XFPreferences;
 
 typedef enum{
-	XFSessionStatusOffline		= 0,
-	XFSessionStatusConnecting	= 1,
-	XFSessionStatusOnline		= 2,
-	XFSessionStatusDisconnecting = 3
+	XFSessionStatusOffline			= 0,
+	XFSessionStatusConnecting		= 1,
+	XFSessionStatusOnline			= 2,
+	XFSessionStatusDisconnecting	= 3
 } XFSessionStatus;
+
+@class XFConnection, XFFriend, XFGroup;
 
 @interface XFSession : NSObject
 {
+	XFConnection	*_tcpConnection;
+	XFFriend		*_loginIdentity;
+	
 	XFSessionStatus _status;
 }
+
+@property (readonly) XFConnection *tcpConnection;
+@property (nonatomic, assign) XFFriend *loginIdentity;
 
 @property (readonly) XFSessionStatus status;
 
