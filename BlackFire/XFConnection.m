@@ -178,7 +178,10 @@
 		NSLog(@"*** Tried sending packet %@ on a disconnected xfire connection",packet);
 		return;
 	}
-	[self sendData:packet.data];
+	if( packet )
+	{
+		[self sendData:packet.data];
+	}
 }
 
 #pragma mark - Keep alive
@@ -492,9 +495,8 @@
 
 - (void)requestFriendInfo:(unsigned int)userID
 {
-	XFPacket *pkt = [XFPacket friendInfoPacket:userID];
-	if( pkt )
-		[self sendData:[pkt raw]];
+	XFPacket *packet = [XFPacket friendInfoPacket:userID];
+	[self sendPacket:packet];
 }
 
 - (void)processFriendAvatarPacket:(XFPacket *)pkt
