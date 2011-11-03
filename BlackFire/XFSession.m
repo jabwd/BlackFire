@@ -107,6 +107,11 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	[self setStatus:XFSessionStatusOffline];
 }
 
+- (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError
+{
+	[self disconnect];
+}
+
 #pragma mark - Managing friends
 
 - (XFFriend *)onlineFriendForUsername:(NSString *)username

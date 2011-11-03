@@ -83,6 +83,7 @@ typedef enum{
 // Handling messages from the connection
 
 - (void)loginFailed:(XFLoginError)reason;
+- (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError;
 
 //--------------------------------------------------------------------------------
 // Managing friends
