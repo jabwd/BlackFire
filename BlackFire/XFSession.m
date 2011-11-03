@@ -114,11 +114,21 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 #pragma mark - Managing friends
 
-- (XFFriend *)onlineFriendForUsername:(NSString *)username
+- (void)raiseFriendNotification:(XFFriendNotification)notification
+{
+	
+}
+
+- (void)receivedSessionID:(NSData *)sessionID forUserID:(unsigned int)userID
+{
+	
+}
+
+- (XFFriend *)onlineFriendForUserID:(unsigned int)userID
 {
 	for(XFFriend *fr in _onlineFriends)
 	{
-		if( [fr.username isEqualToString:username] )
+		if( fr.userID == userID )
 			return fr;
 	}
 	return nil;

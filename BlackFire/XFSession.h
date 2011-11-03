@@ -39,6 +39,11 @@ typedef enum
 	XFShowWhenITypeOption
 } XFPreferences;
 
+typedef enum
+{
+	XFFriendNotificationOnlineStatus = 0
+} XFFriendNotification;
+
 typedef enum{
 	XFSessionStatusOffline			= 0,
 	XFSessionStatusConnecting		= 1,
@@ -88,8 +93,12 @@ typedef enum{
 //--------------------------------------------------------------------------------
 // Managing friends
 
+- (void)raiseFriendNotification:(XFFriendNotification)notification;
+- (void)receivedSessionID:(NSData *)sessionID forUserID:(unsigned int)userID;
+
 - (XFFriend *)onlineFriendForUsername:(NSString *)username;
 - (XFFriend *)offlineFriendForUsername:(NSString *)username;
+
 - (XFFriend *)clanFriendForUsername:(NSString *)username;
 - (XFFriend *)friendOfFriendForUsername:(NSString *)username;
 

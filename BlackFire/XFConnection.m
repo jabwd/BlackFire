@@ -501,15 +501,16 @@
 
 - (void)processFriendAvatarPacket:(XFPacket *)pkt
 {
-	//NSLog(@"Packet: %@",pkt);
-	[_session gotAvatarInfo:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue] 
+	// TODO: Implement this
+	/*[_session gotAvatarInfo:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue] 
                   andUserID:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue] 
-                       type:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]];
+                       type:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]];*/
 }
 
 - (void)processSystemBroadcast:(XFPacket *)pkt
 {
-    [_session delegate_sessionGotSystemBroadcast:[[pkt attributeForKey:@"0x2E"] value]];
+	// TODO: Implement this
+    //[_session delegate_sessionGotSystemBroadcast:[[pkt attributeForKey:@"0x2E"] value]];
 }
 
 - (void)processLoginPacket:(XFPacket *)pkt
@@ -603,7 +604,7 @@
         //[self setClientVersion:[(NSNumber *)[[versions objectAtIndex:0] value] unsignedIntValue]];
 		//[_session setLatestClientVersion:[(NSNumber *)[[versions objectAtIndex:0] value] unsignedIntValue]];
 	}
-	[_session loginFailed:XFVersionTooOldReason];
+	[_session loginFailed:XFLoginErrorVersionTooOld];
 }
 
 // Read the list of friends and add it
@@ -633,34 +634,35 @@
 	
 	for( i = 0; i < cnt; i++ )
 	{
-		XFFriend *fr = [_session friendForUserName:[usernames objectAtIndex:i]];
-		if( ! fr )
+		//XFFriend *fr = [_session friendForUserName:[usernames objectAtIndex:i]];
+		NSString *username = [usernames objectAtIndex:i];
+		
+		XFFriend *friend = [_session onlineFriendForUsername:username];
+		if( ! friend )
+			[_session offlineFriendForUsername:username];
+		
+		if( ! friend )
 		{
-			fr = [[XFFriend alloc] initWithUsername:[usernames objectAtIndex:i] andUserID:[[userids objectAtIndex:i] unsignedIntValue] session:_session];
-			[fr setNickName:[nicknames objectAtIndex:i]];
-			[_session addFriend:fr];
+			friend = [[XFFriend alloc] initWithSession:_session];
+			friend.username = username;
+			friend.userID	= [[userids objectAtIndex:i] unsignedIntValue];
+			friend.nickname = [nicknames objectAtIndex:i];
 			
-			[fr release];
-		}
-		else if( [fr isFriendOfFriend] )
-		{
-			// We can get this on a friend we already know about if they accept a friendship invitation (or we do)
-			// This should have the effect of moving groups from FoF to Online or Offline friend group.
-			[fr retain];
-			[_session removeFriend:fr];
-			[fr setIsFriendOfFriend:NO];
-			[_session addFriend:fr];
-			[fr release];
-		}
-		else if( [fr isClanFriend] )
-		{
-			[fr setIsClanFriend:NO];
+			[_session addFriend:friend];
+			
+			[friend release];
 		}
 	} 
-	if( [_session status] != XFSessionStatusOnline )
+	
+	// the most ugly part of the Xfire protocol.
+	// I see this as an extremely big mistake they made.
+	// We never know when we are actually online, we uset his packet to assume we are online
+	// in 3 seconds, the GUI also hsa to know about this.
+	// the problem is that we will keep receiving sessionIDS for about 3 seconds, yeah this can go wrong
+	// on slow connections but we have nothing to fix this with. Believe me, I tried.
+	// I have reported this to the xfire development team and we will see if they ever change the protocol
+	if( _session.status != XFSessionStatusOnline )
 		[_session setStatus:XFSessionStatusOnline];
-	// required to be called at the end, the BFAppController wants to restore the chat windows and needs
-	// a friends list in order to do that.
 	
 }
 
@@ -671,54 +673,23 @@
 //   uuid[]  Session IDs (sid)
 - (void)processSessionIDPacket:(XFPacket *)pkt
 {
-	XFGroupController *groupCtl = [_session friendGroupController];
-	
 	NSArray *userids    = [pkt attributeValuesForKey:@"0x01"];
 	NSArray *sessionids = [pkt attributeValuesForKey:@"0x03"];
 	
 	unsigned int status = [_session status];
 	
-	unsigned int i, cnt = [userids count];
+	NSUInteger i, cnt = [userids count];
 	if( cnt != [sessionids count] ) return; // prevent glitches.
 	for( i = 0; i < cnt; i++ )
 	{
 		unsigned int uid = [[userids objectAtIndex:i] unsignedIntValue];
 		NSData *sid = [sessionids objectAtIndex:i];
 		
+		[_session receivedSessionID:sid forUserID:uid];
+		
 		XFFriend *fr = [_session friendForUserID:uid];
 		if( fr )
 		{
-			/*XFFriend *clanFriend = [_session clanFriendForUserID:[fr userID]];
-			 
-			 if( clanFriend )
-			 {
-			 // first, get rid of the clanfriend object so we can re-add it.
-			 // otherwise friends we have in a clan do not show up as online.
-			 [clanFriend setSessionID:sid];
-			 if( [sid isClear] )
-			 {
-			 [clanFriend setStatusString:nil];
-			 [clanFriend setGameID:0];
-			 [clanFriend setGameIPAddress:0];
-			 [clanFriend setGamePort:0];
-			 if( [clanFriend isOnline] )
-			 {
-			 [clanFriend setIsOnline:NO];
-			 */
-			/*
-			 * This is DONE, if we notify that a friend came online here
-			 * we get 2 notifications, we don't want that.
-			 */
-			/*	}
-			 }
-			 else
-			 {
-			 if( ![clanFriend isOnline] )
-			 {
-			 [clanFriend setIsOnline:YES];
-			 }
-			 }
-			 }*/
 			[fr setSessionID:sid];
 			if( [sid isClear] )
 			{
