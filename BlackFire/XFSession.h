@@ -8,19 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-// login failure reasons
-extern NSString *XFVersionTooOldReason;
-extern NSString *XFInvalidPasswordReason;
-extern NSString *XFNetworkErrorReason;
-
-// Disconnect reasons
-extern NSString *XFOtherSessionReason;
-extern NSString *XFServerHungUpReason;
-extern NSString *XFServerStoppedRespondingReason;
-extern NSString *XFNormalDisconnectReason;
-
 extern NSString *XFFriendDidChangeNotification;
 extern NSString *XFFriendChangeAttribute;
+
+typedef enum
+{
+	XFLoginErrorVersionTooOld = 0,
+	XFLoginErrorInvalidPassword,
+	XFLoginErrorNetworkError
+} XFLoginError;
+
+typedef enum
+{
+	XFConnectionErrorOtherSession = 0,
+	XFConnectionErrorHungUp,
+	XFConnectionErrorStoppedResponding,
+	XFConnectionErrorNormalDisconnect
+} XFConnectionError;
 
 typedef enum
 {
@@ -42,21 +46,59 @@ typedef enum{
 	XFSessionStatusDisconnecting	= 3
 } XFSessionStatus;
 
-@class XFConnection, XFFriend, XFGroup;
+@class XFConnection, XFFriend, XFGroup, XFSession;
+
+@protocol XFSessionDelegate <NSObject>
+- (void)session:(XFSession *)session loginFailed:(XFLoginError)reason;
+- (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus;
+@end
 
 @interface XFSession : NSObject
 {
 	XFConnection	*_tcpConnection;
 	XFFriend		*_loginIdentity;
 	
+	id <XFSessionDelegate> _delegate;
+	
+	NSMutableArray	*_onlineFriends;
+	NSMutableArray	*_clanFriends;
+	NSMutableArray	*_friendOfFriends;
+	NSMutableArray	*_offlineFriends;
+	NSMutableArray	*_groups;
+	
 	XFSessionStatus _status;
 }
 
 @property (readonly) XFConnection *tcpConnection;
 @property (nonatomic, assign) XFFriend *loginIdentity;
+@property (nonatomic, assign) id <XFSessionDelegate> delegate;
 
 @property (readonly) XFSessionStatus status;
 
+- (id)initWithDelegate:(id<XFSessionDelegate>)delegate;
+
 - (void)setStatus:(XFSessionStatus)newStatus;
+
+//--------------------------------------------------------------------------------
+// Handling messages from the connection
+
+- (void)loginFailed:(XFLoginError)reason;
+
+//--------------------------------------------------------------------------------
+// Managing friends
+
+- (XFFriend *)onlineFriendForUsername:(NSString *)username;
+- (XFFriend *)offlineFriendForUsername:(NSString *)username;
+- (XFFriend *)clanFriendForUsername:(NSString *)username;
+- (XFFriend *)friendOfFriendForUsername:(NSString *)username;
+
+/*
+ * Don't be confused by the naming of these methods: they do not send an invitation nor
+ * send a remove of a friend, these methods are usedto remove friends from these arrays
+ * and can be used in several situations
+ * Note: they automatically find out to which array the XFFriend object belongs
+ */
+- (void)addFriend:(XFFriend *)newFriend;
+- (void)removeFriend:(XFFriend *)oldFriend;
 
 @end
