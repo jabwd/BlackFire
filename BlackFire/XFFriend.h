@@ -68,4 +68,11 @@
 
 - (NSString *)displayName;
 
+/*
+ * This method will make sure that we have no useful information
+ * about the friend, like status string and game IP address. This is the
+ * case when the friend goes offline.
+ */
+- (void)clearInformation;
+
 @end

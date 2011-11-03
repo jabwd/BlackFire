@@ -143,4 +143,16 @@
 	return _username;
 }
 
+- (void)clearInformation
+{
+	_gameIP = 0;
+	_gamePort = 0;
+	[_statusString release];
+	_statusString = nil;
+	_teamspeakIP = 0;
+	_teamspeakPort = 0;
+	_messageIndex = 0;
+	_gameID = 0;
+}
+
 @end
