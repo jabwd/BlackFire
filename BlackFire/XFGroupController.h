@@ -27,6 +27,8 @@
 - (void)addGroup:(XFGroup *)newGroup;
 - (void)removeGroup:(XFGroup *)oldGroup;
 
+- (XFGroup *)groupForID:(unsigned int)groupID;
+
 - (void)addCustomGroup:(NSString *)name groupID:(unsigned int)groupID;
 - (void)addClanGroup:(NSString *)clanName groupID:(unsigned int)groupID;
 

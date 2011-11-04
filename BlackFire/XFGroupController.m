@@ -59,6 +59,16 @@
 	}
 }
 
+- (XFGroup *)groupForID:(unsigned int)groupID
+{
+	for(XFGroup *group in _groups)
+	{
+		if( group.groupID == groupID )
+			return group;
+	}
+	return nil;
+}
+
 
 - (void)addCustomGroup:(NSString *)name groupID:(unsigned int)groupID
 {
