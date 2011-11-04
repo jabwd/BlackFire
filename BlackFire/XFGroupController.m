@@ -71,6 +71,17 @@
 	[group release];
 }
 
+- (void)addClanGroup:(NSString *)clanName groupID:(unsigned int)groupID
+{
+	XFGroup *group	= [[XFGroup alloc] init];
+	group.name		= clanName;
+	group.groupType = XFGroupTypeClanGroup;
+	group.groupID	= groupID;
+	
+	[_groups addObject:group];
+	[group release];
+}
+
 #pragma mark - Managing group members
 
 - (void)addMember:(XFFriend *)fr toGroup:(XFGroup *)group
