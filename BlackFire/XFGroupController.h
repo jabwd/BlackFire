@@ -27,6 +27,8 @@
 - (void)addGroup:(XFGroup *)newGroup;
 - (void)removeGroup:(XFGroup *)oldGroup;
 
+- (void)addCustomGroup:(NSString *)name groupID:(unsigned int)groupID;
+
 //----------------------------------------------------------
 // Managing group members
 

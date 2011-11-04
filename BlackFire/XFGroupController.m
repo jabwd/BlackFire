@@ -59,6 +59,18 @@
 	}
 }
 
+
+- (void)addCustomGroup:(NSString *)name groupID:(unsigned int)groupID
+{
+	XFGroup *group	= [[XFGroup alloc] init];
+	group.name		= name;
+	group.groupType = XFGroupTypeCustom;
+	group.groupID	= groupID;
+	
+	[_groups addObject:group];
+	[group release];
+}
+
 #pragma mark - Managing group members
 
 - (void)addMember:(XFFriend *)fr toGroup:(XFGroup *)group
