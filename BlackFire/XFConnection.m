@@ -548,12 +548,9 @@
 }
 
 - (void)processLoginPacket:(XFPacket *)pkt
-{
-	NSData *hash;
-	NSString *username,*password,*salt;
-	//[_session delegate_getUserName:&username password:&password];
-	username = @"jabwdr";
-	password = @"asdfg";
+{	
+	NSString *username = [_session.delegate username];
+	NSString *password = [_session.delegate password];
     
     
 	NSAssert(username,@"Error while logging in, no username was found",nil);
@@ -562,11 +559,12 @@
 	// copy so we have a full identification on us
 	[[_session loginIdentity] setUsername:username];
 	
-	salt = [[pkt attributeForKey:XFPacketSaltKey] value];
+	NSString *salt = [[pkt attributeForKey:XFPacketSaltKey] value];
 	
     NSString *cur = [[NSString alloc] initWithFormat:@"%@%@UltimateArena",username,password];
-    hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
+    NSData *hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
     [cur release];
+	
     cur = [[NSString alloc] initWithFormat:@"%@%@",[hash stringRepresentation], salt];
     hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
     [cur release];
@@ -574,9 +572,6 @@
 	XFPacket *loginPkt = [XFPacket loginPacketWithUsername:username
                                                   password:[hash stringRepresentation]
                                                      flags:0];
-	
-	[username release];
-	[password release];
     
 	[self sendPacket:loginPkt];
 }

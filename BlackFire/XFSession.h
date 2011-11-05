@@ -59,6 +59,8 @@ typedef enum{
 @protocol XFSessionDelegate <NSObject>
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason;
 - (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus;
+- (NSString *)username;
+- (NSString *)password;
 @end
 
 @interface XFSession : NSObject
