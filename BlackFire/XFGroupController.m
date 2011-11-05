@@ -84,6 +84,21 @@
 	}
 }
 
+- (XFGroup *)onlineFriendsGroup
+{
+	return [self groupForID:1];
+}
+
+- (XFGroup *)offlineFriendsGroup
+{
+	return [self groupForID:2];
+}
+
+- (XFGroup *)friendsOfFriendsGroup
+{
+	return [self groupForID:3];
+}
+
 - (XFGroup *)groupForID:(unsigned int)groupID
 {
 	for(XFGroup *group in _groups)
