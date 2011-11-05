@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "XFSession.h"
 
-@interface ADAppDelegate : NSObject <NSApplicationDelegate>
+@interface ADAppDelegate : NSObject <NSApplicationDelegate, XFSessionDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 

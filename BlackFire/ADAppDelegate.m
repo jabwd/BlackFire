@@ -7,6 +7,7 @@
 //
 
 #import "ADAppDelegate.h"
+#import "XFSession.h"
 
 @implementation ADAppDelegate
 
@@ -20,6 +21,23 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	// Insert code here to initialize your application
+	
+	XFSession *session = [[XFSession alloc] initWithDelegate:self];
+	
+	[session connect];
+}
+
+
+#pragma mark - Session delegate
+
+- (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
+{
+	
+}
+
+- (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus
+{
+	
 }
 
 @end
