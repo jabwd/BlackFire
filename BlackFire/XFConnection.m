@@ -8,10 +8,17 @@
 
 #import "XFConnection.h"
 #import "XfireKit.h"
-#import "XFPacket.h"
-#import "XFFriend.h"
-#import "XFGroup.h"
 #import "XFSession.h"
+#import "XFPacket.h"
+#import "XFPacketDictionary.h"
+
+#import "XFGroupChat.h"
+#import "XFChat.h"
+
+#import "XFGroupController.h"
+#import "XFGroup.h"
+#import "XFFriend.h"
+#import "XFGameServer.h"
 
 @implementation XFConnection
 
@@ -76,7 +83,12 @@
 	_status			= XFConnectionStarting;
 	_socket			= [[Socket alloc] initWithDelegate:self];
 	_socket.port	= XFIRE_PORT;
+	
 	[_socket connectToHost:XFIRE_ADDRESS];
+	
+	// For the lazy code reader: XFIRE_ADDRESS	= "cs.xfire.com"
+	//							 XFIRE_PORT		= 25999
+	// Go on, try it with telnet :D
 	
 	[self performSelector:@selector(connectionTimedOut) withObject:nil afterDelay:10.0f];
 }
@@ -100,8 +112,10 @@
 
 - (void)connectionTimedOut
 {
-	if( _status != XFConnectionDisconnected && _status != XFConnectionStopping )
+	// otherwise it does not make any sense to disconnect here.
+	if( _status == XFConnectionStarting )
 	{
+		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
 		[self disconnect];
 	}
 }
@@ -115,7 +129,14 @@
 
 - (void)didConnect
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	_status = XFConnectionConnected;
 	[self sendData:[@"UA01" dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// haha, yeah the xfire server is that dumb. They actually accept this version..
+	// if this ever breaks, the version too old packet will show up what version we
+	// are supposed to have, then we simply reconnect using that version..
+	// note: that code doesn't actually exist, so.. if it ever breaks that still needs to be written
 	[self sendPacket:[XFPacket clientVersionPacket:9999999]];
 }
 
@@ -133,7 +154,7 @@
 
 - (void)receivedData:(NSData *)data
 {	
-	if( ! _session )
+	if( !_session )
     {
         NSLog(@"Received data but no XFSession exists");
         return;
@@ -178,7 +199,7 @@
 		NSLog(@"*** Tried sending packet %@ on a disconnected xfire connection",packet);
 		return;
 	}
-	if( packet )
+	else if( packet )
 	{
 		[self sendData:packet.data];
 	}
@@ -196,6 +217,8 @@
                                                              userInfo:nil
                                                               repeats:NO];
 	
+	// I don't know what they want in the statistics parameter..
+	// it still works when its empty thuogh, so this is fine.
 	NSArray *stats = [[NSArray alloc] init];
 	[self sendPacket:[XFPacket keepAlivePacketWithValue:0 stats:stats]];
 	[stats release];
@@ -207,7 +230,8 @@
     {
         _keepAliveResponseTimer = nil;
 		
-		// this will also disconnect the connection.
+		// this will also disconnect the connection therefore we are not doing it manually
+		// in this method
 		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
     }
 }
@@ -287,8 +311,10 @@
             
         case XFFriendVOIPSoftwarePacketID:
             /*
-			 TODO: Implement this
-             2011-04-09 14:40:37.827 BlackFire[4402:903] packet:  ID 147, 4 attrs
+			 TODO: Implement this, a lot of users have been crying for this
+			 
+			 
+             BlackFire[4402:903] packet:  ID 147, 4 attrs
              AttrMap {
              sid = [[ Packet Attribute, type = 4, arrType = 3, value = (
              "[[ Packet Attribute, type = 3, arrType = -1, value = <0d170985 78ac5881 f8d17774 fd3cd80a> ]]"
@@ -477,6 +503,14 @@
             
         case XFDownloadNewChannelPacketID:
             break;
+			
+		case 190:
+			// no idea what these packets do, values are constantly empty
+			break;
+			
+		case 186:
+			// no idea what these packets do, values are constantly empty
+			break;
             
             // dump the packet that we don't know
 		default:
@@ -517,7 +551,9 @@
 {
 	NSData *hash;
 	NSString *username,*password,*salt;
-	[_session delegate_getUserName:&username password:&password];
+	//[_session delegate_getUserName:&username password:&password];
+	username = @"jabwdr";
+	password = @"asdfg";
     
     
 	NSAssert(username,@"Error while logging in, no username was found",nil);
@@ -569,10 +605,10 @@
 	user.sessionID	= (NSData *)[[pkt attributeForKey:XFPacketSessionIDKey] value];
 	
 	// TODO: fix the language attribute
-	XFPacket *newPkt = [XFPacket clientInfoPacketWithLanguage:@"us"
-                                                         skin:@"BlackFire"
-                                                        theme:@"Aqua"
-                                                      partner:@""];
+	XFPacket *newPkt = [XFPacket clientInfoPacketWithLanguage:@"en"
+                                                         skin:@"BlackFire2.0"
+                                                        theme:@"aqua"
+                                                      partner:@"Antwan van Houdt"];
 	[self sendPacket:newPkt];
 }
 
@@ -634,18 +670,14 @@
 	
 	for( i = 0; i < cnt; i++ )
 	{
-		//XFFriend *fr = [_session friendForUserName:[usernames objectAtIndex:i]];
-		NSString *username = [usernames objectAtIndex:i];
-		
-		XFFriend *friend = [_session onlineFriendForUsername:username];
-		if( ! friend )
-			[_session offlineFriendForUsername:username];
+		unsigned int uID = [[userids objectAtIndex:i] unsignedIntValue];
+		XFFriend *friend = [_session friendForUserID:uID];
 		
 		if( ! friend )
 		{
 			friend = [[XFFriend alloc] initWithSession:_session];
-			friend.username = username;
-			friend.userID	= [[userids objectAtIndex:i] unsignedIntValue];
+			friend.username = [usernames objectAtIndex:i];
+			friend.userID	= uID;
 			friend.nickname = [nicknames objectAtIndex:i];
 			
 			[_session addFriend:friend];
@@ -676,96 +708,31 @@
 	NSArray *userids    = [pkt attributeValuesForKey:@"0x01"];
 	NSArray *sessionids = [pkt attributeValuesForKey:@"0x03"];
 	
-	unsigned int status = [_session status];
-	
 	NSUInteger i, cnt = [userids count];
-	if( cnt != [sessionids count] ) return; // prevent glitches.
-	for( i = 0; i < cnt; i++ )
+	if( cnt != [sessionids count] ) 
+	{
+		NSLog(@"*** Received invalid session ID packet");
+		return;
+	}
+	
+	for(i=0;i<cnt;i++)
 	{
 		unsigned int uid = [[userids objectAtIndex:i] unsignedIntValue];
 		NSData *sid = [sessionids objectAtIndex:i];
 		
-		[_session receivedSessionID:sid forUserID:uid];
+		XFFriend *friend = [_session friendForUserID:uid];
 		
-		XFFriend *fr = [_session friendForUserID:uid];
-		if( fr )
+		if( [sid isClear] )
 		{
-			[fr setSessionID:sid];
-			if( [sid isClear] )
-			{
-				[fr setStatusString:nil];
-				[fr setGameID:0];
-				[fr setGameIPAddress:0];
-				[fr setGamePort:0];
-				if( [fr isOnline] )
-				{
-					[fr setIsOnline:NO];
-					[groupCtl friendWentOffline:fr];
-					if( status == XFSessionStatusOnline )
-						[self raiseFriendNotification:fr attribute:XFFriendOnlineStatusDidChange];
-				}
-			}
-			else
-			{
-				if( ![fr isOnline] )
-				{
-					[fr setIsOnline:YES];
-					[groupCtl friendCameOnline:fr];
-					if( status == XFSessionStatusOnline )
-						[self raiseFriendNotification:fr attribute:XFFriendOnlineStatusDidChange];
-				}
-			}
+			[friend clearInformation];
+			friend.online = false;
+			friend.sessionID = sid;
 		}
-        else
-        {
-            // this is most likely a member of a clan group
-            XFGroupController *ctrl = [_session friendGroupController];
-            NSArray *groups = [ctrl groups];
-            for(XFGroup *group in groups)
-            {
-				if( [group groupType] != XFFriendGroupClan )
-				{
-					// this is only for clan friend groups
-					continue;
-				}
-                NSArray *members = [group members];
-                for(XFFriend *member in members)
-                {
-                    if( [member userID] == uid )
-                    {
-                        // found the friend
-                        [member setSessionID:sid];
-                        if( [sid isClear] )
-                        {
-                            [member setStatusString:nil];
-                            [member setGameID:0];
-                            [member setGameIPAddress:0];
-                            [member setGamePort:0];
-							if( [member isOnline] )
-                            {
-								[member setIsOnline:NO];
-                                if( status == XFSessionStatusOnline )
-                                    [self raiseFriendNotification:member attribute:XFFriendOnlineStatusDidChange];
-                                [_session delegate_friendGroupDidChange:group];
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            if( ![member isOnline] )
-                            {
-                                [member setIsOnline:YES];
-                                if( status == XFSessionStatusOnline )
-                                    [self raiseFriendNotification:member attribute:XFFriendOnlineStatusDidChange];
-                            }
-                        }
-                        [_session delegate_friendGroupDidChange:group];
-                        return; // done enumerating
-                    }
-                }
-            }
-            //NSLog(@"Received sessionID for unknown Xfire friend");
-        }
+		else
+		{
+			friend.online = true;
+			friend.sessionID = sid;
+		}
 	}
 }
 
@@ -778,16 +745,18 @@
 	NSArray *sessionids  = [pkt attributeValuesForKey:XFPacketSessionIDKey];
 	NSArray *msgs        = [pkt attributeValuesForKey:XFPacketMessageKey];
     
-    unsigned int i, cnt = [sessionids count];
-    NSAssert(cnt == [msgs count],@"Incorrect friend status packet received, sessionIDs='%u' statusses='%u'",[sessionids count],[msgs count]);
+    NSUInteger i, cnt = [sessionids count];
+	
+	if( cnt != [msgs count] )
+	{
+		NSLog(@"*** Received invalid friend status packet");
+		return;
+	}
+
 	for(i=0;i<cnt;i++)
 	{
-		XFFriend *fr = [_session friendForSessionID:[sessionids objectAtIndex:i]];
-		if( fr )
-		{
-			[fr setStatusString:[msgs objectAtIndex:i]];
-			[self raiseFriendNotification:fr attribute:XFFriendStatusStringDidChange];
-		}
+		XFFriend *friend = [_session friendForSessionID:[sessionids objectAtIndex:i]];
+		friend.status = [msgs objectAtIndex:i];
 	}
 }
 
@@ -801,84 +770,29 @@
 // Anyone that is not on our friends list, we will request FoF information if allowed
 - (void)processGameStatusPacket:(XFPacket *)pkt
 {
-	NSArray *sessionIDs, *gameIDs, *gameIPAddrs, *gamePorts;
-	XFFriend *fr;
-	
 	NSMutableArray *unknownSids = [[NSMutableArray alloc] init];
 	
-	sessionIDs  = [pkt attributeValuesForKey:XFPacketSessionIDKey];
-	gameIDs     = [pkt attributeValuesForKey:XFPacketGameIDKey];
-	gameIPAddrs = [pkt attributeValuesForKey:XFPacketGameIPKey];
-	gamePorts   = [pkt attributeValuesForKey:XFPacketGamePortKey];
+	NSArray *sessionIDs  = [pkt attributeValuesForKey:XFPacketSessionIDKey];
+	NSArray *gameIDs     = [pkt attributeValuesForKey:XFPacketGameIDKey];
+	NSArray *gameIPAddrs = [pkt attributeValuesForKey:XFPacketGameIPKey];
+	NSArray *gamePorts   = [pkt attributeValuesForKey:XFPacketGamePortKey];
 	
-	unsigned int i, cnt = [sessionIDs count];
+	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
 		NSData *sid         = [sessionIDs objectAtIndex:i];
 		unsigned int gid    = [[gameIDs objectAtIndex:i] unsignedIntValue];
 		
-		fr = [_session friendForSessionID:sid];
-		if( fr )
+		XFFriend *friend = [_session friendForSessionID:sid];
+		if( ! friend )
 		{
-			// Did a FoF leave a game?  If so, remove from our FoF list
-			if( (gid == 0) && [fr isFriendOfFriend] )
-			{
-                [fr retain];
-				[fr setIsOnline:NO];
-				[_session removeFriend:fr];
-				
-				[self raiseFriendNotification:fr attribute:XFFriendWasRemoved];
-                [fr release]; // dont leak
-			}
-			else
-			{
-                if( [fr gameID] == gid ) 
-                {
-                    [unknownSids release]; // dont leak
-                    return;  
-                }
-				[fr setGameID:gid];
-				[fr setGameIPAddress:[[gameIPAddrs objectAtIndex:i] unsignedIntValue]];
-				[fr setGamePort:([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF)]; // this seems to be a packed value; not sure what the upper half is yet
-				
-				[self raiseFriendNotification:fr attribute:XFFriendGameInfoDidChange];
-			}
+			[unknownSids addObject:sid];
 		}
 		else
 		{
-			// We can get additional notifications on a given FoF before we know who they are
-			// (before we've gotten the info for FoF).  If so, update the info, otherwise we end up
-			// with 2 or more instances of a given FoF in the list.  We won't send a FoF request for this
-			// person again since we've already sent one.  This may result in canceling a pending
-			// friend, if the person comes online and goes offline quickly.  Let's kill the pending FoF.
-			fr = [_session pendingFriendForSessionID:sid];
-			if( fr )
-			{
-				if( gid != 0 )
-				{
-					// change info.
-					[fr setGameID:gid];
-					[fr setGameIPAddress:[[gameIPAddrs objectAtIndex:i] unsignedIntValue]];
-					[fr setGamePort:([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF)];
-				}
-				else
-				{
-					[_session removePendingFriend:fr];
-				}
-			}
-			else
-			{
-				// Add a pending friend (FoF)
-				[unknownSids addObject:sid];
-				
-				fr = [[XFFriend alloc] init];
-				[fr setSessionID:sid];
-				[fr setGameID:gid];
-				[fr setGameIPAddress:[[gameIPAddrs objectAtIndex:i] unsignedIntValue]];
-				[fr setGamePort:([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF)]; // this seems to be a packed value; not sure what the upper half is yet
-				[_session addPendingFriend:fr];
-				[fr release]; // not sure
-			}
+			friend.gameID	= gid;
+			friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
+			friend.gamePort = [[gamePorts objectAtIndex:i] unsignedIntValue];
 		}
 	}
 	
@@ -886,7 +800,8 @@
 	// Request that information if the user requests it
 	if( ([unknownSids count] > 0) && [_session shouldShowFriendsOfFriends] )
 	{
-		[self sendData:[[XFPacket friendOfFriendRequestPacketWithSIDs:unknownSids] raw]];
+		XFPacket *packet = [XFPacket friendOfFriendRequestPacketWithSIDs:unknownSids];
+		[self sendPacket:packet];
 	}
 	[unknownSids release]; // don't leak
 }
@@ -904,13 +819,13 @@
 	NSArray *sessionIDs, *userIDs, *userNames, *nickNames, *commonFriends, *common;
 	NSString *username, *nickname;
 	
-	sessionIDs = [pkt attributeValuesForKey:XFPacketFriendSIDKey];
-	userIDs    = [pkt attributeValuesForKey:XFPacketUserIDKey];
-	userNames  = [pkt attributeValuesForKey:XFPacketNameKey];
-	nickNames  = [pkt attributeValuesForKey:XFPacketNickNameKey];
-	commonFriends = [pkt attributeValuesForKey:XFPacketFriendsKey];
+	sessionIDs		= [pkt attributeValuesForKey:XFPacketFriendSIDKey];
+	userIDs			= [pkt attributeValuesForKey:XFPacketUserIDKey];
+	userNames		= [pkt attributeValuesForKey:XFPacketNameKey];
+	nickNames		= [pkt attributeValuesForKey:XFPacketNickNameKey];
+	commonFriends	= [pkt attributeValuesForKey:XFPacketFriendsKey];
 	
-	unsigned int i, j, cnt = [sessionIDs count];
+	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
 		NSData *sid = [sessionIDs objectAtIndex:i];
@@ -918,30 +833,27 @@
 		nickname = [nickNames objectAtIndex:i];
 		common = [commonFriends objectAtIndex:i]; // it's an array of XFPacketAttributeValue objects containing NSNumbers
 		
+		XFFriend *friend = [_session friendForSessionID:sid];
+		if( friend )
+		{
+			break; // this means that we _know_ this friend and so its not a FoF
+		}
+		
 		// Can be 0 if this person went offline, I think
 		if( [username length] > 0 )
 		{
-			XFFriend *fr = [_session pendingFriendForSessionID:sid];
-			if( fr )
-			{
-				[fr setUserID:[[userIDs objectAtIndex:i] unsignedIntValue]];
-				[fr setUserName:username];
-				[fr setNickName:nickname];
-				[fr setIsOnline:YES];
-				[fr setIsFriendOfFriend:YES];
-				
-				for( j = 0; j < [common count]; j++ )
-				{
-					[fr addCommonFriendID:(NSNumber *)[[common objectAtIndex:j] value]];
-				}
-				
-				// move from pending to actual
-				[_session addFriend:fr];
-				//[_session removePendingFriend:fr];
-				[_session delegate_friendDidChange:fr attribute:XFFriendWasAdded];
-			}
+			XFFriend *friend = [[XFFriend alloc] init];
+			friend.userID			= [[userIDs objectAtIndex:i] unsignedIntValue];
+			friend.username			= username;
+			friend.nickname			= nickname;
+			friend.sessionID		= sid;
+			friend.online			= true;
+			friend.friendOfFriend	= true;
+			
+			[_session addFriend:friend];
+			
+			[friend release];
 		}
-		// else the username is invalid ... the person probably just left a game ... ignore it
 	}
 }
 
@@ -952,25 +864,16 @@
 	userIDs   = [pkt attributeValuesForKey:@"0x01"];
 	nickNames = [pkt attributeValuesForKey:@"0x0d"];
 	
-	unsigned int i, cnt = [userIDs count];
+	NSUInteger i, cnt = [userIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
 		NSString *nickname = [nickNames objectAtIndex:i];
 		unsigned int uid = [[userIDs objectAtIndex:i] unsignedIntValue];
-		// check if it's a friend
-		XFFriend *fr = [_session friendForUserID:uid];
-		if( fr )
-		{
-			[fr setNickName:nickname];
-			[self raiseFriendNotification:fr attribute:XFFriendNicknameDidChange];
-		}
 		
-		// check if it's us, too
-		fr = [_session loginIdentity];
-		if( [fr userID] == uid )
+		XFFriend *friend = [_session friendForUserID:uid];
+		if( friend )
 		{
-			[fr setNickName:nickname];
-			[_session delegate_nicknameDidChange:nickname];
+			friend.nickname = nickname;
 		}
 	}
 }
@@ -980,13 +883,27 @@
 	NSArray *userNames,*firstNames,*lastNames;
 	
 	NSMutableArray *friends = [NSMutableArray array];
-	XFFriend *fr;
 	
 	userNames = [pkt attributeValuesForKey:XFPacketNameKey];
 	firstNames = [pkt attributeValuesForKey:XFPacketFirstNameKey];
 	lastNames = [pkt attributeValuesForKey:XFPacketLastNameKey];
 	
-	unsigned int i, cnt = [userNames count];
+	NSUInteger i, cnt = [userNames count];
+	for(i=0;i<cnt;i++)
+	{
+		XFFriend *friend = [[XFFriend alloc] init];
+		
+		friend.username		= [userNames objectAtIndex:i];
+		friend.firstName	= [firstNames objectAtIndex:i];
+		friend.lastName		= [lastNames objectAtIndex:i];
+		
+		[friends addObject:friend];
+		[friend release];
+	}
+	
+	// TODO: Process search results
+	
+/*	unsigned int i, cnt = [userNames count];
 	for( i = 0; i < cnt; i++ )
 	{
 		fr = [[XFFriend alloc] init];
@@ -999,39 +916,43 @@
 		[fr release];
 	}
 	
-	[_session delegate_searchResults:friends];
+	[_session delegate_searchResults:friends];*/
 }
 
 - (void)processRemoveFriendPacket:(XFPacket *)pkt
 {
-	XFFriend *fr;
-	
 	NSArray *userIDs = [pkt attributeValuesForKey:XFPacketUserIDKey];
 	
-	unsigned int i, cnt = [userIDs count];
-	for( i = 0; i < cnt; i++ )
+	NSUInteger i, cnt = [userIDs count];
+	for(i=0;i<cnt;i++)
 	{
-		fr = [_session friendForUserID:[[userIDs objectAtIndex:i] unsignedIntValue]];
-		if( fr )
-		{
-			[[fr retain] autorelease]; // make sure it stays around for a little while longer
-			
-			[_session removeFriend:fr];
-			[self raiseFriendNotification:fr attribute:XFFriendWasRemoved];
-		}
+		[_session friendWasDeleted:[[userIDs objectAtIndex:i] unsignedIntValue]];
 	}
 }
 
 - (void)processFriendRequestPacket:(XFPacket *)pkt
 {	
 	NSMutableArray *friends = [[NSMutableArray alloc] init];
-	XFFriend *fr;
+	//XFFriend *fr;
 	
 	NSArray *userNames = [pkt attributeValuesForKey:XFPacketNameKey];
 	NSArray *nickNames = [pkt attributeValuesForKey:XFPacketNickNameKey];
 	NSArray *messages  = [pkt attributeValuesForKey:XFPacketMessageKey];
+	
+	NSUInteger i, cnt = [userNames count];
+	for(i=0;i<cnt;i++)
+	{
+		XFFriend *friend = [[XFFriend alloc] init];
+		
+		friend.username = [userNames objectAtIndex:i];
+		friend.nickname = [nickNames objectAtIndex:i];
+		friend.status	= [messages objectAtIndex:i];
+		
+		[friends addObject:friend];
+		[friend release];
+	}
     
-	unsigned int i, cnt = [userNames count];
+/*	unsigned int i, cnt = [userNames count];
 	for( i = 0; i < cnt; i++ )
 	{
 		fr = [[XFFriend alloc] init];
@@ -1046,23 +967,23 @@
 		[fr release];
 	}
 	[_session delegate_didReceiveFriendshipRequests:friends];
-    [friends release];
+    [friends release];*/
 }
 
 - (void)processFriendGroupNamePacket:(XFPacket *)pkt
 {
 	NSArray *groupIDs,*groupNames;
-	XFGroupController *ctl = [_session friendGroupController];
+	XFGroupController *ctl = _session.groupController;
 	NSString *groupName;
 	
 	groupIDs   = [pkt attributeValuesForKey:@"0x19"];
 	groupNames = [pkt attributeValuesForKey:@"0x1a"];
 	
-	unsigned int i, cnt = [groupIDs count];
+	NSUInteger i, cnt = [groupIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
 		groupName = [groupNames objectAtIndex:i];
-		[ctl addCustomGroupNamed:groupName withID:[[groupIDs objectAtIndex:i] intValue]];
+		[ctl addCustomGroup:groupName groupID:[[groupIDs objectAtIndex:i] intValue]];
 	}
 }
 
@@ -1070,23 +991,23 @@
 {
 	NSArray *userIDs;
 	NSArray *groupIDs;
-	XFGroupController *ctl = [_session friendGroupController];
+	XFGroupController *ctl = [_session groupController];
 	
 	userIDs    = [pkt attributeValuesForKey:@"0x01"];
 	groupIDs   = [pkt attributeValuesForKey:@"0x19"];
 	
-	unsigned int i, cnt = [userIDs count];
+	NSUInteger i, cnt = [userIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
-        //NSLog(@"Member: %@",userIDs);
-		//NSLog(@"UserID: %u",[[userIDs objectAtIndex:i] unsignedIntValue]);
-		//XFFriend *fr = [_session friendForUserID:[[userIDs objectAtIndex:i] unsignedIntValue]];
-		[ctl addPendingMemberID:[[userIDs objectAtIndex:i] unsignedIntValue] groupID:[[groupIDs objectAtIndex:i] unsignedIntValue]];
-		//[ctl addFriend:fr toGroup:[ctl groupForID:[[groupIDs objectAtIndex:i] unsignedIntValue]]];
-		//if( fr )
-		//	[ctl addFriendToCustomGroup:fr toGroup:[ctl groupForID:[[groupIDs objectAtIndex:i] unsignedIntValue]]];
-		//else
-		//	NSLog(@"Error: no XFFriend in the friends list that matches this custom group");
+		XFFriend *friend = [_session friendForUserID:[[userIDs objectAtIndex:i] unsignedIntValue]];
+		if( friend )
+		{
+			XFGroup *group = [ctl groupForID:[[groupIDs objectAtIndex:i] unsignedIntValue]];
+			if( group )
+			{
+				[group addMember:friend];
+			}
+		}
 	}
 	//[ctl sortMembers];
 }
@@ -1104,7 +1025,7 @@
 - (void)processFriendGroupListPacket:(XFPacket *)pkt
 {
 #if 0
-	[[[self session] friendGroupController] setGroupList:[pkt attributeValuesForKey:@"0x19"]];
+	//[[[self session] friendGroupController] setGroupList:[pkt attributeValuesForKey:@"0x19"]];
 #endif
 }
 
@@ -1166,16 +1087,18 @@
     
 	
 	// Now that we know the user's preferences, enable the customizable groups
-	[[_session friendGroupController] ensureStandardGroup:XFFriendGroupOnline];
+	/*[[_session friendGroupController] ensureStandardGroup:XFFriendGroupOnline];
 	if( [_session shouldShowFriendsOfFriends] )
 		[[_session friendGroupController] ensureStandardGroup:XFFriendGroupFriendOfFriends];
 	if( [_session shouldShowOfflineFriends] )
 		[[_session friendGroupController] ensureStandardGroup:XFFriendGroupOffline];
+	 */
+	// TODO: implement groups like this
 }
 
 - (void)processChatMessagePacket:(XFPacket *)pkt
 {
-	NSData *sid = (NSData *)[[pkt attributeForKey:XFPacketSessionIDKey] value];
+	/*NSData *sid = (NSData *)[[pkt attributeForKey:XFPacketSessionIDKey] value];
 	XFChat *chat = [_session chatForSessionID:sid];
 	
 	// no open chat yet, create one
@@ -1188,21 +1111,19 @@
 	
 	// chat object handles the message and acknowledgements
 	// the chat has its own delegate
-	[chat receivePacket:pkt];
+	[chat receivePacket:pkt];*/
 }
 
 - (void)processDisconnectPacket:(XFPacket *)pkt
 {
     if( [[[pkt attributeForKey:XFPacketReasonKey] value] intValue] == 1 )
     {
-        [_session delegate_sessionWillDisconnect:XFOtherSessionReason];
+		[_session connection:self willDisconnect:XFConnectionErrorOtherSession];
     }
     else
     {
-        [_session delegate_sessionWillDisconnect:XFServerHungUpReason];
+		[_session connection:self willDisconnect:XFConnectionErrorHungUp];
     }
-    
-    [_session disconnect];
 }
 
 - (void)processKeepAliveResponse:(XFPacket *)pkt
@@ -1220,22 +1141,19 @@
 {
     NSArray             *groupIDs       = [pkt attributeValuesForKey:@"0x6c"];
     NSArray             *clanList       = [pkt attributeValuesForKey:@"0x02"];
-    XFGroupController   *ctr            = [_session friendGroupController];
+    XFGroupController   *ctr            = [_session groupController];
     
-    unsigned int i, cnt = [clanList count];
+	NSUInteger i, cnt = [clanList count];
     for( i = 0; i < cnt;i++ ) 
     {
-        [ctr addClanGroupNamed:[clanList objectAtIndex:i] 
-                        withID:[[groupIDs objectAtIndex:i] intValue]];
+		[ctr addClanGroup:[clanList objectAtIndex:i] groupID:[[groupIDs objectAtIndex:i] intValue]];
     }
 }
 
 - (void)processClanMembersPacket:(XFPacket *)pkt
 {
-	XFGroupController *ctl = [_session friendGroupController];
+	XFGroupController *ctl = [_session groupController];
 	NSArray *userIDs, *userNames, *nickNames, *clanNicks, *groupIDs;
-	
-	NSString *username, *nickname, *clanNick;
 	
 	XFFriend *me = [_session loginIdentity];
 	
@@ -1246,87 +1164,82 @@
 	clanNicks = [pkt attributeValuesForKey:@"0x6d"];
 	groupIDs  = [pkt attributeValuesForKey:@"0x6c"];
 	
-	NSUInteger i, userID, cnt = [userIDs count];
+	NSUInteger i, cnt = [userIDs count];
 	XFGroup *clanGrp = [ctl groupForID:[[groupIDs objectAtIndex:0] intValue]];
 	for( i = 0; i < cnt;i++ )
 	{
-		userID   = [[userIDs objectAtIndex:i] unsignedIntValue];
-		username = [userNames objectAtIndex:i];
-		nickname = [nickNames objectAtIndex:i];
-		clanNick = [clanNicks objectAtIndex:i];
+		unsigned int userID		= [[userIDs objectAtIndex:i] unsignedIntValue];
+		NSString *username		= [userNames objectAtIndex:i];
+		NSString *nickname		= [nickNames objectAtIndex:i];
+		//NSString *clanNickname	= [clanNicks objectAtIndex:i];
 		
 		
-		if( ([username length] > 0) && (![username isEqualToString:[me userName]]) )
+		if( [username length] > 0 && userID != me.userID )
 		{
 			XFFriend *fr = [_session friendForUserID:userID];
 			if( !fr )
 			{
 				fr = [[XFFriend alloc] init];
-				[fr setUserID:userID];
-				[fr setUserName:username];
+				fr.userID = userID;
+				fr.username = username;
+				fr.nickname = nickname;
+				fr.clanFriend = true;
 				
-				[fr setNickName:nickname];
-				[fr setIsOnline:NO];
-				[fr setIsFriendOfFriend:NO];
-				[fr setIsClanFriend:YES];
-                [clanGrp addMemberFast:fr];
-				//[_session addClanFriend:fr];
-				[_session addFriendClean:fr];
+				[_session addFriend:fr];
+				[clanGrp addMember:fr];
 				[fr release];
+				
+				// TODO: Add support for clan nicknames
 			}
 			else
 			{
-				//[_session addClanFriend:fr];
-				[_session addFriendClean:fr];
-				[clanGrp addMemberFast:fr];
+				[clanGrp addMember:fr];
 			}
 		} 
-		// else the username is invalid ... the person probably just left a game ... ignore it
 	}
-    [_session delegate_friendGroupDidChange:clanGrp];
-	[clanGrp sortMembers];
+    //[_session delegate_friendGroupDidChange:clanGrp];
+	//[clanGrp sortMembers];
 }
 
 - (void)processFriendChangePacket:(XFPacket *)pkt
 {
-    unsigned int userID = [[[pkt attributeValuesForKey:@"0x01"] objectAtIndex:0] unsignedIntValue];
+	// seriously, a packet  with 1 attribute? WHAT THE F*CK, ok ok, lets find out what it actually does by dumping it
+	// as soon as we receive it..
+	NSLog(@"Useless packet received: %@",pkt);
+   /* unsigned int userID = [[[pkt attributeValuesForKey:@"0x01"] objectAtIndex:0] unsignedIntValue];
     XFFriend *friend = [_session friendForUserID:userID];
     if( friend )
         [_session delegate_friendDidChange:friend attribute:XFFriendStatusStringDidChange];
+	*/
 }
 
 
 
-#pragma mark -
-#pragma mark Server list
+#pragma mark - Server list
 
-- (void)processServerList:(XFPacket *)pkt{
-    NSArray *gamesArray = [pkt attributeValuesForKey:@"gameid"];
-    NSArray *gameIPs    = [pkt attributeValuesForKey:@"gip"];
-    NSArray *gamePorts  = [pkt attributeValuesForKey:@"gport"];
+- (void)processServerList:(XFPacket *)pkt
+{
+    NSArray *gamesArray = [pkt attributeValuesForKey:XFPacketGameIDKey];
+    NSArray *gameIPs    = [pkt attributeValuesForKey:XFPacketGameIPKey];
+    NSArray *gamePorts  = [pkt attributeValuesForKey:XFPacketGamePortKey];
+	
     NSMutableArray *serverList = [[NSMutableArray alloc] init];
-    unsigned char t1, t2, t3, t4;
     
-    unsigned int i, addr, cnt = [gameIPs count];
+    NSUInteger i, addr, cnt = [gameIPs count];
     for(i=0;i<cnt;i++)
     {
         addr = [[gameIPs objectAtIndex:i] unsignedIntValue];
-        t1 = (addr >> 24) & 0xFF;
-        t2 = (addr >> 16) & 0xFF;
-        t3 = (addr >>  8) & 0xFF;
-        t4 = (addr      ) & 0xFF;
-        NSString *ipString = [[NSString alloc] initWithFormat:@"%u.%u.%u.%u:%u",t1,t2,t3,t4,([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF)];
-        NSMutableDictionary *aDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                      [gamesArray objectAtIndex:i],
-                                      @"gameID",
-                                      ipString,
-                                      @"ip",
-                                      nil];
-        [serverList addObject:aDict];
-        [aDict    release];
-        [ipString release];
+		
+		XFGameServer *server = [[XFGameServer alloc] init];
+		server.IPAddress	= [[gameIPs objectAtIndex:i] unsignedIntValue];
+		server.Port			= [[gamePorts objectAtIndex:i] unsignedIntValue];
+		server.gameID		= [[gamesArray objectAtIndex:i] unsignedIntValue];
+        [serverList addObject:server];
+		
+		[server release];
     }
-    [_session setServerList:serverList];
+	NSLog(@"Received a server list: %@",serverList);
+   // [_session setServerList:serverList];
     [serverList release];
 }
 
@@ -1336,12 +1249,13 @@
     NSRunAlertPanel(@"Invitation has been sent", message, @"OK", nil, nil);
 }
 
-#pragma mark -
-#pragma mark Broadcasting
+#pragma mark - Broadcasting
 
 - (void)processBroadCastPacket:(XFPacket *)pkt
 {
-	if( pkt )
+	// this packet can be used inside on XfireChat to notify the user that
+	// the friend started broadcasting
+	/*if( pkt )
 	{
 		NSData *sid = [[pkt attributeValuesForKey:@"0x03"] objectAtIndex:0];
 		if( [sid length] == 16 )
@@ -1360,13 +1274,12 @@
 		{
 			NSLog(@"Received a broadcastt pacekt with an invalid session ID");
 		}
-	}
+	}*/
 }
 
-#pragma mark -
-#pragma mark Chat rooms
+#pragma mark - Chat rooms
 
-- (void) processChatRoomMotdChanged:(XFPacket *)pkt
+/*- (void) processChatRoomMotdChanged:(XFPacket *)pkt
 {
     NSData *sid = [[pkt attributeValuesForKey:@"0x04"] objectAtIndex:0];
     XFGroupChat *grpChat = [_session groupChatForSessionID:sid];
@@ -1440,11 +1353,6 @@
     NSString *errorMessage = [NSString 
                               stringWithFormat:@"%@ invited you to chatroom %@",
                               nickName,message];
-    
-    /*
-     * This is a REALLY bad implementation it is crying for a better one
-     * TODODODODODODO
-     */
     
     int result = NSRunAlertPanel(@"Chatroom invite", errorMessage, @"Accept", @"Decline", nil);
     if( result == NSOKButton )
@@ -1589,9 +1497,8 @@
 {
     //if( [_session status] != XFSessionStatusOnline )
     //  [_session setStatus:XFSessionStatusOnline];
-}
+}*/
 
-
-#pragma mark - Sending packets
+#pragma mark - Sending Packets
 
 @end

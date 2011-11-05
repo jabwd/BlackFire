@@ -41,7 +41,10 @@ typedef enum
 
 typedef enum
 {
-	XFFriendNotificationOnlineStatus = 0
+	XFFriendNotificationOnlineStatusChanged = 0,
+	XFFriendNotificationStatusChanged,
+	XFFriendNotificationFriendAdded,
+	XFFriendNotificationFriendRemoved
 } XFFriendNotification;
 
 typedef enum{
@@ -51,7 +54,7 @@ typedef enum{
 	XFSessionStatusDisconnecting	= 3
 } XFSessionStatus;
 
-@class XFConnection, XFFriend, XFGroup, XFSession;
+@class XFConnection, XFFriend, XFGroup, XFSession, XFGroupController;
 
 @protocol XFSessionDelegate <NSObject>
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason;
@@ -60,16 +63,14 @@ typedef enum{
 
 @interface XFSession : NSObject
 {
-	XFConnection	*_tcpConnection;
-	XFFriend		*_loginIdentity;
+	XFConnection		*_tcpConnection;
+	XFFriend			*_loginIdentity;
+	XFGroupController	*_groupController;
 	
 	id <XFSessionDelegate> _delegate;
 	
-	NSMutableArray	*_onlineFriends;
-	NSMutableArray	*_clanFriends;
-	NSMutableArray	*_friendOfFriends;
-	NSMutableArray	*_offlineFriends;
-	NSMutableArray	*_groups;
+	NSMutableArray	*_friends;
+	NSTimer			*_keepAliveTimer;
 	
 	XFSessionStatus _status;
 }
@@ -77,12 +78,18 @@ typedef enum{
 @property (readonly) XFConnection *tcpConnection;
 @property (nonatomic, assign) XFFriend *loginIdentity;
 @property (nonatomic, assign) id <XFSessionDelegate> delegate;
+@property (nonatomic, retain) XFGroupController *groupController;
 
 @property (readonly) XFSessionStatus status;
 
 - (id)initWithDelegate:(id<XFSessionDelegate>)delegate;
 
 - (void)setStatus:(XFSessionStatus)newStatus;
+
+//--------------------------------------------------------------------------------
+// Connecting to xfire
+- (void)connect;
+- (void)disconnect;
 
 //--------------------------------------------------------------------------------
 // Handling messages from the connection
@@ -93,14 +100,12 @@ typedef enum{
 //--------------------------------------------------------------------------------
 // Managing friends
 
-- (void)raiseFriendNotification:(XFFriendNotification)notification;
-- (void)receivedSessionID:(NSData *)sessionID forUserID:(unsigned int)userID;
+- (void)raiseFriendNotification:(XFFriendNotification)notification forFriend:(XFFriend *)fr;
 
-- (XFFriend *)onlineFriendForUsername:(NSString *)username;
-- (XFFriend *)offlineFriendForUsername:(NSString *)username;
+- (XFFriend *)friendForUserID:(unsigned int)userID;
+- (XFFriend *)friendForUsername:(NSString *)username;
+- (XFFriend *)friendForSessionID:(NSData *)sessionID;
 
-- (XFFriend *)clanFriendForUsername:(NSString *)username;
-- (XFFriend *)friendOfFriendForUsername:(NSString *)username;
 
 /*
  * Don't be confused by the naming of these methods: they do not send an invitation nor
@@ -110,5 +115,16 @@ typedef enum{
  */
 - (void)addFriend:(XFFriend *)newFriend;
 - (void)removeFriend:(XFFriend *)oldFriend;
+
+/*
+ * Now these methods actually handle friends deletion
+ */
+- (void)friendWasDeleted:(unsigned int)userID;
+
+//--------------------------------------------------------------------------------
+// User options
+
+- (BOOL)shouldShowFriendsOfFriends;
+- (BOOL)shouldShowOfflineFriends;
 
 @end

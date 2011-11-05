@@ -22,9 +22,14 @@
 //--------------------------------------------------------------------
 // Sending messages
 - (void)sendMessage:(NSString *)message;
+- (void)notifyIsTyping;
+- (void)sendNetworkInformation;
 
 //--------------------------------------------------------------------
 // Handling incoming messages
+- (void)receivedNetworkInformation;
+- (void)receivedIsTypingNotification;
+- (void)receivedMessaeg:(NSString *)message;
 
 /*
  * Destroys the XFChat object

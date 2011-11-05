@@ -10,6 +10,8 @@
 #import "XFConnection.h"
 #import "XFFriend.h"
 #import "XFGroup.h"
+#import "XFGroupController.h"
+#import "NSData_XfireAdditions.h"
 
 NSString *XFFriendDidChangeNotification		= @"XFFriendDidChangeNotification";
 NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
@@ -19,6 +21,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 @synthesize tcpConnection	= _tcpConnection;
 @synthesize loginIdentity	= _loginIdentity;
 @synthesize delegate		= _delegate;
+@synthesize groupController = _groupController;
 
 @synthesize status = _status;
 
@@ -26,25 +29,30 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 {
 	if( (self = [super init]) )
 	{
-		_delegate		= delegate;
-		_tcpConnection	= nil;
-		_loginIdentity	= nil;
+		_delegate			= delegate;
+		_tcpConnection		= nil;
+		_loginIdentity		= nil;
+		_groupController	= nil;
 		
-		_onlineFriends		= nil;
-		_offlineFriends		= nil;
-		_clanFriends		= nil;
-		_friendOfFriends	= nil;
+		_friends			= nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_keepAliveTimer invalidate];
+	_keepAliveTimer = nil;
 	[_tcpConnection release];
 	_tcpConnection = nil;
 	[_loginIdentity release];
 	_loginIdentity = nil;
+	[_groupController release];
+	_groupController = nil;
 	_status = XFSessionStatusOffline;
+	_delegate = nil;
+	[_friends release];
+	_friends = nil;
 	[super dealloc];
 }
 
@@ -56,32 +64,37 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		return;
 	}
 	
-	[_onlineFriends release];
-	_onlineFriends = [[NSMutableArray alloc] init];
-	[_offlineFriends release];
-	_offlineFriends = [[NSMutableArray alloc] init];
-	[_friendOfFriends release];
-	_friendOfFriends = [[NSMutableArray alloc] init];
+	[_friends release];
+	_friends = [[NSMutableArray alloc] init];
+	[_groupController release];
+	_groupController = [[XFGroupController alloc] init];
+	
+	[_loginIdentity release];
+	_loginIdentity = [[XFFriend alloc] init];
 	
 	[_tcpConnection release];
 	_tcpConnection = [[XFConnection alloc] initWithSession:self];
 	[_tcpConnection connect];
+	
+	[_keepAliveTimer invalidate];
+	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
 }
 
 - (void)disconnect
 {
+	[_keepAliveTimer invalidate];
+	_keepAliveTimer = nil;
 	[_tcpConnection disconnect];
 	[_tcpConnection release];
 	_tcpConnection = nil;
+	[_groupController release];
+	_groupController = nil;
 	
-	[_onlineFriends release];
-	_onlineFriends = nil;
-	[_offlineFriends release];
-	_offlineFriends = nil;
-	[_clanFriends release];
-	_clanFriends = nil;
-	[_friendOfFriends release];
-	_friendOfFriends = nil;
+	[_loginIdentity release];
+	_loginIdentity = nil;
+	
+	[_friends release];
+	_friends = nil;
 	
 	[self setStatus:XFSessionStatusOffline];
 }
@@ -97,6 +110,11 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 }
 
 #pragma mark - Handling connection messages
+
+- (void)sendKeepAlive:(NSTimer *)timer
+{
+	[_tcpConnection sendKeepAliveRequest];
+}
 
 - (void)loginFailed:(XFLoginError)reason
 {
@@ -114,105 +132,79 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 #pragma mark - Managing friends
 
-- (void)raiseFriendNotification:(XFFriendNotification)notification
+- (void)raiseFriendNotification:(XFFriendNotification)notification forFriend:(XFFriend *)fr
 {
-	
-}
-
-- (void)receivedSessionID:(NSData *)sessionID forUserID:(unsigned int)userID
-{
-	
-}
-
-- (XFFriend *)onlineFriendForUserID:(unsigned int)userID
-{
-	for(XFFriend *fr in _onlineFriends)
+	if( notification == XFFriendNotificationFriendAdded )
 	{
-		if( fr.userID == userID )
-			return fr;
+	}
+}
+
+- (XFFriend *)friendForUserID:(unsigned int)userID
+{
+	NSUInteger i, cnt = [_friends count];
+	for(i=0;i<cnt;i++)
+	{
+		if( [[_friends objectAtIndex:i] userID] == userID )
+			return [_friends objectAtIndex:i];
 	}
 	return nil;
 }
 
-- (XFFriend *)offlineFriendForUsername:(NSString *)username
+- (XFFriend *)friendForUsername:(NSString *)username
 {
-	for(XFFriend *fr in _offlineFriends)
+	NSUInteger i, cnt = [_friends count];
+	for(i=0;i<cnt;i++)
 	{
-		if( [fr.username isEqualToString:username] )
-			return fr;
+		if( [[[_friends objectAtIndex:i] username] isEqualToString:username] )
+			return [_friends objectAtIndex:i];
 	}
 	return nil;
 }
 
-- (XFFriend *)clanFriendForUsername:(NSString *)username
+- (XFFriend *)friendForSessionID:(NSData *)sessionID
 {
-	for(XFFriend *fr in _clanFriends)
+	NSUInteger i, cnt = [_friends count];
+	for(i=0;i<cnt;i++)
 	{
-		if( [fr.username isEqualToString:username] )
-			return fr;
-	}
-	return nil;
-}
-
-- (XFFriend *)friendOfFriendForUsername:(NSString *)username
-{
-	for(XFFriend *fr in _friendOfFriends)
-	{
-		if( [fr.username isEqualToString:username] )
-			return fr;
+		if( [[[_friends objectAtIndex:i] sessionID] isEqualToData:sessionID] )
+			return [_friends objectAtIndex:i];
 	}
 	return nil;
 }
 
 - (void)addFriend:(XFFriend *)newFriend
 {
-	if( newFriend.clanFriend )
-	{
-		[_clanFriends addObject:newFriend];
-	}
-	else if( newFriend.friendOfFriend )
-	{
-		[_friendOfFriends addObject:newFriend];
-	}
-	else if( newFriend.online )
-	{
-		[_onlineFriends addObject:newFriend];
-	}
-	else
-	{
-		[_offlineFriends addObject:newFriend];
-	}
+	[_friends addObject:newFriend];
 }
 
 - (void)removeFriend:(XFFriend *)oldFriend
 {
-	NSMutableArray *friends = nil;
-	if( oldFriend.clanFriend )
-	{
-		friends = _clanFriends;
-	}
-	else if( oldFriend.friendOfFriend )
-	{
-		friends = _friendOfFriends;
-	}
-	else if( oldFriend.online )
-	{
-		friends = _onlineFriends;
-	}
-	else
-	{
-		friends = _offlineFriends;
-	}
-	
-	NSUInteger i, cnt = [friends count];
+	NSUInteger i, cnt = [_friends count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[friends objectAtIndex:i] userID] == oldFriend.userID )
+		if( [[_friends objectAtIndex:i] userID] == oldFriend.userID )
 		{
-			[friends removeObjectAtIndex:i];
+			[_friends removeObjectAtIndex:i];
 			return;
 		}
 	}
+}
+
+- (void)friendWasDeleted:(unsigned int)userID
+{
+	XFFriend *friend = nil;
+	NSUInteger i, cnt = [_friends count];
+	for(i=0;i<cnt;i++)
+	{
+		if( [[_friends objectAtIndex:i] userID] == userID )
+		{
+			friend = [[_friends objectAtIndex:i] retain];
+			[_friends removeObjectAtIndex:i];
+			break;
+		}
+	}
+	[self raiseFriendNotification:XFFriendNotificationFriendRemoved forFriend:friend];
+	[friend release];
 }
 
 @end
