@@ -12,5 +12,14 @@
 #import <Foundation/Foundation.h>
 
 @interface XFGameServer : NSObject
+{
+	unsigned int	_IPAddress;
+	unsigned short	_port;
+	unsigned int	_gameID;
+}
+
+@property (nonatomic, assign) unsigned int IPAddress;
+@property (nonatomic, assign) unsigned short port;
+@property (nonatomic, assign) unsigned int gameID;
 
 @end

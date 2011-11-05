@@ -7,7 +7,17 @@
 //
 
 #import "XFGameServer.h"
+#import "XfireKit.h"
 
 @implementation XFGameServer
+
+@synthesize IPAddress	= _IPAddress;
+@synthesize port		= _port;
+@synthesize gameID		= _gameID;
+
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"[Xfire server IP='%@' Port='%lu' GameID='%lu'",NSStringFromIPAddress(_IPAddress),_port,_gameID];
+}
 
 @end
