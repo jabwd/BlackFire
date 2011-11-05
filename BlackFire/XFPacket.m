@@ -444,7 +444,7 @@ NSString * const XFPacketDataKey			= @"data";
 	_packetID = (unsigned int)[self scanUInt16];
     
 #if JABWD
-	NSLog(@"packet id: %d",pktID);
+	NSLog(@"packet id: %d",_packetID);
 #endif
     
 	// just to be sure so that we do not get any memory leaks..
