@@ -14,8 +14,10 @@
 
 @implementation ADAppDelegate
 
-@synthesize window = _window;
-@synthesize session = _session;
+@synthesize window			= _window;
+@synthesize session			= _session;
+@synthesize loginView		= _loginView;
+@synthesize friendsView		= _friendsView;
 
 - (void)dealloc
 {
@@ -27,6 +29,12 @@
 	[_account release];
 	_account = nil;
     [super dealloc];
+}
+
+- (void)awakeFromNib
+{
+	[_window setContentBorderThickness:30.0 forEdge:NSMinYEdge];
+	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -73,6 +81,54 @@
 }
 
 #pragma mark - Managing the main window
+
+- (void)changeToMode:(BFApplicationMode)newMode
+{
+	// computer says no.
+	if( _currentMode == newMode )
+		return;
+	
+	switch(newMode)
+	{
+		case BFApplicationModeOffline:
+		{
+			
+		}
+			break;
+			
+		case BFApplicationModeLoggingIn:
+		{
+			
+		}
+			break;
+			
+		case BFApplicationModeOnline:
+		{
+			
+		}
+			break;
+			
+		case BFApplicationModeGames:
+		{
+			
+		}
+			break;
+			
+		case BFApplicationModeServers:
+		{
+			
+		}
+			break;
+			
+		default:
+		{
+			NSLog(@"Cannot switch to unknown BFApplication mode");
+		}
+			break;
+	}
+	
+	_currentMode = newMode;
+}
 
 
 #pragma mark - Xfire Session

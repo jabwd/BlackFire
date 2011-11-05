@@ -1237,7 +1237,8 @@
     [serverList release];
 }
 
-- (void)processInvitSend:(XFPacket *)pkt{
+- (void)processInvitSend:(XFPacket *)pkt
+{
     NSString *name    = [[pkt attributeValuesForKey:@"name"] objectAtIndex:0];
     NSString *message = [NSString stringWithFormat:@"Friend request invitation has been sent to %@, he/she will be added to your friends list as soon as he/she accepts",name];
     NSRunAlertPanel(@"Invitation has been sent", message, @"OK", nil, nil);
