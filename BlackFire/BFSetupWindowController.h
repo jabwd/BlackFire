@@ -19,6 +19,9 @@
 	NSButton *_nextButton;
 	NSButton *_previousButton;
 	
+	NSTextField *_usernameField;
+	NSTextField *_passwordField;
+	
 	NSBox  *_mainView;
 	NSView *_accountInfoView;
 	NSView *_settingsView;
@@ -35,6 +38,9 @@
 @property (nonatomic, assign) IBOutlet NSButton *nextButton;
 @property (nonatomic, assign) IBOutlet NSButton *previousButton;
 
+@property (nonatomic, assign) IBOutlet NSTextField *usernameField;
+@property (nonatomic, assign) IBOutlet NSTextField *passwordField;
+
 @property (nonatomic, assign) IBOutlet NSBox  *mainView;
 @property (nonatomic, assign) IBOutlet NSView *accountInfoView;
 @property (nonatomic, assign) IBOutlet NSView *settingsView;
@@ -44,5 +50,6 @@
 
 - (IBAction)next:(id)sender;
 - (IBAction)previous:(id)sender;
+- (IBAction)newAccount:(id)sender;
 
 @end

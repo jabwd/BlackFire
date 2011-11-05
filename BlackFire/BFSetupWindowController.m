@@ -7,6 +7,7 @@
 //
 
 #import "BFSetupWindowController.h"
+#import "BFKeychainManager.h"
 
 @implementation BFSetupWindowController
 
@@ -15,6 +16,9 @@
 
 @synthesize nextButton		= _nextButton;
 @synthesize previousButton	= _previousButton;
+
+@synthesize usernameField = _usernameField;
+@synthesize passwordField = _passwordField;
 
 @synthesize mainView		= _mainView;
 @synthesize accountInfoView = _accountInfoView;
@@ -53,12 +57,45 @@
 			}
 			
 			[[_mainView contentView] addSubview:_accountInfoView];
-			_currentMode++;
+			_currentMode = 1;
 			//[_accountInfoView setFrame:[_mainView bounds]];
 		}
 			break;
 			
 		case 1:
+		{
+			if( [[_usernameField stringValue] length] < 1 || [[_passwordField stringValue] length] < 1 )
+				return;
+			
+			
+			// save the login credentials
+			BFKeychainManager *manager = [BFKeychainManager defaultManager];
+			if( [[manager passwordForServiceName:@"BlackFire" accountName:[_usernameField stringValue]] length] > 0 )
+			{
+				[manager replacePassword:[_passwordField stringValue] serviceName:@"BlackFire" accountName:[_usernameField stringValue]];
+			}
+			else
+			{
+				[manager addPassword:[_passwordField stringValue] serviceName:@"BlackFire" accountName:[_usernameField stringValue]];
+			}
+			
+			NSArray *accounts = [[NSArray alloc] initWithObjects:[_usernameField stringValue], nil];
+			[[NSUserDefaults standardUserDefaults] setObject:accounts forKey:@"accounts"];
+			[accounts release];
+			
+			NSArray *subviews = [[_mainView contentView] subviews];
+			for(NSView *subview in subviews)
+			{
+				[subview removeFromSuperview];
+			}
+			
+			[[_mainView contentView] addSubview:_finishedView];
+			_currentMode++;
+			[_nextButton setTitle:@"Finish"];
+		}
+			break;
+			
+		case 2:
 		{
 			// close this window
 			[_window close];
@@ -71,6 +108,11 @@
 - (IBAction)previous:(id)sender
 {
 	
+}
+
+- (IBAction)newAccount:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.xfire.com/register/"]];
 }
 
 @end

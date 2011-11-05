@@ -17,6 +17,8 @@
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
 
+- (id)initWithUsername:(NSString *)username;
+
 - (void)save;
 - (void)remove;
 
