@@ -18,6 +18,31 @@
 	if( (self = [super init]) )
 	{
 		_groups = [[NSMutableArray alloc] init];
+		
+		// create the standard groups ( whether we need them or not )
+		XFGroup *onlineFriendsGroup		= [[XFGroup alloc] init];
+		XFGroup *offlineFriendsGroup	= [[XFGroup alloc] init];
+		XFGroup *friendsOfFriendsGroup	= [[XFGroup alloc] init];
+		
+		onlineFriendsGroup.groupID		= 1;
+		offlineFriendsGroup.groupID		= 2;
+		friendsOfFriendsGroup.groupID	= 3;
+		
+		onlineFriendsGroup.name		= @"Online";
+		offlineFriendsGroup.name	= @"Offline";
+		friendsOfFriendsGroup.name	= @"Friends of friends";
+		
+		onlineFriendsGroup.groupType	= XFGroupTypeOnlineFriends;
+		offlineFriendsGroup.groupType	= XFGroupTypeOfflineFriends;
+		friendsOfFriendsGroup.groupType = XFGroupTypeFriendOfFriends;
+		
+		[_groups addObject:onlineFriendsGroup];
+		[_groups addObject:offlineFriendsGroup];
+		[_groups addObject:friendsOfFriendsGroup];
+		
+		[onlineFriendsGroup		release];
+		[offlineFriendsGroup	release];
+		[friendsOfFriendsGroup	release];
 	}
 	return self;
 }
