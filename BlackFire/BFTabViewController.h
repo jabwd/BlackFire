@@ -8,12 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ADAppDelegate;
+
 @interface BFTabViewController : NSObject
 {
 	NSView *_view;
+	
+	ADAppDelegate *_delegate;
 }
 
 @property (assign) IBOutlet NSView *view;
+@property (assign) ADAppDelegate *delegate;
 
 - (void)becomeMain;
 

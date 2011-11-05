@@ -12,12 +12,13 @@
 #import "BFAccount.h"
 #import "BFSetupWindowController.h"
 
+#import "BFLoginViewController.h"
+
 @implementation ADAppDelegate
 
 @synthesize window			= _window;
 @synthesize session			= _session;
-@synthesize loginView		= _loginView;
-@synthesize friendsView		= _friendsView;
+@synthesize mainView		= _mainView;
 
 - (void)dealloc
 {
@@ -33,6 +34,7 @@
 
 - (void)awakeFromNib
 {
+	[self changeToMode:BFApplicationModeOffline];
 	[_window setContentBorderThickness:30.0 forEdge:NSMinYEdge];
 	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 }
@@ -92,19 +94,25 @@
 	{
 		case BFApplicationModeOffline:
 		{
+			if( ! _loginViewController )
+			{
+				_loginViewController = [[BFLoginViewController alloc] init];
+			}
+			[_loginViewController session:_session changedStatus:XFSessionStatusOffline];
 			
+			[self changeMainView:_loginViewController.view];
 		}
 			break;
 			
 		case BFApplicationModeLoggingIn:
 		{
-			
+			[_loginViewController session:_session changedStatus:XFSessionStatusConnecting];
 		}
 			break;
 			
 		case BFApplicationModeOnline:
 		{
-			
+			[_loginViewController session:_session changedStatus:XFSessionStatusOnline];
 		}
 			break;
 			
@@ -130,6 +138,18 @@
 	_currentMode = newMode;
 }
 
+- (void)changeMainView:(NSView *)newView
+{
+	NSArray *subviews = [_mainView subviews];
+	for(NSView *view in subviews)
+	{
+		[view removeFromSuperview];
+	}
+	
+	[_mainView addSubview:newView];
+	[newView setFrame:[_mainView bounds]];
+}
+
 
 #pragma mark - Xfire Session
 
@@ -151,11 +171,15 @@
 {
 	if( newStatus == XFSessionStatusOnline )
 	{
-		NSLog(@"The session is now online.");
+		[self changeToMode:BFApplicationModeOnline];
+	}
+	else if( newStatus == XFSessionStatusConnecting )
+	{
+		[self changeToMode:BFApplicationModeLoggingIn];
 	}
 	else if( newStatus == XFSessionStatusOffline )
 	{
-		NSLog(@"The session is now offline.");
+		[self changeToMode:BFApplicationModeOffline];
 		[_session release];
 		_session = nil;
 	}

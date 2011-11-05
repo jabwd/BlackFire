@@ -14,12 +14,14 @@
 
 typedef enum
 {
-	BFApplicationModeOffline = 0,
-	BFApplicationModeLoggingIn,
-	BFApplicationModeOnline,
-	BFApplicationModeGames,
-	BFApplicationModeServers
+	BFApplicationModeOffline = 1,
+	BFApplicationModeLoggingIn = 2,
+	BFApplicationModeOnline = 3,
+	BFApplicationModeGames = 4,
+	BFApplicationModeServers = 5
 } BFApplicationMode;
+
+@class BFLoginViewController;
 
 @interface ADAppDelegate : NSObject <NSApplicationDelegate, XFSessionDelegate, BFSetupWindowControllerDelegate>
 {
@@ -27,7 +29,9 @@ typedef enum
 	XFSession				*_session;
 	BFAccount				*_account;
 	
-	NSView					*_loginView;
+	NSView *_mainView;
+	
+	BFLoginViewController	*_loginViewController;
 	
 	BFApplicationMode		_currentMode;
 }
@@ -35,13 +39,13 @@ typedef enum
 @property (readonly) XFSession *session;
 @property (assign) IBOutlet NSWindow *window;
 
-@property (assign) IBOutlet NSView *loginView;
-@property (assign) IBOutlet NSView *friendsView;
+@property (assign) IBOutlet NSView *mainView;
 
 //----------------------------------------------------------------------------
 // Managing the main window
 
 - (void)changeToMode:(BFApplicationMode)newMode;
+- (void)changeMainView:(NSView *)newView;
 
 //----------------------------------------------------------------------------
 // Xfire Session
