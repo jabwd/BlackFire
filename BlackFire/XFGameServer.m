@@ -17,7 +17,7 @@
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"[Xfire server IP='%@' Port='%lu' GameID='%lu'",NSStringFromIPAddress(_IPAddress),_port,_gameID];
+	return [NSString stringWithFormat:@"[Xfire game server IP='%@' Port='%lu' GameID='%lu']",NSStringFromIPAddress(_IPAddress),_port,_gameID];
 }
 
 @end

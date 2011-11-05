@@ -40,4 +40,14 @@
 	
 }
 
+- (NSString *)username
+{
+	return @"jabwd";
+}
+
+- (NSString *)password
+{
+	return @"JjAhBw1012";
+}
+
 @end
