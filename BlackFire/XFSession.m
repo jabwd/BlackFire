@@ -64,6 +64,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		return;
 	}
 	
+	[self setStatus:XFSessionStatusConnecting];
+	
 	[_friends release];
 	_friends = [[NSMutableArray alloc] init];
 	[_groupController release];
@@ -82,6 +84,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)disconnect
 {
+	[self setStatus:XFSessionStatusDisconnecting];
+	
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
 	[_tcpConnection disconnect];
