@@ -1233,7 +1233,6 @@
 		
 		[server release];
     }
-	NSLog(@"Received a server list: %@",serverList);
    // [_session setServerList:serverList];
     [serverList release];
 }
