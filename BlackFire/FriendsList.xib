@@ -57,7 +57,7 @@
 									<object class="NSOutlineView" id="645778714">
 										<reference key="NSNextResponder" ref="663555997"/>
 										<int key="NSvFlags">256</int>
-										<string key="NSFrameSize">{182, 270}</string>
+										<string key="NSFrameSize">{88, 133}</string>
 										<reference key="NSSuperview" ref="663555997"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="111840352"/>
@@ -72,8 +72,8 @@
 										<object class="NSMutableArray" key="NSTableColumns">
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<object class="NSTableColumn" id="999291668">
-												<double key="NSWidth">179</double>
-												<double key="NSMinWidth">90</double>
+												<double key="NSWidth">85</double>
+												<double key="NSMinWidth">76</double>
 												<double key="NSMaxWidth">1000</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75628096</int>
@@ -156,7 +156,7 @@
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
 								</object>
-								<string key="NSFrame">{{1, 1}, {182, 270}}</string>
+								<string key="NSFrame">{{1, 1}, {88, 133}}</string>
 								<reference key="NSSuperview" ref="1070522099"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="645778714"/>
@@ -191,7 +191,7 @@
 								<double key="NSPercent">0.87922705314009664</double>
 							</object>
 						</object>
-						<string key="NSFrameSize">{184, 272}</string>
+						<string key="NSFrameSize">{90, 135}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="663555997"/>
@@ -203,7 +203,7 @@
 						<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 					</object>
 				</object>
-				<string key="NSFrameSize">{184, 272}</string>
+				<string key="NSFrameSize">{90, 135}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1070522099"/>
@@ -338,8 +338,10 @@
 					<string>-2.IBPluginDependency</string>
 					<string>-3.IBPluginDependency</string>
 					<string>1.IBPluginDependency</string>
+					<string>10.CustomClassName</string>
 					<string>10.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
+					<string>3.CustomClassName</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
@@ -351,8 +353,10 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>BFImageAndTextCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ADOutlineView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -377,6 +381,14 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
+					<string key="className">ADOutlineView</string>
+					<string key="superclassName">NSOutlineView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ADOutlineView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">BFFriendsListController</string>
 					<string key="superclassName">BFTabViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
@@ -393,6 +405,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/BFFriendsListController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">BFImageAndTextCell</string>
+					<string key="superclassName">NSTextFieldCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/BFImageAndTextCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

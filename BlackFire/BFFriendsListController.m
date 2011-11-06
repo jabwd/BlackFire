@@ -7,6 +7,7 @@
 //
 
 #import "BFFriendsListController.h"
+#import "BFImageAndTextCell.h"
 
 #import "XFSession.h"
 #import "XFGroupController.h"
@@ -22,6 +23,7 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"FriendsList" owner:self];
+		[_friendsList setDoubleAction:@selector(doubleClick)];
 	}
 	return self;
 }
@@ -31,6 +33,12 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"FriendsList" owner:self];
+		[_friendsList setDoubleAction:@selector(doubleClick)];
+		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
+		BFImageAndTextCell *cell = [column dataCell];
+		[cell setEditable:NO];
+		[cell setDisplayImageSize:NSMakeSize(23.0f, 23.0f)];
+		
 		_session = session;
 	}
 	return self;
@@ -48,6 +56,21 @@
 }
 
 #pragma mark - Outlineview datasource
+
+- (NSUInteger)selectedRow
+{
+	NSUInteger selectedRow = [_friendsList selectedRow];
+	if( [_friendsList clickedRow] != selectedRow )
+	{
+		return [_friendsList clickedRow];
+	}
+	return selectedRow;
+}
+
+- (void)doubleClicked
+{
+	
+}
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
@@ -95,11 +118,91 @@
 	return nil;
 }
 
+- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+	if( [item isKindOfClass:[XFFriend class]] )
+	{
+		XFFriend			*friend			= (XFFriend *)item;
+		BFImageAndTextCell	*imageCell		= (BFImageAndTextCell *)cell;
+		
+		[imageCell setImage:[NSImage imageNamed:@"xfire"]];
+		
+		NSString *status = friend.status;
+		if( [status rangeOfString:@"AFK"].location != NSNotFound )
+		{
+			[imageCell setFriendStatus:CellStatusAFK];
+		}
+		else if( friend.online )
+		{
+			[imageCell setFriendStatus:CellStatusOnline];
+		}
+		else
+		{
+			[imageCell setFriendStatus:CellStatusOffline];
+		}
+		
+		if( [status length] > 0 )
+		{
+			[(BFImageAndTextCell *)cell setShowsStatus:true];
+			if( friend.gameIP != 0 )
+			{
+				
+			}
+			[(BFImageAndTextCell *)cell setCellStatusString:status];
+		}
+		else
+		{
+			[(BFImageAndTextCell *)cell setShowsStatus:false];
+		}
+		/*if( [status length] > 0 )
+		{
+			// if we got a status, display it
+			[(BFImageAndTextCell *)cell setShowsStatus:YES];
+			if( [item gameIPAddress] != 0 )
+			{
+				NSString *statusStr = [[NSString alloc] initWithFormat:@"%@ %@:%u",status,[BFAppSupport ipToString:[item gameIPAddress]], [item gamePort]];
+				[(BFImageAndTextCell *)cell setCellStatusString:statusStr];
+				[statusStr release];
+			} 
+			else 
+			{
+				[(BFImageAndTextCell *)cell setCellStatusString:status];
+			}
+			
+		} 
+		else
+		{
+			// causes the cell to draw in the "default" mode
+			[(BFImageAndTextCell *)cell setShowsStatus:NO];
+		}*/
+	} 
+	else
+	{
+		[(BFImageAndTextCell *)cell setStatusImage:nil];
+		[(BFImageAndTextCell *)cell setShowsStatus:NO];
+		[cell setImage:nil];
+	}
+}
+
+- (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation
+{
+	return @"Tooltip";
+}
+
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
 {
 	if( [item isKindOfClass:[XFGroup class]] )
 		return true;
 	return false;
+}
+
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+	if( [item isKindOfClass:[XFGroup class]] )
+	{
+		return 17.0f;
+	}
+	return 26.0f;
 }
 
 @end

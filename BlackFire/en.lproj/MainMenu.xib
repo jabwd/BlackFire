@@ -1309,7 +1309,7 @@
 						<object class="NSCustomView" id="243777411">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{-1, 31}, {207, 307}}</string>
+							<string key="NSFrame">{{-1, 30}, {207, 308}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="581243776"/>
@@ -1356,7 +1356,6 @@
 							<string key="NSFrame">{{42, 2}, {93, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="118632682">

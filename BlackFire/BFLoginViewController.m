@@ -21,8 +21,6 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"LoginView" owner:self];
-		
-		NSLog(@"View: %@",_view);
 	}
 	return self;
 }

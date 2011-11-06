@@ -1173,7 +1173,6 @@
 	
 	NSUInteger i, cnt = [userIDs count];
 	XFGroup *clanGrp = [ctl groupForID:[[groupIDs objectAtIndex:0] intValue]];
-	NSLog(@"ClanGRp: %@",clanGrp);
 	for( i = 0; i < cnt;i++ )
 	{
 		unsigned int userID		= [[userIDs objectAtIndex:i] unsignedIntValue];
