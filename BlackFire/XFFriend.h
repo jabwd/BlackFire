@@ -69,6 +69,8 @@
 - (NSString *)displayName;
 - (NSString *)gameIPString;
 
+- (NSComparisonResult)compare:(XFFriend *)other;
+
 /*
  * This method will make sure that we have no useful information
  * about the friend, like status string and game IP address. This is the

@@ -23,13 +23,15 @@ typedef enum
 
 @class BFLoginViewController, BFFriendsListController;
 
-@interface ADAppDelegate : NSObject <NSApplicationDelegate, XFSessionDelegate, BFSetupWindowControllerDelegate>
+@interface ADAppDelegate : NSObject <NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate, BFSetupWindowControllerDelegate>
 {
 	BFSetupWindowController *_setupWindowController;
 	XFSession				*_session;
 	BFAccount				*_account;
 	
-	NSView *_mainView;
+	NSView			*_mainView;
+	NSView			*_toolbarView;
+	NSToolbarItem	*_toolbarItem;
 	
 	BFLoginViewController	*_loginViewController;
 	BFFriendsListController *_friendsListController;
@@ -41,6 +43,7 @@ typedef enum
 @property (assign) IBOutlet NSWindow *window;
 
 @property (assign) IBOutlet NSView *mainView;
+@property (assign) IBOutlet NSView *toolbarView;
 
 //----------------------------------------------------------------------------
 // Managing the main window

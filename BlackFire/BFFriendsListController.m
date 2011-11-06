@@ -105,6 +105,16 @@
 	return nil;
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item
+{
+	return true;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item
+{
+	return true;
+}
+
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
 	if( [item isKindOfClass:[XFGroup class]] )
@@ -128,7 +138,7 @@
 		[imageCell setImage:[NSImage imageNamed:@"xfire"]];
 		
 		NSString *status = friend.status;
-		if( [status rangeOfString:@"AFK"].location != NSNotFound )
+		if( [status rangeOfString:@"AFK"].length > 0 )
 		{
 			[imageCell setFriendStatus:CellStatusAFK];
 		}
@@ -146,7 +156,7 @@
 			[(BFImageAndTextCell *)cell setShowsStatus:true];
 			if( friend.gameIP != 0 )
 			{
-				
+				status = [NSString stringWithFormat:@"%@ %@",status,[friend gameIPString]];
 			}
 			[(BFImageAndTextCell *)cell setCellStatusString:status];
 		}
@@ -154,27 +164,6 @@
 		{
 			[(BFImageAndTextCell *)cell setShowsStatus:false];
 		}
-		/*if( [status length] > 0 )
-		{
-			// if we got a status, display it
-			[(BFImageAndTextCell *)cell setShowsStatus:YES];
-			if( [item gameIPAddress] != 0 )
-			{
-				NSString *statusStr = [[NSString alloc] initWithFormat:@"%@ %@:%u",status,[BFAppSupport ipToString:[item gameIPAddress]], [item gamePort]];
-				[(BFImageAndTextCell *)cell setCellStatusString:statusStr];
-				[statusStr release];
-			} 
-			else 
-			{
-				[(BFImageAndTextCell *)cell setCellStatusString:status];
-			}
-			
-		} 
-		else
-		{
-			// causes the cell to draw in the "default" mode
-			[(BFImageAndTextCell *)cell setShowsStatus:NO];
-		}*/
 	} 
 	else
 	{
@@ -200,7 +189,7 @@
 {
 	if( [item isKindOfClass:[XFGroup class]] )
 	{
-		return 17.0f;
+		return 18.0f;
 	}
 	return 26.0f;
 }

@@ -137,6 +137,11 @@
 
 #pragma mark - Handy methods
 
+- (NSComparisonResult)compare:(XFFriend *)other
+{
+	return [[self displayName] caseInsensitiveCompare:[other displayName]];
+}
+
 - (NSString *)displayName
 {
 	if( [_nickname length] > 0 )

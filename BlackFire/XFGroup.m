@@ -70,4 +70,9 @@
 	return [_members objectAtIndex:index];
 }
 
+- (void)sortMembers
+{
+	[_members sortUsingSelector:@selector(compare:)];
+}
+
 @end

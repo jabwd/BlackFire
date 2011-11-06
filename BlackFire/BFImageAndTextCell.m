@@ -217,7 +217,7 @@
 - (NSSize)cellSize
 {
 	NSSize sz = [super cellSize];
-	sz.width += (_displayImageSize.width + 3.0f);
+	sz.width += (_displayImageSize.width + 20.0f);
 	return sz;
 }
 

@@ -20,6 +20,7 @@
 @synthesize window			= _window;
 @synthesize session			= _session;
 @synthesize mainView		= _mainView;
+@synthesize toolbarView		= _toolbarView;
 
 - (void)dealloc
 {
@@ -38,6 +39,21 @@
 	[self changeToMode:BFApplicationModeOffline];
 	[_window setContentBorderThickness:30.0 forEdge:NSMinYEdge];
 	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
+	
+	NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"friendsListToolbar"];
+    [toolbar setAllowsUserCustomization:NO];
+    [toolbar setAutosavesConfiguration: YES];
+    [toolbar setSizeMode:               NSToolbarSizeModeSmall];
+    [toolbar setDisplayMode:            NSToolbarDisplayModeIconOnly];
+    
+    _toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:@"status"];
+    [_toolbarItem setView:_toolbarView];
+    [_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame]))];
+    [_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame]))];
+    
+    [toolbar      setDelegate:self];
+    [_window	setToolbar:toolbar];
+    [toolbar      release];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -81,6 +97,25 @@
 	}
 	
 	[self connectionCheck];
+}
+
+#pragma mark - Toolbar delegate
+- (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
+	return _toolbarItem;
+}
+
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)aToolbar {
+	return [NSArray arrayWithObjects:@"status", nil];
+}
+
+
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)aToolbar {
+	return [NSArray arrayWithObjects:@"status", nil];
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem 
+{
+	return YES;
 }
 
 #pragma mark - Managing the main window

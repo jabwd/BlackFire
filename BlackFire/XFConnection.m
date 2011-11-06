@@ -682,7 +682,7 @@
 			
 			[friend release];
 		}
-	} 
+	}
 	
 	// the most ugly part of the Xfire protocol.
 	// I see this as an extremely big mistake they made.
@@ -738,6 +738,8 @@
 			friend.sessionID = sid;
 		}
 	}
+	[offlineGroup sortMembers];
+	[onlineGroup sortMembers];
 }
 
 // Contains a list of status strings for a given user's session
@@ -862,6 +864,7 @@
 			[friend release];
 		}
 	}
+	[fofGroup sortMembers];
 }
 
 - (void)processNicknameChangePacket:(XFPacket *)pkt
@@ -1013,10 +1016,10 @@
 			if( group )
 			{
 				[group addMember:friend];
+				[ctl sortMembers];
 			}
 		}
 	}
-	//[ctl sortMembers];
 }
 
 /*
@@ -1205,7 +1208,7 @@
 		} 
 	}
     //[_session delegate_friendGroupDidChange:clanGrp];
-	//[clanGrp sortMembers];
+	[clanGrp sortMembers];
 }
 
 - (void)processFriendChangePacket:(XFPacket *)pkt

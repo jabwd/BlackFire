@@ -40,4 +40,6 @@ typedef enum
 - (NSUInteger)membersCount;
 - (XFFriend *)memberAtIndex:(NSUInteger)index;
 
+- (void)sortMembers;
+
 @end
