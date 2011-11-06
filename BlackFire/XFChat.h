@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class XFFriend, XFConnection;
+@class XFFriend, XFConnection, XFChat;
+
+@protocol XFChatDelegate <NSObject>
+
+@end
 
 @interface XFChat : NSObject
 {
