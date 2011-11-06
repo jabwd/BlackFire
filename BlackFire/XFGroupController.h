@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic, assign) XFSession *session;
+@property (readonly) NSMutableArray *groups;
 
 
 //----------------------------------------------------------

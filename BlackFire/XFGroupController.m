@@ -12,6 +12,7 @@
 @implementation XFGroupController
 
 @synthesize session = _session;
+@synthesize groups = _groups;
 
 - (id)init
 {
