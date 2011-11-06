@@ -663,6 +663,7 @@
 		return;
     }
 	
+	XFGroup *offlineGroup = [_session.groupController offlineFriendsGroup];
 	for( i = 0; i < cnt; i++ )
 	{
 		unsigned int uID = [[userids objectAtIndex:i] unsignedIntValue];
@@ -674,6 +675,8 @@
 			friend.username = [usernames objectAtIndex:i];
 			friend.userID	= uID;
 			friend.nickname = [nicknames objectAtIndex:i];
+			
+			[offlineGroup addMember:friend];
 			
 			[_session addFriend:friend];
 			
@@ -710,6 +713,8 @@
 		return;
 	}
 	
+	XFGroup *offlineGroup	= [_session.groupController offlineFriendsGroup];
+	XFGroup *onlineGroup	= [_session.groupController onlineFriendsGroup];
 	for(i=0;i<cnt;i++)
 	{
 		unsigned int uid = [[userids objectAtIndex:i] unsignedIntValue];
@@ -719,12 +724,16 @@
 		
 		if( [sid isClear] )
 		{
+			[onlineGroup removeMember:friend];
+			[offlineGroup addMember:friend];
 			[friend clearInformation];
 			friend.online = false;
 			friend.sessionID = sid;
 		}
 		else
 		{
+			[offlineGroup removeMember:friend];
+			[onlineGroup addMember:friend];
 			friend.online = true;
 			friend.sessionID = sid;
 		}
@@ -820,6 +829,7 @@
 	nickNames		= [pkt attributeValuesForKey:XFPacketNickNameKey];
 	commonFriends	= [pkt attributeValuesForKey:XFPacketFriendsKey];
 	
+	XFGroup *fofGroup = [_session.groupController friendsOfFriendsGroup];
 	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
@@ -844,6 +854,8 @@
 			friend.sessionID		= sid;
 			friend.online			= true;
 			friend.friendOfFriend	= true;
+			
+			[fofGroup addMember:friend];
 			
 			[_session addFriend:friend];
 			
@@ -1161,6 +1173,7 @@
 	
 	NSUInteger i, cnt = [userIDs count];
 	XFGroup *clanGrp = [ctl groupForID:[[groupIDs objectAtIndex:0] intValue]];
+	NSLog(@"ClanGRp: %@",clanGrp);
 	for( i = 0; i < cnt;i++ )
 	{
 		unsigned int userID		= [[userIDs objectAtIndex:i] unsignedIntValue];

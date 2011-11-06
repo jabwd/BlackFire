@@ -21,7 +21,7 @@ typedef enum
 	BFApplicationModeServers = 5
 } BFApplicationMode;
 
-@class BFLoginViewController;
+@class BFLoginViewController, BFFriendsListController;
 
 @interface ADAppDelegate : NSObject <NSApplicationDelegate, XFSessionDelegate, BFSetupWindowControllerDelegate>
 {
@@ -32,6 +32,7 @@ typedef enum
 	NSView *_mainView;
 	
 	BFLoginViewController	*_loginViewController;
+	BFFriendsListController *_friendsListController;
 	
 	BFApplicationMode		_currentMode;
 }

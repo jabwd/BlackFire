@@ -13,6 +13,7 @@
 #import "BFSetupWindowController.h"
 
 #import "BFLoginViewController.h"
+#import "BFFriendsListController.h"
 
 @implementation ADAppDelegate
 
@@ -113,6 +114,11 @@
 		case BFApplicationModeOnline:
 		{
 			[_loginViewController session:_session changedStatus:XFSessionStatusOnline];
+			
+			if( ! _friendsListController )
+				_friendsListController = [[BFFriendsListController alloc] initWithSession:_session];
+			
+			[self changeMainView:_friendsListController.view];
 		}
 			break;
 			
