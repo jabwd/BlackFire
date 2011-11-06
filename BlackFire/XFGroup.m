@@ -20,9 +20,16 @@
 {
 	if( (self = [super init]) )
 	{
-		
+		_members = [[NSMutableArray alloc] init];
 	}
 	return self;
+}
+
+- (void)dealloc
+{
+	[_members release];
+	_members = nil;
+	[super dealloc];
 }
 
 - (void)addMember:(XFFriend *)member
