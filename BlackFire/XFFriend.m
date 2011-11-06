@@ -3,10 +3,12 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 10/31/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
 #import "XFFriend.h"
+#import "XfireKit.h"
+
 #import "XFSession.h"
 
 @implementation XFFriend
@@ -141,6 +143,13 @@
 		return _nickname;
 	
 	return _username;
+}
+
+- (NSString *)gameIPString
+{
+	if( _gameIP == 0 )
+		return @"";
+	return [NSString stringWithFormat:@"%@:%lu",NSStringFromIPAddress(_gameIP),_gamePort];
 }
 
 - (void)clearInformation

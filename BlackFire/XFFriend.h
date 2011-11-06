@@ -3,7 +3,7 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 10/31/11.
-//  Copyright (c) 2011 Exurion. All rights reserved.
+//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 //  Stores an XFFriend representation
 
@@ -67,6 +67,7 @@
 // Handy methods
 
 - (NSString *)displayName;
+- (NSString *)gameIPString;
 
 /*
  * This method will make sure that we have no useful information
