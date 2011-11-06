@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "XFChat.h"
 
-@interface BFChat : NSObject <XFChatDelegate>
+@interface BFChat : NSObject <XFChatDelegate, NSTableViewDataSource, NSTableViewDelegate>
 {
 	XFChat *_chat;
 }
+
+- (id)initWithChat:(XFChat *)chat;
 @end

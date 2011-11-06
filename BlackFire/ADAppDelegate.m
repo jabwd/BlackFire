@@ -15,6 +15,8 @@
 #import "BFLoginViewController.h"
 #import "BFFriendsListController.h"
 
+#import "BFChatWindowController.h"
+
 @implementation ADAppDelegate
 
 @synthesize window			= _window;
@@ -58,6 +60,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	[[BFChatWindowController alloc] init];
+	return;
 	if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"finishedSetup"] )
 	{
 		_setupWindowController = [[BFSetupWindowController alloc] initWithWindowNibName:@"BFSetupWindow"];

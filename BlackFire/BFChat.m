@@ -10,4 +10,19 @@
 
 @implementation BFChat
 
+- (id)initWithChat:(XFChat *)chat
+{
+	if( (self = [super init]) )
+	{
+		_chat = [chat retain];
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	[_chat release];
+	_chat = nil;
+	[super dealloc];
+}
 @end

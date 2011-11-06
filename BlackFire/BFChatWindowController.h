@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface BFChatWindowController : NSObject <NSWindowDelegate>
+@interface BFChatWindowController : NSObject <NSWindowDelegate, NSSplitViewDelegate>
 {
 	NSWindow *_window;
 }
