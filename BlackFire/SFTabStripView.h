@@ -3,11 +3,13 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 11/6/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
+#import <Cocoa/Cocoa.h>
 
-
-@interface SFTabStripView : NSObject
-
+@interface SFTabStripView : NSView
+{
+	NSMutableArray *_tabs;
+}
 @end
