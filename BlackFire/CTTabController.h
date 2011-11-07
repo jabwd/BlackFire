@@ -15,6 +15,7 @@
 	NSMutableArray *_tabs;
 	
 	CTTabStripView		*_tabStripView;
+	NSWindow			*_window;
 	CTTabView			*_placeholderTab;  // weak. Tab being dragged
 	
 	NSRect		_placeholderFrame;  // Frame to use
@@ -25,6 +26,9 @@
 	
 	BOOL _initialLayoutComplete;
 }
+
+@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet CTTabStripView *tabStripView;
 
 + (CGFloat)minTabWidth;
 + (CGFloat)minSelectedTabWidth;

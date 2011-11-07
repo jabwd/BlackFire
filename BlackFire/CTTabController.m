@@ -10,17 +10,7 @@
 #import "CTTabStripView.h"
 #import "CTTabView.h"
 
-// The images names used for different states of the new tab button.
-static NSImage* kNewTabHoverImage = nil;
-static NSImage* kNewTabImage = nil;
-static NSImage* kNewTabPressedImage = nil;
-
-// Image used to display default icon (when contents.hasIcon && !contents.icon)
-static NSImage* kDefaultIconImage = nil;
-
-// A value to indicate tab layout should use the full available width of the
-// view.
-const CGFloat kUseFullAvailableWidth = -1.0;
+#import <QuartzCore/QuartzCore.h>
 
 // The amount by which tabs overlap.
 const CGFloat kTabOverlap = 20.0;
@@ -28,13 +18,13 @@ const CGFloat kTabOverlap = 20.0;
 // The width and height for a tab's icon.
 const CGFloat kIconWidthAndHeight = 16.0;
 
-// The amount by which the new tab button is offset (from the tabs).
-const CGFloat kNewTabButtonOffset = 8.0;
-
 // Time (in seconds) in which tabs animate to their final position.
 const NSTimeInterval kAnimationDuration = 0.125;
 
 @implementation CTTabController
+
+@synthesize window			= _window;
+@synthesize tabStripView	= _tabStripView;
 
 
 + (CGFloat)minTabWidth				{ return 31;	}
@@ -42,8 +32,65 @@ const NSTimeInterval kAnimationDuration = 0.125;
 + (CGFloat)maxTabWidth				{ return 220;	}
 + (CGFloat)miniTabWidth				{ return 53;	}
 + (CGFloat)appTabWidth				{ return 66;	}
-+ (CGFloat)defaultTabHeight			{ return 25.0; }
-+ (CGFloat)defaultIndentForControls { return 64.0; }
++ (CGFloat)defaultTabHeight			{ return 25.0;	}
++ (CGFloat)defaultIndentForControls { return 64.0;	}
+
+- (id)init
+{
+	if( (self = [super init]) )
+	{
+		_tabs = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
+- (void)awakeFromNib
+{
+	[[[_window contentView] superview] addSubview:_tabStripView];
+	NSRect windowFrame = [[[_window contentView] superview] frame];
+	[_tabStripView setFrame:NSMakeRect(0, windowFrame.size.height-59-20, windowFrame.size.width, 59)];
+	
+	[self addTab];
+}
+
+- (void)dealloc
+{
+	[_tabs release];
+	_tabs = nil;
+	[super dealloc];
+}
+
+#pragma mark - Managing the tabs
+
+- (void)addTab
+{
+	CTTabView *newTab = [[CTTabView alloc] initWithFrame:NSMakeRect(0,0,[CTTabController minTabWidth],[CTTabController defaultTabHeight])];
+	[_tabs addObject:newTab];
+	[_tabStripView addSubview:newTab];
+	[newTab release];
+	
+	[_tabStripView setNeedsDisplay:true];
+	[self layoutTabsAnimated:false];
+}
+
+- (void)layoutTabsAnimated:(BOOL)animated
+{
+	NSRect stripRect = [_tabStripView frame];
+	CGFloat availableSpace = stripRect.size.width-[CTTabController defaultIndentForControls];
+	CGFloat tabWidth = (float)((float)availableSpace/(float)[_tabs count]);
+	
+	NSUInteger i, cnt = [_tabs count];
+	for(i=0;i<cnt;i++)
+	{
+		CTTabView *view = [_tabs objectAtIndex:i];
+		NSRect tabFrame = [view frame];
+		
+		[view setFrame:NSMakeRect([CTTabController defaultIndentForControls]+(i*tabWidth), 35, tabWidth, [CTTabController defaultTabHeight])];
+	}
+	
+	//[NSAnimationContext beginGrouping];
+}
+
 /*
 
 - (BOOL)isTabFullyVisible:(CTTabView*)tab 

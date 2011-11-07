@@ -6,14 +6,19 @@
 //  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h> 
+
+@class CTTabController;
 
 
-@interface BFChatWindowController : NSObject <NSWindowDelegate, NSSplitViewDelegate>
+@interface BFChatWindowController : NSObject <NSWindowDelegate>
 {
 	NSWindow *_window;
+	
+	CTTabController *_tabController;
 }
 
+@property (assign) IBOutlet CTTabController *tabController;
 @property (assign) IBOutlet NSWindow *window;
 
 - (id)init;
