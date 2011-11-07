@@ -12,4 +12,9 @@
 {
 	NSMutableArray *_tabs;
 }
+
+//---------------------------------------------------------------------------------
+// Laying out the tabs
+
+- (void)layoutTabs;
 @end

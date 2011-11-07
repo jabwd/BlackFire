@@ -39,6 +39,13 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	[_tabs release];
+	_tabs = nil;
+	[super dealloc];
+}
+
 - (void)update
 {
 	[self setNeedsDisplay:true];
@@ -59,8 +66,7 @@
 	[image drawInRect:dirtyRect fromRect:NSMakeRect(0, 0, 0, 24.0) operation:NSCompositeSourceOver fraction:1.0f];
 }
 
-//---------------------------------------------------------------------------------
-// Laying out the tabs
+#pragma mark - Laying out the tabs
 
 - (void)layoutTabs
 {
