@@ -13,6 +13,8 @@
 	NSMutableArray *_tabs;
 }
 
+@property (readonly) NSMutableArray *tabs;
+
 //---------------------------------------------------------------------------------
 // Laying out the tabs
 

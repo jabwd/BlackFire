@@ -15,6 +15,8 @@
 
 @implementation SFTabStripView
 
+@synthesize tabs = _tabs;
+
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if( (self = [super initWithFrame:frameRect]) )
