@@ -9,6 +9,7 @@
 // TODO: Add Snow leopard support
 
 #import "SFTabView.h"
+#import "SFTabStripView.h"
 
 @implementation SFTabView
 
@@ -101,6 +102,12 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+	if( !_selected )
+	{
+		SFTabStripView *strip = [self superview];
+		[strip selectTab:self];
+	}
+	
 	_originalPoint	= [NSEvent mouseLocation];
 	_originalRect	= [self frame];
 }
@@ -115,10 +122,42 @@
 	ownFrame.origin.x -= deltaX;
 	[self setFrame:ownFrame];
 	_originalPoint = [NSEvent mouseLocation];
+	
+	SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
+	
+	for(SFTabView *tabView in tabStrip.tabs)
+	{
+		if( tabView == self )
+			continue;
+		
+		NSRect frame = [tabView frame];
+		
+		// first determine on which side the other tab exists
+		if( frame.origin.x <= ownFrame.origin.x )
+		{
+			if( (frame.origin.x+(frame.size.width/2)) >= ownFrame.origin.x )
+			{
+				[tabView setFrame:_originalRect];
+				_originalRect = frame;
+				return;
+			}
+		}
+		else if( frame.origin.x >= ownFrame.origin.x )
+		{
+			if( (frame.origin.x) <= (ownFrame.origin.x+(ownFrame.size.width/2)) )
+			{
+				[tabView setFrame:_originalRect];
+				_originalRect = frame;
+				return;
+			}
+		}
+	}
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+	if( !_selected )
+		return;
 	[[self animator] setFrame:_originalRect];
 }
 

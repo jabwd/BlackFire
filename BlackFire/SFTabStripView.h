@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SFTabView;
+
 @interface SFTabStripView : NSView
 {
 	NSMutableArray *_tabs;
@@ -17,6 +19,8 @@
 
 //---------------------------------------------------------------------------------
 // Laying out the tabs
+
+- (void)selectTab:(SFTabView *)newSelected;
 
 - (void)layoutTabs;
 @end

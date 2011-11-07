@@ -70,6 +70,20 @@
 
 #pragma mark - Laying out the tabs
 
+- (void)selectTab:(SFTabView *)newSelected
+{
+	for(SFTabView *tabView in _tabs)
+	{
+		if( tabView.selected )
+			tabView.selected = false;
+	}
+	
+	newSelected.selected = true;
+	[newSelected orderOnTop];
+	
+	[self setNeedsDisplay:true];
+}
+
 - (void)layoutTabs
 {
 	CGFloat availableSpace = [self frame].size.width;
