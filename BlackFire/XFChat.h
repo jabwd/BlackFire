@@ -23,6 +23,8 @@
 @property (nonatomic, retain) XFFriend *remoteFriend;
 @property (nonatomic, assign) XFConnection *connection;
 
+- (id)initWithRemoteFriend:(XFFriend *)remoteFriend;
+
 //--------------------------------------------------------------------
 // Sending messages
 - (void)sendMessage:(NSString *)message;
@@ -33,7 +35,7 @@
 // Handling incoming messages
 - (void)receivedNetworkInformation;
 - (void)receivedIsTypingNotification;
-- (void)receivedMessaeg:(NSString *)message;
+- (void)receivedMessage:(NSString *)message;
 
 /*
  * Destroys the XFChat object

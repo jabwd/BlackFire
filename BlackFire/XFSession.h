@@ -3,7 +3,7 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 10/31/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -54,11 +54,15 @@ typedef enum{
 	XFSessionStatusDisconnecting	= 3
 } XFSessionStatus;
 
-@class XFConnection, XFFriend, XFGroup, XFSession, XFGroupController;
+@class XFConnection, XFFriend, XFGroup, XFSession, XFGroupController, XFChat;
 
 @protocol XFSessionDelegate <NSObject>
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason;
 - (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus;
+
+- (void)session:(XFSession *)session chatDidStart:(XFChat *)chat;
+- (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat;
+
 - (NSString *)username;
 - (NSString *)password;
 @end
@@ -73,6 +77,8 @@ typedef enum{
 	
 	NSMutableArray	*_friends;
 	NSTimer			*_keepAliveTimer;
+	
+	NSMutableArray	*_chats;
 	
 	XFSessionStatus _status;
 }
@@ -122,6 +128,14 @@ typedef enum{
  * Now these methods actually handle friends deletion
  */
 - (void)friendWasDeleted:(unsigned int)userID;
+
+//--------------------------------------------------------------------------------
+// Managing chats
+
+- (XFChat *)chatForSessionID:(NSData *)sessionID;
+
+- (XFChat *)beginNewChatForFriend:(XFFriend *)remoteFriend;
+
 
 //--------------------------------------------------------------------------------
 // User options

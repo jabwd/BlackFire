@@ -3,7 +3,7 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 10/31/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
 #import "XFSession.h"
@@ -11,6 +11,7 @@
 #import "XFFriend.h"
 #import "XFGroup.h"
 #import "XFGroupController.h"
+#import "XFChat.h"
 #import "NSData_XfireAdditions.h"
 
 NSString *XFFriendDidChangeNotification		= @"XFFriendDidChangeNotification";
@@ -35,6 +36,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		_groupController	= nil;
 		
 		_friends			= nil;
+		_chats				= nil;
 	}
 	return self;
 }
@@ -53,6 +55,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	_delegate = nil;
 	[_friends release];
 	_friends = nil;
+	[_chats release];
+	_chats = nil;
 	[super dealloc];
 }
 
@@ -78,6 +82,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	_tcpConnection = [[XFConnection alloc] initWithSession:self];
 	[_tcpConnection connect];
 	
+	[_chats release];
+	_chats = [[NSMutableArray alloc] init];
+	
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
 }
@@ -99,6 +106,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	
 	[_friends release];
 	_friends = nil;
+	
+	[_chats release];
+	_chats = nil;
 	
 	[self setStatus:XFSessionStatusOffline];
 }
@@ -209,6 +219,49 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	}
 	[self raiseFriendNotification:XFFriendNotificationFriendRemoved forFriend:friend];
 	[friend release];
+}
+
+#pragma mark - Managing chats
+
+- (XFChat *)chatForSessionID:(NSData *)sessionID
+{
+	for(XFChat *chat in _chats)
+	{
+		if( [chat.remoteFriend.sessionID isEqualToData:sessionID] )
+			return chat;
+	}
+	return nil;
+}
+
+- (XFChat *)beginNewChatForFriend:(XFFriend *)remoteFriend
+{
+	XFChat *chat	= [[XFChat alloc] initWithRemoteFriend:remoteFriend];
+	chat.connection = _tcpConnection;
+	
+	if( [_delegate respondsToSelector:@selector(session:chatDidStart:)] )
+		[_delegate session:self chatDidStart:chat];
+	
+	return chat;
+}
+
+- (void)closeChat:(XFChat *)chat
+{
+	[chat retain];
+	NSUInteger i, cnt = [_chats count];
+	for(i=0;i<cnt;i++)
+	{
+		XFChat *chat_ = [_chats objectAtIndex:i];
+		if( chat_.remoteFriend.userID == chat.remoteFriend.userID )
+		{
+			[_chats removeObjectAtIndex:i];
+			break;
+		}
+	}
+	
+	if( [_delegate respondsToSelector:@selector(session:chatDidEnd:)] )
+		[_delegate session:self chatDidEnd:chat];
+	
+	[chat release];
 }
 
 @end
