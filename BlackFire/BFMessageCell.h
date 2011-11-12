@@ -3,11 +3,18 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 11/6/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Antwan van houdt. All rights reserved.
 //
 
 
 
-@interface BFMessageCell : NSCell
+@interface BFMessageCell : NSTextFieldCell
+{
+	NSString *_displayName;
+	NSDate	 *_date;
+}
+
+@property (nonatomic, retain) NSString *displayName;
+@property (nonatomic, retain) NSDate *date;
 
 @end

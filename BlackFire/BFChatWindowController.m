@@ -25,12 +25,15 @@
 		[_window makeKeyAndOrderFront:self];
 		
 		_chats = [[NSMutableArray alloc] init];
+		_currentlySelectedChat = nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_chats release];
+	_chats = nil;
 	[super dealloc];
 }
 
@@ -39,6 +42,38 @@
 - (void)addChat:(BFChat *)chat
 {
 	[_chats addObject:chat];
+	
+	if( ! _currentlySelectedChat )
+	{
+		_currentlySelectedChat = chat;
+	}
+}
+
+- (void)reloadData
+{
+	[_messageTableView reloadData];
+}
+
+#pragma mark - NSTableViewDatasource and delegate
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+	return 0;
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+	return 20.0f;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	return nil;
+}
+
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	
 }
 
 #pragma mark - NSSplitviewDelegate

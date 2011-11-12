@@ -7,8 +7,11 @@
 //
 
 #import "BFChat.h"
+#import "BFChatWindowController.h"
 
 @implementation BFChat
+
+@synthesize windowController = _windowController;
 
 - (id)initWithChat:(XFChat *)chat
 {
@@ -33,32 +36,22 @@
 
 - (void)receivedMessage:(NSString *)message
 {
-	NSDictionary *newMessage = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"", nil];
+	NSDictionary *newMessage = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",[NSDate date],@"date", nil];
 	
-	
+	[_messages addObject:newMessage];
 	
 	[newMessage release];
 }
 
-#pragma mark - Tableview datasource
+#pragma mark - Accessing messages
 
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+- (NSUInteger)messageCount
 {
-	return nil;
+	return [_messages count];
 }
 
-- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+- (NSDictionary *)messageAtIndex:(NSUInteger)idx
 {
-	
-}
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
-{
-	return 0;
-}
-
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
-{
-	return 20.0f;
+	return [_messages objectAtIndex:idx];
 }
 @end

@@ -9,12 +9,17 @@
 #import <Cocoa/Cocoa.h>
 #import "XFChat.h"
 
+@class BFChatWindowController;
+
 @interface BFChat : NSObject <XFChatDelegate>
 {
+	BFChatWindowController *_windowController;
 	XFChat *_chat;
 	
 	NSMutableArray *_messages;
 }
+
+@property (nonatomic, assign) BFChatWindowController *windowController;
 
 - (id)initWithChat:(XFChat *)chat;
 

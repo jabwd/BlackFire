@@ -11,13 +11,14 @@
 @class BFChat;
 
 
-@interface BFChatWindowController : NSObject <NSWindowDelegate>
+@interface BFChatWindowController : NSObject <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	NSWindow *_window;
 	
 	NSTableView *_messageTableView;
 
 	NSMutableArray *_chats;
+	BFChat	*_currentlySelectedChat;
 }
 
 @property (assign) IBOutlet NSTableView *messageTableView;
@@ -28,5 +29,10 @@
 //----------------------------------------------------------------------
 // Managing chats
 - (void)addChat:(BFChat *)chat;
+
+/*
+ * Call this to refresh the tableview
+ */
+- (void)reloadData;
 
 @end
