@@ -75,7 +75,7 @@
 		_sessionID		= nil;
 		
 		_userID			= userID;
-		_messageIndex	= 0;
+		_messageIndex	= 1;
 		_gameID			= 0;
 		_gameIP			= 0;
 		_gamePort		= 0;
@@ -103,7 +103,7 @@
 		_sessionID		= nil;
 		
 		_userID			= 0;
-		_messageIndex	= 0;
+		_messageIndex	= 1;
 		_gameID			= 0;
 		_gameIP			= 0;
 		_gamePort		= 0;

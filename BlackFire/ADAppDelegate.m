@@ -33,6 +33,8 @@
 	_session = nil;
 	[_account release];
 	_account = nil;
+	[_chatControllers release];
+	_chatControllers = nil;
     [super dealloc];
 }
 
@@ -60,8 +62,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	[[BFChatWindowController alloc] init];
-	return;
 	if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"finishedSetup"] )
 	{
 		_setupWindowController = [[BFSetupWindowController alloc] initWithWindowNibName:@"BFSetupWindow"];
@@ -197,6 +197,19 @@
 
 
 #pragma mark - Xfire Session
+
+- (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat
+{
+	for(BFChatWindowController *chatController in _chatControllers)
+	{
+		
+	}
+}
+
+- (void)session:(XFSession *)session chatDidStart:(XFChat *)chat
+{
+	BFChatWindowController *chatController = [[BFChatWindowController alloc] init];
+}
 
 - (void)connectionCheck
 {

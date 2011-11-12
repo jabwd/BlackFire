@@ -104,7 +104,7 @@
 {
 	if( !_selected )
 	{
-		SFTabStripView *strip = [self superview];
+		SFTabStripView *strip = (SFTabStripView *)[self superview];
 		[strip selectTab:self];
 	}
 	
@@ -124,6 +124,41 @@
 	_originalPoint = [NSEvent mouseLocation];
 	
 	SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
+	
+	NSUInteger i, cnt = [tabStrip.tabs count];
+	for(i=0;i<cnt;i++)
+	{
+		SFTabView *tabView = [tabStrip.tabs objectAtIndex:i];
+		if( tabView == self )
+			continue;
+		
+		NSRect frame = [tabView frame];
+		
+		// first determine on which side the other tab exists
+		if( frame.origin.x <= ownFrame.origin.x )
+		{
+			if( (frame.origin.x+(frame.size.width/2)) >= ownFrame.origin.x )
+			{
+				[tabView setFrame:_originalRect];
+				_originalRect = frame;
+				NSUInteger idx = [tabStrip.tabs indexOfObject:self];
+				[tabStrip.tabs exchangeObjectAtIndex:i withObjectAtIndex:idx];
+				return;
+			}
+		}
+		else if( frame.origin.x >= ownFrame.origin.x )
+		{
+			if( (frame.origin.x) <= (ownFrame.origin.x+(ownFrame.size.width/2)) )
+			{
+				[tabView setFrame:_originalRect];
+				_originalRect = frame;
+				NSUInteger idx = [tabStrip.tabs indexOfObject:self];
+				[tabStrip.tabs exchangeObjectAtIndex:i withObjectAtIndex:idx];
+				return;
+			}
+		}
+	}
+	return;
 	
 	for(SFTabView *tabView in tabStrip.tabs)
 	{

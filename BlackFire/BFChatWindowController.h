@@ -8,19 +8,25 @@
 
 #import <Cocoa/Cocoa.h> 
 
-@class CTTabController;
+@class BFChat;
 
 
 @interface BFChatWindowController : NSObject <NSWindowDelegate>
 {
 	NSWindow *_window;
 	
-	CTTabController *_tabController;
+	NSTableView *_messageTableView;
+
+	NSMutableArray *_chats;
 }
 
-@property (assign) IBOutlet CTTabController *tabController;
+@property (assign) IBOutlet NSTableView *messageTableView;
 @property (assign) IBOutlet NSWindow *window;
 
 - (id)init;
+
+//----------------------------------------------------------------------
+// Managing chats
+- (void)addChat:(BFChat *)chat;
 
 @end

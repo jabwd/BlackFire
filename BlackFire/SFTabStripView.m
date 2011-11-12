@@ -36,6 +36,11 @@
 		[_tabs addObject:tabView2];
 		[tabView2 release];
 		
+		SFTabView *tabView3 = [[SFTabView alloc] initWithFrame:NSZeroRect];
+		tabView3.selected = false;
+		[_tabs addObject:tabView3];
+		[tabView3 release];
+		
 		[self layoutTabs];
 	}
 	return self;
@@ -51,6 +56,12 @@
 - (void)update
 {
 	[self setNeedsDisplay:true];
+}
+
+- (void)resizeWithOldSuperviewSize:(NSSize)oldSize
+{
+	[super resizeWithOldSuperviewSize:oldSize];
+	[self layoutTabs];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -86,7 +97,7 @@
 
 - (void)layoutTabs
 {
-	CGFloat availableSpace = [self frame].size.width;
+	CGFloat availableSpace = [self frame].size.width+(TAB_OVERLAP*([_tabs count]-1));
 	CGFloat tabWidth = (CGFloat)availableSpace/((CGFloat)[_tabs count]);
 	NSUInteger i, cnt = [_tabs count];
 	SFTabView *selected = nil;

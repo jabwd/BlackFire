@@ -7,11 +7,11 @@
 //
 
 #import "BFChatWindowController.h"
-#import "CTTabController.h"
+#import "BFChat.h"
 
 @implementation BFChatWindowController
 
-@synthesize tabController = _tabController;
+@synthesize messageTableView = _messageTableView;
 
 @synthesize window = _window;
 
@@ -23,6 +23,8 @@
 		[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
 		[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 		[_window makeKeyAndOrderFront:self];
+		
+		_chats = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -30,6 +32,13 @@
 - (void)dealloc
 {
 	[super dealloc];
+}
+
+#pragma mark - Managing chats
+
+- (void)addChat:(BFChat *)chat
+{
+	[_chats addObject:chat];
 }
 
 #pragma mark - NSSplitviewDelegate

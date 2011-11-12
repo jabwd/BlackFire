@@ -9,10 +9,18 @@
 #import <Cocoa/Cocoa.h>
 #import "XFChat.h"
 
-@interface BFChat : NSObject <XFChatDelegate, NSTableViewDataSource, NSTableViewDelegate>
+@interface BFChat : NSObject <XFChatDelegate>
 {
 	XFChat *_chat;
+	
+	NSMutableArray *_messages;
 }
 
 - (id)initWithChat:(XFChat *)chat;
+
+//--------------------------------------------------------------------
+// accessing messages
+
+- (NSUInteger)messageCount;
+- (NSDictionary *)messageAtIndex:(NSUInteger)idx;
 @end

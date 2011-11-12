@@ -10,8 +10,6 @@
 #import "XFSession.h"
 #import "BFSetupWindowController.h"
 
-@class BFSetupWindowController, BFAccount;
-
 typedef enum
 {
 	BFApplicationModeOffline = 1,
@@ -21,7 +19,7 @@ typedef enum
 	BFApplicationModeServers = 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController;
+@class BFLoginViewController, BFFriendsListController,BFSetupWindowController, BFAccount, BFChatWindowController;
 
 @interface ADAppDelegate : NSObject <NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate, BFSetupWindowControllerDelegate>
 {
@@ -32,6 +30,8 @@ typedef enum
 	NSView			*_mainView;
 	NSView			*_toolbarView;
 	NSToolbarItem	*_toolbarItem;
+	
+	NSMutableArray *_chatControllers;
 	
 	BFLoginViewController	*_loginViewController;
 	BFFriendsListController *_friendsListController;

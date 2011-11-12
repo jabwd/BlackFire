@@ -23,6 +23,7 @@
 @implementation XFConnection
 
 @synthesize status = _status;
+@synthesize session = _session;
 
 - (id)initWithSession:(XFSession *)session
 {
@@ -1016,7 +1017,7 @@
 			if( group )
 			{
 				[group addMember:friend];
-				[ctl sortMembers];
+				[group sortMembers];
 			}
 		}
 	}
@@ -1108,20 +1109,53 @@
 
 - (void)processChatMessagePacket:(XFPacket *)pkt
 {
-	/*NSData *sid = (NSData *)[[pkt attributeForKey:XFPacketSessionIDKey] value];
-	XFChat *chat = [_session chatForSessionID:sid];
-	
-	// no open chat yet, create one
-	if( chat == nil )
+	// check for the chat, otherwise create it
+	NSData *sessionID = (NSData *)[[pkt attributeForKey:XFPacketSessionIDKey] value];
+	XFChat *chat = [_session chatForSessionID:sessionID];
+	if( !chat )
 	{
-		XFFriend *fr = [_session friendForSessionID:sid];
-		if( !fr || [fr isBlocked] ) return;
-		chat = [_session beginChatWithFriend:fr];
+		XFFriend *friend = [_session friendForSessionID:sessionID];
+		if( friend )
+			chat = [_session beginNewChatForFriend:friend];
+		else
+		{
+			NSLog(@"*** Received a chat request for an unknown friend");
+			return;
+		}
 	}
 	
-	// chat object handles the message and acknowledgements
-	// the chat has its own delegate
-	[chat receivePacket:pkt];*/
+	// decode the packet and notify the XFChat object
+	XFPacketDictionary *peermsg = (XFPacketDictionary *)[[pkt attributeForKey:XFPacketPeerMessageKey] value];
+	switch( [[[peermsg objectForKey:XFPacketMessageTypeKey] value] intValue] )
+	{
+		case 0: // chat message
+		{
+			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
+			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
+			[chat receivedMessage:message];
+			XFPacket *sendPkt = [XFPacket chatAcknowledgementPacketWithSID:[chat.remoteFriend sessionID] 
+																   imIndex:(unsigned int)imIndex];
+			[self sendPacket:sendPkt];
+		}
+			break;
+			
+		case 1: // acknowledgement
+		{
+			NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
+			
+		}
+			break;
+			
+		case 2: 
+		{
+			// for PTP connections
+		}
+			break;
+			
+		case 3: // typing notification
+			[chat receivedIsTypingNotification];
+			break;
+	}
 }
 
 - (void)processDisconnectPacket:(XFPacket *)pkt

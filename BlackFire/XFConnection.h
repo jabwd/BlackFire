@@ -30,6 +30,7 @@ typedef enum
 }
 
 @property (readonly) XFConnectionStatus status;
+@property (readonly) XFSession			*session;
 
 - (id)initWithSession:(XFSession *)session;
 
