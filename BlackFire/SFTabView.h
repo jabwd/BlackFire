@@ -16,9 +16,13 @@
 	NSPoint _originalPoint;
 	
 	BOOL _selected;
+	
+	NSInteger _tag;
 }
 
 @property (nonatomic, retain) NSString *title;
+@property (assign) NSInteger tag;
 
 @property (assign) BOOL selected;
+
 @end

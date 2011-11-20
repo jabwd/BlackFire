@@ -1323,7 +1323,7 @@
 						<object class="NSSegmentedControl" id="581243776">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{7, 2}, {22, 25}}</string>
+							<string key="NSFrame">{{7, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="734160504"/>
@@ -1341,7 +1341,7 @@
 								<reference key="NSControlView" ref="581243776"/>
 								<array class="NSMutableArray" key="NSSegmentImages">
 									<object class="NSSegmentItem">
-										<double key="NSSegmentItemWidth">20</double>
+										<double key="NSSegmentItemWidth">24</double>
 										<object class="NSCustomResource" key="NSSegmentItemImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">NSAddTemplate</string>
@@ -1357,7 +1357,7 @@
 						<object class="NSSegmentedControl" id="734160504">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{36, 2}, {89, 25}}</string>
+							<string key="NSFrame">{{39, 2}, {89, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>

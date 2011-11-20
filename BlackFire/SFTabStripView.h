@@ -10,12 +10,19 @@
 
 @class SFTabView;
 
+@protocol TabStripDelegate <NSObject>
+- (void)didSelectNewTab:(SFTabView *)tabView;
+@end
+
 @interface SFTabStripView : NSView
 {
 	NSMutableArray *_tabs;
+	
+	id <TabStripDelegate> _delegate;
 }
 
 @property (readonly) NSMutableArray *tabs;
+@property (assign) id <TabStripDelegate> delegate;
 
 //---------------------------------------------------------------------------------
 // Laying out the tabs
@@ -23,7 +30,9 @@
 - (void)selectTab:(SFTabView *)newSelected;
 
 
+- (SFTabView *)tabViewForTag:(NSUInteger)tag;
 - (void)addTabView:(SFTabView *)tabView;
+- (void)removeTabView:(SFTabView *)tabView;
 
 - (void)layoutTabs;
 @end

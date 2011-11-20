@@ -15,6 +15,7 @@
 
 @synthesize title = _title;
 @synthesize selected = _selected;
+@synthesize tag = _tag;
 
 - (id)initWithFrame:(NSRect)frame
 {

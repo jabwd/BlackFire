@@ -7,11 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h> 
+#import "SFTabStripView.h"
 
-@class BFChat, SFTabStripView;
+@class BFChat;
 
 
-@interface BFChatWindowController : NSObject <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
+@interface BFChatWindowController : NSObject <TabStripDelegate, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	NSWindow *_window;
 	NSView *_switchView;

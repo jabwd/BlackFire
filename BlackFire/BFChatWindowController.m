@@ -8,8 +8,9 @@
 
 #import "BFChatWindowController.h"
 #import "BFChat.h"
+#import "XFChat.h"
+#import "XFFriend.h"
 
-#import "SFTabStripView.h"
 #import "SFTabView.h"
 
 @implementation BFChatWindowController
@@ -29,6 +30,7 @@
 		[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 		[_window makeKeyAndOrderFront:self];
 		[_window setTitle:@""];
+		[_tabStripView setDelegate:self];
 		
 		_chats = [[NSMutableArray alloc] init];
 		_currentlySelectedChat = nil;
@@ -61,6 +63,19 @@
 
 #pragma mark - Managing chats
 
+- (void)didSelectNewTab:(SFTabView *)tabView
+{
+	for(BFChat *chat in _chats)
+	{
+		if( chat.chat.remoteFriend.userID == tabView.tag )
+		{
+			_currentlySelectedChat = chat;
+			[self changeSwitchView:chat.chatScrollView];
+			return;
+		}
+	}
+}
+
 - (void)addChat:(BFChat *)chat
 {
 	[_chats addObject:chat];
@@ -69,6 +84,7 @@
 	
 	SFTabView *tabView = [[SFTabView alloc] init];
 	tabView.title = [chat.chat.remoteFriend displayName];
+	[tabView setTag:chat.chat.remoteFriend.userID];
 	
 	if( ! _currentlySelectedChat )
 	{

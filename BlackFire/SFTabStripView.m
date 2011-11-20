@@ -16,7 +16,8 @@
 
 @implementation SFTabStripView
 
-@synthesize tabs = _tabs;
+@synthesize tabs		= _tabs;
+@synthesize delegate	= _delegate;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -26,23 +27,6 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NSWindowDidBecomeMainNotification object:nil];
 		
 		_tabs = [[NSMutableArray alloc] init];
-	/*	
-		SFTabView *tabView = [[SFTabView alloc] initWithFrame:NSMakeRect(0, 0, 50, 24)];
-		tabView.selected = true;
-		[_tabs addObject:tabView];
-		[tabView release];
-		
-		SFTabView *tabView2 = [[SFTabView alloc] initWithFrame:NSMakeRect(0, 0, 0, 24)];
-		tabView2.selected = false;
-		[_tabs addObject:tabView2];
-		[tabView2 release];
-		
-		SFTabView *tabView3 = [[SFTabView alloc] initWithFrame:NSZeroRect];
-		tabView3.selected = false;
-		[_tabs addObject:tabView3];
-		[tabView3 release];
-		
-		[self layoutTabs];*/
 	}
 	return self;
 }
@@ -95,13 +79,9 @@
 	[newSelected orderOnTop];
 	
 	[self setNeedsDisplay:true];
-}
-
-- (void)addTabView:(SFTabView *)tabView
-{
-	[self addSubview:tabView];
-	[_tabs addObject:tabView];
-	[self layoutTabs];
+	
+	if( [_delegate respondsToSelector:@selector(didSelectNewTab:)] )
+		[_delegate didSelectNewTab:newSelected];
 }
 
 - (void)layoutTabs
@@ -125,6 +105,39 @@
 	}
 	
 	[selected orderOnTop];
+}
+
+#pragma mark - Managing tabs
+
+- (void)addTabView:(SFTabView *)tabView
+{
+	[self addSubview:tabView];
+	[_tabs addObject:tabView];
+	[self layoutTabs];
+}
+
+- (void)removeTabView:(SFTabView *)tabView
+{
+	[tabView removeFromSuperview];
+	NSUInteger i,cnt = [_tabs count];
+	for(i=0;i<cnt;i++)
+	{
+		if( [[_tabs objectAtIndex:i] tag] == tabView.tag )
+		{
+			[_tabs removeObjectAtIndex:i];
+			return;
+		}
+	}
+}
+
+- (SFTabView *)tabViewForTag:(NSUInteger)tag
+{
+	for(SFTabView *view in _tabs)
+	{
+		if( view.tag == tag )
+			return view;
+	}
+	return nil;
 }
 
 @end
