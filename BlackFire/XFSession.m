@@ -37,6 +37,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		
 		_friends			= nil;
 		_chats				= nil;
+		_groupChats			= nil;
 	}
 	return self;
 }
@@ -57,6 +58,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	_friends = nil;
 	[_chats release];
 	_chats = nil;
+	[_groupChats release];
+	_groupChats = nil;
 	[super dealloc];
 }
 
@@ -85,6 +88,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	[_chats release];
 	_chats = [[NSMutableArray alloc] init];
 	
+	[_groupChats release];
+	_groupChats = [[NSMutableArray alloc] init];
+	
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
 }
@@ -109,6 +115,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	
 	[_chats release];
 	_chats = nil;
+	
+	[_groupChats release];
+	_groupChats = nil;
 	
 	[self setStatus:XFSessionStatusOffline];
 }

@@ -82,6 +82,7 @@ typedef enum{
 	NSTimer			*_keepAliveTimer;
 	
 	NSMutableArray	*_chats;
+	NSMutableArray	*_groupChats;
 	
 	XFSessionStatus _status;
 }
