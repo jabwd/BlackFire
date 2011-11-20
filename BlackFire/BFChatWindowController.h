@@ -15,6 +15,7 @@
 {
 	NSWindow *_window;
 	NSView *_switchView;
+	NSTextField *_messageField;
 
 	NSMutableArray	*_chats;
 	BFChat			*_currentlySelectedChat;
@@ -24,6 +25,7 @@
 
 @property (assign) IBOutlet NSView *switchView;
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSTextField *messageField;
 
 @property (assign) IBOutlet SFTabStripView *tabStripView;
 
@@ -33,5 +35,11 @@
 // Managing chats
 - (void)addChat:(BFChat *)chat;
 - (void)changeSwitchView:(NSView *)newView;
+
+
+//----------------------------------------------------------------------
+// User interface controls
+
+- (IBAction)sendMessage:(id)sender;
 
 @end

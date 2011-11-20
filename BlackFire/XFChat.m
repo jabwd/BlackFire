@@ -141,7 +141,7 @@
 
 - (void)closeChat
 {
-	
+	[_connection.session closeChat:self];
 }
 
 @end

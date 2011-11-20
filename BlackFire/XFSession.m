@@ -257,6 +257,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)closeChat:(XFChat *)chat
 {
+	NSLog(@"CLOSE CHATTTTTT");
 	[chat retain];
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)

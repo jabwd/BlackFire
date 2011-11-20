@@ -27,6 +27,9 @@
 	{
 		[NSBundle loadNibNamed:@"BFChat" owner:self];
 		_chat = [chat retain];
+		_dateFormatter = [[NSDateFormatter alloc] init];
+		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
+		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	}
 	return self;
 }
@@ -37,12 +40,16 @@
 	_chat = nil;
 	[_windowController release];
 	_windowController = nil;
+	[_dateFormatter release];
+	_dateFormatter = nil;
 	[super dealloc];
 }
 
 - (void)closeChat
 {
 	[_chat closeChat];
+	[_chat release];
+	_chat = nil;
 }
 
 #pragma mark - XFChat Delegate
@@ -76,8 +83,8 @@
 		boldStyleRange.location += 1;
 	}
 	
-	/*if([[NSUserDefaults standardUserDefaults] boolForKey:BFEnableTimeStamps])
-		timeStamp = [dateFormatter stringFromDate:[NSDate date]];*/
+	if([[NSUserDefaults standardUserDefaults] boolForKey:@"enableTimeStamps"])
+		timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
 	
 	NSFont *chatFont		= [[NSFont fontWithName:@"Helvetica" size:12.0f] retain];
 	NSFont *boldFont		= [[[NSFontManager sharedFontManager] convertWeight:YES ofFont:chatFont] retain];

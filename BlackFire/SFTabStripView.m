@@ -8,6 +8,7 @@
 
 #define TAB_OVERLAP 17.0f
 #define TAB_HEIGHT	24.0f
+#define TAB_WIDTHMAX 160.0f
 
 #import "SFTabStripView.h"
 #import "SFTabView.h"
@@ -48,6 +49,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_tabs release];
 	_tabs = nil;
 	[super dealloc];
@@ -110,6 +112,8 @@
 	SFTabView *selected = nil;
 	for(i=0;i<cnt;i++)
 	{
+		if( tabWidth > TAB_WIDTHMAX )
+			tabWidth = TAB_WIDTHMAX;
 		NSRect viewFrame = NSMakeRect(tabWidth*i-(i*TAB_OVERLAP), 0, tabWidth, TAB_HEIGHT);
 		SFTabView *tab = [_tabs objectAtIndex:i];
 		if( tab.selected )

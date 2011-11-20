@@ -16,6 +16,7 @@
 
 @synthesize switchView = _switchView;
 @synthesize window = _window;
+@synthesize messageField = _messageField;
 
 @synthesize tabStripView = _tabStripView;
 
@@ -49,6 +50,12 @@
 	{
 		[chat closeChat];
 	}
+	[_chats release];
+	_chats = [[NSMutableArray alloc] init];
+	
+	// get rid of this chatwindow controller
+	[self release];
+	self = nil;
 	return true;
 }
 
@@ -60,17 +67,17 @@
 	
 	chat.windowController = self;
 	
+	SFTabView *tabView = [[SFTabView alloc] init];
+	tabView.title = [chat.chat.remoteFriend displayName];
+	
 	if( ! _currentlySelectedChat )
 	{
 		_currentlySelectedChat = chat;
 		[self changeSwitchView:chat.chatScrollView];
-		
+		tabView.selected = true;
 	}
-	
-	SFTabView *tabView = [[SFTabView alloc] init];
-	tabView.title = [chat.chat.remoteFriend displayName];
-	tabView.selected = true;
 	[_tabStripView addTabView:tabView];
+	[tabView release];
 }
 
 - (void)changeSwitchView:(NSView *)newView
@@ -84,6 +91,17 @@
 	
 	[_switchView addSubview:newView];
 	[newView setFrame:[_switchView bounds]];
+}
+
+
+#pragma mark - User interface controls
+
+- (IBAction)sendMessage:(id)sender
+{
+	[_currentlySelectedChat sendMessage:[_messageField stringValue]];
+	
+	[_messageField setStringValue:@""];
+	[_messageField setNeedsDisplay:true];
 }
 
 @end

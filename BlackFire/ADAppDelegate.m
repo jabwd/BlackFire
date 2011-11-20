@@ -8,6 +8,8 @@
 
 #import "ADAppDelegate.h"
 #import "XFSession.h"
+#import "XFFriend.h"
+#import "XFChat.h"
 
 #import "BFAccount.h"
 #import "BFSetupWindowController.h"
@@ -215,9 +217,15 @@
 
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat
 {
-	for(BFChatWindowController *chatController in _chatControllers)
+	NSUInteger i, cnt = [_chatControllers count];
+	for(i=0;i<cnt;i++)
 	{
-		
+		BFChat *bfchat = [_chatControllers objectAtIndex:i];
+		if( bfchat.chat.remoteFriend.userID == chat.remoteFriend.userID )
+		{
+			[_chatControllers removeObjectAtIndex:i];
+			return;
+		}
 	}
 }
 
@@ -229,11 +237,9 @@
 	BFChat *blackfireChat = [[BFChat alloc] initWithChat:chat];
 	[chatController addChat:blackfireChat];
 	[chat setDelegate:blackfireChat];
-	//[blackfireChat release];
 	
-	[_chatControllers addObject:chatController];
-	
-	[chatController release];
+	[_chatControllers addObject:blackfireChat];
+	[blackfireChat release];
 }
 
 - (void)connectionCheck
@@ -267,6 +273,22 @@
 		_session = nil;
 	}
 }
+
+
+
+- (void)session:(XFSession *)session didReceiveFriendShipRequests:(NSArray *)requests
+{
+#warning implement this method
+	NSLog(@"Received friend ship request: %@",requests);
+}
+
+- (void)session:(XFSession *)session didReceiveSearchResults:(NSArray *)results
+{
+#warning implement this method
+	NSLog(@"Received search results: %@",results);
+}
+
+
 
 - (NSString *)username
 {

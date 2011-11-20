@@ -25,6 +25,7 @@ typedef enum
 	
 	NSTextView *_chatHistoryView;
 	NSScrollView *_chatScrollView;
+	NSDateFormatter *_dateFormatter;
 }
 
 @property (nonatomic, retain) BFChatWindowController *windowController;
@@ -39,5 +40,6 @@ typedef enum
 //------------------------------------------------------------------------------
 // Misc methods
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type;
+- (void)sendMessage:(NSString *)message;
 
 @end

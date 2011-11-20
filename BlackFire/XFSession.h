@@ -143,6 +143,7 @@ typedef enum{
  * by the delegate or the XFConnection ( incoming chats ).
  */
 - (XFChat *)beginNewChatForFriend:(XFFriend *)remoteFriend;
+- (void)closeChat:(XFChat *)chat;
 
 
 
