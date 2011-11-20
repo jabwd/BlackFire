@@ -241,6 +241,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	if( [_delegate respondsToSelector:@selector(session:chatDidStart:)] )
 		[_delegate session:self chatDidStart:chat];
 	
+	[_chats addObject:chat];
+	
 	return chat;
 }
 
@@ -262,6 +264,25 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		[_delegate session:self chatDidEnd:chat];
 	
 	[chat release];
+}
+
+
+#pragma mark - Handling some misc connection stuff
+
+- (void)receivedFriendShipRequests:(NSArray *)requests
+{
+	if( [requests count] < 1 )
+		return;
+	
+	if( [_delegate respondsToSelector:@selector(session:didReceiveFriendShipRequests:)] )
+		[_delegate session:self didReceiveFriendShipRequests:requests];
+}
+
+
+- (void)receivedSearchResults:(NSArray *)results
+{
+	if( [_delegate respondsToSelector:@selector(session:didReceiveSearchResults:)] )
+		[_delegate session:self didReceiveSearchResults:results];
 }
 
 @end

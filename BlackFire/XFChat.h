@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class XFFriend, XFConnection, XFChat;
+@class XFFriend, XFConnection, XFChat, XFPacket;
 
 @protocol XFChatDelegate <NSObject>
 - (void)receivedMessage:(NSString *)message;
@@ -30,6 +30,10 @@
 - (id)initWithRemoteFriend:(XFFriend *)remoteFriend;
 
 //--------------------------------------------------------------------
+// Handy methods
+- (XFFriend *)loginIdentity;
+
+//--------------------------------------------------------------------
 // Sending messages
 - (void)sendMessage:(NSString *)message;
 - (void)notifyIsTyping;
@@ -41,9 +45,10 @@
 - (void)receivedIsTypingNotification;
 - (void)receivedMessage:(NSString *)message;
 
-/*
- * Destroys the XFChat object
- */
+- (void)receivedPacket:(XFPacket *)packet;
+
+//---------------------------------------------------------------------
+// Closing the Chat
 - (void)closeChat;
 
 @end

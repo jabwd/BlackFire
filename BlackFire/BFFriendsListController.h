@@ -8,7 +8,7 @@
 
 #import "BFTabViewController.h"
 
-@class XFSession;
+@class XFSession, XFFriend, XFGroup;
 
 @interface BFFriendsListController : BFTabViewController <NSOutlineViewDelegate, NSOutlineViewDataSource>
 {
@@ -21,5 +21,15 @@
 - (id)initWithSession:(XFSession *)session;
 
 - (void)reloadData;
+
+//--------------------------------------------------------------------------
+// Getting friends and groups
+- (NSInteger)activeRow;
+- (XFFriend *)selectedFriend;
+- (XFGroup *)selectedGroup;
+- (XFGroup *)friendGroupForItemAtRow:(NSInteger)row;
+- (XFFriend *)selectedFriendNotFoF;
+- (XFFriend *)selectedOnlineFriendNotFoF;
+- (XFFriend *)selectedOnlineFriend;
 
 @end

@@ -60,6 +60,16 @@
 	}
 }
 
+- (BOOL)friendIsMember:(XFFriend *)possibleMember
+{
+	for(XFFriend *member in _members)
+	{
+		if( member.userID == possibleMember.userID )
+			return true;
+	}
+	return false;
+}
+
 - (NSUInteger)membersCount
 {
 	return [_members count];

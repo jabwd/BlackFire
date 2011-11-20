@@ -23,7 +23,13 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"FriendsList" owner:self];
-		[_friendsList setDoubleAction:@selector(doubleClick)];
+		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
+		BFImageAndTextCell *cell = [column dataCell];
+		[cell setEditable:NO];
+		[cell setDisplayImageSize:NSMakeSize(23.0f, 23.0f)];
+		
+		[_friendsList setDoubleAction:@selector(doubleClicked)];
+		[_friendsList setTarget:self];
 	}
 	return self;
 }
@@ -33,11 +39,13 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"FriendsList" owner:self];
-		[_friendsList setDoubleAction:@selector(doubleClick)];
 		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
 		BFImageAndTextCell *cell = [column dataCell];
 		[cell setEditable:NO];
 		[cell setDisplayImageSize:NSMakeSize(23.0f, 23.0f)];
+		
+		[_friendsList setDoubleAction:@selector(doubleClicked)];
+		[_friendsList setTarget:self];
 		
 		_session = session;
 	}
@@ -55,6 +63,7 @@
 	[_friendsList reloadData];
 }
 
+
 #pragma mark - Outlineview datasource
 
 - (NSUInteger)selectedRow
@@ -69,7 +78,7 @@
 
 - (void)doubleClicked
 {
-	
+	[_session beginNewChatForFriend:[self selectedOnlineFriend]];
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
@@ -193,5 +202,112 @@
 	}
 	return 26.0f;
 }
+
+
+
+#pragma mark - Getting friends and groups
+
+
+
+- (NSInteger)activeRow
+{
+	// first check the selected row
+	NSInteger selRow    = [_friendsList selectedRow];
+	NSInteger clickRow  = [_friendsList clickedRow];
+	
+	if ( selRow == clickRow ) 
+		return selRow;
+	else if ( clickRow >= 0 )
+		return clickRow;
+	else 
+		return selRow;
+	return 0;
+}
+
+- (XFFriend *)selectedFriend 
+{	
+	NSInteger row = [self activeRow];
+	
+	if( row >= 0 ) 
+	{
+		id selItem = [_friendsList itemAtRow:row];
+		if( [selItem isKindOfClass:[XFFriend class]] ) 
+		{
+			return selItem;
+		}
+	}
+	return nil;
+}
+
+- (XFGroup *)selectedGroup
+{
+	NSInteger row = [self activeRow];
+	if( row >= 0 ){
+		id selItem = [_friendsList itemAtRow:row];
+		if( [selItem isKindOfClass:[XFGroup class]] )
+		{
+			return selItem;
+		}
+		else
+		{
+			id parent = [_friendsList parentForItem:selItem];
+			if( [parent isKindOfClass:[XFGroup class]] )
+				return parent;
+		}
+	}
+	return nil;
+}
+
+- (XFGroup *)friendGroupForItemAtRow:(NSInteger)row 
+{
+	NSInteger rowLvl = [_friendsList levelForRow:row];
+	NSInteger lvl;
+	id item;
+	id friendAtRow = [_friendsList itemAtRow:row];
+	
+	if( ![friendAtRow isKindOfClass:[XFFriend class]] )
+		return nil;
+	
+	while ( row >= 0 ) 
+	{
+		lvl = [_friendsList levelForRow:row];
+		if( lvl < rowLvl ) 
+		{
+			item = [_friendsList itemAtRow:row];
+			if ([item isKindOfClass:[XFGroup class]] &&[item friendIsMember:friendAtRow] ) 
+			{
+				return item;
+			}
+		}
+		row--;
+	}
+	
+	return nil;
+}
+
+- (XFFriend *)selectedFriendNotFoF 
+{
+	XFFriend *fr = [self selectedFriend];
+	if ( !fr.friendOfFriend )
+		return fr;
+	return nil;
+}
+
+- (XFFriend *)selectedOnlineFriendNotFoF 
+{
+	XFFriend *fr = [self selectedFriendNotFoF];
+	if( fr.online )
+		return fr;
+	return nil;
+}
+
+- (XFFriend *)selectedOnlineFriend 
+{
+	XFFriend *fr = [self selectedFriend];
+	if( fr.online )
+		return fr;
+	return nil;
+}
+
 
 @end

@@ -16,6 +16,7 @@
 #import "BFFriendsListController.h"
 
 #import "BFChatWindowController.h"
+#import "BFChat.h"
 
 @implementation ADAppDelegate
 
@@ -58,6 +59,20 @@
     [toolbar      setDelegate:self];
     [_window	setToolbar:toolbar];
     [toolbar      release];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
+{
+	if( ![_window isVisible] )
+	{
+		[_window makeKeyAndOrderFront:self];
+	}
+	return false;
+}
+
+- (NSMenu *)applicationDockMenu:(NSApplication *)sender
+{
+	return nil;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -208,7 +223,17 @@
 
 - (void)session:(XFSession *)session chatDidStart:(XFChat *)chat
 {
+	NSLog(@"Chat did start");
 	BFChatWindowController *chatController = [[BFChatWindowController alloc] init];
+	
+	BFChat *blackfireChat = [[BFChat alloc] initWithChat:chat];
+	[chatController addChat:blackfireChat];
+	[chat setDelegate:blackfireChat];
+	//[blackfireChat release];
+	
+	[_chatControllers addObject:chatController];
+	
+	[chatController release];
 }
 
 - (void)connectionCheck

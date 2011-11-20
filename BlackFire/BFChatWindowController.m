@@ -9,11 +9,15 @@
 #import "BFChatWindowController.h"
 #import "BFChat.h"
 
+#import "SFTabStripView.h"
+#import "SFTabView.h"
+
 @implementation BFChatWindowController
 
-@synthesize messageTableView = _messageTableView;
-
+@synthesize switchView = _switchView;
 @synthesize window = _window;
+
+@synthesize tabStripView = _tabStripView;
 
 - (id)init
 {
@@ -23,6 +27,7 @@
 		[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
 		[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 		[_window makeKeyAndOrderFront:self];
+		[_window setTitle:@""];
 		
 		_chats = [[NSMutableArray alloc] init];
 		_currentlySelectedChat = nil;
@@ -34,7 +39,17 @@
 {
 	[_chats release];
 	_chats = nil;
+	_currentlySelectedChat = nil;
 	[super dealloc];
+}
+
+- (BOOL)windowShouldClose:(id)sender
+{
+	for(BFChat *chat in _chats)
+	{
+		[chat closeChat];
+	}
+	return true;
 }
 
 #pragma mark - Managing chats
@@ -43,58 +58,32 @@
 {
 	[_chats addObject:chat];
 	
+	chat.windowController = self;
+	
 	if( ! _currentlySelectedChat )
 	{
 		_currentlySelectedChat = chat;
+		[self changeSwitchView:chat.chatScrollView];
+		
 	}
-}
-
-- (void)reloadData
-{
-	[_messageTableView reloadData];
-}
-
-#pragma mark - NSTableViewDatasource and delegate
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
-{
-	return 0;
-}
-
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
-{
-	return 20.0f;
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
-{
-	return nil;
-}
-
-- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
-{
 	
+	SFTabView *tabView = [[SFTabView alloc] init];
+	tabView.title = [chat.chat.remoteFriend displayName];
+	tabView.selected = true;
+	[_tabStripView addTabView:tabView];
 }
 
-#pragma mark - NSSplitviewDelegate
-/*
--(NSView* )resizeView 
+- (void)changeSwitchView:(NSView *)newView
 {
-	// TODO: return the view which contains the resize control
-}
-
--(NSRect)splitView:(NSSplitView *)splitView additionalEffectiveRectOfDividerAtIndex:(NSInteger)dividerIndex {
-	return [[self resizeView] convertRect:[[self resizeView] bounds] toView:splitView]; 
-}*/
-
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
-{
-	return 65.0f;
-}
-
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
-{
-	return 10000.0f;
+	NSArray *subViews = [_switchView subviews];
+	NSUInteger i, cnt = [subViews count];
+	for(i=0;i<cnt;i++)
+	{
+		[[subViews objectAtIndex:i] removeFromSuperview];
+	}
+	
+	[_switchView addSubview:newView];
+	[newView setFrame:[_switchView bounds]];
 }
 
 @end

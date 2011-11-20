@@ -9,16 +9,24 @@
 #import "BFChat.h"
 #import "BFChatWindowController.h"
 
+#import "XFFriend.h"
+
+#import "AHHyperlinkScanner.h"
+
 @implementation BFChat
 
-@synthesize windowController = _windowController;
+@synthesize windowController	= _windowController;
+@synthesize chatHistoryView  = _chatHistoryView;
+@synthesize chatScrollView = _chatScrollView;
+
+@synthesize chat = _chat;
 
 - (id)initWithChat:(XFChat *)chat
 {
 	if( (self = [super init]) )
 	{
+		[NSBundle loadNibNamed:@"BFChat" owner:self];
 		_chat = [chat retain];
-		_messages = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -27,31 +35,78 @@
 {
 	[_chat release];
 	_chat = nil;
-	[_messages release];
-	_messages = nil;
+	[_windowController release];
+	_windowController = nil;
 	[super dealloc];
+}
+
+- (void)closeChat
+{
+	[_chat closeChat];
 }
 
 #pragma mark - XFChat Delegate
 
 - (void)receivedMessage:(NSString *)message
 {
-	NSDictionary *newMessage = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",[NSDate date],@"date", nil];
-	
-	[_messages addObject:newMessage];
-	
-	[newMessage release];
+	[self processMessage:message ofFriend:[_chat.remoteFriend displayName] ofType:BFFriendMessageType];
 }
 
-#pragma mark - Accessing messages
-
-- (NSUInteger)messageCount
+- (void)sendMessage:(NSString *)message
 {
-	return [_messages count];
+	if( [message length] < 1 && [message length] > 4000 )
+		return;
+	
+	[self processMessage:message ofFriend:[[_chat loginIdentity] displayName] ofType:BFUserMessageType];
+	
+	[_chat sendMessage:message];
 }
 
-- (NSDictionary *)messageAtIndex:(NSUInteger)idx
+#pragma mark - Misc methods
+
+- (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type
 {
-	return [_messages objectAtIndex:idx];
+	NSMutableAttributedString *fmtMsg;
+	NSString *newline = @"", *timeStamp = @"";
+	NSRange boldStyleRange = NSMakeRange(0, 0);
+	
+	if( [[_chatHistoryView textStorage] length] > 0 ) 
+	{
+		newline = @"\n";
+		boldStyleRange.location += 1;
+	}
+	
+	/*if([[NSUserDefaults standardUserDefaults] boolForKey:BFEnableTimeStamps])
+		timeStamp = [dateFormatter stringFromDate:[NSDate date]];*/
+	
+	NSFont *chatFont		= [[NSFont fontWithName:@"Helvetica" size:12.0f] retain];
+	NSFont *boldFont		= [[[NSFontManager sharedFontManager] convertWeight:YES ofFont:chatFont] retain];
+	
+	boldStyleRange.length    = [shortDispName length] + 2 + [timeStamp length];  // the time plus name plus colon
+	
+	NSString *fmtMessage = [[NSString alloc] initWithFormat:@"%@%@ %@: %@",newline,timeStamp,shortDispName,msg];
+	fmtMsg = [[NSMutableAttributedString alloc] initWithString:fmtMessage];
+	[fmtMessage release];
+	
+	[fmtMsg addAttribute:NSFontAttributeName value:chatFont range:NSMakeRange(0, [fmtMsg length])];
+	[fmtMsg addAttribute:NSFontAttributeName value:boldFont range:boldStyleRange];
+	
+	if( type == BFFriendMessageType )
+		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:boldStyleRange];
+	else 
+		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:boldStyleRange];
+	
+	[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange([newline length], [timeStamp length])];
+	
+	AHHyperlinkScanner	*scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:fmtMsg usingStrictChecking:NO];
+    [[_chatHistoryView textStorage] appendAttributedString:[scanner linkifiedString]];
+	[_chatHistoryView setNeedsDisplay:true];
+	NSRange range;
+	range.location = [[_chatHistoryView textStorage] length];
+	range.length = 1;
+	[_chatHistoryView scrollRangeToVisible:range];
+	[scanner release];
+	[fmtMsg release];
 }
+
 @end

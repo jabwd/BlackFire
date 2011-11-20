@@ -22,5 +22,8 @@
 
 - (void)selectTab:(SFTabView *)newSelected;
 
+
+- (void)addTabView:(SFTabView *)tabView;
+
 - (void)layoutTabs;
 @end

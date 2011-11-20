@@ -893,7 +893,7 @@
 {
 	NSArray *userNames,*firstNames,*lastNames;
 	
-	NSMutableArray *friends = [NSMutableArray array];
+	NSMutableArray *friends = [[NSMutableArray alloc] init];
 	
 	userNames = [pkt attributeValuesForKey:XFPacketNameKey];
 	firstNames = [pkt attributeValuesForKey:XFPacketFirstNameKey];
@@ -911,23 +911,8 @@
 		[friends addObject:friend];
 		[friend release];
 	}
-	
-	// TODO: Process search results
-	
-/*	unsigned int i, cnt = [userNames count];
-	for( i = 0; i < cnt; i++ )
-	{
-		fr = [[XFFriend alloc] init];
-		
-		[fr setUserName:[userNames objectAtIndex:i]];
-		[fr setFirstName:[firstNames objectAtIndex:i]];
-		[fr setLastName:[lastNames objectAtIndex:i]];
-		
-		[friends addObject:fr];
-		[fr release];
-	}
-	
-	[_session delegate_searchResults:friends];*/
+	[_session receivedSearchResults:friends];
+	[friends release];
 }
 
 - (void)processRemoveFriendPacket:(XFPacket *)pkt
@@ -944,7 +929,6 @@
 - (void)processFriendRequestPacket:(XFPacket *)pkt
 {	
 	NSMutableArray *friends = [[NSMutableArray alloc] init];
-	//XFFriend *fr;
 	
 	NSArray *userNames = [pkt attributeValuesForKey:XFPacketNameKey];
 	NSArray *nickNames = [pkt attributeValuesForKey:XFPacketNickNameKey];
@@ -962,23 +946,10 @@
 		[friends addObject:friend];
 		[friend release];
 	}
-    
-/*	unsigned int i, cnt = [userNames count];
-	for( i = 0; i < cnt; i++ )
-	{
-		fr = [[XFFriend alloc] init];
-        
-		[fr setUserName:[userNames objectAtIndex:i]];
-        if( i < [nickNames count] )
-            [fr setNickName:[nickNames objectAtIndex:i]];
-        if( i < [messages count] )
-            [fr setStatusString:[messages objectAtIndex:i]];
-        if( ![fr isBlocked] )
-            [friends addObject:fr];
-		[fr release];
-	}
-	[_session delegate_didReceiveFriendshipRequests:friends];
-    [friends release];*/
+	
+
+	[_session receivedFriendShipRequests:friends];
+	[friends release];
 }
 
 - (void)processFriendGroupNamePacket:(XFPacket *)pkt
@@ -1124,38 +1095,7 @@
 		}
 	}
 	
-	// decode the packet and notify the XFChat object
-	XFPacketDictionary *peermsg = (XFPacketDictionary *)[[pkt attributeForKey:XFPacketPeerMessageKey] value];
-	switch( [[[peermsg objectForKey:XFPacketMessageTypeKey] value] intValue] )
-	{
-		case 0: // chat message
-		{
-			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
-			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
-			[chat receivedMessage:message];
-			XFPacket *sendPkt = [XFPacket chatAcknowledgementPacketWithSID:[chat.remoteFriend sessionID] 
-																   imIndex:(unsigned int)imIndex];
-			[self sendPacket:sendPkt];
-		}
-			break;
-			
-		case 1: // acknowledgement
-		{
-			NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
-			
-		}
-			break;
-			
-		case 2: 
-		{
-			// for PTP connections
-		}
-			break;
-			
-		case 3: // typing notification
-			[chat receivedIsTypingNotification];
-			break;
-	}
+	[chat receivedPacket:pkt];
 }
 
 - (void)processDisconnectPacket:(XFPacket *)pkt

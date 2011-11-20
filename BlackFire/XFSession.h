@@ -63,6 +63,9 @@ typedef enum{
 - (void)session:(XFSession *)session chatDidStart:(XFChat *)chat;
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat;
 
+- (void)session:(XFSession *)session didReceiveFriendShipRequests:(NSArray *)requests;
+- (void)session:(XFSession *)session didReceiveSearchResults:(NSArray *)results;
+
 - (NSString *)username;
 - (NSString *)password;
 @end
@@ -134,7 +137,31 @@ typedef enum{
 
 - (XFChat *)chatForSessionID:(NSData *)sessionID;
 
+/*
+ * Created a new XFChat object for the given friend. Either called
+ * by the delegate or the XFConnection ( incoming chats ).
+ */
 - (XFChat *)beginNewChatForFriend:(XFFriend *)remoteFriend;
+
+
+
+//--------------------------------------------------------------------------------
+// Handling some misc socket responses
+
+/*
+ * This method is called by the XFConnection whenever we receive a packet
+ * containing 1 or more friend requests. The XFSession delegate will be the
+ * only object actually using this data for something.
+ */
+- (void)receivedFriendShipRequests:(NSArray *)requests;
+
+/*
+ * This method is called by the XFConnection whenever search results are
+ * returned by the server. This includes empty arrays so we can notify
+ * the user whenever the search query did not return any results ( rather than
+ * showing infinite progress ).
+ */
+- (void)receivedSearchResults:(NSArray *)results;
 
 
 //--------------------------------------------------------------------------------

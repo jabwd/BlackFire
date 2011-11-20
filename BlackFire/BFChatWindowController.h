@@ -8,31 +8,30 @@
 
 #import <Cocoa/Cocoa.h> 
 
-@class BFChat;
+@class BFChat, SFTabStripView;
 
 
 @interface BFChatWindowController : NSObject <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	NSWindow *_window;
-	
-	NSTableView *_messageTableView;
+	NSView *_switchView;
 
-	NSMutableArray *_chats;
-	BFChat	*_currentlySelectedChat;
+	NSMutableArray	*_chats;
+	BFChat			*_currentlySelectedChat;
+	
+	SFTabStripView *_tabStripView;
 }
 
-@property (assign) IBOutlet NSTableView *messageTableView;
+@property (assign) IBOutlet NSView *switchView;
 @property (assign) IBOutlet NSWindow *window;
+
+@property (assign) IBOutlet SFTabStripView *tabStripView;
 
 - (id)init;
 
 //----------------------------------------------------------------------
 // Managing chats
 - (void)addChat:(BFChat *)chat;
-
-/*
- * Call this to refresh the tableview
- */
-- (void)reloadData;
+- (void)changeSwitchView:(NSView *)newView;
 
 @end

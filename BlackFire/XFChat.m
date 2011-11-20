@@ -47,6 +47,13 @@
 	[super dealloc];
 }
 
+#pragma mark - Handy methods
+
+- (XFFriend *)loginIdentity
+{
+	return _connection.session.loginIdentity;
+}
+
 #pragma mark - Sending messages
 
 - (void)sendMessage:(NSString *)message
@@ -91,6 +98,43 @@
 - (void)receivedNetworkInformation
 {
 	
+}
+
+
+- (void)receivedPacket:(XFPacket *)packet
+{
+	// decode the packet and notify the XFChat object
+	XFPacketDictionary *peermsg = (XFPacketDictionary *)[[packet attributeForKey:XFPacketPeerMessageKey] value];
+	switch( [[[peermsg objectForKey:XFPacketMessageTypeKey] value] intValue] )
+	{
+		case 0: // chat message
+		{
+			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
+			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
+			[self receivedMessage:message];
+			XFPacket *sendPkt = [XFPacket chatAcknowledgementPacketWithSID:[_remoteFriend sessionID] 
+																   imIndex:(unsigned int)imIndex];
+			[_connection sendPacket:sendPkt];
+		}
+			break;
+			
+		case 1: // acknowledgement
+		{
+			NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
+			
+		}
+			break;
+			
+		case 2: 
+		{
+			// for PTP connections
+		}
+			break;
+			
+		case 3: // typing notification
+			[self receivedIsTypingNotification];
+			break;
+	}
 }
 
 #pragma mark - Misc

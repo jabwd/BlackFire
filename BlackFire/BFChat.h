@@ -11,21 +11,33 @@
 
 @class BFChatWindowController;
 
+typedef enum
+{
+	BFUserMessageType		= 0,
+	BFFriendMessageType		= 1,
+	BFWarningMessageType	= 2
+} BFIMType;
+
 @interface BFChat : NSObject <XFChatDelegate>
 {
 	BFChatWindowController *_windowController;
 	XFChat *_chat;
 	
-	NSMutableArray *_messages;
+	NSTextView *_chatHistoryView;
+	NSScrollView *_chatScrollView;
 }
 
-@property (nonatomic, assign) BFChatWindowController *windowController;
+@property (nonatomic, retain) BFChatWindowController *windowController;
+@property (assign) IBOutlet NSTextView *chatHistoryView;
+@property (assign) IBOutlet NSScrollView *chatScrollView;
+@property (nonatomic, retain) XFChat *chat;
 
 - (id)initWithChat:(XFChat *)chat;
 
-//--------------------------------------------------------------------
-// accessing messages
+- (void)closeChat;
 
-- (NSUInteger)messageCount;
-- (NSDictionary *)messageAtIndex:(NSUInteger)idx;
+//------------------------------------------------------------------------------
+// Misc methods
+- (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type;
+
 @end

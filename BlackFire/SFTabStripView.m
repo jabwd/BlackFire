@@ -25,7 +25,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NSWindowDidBecomeMainNotification object:nil];
 		
 		_tabs = [[NSMutableArray alloc] init];
-		
+	/*	
 		SFTabView *tabView = [[SFTabView alloc] initWithFrame:NSMakeRect(0, 0, 50, 24)];
 		tabView.selected = true;
 		[_tabs addObject:tabView];
@@ -41,7 +41,7 @@
 		[_tabs addObject:tabView3];
 		[tabView3 release];
 		
-		[self layoutTabs];
+		[self layoutTabs];*/
 	}
 	return self;
 }
@@ -93,6 +93,13 @@
 	[newSelected orderOnTop];
 	
 	[self setNeedsDisplay:true];
+}
+
+- (void)addTabView:(SFTabView *)tabView
+{
+	[self addSubview:tabView];
+	[_tabs addObject:tabView];
+	[self layoutTabs];
 }
 
 - (void)layoutTabs
