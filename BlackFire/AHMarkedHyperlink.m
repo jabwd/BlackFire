@@ -104,7 +104,8 @@ withValidationStatus:(AH_URI_VERIFICATION_STATUS)status
 	if(preString) [preString release];
 }
 
-- (void)setValidationStatus:(AH_URI_VERIFICATION_STATUS)status
+// disabled this, should be fine..
+/*- (void)setValidationStatus:(AH_URI_VERIFICATION_STATUS)status
 {
 	urlStatus = status;
 }
@@ -115,7 +116,7 @@ withValidationStatus:(AH_URI_VERIFICATION_STATUS)status
 		[pString release];
 		pString = [pInString retain];
 	}
-}
+}*/
 
 #pragma mark NSCopying
 

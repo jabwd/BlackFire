@@ -38,7 +38,7 @@
 @property(assign) NSRange											 range;
 @property(retain) NSURL												*URL;
 @property(retain) NSString										*parentString;
-@property(assign) AH_URI_VERIFICATION_STATUS	 validationStatus;
+@property(assign, setter=setValidationStatus:) AH_URI_VERIFICATION_STATUS	 validationStatus;
 
 + (id)hyperlinkWithString:(NSString *)inString withValidationStatus:(AH_URI_VERIFICATION_STATUS)status parentString:(NSString *)pInString andRange:(NSRange)inRange;
 -(id)initWithString:(NSString *)inString withValidationStatus:(AH_URI_VERIFICATION_STATUS)status parentString:(NSString *)pInString andRange:(NSRange)inRange;

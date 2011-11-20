@@ -61,7 +61,7 @@
 
 - (void)sendMessage:(NSString *)message
 {
-	if( [message length] < 1 && [message length] > 4000 )
+	if( [message length] < 1 || [message length] > 4000 )
 		return;
 	
 	[self processMessage:message ofFriend:[[_chat loginIdentity] displayName] ofType:BFUserMessageType];

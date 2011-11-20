@@ -257,8 +257,11 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)closeChat:(XFChat *)chat
 {
-	NSLog(@"CLOSE CHATTTTTT");
+	// just to make sure that the chat isn't destroyed when we are still busy
+	// removing it, we still need it in the delegate _after_ removing it from our
+	// own storage
 	[chat retain];
+	
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)
 	{

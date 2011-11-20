@@ -43,6 +43,9 @@
 
 - (void)awakeFromNib
 {
+	_chatControllers = [[NSMutableArray alloc] init];
+	
+	
 	[self changeToMode:BFApplicationModeOffline];
 	[_window setContentBorderThickness:30.0 forEdge:NSMinYEdge];
 	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
@@ -231,8 +234,13 @@
 
 - (void)session:(XFSession *)session chatDidStart:(XFChat *)chat
 {
-	NSLog(@"Chat did start");
-	BFChatWindowController *chatController = [[BFChatWindowController alloc] init];
+	BFChatWindowController *chatController;
+	if( [_chatControllers count] > 0 )
+	{
+		chatController = [[_chatControllers objectAtIndex:0] windowController];
+	}
+	else
+		chatController = [[BFChatWindowController alloc] init];
 	
 	BFChat *blackfireChat = [[BFChat alloc] initWithChat:chat];
 	[chatController addChat:blackfireChat];
