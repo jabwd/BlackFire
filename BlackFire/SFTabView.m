@@ -39,6 +39,7 @@
 	NSImage *left;
 	NSImage *right;
 	NSImage *fill;
+	NSImage *close;
 	if( _selected )
 	{
 		if( [[self window] isMainWindow] )
@@ -46,12 +47,14 @@
 			left	= [NSImage imageNamed:@"activeTabLeft"];
 			right	= [NSImage imageNamed:@"activeTabRight"];
 			fill	= [NSImage imageNamed:@"activeTabFill"];
+			close	= [NSImage imageNamed:@"activeTabClose"];
 		}
 		else
 		{
 			left	= [NSImage imageNamed:@"activeWTabLeft"];
 			right	= [NSImage imageNamed:@"activeWTabRight"];
 			fill	= [NSImage imageNamed:@"activeWTabFill"];
+			close	= [NSImage imageNamed:@"activeTabClose"]; // TODO: other image?
 		}
 	}
 	else
@@ -61,18 +64,21 @@
 			left	= [NSImage imageNamed:@"inactiveTabLeft"];
 			right	= [NSImage imageNamed:@"inactiveTabRight"];
 			fill	= [NSImage imageNamed:@"inactiveTabFill"];
+			close	= [NSImage imageNamed:@"inactiveTabClose"];
 		}
 		else
 		{
 			left	= [NSImage imageNamed:@"inactiveWTabLeft"];
 			right	= [NSImage imageNamed:@"inactiveWTabRight"];
 			fill	= [NSImage imageNamed:@"inactiveWTabFill"];
+			close	= [NSImage imageNamed:@"inactiveTabClose"]; // TODO: other image?
 		}
 	}
 	
 	[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
+	[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -94,7 +100,10 @@
 	
 	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:style,NSParagraphStyleAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
 	
-	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:@"Title" attributes:attributes];
+	if( ! _title )
+		_title = [@"" retain];
+	
+	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:_title attributes:attributes];
 	CGFloat height = [titleAttrStr size].height/2;
 	NSRect stringRect = NSMakeRect(10, (dirtyRect.size.height/2)-height-2.0f, dirtyRect.size.width-20, 24-height);
 	[titleAttrStr drawInRect:stringRect];

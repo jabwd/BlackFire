@@ -78,7 +78,8 @@
 
 - (void)doubleClicked
 {
-	[_session beginNewChatForFriend:[self selectedOnlineFriend]];
+	if( [self selectedOnlineFriend] )
+		[_session beginNewChatForFriend:[self selectedOnlineFriend]];
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
@@ -200,7 +201,21 @@
 	{
 		return 18.0f;
 	}
-	return 26.0f;
+	return 28.0f;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+	/*NSLog(@"Should be selecting an item :/");
+	if( [item isKindOfClass:[XFGroup class]] )
+	{
+		if( [outlineView isItemExpanded:item] )
+			[outlineView collapseItem:item];
+		else
+			[outlineView expandItem:item];
+		return true;
+	}*/
+	return true;
 }
 
 
