@@ -10,9 +10,20 @@
 
 @implementation XFGame
 
-@synthesize longName = _longName;
-@synthesize shortName = _shortName;
-@synthesize gameID = _gameID;
+@synthesize longName	= _longName;
+@synthesize shortName	= _shortName;
+@synthesize gameID		= _gameID;
+
+- (id)initWithLongName:(NSString *)longName shortName:(NSString *)shortName gameID:(unsigned int)gameID
+{
+	if( (self = [super init]) )
+	{
+		_longName	= [longName retain];
+		_shortName	= [shortName retain];
+		_gameID		= gameID;
+	}
+	return self;
+}
 
 - (void)dealloc
 {

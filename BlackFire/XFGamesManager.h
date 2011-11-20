@@ -6,6 +6,9 @@
 //  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 //  As this class does not require an XFSession, a shared instance is optional
+//	ITs generallay a good idea to subclass this class to suit your needs,
+//	in this case blackfire is subclassing it to add support for NSImage ( appkit ) 
+//	and game detection.
 
 #import <Foundation/Foundation.h>
 #import "XFGame.h"

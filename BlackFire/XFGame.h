@@ -20,5 +20,7 @@
 @property (retain) NSString *shortName;
 @property (assign) unsigned int gameID;
 
+- (id)initWithLongName:(NSString *)longName shortName:(NSString *)shortName gameID:(unsigned int)gameID;
+
 
 @end
