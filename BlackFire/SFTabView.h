@@ -12,16 +12,26 @@
 {
 	NSString *_title;
 	
+	id _target;
+	SEL _selector;
+	
 	NSRect _originalRect;
 	NSPoint _originalPoint;
 	
-	BOOL _selected;
-	
 	NSInteger _tag;
+	
+	BOOL _selected;
+	BOOL _mouseInside;
+	BOOL _dragging;
+	BOOL _mouseInsideClose;
+	BOOL _mouseDownInsideClose;
 }
 
 @property (nonatomic, retain) NSString *title;
 @property (assign) NSInteger tag;
+
+@property (assign) id target;
+@property (assign) SEL selector;
 
 @property (assign) BOOL selected;
 

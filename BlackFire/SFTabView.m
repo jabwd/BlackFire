@@ -17,11 +17,25 @@
 @synthesize selected = _selected;
 @synthesize tag = _tag;
 
+@synthesize target = _target;
+@synthesize selector = _selector;
+
 - (id)initWithFrame:(NSRect)frame
 {
     if( (self = [super initWithFrame:frame]) )
 	{
-		_title = [@"title" retain];
+		_title = nil;
+		
+		_mouseInside = false;
+		
+		
+		NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:frame options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+		[self addTrackingArea:trackingArea];
+		[trackingArea release];
+		
+		trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(10, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+		[self addTrackingArea:trackingArea];
+		[trackingArea release];
 	}
     return self;
 }
@@ -47,14 +61,22 @@
 			left	= [NSImage imageNamed:@"activeTabLeft"];
 			right	= [NSImage imageNamed:@"activeTabRight"];
 			fill	= [NSImage imageNamed:@"activeTabFill"];
-			close	= [NSImage imageNamed:@"activeTabClose"];
+			
+			if( _mouseInsideClose )
+				close = [NSImage imageNamed:@"activeTabCloseHover"];
+			else
+				close = [NSImage imageNamed:@"activeTabClose"];
 		}
 		else
 		{
 			left	= [NSImage imageNamed:@"activeWTabLeft"];
 			right	= [NSImage imageNamed:@"activeWTabRight"];
 			fill	= [NSImage imageNamed:@"activeWTabFill"];
-			close	= [NSImage imageNamed:@"activeTabClose"]; // TODO: other image?
+			
+			if( _mouseInsideClose )
+				close = [NSImage imageNamed:@"activeWTabCloseHover"];
+			else
+				close = [NSImage imageNamed:@"activeWTabClose"];
 		}
 	}
 	else
@@ -64,21 +86,32 @@
 			left	= [NSImage imageNamed:@"inactiveTabLeft"];
 			right	= [NSImage imageNamed:@"inactiveTabRight"];
 			fill	= [NSImage imageNamed:@"inactiveTabFill"];
-			close	= [NSImage imageNamed:@"inactiveTabClose"];
+			
+			if( _mouseInsideClose )
+				close = [NSImage imageNamed:@"inactiveTabCloseHover"];
+			else
+				close = [NSImage imageNamed:@"inactiveTabClose"];
 		}
 		else
 		{
 			left	= [NSImage imageNamed:@"inactiveWTabLeft"];
 			right	= [NSImage imageNamed:@"inactiveWTabRight"];
 			fill	= [NSImage imageNamed:@"inactiveWTabFill"];
-			close	= [NSImage imageNamed:@"inactiveTabClose"]; // TODO: other image?
+			
+			if( _mouseInsideClose )
+				close = [NSImage imageNamed:@"inactiveWTabCloseHover"];
+			else
+				close = [NSImage imageNamed:@"inactiveWTabClose"];
 		}
 	}
 	
 	[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
-	[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
+	
+	
+	if( _mouseInside )
+		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -110,8 +143,70 @@
 	[titleAttrStr release];
 }
 
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+	_mouseInside = true;
+	
+	NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
+	
+	if( actual.x > 7 && actual.x < 26 && actual.y > 251 && actual.y < 263 )
+	{
+		_mouseInsideClose = true;
+		NSLog(@"InsideClose");
+	}
+	
+	NSLog(@"Kanker: %lf %lf  ",actual.x,actual.y);
+	[self setNeedsDisplay:true];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent
+{	
+	NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
+	actual.y -= 246; // kinda random, but whatever
+	if( actual.y < 0 )
+		actual.y = 3;
+	NSRect frame = [self frame];
+	if( frame.origin.x < actual.x && frame.size.width > actual.x && frame.origin.y < actual.y && frame.size.height > actual.y )
+	{
+		_mouseInsideClose = false;
+		_mouseInside = true;
+	}
+	else
+	{
+		_mouseInsideClose = false;
+		_mouseInside = false;
+	}
+	
+	NSLog(@"Kanker: %lf %lf  %lf %lf %lf %lf",actual.x,actual.y,frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+	
+	[self setNeedsDisplay:true];
+}
+
+- (void)updateTrackingAreas
+{
+	[super updateTrackingAreas];
+
+	NSArray *trackingAreas = [self trackingAreas];
+	NSUInteger i, cnt = [trackingAreas count];
+	for(i=0;i<cnt;i++)
+	{
+		[self removeTrackingArea:[trackingAreas objectAtIndex:i]];
+	}
+	
+	NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:[self frame] options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+	[self addTrackingArea:trackingArea];
+	[trackingArea release];
+	
+	trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(14, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+	[self addTrackingArea:trackingArea];
+	[trackingArea release];
+}
+
+
 - (void)mouseDown:(NSEvent *)theEvent
 {
+	_dragging = false;
 	if( !_selected )
 	{
 		SFTabStripView *strip = (SFTabStripView *)[self superview];
@@ -120,6 +215,13 @@
 	
 	_originalPoint	= [NSEvent mouseLocation];
 	_originalRect	= [self frame];
+	
+	NSPoint actual = [[self window] convertScreenToBase:_originalPoint];
+	
+	if( actual.x > 10 && actual.x < 22 && actual.y > 251 && actual.y < 263 )
+		_mouseDownInsideClose = true;
+	else
+		_mouseDownInsideClose = false;
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
@@ -128,10 +230,23 @@
 		return;
 	NSPoint newPoint = [NSEvent mouseLocation];
 	CGFloat deltaX = _originalPoint.x - newPoint.x;
+	
+	if( ! _dragging )
+	{
+		if( deltaX < 10.0f && deltaX > -10.0f )
+		{
+			return;
+		}
+		else
+		{
+			_dragging = true;
+		}
+	}
+	
 	NSRect ownFrame = [self frame];
 	ownFrame.origin.x -= deltaX;
-	[self setFrame:ownFrame];
 	_originalPoint = [NSEvent mouseLocation];
+	[self setFrame:ownFrame];
 	
 	SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
 	
@@ -201,6 +316,17 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+	if( _mouseDownInsideClose )
+	{
+		NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
+		if( actual.x > 10 && actual.x < 22 && actual.y > 251 && actual.y < 263 )
+		{
+			if( [_target respondsToSelector:_selector] )
+				[_target performSelector:_selector withObject:self];
+		}
+		_mouseDownInsideClose = false;
+	}
+	
 	if( !_selected )
 		return;
 	[[self animator] setFrame:_originalRect];

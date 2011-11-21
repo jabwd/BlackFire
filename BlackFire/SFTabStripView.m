@@ -118,16 +118,27 @@
 
 - (void)removeTabView:(SFTabView *)tabView
 {
+	[tabView retain];
 	[tabView removeFromSuperview];
+	
 	NSUInteger i,cnt = [_tabs count];
 	for(i=0;i<cnt;i++)
 	{
 		if( [[_tabs objectAtIndex:i] tag] == tabView.tag )
 		{
 			[_tabs removeObjectAtIndex:i];
-			return;
+			break;
 		}
 	}
+
+	
+	if( tabView.selected && [_tabs count] > 0  )
+	{
+		[self selectTab:[_tabs objectAtIndex:0]];
+		[self layoutTabs];
+	}
+	
+	[tabView release];
 }
 
 - (SFTabView *)tabViewForTag:(NSUInteger)tag

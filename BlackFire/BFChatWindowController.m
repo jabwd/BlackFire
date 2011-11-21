@@ -84,7 +84,7 @@
 	
 	SFTabView *tabView = [[SFTabView alloc] init];
 	tabView.title = [chat.chat.remoteFriend displayName];
-	NSLog(@"TabView: %@",tabView.title);
+	//NSLog(@"TabView: %@",tabView.title);
 	[tabView setTag:chat.chat.remoteFriend.userID];
 	
 	if( ! _currentlySelectedChat )
@@ -93,8 +93,36 @@
 		[self changeSwitchView:chat.chatScrollView];
 		tabView.selected = true;
 	}
+	[tabView setTarget:self];
+	[tabView setSelector:@selector(tabShouldClose:)];
 	[_tabStripView addTabView:tabView];
 	[tabView release];
+}
+
+- (void)tabShouldClose:(SFTabView *)tabView
+{
+	NSUInteger userID = tabView.tag;
+	if( userID < 1 )
+		return;
+	
+	if( [_chats count] == 1 )
+	{
+		[[self window] performClose:self];
+		return;
+	}
+	
+	NSUInteger i, cnt = [_chats count];
+	for(i=0;i<cnt;i++)
+	{
+		BFChat *chat = [_chats objectAtIndex:i];
+		if( chat.chat.remoteFriend.userID == userID )
+		{
+			[chat closeChat];
+			[_chats removeObjectAtIndex:i];
+			[_tabStripView removeTabView:tabView];
+			return;
+		}
+	}
 }
 
 - (void)changeSwitchView:(NSView *)newView

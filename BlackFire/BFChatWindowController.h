@@ -14,8 +14,8 @@
 
 @interface BFChatWindowController : NSObject <TabStripDelegate, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
-	NSWindow *_window;
-	NSView *_switchView;
+	NSWindow	*_window;
+	NSView		*_switchView;
 	NSTextField *_messageField;
 
 	NSMutableArray	*_chats;
@@ -35,6 +35,7 @@
 //----------------------------------------------------------------------
 // Managing chats
 - (void)addChat:(BFChat *)chat;
+- (void)tabShouldClose:(SFTabView *)tabView;
 - (void)changeSwitchView:(NSView *)newView;
 
 
