@@ -2888,6 +2888,7 @@
 		36B642791484464700D9B11E /* online.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642721484464600D9B11E /* online.m4v */; };
 		36B6427A1484464700D9B11E /* receive.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642731484464600D9B11E /* receive.m4v */; };
 		36B6427B1484464700D9B11E /* Send.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642741484464700D9B11E /* Send.m4v */; };
+		36B6427F1484474700D9B11E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
@@ -5832,6 +5833,7 @@
 		36B642721484464600D9B11E /* online.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = online.m4v; sourceTree = "<group>"; };
 		36B642731484464600D9B11E /* receive.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = receive.m4v; sourceTree = "<group>"; };
 		36B642741484464700D9B11E /* Send.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Send.m4v; sourceTree = "<group>"; };
+		36B6427E1484474700D9B11E /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		36D9C9F114659B9600C4A162 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		36D9C9F51465C63400C4A162 /* BFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFLoginViewController.h; sourceTree = "<group>"; };
 		36D9C9F61465C63400C4A162 /* BFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFLoginViewController.m; sourceTree = "<group>"; };
@@ -5864,6 +5866,7 @@
 				36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */,
 				3616F6A9145F5CE400E5066D /* libcrypto.dylib in Frameworks */,
 				3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */,
+				36B6427F1484474700D9B11E /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5890,6 +5893,7 @@
 		3616F65C145F0E5500E5066D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36B6427E1484474700D9B11E /* Growl.framework */,
 				36D9C9F114659B9600C4A162 /* Security.framework */,
 				3616F6A8145F5CE400E5066D /* libcrypto.dylib */,
 				3616F65D145F0E5500E5066D /* Cocoa.framework */,
@@ -12100,6 +12104,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
@@ -12113,6 +12121,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
