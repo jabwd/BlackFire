@@ -13,5 +13,5 @@
 	
 }
 
-- (NSImage *)imageForGame:(unsigned int)gameID;
+- (NSImage *)imageForGame:(NSUInteger)gameID;
 @end

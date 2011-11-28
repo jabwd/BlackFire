@@ -8,6 +8,7 @@
 
 #import "BFFriendsListController.h"
 #import "BFImageAndTextCell.h"
+#import "BFGamesManager.h"
 
 #import "XFSession.h"
 #import "XFGroupController.h"
@@ -145,30 +146,44 @@
 		XFFriend			*friend			= (XFFriend *)item;
 		BFImageAndTextCell	*imageCell		= (BFImageAndTextCell *)cell;
 		
-		[imageCell setImage:[NSImage imageNamed:@"xfire"]];
+		NSString *statusString = friend.status;
+		if( ! statusString )
+			statusString = @"";
 		
-		NSString *status = friend.status;
-		if( [status rangeOfString:@"AFK"].length > 0 )
+		if( friend.gameID > 0 )
 		{
+			if( [statusString length] > 0 )
+			{
+				statusString = [NSString stringWithFormat:@"%@, ",statusString];
+			}
+			
+			if( friend.gameIP > 0 )
+			{
+				statusString = [NSString stringWithFormat:@"%@Playing %@ on %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:friend.gameID],[friend gameIPString]];
+			}
+			else
+			{
+				statusString = [NSString stringWithFormat:@"%@Playing %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:friend.gameID]];
+			}
+		}
+		
+		[imageCell setImage:[[BFGamesManager sharedGamesManager] imageForGame:friend.gameID]];
+		
+		if( [statusString rangeOfString:@"AFK"].length > 0 )
 			[imageCell setFriendStatus:CellStatusAFK];
-		}
 		else if( friend.online )
-		{
 			[imageCell setFriendStatus:CellStatusOnline];
-		}
 		else
-		{
 			[imageCell setFriendStatus:CellStatusOffline];
-		}
 		
-		if( [status length] > 0 )
+		if( [statusString length] > 0 )
 		{
 			[(BFImageAndTextCell *)cell setShowsStatus:true];
 			if( friend.gameIP != 0 )
 			{
-				status = [NSString stringWithFormat:@"%@ %@",status,[friend gameIPString]];
+				statusString = [NSString stringWithFormat:@"%@ %@",statusString,[friend gameIPString]];
 			}
-			[(BFImageAndTextCell *)cell setCellStatusString:status];
+			[(BFImageAndTextCell *)cell setCellStatusString:statusString];
 		}
 		else
 		{

@@ -8,7 +8,7 @@
 
 #import "XFGamesManager.h"
 
-#define GAMESFILE_NAME @"Games.plist"
+#define GAMESFILE_NAME @"Games"
 
 // modify these if your file is using different key/value pairs
 NSString *XFLongNameKey		= @"LongName";
@@ -49,9 +49,9 @@ static XFGamesManager *sharedGameManager = nil;
 	[super dealloc];
 }
 
-- (XFGame *)gameForGameID:(unsigned int)gameID
+- (XFGame *)gameForGameID:(NSUInteger)gameID
 {
-	NSString *key = [[NSString alloc] initWithFormat:@""];
+	NSString *key = [[NSString alloc] initWithFormat:@"%lu",gameID];
 	XFGame *game = [[[XFGame alloc] init] autorelease];
 	NSDictionary *info = [_games objectForKey:key];
 	if( info )
@@ -72,12 +72,12 @@ static XFGamesManager *sharedGameManager = nil;
 	return game;
 }
 
-- (NSString *)longNameForGameID:(unsigned int)gameID
+- (NSString *)longNameForGameID:(NSUInteger)gameID
 {
 	return [self gameForGameID:gameID].longName;
 }
 
-- (NSString *)shortNameForGameID:(unsigned int)gameID
+- (NSString *)shortNameForGameID:(NSUInteger)gameID
 {
 	return [self gameForGameID:gameID].shortName;
 }

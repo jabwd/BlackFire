@@ -24,9 +24,9 @@ extern NSString *XFGameIDKey;
 
 + (id)sharedGamesManager;
 
-- (XFGame *)gameForGameID:(unsigned int)gameID;
+- (XFGame *)gameForGameID:(NSUInteger)gameID;
 
-- (NSString *)longNameForGameID:(unsigned int)gameID;
-- (NSString *)shortNameForGameID:(unsigned int)gameID;
+- (NSString *)longNameForGameID:(NSUInteger)gameID;
+- (NSString *)shortNameForGameID:(NSUInteger)gameID;
 
 @end

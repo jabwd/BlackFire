@@ -11,11 +11,14 @@
 @implementation BFGamesManager
 
 
-- (NSImage *)imageForGame:(unsigned int)gameID
+- (NSImage *)imageForGame:(NSUInteger)gameID
 {
 	if( gameID > 0 )
 	{
-		return [NSImage imageNamed:[NSString stringWithFormat:@"%lu",gameID]];
+		NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%lu",gameID]];
+		if( ! image )
+			image = [NSImage imageNamed:@"-1"];
+		return image;
 	}
 	return [NSImage imageNamed:@"-1"];
 }
