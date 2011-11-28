@@ -27,13 +27,14 @@
 
 - (IBAction)reconnect:(id)sender
 {
+	NSLog(@"Delegate: %lu",_delegate.session.status);
 	if( _delegate.session.status == XFSessionStatusOffline )
 	{
 		[_delegate connectionCheck];
 	}
 	else if( _delegate.session.status == XFSessionStatusConnecting )
 	{
-		[_delegate.session disconnect];
+		[_delegate disconnect];
 	}
 }
 

@@ -289,6 +289,13 @@
 	}
 }
 
+- (void)disconnect
+{
+	[_session disconnect];
+	[_session release];
+	_session = nil;
+}
+
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
 {
 	
