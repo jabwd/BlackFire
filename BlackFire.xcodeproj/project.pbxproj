@@ -2881,6 +2881,13 @@
 		36B6425F1483EF5000D9B11E /* 6986.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B637741483EF4C00D9B11E /* 6986.png */; };
 		36B64261148414ED00D9B11E /* Games.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36B64260148414ED00D9B11E /* Games.plist */; };
 		36B64269148421EB00D9B11E /* 81.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 36B64268148421EB00D9B11E /* 81.pdf */; };
+		36B642751484464700D9B11E /* connected.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B6426E1484464400D9B11E /* connected.m4v */; };
+		36B642761484464700D9B11E /* gamesTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B6426F1484464500D9B11E /* gamesTemplate.png */; };
+		36B642771484464700D9B11E /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B642701484464500D9B11E /* joystick.png */; };
+		36B642781484464700D9B11E /* offline.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642711484464600D9B11E /* offline.m4v */; };
+		36B642791484464700D9B11E /* online.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642721484464600D9B11E /* online.m4v */; };
+		36B6427A1484464700D9B11E /* receive.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642731484464600D9B11E /* receive.m4v */; };
+		36B6427B1484464700D9B11E /* Send.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642741484464700D9B11E /* Send.m4v */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
@@ -5818,6 +5825,13 @@
 		36B637741483EF4C00D9B11E /* 6986.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6986.png; sourceTree = "<group>"; };
 		36B64260148414ED00D9B11E /* Games.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Games.plist; sourceTree = "<group>"; };
 		36B64268148421EB00D9B11E /* 81.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 81.pdf; sourceTree = "<group>"; };
+		36B6426E1484464400D9B11E /* connected.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = connected.m4v; sourceTree = "<group>"; };
+		36B6426F1484464500D9B11E /* gamesTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gamesTemplate.png; sourceTree = "<group>"; };
+		36B642701484464500D9B11E /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
+		36B642711484464600D9B11E /* offline.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = offline.m4v; sourceTree = "<group>"; };
+		36B642721484464600D9B11E /* online.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = online.m4v; sourceTree = "<group>"; };
+		36B642731484464600D9B11E /* receive.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = receive.m4v; sourceTree = "<group>"; };
+		36B642741484464700D9B11E /* Send.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Send.m4v; sourceTree = "<group>"; };
 		36D9C9F114659B9600C4A162 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		36D9C9F51465C63400C4A162 /* BFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFLoginViewController.h; sourceTree = "<group>"; };
 		36D9C9F61465C63400C4A162 /* BFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFLoginViewController.m; sourceTree = "<group>"; };
@@ -5989,15 +6003,9 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				36B64268148421EB00D9B11E /* 81.pdf */,
+				36B6427D1484468B00D9B11E /* Images */,
+				36B6427C1484467300D9B11E /* Sounds */,
 				36B64260148414ED00D9B11E /* Games.plist */,
-				36B62C891483EF2800D9B11E /* icons */,
-				36ADF20D1469AC9600F46E9E /* blue_bubble.png */,
-				362FFA80146742C2007E3BD8 /* Safari tabs */,
-				3652984A146698140010FD7F /* avi_bubble.png */,
-				3652984B146698140010FD7F /* away_bubble.png */,
-				36529848146697EE0010FD7F /* blackfire_experimental.icns */,
-				36529846146697C00010FD7F /* xfire.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -9017,6 +9025,35 @@
 			path = icons;
 			sourceTree = "<group>";
 		};
+		36B6427C1484467300D9B11E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				36B6426E1484464400D9B11E /* connected.m4v */,
+				36B642711484464600D9B11E /* offline.m4v */,
+				36B642721484464600D9B11E /* online.m4v */,
+				36B642731484464600D9B11E /* receive.m4v */,
+				36B642741484464700D9B11E /* Send.m4v */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		36B6427D1484468B00D9B11E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				36B64268148421EB00D9B11E /* 81.pdf */,
+				36529846146697C00010FD7F /* xfire.jpg */,
+				36B642701484464500D9B11E /* joystick.png */,
+				36B6426F1484464500D9B11E /* gamesTemplate.png */,
+				36529848146697EE0010FD7F /* blackfire_experimental.icns */,
+				36ADF20D1469AC9600F46E9E /* blue_bubble.png */,
+				3652984A146698140010FD7F /* avi_bubble.png */,
+				3652984B146698140010FD7F /* away_bubble.png */,
+				362FFA80146742C2007E3BD8 /* Safari tabs */,
+				36B62C891483EF2800D9B11E /* icons */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		36D9C9F41465C4A300C4A162 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -11924,6 +11961,13 @@
 				36B6425F1483EF5000D9B11E /* 6986.png in Resources */,
 				36B64261148414ED00D9B11E /* Games.plist in Resources */,
 				36B64269148421EB00D9B11E /* 81.pdf in Resources */,
+				36B642751484464700D9B11E /* connected.m4v in Resources */,
+				36B642761484464700D9B11E /* gamesTemplate.png in Resources */,
+				36B642771484464700D9B11E /* joystick.png in Resources */,
+				36B642781484464700D9B11E /* offline.m4v in Resources */,
+				36B642791484464700D9B11E /* online.m4v in Resources */,
+				36B6427A1484464700D9B11E /* receive.m4v in Resources */,
+				36B6427B1484464700D9B11E /* Send.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
