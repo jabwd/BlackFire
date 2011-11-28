@@ -240,7 +240,9 @@
 		chatController = [[_chatControllers objectAtIndex:0] windowController];
 	}
 	else
+	{
 		chatController = [[BFChatWindowController alloc] init];
+	}
 	
 	BFChat *blackfireChat = [[BFChat alloc] initWithChat:chat];
 	[chatController addChat:blackfireChat];

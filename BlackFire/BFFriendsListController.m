@@ -26,7 +26,7 @@
 		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
 		BFImageAndTextCell *cell = [column dataCell];
 		[cell setEditable:NO];
-		[cell setDisplayImageSize:NSMakeSize(23.0f, 23.0f)];
+		[cell setDisplayImageSize:NSMakeSize(24.0f, 24.0f)];
 		
 		[_friendsList setDoubleAction:@selector(doubleClicked)];
 		[_friendsList setTarget:self];
@@ -42,7 +42,7 @@
 		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
 		BFImageAndTextCell *cell = [column dataCell];
 		[cell setEditable:NO];
-		[cell setDisplayImageSize:NSMakeSize(23.0f, 23.0f)];
+		[cell setDisplayImageSize:NSMakeSize(24.0f, 24.0f)];
 		
 		[_friendsList setDoubleAction:@selector(doubleClicked)];
 		[_friendsList setTarget:self];

@@ -216,9 +216,10 @@
 	_originalPoint	= [NSEvent mouseLocation];
 	_originalRect	= [self frame];
 	
-	NSPoint actual = [[self window] convertScreenToBase:_originalPoint];
+	NSPoint new = [[self window] convertScreenToBase:_originalPoint];
+	NSPoint actual = [self convertPoint:new fromView:[[[self window] contentView] superview]];
 	
-	if( actual.x > 10 && actual.x < 22 && actual.y > 251 && actual.y < 263 )
+	if( actual.x > 10 && actual.x < 22 && actual.y > 3 && actual.y < 19 )
 		_mouseDownInsideClose = true;
 	else
 		_mouseDownInsideClose = false;
@@ -318,8 +319,9 @@
 {
 	if( _mouseDownInsideClose )
 	{
-		NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
-		if( actual.x > 10 && actual.x < 22 && actual.y > 251 && actual.y < 263 )
+		NSPoint new = [[self window] convertScreenToBase:_originalPoint];
+		NSPoint actual = [self convertPoint:new fromView:[[[self window] contentView] superview]];
+		if( actual.x > 10 && actual.x < 22 && actual.y > 3 && actual.y < 19 )
 		{
 			if( [_target respondsToSelector:_selector] )
 				[_target performSelector:_selector withObject:self];

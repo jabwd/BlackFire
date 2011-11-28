@@ -84,7 +84,7 @@
 	
 	SFTabView *tabView = [[SFTabView alloc] init];
 	tabView.title = [chat.chat.remoteFriend displayName];
-	//NSLog(@"TabView: %@",tabView.title);
+
 	[tabView setTag:chat.chat.remoteFriend.userID];
 	
 	if( ! _currentlySelectedChat )
