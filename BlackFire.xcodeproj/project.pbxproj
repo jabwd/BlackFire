@@ -2889,6 +2889,8 @@
 		36B6427A1484464700D9B11E /* receive.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642731484464600D9B11E /* receive.m4v */; };
 		36B6427B1484464700D9B11E /* Send.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642741484464700D9B11E /* Send.m4v */; };
 		36B6427F1484474700D9B11E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
+		36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B64281148447EC00D9B11E /* BFNotificationCenter.m */; };
+		36B642841484486900D9B11E /* offline_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B642831484486900D9B11E /* offline_bubble.png */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
@@ -5834,6 +5836,9 @@
 		36B642731484464600D9B11E /* receive.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = receive.m4v; sourceTree = "<group>"; };
 		36B642741484464700D9B11E /* Send.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Send.m4v; sourceTree = "<group>"; };
 		36B6427E1484474700D9B11E /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		36B64280148447EC00D9B11E /* BFNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNotificationCenter.h; sourceTree = "<group>"; };
+		36B64281148447EC00D9B11E /* BFNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNotificationCenter.m; sourceTree = "<group>"; };
+		36B642831484486900D9B11E /* offline_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_bubble.png; sourceTree = "<group>"; };
 		36D9C9F114659B9600C4A162 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		36D9C9F51465C63400C4A162 /* BFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFLoginViewController.h; sourceTree = "<group>"; };
 		36D9C9F61465C63400C4A162 /* BFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFLoginViewController.m; sourceTree = "<group>"; };
@@ -6159,6 +6164,8 @@
 				3616F66F145F0E5500E5066D /* ADAppDelegate.h */,
 				3616F670145F0E5500E5066D /* ADAppDelegate.m */,
 				3616F672145F0E5500E5066D /* MainMenu.xib */,
+				36B64280148447EC00D9B11E /* BFNotificationCenter.h */,
+				36B64281148447EC00D9B11E /* BFNotificationCenter.m */,
 			);
 			name = BlackFire;
 			sourceTree = "<group>";
@@ -9047,6 +9054,7 @@
 				36B64268148421EB00D9B11E /* 81.pdf */,
 				36529846146697C00010FD7F /* xfire.jpg */,
 				36B642701484464500D9B11E /* joystick.png */,
+				36B642831484486900D9B11E /* offline_bubble.png */,
 				36B6426F1484464500D9B11E /* gamesTemplate.png */,
 				36529848146697EE0010FD7F /* blackfire_experimental.icns */,
 				36ADF20D1469AC9600F46E9E /* blue_bubble.png */,
@@ -11972,6 +11980,7 @@
 				36B642791484464700D9B11E /* online.m4v in Resources */,
 				36B6427A1484464700D9B11E /* receive.m4v in Resources */,
 				36B6427B1484464700D9B11E /* Send.m4v in Resources */,
+				36B642841484486900D9B11E /* offline_bubble.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12022,6 +12031,7 @@
 				36FD1186147953B5009F70DE /* XFGamesManager.m in Sources */,
 				36FD118A14795400009F70DE /* XFGame.m in Sources */,
 				36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */,
+				36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
