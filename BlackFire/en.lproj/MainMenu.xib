@@ -1344,7 +1344,7 @@
 										<double key="NSSegmentItemWidth">24</double>
 										<object class="NSCustomResource" key="NSSegmentItemImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">NSAddTemplate</string>
+											<string key="NSResourceName">81</string>
 										</object>
 										<string key="NSSegmentItemLabel"/>
 										<int key="NSSegmentItemImageScaling">0</int>
@@ -2367,6 +2367,38 @@
 						<reference key="destination" ref="498587111"/>
 					</object>
 					<int key="connectionID">670</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nicknamePopUpButton</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="70425166"/>
+					</object>
+					<int key="connectionID">697</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">statusBubbleView</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="804239304"/>
+					</object>
+					<int key="connectionID">698</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">avatarImageView</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="407376819"/>
+					</object>
+					<int key="connectionID">699</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">statusPopUpButton</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1019595056"/>
+					</object>
+					<int key="connectionID">700</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3728,7 +3760,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">696</int>
+			<int key="maxID">700</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3736,14 +3768,34 @@
 					<string key="className">ADAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="avatarImageView">NSImageView</string>
 						<string key="mainView">NSView</string>
+						<string key="nicknamePopUpButton">NSPopUpButton</string>
+						<string key="statusBubbleView">NSImageView</string>
+						<string key="statusPopUpButton">NSPopUpButton</string>
 						<string key="toolbarView">NSView</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="avatarImageView">
+							<string key="name">avatarImageView</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="mainView">
 							<string key="name">mainView</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nicknamePopUpButton">
+							<string key="name">nicknamePopUpButton</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="statusBubbleView">
+							<string key="name">statusBubbleView</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="statusPopUpButton">
+							<string key="name">statusPopUpButton</string>
+							<string key="candidateClassName">NSPopUpButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="toolbarView">
 							<string key="name">toolbarView</string>
@@ -3807,7 +3859,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NSAddTemplate">{8, 8}</string>
+			<string key="81">{11, 11}</string>
 			<string key="NSEveryone">{32, 32}</string>
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>

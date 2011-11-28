@@ -27,6 +27,11 @@
 @synthesize mainView		= _mainView;
 @synthesize toolbarView		= _toolbarView;
 
+@synthesize avatarImageView			= _avatarImageView;
+@synthesize statusBubbleView		= _statusBubbleView;
+@synthesize nicknamePopUpButton		= _nicknamePopUpButton;
+@synthesize statusPopUpButton		= _statusPopUpButton;
+
 - (void)dealloc
 {
 	[_setupWindowController release];

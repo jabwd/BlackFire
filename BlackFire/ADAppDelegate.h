@@ -31,6 +31,13 @@ typedef enum
 	NSView			*_toolbarView;
 	NSToolbarItem	*_toolbarItem;
 	
+	// toolbar outlets
+	NSImageView *_avatarImageView;
+	NSImageView *_statusBubbleView;
+	NSPopUpButton *_nicknamePopUpButton;
+	NSPopUpButton *_statusPopUpButton;
+	// end toolbar outlets
+	
 	NSMutableArray *_chatControllers;
 	
 	BFLoginViewController	*_loginViewController;
@@ -41,6 +48,11 @@ typedef enum
 
 @property (readonly) XFSession *session;
 @property (assign) IBOutlet NSWindow *window;
+
+@property (assign) IBOutlet NSImageView *avatarImageView;
+@property (assign) IBOutlet NSImageVIew *statusBubbleView;
+@property (assign) IBOutlet NSPopUpButton *nicknamePopUpButton;
+@property (assign) IBOutlet NSPopUpButton *statusPopUpButton;
 
 @property (assign) IBOutlet NSView *mainView;
 @property (assign) IBOutlet NSView *toolbarView;
