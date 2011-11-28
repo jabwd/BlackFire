@@ -165,6 +165,14 @@
 			}
 			[_loginViewController session:_session changedStatus:XFSessionStatusOffline];
 			
+			[_statusBubbleView setImage:nil];
+			[_avatarImageView setImage:nil];
+			
+			//[_statusPopUpButton selectItemWithTitle:@"Offline"];
+			[_statusPopUpButton setTitle:@"Offline"];
+			[_nicknamePopUpButton setTitle:@""];
+			[_statusPopUpButton selectItemWithTag:0];
+			
 			[self changeMainView:_loginViewController.view];
 		}
 			break;
@@ -172,6 +180,7 @@
 		case BFApplicationModeLoggingIn:
 		{
 			[_loginViewController session:_session changedStatus:XFSessionStatusConnecting];
+			[_statusPopUpButton setTitle:@"Connecting…"];
 		}
 			break;
 			
@@ -183,6 +192,16 @@
 				_friendsListController = [[BFFriendsListController alloc] initWithSession:_session];
 			
 			[self changeMainView:_friendsListController.view];
+			
+			[_statusBubbleView setImage:[NSImage imageNamed:@"avi_bubble"]];
+			[_avatarImageView setImage:[NSImage imageNamed:@"xfire"]];
+			
+			[_statusPopUpButton setTitle:@"Available"];
+			NSString *nickname = [[_session loginIdentity] displayName];
+			if( ! nickname )
+				nickname = @":D"; // this should actually never ever happen
+			[_nicknamePopUpButton setTitle:nickname];
+			
 		}
 			break;
 			
@@ -259,7 +278,7 @@
 
 - (void)connectionCheck
 {
-	if( !_session || _session.status == XFSessionStatusOffline && [_account.username length] > 0 && [_account.password length] > 0  )
+	if( (!_session || _session.status == XFSessionStatusOffline) && [_account.username length] > 0 && [_account.password length] > 0  )
 	{
 		_session = [[XFSession alloc] initWithDelegate:self];
 		[_session connect];
@@ -317,6 +336,18 @@
 - (NSString *)password
 {
 	return _account.password;
+}
+
+#pragma mark - Friends list toolbar
+
+- (IBAction)selectStatus:(id)sender
+{
+	
+}
+
+- (IBAction)selectNicknameOption:(id)sender
+{
+	
 }
 
 @end

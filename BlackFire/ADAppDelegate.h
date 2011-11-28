@@ -50,7 +50,7 @@ typedef enum
 @property (assign) IBOutlet NSWindow *window;
 
 @property (assign) IBOutlet NSImageView *avatarImageView;
-@property (assign) IBOutlet NSImageVIew *statusBubbleView;
+@property (assign) IBOutlet NSImageView *statusBubbleView;
 @property (assign) IBOutlet NSPopUpButton *nicknamePopUpButton;
 @property (assign) IBOutlet NSPopUpButton *statusPopUpButton;
 
@@ -66,5 +66,12 @@ typedef enum
 //----------------------------------------------------------------------------
 // Xfire Session
 - (void)connectionCheck;
+
+
+//----------------------------------------------------------------------------
+// Friends list toolbar
+
+- (IBAction)selectStatus:(id)sender;
+- (IBAction)selectNicknameOption:(id)sender;
 
 @end
