@@ -2891,6 +2891,7 @@
 		36B6427F1484474700D9B11E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
 		36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B64281148447EC00D9B11E /* BFNotificationCenter.m */; };
 		36B642841484486900D9B11E /* offline_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B642831484486900D9B11E /* offline_bubble.png */; };
+		36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
@@ -2910,6 +2911,19 @@
 		36FD1186147953B5009F70DE /* XFGamesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD1185147953B5009F70DE /* XFGamesManager.m */; };
 		36FD118A14795400009F70DE /* XFGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD118914795400009F70DE /* XFGame.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		36B6428614844F0300D9B11E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3616F659145F0E5500E5066D /* BlackFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -9084,6 +9098,7 @@
 				3616F655145F0E5500E5066D /* Sources */,
 				3616F656145F0E5500E5066D /* Frameworks */,
 				3616F657145F0E5500E5066D /* Resources */,
+				36B6428614844F0300D9B11E /* CopyFiles */,
 			);
 			buildRules = (
 			);

@@ -8,6 +8,7 @@
 
 #import "BFChat.h"
 #import "BFChatWindowController.h"
+#import "BFNotificationCenter.h"
 
 #import "XFFriend.h"
 
@@ -57,6 +58,11 @@
 - (void)receivedMessage:(NSString *)message
 {
 	[self processMessage:message ofFriend:[_chat.remoteFriend displayName] ofType:BFFriendMessageType];
+	
+	if( ![self.windowController.window isMainWindow] )
+	{
+		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
+	}
 }
 
 - (void)sendMessage:(NSString *)message
@@ -67,6 +73,8 @@
 	[self processMessage:message ofFriend:[[_chat loginIdentity] displayName] ofType:BFUserMessageType];
 	
 	[_chat sendMessage:message];
+	
+	[[BFNotificationCenter defaultNotificationCenter] playSendSound];
 }
 
 #pragma mark - Misc methods

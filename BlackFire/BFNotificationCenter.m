@@ -51,7 +51,7 @@ static BFNotificationCenter *notificationCenter = nil;
 - (void)playConnectedSound
 {
 	if( ! _connectSound )
-		_connectSound = [[NSSound soundNamed:@"connected"] retain];
+		_connectSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"connected" ofType:@"m4v"] byReference:false];
 	if( [_connectSound isPlaying] )
 		return;
 	
@@ -62,7 +62,7 @@ static BFNotificationCenter *notificationCenter = nil;
 - (void)playOnlineSound
 {
 	if( ! _onlineSound )
-		_onlineSound = [[NSSound soundNamed:@"online"] retain];
+		_onlineSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"online" ofType:@"m4v"] byReference:false];
 	if( [_onlineSound isPlaying] )
 		return;
 	
@@ -73,7 +73,7 @@ static BFNotificationCenter *notificationCenter = nil;
 - (void)playOfflineSound
 {
 	if( ! _offlineSound )
-		_offlineSound = [[NSSound soundNamed:@"offline"] retain];
+		_offlineSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"offline" ofType:@"m4v"] byReference:false];
 	if( [_offlineSound isPlaying] )
 		return;
 	
@@ -84,7 +84,8 @@ static BFNotificationCenter *notificationCenter = nil;
 - (void)playReceivedSound
 {
 	if( ! _receiveSound )
-		_receiveSound = [[NSSound soundNamed:@"receive"] retain];
+		_receiveSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"receive" ofType:@"m4v"] byReference:false];
+	
 	if( [_receiveSound isPlaying] )
 		return;
 	
@@ -95,7 +96,7 @@ static BFNotificationCenter *notificationCenter = nil;
 - (void)playSendSound
 {
 	if( ! _sendSound )
-		_sendSound = [[NSSound soundNamed:@"send"] retain];
+		_sendSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Send" ofType:@"m4v"] byReference:false];
 	if( [_sendSound isPlaying] )
 		return;
 	
