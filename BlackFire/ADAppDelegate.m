@@ -259,10 +259,14 @@
 
 - (void)connectionCheck
 {
-	if( !_session || _session.status == XFSessionStatusOffline )
+	if( !_session || _session.status == XFSessionStatusOffline && [_account.username length] > 0 && [_account.password length] > 0  )
 	{
 		_session = [[XFSession alloc] initWithDelegate:self];
 		[_session connect];
+	}
+	else
+	{
+		NSLog(@"Cannot connect at this time");
 	}
 }
 
