@@ -14,6 +14,10 @@
 #import "XFChat.h"
 #import "NSData_XfireAdditions.h"
 
+// the amount of seconds before sending a keepalive request
+// lower this if you are on an unstable connection
+#define KEEPALIVE_TIME 60.0f
+
 NSString *XFFriendDidChangeNotification		= @"XFFriendDidChangeNotification";
 NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
@@ -92,7 +96,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	_groupChats = [[NSMutableArray alloc] init];
 	
 	[_keepAliveTimer invalidate];
-	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
+	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:KEEPALIVE_TIME target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
 }
 
 - (void)disconnect
