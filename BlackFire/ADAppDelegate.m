@@ -252,10 +252,30 @@
 		if( chat.chat.remoteFriend.userID == remoteFriend.userID )
 		{
 			// chat already exists
-			return;
+			// however, the user double clicked on the friends list, for awesome behaviour:
+			// show the chat window on top, select the correct tab.
+			[chat.windowController.window makeKeyAndOrderFront:nil];
+			[chat.windowController selectChat:chat];
+			return; // done here.
 		}
 	}
 	[_session beginNewChatForFriend:remoteFriend];
+	
+	// now, the user clicked on the friend so we should make the chat window
+	// the mainwindow again, exact same code as above.
+	
+	for(BFChat *chat in _chatControllers)
+	{
+		if( chat.chat.remoteFriend.userID == remoteFriend.userID )
+		{
+			// however, the user double clicked on the friends list, for awesome behaviour:
+			// show the chat window on top, select the correct tab.
+			[chat.windowController.window makeKeyAndOrderFront:nil];
+			[chat.windowController selectChat:chat];
+			
+			return; // if there are more objects in the loop we optimize it a little bit here.
+		}
+	}
 }
 
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat

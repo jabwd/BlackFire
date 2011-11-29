@@ -63,6 +63,27 @@
 
 #pragma mark - Managing chats
 
+- (void)selectChat:(BFChat *)chat
+{
+	// don't waste time, we like it if stuff works fast :D
+	if( chat == _currentlySelectedChat )
+		return;
+	
+	// select the correct tab
+	NSArray *tabViews = [_tabStripView tabs];
+	for(SFTabView *tabView in tabViews)
+	{
+		if( [tabView tag] == chat.chat.remoteFriend.userID )
+			tabView.selected = true;
+		else
+			tabView.selected = false;
+	}
+	[_tabStripView layoutTabs];
+	
+	_currentlySelectedChat = chat;
+	[self changeSwitchView:chat.chatScrollView];
+}
+
 - (void)didSelectNewTab:(SFTabView *)tabView
 {
 	for(BFChat *chat in _chats)

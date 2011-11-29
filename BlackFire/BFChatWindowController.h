@@ -34,6 +34,8 @@
 
 //----------------------------------------------------------------------
 // Managing chats
+
+- (void)selectChat:(BFChat *)chat;
 - (void)addChat:(BFChat *)chat;
 - (void)tabShouldClose:(SFTabView *)tabView;
 - (void)changeSwitchView:(NSView *)newView;
