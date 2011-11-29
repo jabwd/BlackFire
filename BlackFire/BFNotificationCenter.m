@@ -7,7 +7,6 @@
 //
 
 #import "BFNotificationCenter.h"
-#import <Growl/Growl.h>
 
 static BFNotificationCenter *notificationCenter = nil;
 
@@ -26,7 +25,7 @@ static BFNotificationCenter *notificationCenter = nil;
 {
 	if( (self = [super init]) )
 	{
-		
+		[GrowlApplicationBridge setGrowlDelegate:self];
 	}
 	return self;
 }
@@ -106,8 +105,38 @@ static BFNotificationCenter *notificationCenter = nil;
 
 #pragma mark - Growl
 
-- (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body
+- (NSString *)applicationNameForGrowl
+{
+	return @"BlackFire";
+}
+
+- (NSDictionary *)registrationDictionaryForGrowl 
+{
+	NSArray *notes = [[NSArray alloc] initWithObjects:
+					  @"Normal",
+					  nil];
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:notes,GROWL_NOTIFICATIONS_ALL,
+						  notes,GROWL_NOTIFICATIONS_DEFAULT,
+						  nil];
+	[notes release];
+	return dict;
+}
+
+- (void)growlIsReady
 {
 	
+}
+
+- (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body
+{
+	[GrowlApplicationBridge
+     notifyWithTitle:notificationTitle
+     description:body
+     notificationName:@"Normal"
+     iconData:nil
+     priority:0
+     isSticky:NO
+     clickContext:nil];
 }
 @end

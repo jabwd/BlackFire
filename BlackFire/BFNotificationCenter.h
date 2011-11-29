@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Growl/GrowlApplicationBridge.h>
 
-@interface BFNotificationCenter : NSObject
+@interface BFNotificationCenter : NSObject <GrowlApplicationBridgeDelegate>
 {
 	NSSound *_connectSound;
 	NSSound *_onlineSound;
