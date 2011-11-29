@@ -292,6 +292,9 @@
 	[blackfireChat release];
 }
 
+
+
+
 - (void)connectionCheck
 {
 	if( (!_session || _session.status == XFSessionStatusOffline) && [_account.username length] > 0 && [_account.password length] > 0  )
@@ -312,10 +315,20 @@
 	_session = nil;
 }
 
+
+
+- (void)session:(XFSession *)session friendChanged:(XFFriend *)changedFriend type:(XFFriendNotification)notificationType
+{
+	// make sure that the friends list displays the latest data
+	[_friendsListController reloadData];
+}
+
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
 {
 	
 }
+
+
 
 - (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus
 {

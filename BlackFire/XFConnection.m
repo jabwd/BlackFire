@@ -730,6 +730,7 @@
 			[friend clearInformation];
 			friend.online = false;
 			friend.sessionID = sid;
+			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
 		}
 		else
 		{
@@ -737,6 +738,7 @@
 			[onlineGroup addMember:friend];
 			friend.online = true;
 			friend.sessionID = sid;
+			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
 		}
 	}
 	[offlineGroup sortMembers];
@@ -764,6 +766,7 @@
 	{
 		XFFriend *friend = [_session friendForSessionID:[sessionids objectAtIndex:i]];
 		friend.status = [msgs objectAtIndex:i];
+		[_session raiseFriendNotification:XFFriendNotificationStatusChanged forFriend:friend];
 	}
 }
 
@@ -800,6 +803,7 @@
 			friend.gameID	= gid;
 			friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
 			friend.gamePort = [[gamePorts objectAtIndex:i] unsignedIntValue];
+			[_session raiseFriendNotification:XFFriendNotificationGameStatusChanged forFriend:friend];
 		}
 	}
 	

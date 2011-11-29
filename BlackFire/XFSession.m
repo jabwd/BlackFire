@@ -161,9 +161,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)raiseFriendNotification:(XFFriendNotification)notification forFriend:(XFFriend *)fr
 {
-	if( notification == XFFriendNotificationFriendAdded )
-	{
-	}
+	if( [_delegate respondsToSelector:@selector(session:friendChanged:type:)] )
+		[_delegate session:self friendChanged:fr type:notification];
 }
 
 - (XFFriend *)friendForUserID:(unsigned int)userID
