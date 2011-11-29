@@ -39,7 +39,16 @@ typedef enum
 
 //------------------------------------------------------------------------------
 // Misc methods
+
+/*
+ * Processes a plain text string to a NSAttributedString according to the given
+ * BlackFire Instant Message Type.
+ */
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type;
+
+/*
+ * Sends a message over the xfire network
+ */
 - (void)sendMessage:(NSString *)message;
 
 @end

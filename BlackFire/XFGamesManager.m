@@ -58,11 +58,11 @@ static XFGamesManager *sharedGameManager = nil;
 	{
 		game.longName	= [info objectForKey:XFLongNameKey];
 		game.shortName	= [info objectForKey:XFShortNameKey];
-		game.gameID		= gameID;
+		game.gameID		= (unsigned int)gameID;
 	}
 	else
 	{
-		NSLog(@"*** Unknown gameID: %u",gameID);
+		NSLog(@"*** Unknown gameID: %lu",gameID);
 		game.longName	= @"Unknown game";
 		game.gameID		= -1;
 		game.shortName	= @"-1";

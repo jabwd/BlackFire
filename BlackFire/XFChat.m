@@ -120,8 +120,8 @@
 			
 		case 1: // acknowledgement
 		{
-			NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
-			
+			//NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
+			// TODO: handle this
 		}
 			break;
 			

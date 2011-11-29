@@ -38,6 +38,8 @@
 + (CGFloat)defaultTabHeight;
 + (CGFloat)defaultIndentForControls;
 
+- (void)addTab;
+
 
 - (void)layoutTabsAnimated:(BOOL)animated;
 

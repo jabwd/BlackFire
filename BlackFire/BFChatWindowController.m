@@ -11,6 +11,8 @@
 #import "XFChat.h"
 #import "XFFriend.h"
 
+#import "BFGamesManager.h"
+
 #import "SFTabView.h"
 
 @implementation BFChatWindowController
@@ -189,6 +191,25 @@
 }
 
 #pragma mark - Toolbar Delegate
+
+- (void)updateToolbar
+{
+	XFFriend *remoteFriend = _currentlySelectedChat.chat.remoteFriend;
+	if( remoteFriend )
+	{
+		NSImage *displayImage = nil;
+		if( remoteFriend.gameID > 0 )
+		{
+			displayImage = [[BFGamesManager sharedGamesManager] imageForGame:remoteFriend.gameID];
+		}
+		
+		
+	}
+	else
+	{
+		NSLog(@"*** Called - (void)updateToolbar but no remoteFriend exists. Are you sure there is a chat open at this time?");
+	}
+}
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
 	return _toolbarItem;

@@ -51,4 +51,10 @@
 
 - (IBAction)sendMessage:(id)sender;
 
+/*
+ * Updates the toolbar information using the currently selected chat
+ * as its reference.
+ */
+- (void)updateToolbar;
+
 @end
