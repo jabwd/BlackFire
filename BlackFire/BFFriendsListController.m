@@ -10,6 +10,8 @@
 #import "BFImageAndTextCell.h"
 #import "BFGamesManager.h"
 
+#import "ADAppDelegate.h"
+
 #import "XFSession.h"
 #import "XFGroupController.h"
 #import "XFGroup.h"
@@ -79,8 +81,7 @@
 
 - (void)doubleClicked
 {
-	if( [self selectedOnlineFriend] )
-		[_session beginNewChatForFriend:[self selectedOnlineFriend]];
+	[_delegate beginChatWithFriend:[self selectedOnlineFriend]];
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item

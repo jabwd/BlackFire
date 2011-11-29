@@ -189,7 +189,10 @@
 			[_loginViewController session:_session changedStatus:XFSessionStatusOnline];
 			
 			if( ! _friendsListController )
+			{
 				_friendsListController = [[BFFriendsListController alloc] initWithSession:_session];
+				_friendsListController.delegate = self;
+			}
 			
 			[self changeMainView:_friendsListController.view];
 			
@@ -241,6 +244,19 @@
 
 
 #pragma mark - Xfire Session
+
+- (void)beginChatWithFriend:(XFFriend *)remoteFriend
+{
+	for(BFChat *chat in _chatControllers)
+	{
+		if( chat.chat.remoteFriend.userID == remoteFriend.userID )
+		{
+			// chat already exists
+			return;
+		}
+	}
+	[_session beginNewChatForFriend:remoteFriend];
+}
 
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat
 {

@@ -68,6 +68,7 @@ typedef enum
 - (void)connectionCheck;
 - (void)disconnect;
 
+- (void)beginChatWithFriend:(XFFriend *)remoteFriend;
 
 //----------------------------------------------------------------------------
 // Friends list toolbar
