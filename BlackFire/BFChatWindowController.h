@@ -20,6 +20,13 @@
 	
 	NSView *_toolbarView;
 	NSToolbarItem *_toolbarItem;
+	
+	// chat toolbar
+	NSImageView *_avatarImageView;
+	NSImageView *_statusIconView;
+	NSTextField *_nicknameField;
+	NSTextField *_statusField;
+	// end chat toolbar
 
 	NSMutableArray	*_chats;
 	BFChat			*_currentlySelectedChat;
@@ -30,6 +37,11 @@
 @property (assign) IBOutlet NSView *switchView;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *messageField;
+
+@property (assign) IBOutlet NSImageView *avatarImageView;
+@property (assign) IBOutlet NSImageView *statusIconView;
+@property (assign) IBOutlet NSTextField *nicknameField;
+@property (assign) IBOutlet NSTextField *statusField;
 
 @property (assign) IBOutlet NSView *toolbarView;
 

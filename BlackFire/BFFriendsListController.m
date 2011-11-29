@@ -142,6 +142,7 @@
 
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
+	// below here we configure the tableview cell to display the correct data
 	if( [item isKindOfClass:[XFFriend class]] )
 	{
 		XFFriend			*friend			= (XFFriend *)item;

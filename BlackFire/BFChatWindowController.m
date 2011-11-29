@@ -22,6 +22,11 @@
 @synthesize messageField	= _messageField;
 @synthesize toolbarView		= _toolbarView;
 
+@synthesize avatarImageView = _avatarImageView;
+@synthesize statusIconView	= _statusIconView;
+@synthesize nicknameField	= _nicknameField;
+@synthesize statusField		= _statusField;
+
 @synthesize tabStripView	= _tabStripView;
 
 - (id)init
@@ -102,6 +107,7 @@
 	
 	_currentlySelectedChat = chat;
 	[self changeSwitchView:chat.chatScrollView];
+	[self updateToolbar];
 }
 
 - (void)didSelectNewTab:(SFTabView *)tabView
@@ -112,6 +118,7 @@
 		{
 			_currentlySelectedChat = chat;
 			[self changeSwitchView:chat.chatScrollView];
+			[self updateToolbar];
 			return;
 		}
 	}
@@ -138,6 +145,7 @@
 	[tabView setSelector:@selector(tabShouldClose:)];
 	[_tabStripView addTabView:tabView];
 	[tabView release];
+	[self updateToolbar];
 }
 
 - (void)tabShouldClose:(SFTabView *)tabView
@@ -198,12 +206,43 @@
 	if( remoteFriend )
 	{
 		NSImage *displayImage = nil;
+		NSString *statusString = remoteFriend.status;
+		if( ! statusString )
+			statusString = @"";
+#warning Finish this shit
 		if( remoteFriend.gameID > 0 )
 		{
 			displayImage = [[BFGamesManager sharedGamesManager] imageForGame:remoteFriend.gameID];
+			if( [statusString length] > 0 )
+			{
+				statusString = [NSString stringWithFormat:@"%@, ",statusString];
+			}
+			
+			if( remoteFriend.gameIP > 0 )
+			{
+				statusString = [NSString stringWithFormat:@"%@Playing %@ on %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:remoteFriend.gameID],[remoteFriend gameIPString]];
+			}
+			else
+			{
+				statusString = [NSString stringWithFormat:@"%@Playing %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:remoteFriend.gameID]];
+			}
+		}
+		else
+			displayImage = [NSImage imageNamed:@"xfire"];
+
+		[_avatarImageView setImage:displayImage];
+		[_statusField setStringValue:statusString];
+		
+		if( [statusString rangeOfString:@"AFK"].length > 0 )
+		{
+			[_statusIconView setImage:[NSImage imageNamed:@"away_bubble"]];
+		}
+		else
+		{
+			[_statusIconView setImage:[NSImage imageNamed:@"avi_bubble"]];
 		}
 		
-		
+		[_nicknameField setStringValue:[remoteFriend displayName]];
 	}
 	else
 	{
