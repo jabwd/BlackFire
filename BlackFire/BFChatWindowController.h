@@ -12,11 +12,14 @@
 @class BFChat;
 
 
-@interface BFChatWindowController : NSObject <TabStripDelegate, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
+@interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate>
 {
 	NSWindow	*_window;
 	NSView		*_switchView;
 	NSTextField *_messageField;
+	
+	NSView *_toolbarView;
+	NSToolbarItem *_toolbarItem;
 
 	NSMutableArray	*_chats;
 	BFChat			*_currentlySelectedChat;
@@ -27,6 +30,8 @@
 @property (assign) IBOutlet NSView *switchView;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *messageField;
+
+@property (assign) IBOutlet NSView *toolbarView;
 
 @property (assign) IBOutlet SFTabStripView *tabStripView;
 

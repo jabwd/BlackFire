@@ -15,11 +15,12 @@
 
 @implementation BFChatWindowController
 
-@synthesize switchView = _switchView;
-@synthesize window = _window;
-@synthesize messageField = _messageField;
+@synthesize switchView		= _switchView;
+@synthesize window			= _window;
+@synthesize messageField	= _messageField;
+@synthesize toolbarView		= _toolbarView;
 
-@synthesize tabStripView = _tabStripView;
+@synthesize tabStripView	= _tabStripView;
 
 - (id)init
 {
@@ -31,6 +32,23 @@
 		[_window makeKeyAndOrderFront:self];
 		[_window setTitle:@""];
 		[_tabStripView setDelegate:self];
+		
+		NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"chatWindowToolbar"];
+		[toolbar setAllowsUserCustomization:NO];
+		[toolbar setAutosavesConfiguration: YES];
+		[toolbar setSizeMode:               NSToolbarSizeModeSmall];
+		[toolbar setShowsBaselineSeparator:false];
+		[toolbar setDisplayMode:            NSToolbarDisplayModeIconOnly];
+		
+		_toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:@"status"];
+		[_toolbarItem setView:_toolbarView];
+		[_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame]))];
+		[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame]))];
+		
+		[toolbar      setDelegate:self];
+		[_window	setToolbar:toolbar];
+		[toolbar      release];
+
 		
 		_chats = [[NSMutableArray alloc] init];
 		_currentlySelectedChat = nil;
@@ -168,6 +186,26 @@
 	
 	[_messageField setStringValue:@""];
 	[_messageField setNeedsDisplay:true];
+}
+
+#pragma mark - Toolbar Delegate
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
+	return _toolbarItem;
+}
+
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)aToolbar {
+	return [NSArray arrayWithObjects:@"status", nil];
+}
+
+
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)aToolbar {
+	return [NSArray arrayWithObjects:@"status", nil];
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem 
+{
+	return YES;
 }
 
 @end
