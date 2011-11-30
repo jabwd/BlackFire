@@ -19,6 +19,8 @@
 #import "BFChatWindowController.h"
 #import "BFChat.h"
 
+#import "BFNotificationCenter.h"
+
 @implementation ADAppDelegate
 
 @synthesize window			= _window;
@@ -311,7 +313,16 @@
 	
 	if( notificationType == XFFriendNotificationOnlineStatusChanged )
 	{
-		NSLog(@"Online status changed");
+		if( changedFriend.online )
+		{
+			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]] body:[NSString stringWithFormat:@"%@ is now online.",[changedFriend displayName]]];
+			[[BFNotificationCenter defaultNotificationCenter] playOnlineSound];
+		}
+		else
+		{
+			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]] body:[NSString stringWithFormat:@"%@ is now offline.",[changedFriend displayName]]];
+			[[BFNotificationCenter defaultNotificationCenter] playOfflineSound];
+		}
 	}
 	
 	// now post an application wide notification so other classes can update their shit too

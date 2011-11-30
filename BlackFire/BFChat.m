@@ -91,31 +91,26 @@
 	{
 		case XFFriendNotificationOnlineStatusChanged:
 		{
-			NSLog(@"Friend came online");
 		}
 			break;
 			
 		case XFFriendNotificationStatusChanged:
 		{
-			NSLog(@"Friend status changed");
 		}
 			break;
 			
 		case XFFriendNotificationGameStatusChanged:
 		{
-			NSLog(@"Friend game status changed");
 		}
 			break;
 			
 		case XFFriendNotificationFriendAdded:
 		{
-			NSLog(@"Friend was added");
 		}
 			break;
 			
 		case XFFriendNotificationFriendRemoved:
 		{
-			NSLog(@"Friend was removed");
 		}
 			break;
 	}
