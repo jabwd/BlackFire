@@ -341,6 +341,10 @@
 {
 	// make sure that the friends list displays the latest data
 	[_friendsListController reloadData];
+	
+	// now post an application wide notification so other classes can update their shit too
+	// ( mainly for the chat anyways ).
+	[[NSNotificationCenter defaultCenter] postNotificationName:XFFriendDidChangeNotification object:changedFriend];
 }
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
