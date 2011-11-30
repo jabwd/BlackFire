@@ -61,7 +61,6 @@
 							<string key="NSFrame">{{15, 6}, {191, 22}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:903</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="505610617">
@@ -136,15 +135,15 @@
 					<object class="NSTextField" id="715604813">
 						<reference key="NSNextResponder" ref="1023256652"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{39, 3}, {83, 14}}</string>
+						<string key="NSFrame">{{27, 4}, {97, 14}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="933966783"/>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="835358707">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272761856</int>
+							<int key="NSCellFlags">67239488</int>
+							<int key="NSCellFlags2">272762880</int>
 							<string key="NSContents">Label</string>
 							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
@@ -171,15 +170,15 @@
 					<object class="NSTextField" id="524336039">
 						<reference key="NSNextResponder" ref="1023256652"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{27, 19}, {95, 17}}</string>
+						<string key="NSFrame">{{20, 17}, {104, 17}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="715604813"/>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1043742240">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags">67239488</int>
+							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents">Label</string>
 							<reference key="NSSupport" ref="613862212"/>
 							<string key="NSCellIdentifier">_NS:3944</string>
@@ -208,7 +207,7 @@
 								<string>NeXT TIFF v4.0 pasteboard type</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{5, 13}, {12, 12}}</string>
+						<string key="NSFrame">{{5, 11}, {12, 12}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="524336039"/>
@@ -244,10 +243,9 @@
 								<string>NeXT TIFF v4.0 pasteboard type</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
+						<string key="NSFrame">{{129, 2}, {32, 32}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="1003972465">
@@ -266,7 +264,7 @@
 						<bool key="NSEditable">YES</bool>
 					</object>
 				</object>
-				<string key="NSFrameSize">{163, 38}</string>
+				<string key="NSFrameSize">{163, 36}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="486747159"/>
