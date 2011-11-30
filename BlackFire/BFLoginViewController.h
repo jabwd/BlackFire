@@ -24,7 +24,6 @@
 @property (assign) IBOutlet NSTextField *connectionStatus;
 
 - (IBAction)reconnect:(id)sender;
-- (IBAction)account:(id)sender;
 
 - (void)session:(XFSession *)session changedStatus:(XFSessionStatus)newStatus;
 @end

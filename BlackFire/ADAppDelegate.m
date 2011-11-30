@@ -302,25 +302,32 @@
 	[_session disconnect];
 	[_session release];
 	_session = nil;
+	
+	[self changeToMode:BFApplicationModeOffline];
 }
 
 
 
 - (void)session:(XFSession *)session friendChanged:(XFFriend *)changedFriend type:(XFFriendNotification)notificationType
 {
+	if( ! changedFriend )
+		return;
+	
 	// make sure that the friends list displays the latest data
 	[_friendsListController reloadData];
 	
-	if( notificationType == XFFriendNotificationOnlineStatusChanged )
+	if( notificationType == XFFriendNotificationOnlineStatusChanged && [[changedFriend displayName] length] > 0 )
 	{
 		if( changedFriend.online )
 		{
-			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]] body:[NSString stringWithFormat:@"%@ is now online.",[changedFriend displayName]]];
+		/*	[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]] body:@"Click here to start a chat."];*/
+			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[changedFriend displayName] body:@"Came online"];
 			[[BFNotificationCenter defaultNotificationCenter] playOnlineSound];
 		}
 		else
 		{
-			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]] body:[NSString stringWithFormat:@"%@ is now offline.",[changedFriend displayName]]];
+			/*[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]] body:[NSString stringWithFormat:@"%@ is now offline.",[changedFriend displayName]]];*/
+			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[changedFriend displayName] body:@"Went offline"];
 			[[BFNotificationCenter defaultNotificationCenter] playOfflineSound];
 		}
 	}

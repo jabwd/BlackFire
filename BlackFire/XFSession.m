@@ -42,12 +42,15 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		_friends			= nil;
 		_chats				= nil;
 		_groupChats			= nil;
+		
+		_canPostNotifications = false;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
 	[_tcpConnection release];
@@ -95,12 +98,15 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	[_groupChats release];
 	_groupChats = [[NSMutableArray alloc] init];
 	
+	_canPostNotifications = false;
+	
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:KEEPALIVE_TIME target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
 }
 
 - (void)disconnect
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[self setStatus:XFSessionStatusDisconnecting];
 	
 	[_keepAliveTimer invalidate];
@@ -130,10 +136,20 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 {
 	_status = newStatus;
 	
+	if( _status == XFSessionStatusOnline )
+	{
+		[self performSelector:@selector(allowNotifications) withObject:nil afterDelay:3.0f];
+	}
+	
 	if( [_delegate respondsToSelector:@selector(session:statusChanged:)] )
 	{
 		[_delegate session:self statusChanged:_status];
 	}
+}
+
+- (void)allowNotifications
+{
+	_canPostNotifications = true;
 }
 
 #pragma mark - Handling connection messages
@@ -161,6 +177,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)raiseFriendNotification:(XFFriendNotification)notification forFriend:(XFFriend *)fr
 {
+	if( !_canPostNotifications )
+		return;
+	
 	if( [_delegate respondsToSelector:@selector(session:friendChanged:type:)] )
 		[_delegate session:self friendChanged:fr type:notification];
 }

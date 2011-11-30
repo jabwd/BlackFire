@@ -11,6 +11,14 @@
 
 @implementation ADOutlineView
 
+/*- (void)drawRow:(NSInteger)row clipRect:(NSRect)clipRect
+{
+	clipRect.origin.x -= 10;
+	[[NSColor blueColor] set];
+	NSRectFill(clipRect);
+	[super drawRow:row clipRect:clipRect];
+}*/
+
 /*
  * This draws our nice "iOS" like highlight on the selection of a row.
  * OS X Just doesn't look as nice :D

@@ -88,6 +88,11 @@ typedef enum{
 	NSMutableArray	*_groupChats;
 	
 	XFSessionStatus _status;
+	
+	// yeath this seems odd, but we need this in order to make sure that we aren't doing any excessive
+	// work displaying growl notifications when we are still "connecting" to xfire.
+	// yup, the protocol sucks.
+	BOOL _canPostNotifications;
 }
 
 @property (readonly) XFConnection *tcpConnection;
@@ -172,7 +177,7 @@ typedef enum{
 //--------------------------------------------------------------------------------
 // User options
 
-- (BOOL)shouldShowFriendsOfFriends;
-- (BOOL)shouldShowOfflineFriends;
+//- (BOOL)shouldShowFriendsOfFriends;
+//- (BOOL)shouldShowOfflineFriends;
 
 @end
