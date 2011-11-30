@@ -27,19 +27,14 @@
 
 - (IBAction)reconnect:(id)sender
 {
-	if( _delegate.session.status == XFSessionStatusOffline )
+	if( _delegate.currentMode == BFApplicationModeOffline )
 	{
 		[_delegate connectionCheck];
 	}
-	else if( _delegate.session.status == XFSessionStatusConnecting )
+	else if( _delegate.currentMode == BFApplicationModeLoggingIn  )
 	{
 		[_delegate disconnect];
 	}
-}
-
-- (IBAction)account:(id)sender
-{
-	// show other account window
 }
 
 - (void)session:(XFSession *)session changedStatus:(XFSessionStatus)newStatus

@@ -10,6 +10,7 @@
 #import "BFChatWindowController.h"
 #import "BFNotificationCenter.h"
 
+#import "XFSession.h"
 #import "XFFriend.h"
 
 #import "AHHyperlinkScanner.h"
@@ -31,6 +32,8 @@
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
 		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
 	}
 	return self;
 }
@@ -79,6 +82,47 @@
 }
 
 #pragma mark - Misc methods
+
+- (void)friendDidChange:(NSNotification *)notification
+{
+	XFFriendNotification notificationType = [[[notification userInfo] objectForKey:@"type"] intValue];
+	
+	switch(notificationType)
+	{
+		case XFFriendNotificationOnlineStatusChanged:
+		{
+			NSLog(@"Friend came online");
+		}
+			break;
+			
+		case XFFriendNotificationStatusChanged:
+		{
+			NSLog(@"Friend status changed");
+		}
+			break;
+			
+		case XFFriendNotificationGameStatusChanged:
+		{
+			NSLog(@"Friend game status changed");
+		}
+			break;
+			
+		case XFFriendNotificationFriendAdded:
+		{
+			NSLog(@"Friend was added");
+		}
+			break;
+			
+		case XFFriendNotificationFriendRemoved:
+		{
+			NSLog(@"Friend was removed");
+		}
+			break;
+	}
+	
+	// TODO: Figure out whether this chat is the main chat
+	[_windowController updateToolbar];
+}
 
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type
 {

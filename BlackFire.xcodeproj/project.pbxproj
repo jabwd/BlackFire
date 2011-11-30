@@ -67,8 +67,6 @@
 		3652984C146698140010FD7F /* avi_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3652984A146698140010FD7F /* avi_bubble.png */; };
 		3652984D146698140010FD7F /* away_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3652984B146698140010FD7F /* away_bubble.png */; };
 		366AC22B14655185002A1F50 /* XFGroupChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC22A14655185002A1F50 /* XFGroupChat.m */; };
-		366AC23114655E3E002A1F50 /* BFSetupWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23014655E3E002A1F50 /* BFSetupWindowController.m */; };
-		366AC23314655E6C002A1F50 /* BFSetupWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366AC23214655E6C002A1F50 /* BFSetupWindow.xib */; };
 		366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23A14658C8D002A1F50 /* BFAccount.m */; };
 		366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23D14658D21002A1F50 /* BFKeychainManager.m */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
@@ -3016,9 +3014,6 @@
 		3652984B146698140010FD7F /* away_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = away_bubble.png; sourceTree = "<group>"; };
 		366AC22914655185002A1F50 /* XFGroupChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGroupChat.h; sourceTree = "<group>"; };
 		366AC22A14655185002A1F50 /* XFGroupChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFGroupChat.m; sourceTree = "<group>"; };
-		366AC22F14655E3E002A1F50 /* BFSetupWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFSetupWindowController.h; sourceTree = "<group>"; };
-		366AC23014655E3E002A1F50 /* BFSetupWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSetupWindowController.m; sourceTree = "<group>"; };
-		366AC23214655E6C002A1F50 /* BFSetupWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFSetupWindow.xib; sourceTree = "<group>"; };
 		366AC23914658C8D002A1F50 /* BFAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAccount.h; sourceTree = "<group>"; };
 		366AC23A14658C8D002A1F50 /* BFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAccount.m; sourceTree = "<group>"; };
 		366AC23C14658D21002A1F50 /* BFKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFKeychainManager.h; sourceTree = "<group>"; };
@@ -6187,19 +6182,8 @@
 		366AC22E14655E1D002A1F50 /* WindowControllers */ = {
 			isa = PBXGroup;
 			children = (
-				366AC23414656111002A1F50 /* SetupWindow */,
 			);
 			name = WindowControllers;
-			sourceTree = "<group>";
-		};
-		366AC23414656111002A1F50 /* SetupWindow */ = {
-			isa = PBXGroup;
-			children = (
-				366AC22F14655E3E002A1F50 /* BFSetupWindowController.h */,
-				366AC23014655E3E002A1F50 /* BFSetupWindowController.m */,
-				366AC23214655E6C002A1F50 /* BFSetupWindow.xib */,
-			);
-			name = SetupWindow;
 			sourceTree = "<group>";
 		};
 		366AC23814658C7C002A1F50 /* Misc */ = {
@@ -9142,7 +9126,6 @@
 				3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */,
 				3616F66E145F0E5500E5066D /* Credits.rtf in Resources */,
 				3616F674145F0E5500E5066D /* MainMenu.xib in Resources */,
-				366AC23314655E6C002A1F50 /* BFSetupWindow.xib in Resources */,
 				36D9C9FC1465CAF600C4A162 /* LoginView.xib in Resources */,
 				369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */,
 				36529847146697C00010FD7F /* xfire.jpg in Resources */,
@@ -12022,7 +12005,6 @@
 				3646BBE11464A548008FD6D4 /* XFChat.m in Sources */,
 				3646BBE41464A849008FD6D4 /* XFGameServer.m in Sources */,
 				366AC22B14655185002A1F50 /* XFGroupChat.m in Sources */,
-				366AC23114655E3E002A1F50 /* BFSetupWindowController.m in Sources */,
 				366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */,
 				366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */,
 				36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */,

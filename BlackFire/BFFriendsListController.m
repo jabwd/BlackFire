@@ -169,6 +169,10 @@
 			}
 		}
 		
+		// always show this for offline friends
+		if( !friend.online )
+			statusString = @"Offline";
+		
 		[imageCell setImage:[[BFGamesManager sharedGamesManager] imageForGame:friend.gameID]];
 		
 		if( [statusString rangeOfString:@"AFK"].length > 0 )

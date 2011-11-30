@@ -231,6 +231,10 @@
 			displayImage = [NSImage imageNamed:@"xfire"];
 
 		[_avatarImageView setImage:displayImage];
+		if( [statusString length] < 1 && remoteFriend.online )
+			statusString = @"Online";
+		else if( ! remoteFriend.online )
+			statusString = @"Offline";
 		[_statusField setStringValue:statusString];
 		
 		if( [statusString rangeOfString:@"AFK"].length > 0 )

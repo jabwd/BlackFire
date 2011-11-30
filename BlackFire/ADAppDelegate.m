@@ -12,7 +12,6 @@
 #import "XFChat.h"
 
 #import "BFAccount.h"
-#import "BFSetupWindowController.h"
 
 #import "BFLoginViewController.h"
 #import "BFFriendsListController.h"
@@ -32,10 +31,10 @@
 @synthesize nicknamePopUpButton		= _nicknamePopUpButton;
 @synthesize statusPopUpButton		= _statusPopUpButton;
 
+@synthesize currentMode = _currentMode;
+
 - (void)dealloc
 {
-	[_setupWindowController release];
-	_setupWindowController = nil;
 	[_session disconnect];
 	[_session release];
 	_session = nil;
@@ -87,45 +86,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"finishedSetup"] )
-	{
-		_setupWindowController = [[BFSetupWindowController alloc] initWithWindowNibName:@"BFSetupWindow"];
-		_setupWindowController.delegate = self;
-	}
-	else
-	{
-		NSArray *accounts = [[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"];
-		if( [accounts count] > 0 )
-		{
-			[_account release];
-			_account = [[BFAccount alloc] initWithUsername:[accounts objectAtIndex:0]];
-			[self connectionCheck];
-		}
-		else
-		{
-			_setupWindowController = [[BFSetupWindowController alloc] initWithWindowNibName:@"BFSetupWindow"];
-			_setupWindowController.delegate = self;
-		}
-	}
-}
-
-#pragma mark - Setup window
-
-- (void)setupWindowClosed
-{
-	[_setupWindowController release];
-	_setupWindowController = nil;
-	
-	[[NSUserDefaults standardUserDefaults] setBool:true forKey:@"finishedSetup"];
-	
 	NSArray *accounts = [[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"];
 	if( [accounts count] > 0 )
 	{
 		[_account release];
 		_account = [[BFAccount alloc] initWithUsername:[accounts objectAtIndex:0]];
+		[self connectionCheck];
 	}
-	
-	[self connectionCheck];
 }
 
 #pragma mark - Toolbar delegate
@@ -342,9 +309,16 @@
 	// make sure that the friends list displays the latest data
 	[_friendsListController reloadData];
 	
+	if( notificationType == XFFriendNotificationOnlineStatusChanged )
+	{
+		NSLog(@"Online status changed");
+	}
+	
 	// now post an application wide notification so other classes can update their shit too
 	// ( mainly for the chat anyways ).
-	[[NSNotificationCenter defaultCenter] postNotificationName:XFFriendDidChangeNotification object:changedFriend];
+	NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:notificationType],@"type", nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:XFFriendDidChangeNotification object:changedFriend userInfo:userInfo];
+	[userInfo release];
 }
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason

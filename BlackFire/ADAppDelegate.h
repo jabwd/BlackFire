@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "XFSession.h"
-#import "BFSetupWindowController.h"
 
 typedef enum
 {
@@ -19,11 +18,10 @@ typedef enum
 	BFApplicationModeServers = 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController,BFSetupWindowController, BFAccount, BFChatWindowController;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController;
 
-@interface ADAppDelegate : NSObject <NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate, BFSetupWindowControllerDelegate>
+@interface ADAppDelegate : NSObject <NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
-	BFSetupWindowController *_setupWindowController;
 	XFSession				*_session;
 	BFAccount				*_account;
 	
@@ -56,6 +54,8 @@ typedef enum
 
 @property (assign) IBOutlet NSView *mainView;
 @property (assign) IBOutlet NSView *toolbarView;
+
+@property (readonly) BFApplicationMode currentMode;
 
 //----------------------------------------------------------------------------
 // Managing the main window
