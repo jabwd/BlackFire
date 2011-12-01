@@ -12,14 +12,23 @@
 @interface BFLoginViewController : BFTabViewController
 {
 	NSButton			*_reconnectButton;
-	NSButton			*_otherAccountButton;
+	
+	NSTextField *_usernameField;
+	NSTextField *_usernameLabel;
+	NSTextField *_passwordField;
+	NSTextField *_passwordLabel;
 	
 	NSProgressIndicator *_progressIndicator;
 	NSTextField			*_connectionStatus;
 }
 
 @property (assign) IBOutlet NSButton *reconnectButton;
-@property (assign) IBOutlet NSButton *otherAccountButton;
+
+@property (assign) IBOutlet NSTextField *usernameField;
+@property (assign) IBOutlet NSTextField *usernameLabel;
+@property (assign) IBOutlet NSTextField *passwordField;
+@property (assign) IBOutlet NSTextField *passwordLabel;
+
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;
 @property (assign) IBOutlet NSTextField *connectionStatus;
 

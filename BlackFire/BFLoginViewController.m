@@ -8,11 +8,17 @@
 
 #import "BFLoginViewController.h"
 #import "ADAppDelegate.h"
+#import "BFAccount.h"
 
 @implementation BFLoginViewController
 
 @synthesize reconnectButton		= _reconnectButton;
-@synthesize otherAccountButton	= _otherAccountButton;
+
+@synthesize usernameField = _usernameField;
+@synthesize usernameLabel = _usernameLabel;
+@synthesize passwordField = _passwordField;
+@synthesize passwordLabel = _passwordLabel;
+
 @synthesize progressIndicator	= _progressIndicator;
 @synthesize connectionStatus	= _connectionStatus;
 
@@ -21,19 +27,32 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"LoginView" owner:self];
+		NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"accountName"];
+		if( [username length] > 0 )
+		{
+			BFAccount *account = [[BFAccount alloc] initWithUsername:username];
+			[_usernameField setStringValue:username];
+			[_passwordField setStringValue:account.password];
+			[account release];
+		}
 	}
 	return self;
 }
 
 - (IBAction)reconnect:(id)sender
 {
-	if( _delegate.currentMode == BFApplicationModeOffline )
-	{
-		[_delegate connectionCheck];
-	}
-	else if( _delegate.currentMode == BFApplicationModeLoggingIn  )
+	if( [_usernameField isHidden] )
 	{
 		[_delegate disconnect];
+	}
+	else if( [[_usernameField stringValue] length] > 0 && [[_passwordField stringValue] length] > 0 )
+	{
+		BFAccount *account = [[BFAccount alloc] initWithUsername:[_usernameField stringValue]];
+		[account setPassword:[_passwordField stringValue]];
+		[account save];
+		[[NSUserDefaults standardUserDefaults] setObject:account.username forKey:@"accountName"];
+		[account release];
+		[_delegate connectionCheck];
 	}
 }
 
@@ -41,8 +60,6 @@
 {
 	if( newStatus == XFSessionStatusConnecting )
 	{
-		[_otherAccountButton setHidden:true];
-		
 		[_reconnectButton setTitle:@"Cancel"];
 		[_reconnectButton setHidden:false];
 		
@@ -51,11 +68,15 @@
 		
 		[_connectionStatus setStringValue:@"Connecting…"];
 		[_connectionStatus setHidden:false];
+		
+		[_usernameField setHidden:true];
+		[_usernameLabel setHidden:true];
+		[_passwordField setHidden:true];
+		[_passwordLabel setHidden:true];
 	}
 	else if( newStatus == XFSessionStatusOnline )
 	{
 		[_reconnectButton setHidden:true];
-		[_otherAccountButton setHidden:true];
 		
 		[_progressIndicator setHidden:true];
 		[_progressIndicator stopAnimation:nil];
@@ -65,10 +86,7 @@
 	}
 	else if( newStatus == XFSessionStatusOffline )
 	{
-		[_reconnectButton setTitle:@"Reconnect"];
-		[_otherAccountButton setTitle:@"Account…"];
-		
-		[_otherAccountButton setHidden:false];
+		[_reconnectButton setTitle:@"Connect"];
 		[_reconnectButton setHidden:false];
 		
 		[_progressIndicator stopAnimation:nil];
@@ -76,6 +94,11 @@
 		
 		[_connectionStatus setStringValue:@"Offline"];
 		[_connectionStatus setHidden:false];
+		
+		[_usernameField setHidden:false];
+		[_usernameLabel setHidden:false];
+		[_passwordField setHidden:false];
+		[_passwordLabel setHidden:false];
 	}
 }
 @end

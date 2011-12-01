@@ -162,6 +162,9 @@
 	[_chatHistoryView scrollRangeToVisible:range];
 	[scanner release];
 	[fmtMsg release];
+	
+	[chatFont release];
+	[boldFont release];
 }
 
 @end

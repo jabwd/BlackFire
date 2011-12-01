@@ -88,13 +88,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	NSArray *accounts = [[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"];
-	if( [accounts count] > 0 )
-	{
-		[_account release];
-		_account = [[BFAccount alloc] initWithUsername:[accounts objectAtIndex:0]];
-		[self connectionCheck];
-	}
+	[self connectionCheck];
 }
 
 #pragma mark - Toolbar delegate
@@ -131,6 +125,7 @@
 			if( ! _loginViewController )
 			{
 				_loginViewController = [[BFLoginViewController alloc] init];
+				_loginViewController.delegate = self;
 			}
 			[_loginViewController session:_session changedStatus:XFSessionStatusOffline];
 			
@@ -286,6 +281,11 @@
 
 - (void)connectionCheck
 {
+	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"accountName"];
+	if( [username length] < 1 )
+		return;
+	[_account release];
+	_account = [[BFAccount alloc] initWithUsername:username];
 	if( (!_session || _session.status == XFSessionStatusOffline) && [_account.username length] > 0 && [_account.password length] > 0  )
 	{
 		_session = [[XFSession alloc] initWithDelegate:self];
@@ -300,6 +300,7 @@
 - (void)disconnect
 {
 	[_session disconnect];
+	[_session setDelegate:nil];
 	[_session release];
 	_session = nil;
 	
@@ -311,7 +312,11 @@
 - (void)session:(XFSession *)session friendChanged:(XFFriend *)changedFriend type:(XFFriendNotification)notificationType
 {
 	if( ! changedFriend )
+	{
+		// just make sure we are up-to-date then.
+		[_friendsListController reloadData];
 		return;
+	}
 	
 	// make sure that the friends list displays the latest data
 	[_friendsListController reloadData];
@@ -341,7 +346,18 @@
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
 {
-	
+	if( reason == XFLoginErrorNetworkError )
+	{
+		NSRunAlertPanel(@"Login failed", @"Could not connect to xfire. Are you sure you are connected to the internet?", @"OK", nil, nil);
+	}
+	else if( reason == XFLoginErrorInvalidPassword )
+	{
+		NSRunAlertPanel(@"Login failed", @"Incorrect username and or password", @"OK", nil, nil);
+	}
+	else
+	{
+		NSRunAlertPanel(@"Error", [NSString stringWithFormat:@"An error occured %lu",reason], @"OK", nil, nil);
+	}
 }
 
 
@@ -359,6 +375,7 @@
 	else if( newStatus == XFSessionStatusOffline )
 	{
 		[self changeToMode:BFApplicationModeOffline];
+		[_session setDelegate:nil];
 		[_session release];
 		_session = nil;
 	}

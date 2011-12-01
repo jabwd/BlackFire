@@ -273,6 +273,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		[_delegate session:self chatDidStart:chat];
 	
 	[_chats addObject:chat];
+	[chat release];
 	
 	return chat;
 }

@@ -725,8 +725,12 @@
 		
 		if( [sid isClear] )
 		{
-			[onlineGroup removeMember:friend];
-			[offlineGroup addMember:friend];
+			// makes sure that no clan members are shown in these groups.
+			if( [onlineGroup friendIsMember:friend] )
+			{
+				[onlineGroup removeMember:friend];
+				[offlineGroup addMember:friend];
+			}
 			[friend clearInformation];
 			friend.online = false;
 			friend.sessionID = sid;
@@ -734,8 +738,12 @@
 		}
 		else
 		{
-			[offlineGroup removeMember:friend];
-			[onlineGroup addMember:friend];
+			// makes sure that no clan members are shown in these groups.
+			if( [offlineGroup friendIsMember:friend] )
+			{
+				[offlineGroup removeMember:friend];
+				[onlineGroup addMember:friend];
+			}
 			friend.online = true;
 			friend.sessionID = sid;
 			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
@@ -743,6 +751,9 @@
 	}
 	[offlineGroup sortMembers];
 	[onlineGroup sortMembers];
+	
+	// make sure that the tableview of the GUI refreshes.
+	[_session raiseFriendNotification:0 forFriend:nil];
 }
 
 // Contains a list of status strings for a given user's session
