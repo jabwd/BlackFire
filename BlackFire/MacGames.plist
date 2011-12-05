@@ -1,0 +1,2260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>4x4 Evolution 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>4x4 Evolution 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4409</string>
+	</dict>
+	<key>Age of Empires</key>
+	<dict>
+		<key>AppName</key>
+		<string>Age of Empires</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4565</string>
+	</dict>
+	<key>Age of Empires II</key>
+	<dict>
+		<key>AppName</key>
+		<string>Age of Empires II</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4124</integer>
+	</dict>
+	<key>Age of Empires III</key>
+	<dict>
+		<key>AppName</key>
+		<string>Age of Empires III</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4679</integer>
+	</dict>
+	<key>Age of Empires III - The WarChiefs</key>
+	<dict>
+		<key>AppName</key>
+		<string>Age of Empires III - The WarChiefs</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4922</string>
+	</dict>
+	<key>Age of Empires III Trial</key>
+	<dict>
+		<key>AppName</key>
+		<string>Age of Empires III Trial</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4633</string>
+	</dict>
+	<key>Age of Mythology</key>
+	<dict>
+		<key>AppName</key>
+		<string>Age of Mythology</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4139</integer>
+	</dict>
+	<key>Athena Sword</key>
+	<dict>
+		<key>AppName</key>
+		<string>Athena Sword</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4275</integer>
+	</dict>
+	<key>Battlefield 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Battlefield 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4578</string>
+	</dict>
+	<key>Battlefield 2142</key>
+	<dict>
+		<key>AppName</key>
+		<string>Battlefield 2142</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4880</string>
+	</dict>
+	<key>Black &amp; White</key>
+	<dict>
+		<key>AppName</key>
+		<string>Black &amp; White</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4413</string>
+	</dict>
+	<key>Black &amp; White 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Black &amp; White 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4663</string>
+	</dict>
+	<key>Black &amp; White 2 Demo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Black &amp; White 2 Demo</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4663</string>
+	</dict>
+	<key>Blitzkrieg</key>
+	<dict>
+		<key>AppName</key>
+		<string>Blitzkrieg</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4645</string>
+	</dict>
+	<key>Braid</key>
+	<dict>
+		<key>AppName</key>
+		<string>Braid</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5769</integer>
+	</dict>
+	<key>Breakthrough</key>
+	<dict>
+		<key>AppName</key>
+		<string>Breakthrough</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4150</integer>
+	</dict>
+	<key>Call of Duty 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4683</string>
+	</dict>
+	<key>Call of Duty 2 Demo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 2 Demo</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4656</integer>
+	</dict>
+	<key>Call of Duty 2 Multiplayer</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 2 Multiplayer</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4684</integer>
+	</dict>
+	<key>Call of Duty 4</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 4</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>5185</integer>
+	</dict>
+	<key>Call of Duty 4 Multiplayer</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 4 Multiplayer</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<string>5186</string>
+	</dict>
+	<key>Call of Duty MP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty MP</string>
+		<key>arguments</key>
+		<array>
+			<string>NSServices</string>
+		</array>
+		<key>gameID</key>
+		<string>4120</string>
+	</dict>
+	<key>Call of Duty SP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty SP</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4119</string>
+	</dict>
+	<key>Civilization IV</key>
+	<dict>
+		<key>AppName</key>
+		<string>Civilization IV</string>
+		<key>arguments</key>
+		<array>
+			<string>-applaunch 3900</string>
+		</array>
+		<key>gameID</key>
+		<string>4685</string>
+	</dict>
+	<key>Civilization IV Warlords</key>
+	<dict>
+		<key>AppName</key>
+		<string>Civilization IV Warlords</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4866</integer>
+	</dict>
+	<key>Close Combat First to Fight</key>
+	<dict>
+		<key>AppName</key>
+		<string>Close Combat First to Fight</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4446</integer>
+	</dict>
+	<key>CoD United Offensive MP</key>
+	<dict>
+		<key>AppName</key>
+		<string>CoD United Offensive MP</string>
+		<key>arguments</key>
+		<array>
+			<string>NSServices</string>
+		</array>
+		<key>gameID</key>
+		<integer>4311</integer>
+	</dict>
+	<key>CoD United Offensive SP</key>
+	<dict>
+		<key>AppName</key>
+		<string>CoD United Offensive SP</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4310</string>
+	</dict>
+	<key>Colin McRae Rally '05</key>
+	<dict>
+		<key>AppName</key>
+		<string>Colin McRae Rally '05</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4422</string>
+	</dict>
+	<key>Command &amp; Conquer Generals</key>
+	<dict>
+		<key>AppName</key>
+		<string>Command &amp; Conquer Generals</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4129</integer>
+	</dict>
+	<key>Command and Conquer 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Command and Conquer 3</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5013</integer>
+	</dict>
+	<key>Counter Strike Source</key>
+	<dict>
+		<key>AppName</key>
+		<string>Counter Strike Source</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4331</integer>
+	</dict>
+	<key>Counter-Strike</key>
+	<dict>
+		<key>AppName</key>
+		<string>Counter-Strike</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5</string>
+	</dict>
+	<key>Counter-Strike Source</key>
+	<dict>
+		<key>AppName</key>
+		<string>Counter-Strike Source</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4331</string>
+	</dict>
+	<key>Crazy Machines 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Crazy Machines 2</string>
+		<key>arguments</key>
+		<array>
+			<string>-applaunch 18400</string>
+		</array>
+		<key>gameID</key>
+		<string>5467</string>
+	</dict>
+	<key>DEFCON</key>
+	<dict>
+		<key>AppName</key>
+		<string>DEFCON</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4920</integer>
+	</dict>
+	<key>DTM Race Driver 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>DTM Race Driver 3</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4758</string>
+	</dict>
+	<key>Darwinia</key>
+	<dict>
+		<key>AppName</key>
+		<string>Darwinia</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4431</integer>
+	</dict>
+	<key>Darwinia Demo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Darwinia Demo</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4430</string>
+	</dict>
+	<key>Delta Force Black Hawk Down</key>
+	<dict>
+		<key>AppName</key>
+		<string>Delta Force Black Hawk Down</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4155</string>
+	</dict>
+	<key>Diablo II</key>
+	<dict>
+		<key>AppName</key>
+		<string>Diablo II(Carbon) </string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4102</string>
+	</dict>
+	<key>Doom 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Doom 3</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4271</integer>
+	</dict>
+	<key>Dungeon Siege</key>
+	<dict>
+		<key>AppName</key>
+		<string>Dungeon Siege</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4100</integer>
+	</dict>
+	<key>EVE Online</key>
+	<dict>
+		<key>AppName</key>
+		<string>EVE Online</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4320</integer>
+	</dict>
+	<key>Elite Force HM 1.2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Elite Force HM 1.2</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4208</integer>
+	</dict>
+	<key>Elite Force HM Carbon</key>
+	<dict>
+		<key>AppName</key>
+		<string>Elite Force HM Carbon</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4208</integer>
+	</dict>
+	<key>Elite Force Holomatch</key>
+	<dict>
+		<key>AppName</key>
+		<string>Elite Force Holomatch</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4208</integer>
+	</dict>
+	<key>Elite Force SP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Elite Force</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4225</integer>
+	</dict>
+	<key>Empire At War</key>
+	<dict>
+		<key>AppName</key>
+		<string>Empire At War</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4726</string>
+	</dict>
+	<key>Empire at War</key>
+	<dict>
+		<key>AppName</key>
+		<string>Empire at War</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4726</integer>
+	</dict>
+	<key>Enemy Territory QUAKE Wars</key>
+	<dict>
+		<key>AppName</key>
+		<string>Enemy Territory QUAKE Wars</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<string>5080</string>
+	</dict>
+	<key>FlatOut 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>FlatOut 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4875</string>
+	</dict>
+	<key>Football Manager 2007</key>
+	<dict>
+		<key>AppName</key>
+		<string>Football Manager 2007</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4947</string>
+	</dict>
+	<key>Freecell</key>
+	<dict>
+		<key>AppName</key>
+		<string>Freecell</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4745</integer>
+	</dict>
+	<key>Full Tilt Poker</key>
+	<dict>
+		<key>AppName</key>
+		<string>Full Tilt Poker</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4995</integer>
+	</dict>
+	<key>Galactic Battlegrounds</key>
+	<dict>
+		<key>AppName</key>
+		<string>Galactic Battlegrounds</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4384</integer>
+	</dict>
+	<key>Gangland</key>
+	<dict>
+		<key>AppName</key>
+		<string>Gangland</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4673</string>
+	</dict>
+	<key>Ghost Recon</key>
+	<dict>
+		<key>AppName</key>
+		<string>Ghost Recon</string>
+		<key>arguments</key>
+		<array>
+			<string>-client</string>
+		</array>
+		<key>gameID</key>
+		<integer>4154</integer>
+	</dict>
+	<key>Guild Wars</key>
+	<dict>
+		<key>AppName</key>
+		<string>Guild Wars</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4345</string>
+	</dict>
+	<key>Half Life 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Half Life 2</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4357</integer>
+	</dict>
+	<key>Half Life 2: Episode One</key>
+	<dict>
+		<key>AppName</key>
+		<string>Half Life 2: Episode One</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4822</integer>
+	</dict>
+	<key>Half Life 2: Episode Two</key>
+	<dict>
+		<key>AppName</key>
+		<string>Half Life 2: Episode Two</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5154</integer>
+	</dict>
+	<key>Halo 1.0.4</key>
+	<dict>
+		<key>AppName</key>
+		<string>Halo 1.0.4</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4107</integer>
+	</dict>
+	<key>Halo 1.04</key>
+	<dict>
+		<key>AppName</key>
+		<string>Halo 1.04</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4107</integer>
+	</dict>
+	<key>Heroes of Might and Magic V</key>
+	<dict>
+		<key>AppName</key>
+		<string>Heroes of Might and Magic V</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4815</integer>
+	</dict>
+	<key>Homeworld 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Homeworld 2</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4389</integer>
+	</dict>
+	<key>I wanna be the guy.Wineskin.prefs</key>
+	<dict>
+		<key>AppName</key>
+		<string>I wanna be the guy</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5825</integer>
+	</dict>
+	<key>Imperial Glory</key>
+	<dict>
+		<key>AppName</key>
+		<string>Imperial Glory</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4577</string>
+	</dict>
+	<key>James Bond 007 Nightfire</key>
+	<dict>
+		<key>AppName</key>
+		<string>James Bond 007 Nightfire</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4982</string>
+	</dict>
+	<key>Jedi Academy</key>
+	<dict>
+		<key>AppName</key>
+		<string>Jedi Academy</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4157</string>
+	</dict>
+	<key>Jedi Academy MP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Jedi Academy MP</string>
+		<key>arguments</key>
+		<array>
+			<string>NSServices</string>
+		</array>
+		<key>gameID</key>
+		<integer>4158</integer>
+	</dict>
+	<key>Jedi Knight II</key>
+	<dict>
+		<key>AppName</key>
+		<string>Jedi Knight II</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4161</string>
+	</dict>
+	<key>Jedi Knight II MP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Jedi Knight II MP</string>
+		<key>arguments</key>
+		<array>
+			<string>NSServices</string>
+		</array>
+		<key>gameID</key>
+		<integer>4160</integer>
+	</dict>
+	<key>Klondike Forever</key>
+	<dict>
+		<key>AppName</key>
+		<string>Klondike Forever</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4148</integer>
+	</dict>
+	<key>Knights of the Old Republic</key>
+	<dict>
+		<key>AppName</key>
+		<string>Knights of the Old Republic</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4121</integer>
+	</dict>
+	<key>Kung Fu Panda</key>
+	<dict>
+		<key>AppName</key>
+		<string>Kung Fu Panda</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5443</string>
+	</dict>
+	<key>Kung Fu Panda Demo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Kung Fu Panda Demo</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5377</string>
+	</dict>
+	<key>LEGO Star Wars</key>
+	<dict>
+		<key>AppName</key>
+		<string>LEGO Star Wars</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4445</integer>
+	</dict>
+	<key>Left 4 Dead</key>
+	<dict>
+		<key>AppName</key>
+		<string>Left 4 Dead</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5633</integer>
+	</dict>
+	<key>Legion Arena</key>
+	<dict>
+		<key>AppName</key>
+		<string>Legion Arena</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4628</integer>
+	</dict>
+	<key>Lineage</key>
+	<dict>
+		<key>AppName</key>
+		<string>Lineage</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4113</integer>
+	</dict>
+	<key>MAME OS X</key>
+	<dict>
+		<key>AppName</key>
+		<string>MAME OS X</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4268</integer>
+	</dict>
+	<key>MacMAME</key>
+	<dict>
+		<key>AppName</key>
+		<string>MacMAME</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4268</integer>
+	</dict>
+	<key>Maelstrom</key>
+	<dict>
+		<key>AppName</key>
+		<string>Maelstrom</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4986</integer>
+	</dict>
+	<key>Max Payne</key>
+	<dict>
+		<key>AppName</key>
+		<string>Max Payne</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4307</string>
+	</dict>
+	<key>Medal of Honor</key>
+	<dict>
+		<key>AppName</key>
+		<string>Medal of Honor</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4114</integer>
+	</dict>
+	<key>Mibi</key>
+	<dict>
+		<key>AppName</key>
+		<string>Mibi</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5956</string>
+	</dict>
+	<key>Myst</key>
+	<dict>
+		<key>AppName</key>
+		<string>Myst</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4764</integer>
+	</dict>
+	<key>NFSMW</key>
+	<dict>
+		<key>AppName</key>
+		<string>NFSMW</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4702</integer>
+	</dict>
+	<key>NOLF2</key>
+	<dict>
+		<key>AppName</key>
+		<string>NOLF2</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4305</integer>
+	</dict>
+	<key>Nascar 2003</key>
+	<dict>
+		<key>AppName</key>
+		<string>Nascar 2003</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4207</integer>
+	</dict>
+	<key>Need for Speed Carbon</key>
+	<dict>
+		<key>AppName</key>
+		<string>Need for Speed Carbon</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4943</string>
+	</dict>
+	<key>Neverwinter Nights</key>
+	<dict>
+		<key>AppName</key>
+		<string>Neverwinter Nights</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4108</integer>
+	</dict>
+	<key>Neverwinter Nights 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Neverwinter Nights 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4942</string>
+	</dict>
+	<key>Nexuiz</key>
+	<dict>
+		<key>AppName</key>
+		<string>Nexuiz</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5697</integer>
+	</dict>
+	<key>No one lives forever</key>
+	<dict>
+		<key>AppName</key>
+		<string>No one lives forever</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4381</string>
+	</dict>
+	<key>PokerStars</key>
+	<dict>
+		<key>AppName</key>
+		<string>PokerStars</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4567</string>
+	</dict>
+	<key>Postal 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Postal 2</string>
+		<key>arguments</key>
+		<array>
+			<string> </string>
+		</array>
+		<key>gameID</key>
+		<string>4401</string>
+	</dict>
+	<key>Prey</key>
+	<dict>
+		<key>AppName</key>
+		<string>Prey</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4858</integer>
+	</dict>
+	<key>Quake 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Quake 2</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4116</integer>
+	</dict>
+	<key>Quake 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Quake 3</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<string>4111</string>
+	</dict>
+	<key>Quake 4</key>
+	<dict>
+		<key>AppName</key>
+		<string>Quake 4</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4678</integer>
+	</dict>
+	<key>Quake3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Quake3</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4111</integer>
+	</dict>
+	<key>Railroad Tycoon 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Railroad Tycoon 3</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4643</string>
+	</dict>
+	<key>Raven Shield</key>
+	<dict>
+		<key>AppName</key>
+		<string>Raven Shield</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4141</integer>
+	</dict>
+	<key>Return to Castle Wolfenstein</key>
+	<dict>
+		<key>AppName</key>
+		<string>Wolfenstein SP</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4173</integer>
+	</dict>
+	<key>Rise of Nations Gold</key>
+	<dict>
+		<key>AppName</key>
+		<string>Rise of Nations Gold</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4135</integer>
+	</dict>
+	<key>RollerCoaster Tycoon 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>RollerCoaster Tycoon 3</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4344</string>
+	</dict>
+	<key>Rome Total War</key>
+	<dict>
+		<key>AppName</key>
+		<string>Rome Total War</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4325</string>
+	</dict>
+	<key>SPORE</key>
+	<dict>
+		<key>AppName</key>
+		<string>SPORE</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5540</string>
+	</dict>
+	<key>SPORE(TM) Labor</key>
+	<dict>
+		<key>AppName</key>
+		<string>SPORE(TM) Labor</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5459</string>
+	</dict>
+	<key>Sauerbraten</key>
+	<dict>
+		<key>AppName</key>
+		<string>Sauerbraten</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5055</integer>
+	</dict>
+	<key>Second Life</key>
+	<dict>
+		<key>AppName</key>
+		<string>Second Life</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4179</integer>
+	</dict>
+	<key>Shadowbane</key>
+	<dict>
+		<key>AppName</key>
+		<string>Shadowbane</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4244</string>
+	</dict>
+	<key>SimCity 4</key>
+	<dict>
+		<key>AppName</key>
+		<string>SimCity 4</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4127</integer>
+	</dict>
+	<key>Sims 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Sims 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4322</string>
+	</dict>
+	<key>Sims 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Sims 3</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5828</string>
+	</dict>
+	<key>Spearhead</key>
+	<dict>
+		<key>AppName</key>
+		<string>Spearhead</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4152</integer>
+	</dict>
+	<key>Splinter Cell</key>
+	<dict>
+		<key>AppName</key>
+		<string>Splinter Cell</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4441</string>
+	</dict>
+	<key>Star Wars Battlefront</key>
+	<dict>
+		<key>AppName</key>
+		<string>Star Wars Battlefront</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<string>4323</string>
+	</dict>
+	<key>StarCraft Brood War</key>
+	<dict>
+		<key>AppName</key>
+		<string>StarCraft Brood War</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4284</string>
+	</dict>
+	<key>Starcraft (Carbon)</key>
+	<dict>
+		<key>AppName</key>
+		<string>Starcraft (Carbon)</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4101</integer>
+	</dict>
+	<key>Stronghold</key>
+	<dict>
+		<key>AppName</key>
+		<string>Stronghold</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4604</integer>
+	</dict>
+	<key>Stubbs The Zombie</key>
+	<dict>
+		<key>AppName</key>
+		<string>Stubbs The Zombie</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4717</string>
+	</dict>
+	<key>The Movies</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Movies</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4696</string>
+	</dict>
+	<key>The Movies Demo</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Movies Demo</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4696</string>
+	</dict>
+	<key>The Return Of The King</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Return Of The King</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4686</string>
+	</dict>
+	<key>The Sims 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Sims 2</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4322</integer>
+	</dict>
+	<key>The Sims Carbon</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Sims Carbon</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4293</integer>
+	</dict>
+	<key>The Sims Vacation</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Sims Vacation</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4293</integer>
+	</dict>
+	<key>Tiger Woods PGA Tour '05</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tiger Woods PGA Tour '05</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4341</string>
+	</dict>
+	<key>Tiger Woods PGA Tour 08</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tiger Woods PGA Tour 08</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5126</string>
+	</dict>
+	<key>Tomb Raider Anniversary</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tomb Raider Anniversary</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>5068</string>
+	</dict>
+	<key>Tony Hawk's Pro Skater 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tony Hawk's Pro Skater 3</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4269</string>
+	</dict>
+	<key>Tony Hawk's Pro Skater 4</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tony Hawk's Pro Skater 4</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<string>4272</string>
+	</dict>
+	<key>Tremulous</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tremulous</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5079</integer>
+	</dict>
+	<key>Tropico for OS X</key>
+	<dict>
+		<key>AppName</key>
+		<string>Tropico for OS X</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4437</string>
+	</dict>
+	<key>TrueCrimeMac</key>
+	<dict>
+		<key>AppName</key>
+		<string>TrueCrimeMac</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4242</integer>
+	</dict>
+	<key>Unreal Tournament 2003</key>
+	<dict>
+		<key>AppName</key>
+		<string>Unreal Tournament 2003</string>
+		<key>arguments</key>
+		<array>
+			<string> </string>
+		</array>
+		<key>gameID</key>
+		<string>4</string>
+	</dict>
+	<key>Unreal Tournament 2004</key>
+	<dict>
+		<key>AppName</key>
+		<string>Unreal Tournament 2004</string>
+		<key>arguments</key>
+		<array>
+			<string> </string>
+		</array>
+		<key>gameID</key>
+		<integer>4181</integer>
+	</dict>
+	<key>Unreal Tournament 2004 Demo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Unreal Tournament 2004 Demo</string>
+		<key>arguments</key>
+		<array>
+			<string> </string>
+		</array>
+		<key>gameID</key>
+		<integer>4162</integer>
+	</dict>
+	<key>Unreal Tournament 3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Unreal Tournament 3</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5208</integer>
+	</dict>
+	<key>Unreal Tournament OS X</key>
+	<dict>
+		<key>AppName</key>
+		<string>Unreal Tournament OS X</string>
+		<key>arguments</key>
+		<array>
+			<string> </string>
+		</array>
+		<key>gameID</key>
+		<integer>3</integer>
+	</dict>
+	<key>Warcraft II</key>
+	<dict>
+		<key>AppName</key>
+		<string>Warcraft II</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4390</integer>
+	</dict>
+	<key>Warcraft III</key>
+	<dict>
+		<key>AppName</key>
+		<string>Warcraft III</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4270</string>
+	</dict>
+	<key>WoP</key>
+	<dict>
+		<key>AppName</key>
+		<string>WoP</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5065</integer>
+	</dict>
+	<key>Wolfenstein ET</key>
+	<dict>
+		<key>AppName</key>
+		<string>Wolfenstein ET</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4097</integer>
+	</dict>
+	<key>Wolfenstein MP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Wolfenstein MP</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4174</string>
+	</dict>
+	<key>Wolfenstein SP</key>
+	<dict>
+		<key>AppName</key>
+		<string>Wolfenstein SP</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4173</string>
+	</dict>
+	<key>Worms 3D</key>
+	<dict>
+		<key>AppName</key>
+		<string>Worms 3D</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4367</integer>
+	</dict>
+	<key>Worms Armageddon</key>
+	<dict>
+		<key>AppName</key>
+		<string>Worms Armageddon</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4397</integer>
+	</dict>
+	<key>XIII</key>
+	<dict>
+		<key>AppName</key>
+		<string>XIII</string>
+		<key>arguments</key>
+		<array>
+			<string> </string>
+		</array>
+		<key>gameID</key>
+		<string>4290</string>
+	</dict>
+	<key>Zero Hour</key>
+	<dict>
+		<key>AppName</key>
+		<string>Zero Hour</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4156</integer>
+	</dict>
+	<key>Zoo Tycoon 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Zoo Tycoon 2</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4364</integer>
+	</dict>
+	<key>altitude</key>
+	<dict>
+		<key>AppName</key>
+		<string>Altitude</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6141</integer>
+	</dict>
+	<key>assaultcube</key>
+	<dict>
+		<key>AppName</key>
+		<string>AssaultCube</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5647</integer>
+	</dict>
+	<key>com.2dboy.wog</key>
+	<dict>
+		<key>AppName</key>
+		<string>World of Goo</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5579</integer>
+	</dict>
+	<key>com.Mojang Specifications.Minecraft.Minecraft</key>
+	<dict>
+		<key>AppName</key>
+		<string>Minecraft</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6216</integer>
+	</dict>
+	<key>com.apple.Vegastrike</key>
+	<dict>
+		<key>AppName</key>
+		<string></string>
+	</dict>
+	<key>com.armygame.operations</key>
+	<dict>
+		<key>AppName</key>
+		<string>Army Operations 2.5.0</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>2</integer>
+	</dict>
+	<key>com.aspyr.BF1942roadtorome</key>
+	<dict>
+		<key>AppName</key>
+		<string>BattleField 1942 The Road to rome</string>
+		<key>arguments</key>
+		<array>
+			<string>+joinServer</string>
+		</array>
+		<key>gameID</key>
+		<integer>4105</integer>
+	</dict>
+	<key>com.aspyr.Civ5</key>
+	<dict>
+		<key>AppName</key>
+		<string>Civilization V</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6290</integer>
+	</dict>
+	<key>com.aspyr.Prey</key>
+	<dict>
+		<key>AppName</key>
+		<string>Prey</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4858</integer>
+	</dict>
+	<key>com.aspyr.battlefield1942</key>
+	<dict>
+		<key>AppName</key>
+		<string>Battlefield 1942</string>
+		<key>arguments</key>
+		<array>
+			<string>+joinServer</string>
+		</array>
+		<key>gameID</key>
+		<integer>4105</integer>
+	</dict>
+	<key>com.aspyr.callofduty</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty SP</string>
+		<key>arguments</key>
+		<array>
+			<string>NSServices</string>
+		</array>
+		<key>gameID</key>
+		<integer>4119</integer>
+	</dict>
+	<key>com.aspyr.callofduty2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 2</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4683</integer>
+	</dict>
+	<key>com.aspyr.callofduty4</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty 4 Multiplayer</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>5186</integer>
+	</dict>
+	<key>com.aspyr.callofdutymp</key>
+	<dict>
+		<key>AppName</key>
+		<string>Call of Duty MP</string>
+		<key>arguments</key>
+		<array>
+			<string>NSServices</string>
+		</array>
+		<key>gameID</key>
+		<integer>4120</integer>
+	</dict>
+	<key>com.aspyr.callofdutyuomp</key>
+	<dict>
+		<key>AppName</key>
+		<string>CoD United Offensive MP.app</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4311</integer>
+	</dict>
+	<key>com.aspyr.callofdutyuosp</key>
+	<dict>
+		<key>AppName</key>
+		<string>CoD United Offensive SP.app</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4310</integer>
+	</dict>
+	<key>com.aspyr.eftwo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Elite Force II</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4190</integer>
+	</dict>
+	<key>com.aspyr.ghostrecon</key>
+	<dict>
+		<key>AppName</key>
+		<string>Ghost Recon</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4154</integer>
+	</dict>
+	<key>com.blizzard.Diablo2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Diablo II (Carbon)</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4285</integer>
+	</dict>
+	<key>com.blizzard.Starcraft</key>
+	<dict>
+		<key>AppName</key>
+		<string>Starcraft (Carbon)</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4101</integer>
+	</dict>
+	<key>com.blizzard.WarcraftIII</key>
+	<dict>
+		<key>AppName</key>
+		<string>Warcraft III</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4112</integer>
+	</dict>
+	<key>com.blizzard.starcraft2</key>
+	<dict>
+		<key>AppName</key>
+		<string>SC2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6116</integer>
+	</dict>
+	<key>com.blizzard.worldofwarcraft</key>
+	<dict>
+		<key>AppName</key>
+		<string>World of Warcraft</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4216</integer>
+	</dict>
+	<key>com.feralinteractive.bioshock</key>
+	<dict>
+		<key>AppName</key>
+		<string>Bioshock</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5119</integer>
+	</dict>
+	<key>com.fruitz-of-dojo.quake</key>
+	<dict>
+		<key>AppName</key>
+		<string>GLQuake</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4235</integer>
+	</dict>
+	<key>com.hedgewars</key>
+	<dict>
+		<key>AppName</key>
+		<string>Hedgewars</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6097</integer>
+	</dict>
+	<key>com.install4j.4578-0181-0549-1546.36</key>
+	<dict>
+		<key>AppName</key>
+		<string>Altitude</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6141</integer>
+	</dict>
+	<key>com.macplay.SoldierOfFortune2MP</key>
+	<dict>
+		<key>AppName</key>
+		<string>SOF II - Multiplayer</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4151</integer>
+	</dict>
+	<key>com.macplay.SoldierOfFortune2SP</key>
+	<dict>
+		<key>AppName</key>
+		<string>SOF II - Single Player</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<string>4153</string>
+	</dict>
+	<key>com.macsoft.halo</key>
+	<dict>
+		<key>AppName</key>
+		<string>Halo</string>
+		<key>arguments</key>
+		<array>
+			<string>-connect</string>
+		</array>
+		<key>gameID</key>
+		<integer>4107</integer>
+	</dict>
+	<key>com.popcap.bejeweled2.app</key>
+	<dict>
+		<key>AppName</key>
+		<string>Bejeweled Deluxe 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5271</integer>
+	</dict>
+	<key>com.popcap.peggle</key>
+	<dict>
+		<key>AppName</key>
+		<string>Peggle Deluxe</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5135</integer>
+	</dict>
+	<key>com.popcap.plantsvszombies</key>
+	<dict>
+		<key>AppName</key>
+		<string>Plants vs. Zombies</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5792</integer>
+	</dict>
+	<key>com.portingteam.DeusEx</key>
+	<dict>
+		<key>AppName</key>
+		<string>Deus Ex</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4241</integer>
+	</dict>
+	<key>com.runicgames.TorchlightMac</key>
+	<dict>
+		<key>AppName</key>
+		<string>torchlightmac</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5976</integer>
+	</dict>
+	<key>com.runningwithscissors.postal2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Postal 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4401</integer>
+	</dict>
+	<key>com.s2games.HoN</key>
+	<dict>
+		<key>AppName</key>
+		<string>Heroes of Newerth</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<string>5910</string>
+	</dict>
+	<key>com.sigames.eur.FootballManager2010</key>
+	<dict>
+		<key>AppName</key>
+		<string>Football Manager 2010 v 10 . 3 . 0 f 111861</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5981</integer>
+	</dict>
+	<key>com.transgaming.EVEOnline</key>
+	<dict>
+		<key>AppName</key>
+		<string>EVE Online</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4320</integer>
+	</dict>
+	<key>com.transgaming.cider.dragonageorigins</key>
+	<dict>
+		<key>AppName</key>
+		<string>Dragon Age Origins</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5985</integer>
+	</dict>
+	<key>com.transgaming.cider.leagueoflegends</key>
+	<dict>
+		<key>AppName</key>
+		<string>League of Legends</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5946</integer>
+	</dict>
+	<key>com.transgaming.cityofheroes</key>
+	<dict>
+		<key>AppName</key>
+		<string>City of Heroes</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<string>4217</string>
+	</dict>
+	<key>com.transgaming.cncra3</key>
+	<dict>
+		<key>AppName</key>
+		<string>Command and Conquer - Red alert 3</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5601</integer>
+	</dict>
+	<key>com.transgaming.cs</key>
+	<dict>
+		<key>AppName</key>
+		<string>Counter Strike 1.6</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5</integer>
+	</dict>
+	<key>com.transgaming.gametap</key>
+	<dict>
+		<key>AppName</key>
+		<string>Gta San Andreas</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4572</integer>
+	</dict>
+	<key>com.transgaming.swat4</key>
+	<dict>
+		<key>AppName</key>
+		<string>SWAT 4</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4432</integer>
+	</dict>
+	<key>com.transgaming.thesims3</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Sims 3</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>5828</integer>
+	</dict>
+	<key>com.transgaming.thesimsmedieval</key>
+	<dict>
+		<key>AppName</key>
+		<string>The Sims Medieval</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>-1</integer>
+	</dict>
+	<key>com.transgaming.warhammeronline</key>
+	<dict>
+		<key>AppName</key>
+		<string>Warhammer Online</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5549</integer>
+	</dict>
+	<key>com.tripwireinteractive.killingfloor</key>
+	<dict>
+		<key>AppName</key>
+		<string>Killing Floor</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5804</integer>
+	</dict>
+	<key>com.vpltd.FlatOut2</key>
+	<dict>
+		<key>AppName</key>
+		<string>FlatOut 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4875</integer>
+	</dict>
+	<key>com.yourcompany.Mibi</key>
+	<dict>
+		<key>AppName</key>
+		<string>Mibi</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5956</integer>
+	</dict>
+	<key>counter-strike source</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4331</integer>
+	</dict>
+	<key>cruden.racer</key>
+	<dict>
+		<key>AppName</key>
+		<string>Racer</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5292</integer>
+	</dict>
+	<key>day of defeat source</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4653</integer>
+	</dict>
+	<key>garrysmod</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4593</integer>
+	</dict>
+	<key>half-life 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4357</integer>
+	</dict>
+	<key>half-life 2 deathmatch</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4363</integer>
+	</dict>
+	<key>half-life 2 episode one</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>4822</integer>
+	</dict>
+	<key>half-life 2 episode two</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5154</integer>
+	</dict>
+	<key>ioUrbanTerror</key>
+	<dict>
+		<key>AppName</key>
+		<string>ioUrbanTerror</string>
+		<key>arguments</key>
+		<array>
+			<string>+connect</string>
+		</array>
+		<key>gameID</key>
+		<string>5128</string>
+	</dict>
+	<key>iostvoyHM-1.37</key>
+	<dict>
+		<key>AppName</key>
+		<string>iostvoyHM-1.37</string>
+		<key>arguments</key>
+		<array>
+			<string></string>
+		</array>
+		<key>gameID</key>
+		<integer>4208</integer>
+	</dict>
+	<key>left 4 dead</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5633</integer>
+	</dict>
+	<key>left 4 dead 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6003</integer>
+	</dict>
+	<key>net.urbanterror.www</key>
+	<dict>
+		<key>AppName</key>
+		<string>ioUrbanTerror</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5128</integer>
+	</dict>
+	<key>net.wz2100.Warzone</key>
+	<dict>
+		<key>AppName</key>
+		<string>Warzone 2100</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6207</integer>
+	</dict>
+	<key>portal</key>
+	<dict>
+		<key>AppName</key>
+		<string>hl2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5153</integer>
+	</dict>
+	<key>portal2_osx</key>
+	<dict>
+		<key>AppName</key>
+		<string>portal2_osx</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>6521</integer>
+	</dict>
+	<key>serverTypes</key>
+	<dict>
+		<key>2</key>
+		<string>-ams</string>
+		<key>4097</key>
+		<string>-rws</string>
+		<key>4157</key>
+		<string>-jk3s</string>
+		<key>4158</key>
+		<string>-jk3s</string>
+		<key>4336</key>
+		<string>-tm</string>
+		<key>4357</key>
+		<string>-hl2s</string>
+		<key>4566</key>
+		<string>-tm</string>
+		<key>4753</key>
+		<string>-tm</string>
+		<key>4991</key>
+		<string>-tm</string>
+		<key>5134</key>
+		<string>-hl2s</string>
+		<key>5374</key>
+		<string>-tm</string>
+		<key>LolRaar:</key>
+		<string>-jk3m</string>
+	</dict>
+	<key>team fortress 2</key>
+	<dict>
+		<key>AppName</key>
+		<string>Team Fortress 2</string>
+		<key>arguments</key>
+		<array/>
+		<key>gameID</key>
+		<integer>5134</integer>
+	</dict>
+</dict>
+</plist>

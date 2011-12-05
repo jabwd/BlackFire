@@ -321,4 +321,18 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		[_delegate session:self didReceiveSearchResults:results];
 }
 
+
+
+#pragma mark - Games & Servers
+
+- (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port
+{
+	[_tcpConnection setGameStatus:gameID gameIP:IPAddress gamePort:port];
+}
+
+- (void)exitGame
+{
+	[_tcpConnection setGameStatus:0 gameIP:0 gamePort:0];
+}
+
 @end

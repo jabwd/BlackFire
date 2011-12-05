@@ -807,6 +807,7 @@
 		XFFriend *friend = [_session friendForSessionID:sid];
 		if( ! friend )
 		{
+			NSLog(@"Unknown sid!");
 			[unknownSids addObject:sid];
 		}
 		else
@@ -820,10 +821,11 @@
 	
 	// Some Session IDs were unknown.  These correspond to Friends of Friends
 	// Request that information if the user requests it
-	if( ([unknownSids count] > 0) && [_session shouldShowFriendsOfFriends] )
+	if( ([unknownSids count] > 0) ) 
 	{
 		XFPacket *packet = [XFPacket friendOfFriendRequestPacketWithSIDs:unknownSids];
 		[self sendPacket:packet];
+		NSLog(@"Packet %@",packet);
 	}
 	[unknownSids release]; // don't leak
 }
@@ -838,6 +840,7 @@
 // Ignore mutual friends for now
 - (void)processFriendOfFriendPacket:(XFPacket *)pkt
 {
+	NSLog(@"Friends of Friends %@",pkt);
 	NSArray *sessionIDs, *userIDs, *userNames, *nickNames, *commonFriends, *common;
 	NSString *username, *nickname;
 	
@@ -1499,5 +1502,36 @@
 }*/
 
 #pragma mark - Sending Packets
+
+- (void)setGameStatus:(unsigned)gameID gameIP:(unsigned)gip gamePort:(unsigned)gp
+{
+	if( _status != XFConnectionConnected ) 
+		return;
+	
+	XFPacket *pkt = [XFPacket gameStatusChangePacketWithGameID:gameID gameIP:gip gamePort:gp];
+	[self sendPacket:pkt];
+}
+
+- (void)setStatusText:(NSString *)text
+{
+	if( _status != XFConnectionConnected )
+    {
+        NSLog(@"Tried to send a packet to a disconnected XFConnection");
+		return;
+    }
+	
+	XFPacket *pkt = [XFPacket statusTextChangePacket:text];
+	[self sendPacket:pkt];
+}
+
+- (void)changeNickname:(NSString *)text
+{
+	if( _status != XFConnectionConnected )
+		return;
+	
+	XFPacket *pkt = [XFPacket changeNicknamePacketWithName:text];
+	[self sendPacket:pkt];
+}
+
 
 @end

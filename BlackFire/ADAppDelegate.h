@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "XFSession.h"
 
+#import "BFGamesManager.h"
+
 typedef enum
 {
 	BFApplicationModeOffline = 1,
@@ -20,7 +22,7 @@ typedef enum
 
 @class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController;
 
-@interface ADAppDelegate : NSObject <NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
+@interface ADAppDelegate : NSObject <BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
 	XFSession				*_session;
 	BFAccount				*_account;

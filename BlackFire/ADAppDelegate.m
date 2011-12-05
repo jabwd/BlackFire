@@ -49,6 +49,7 @@
 
 - (void)awakeFromNib
 {
+	[[BFGamesManager sharedGamesManager] setDelegate:self];
 	_chatControllers = [[NSMutableArray alloc] init];
 	
 	
@@ -366,6 +367,7 @@
 {
 	if( newStatus == XFSessionStatusOnline )
 	{
+		[[BFGamesManager sharedGamesManager] startMonitoring];
 		[self changeToMode:BFApplicationModeOnline];
 	}
 	else if( newStatus == XFSessionStatusConnecting )
@@ -374,6 +376,7 @@
 	}
 	else if( newStatus == XFSessionStatusOffline )
 	{
+		[[BFGamesManager sharedGamesManager] stopMonitoring];
 		[self changeToMode:BFApplicationModeOffline];
 		[_session setDelegate:nil];
 		[_session release];
@@ -405,6 +408,18 @@
 - (NSString *)password
 {
 	return _account.password;
+}
+
+#pragma mark - Game detection
+
+- (void)gameDidLaunch:(unsigned int)gameID
+{
+	[_session enterGame:gameID IP:0 port:0];
+}
+
+- (void)gameDidTerminate:(unsigned int)gameID
+{
+	[_session exitGame];
 }
 
 #pragma mark - Friends list toolbar

@@ -40,6 +40,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_chat release];
 	_chat = nil;
 	[_windowController release];
@@ -51,6 +52,7 @@
 
 - (void)closeChat
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_chat closeChat];
 	[_chat release];
 	_chat = nil;

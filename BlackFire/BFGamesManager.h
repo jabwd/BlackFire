@@ -8,10 +8,34 @@
 
 #import "XFGamesManager.h"
 
+@protocol BFGameDetectionDelegate <NSObject>
+
+- (void)gameDidLaunch:(unsigned int)gameID;
+- (void)gameDidTerminate:(unsigned int)gameID;
+
+@end
+
 @interface BFGamesManager : XFGamesManager
 {
+	NSMutableDictionary *_macGames;
+	NSMutableArray		*_runningGames;
 	
+	id <BFGameDetectionDelegate> _delegate;
 }
 
+@property (assign) id <BFGameDetectionDelegate> delegate;
+
+//----------------------------------------------------------------------------
+// Xfire games
+
 - (NSImage *)imageForGame:(NSUInteger)gameID;
+
+
+//-----------------------------------------------------------------------------
+// Mac games
+
+- (unsigned int)gameIDForApplication:(NSDictionary *)applicationInfo;
+
+- (void)startMonitoring;
+- (void)stopMonitoring;
 @end

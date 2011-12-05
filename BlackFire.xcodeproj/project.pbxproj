@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 360D99B8148BEB6F00A529F6 /* MacGames.plist */; };
+		360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 360D99C0148C267D00A529F6 /* BFProcessInformation.m */; };
 		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; };
 		3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3616F666145F0E5500E5066D /* InfoPlist.strings */; };
 		3616F66A145F0E5500E5066D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F669145F0E5500E5066D /* main.m */; };
@@ -2924,6 +2926,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		360D99B8148BEB6F00A529F6 /* MacGames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MacGames.plist; sourceTree = "<group>"; };
+		360D99BF148C267D00A529F6 /* BFProcessInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFProcessInformation.h; sourceTree = "<group>"; };
+		360D99C0148C267D00A529F6 /* BFProcessInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFProcessInformation.m; sourceTree = "<group>"; };
 		3616F659145F0E5500E5066D /* BlackFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3616F65D145F0E5500E5066D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3616F660145F0E5500E5066D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -6021,6 +6026,7 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				360D99B8148BEB6F00A529F6 /* MacGames.plist */,
 				36B6427D1484468B00D9B11E /* Images */,
 				36B6427C1484467300D9B11E /* Sounds */,
 				36B64260148414ED00D9B11E /* Games.plist */,
@@ -6228,6 +6234,8 @@
 			children = (
 				36B62C861483CDB400D9B11E /* BFGamesManager.h */,
 				36B62C871483CDB400D9B11E /* BFGamesManager.m */,
+				360D99BF148C267D00A529F6 /* BFProcessInformation.h */,
+				360D99C0148C267D00A529F6 /* BFProcessInformation.m */,
 			);
 			name = "Managing games";
 			sourceTree = "<group>";
@@ -11979,6 +11987,7 @@
 				36B6427A1484464700D9B11E /* receive.m4v in Resources */,
 				36B6427B1484464700D9B11E /* Send.m4v in Resources */,
 				36B642841484486900D9B11E /* offline_bubble.png in Resources */,
+				360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12029,6 +12038,7 @@
 				36FD118A14795400009F70DE /* XFGame.m in Sources */,
 				36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */,
 				36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */,
+				360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

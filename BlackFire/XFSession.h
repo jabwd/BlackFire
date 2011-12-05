@@ -180,4 +180,10 @@ typedef enum{
 //- (BOOL)shouldShowFriendsOfFriends;
 //- (BOOL)shouldShowOfflineFriends;
 
+//--------------------------------------------------------------------------------
+// Games & Favorite servers
+
+- (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port;
+- (void)exitGame;
+
 @end
