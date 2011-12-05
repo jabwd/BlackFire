@@ -2896,6 +2896,7 @@
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
 		36D9C9FC1465CAF600C4A162 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9C9FB1465CAF600C4A162 /* LoginView.xib */; };
+		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
 		36EBDDA51479B2F500D219D7 /* activeTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD991479B2F500D219D7 /* activeTabClose.png */; };
 		36EBDDA61479B2F500D219D7 /* activeTabCloseHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */; };
 		36EBDDA71479B2F500D219D7 /* activeTabClosePressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9B1479B2F500D219D7 /* activeTabClosePressed.png */; };
@@ -5859,6 +5860,7 @@
 		36D9C9F81465C88F00C4A162 /* BFTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabViewController.h; sourceTree = "<group>"; };
 		36D9C9F91465C88F00C4A162 /* BFTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabViewController.m; sourceTree = "<group>"; };
 		36D9C9FB1465CAF600C4A162 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36EBDD991479B2F500D219D7 /* activeTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClose.png; sourceTree = "<group>"; };
 		36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabCloseHover.png; sourceTree = "<group>"; };
 		36EBDD9B1479B2F500D219D7 /* activeTabClosePressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClosePressed.png; sourceTree = "<group>"; };
@@ -5951,6 +5953,7 @@
 				3616F669145F0E5500E5066D /* main.m */,
 				3616F66B145F0E5500E5066D /* BlackFire-Prefix.pch */,
 				3616F66C145F0E5500E5066D /* Credits.rtf */,
+				36E41295148D318C003BABE9 /* License.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -11988,6 +11991,7 @@
 				36B6427B1484464700D9B11E /* Send.m4v in Resources */,
 				36B642841484486900D9B11E /* offline_bubble.png in Resources */,
 				360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */,
+				36E41296148D318C003BABE9 /* License.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
