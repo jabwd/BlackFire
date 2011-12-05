@@ -40,6 +40,9 @@ typedef enum
 //------------------------------------------------------------------------------
 // Misc methods
 
+
+- (void)displayWarning:(NSString *)warningMessage;
+
 /*
  * Processes a plain text string to a NSAttributedString according to the given
  * BlackFire Instant Message Type.

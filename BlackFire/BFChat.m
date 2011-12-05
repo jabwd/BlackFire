@@ -10,6 +10,8 @@
 #import "BFChatWindowController.h"
 #import "BFNotificationCenter.h"
 
+#import "BFGamesManager.h"
+
 #import "XFSession.h"
 #import "XFFriend.h"
 
@@ -68,6 +70,7 @@
 	{
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message];
+		[[NSApplication sharedApplication] requestUserAttention:10];
 	}
 }
 
@@ -93,16 +96,37 @@
 	{
 		case XFFriendNotificationOnlineStatusChanged:
 		{
+			if( _chat.remoteFriend.online )
+			{
+				[self displayWarning:[NSString stringWithFormat:@"%@ came online",[_chat.remoteFriend displayName]]];
+			}
+			else
+			{
+				[self displayWarning:[NSString stringWithFormat:@"%@ went offline",[_chat.remoteFriend displayName]]];
+			}
 		}
 			break;
 			
 		case XFFriendNotificationStatusChanged:
 		{
+			if( [[_chat.remoteFriend status] length] > 0 )
+				[self displayWarning:[NSString stringWithFormat:@"%@'s status changed to %@",[_chat.remoteFriend displayName],[_chat.remoteFriend status]]];
+			else
+				[self displayWarning:[NSString stringWithFormat:@"%@ is now Online",[_chat.remoteFriend displayName]]];
 		}
 			break;
 			
 		case XFFriendNotificationGameStatusChanged:
 		{
+			if( [_chat.remoteFriend gameID] > 0 )
+			{
+				[self displayWarning:[NSString stringWithFormat:@"%@ started playing %@",[_chat.remoteFriend displayName],[[BFGamesManager sharedGamesManager] longNameForGameID:[_chat.remoteFriend gameID]]]];
+			}
+			else
+			{
+				// TODO: Make this more advanced
+				[self displayWarning:[NSString stringWithFormat:@"%@ stopped playing",[_chat.remoteFriend displayName]]];
+			}
 		}
 			break;
 			
@@ -119,6 +143,49 @@
 	
 	// TODO: Figure out whether this chat is the main chat
 	[_windowController updateToolbar];
+}
+
+
+- (void)displayWarning:(NSString *)warningMessage
+{
+	if( [warningMessage length] > 0 )
+	{
+		NSMutableAttributedString *fmtMsg = nil;
+		NSString *newline = @"", *timestamp = @"";
+		
+		if( [[_chatHistoryView textStorage] length] > 0 )
+		{
+			newline = @"\n";
+		}
+		
+		if([[NSUserDefaults standardUserDefaults] boolForKey:@"enableTimeStamps"])
+			timestamp = [_dateFormatter stringFromDate:[NSDate date]];
+		
+		NSFont *chatFont = [[NSFont fontWithName:@"Helvetica" size:12.0f] retain];
+		NSFont *boldFont = [[[NSFontManager sharedFontManager] convertWeight:true ofFont:chatFont] retain];
+		
+		NSString *fmtMessage = [[NSString alloc] initWithFormat:@"%@%@ <%@>",newline,timestamp,warningMessage];
+		fmtMsg = [[NSMutableAttributedString alloc] initWithString:fmtMessage];
+		[fmtMessage release];
+		
+		[fmtMsg addAttribute:NSFontAttributeName value:boldFont range:NSMakeRange(0, [fmtMsg length])];
+
+		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0 ,[fmtMsg length])];
+		
+		AHHyperlinkScanner	*scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:fmtMsg usingStrictChecking:NO];
+		[[_chatHistoryView textStorage] appendAttributedString:[scanner linkifiedString]];
+		[_chatHistoryView setNeedsDisplay:true];
+		NSRange range;
+		range.location = [[_chatHistoryView textStorage] length];
+		range.length = 1;
+		[_chatHistoryView scrollRangeToVisible:range];
+		[scanner release];
+		
+		
+		[fmtMsg release];
+		[boldFont release];
+		[chatFont release];
+	}
 }
 
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type
