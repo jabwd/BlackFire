@@ -12,9 +12,19 @@
 
 - (void)orderOnTop
 {
+	/*NSView *superview = [self superview];
+	[self removeFromSuperview];
+	[superview addSubview:self positioned:NSWindowAbove relativeTo:nil];*/
+	[self orderOnTopOfView:nil];
+}
+
+- (void)orderOnTopOfView:(NSView *)otherView
+{
+	[self retain];
 	NSView *superview = [self superview];
 	[self removeFromSuperview];
-	[superview addSubview:self positioned:NSWindowAbove relativeTo:nil];
+	[superview addSubview:self positioned:NSWindowAbove relativeTo:otherView];
+	[self release];
 }
 
 @end

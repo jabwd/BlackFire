@@ -16,4 +16,6 @@
  */
 - (void)orderOnTop;
 
+- (void)orderOnTopOfView:(NSView *)otherView;
+
 @end

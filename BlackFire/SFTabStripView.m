@@ -76,12 +76,13 @@
 	}
 	
 	newSelected.selected = true;
-	[newSelected orderOnTop];
 	
 	[self setNeedsDisplay:true];
 	
 	if( [_delegate respondsToSelector:@selector(didSelectNewTab:)] )
 		[_delegate didSelectNewTab:newSelected];
+	
+	[self layoutTabs];
 }
 
 - (void)layoutTabs
@@ -102,6 +103,30 @@
 		
 		[tab removeFromSuperview];
 		[self addSubview:tab];
+		
+		if( ! selected )
+		{
+			[tab orderOnTop];
+		}
+		/*else
+		{
+			// we passed the selected tab so now we need to do it a bit more advanced.
+			if( (i+1) < cnt )
+			{
+				SFTabView *nextTab = [_tabs objectAtIndex:(i+1)];
+				[nextTab orderOnTopOfView:tab];
+			}
+		}*/ // done in the second loop
+	}
+	
+	// reverse loop
+	for(i=cnt;i>0;i--)
+	{
+		SFTabView *tab = [_tabs objectAtIndex:(i-1)]; // compensate for the 0 index
+		if( tab.selected )
+			break; // done here.
+		
+		[tab orderOnTop];
 	}
 	
 	[selected orderOnTop];

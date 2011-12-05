@@ -186,6 +186,8 @@
 	
 	[_switchView addSubview:newView];
 	[newView setFrame:[_switchView bounds]];
+	
+	[_messageField becomeFirstResponder];
 }
 
 

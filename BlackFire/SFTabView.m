@@ -109,10 +109,6 @@
 	[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	
-	
-	if( _mouseInside )
-		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
-	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
 	[style setAlignment:NSCenterTextAlignment];
@@ -141,6 +137,10 @@
 	NSRect stringRect = NSMakeRect(10, (dirtyRect.size.height/2)-height-2.0f, dirtyRect.size.width-20, 24-height);
 	[titleAttrStr drawInRect:stringRect];
 	[titleAttrStr release];
+	
+	// draw the close button on top of everything
+	if( _mouseInside )
+		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
 }
 
 
@@ -156,7 +156,7 @@
 		NSLog(@"InsideClose");
 	}
 	
-	NSLog(@"Kanker: %lf %lf  ",actual.x,actual.y);
+	//NSLog(@"Kanker: %lf %lf  ",actual.x,actual.y);
 	[self setNeedsDisplay:true];
 }
 
@@ -178,7 +178,7 @@
 		_mouseInside = false;
 	}
 	
-	NSLog(@"Kanker: %lf %lf  %lf %lf %lf %lf",actual.x,actual.y,frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+	//NSLog(@"Kanker: %lf %lf  %lf %lf %lf %lf",actual.x,actual.y,frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 	
 	[self setNeedsDisplay:true];
 }
