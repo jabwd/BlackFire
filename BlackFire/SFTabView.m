@@ -19,6 +19,7 @@
 
 @synthesize target = _target;
 @synthesize selector = _selector;
+@synthesize tabRightSide =_tabRightSide;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -33,9 +34,9 @@
 		[self addTrackingArea:trackingArea];
 		[trackingArea release];
 		
-		trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(10, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+		/*trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(10, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 		[self addTrackingArea:trackingArea];
-		[trackingArea release];
+		[trackingArea release];*/
 	}
     return self;
 }
@@ -158,13 +159,13 @@
 {
 	_mouseInside = true;
 	
-	NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
+	/*NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
 	
 	if( actual.x > 7 && actual.x < 26 && actual.y > 251 && actual.y < 263 )
 	{
 		_mouseInsideClose = true;
 		NSLog(@"InsideClose");
-	}
+	}*/
 	
 	//NSLog(@"Kanker: %lf %lf  ",actual.x,actual.y);
 	[self setNeedsDisplay:true];
@@ -172,7 +173,7 @@
 
 - (void)mouseExited:(NSEvent *)theEvent
 {	
-	NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
+	/*NSPoint actual = [[self window] convertScreenToBase:[NSEvent mouseLocation]];
 	actual.y -= 246; // kinda random, but whatever
 	if( actual.y < 0 )
 		actual.y = 3;
@@ -187,7 +188,8 @@
 		_mouseInsideClose = false;
 		_mouseInside = false;
 	}
-	
+	*/
+	_mouseInside = false;
 	//NSLog(@"Kanker: %lf %lf  %lf %lf %lf %lf",actual.x,actual.y,frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 	
 	[self setNeedsDisplay:true];
@@ -208,9 +210,9 @@
 	[self addTrackingArea:trackingArea];
 	[trackingArea release];
 	
-	trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(14, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+	/*trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(14, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 	[self addTrackingArea:trackingArea];
-	[trackingArea release];
+	[trackingArea release];*/
 }
 
 

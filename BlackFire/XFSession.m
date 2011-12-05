@@ -44,6 +44,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		_groupChats			= nil;
 		
 		_canPostNotifications = false;
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemWillPowerOff:) name:NSWorkspaceWillPowerOffNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemWillSleep:) name:NSWorkspaceWillSleepNotification object:nil];
 	}
 	return self;
 }
@@ -106,6 +109,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)disconnect
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[self setStatus:XFSessionStatusDisconnecting];
 	
@@ -150,6 +154,18 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)allowNotifications
 {
 	_canPostNotifications = true;
+}
+
+
+
+- (void)systemWillPowerOff:(NSNotification *)notification
+{
+	[self disconnect];
+}
+
+- (void)systemWillSleep:(NSNotification *)notification
+{
+	[self disconnect];
 }
 
 #pragma mark - Handling connection messages

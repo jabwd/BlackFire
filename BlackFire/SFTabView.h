@@ -25,6 +25,8 @@
 	BOOL _dragging;
 	BOOL _mouseInsideClose;
 	BOOL _mouseDownInsideClose;
+	
+	BOOL _tabRightSide; // used for the drawing, set in layoutTabs of the tabstripview
 }
 
 @property (nonatomic, retain) NSString *title;
@@ -34,5 +36,6 @@
 @property (assign) SEL selector;
 
 @property (assign) BOOL selected;
+@property (assign) BOOL tabRightSide;
 
 @end
