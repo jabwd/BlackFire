@@ -46,6 +46,7 @@
 @property (assign) IBOutlet NSView *toolbarView;
 
 @property (assign) IBOutlet SFTabStripView *tabStripView;
+@property (readonly) BFChat *currentChat;
 
 - (id)init;
 

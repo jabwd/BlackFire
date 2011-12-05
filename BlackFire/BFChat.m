@@ -64,7 +64,7 @@
 {
 	[self processMessage:message ofFriend:[_chat.remoteFriend displayName] ofType:BFFriendMessageType];
 	
-	if( ![self.windowController.window isMainWindow] )
+	if( ![self.windowController.window isMainWindow] || _windowController.currentChat != self )
 	{
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message];

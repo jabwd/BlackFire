@@ -20,8 +20,8 @@ typedef enum
 
 @interface BFChat : NSObject <XFChatDelegate>
 {
-	BFChatWindowController *_windowController;
-	XFChat *_chat;
+	BFChatWindowController	*_windowController;
+	XFChat					*_chat;
 	
 	NSTextView *_chatHistoryView;
 	NSScrollView *_chatScrollView;

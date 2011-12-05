@@ -28,6 +28,7 @@
 @synthesize statusField		= _statusField;
 
 @synthesize tabStripView	= _tabStripView;
+@synthesize currentChat		= _currentlySelectedChat;
 
 - (id)init
 {
