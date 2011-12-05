@@ -111,7 +111,6 @@
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
-	[style setAlignment:NSCenterTextAlignment];
 	
 	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
 	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
@@ -134,7 +133,18 @@
 	
 	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:_title attributes:attributes];
 	CGFloat height = [titleAttrStr size].height/2;
-	NSRect stringRect = NSMakeRect(10, (dirtyRect.size.height/2)-height-2.0f, dirtyRect.size.width-20, 24-height);
+	CGFloat baseX = 24;
+	CGFloat width = [titleAttrStr size].width;
+	if( (dirtyRect.size.width-34) < width )
+		width = dirtyRect.size.width-34;
+	else
+	{
+		baseX = (dirtyRect.size.width/2)-(width/2);
+	}
+	// safeguard
+	if( baseX < 24 )
+		baseX = 24;
+	NSRect stringRect = NSMakeRect(baseX, (dirtyRect.size.height/2)-height-2.0f, width, 24-height);
 	[titleAttrStr drawInRect:stringRect];
 	[titleAttrStr release];
 	
