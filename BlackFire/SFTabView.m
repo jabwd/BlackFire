@@ -32,7 +32,7 @@
 		_mouseInside = false;
 		
 		
-		NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(5, 0, frame.size.width-5, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+		NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8, 0, frame.size.width-8, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 		[self addTrackingArea:trackingArea];
 		[trackingArea release];
 		
@@ -211,7 +211,7 @@
 	}
 	NSRect frame = [self frame];
 	
-	NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(5, 0, frame.size.width-5, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+	NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8, 0, frame.size.width-8, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 	[self addTrackingArea:trackingArea];
 	[trackingArea release];
 	

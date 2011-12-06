@@ -326,14 +326,12 @@
 	{
 		if( changedFriend.online )
 		{
-		/*	[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]] body:@"Click here to start a chat."];*/
-			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[changedFriend displayName] body:@"Came online"];
+			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:@"Friend came online" body:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]]];
 			[[BFNotificationCenter defaultNotificationCenter] playOnlineSound];
 		}
 		else
 		{
-			/*[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]] body:[NSString stringWithFormat:@"%@ is now offline.",[changedFriend displayName]]];*/
-			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[changedFriend displayName] body:@"Went offline"];
+			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:@"Friend went offline" body:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]]];
 			[[BFNotificationCenter defaultNotificationCenter] playOfflineSound];
 		}
 	}
