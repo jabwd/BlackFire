@@ -28,6 +28,7 @@
 	BOOL _mouseInsideClose;
 	BOOL _mouseDownInsideClose;
 	
+	BOOL _tabDragAction;
 	BOOL _tabRightSide; // used for the drawing, set in layoutTabs of the tabstripview
 }
 
@@ -40,6 +41,7 @@
 @property (assign) NSUInteger missedMessages;
 
 @property (assign) BOOL selected;
+@property (assign) BOOL tabDragAction;
 @property (assign) BOOL tabRightSide;
 
 @end

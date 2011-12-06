@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
-#define TAB_OVERLAP 17.0f
+#define TAB_OVERLAP 10.0f
 #define TAB_HEIGHT	24.0f
 #define TAB_WIDTHMAX 160.0f
 
@@ -185,14 +185,14 @@
 {
 	for(SFTabView *view in _tabs)
 	{
-		view.tabRightSide = false; // make sure that the drawing bug does not re-occur
+		view.tabDragAction = true;
 	}
 }
 
 - (void)tabDoneDragging
 {
 	// make sure that the drawing is done ok again
-	BOOL selected = false;
+	/*BOOL selected = false;
 	for(SFTabView *view in _tabs)
 	{
 		if( view.selected )
@@ -204,6 +204,11 @@
 		{
 			view.tabRightSide = true;
 		}
+	}*/
+	
+	for(SFTabView *view in _tabs)
+	{
+		view.tabDragAction = false;
 	}
 }
 

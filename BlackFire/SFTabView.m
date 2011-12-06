@@ -21,6 +21,7 @@
 
 @synthesize target = _target;
 @synthesize selector = _selector;
+@synthesize tabDragAction = _tabDragAction;
 @synthesize tabRightSide =_tabRightSide;
 
 - (id)initWithFrame:(NSRect)frame
@@ -29,6 +30,7 @@
 	{
 		_title = nil;
 		
+		_tabDragAction = false;
 		_mouseInside = false;
 		
 		
@@ -109,10 +111,27 @@
 		}
 	}
 	
-	if( !_tabRightSide || _selected )
+	if( _tabDragAction || _selected )
+	{
 		[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
-	[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
-	[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
+		[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+	}
+	else
+	{
+		if( _tabRightSide )
+		{
+			[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+		}
+		else
+		{
+			[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+		}
+	}
+	
+	
+	// optimizes the drawing. the tabstrip already has this fill.
+	if( _selected )
+		[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -141,7 +160,7 @@
 	CGFloat baseX = 24;
 	CGFloat width = [titleAttrStr size].width;
 	if( (dirtyRect.size.width-34) < width )
-		width = dirtyRect.size.width-34;
+		width = dirtyRect.size.width-36;
 	else
 	{
 		baseX = (dirtyRect.size.width/2)-(width/2);
@@ -356,7 +375,10 @@
 	
 	if( !_selected )
 		return;
-	[[self animator] setFrame:_originalRect];
+	//[[self animator] setFrame:_originalRect];
+	[self setFrame:_originalRect];
+	SFTabStripView *view = (SFTabStripView *)[self superview];
+	[view layoutTabs];
 }
 
 @end
