@@ -92,6 +92,70 @@
 	[self connectionCheck];
 }
 
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	NSLog(@"Validating menu item");
+	switch([menuItem tag])
+	{
+		case 2:
+		{
+			// previou stab
+		}
+			break;
+			
+		case 3:
+		{
+			// next tab
+		}
+			break;
+			
+		default:
+			break;
+	}
+	return true;
+}
+
+- (IBAction)selectNextTab:(id)sender
+{
+	// detect if a window is in front
+	for(BFChat *chat in _chatControllers)
+	{
+		NSWindow *window = chat.windowController.window;
+		if( [window isMainWindow] )
+		{
+			[chat.windowController selectNextTab];
+			return;
+		}
+	}
+}
+
+- (IBAction)selectPreviousTab:(id)sender
+{
+	for(BFChat *chat in _chatControllers)
+	{
+		NSWindow *window = chat.windowController.window;
+		if( [window isMainWindow] )
+		{
+			[chat.windowController selectPreviousTab];
+			return;
+		}
+	}
+}
+
+- (IBAction)closeAction:(id)sender
+{
+	for(BFChat *chat in _chatControllers)
+	{
+		NSWindow *window = chat.windowController.window;
+		if( [window isMainWindow] )
+		{
+			[chat.windowController closeChat:chat];
+			return;
+		}
+	}
+}
+
 #pragma mark - Toolbar delegate
 - (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
 	return _toolbarItem;

@@ -148,6 +148,20 @@
 	[self updateToolbar];
 }
 
+- (void)closeChat:(BFChat *)chat
+{
+	// this is slightly inefficient, but easier on the eyes.
+	NSArray *tabViews = [_tabStripView tabs];
+	for(SFTabView *tabView in tabViews)
+	{
+		if( [tabView tag] == chat.chat.remoteFriend.userID )
+		{
+			[self tabShouldClose:tabView];
+			return;
+		}
+	}
+}
+
 - (void)tabShouldClose:(SFTabView *)tabView
 {
 	NSUInteger userID = tabView.tag;
@@ -156,7 +170,7 @@
 	
 	if( [_chats count] == 1 )
 	{
-		[[self window] performClose:self];
+		[_window performClose:self];
 		return;
 	}
 	
@@ -198,6 +212,56 @@
 	
 	[_messageField setStringValue:@""];
 	[_messageField setNeedsDisplay:true];
+}
+
+- (void)selectNextTab
+{
+	NSUInteger i, cnt = [_chats count];
+	for(i=0;i<cnt;i++)
+	{
+		BFChat *chat = [_chats objectAtIndex:i];
+		if( chat != _currentlySelectedChat )
+		{
+			continue;
+		}
+		if( i == (cnt - 1) )
+		{
+			BFChat *nextChat = [_chats objectAtIndex:0];
+			[self selectChat:nextChat];
+			return;
+		}
+		else
+		{
+			BFChat *nextChat = [_chats objectAtIndex:(i+1)];
+			[self selectChat:nextChat];
+			return;
+		}
+	}
+}
+
+- (void)selectPreviousTab
+{
+	NSUInteger i, cnt = [_chats count];
+	for(i=0;i<cnt;i++)
+	{
+		BFChat *chat = [_chats objectAtIndex:i];
+		if( chat != _currentlySelectedChat )
+		{
+			continue;
+		}
+		if( i == 0 )
+		{
+			BFChat *nextChat = [_chats objectAtIndex:(cnt-1)];
+			[self selectChat:nextChat];
+			return;
+		}
+		else
+		{
+			BFChat *nextChat = [_chats objectAtIndex:(i-1)];
+			[self selectChat:nextChat];
+			return;
+		}
+	}
 }
 
 #pragma mark - Toolbar Delegate

@@ -65,6 +65,12 @@ typedef enum
 - (void)changeToMode:(BFApplicationMode)newMode;
 - (void)changeMainView:(NSView *)newView;
 
+- (IBAction)selectNextTab:(id)sender;
+- (IBAction)selectPreviousTab:(id)sender;
+
+- (IBAction)closeAction:(id)sender; // overrides the default close found in 
+									// in the file menu: close tab not the window
+
 //----------------------------------------------------------------------------
 // Xfire Session
 - (void)connectionCheck;

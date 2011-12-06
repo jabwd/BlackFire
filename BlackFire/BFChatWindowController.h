@@ -55,8 +55,13 @@
 
 - (void)selectChat:(BFChat *)chat;
 - (void)addChat:(BFChat *)chat;
+
+- (void)closeChat:(BFChat *)chat;
 - (void)tabShouldClose:(SFTabView *)tabView;
 - (void)changeSwitchView:(NSView *)newView;
+
+- (void)selectPreviousTab;
+- (void)selectNextTab;
 
 
 //----------------------------------------------------------------------
