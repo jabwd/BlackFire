@@ -66,7 +66,7 @@
 	 */
 	
 	//NSLog(@"ApplicationInfo: %@",applicationInfo);
-	//[BFProcessInformation argumentsForProcess:[[applicationInfo objectForKey:@"NSApplicationProcessIdentifier"] intValue]];
+	[BFProcessInformation argumentsForProcess:[[applicationInfo objectForKey:@"NSApplicationProcessIdentifier"] intValue]];
 
 	output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationName"]];
 	if( !output )

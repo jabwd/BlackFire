@@ -35,4 +35,6 @@
 - (void)removeTabView:(SFTabView *)tabView;
 
 - (void)layoutTabs;
+- (void)aTabIsDragging;
+- (void)tabDoneDragging;
 @end

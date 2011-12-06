@@ -17,6 +17,8 @@
 @synthesize selected = _selected;
 @synthesize tag = _tag;
 
+@synthesize missedMessages = _missedMessages;
+
 @synthesize target = _target;
 @synthesize selector = _selector;
 @synthesize tabRightSide =_tabRightSide;
@@ -30,7 +32,7 @@
 		_mouseInside = false;
 		
 		
-		NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:frame options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+		NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(5, 0, frame.size.width-5, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 		[self addTrackingArea:trackingArea];
 		[trackingArea release];
 		
@@ -55,6 +57,7 @@
 	NSImage *right;
 	NSImage *fill;
 	NSImage *close;
+	
 	if( _selected )
 	{
 		if( [[self window] isMainWindow] )
@@ -106,7 +109,8 @@
 		}
 	}
 	
-	[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+	if( !_tabRightSide || _selected )
+		[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
 	
@@ -205,8 +209,9 @@
 	{
 		[self removeTrackingArea:[trackingAreas objectAtIndex:i]];
 	}
+	NSRect frame = [self frame];
 	
-	NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:[self frame] options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
+	NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(5, 0, frame.size.width-5, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 	[self addTrackingArea:trackingArea];
 	[trackingArea release];
 	
@@ -239,8 +244,8 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-	if( !_selected )
-		return;
+	//if( !_selected )
+	//	return;
 	NSPoint newPoint = [NSEvent mouseLocation];
 	CGFloat deltaX = _originalPoint.x - newPoint.x;
 	
@@ -253,6 +258,8 @@
 		else
 		{
 			_dragging = true;
+			SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
+			[tabStrip aTabIsDragging];
 		}
 	}
 	
@@ -339,6 +346,12 @@
 				[_target performSelector:_selector withObject:self];
 		}
 		_mouseDownInsideClose = false;
+	}
+	
+	if( _dragging )
+	{
+		SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
+		[tabStrip tabDoneDragging];
 	}
 	
 	if( !_selected )

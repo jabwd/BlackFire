@@ -26,7 +26,8 @@ char * getStuff(int pid);
 	if( pString )
 	{
 		NSString *processString = [[NSString alloc] initWithUTF8String:pString];
-		NSLog(@"ProcessString: %@",processString);
+		NSArray *components = [processString componentsSeparatedByString:@" "];
+		NSLog(@"Comp: %@",components);
 		[processString release];
 	}
 	return nil;
@@ -35,11 +36,11 @@ char * getStuff(int pid);
 @end
 
 char * getStuff(int pid) {
-	printf("%d\n", pid);
+	//printf("%d\n", pid);
 	int    mib[3], argmax, nargs, c = 0;
 	size_t    size;
 	char    *procargs, *sp, *np, *cp;
-	extern int  eflg;
+	//extern int  eflg;
 	int show_args = 1;
 	
 	mib[0] = CTL_KERN;
@@ -176,7 +177,7 @@ char * getStuff(int pid) {
 	}
 	
 	/* Make a copy of the string. */
-	printf("%s\n", sp);
+	//printf("%s\n", sp);
 	
 	/* Clean up. */
 	free(procargs);

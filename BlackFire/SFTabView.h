@@ -20,6 +20,8 @@
 	
 	NSInteger _tag;
 	
+	NSUInteger _missedMessages;
+	
 	BOOL _selected;
 	BOOL _mouseInside;
 	BOOL _dragging;
@@ -34,6 +36,8 @@
 
 @property (assign) id target;
 @property (assign) SEL selector;
+
+@property (assign) NSUInteger missedMessages;
 
 @property (assign) BOOL selected;
 @property (assign) BOOL tabRightSide;

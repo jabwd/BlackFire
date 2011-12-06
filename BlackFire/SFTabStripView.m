@@ -100,13 +100,18 @@
 		if( tab.selected )
 			selected = tab;
 		[tab setFrame:viewFrame];
-		
-		[tab removeFromSuperview];
-		[self addSubview:tab];
+		[tab updateTrackingAreas];
+	//	[tab removeFromSuperview];
+	//	[self addSubview:tab];
 		
 		if( ! selected )
 		{
 			[tab orderOnTop];
+			tab.tabRightSide = false;
+		}
+		else if( tab != selected )
+		{
+			tab.tabRightSide = true;
 		}
 		/*else
 		{
@@ -174,6 +179,32 @@
 			return view;
 	}
 	return nil;
+}
+
+- (void)aTabIsDragging
+{
+	for(SFTabView *view in _tabs)
+	{
+		view.tabRightSide = false; // make sure that the drawing bug does not re-occur
+	}
+}
+
+- (void)tabDoneDragging
+{
+	// make sure that the drawing is done ok again
+	BOOL selected = false;
+	for(SFTabView *view in _tabs)
+	{
+		if( view.selected )
+		{
+			selected = true;
+			continue;
+		}
+		if( selected )
+		{
+			view.tabRightSide = true;
+		}
+	}
 }
 
 @end

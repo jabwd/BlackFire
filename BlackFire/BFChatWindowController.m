@@ -255,6 +255,15 @@
 	{
 		NSLog(@"*** Called - (void)updateToolbar but no remoteFriend exists. Are you sure there is a chat open at this time?");
 	}
+	
+	if( remoteFriend.online )
+	{
+		[_messageField setHidden:false];
+	}
+	else
+	{
+		[_messageField setHidden:true];
+	}
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
