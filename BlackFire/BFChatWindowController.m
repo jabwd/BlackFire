@@ -38,7 +38,6 @@
 		[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
 		[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 		[_window makeKeyAndOrderFront:self];
-		[_window setTitle:@""];
 		[_tabStripView setDelegate:self];
 		
 		NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"chatWindowToolbar"];
