@@ -58,7 +58,7 @@
 						<object class="NSTextField" id="611245708">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">290</int>
-							<string key="NSFrame">{{15, 6}, {191, 22}}</string>
+							<string key="NSFrame">{{18, 8}, {184, 20}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
@@ -68,10 +68,10 @@
 								<int key="NSCellFlags">-1804468671</int>
 								<int key="NSCellFlags2">272638976</int>
 								<string key="NSContents"/>
-								<object class="NSFont" key="NSSupport" id="613862212">
-									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">13</double>
-									<int key="NSfFlags">1044</int>
+								<object class="NSFont" key="NSSupport">
+									<string key="NSName">Helvetica</string>
+									<double key="NSSize">12</double>
+									<int key="NSfFlags">16</int>
 								</object>
 								<string key="NSCellIdentifier">_NS:903</string>
 								<reference key="NSControlView" ref="611245708"/>
@@ -122,7 +122,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="454028044"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{220, 263}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">chatWindow</string>
@@ -181,7 +181,11 @@
 							<int key="NSCellFlags">67239488</int>
 							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents"/>
-							<reference key="NSSupport" ref="613862212"/>
+							<object class="NSFont" key="NSSupport">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">13</double>
+								<int key="NSfFlags">1044</int>
+							</object>
 							<string key="NSCellIdentifier">_NS:3944</string>
 							<reference key="NSControlView" ref="524336039"/>
 							<reference key="NSBackgroundColor" ref="86368289"/>
