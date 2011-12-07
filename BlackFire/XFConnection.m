@@ -871,7 +871,7 @@
 	userIDs			= [pkt attributeValuesForKey:XFPacketUserIDKey];
 	userNames		= [pkt attributeValuesForKey:XFPacketNameKey];
 	nickNames		= [pkt attributeValuesForKey:XFPacketNickNameKey];
-	commonFriends	= [pkt attributeValuesForKey:XFPacketFriendsKey];
+	//commonFriends	= [pkt attributeValuesForKey:XFPacketFriendsKey];
 	
 	XFGroup *fofGroup = [_session.groupController friendsOfFriendsGroup];
 	NSUInteger i, cnt = [sessionIDs count];
@@ -880,7 +880,7 @@
 		NSData *sid = [sessionIDs objectAtIndex:i];
 		username = [userNames objectAtIndex:i];
 		nickname = [nickNames objectAtIndex:i];
-		common = [commonFriends objectAtIndex:i]; // it's an array of XFPacketAttributeValue objects containing NSNumbers
+		//common = [commonFriends objectAtIndex:i]; // it's an array of XFPacketAttributeValue objects containing NSNumbers
 		
 		XFFriend *friend = [_session friendForSessionID:sid];
 		
@@ -1218,7 +1218,7 @@
 	userIDs   = [pkt attributeValuesForKey:@"0x01"];
 	userNames = [pkt attributeValuesForKey:@"0x02"];
 	nickNames = [pkt attributeValuesForKey:@"0x0d"];
-	clanNicks = [pkt attributeValuesForKey:@"0x6d"];
+	//clanNicks = [pkt attributeValuesForKey:@"0x6d"];
 	groupIDs  = [pkt attributeValuesForKey:@"0x6c"];
 	
 	NSUInteger i, cnt = [userIDs count];
@@ -1279,11 +1279,9 @@
 	
     NSMutableArray *serverList = [[NSMutableArray alloc] init];
     
-    NSUInteger i, addr, cnt = [gameIPs count];
+    NSUInteger i, cnt = [gameIPs count];
     for(i=0;i<cnt;i++)
     {
-        addr = [[gameIPs objectAtIndex:i] unsignedIntValue];
-		
 		XFGameServer *server = [[XFGameServer alloc] init];
 		server.IPAddress	= [[gameIPs objectAtIndex:i] unsignedIntValue];
 		server.Port			= [[gamePorts objectAtIndex:i] unsignedIntValue];
