@@ -13,16 +13,17 @@
 
 @implementation SFTabView
 
-@synthesize title = _title;
-@synthesize selected = _selected;
-@synthesize tag = _tag;
+@synthesize title		= _title;
+@synthesize selected	= _selected;
+@synthesize tag			= _tag;
+@synthesize image		= _tabImage;
 
 @synthesize missedMessages = _missedMessages;
 
-@synthesize target = _target;
-@synthesize selector = _selector;
-@synthesize tabDragAction = _tabDragAction;
-@synthesize tabRightSide =_tabRightSide;
+@synthesize target			= _target;
+@synthesize selector		= _selector;
+@synthesize tabDragAction	= _tabDragAction;
+@synthesize tabRightSide	=_tabRightSide;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -111,6 +112,7 @@
 		}
 	}
 	
+	// improves the way the tabs are drawn on the screen
 	if( _tabDragAction || _selected )
 	{
 		[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
@@ -216,6 +218,11 @@
 	//NSLog(@"Kanker: %lf %lf  %lf %lf %lf %lf",actual.x,actual.y,frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 	
 	[self setNeedsDisplay:true];
+}
+
+- (void)mouseMoved:(NSEvent *)theEvent
+{
+	NSLog(@"Mouse moved");
 }
 
 - (void)updateTrackingAreas

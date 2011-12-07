@@ -683,6 +683,12 @@
 			
 			[friend release];
 		}
+		else if( friend.clanFriend )
+		{
+			// this means we also have the clan friend in our own friends list
+			// This fixes a bug of the friend not showing up in the friends list 
+			[offlineGroup addMember:friend];
+		}
 	}
 	
 	// the most ugly part of the Xfire protocol.
@@ -744,8 +750,8 @@
 				[offlineGroup removeMember:friend];
 				[onlineGroup addMember:friend];
 			}
-			friend.online = true;
-			friend.sessionID = sid;
+			friend.online		= true;
+			friend.sessionID	= sid;
 			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
 		}
 	}
@@ -807,11 +813,30 @@
 		XFFriend *friend = [_session friendForSessionID:sid];
 		if( ! friend )
 		{
-			NSLog(@"Unknown sid!");
 			[unknownSids addObject:sid];
+			
+			// create a placeholder object for this XFFriend object.. yeah this could become a leak.
+			XFFriend *fof		= [[XFFriend alloc] initWithSession:_session];
+			fof.sessionID		= sid;
+			fof.gameID			= gid;
+			fof.gameIP			= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
+			fof.gamePort		= [[gamePorts objectAtIndex:i] unsignedIntValue];
+			fof.friendOfFriend	= true; // can't be any one else.. as far as I know
+			[_session addFriend:fof]; // this shouldn't add the friend to any group.
+			[fof release];
 		}
 		else
 		{
+			// the FoF probably stopped playing a game then.
+			if( gid == 0 && friend.friendOfFriend )
+			{
+				XFGroup *fofGroup = [_session.groupController friendsOfFriendsGroup];
+				[fofGroup removeMember:friend];
+				[_session raiseFriendNotification:XFFriendNotificationFriendRemoved forFriend:friend];
+				
+				[_session removeFriend:friend];
+				continue;
+			}
 			friend.gameID	= gid;
 			friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
 			friend.gamePort = [[gamePorts objectAtIndex:i] unsignedIntValue];
@@ -825,7 +850,6 @@
 	{
 		XFPacket *packet = [XFPacket friendOfFriendRequestPacketWithSIDs:unknownSids];
 		[self sendPacket:packet];
-		NSLog(@"Packet %@",packet);
 	}
 	[unknownSids release]; // don't leak
 }
@@ -840,7 +864,6 @@
 // Ignore mutual friends for now
 - (void)processFriendOfFriendPacket:(XFPacket *)pkt
 {
-	NSLog(@"Friends of Friends %@",pkt);
 	NSArray *sessionIDs, *userIDs, *userNames, *nickNames, *commonFriends, *common;
 	NSString *username, *nickname;
 	
@@ -860,13 +883,37 @@
 		common = [commonFriends objectAtIndex:i]; // it's an array of XFPacketAttributeValue objects containing NSNumbers
 		
 		XFFriend *friend = [_session friendForSessionID:sid];
+		
 		if( friend )
 		{
-			break; // this means that we _know_ this friend and so its not a FoF
+			friend.userID			= [[userIDs objectAtIndex:i] unsignedIntValue];
+			friend.username			= username;
+			friend.nickname			= nickname;
+			friend.online			= true;
+			friend.friendOfFriend	= true;
+			
+			if( [username length] > 0 )
+			{
+				[fofGroup addMember:friend];
+			}
+			else
+			{
+				// this friend probably stopped plaing a game
+				[fofGroup removeMember:friend];
+				[_session raiseFriendNotification:XFFriendNotificationFriendRemoved forFriend:friend];
+				
+				[_session removeFriend:friend];
+				
+			}
 		}
-		
+		else
+		{
+			// we don't know him.
+			NSLog(@"*** Received a friend of friend which we do not know.");
+		}
+		/*
 		// Can be 0 if this person went offline, I think
-		if( [username length] > 0 )
+		if( [username length] > 0 && ! friend )
 		{
 			XFFriend *friend = [[XFFriend alloc] init];
 			friend.userID			= [[userIDs objectAtIndex:i] unsignedIntValue];
@@ -882,6 +929,14 @@
 			
 			[friend release];
 		}
+		else if( friend )
+		{
+			[fofGroup removeMember:friend];
+		}
+		else
+		{
+			NSLog(@"*** Found a FoF for unknown friend, don't know what to do with this: %@",pkt);
+		}*/
 	}
 	[fofGroup sortMembers];
 }
@@ -1181,11 +1236,11 @@
 			XFFriend *fr = [_session friendForUserID:userID];
 			if( !fr )
 			{
-				fr = [[XFFriend alloc] init];
-				fr.userID = userID;
-				fr.username = username;
-				fr.nickname = nickname;
-				fr.clanFriend = true;
+				fr				= [[XFFriend alloc] init];
+				fr.userID		= userID;
+				fr.username		= username;
+				fr.nickname		= nickname;
+				fr.clanFriend	= true;
 				
 				[_session addFriend:fr];
 				[clanGrp addMember:fr];
@@ -1195,6 +1250,7 @@
 			}
 			else
 			{
+				fr.clanFriend = false;
 				[clanGrp addMember:fr];
 			}
 		} 
@@ -1207,12 +1263,8 @@
 {
 	// seriously, a packet  with 1 attribute? WHAT THE F*CK, ok ok, lets find out what it actually does by dumping it
 	// as soon as we receive it..
-	NSLog(@"Useless packet received: %@",pkt);
-   /* unsigned int userID = [[[pkt attributeValuesForKey:@"0x01"] objectAtIndex:0] unsignedIntValue];
-    XFFriend *friend = [_session friendForUserID:userID];
-    if( friend )
-        [_session delegate_friendDidChange:friend attribute:XFFriendStatusStringDidChange];
-	*/
+	
+	//  guess this is some stupid action of the outdated xfire protocol
 }
 
 

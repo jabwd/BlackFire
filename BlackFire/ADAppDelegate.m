@@ -95,25 +95,35 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	NSLog(@"Validating menu item");
 	switch([menuItem tag])
 	{
 		case 2:
 		{
 			// previou stab
+			if( [_chatControllers count] > 0 )
+			{
+				return true;
+			}
 		}
 			break;
 			
 		case 3:
 		{
 			// next tab
+			if( [_chatControllers count] > 0 )
+			{
+				return true;
+			}
 		}
 			break;
 			
 		default:
+		{
+			return true;
+		}
 			break;
 	}
-	return true;
+	return false;
 }
 
 - (IBAction)selectNextTab:(id)sender

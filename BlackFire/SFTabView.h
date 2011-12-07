@@ -11,6 +11,7 @@
 @interface SFTabView : NSView
 {
 	NSString *_title;
+	NSImage *_tabImage;
 	
 	id _target;
 	SEL _selector;
@@ -34,6 +35,7 @@
 
 @property (nonatomic, retain) NSString *title;
 @property (assign) NSInteger tag;
+@property (nonatomic, retain) NSImage *image;
 
 @property (assign) id target;
 @property (assign) SEL selector;
