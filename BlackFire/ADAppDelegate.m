@@ -148,7 +148,7 @@
 	for(BFChat *chat in _chatControllers)
 	{
 		NSWindow *window = chat.windowController.window;
-		if( [window isMainWindow] )
+		if( [window isMainWindow] && chat.windowController.currentChat == chat )
 		{
 			[chat.windowController closeChat:chat];
 			return;

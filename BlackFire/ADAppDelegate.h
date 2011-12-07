@@ -13,11 +13,11 @@
 
 typedef enum
 {
-	BFApplicationModeOffline = 1,
-	BFApplicationModeLoggingIn = 2,
-	BFApplicationModeOnline = 3,
-	BFApplicationModeGames = 4,
-	BFApplicationModeServers = 5
+	BFApplicationModeOffline	= 1,
+	BFApplicationModeLoggingIn	= 2,
+	BFApplicationModeOnline		= 3,
+	BFApplicationModeGames		= 4,
+	BFApplicationModeServers	= 5
 } BFApplicationMode;
 
 @class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController;
@@ -32,10 +32,10 @@ typedef enum
 	NSToolbarItem	*_toolbarItem;
 	
 	// toolbar outlets
-	NSImageView *_avatarImageView;
-	NSImageView *_statusBubbleView;
-	NSPopUpButton *_nicknamePopUpButton;
-	NSPopUpButton *_statusPopUpButton;
+	NSImageView		*_avatarImageView;
+	NSImageView		*_statusBubbleView;
+	NSPopUpButton	*_nicknamePopUpButton;
+	NSPopUpButton	*_statusPopUpButton;
 	// end toolbar outlets
 	
 	NSMutableArray *_chatControllers;
@@ -46,13 +46,13 @@ typedef enum
 	BFApplicationMode		_currentMode;
 }
 
-@property (readonly) XFSession *session;
-@property (assign) IBOutlet NSWindow *window;
+@property (readonly) XFSession			*session;
+@property (assign) IBOutlet NSWindow	*window;
 
-@property (assign) IBOutlet NSImageView *avatarImageView;
-@property (assign) IBOutlet NSImageView *statusBubbleView;
-@property (assign) IBOutlet NSPopUpButton *nicknamePopUpButton;
-@property (assign) IBOutlet NSPopUpButton *statusPopUpButton;
+@property (assign) IBOutlet NSImageView		*avatarImageView;
+@property (assign) IBOutlet NSImageView		*statusBubbleView;
+@property (assign) IBOutlet NSPopUpButton	*nicknamePopUpButton;
+@property (assign) IBOutlet NSPopUpButton	*statusPopUpButton;
 
 @property (assign) IBOutlet NSView *mainView;
 @property (assign) IBOutlet NSView *toolbarView;
