@@ -1196,13 +1196,18 @@
 
 - (void)processClanListPacket:(XFPacket *)pkt
 {
+	NSLog(@"ClanList: %@",pkt);
     NSArray             *groupIDs       = [pkt attributeValuesForKey:@"0x6c"];
     NSArray             *clanList       = [pkt attributeValuesForKey:@"0x02"];
+	NSArray				*clanTypes		= [pkt attributeValuesForKey:@"0xb0"];
     XFGroupController   *ctr            = [_session groupController];
     
 	NSUInteger i, cnt = [clanList count];
     for( i = 0; i < cnt;i++ ) 
     {
+		NSInteger type = [[clanTypes objectAtIndex:i] intValue];
+		if( type == 1 )
+			continue; // this clan group has no members, thus ignore it
 		[ctr addClanGroup:[clanList objectAtIndex:i] groupID:[[groupIDs objectAtIndex:i] intValue]];
     }
 }

@@ -117,6 +117,18 @@
 		}
 			break;
 			
+		case 4:
+		{
+			// remove friend
+		}
+			break;
+			
+		case 5:
+		{
+			// show profile
+		}
+			break;
+			
 		default:
 		{
 			return true;
@@ -124,6 +136,11 @@
 			break;
 	}
 	return false;
+}
+
+- (IBAction)help:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:@"http://www.macxfire.com/"];
 }
 
 - (IBAction)selectNextTab:(id)sender

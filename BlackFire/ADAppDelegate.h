@@ -68,6 +68,7 @@ typedef enum
 - (IBAction)selectNextTab:(id)sender;
 - (IBAction)selectPreviousTab:(id)sender;
 
+- (IBAction)help:(id)sender;
 - (IBAction)closeAction:(id)sender; // overrides the default close found in 
 									// in the file menu: close tab not the window
 
