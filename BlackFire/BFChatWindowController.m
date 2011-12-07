@@ -35,26 +35,6 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"BFChatWindow" owner:self];
-		[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
-		[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
-		[_window makeKeyAndOrderFront:self];
-		[_tabStripView setDelegate:self];
-		
-		NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"chatWindowToolbar"];
-		[toolbar setAllowsUserCustomization:NO];
-		[toolbar setAutosavesConfiguration: YES];
-		[toolbar setSizeMode:               NSToolbarSizeModeSmall];
-		[toolbar setShowsBaselineSeparator:false];
-		[toolbar setDisplayMode:            NSToolbarDisplayModeIconOnly];
-		
-		_toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:@"status"];
-		[_toolbarItem setView:_toolbarView];
-		[_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame]))];
-		[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame]))];
-		
-		[toolbar      setDelegate:self];
-		[_window	setToolbar:toolbar];
-		[toolbar      release];
 
 		
 		_chats = [[NSMutableArray alloc] init];
@@ -84,6 +64,30 @@
 	[self release];
 	self = nil;
 	return true;
+}
+
+- (void)awakeFromNib
+{
+	[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
+	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
+	[_window makeKeyAndOrderFront:self];
+	[_tabStripView setDelegate:self];
+	
+	NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"chatWindowToolbar"];
+	[toolbar setAllowsUserCustomization:NO];
+	[toolbar setAutosavesConfiguration: YES];
+	[toolbar setSizeMode:               NSToolbarSizeModeSmall];
+	[toolbar setShowsBaselineSeparator:false];
+	[toolbar setDisplayMode:            NSToolbarDisplayModeIconOnly];
+	
+	_toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:@"status"];
+	[_toolbarItem setView:_toolbarView];
+	[_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame]))];
+	[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame]))];
+	
+	[toolbar      setDelegate:self];
+	[_window	setToolbar:toolbar];
+	[toolbar      release];
 }
 
 #pragma mark - Managing chats

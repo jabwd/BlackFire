@@ -164,6 +164,10 @@
 			return;
 		}
 	}
+	if( [[NSApplication sharedApplication] mainWindow] )
+	{
+		[[[NSApplication sharedApplication] mainWindow] performClose:nil];
+	}
 }
 
 #pragma mark - Toolbar delegate

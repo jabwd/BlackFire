@@ -48,6 +48,8 @@
 
 - (void)dealloc
 {
+	[_tabImage release];
+	_tabImage = nil;
 	[_title release];
 	_title = nil;
 	[super dealloc];
@@ -177,6 +179,8 @@
 	// draw the close button on top of everything
 	if( _mouseInside )
 		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
+	else if( _tabImage )
+		[_tabImage drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 13, 13) operation:NSCompositeSourceOver fraction:1.0f];
 }
 
 
