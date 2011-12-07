@@ -8,6 +8,7 @@
 
 #import "BFChat.h"
 #import "BFChatWindowController.h"
+#import "SFTabView.h"
 #import "BFNotificationCenter.h"
 
 #import "BFGamesManager.h"
@@ -31,6 +32,7 @@
 	{
 		[NSBundle loadNibNamed:@"BFChat" owner:self];
 		_chat = [chat retain];
+		_missedMessages = 0;
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
 		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
@@ -55,9 +57,21 @@
 - (void)closeChat
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	_missedMessages = 0;
+	SFTabView *tab = [_windowController tabViewForChat:self];
+	tab.missedMessages = _missedMessages;
+	[tab setNeedsDisplay:true]; // reset the missed messages count
 	[_chat closeChat];
 	[_chat release];
 	_chat = nil;
+}
+
+- (void)becameMainChat
+{
+	_missedMessages = 0;
+	SFTabView *tab = [_windowController tabViewForChat:self];
+	tab.missedMessages = _missedMessages;
+	[tab setNeedsDisplay:true];
 }
 
 #pragma mark - XFChat Delegate
@@ -71,6 +85,10 @@
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message];
 		[[NSApplication sharedApplication] requestUserAttention:10];
+		_missedMessages++;
+		SFTabView *tab = [_windowController tabViewForChat:self];
+		tab.missedMessages = _missedMessages;
+		[tab setNeedsDisplay:true];
 	}
 }
 

@@ -161,17 +161,17 @@
 	
 	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:_title attributes:attributes];
 	CGFloat height = [titleAttrStr size].height/2;
-	CGFloat baseX = 24;
+	CGFloat baseX = 25;
 	CGFloat width = [titleAttrStr size].width;
-	if( (dirtyRect.size.width-34) < width )
+	if( (dirtyRect.size.width-36) < width )
 		width = dirtyRect.size.width-36;
 	else
 	{
 		baseX = (dirtyRect.size.width/2)-(width/2);
 	}
 	// safeguard
-	if( baseX < 24 )
-		baseX = 24;
+	if( baseX < 25 )
+		baseX = 25;
 	NSRect stringRect = NSMakeRect(baseX, (dirtyRect.size.height/2)-height-2.0f, width, 24-height);
 	[titleAttrStr drawInRect:stringRect];
 	[titleAttrStr release];
@@ -179,8 +179,14 @@
 	// draw the close button on top of everything
 	if( _mouseInside )
 		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
-	else if( _tabImage )
+	else if( _tabImage && _missedMessages < 1 )
 		[_tabImage drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 13, 13) operation:NSCompositeSourceOver fraction:1.0f];
+	else if( _missedMessages > 0 )
+	{
+		NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"(%lu)",_missedMessages] attributes:attributes];
+		[countString drawInRect:NSMakeRect(10, 4, [countString size].width, 13)];
+		[countString release];
+	}
 }
 
 

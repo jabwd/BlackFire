@@ -63,6 +63,8 @@
 - (void)selectPreviousTab;
 - (void)selectNextTab;
 
+- (SFTabView *)tabViewForChat:(BFChat *)chat;
+
 
 //----------------------------------------------------------------------
 // User interface controls

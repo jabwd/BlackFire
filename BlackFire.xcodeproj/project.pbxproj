@@ -26,6 +26,8 @@
 		3616F6A1145F278300E5066D /* XFPacketDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F69E145F278300E5066D /* XFPacketDictionary.m */; };
 		3616F6A4145F29D800E5066D /* XFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F6A3145F29D800E5066D /* XFSession.m */; };
 		3616F6A9145F5CE400E5066D /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F6A8145F5CE400E5066D /* libcrypto.dylib */; };
+		361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */; };
+		361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361D2EEF148FFA0D008EE54C /* StringPrompt.xib */; };
 		36276EC71468152900F84E7B /* SFTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EC61468152900F84E7B /* SFTabView.m */; };
 		36276ECA1468252900F84E7B /* activeWTabFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276EC91468252900F84E7B /* activeWTabFill.png */; };
 		36276ED51468261700F84E7B /* activeWTabFillSL.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276ECB1468261700F84E7B /* activeWTabFillSL.png */; };
@@ -2965,6 +2967,9 @@
 		3616F6A2145F29D800E5066D /* XFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFSession.h; sourceTree = "<group>"; };
 		3616F6A3145F29D800E5066D /* XFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFSession.m; sourceTree = "<group>"; };
 		3616F6A8145F5CE400E5066D /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADStringPromptController.h; sourceTree = "<group>"; };
+		361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADStringPromptController.m; sourceTree = "<group>"; };
+		361D2EEF148FFA0D008EE54C /* StringPrompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringPrompt.xib; sourceTree = "<group>"; };
 		36276EC51468152900F84E7B /* SFTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTabView.h; sourceTree = "<group>"; };
 		36276EC61468152900F84E7B /* SFTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTabView.m; sourceTree = "<group>"; };
 		36276EC91468252900F84E7B /* activeWTabFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeWTabFill.png; sourceTree = "<group>"; };
@@ -6191,6 +6196,9 @@
 		366AC22E14655E1D002A1F50 /* WindowControllers */ = {
 			isa = PBXGroup;
 			children = (
+				361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */,
+				361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */,
+				361D2EEF148FFA0D008EE54C /* StringPrompt.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -11992,6 +12000,7 @@
 				36B642841484486900D9B11E /* offline_bubble.png in Resources */,
 				360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */,
 				36E41296148D318C003BABE9 /* License.rtf in Resources */,
+				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12043,6 +12052,7 @@
 				36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */,
 				36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */,
 				360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */,
+				361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

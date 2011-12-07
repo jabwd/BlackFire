@@ -1196,7 +1196,6 @@
 
 - (void)processClanListPacket:(XFPacket *)pkt
 {
-	NSLog(@"ClanList: %@",pkt);
     NSArray             *groupIDs       = [pkt attributeValuesForKey:@"0x6c"];
     NSArray             *clanList       = [pkt attributeValuesForKey:@"0x02"];
 	NSArray				*clanTypes		= [pkt attributeValuesForKey:@"0xb0"];

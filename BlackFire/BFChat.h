@@ -26,6 +26,8 @@ typedef enum
 	NSTextView *_chatHistoryView;
 	NSScrollView *_chatScrollView;
 	NSDateFormatter *_dateFormatter;
+	
+	NSUInteger _missedMessages;
 }
 
 @property (nonatomic, retain) BFChatWindowController *windowController;
@@ -39,6 +41,9 @@ typedef enum
 
 //------------------------------------------------------------------------------
 // Misc methods
+
+// called from the chatwindow controller whenever this chat is selected
+- (void)becameMainChat;
 
 
 - (void)displayWarning:(NSString *)warningMessage;

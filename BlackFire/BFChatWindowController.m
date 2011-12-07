@@ -205,6 +205,22 @@
 	[newView setFrame:[_switchView bounds]];
 	
 	[_messageField becomeFirstResponder];
+	[_currentlySelectedChat becameMainChat];
+}
+
+- (SFTabView *)tabViewForChat:(BFChat *)chat
+{
+	if( chat )
+	{
+		for(SFTabView *tab in [_tabStripView tabs])
+		{
+			if( tab.tag == chat.chat.remoteFriend.userID )
+			{
+				return tab;
+			}
+		}
+	}
+	return nil;
 }
 
 
