@@ -223,6 +223,8 @@
 				_loginViewController = [[BFLoginViewController alloc] init];
 				_loginViewController.delegate = self;
 			}
+			[_friendsListController release];
+			_friendsListController = nil;
 			[_loginViewController session:_session changedStatus:XFSessionStatusOffline];
 			
 			[_statusBubbleView setImage:nil];
@@ -393,7 +395,7 @@
 	}
 }
 
-- (void)disconnect
+- (IBAction)disconnect:(id)sender
 {
 	[_session disconnect];
 	[_session setDelegate:nil];
@@ -469,6 +471,10 @@
 	}
 	else if( newStatus == XFSessionStatusOffline )
 	{
+		for(BFChat *chat in _chatControllers)
+		{
+			[chat closeChat];
+		}
 		[[BFGamesManager sharedGamesManager] stopMonitoring];
 		[self changeToMode:BFApplicationModeOffline];
 		[_session setDelegate:nil];

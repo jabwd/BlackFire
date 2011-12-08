@@ -75,7 +75,7 @@ typedef enum
 //----------------------------------------------------------------------------
 // Xfire Session
 - (void)connectionCheck;
-- (void)disconnect;
+- (IBAction)disconnect:(id)sender;
 
 - (void)beginChatWithFriend:(XFFriend *)remoteFriend;
 

@@ -43,7 +43,7 @@
 {
 	if( [_usernameField isHidden] )
 	{
-		[_delegate disconnect];
+		[_delegate disconnect:nil];
 	}
 	else if( [[_usernameField stringValue] length] > 0 && [[_passwordField stringValue] length] > 0 )
 	{
