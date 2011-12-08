@@ -3,3 +3,6 @@ BlackFire 2.0 Bugs List
 This file only contains bugs that currently are NOT fixed, it will also include yet to implement
 features.
 =======================================================================
+
+1) [Crash] When closing the tabs. _currentlySelectedChat is still set to a no longer existing object
+and therefore makes the app crash or behave in an odd way.
