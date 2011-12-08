@@ -1214,7 +1214,7 @@
 - (void)processClanMembersPacket:(XFPacket *)pkt
 {
 	XFGroupController *ctl = [_session groupController];
-	NSArray *userIDs, *userNames, *nickNames, *clanNicks, *groupIDs;
+	NSArray *userIDs, *userNames, *nickNames, *groupIDs;
 	
 	XFFriend *me = [_session loginIdentity];
 	

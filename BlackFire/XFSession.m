@@ -45,8 +45,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		
 		_canPostNotifications = false;
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemWillPowerOff:) name:NSWorkspaceWillPowerOffNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemWillSleep:) name:NSWorkspaceWillSleepNotification object:nil];
+		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(systemWillPowerOff:) name:NSWorkspaceWillPowerOffNotification object:nil];
+		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(systemWillSleep:) name:NSWorkspaceWillSleepNotification object:nil];
 	}
 	return self;
 }
@@ -54,6 +54,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)dealloc
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
 	[_tcpConnection release];
@@ -109,7 +110,6 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)disconnect
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[self setStatus:XFSessionStatusDisconnecting];
 	

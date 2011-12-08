@@ -39,6 +39,8 @@
 		
 		_chats = [[NSMutableArray alloc] init];
 		_currentlySelectedChat = nil;
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
 	}
 	return self;
 }
@@ -64,6 +66,11 @@
 	[self release];
 	self = nil;
 	return true;
+}
+
+- (void)didBecomeMain:(NSNotification *)notification
+{
+	[_currentlySelectedChat becameMainChat];
 }
 
 - (void)awakeFromNib
