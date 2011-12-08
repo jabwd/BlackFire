@@ -140,7 +140,7 @@
 
 - (IBAction)help:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:@"http://www.macxfire.com/"];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.macxfire.com/"]];
 }
 
 - (IBAction)selectNextTab:(id)sender
