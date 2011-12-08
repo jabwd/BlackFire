@@ -41,9 +41,12 @@
 		NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%lu",gameID]];
 		if( ! image )
 			image = [NSImage imageNamed:@"-1"];
+		[image setScalesWhenResized:true];
 		return image;
 	}
-	return [NSImage imageNamed:@"-1"];
+	NSImage *tmp = [NSImage imageNamed:@"-1"];
+	[tmp setScalesWhenResized:true];
+	return tmp;
 }
 
 #pragma mark - Mac Games
