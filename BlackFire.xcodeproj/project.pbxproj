@@ -2929,6 +2929,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		360809EA1491810F0081C05A /* Bugs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bugs.txt; sourceTree = "<group>"; };
+		360809ED149181180081C05A /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 		360D99B8148BEB6F00A529F6 /* MacGames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MacGames.plist; sourceTree = "<group>"; };
 		360D99BF148C267D00A529F6 /* BFProcessInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFProcessInformation.h; sourceTree = "<group>"; };
 		360D99C0148C267D00A529F6 /* BFProcessInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFProcessInformation.m; sourceTree = "<group>"; };
@@ -5959,6 +5961,8 @@
 				3616F66B145F0E5500E5066D /* BlackFire-Prefix.pch */,
 				3616F66C145F0E5500E5066D /* Credits.rtf */,
 				36E41295148D318C003BABE9 /* License.rtf */,
+				360809EA1491810F0081C05A /* Bugs.txt */,
+				360809ED149181180081C05A /* Readme.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

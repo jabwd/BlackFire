@@ -1,0 +1,5 @@
+BlackFire 2.0 Bugs List
+=======================================================================
+This file only contains bugs that currently are NOT fixed, it will also include yet to implement
+features.
+=======================================================================
