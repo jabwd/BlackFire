@@ -313,7 +313,7 @@
 		NSString *statusString = remoteFriend.status;
 		if( ! statusString )
 			statusString = @"";
-#warning Finish this shit
+
 		if( remoteFriend.gameID > 0 )
 		{
 			displayImage = [[BFGamesManager sharedGamesManager] imageForGame:remoteFriend.gameID];
@@ -335,22 +335,29 @@
 			displayImage = [NSImage imageNamed:@"xfire"];
 
 		[_avatarImageView setImage:displayImage];
-		if( [statusString length] < 1 && remoteFriend.online )
-			statusString = @"Online";
-		else if( ! remoteFriend.online )
-			statusString = @"Offline";
-		[_statusField setStringValue:statusString];
 		
-		if( [statusString rangeOfString:@"AFK"].length > 0 )
+		if( remoteFriend.online )
 		{
-			[_statusIconView setImage:[NSImage imageNamed:@"away_bubble"]];
+			if( [statusString length] < 1 )
+				statusString = @"Online";
+			if( [statusString rangeOfString:@"AFK"].length > 0 )
+			{
+				[_statusIconView setImage:[NSImage imageNamed:@"away_bubble"]];
+			}
+			else
+			{
+				[_statusIconView setImage:[NSImage imageNamed:@"avi_bubble"]];
+			}
 		}
 		else
 		{
-			[_statusIconView setImage:[NSImage imageNamed:@"avi_bubble"]];
+			if( [statusString length] < 1 )
+				statusString = @"Offline";
+			[_statusIconView setImage:[NSImage imageNamed:@"offline_bubble"]];
 		}
 		
 		[_nicknameField setStringValue:[remoteFriend displayName]];
+		[_statusField setStringValue:statusString];
 	}
 	else
 	{
