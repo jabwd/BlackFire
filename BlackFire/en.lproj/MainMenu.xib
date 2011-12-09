@@ -728,21 +728,21 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="103602938">
 									<reference key="NSMenu" ref="686602257"/>
-									<bool key="NSIsDisabled">YES</bool>
 									<string key="NSTitle">Remove selected friend</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">4</int>
 								</object>
 								<object class="NSMenuItem" id="1023134856">
 									<reference key="NSMenu" ref="686602257"/>
-									<bool key="NSIsDisabled">YES</bool>
 									<string key="NSTitle">Show profile</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">5</int>
 								</object>
 							</array>
 						</object>
@@ -1701,6 +1701,14 @@
 						<reference key="destination" ref="741531065"/>
 					</object>
 					<int key="connectionID">821</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showProfile:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1023134856"/>
+					</object>
+					<int key="connectionID">838</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2695,7 +2703,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">837</int>
+			<int key="maxID">838</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

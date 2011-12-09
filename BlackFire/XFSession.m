@@ -386,4 +386,13 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	}
 }
 
+- (void)sendRemoveFriend:(XFFriend *)remoteFriend
+{
+	if( remoteFriend )
+	{
+		[_tcpConnection sendRemoveFriend:remoteFriend];
+		[self raiseFriendNotification:XFFriendNotificationFriendRemoved forFriend:remoteFriend];
+	}
+}
+
 @end

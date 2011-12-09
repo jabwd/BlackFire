@@ -190,4 +190,6 @@ typedef enum{
 - (void)setNickname:(NSString *)text;
 - (void)beginUserSearch:(NSString *)searchString;
 
+- (void)sendRemoveFriend:(XFFriend *)remoteFriend;
+
 @end

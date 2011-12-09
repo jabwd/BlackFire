@@ -1599,5 +1599,41 @@
 	[self sendPacket:pkt];
 }
 
+- (void)sendFriendInvitation:(NSString *)username message:(NSString *)msg
+{
+	if( _status != XFConnectionConnected )
+		return;
+	
+	XFPacket *pkt = [XFPacket addFriendRequestPacketWithUserName:username message:msg];
+	[self sendPacket:pkt];
+}
+
+- (void)sendRemoveFriend:(XFFriend *)fr
+{
+	if( _status != XFConnectionConnected )
+		return;
+	
+	XFPacket *pkt = [XFPacket removeFriendRequestWithUserID:[fr userID]];
+	[self sendPacket:pkt];
+}
+
+- (void)acceptFriendRequest:(XFFriend *)fr
+{
+	if( _status != XFConnectionConnected )
+		return;
+	
+	XFPacket *pkt = [XFPacket acceptFriendRequestPacketWithUserName:[fr userName]];
+	[self sendPacket:pkt];
+}
+
+- (void)declineFriendRequest:(XFFriend *)fr
+{
+	if( _status != XFConnectionConnected )
+		return;
+	
+	XFPacket *pkt = [XFPacket declineFriendRequestPacketWithUserName:[fr userName]];
+	[self sendPacket:pkt];
+}
+
 
 @end
