@@ -17,6 +17,8 @@
 @synthesize cancelButton	= _cancelButton;
 @synthesize doneButton		= _doneButton;
 
+@synthesize delegate		= _delegate;
+
 - (id)initWithWindow:(NSWindow *)mainWindow
 {
 	if( (self = [super init]) )
@@ -30,6 +32,7 @@
 
 - (void)dealloc
 {
+	_delegate = nil;
 	[super dealloc];
 }
 
@@ -58,12 +61,20 @@
 
 - (IBAction)cancelAction:(id)sender
 {
-	
+	[self hide];
+	if( [_delegate respondsToSelector:@selector(stringPromptDidCancel:)] )
+	{
+		[_delegate stringPromptDidCancel:self];
+	}
 }
 
 - (IBAction)doneAction:(id)sender
 {
-	
+	[self hide];
+	if( [_delegate respondsToSelector:@selector(stringPromptDidSucceed:)] )
+	{
+		[_delegate stringPromptDidSucceed:self];
+	}
 }
 
 @end

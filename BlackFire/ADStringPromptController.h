@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class ADStringPromptController;
+
+@protocol ADStringPromptDelegate <NSObject>
+- (void)stringPromptDidCancel:(ADStringPromptController *)prompt;
+- (void)stringPromptDidSucceed:(ADStringPromptController *)prompt;
+@end
+
 @interface ADStringPromptController : NSObject
 {
 	NSWindow *_mainWindow;
+	
+	id <ADStringPromptDelegate> _delegate;
 }
 
 @property (assign) IBOutlet NSWindow	*sheet;
@@ -19,6 +28,8 @@
 
 @property (assign) IBOutlet NSButton *cancelButton;
 @property (assign) IBOutlet NSButton *doneButton;
+
+@property (assign) id <ADStringPromptDelegate> delegate;
 
 - (id)initWithWindow:(NSWindow *)mainWindow;
 
