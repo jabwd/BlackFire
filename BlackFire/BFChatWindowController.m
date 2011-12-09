@@ -47,6 +47,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_chats release];
 	_chats = nil;
 	_currentlySelectedChat = nil;
@@ -55,10 +56,12 @@
 
 - (BOOL)windowShouldClose:(id)sender
 {
+	
 	for(BFChat *chat in _chats)
 	{
 		[chat closeChat];
 	}
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_chats release];
 	_chats = [[NSMutableArray alloc] init];
 	
@@ -194,6 +197,14 @@
 			[chat closeChat];
 			[_chats removeObjectAtIndex:i];
 			[_tabStripView removeTabView:tabView];
+			if( chat == _currentlySelectedChat )
+			{
+				_currentlySelectedChat = nil;
+				if( [_chats count] > 0 )
+				{
+					_currentlySelectedChat = [_chats objectAtIndex:0];
+				}
+			}
 			return;
 		}
 	}
