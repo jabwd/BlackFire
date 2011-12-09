@@ -477,14 +477,21 @@
 	{
 		[self changeToMode:BFApplicationModeLoggingIn];
 	}
-	else if( newStatus == XFSessionStatusOffline )
+	else if( newStatus == XFSessionStatusDisconnecting )
 	{
-		for(BFChat *chat in _chatControllers)
+		// pre disconnect stage, get rid of the XFSession required resources here.
+		NSUInteger i, cnt = [_chatControllers count];
+		for(i=0;i<cnt;i++)
 		{
-			[chat closeChat];
+			// this should work as the BFChat object is removed from the array when we call closeChat
+			BFChat *chat = [_chatControllers objectAtIndex:0];
+			[chat.windowController closeChat:chat];
 		}
 		[[BFGamesManager sharedGamesManager] stopMonitoring];
 		[self changeToMode:BFApplicationModeOffline];
+	}
+	else if( newStatus == XFSessionStatusOffline )
+	{
 		[_session setDelegate:nil];
 		[_session release];
 		_session = nil;
