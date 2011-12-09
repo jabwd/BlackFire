@@ -1587,5 +1587,17 @@
 	[self sendPacket:pkt];
 }
 
+- (void)beginUserSearch:(NSString *)searchString
+{
+	if( _status != XFConnectionConnected )
+		return;
+	
+	XFPacket *pkt = [XFPacket userSearchPacketWithName:searchString
+                                                 fname:nil
+                                                 lname:nil
+                                                 email:nil];
+	[self sendPacket:pkt];
+}
+
 
 @end

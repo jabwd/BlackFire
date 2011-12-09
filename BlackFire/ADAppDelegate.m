@@ -218,6 +218,14 @@
 	{
 		case BFApplicationModeOffline:
 		{
+			// make sure that all string prompts currently visible are hidden:
+			if( _stringPromptController )
+			{
+				[_stringPromptController hide];
+				[_stringPromptController release];
+				_stringPromptController = nil;
+			}
+			
 			if( ! _loginViewController )
 			{
 				_loginViewController = [[BFLoginViewController alloc] init];
@@ -498,6 +506,12 @@
 }
 
 
+- (void)session:(XFSession *)session nicknameChanged:(NSString *)newNickname
+{
+	[_nicknamePopUpButton setTitle:newNickname];
+	[_friendsListController reloadData];
+}
+
 
 - (NSString *)username
 {
@@ -530,7 +544,41 @@
 
 - (IBAction)selectNicknameOption:(id)sender
 {
+	if( _stringPromptController )
+	{
+		NSLog(@"*** Cannot change nickname while another string prompt is running");
+	}
+	else
+	{
+		_stringPromptController = [[ADStringPromptController alloc] initWithWindow:_window];
+		NSString *nickname = [[_session loginIdentity] nickname];
+		if( ! nickname )
+			nickname = @"";
+		_stringPromptController.messageField.stringValue = nickname;
+		_stringPromptController.titleField.stringValue = @"Change your nickname:";
+		_stringPromptController.delegate = self;
+		[_stringPromptController show];
+	}
+}
+
+
+#pragma mark - String prompt
+
+- (void)stringPromptDidSucceed:(ADStringPromptController *)prompt
+{	
+	NSString *nickname = [_stringPromptController.messageField.stringValue copy];
+	[_stringPromptController release];
+	_stringPromptController = nil;
 	
+	[_session setNickname:nickname];
+	
+	[nickname release];
+}
+
+- (void)stringPromptDidCancel:(ADStringPromptController *)prompt
+{
+	[_stringPromptController release];
+	_stringPromptController = nil;
 }
 
 @end

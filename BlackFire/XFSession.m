@@ -339,7 +339,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 
 
-#pragma mark - Games & Servers
+#pragma mark - User session
 
 - (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port
 {
@@ -349,6 +349,41 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)exitGame
 {
 	[_tcpConnection setGameStatus:0 gameIP:0 gamePort:0];
+}
+
+- (void)setStatusString:(NSString *)text
+{
+	if( _status == XFSessionStatusOnline )
+	{
+		if( ! [_loginIdentity.status isEqualToString:text] )
+		{
+			_loginIdentity.status = text;
+			[_tcpConnection setStatusText:text];
+		}
+	}
+}
+
+- (void)setNickname:(NSString *)text
+{
+	if( _status == XFSessionStatusOnline )
+	{
+		if( ! [_loginIdentity.nickname isEqualToString:text] )
+		{
+			_loginIdentity.nickname = text;
+			[_tcpConnection changeNickname:text];
+			
+			if( [_delegate respondsToSelector:@selector(session:nicknameChanged:)] )
+				[_delegate session:self nicknameChanged:text];
+		}
+	}
+}
+
+- (void)beginUserSearch:(NSString *)searchString
+{
+	if( _status == XFSessionStatusOnline )
+	{
+		[_tcpConnection beginUserSearch:searchString];
+	}
 }
 
 @end

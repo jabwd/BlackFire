@@ -60,6 +60,7 @@ typedef enum{
 @protocol XFSessionDelegate <NSObject>
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason;
 - (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus;
+- (void)session:(XFSession *)session nicknameChanged:(NSString *)newNickname;
 
 - (void)session:(XFSession *)session chatDidStart:(XFChat *)chat;
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat;
@@ -181,9 +182,12 @@ typedef enum{
 //- (BOOL)shouldShowOfflineFriends;
 
 //--------------------------------------------------------------------------------
-// Games & Favorite servers
+// User session
 
 - (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port;
 - (void)exitGame;
+- (void)setStatusString:(NSString *)text;
+- (void)setNickname:(NSString *)text;
+- (void)beginUserSearch:(NSString *)searchString;
 
 @end

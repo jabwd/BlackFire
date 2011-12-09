@@ -10,6 +10,7 @@
 #import "XFSession.h"
 
 #import "BFGamesManager.h"
+#import "ADStringPromptController.h"
 
 typedef enum
 {
@@ -22,7 +23,7 @@ typedef enum
 
 @class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController;
 
-@interface ADAppDelegate : NSObject <BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
+@interface ADAppDelegate : NSObject <ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
 	XFSession				*_session;
 	BFAccount				*_account;
@@ -40,8 +41,9 @@ typedef enum
 	
 	NSMutableArray *_chatControllers;
 	
-	BFLoginViewController	*_loginViewController;
-	BFFriendsListController *_friendsListController;
+	BFLoginViewController		*_loginViewController;
+	BFFriendsListController		*_friendsListController;
+	ADStringPromptController	*_stringPromptController;
 	
 	BFApplicationMode		_currentMode;
 }
