@@ -7,18 +7,23 @@
 //
 
 #import "XFGamesManager.h"
+#import "BFDownload.h"
 
 @protocol BFGameDetectionDelegate <NSObject>
 
 - (void)gameDidLaunch:(unsigned int)gameID;
 - (void)gameDidTerminate:(unsigned int)gameID;
+- (void)gameIconDidDownload; // used for reloading the data on the tableview
 
 @end
 
-@interface BFGamesManager : XFGamesManager
+@interface BFGamesManager : XFGamesManager <BFDownloadDelegate>
 {
 	NSMutableDictionary *_macGames;
 	NSMutableArray		*_runningGames;
+	NSMutableArray		*_missingIcons;
+	
+	BFDownload *_download;
 	
 	id <BFGameDetectionDelegate> _delegate;
 }
@@ -28,7 +33,8 @@
 //----------------------------------------------------------------------------
 // Xfire games
 
-- (NSImage *)imageForGame:(NSUInteger)gameID;
+- (NSImage *)imageForGame:(unsigned int)gameID;
+- (void)downloadNextMissingIcon;
 
 
 //-----------------------------------------------------------------------------

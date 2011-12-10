@@ -19,12 +19,15 @@
 	{
 		_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
 		_runningGames	= [[NSMutableArray alloc] init];
+		_missingIcons	= [[NSMutableArray alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_missingIcons release];
+	_missingIcons = nil;
 	[_runningGames release];
 	_runningGames = nil;
 	[_macGames release];
@@ -34,13 +37,84 @@
 
 #pragma mark - Xfire games
 
-- (NSImage *)imageForGame:(NSUInteger)gameID
+- (void)download:(BFDownload *)download didFailWithError:(NSError *)error
+{
+	[self downloadNextMissingIcon];
+	
+	NSLog(@"*** Game icon download failed with error: %@",error);
+}
+
+- (void)download:(BFDownload *)download didFinishWithPath:(NSString *)path
+{
+	NSNumber *game = (NSNumber *)download.context;
+	if( ![game isKindOfClass:[NSNumber class]] )
+	{
+		NSLog(@"*** Context of BFDownload is invalid, cannot move image file");
+		return;
+	}
+	NSString *finalPath = [NSString stringWithFormat:@"%@/%u.png",[[NSBundle mainBundle] resourcePath],[game unsignedIntValue]];
+	
+	NSError *error = nil;
+	[[NSFileManager defaultManager] moveItemAtPath:path toPath:finalPath error:&error];
+	
+	if( error )
+	{
+		NSLog(@"*** An error occured while moving %@ to %@\n%@",path,finalPath,error);
+	}
+	
+	if( [_delegate respondsToSelector:@selector(gameIconDidDownload)] )
+		[_delegate gameIconDidDownload];
+	
+	[self downloadNextMissingIcon];
+}
+
+- (void)downloadNextMissingIcon
+{
+	if( _download )
+	{
+		[_download release];
+		_download = nil;
+	}
+	if( [_missingIcons count] < 1 )
+	{
+		NSLog(@"Done downloading all the game icons needed for this session.");
+		return; // break the cycle
+	}
+	NSNumber *game = [[_missingIcons objectAtIndex:0] retain];
+	[_missingIcons removeObjectAtIndex:0];
+	
+	_download = [[BFDownload imageDownload:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.exurion.com/xfire/icons/%u.png",[game unsignedIntValue]]] withDelegate:self] retain];
+	_download.context = game;
+	
+	[game release];
+}
+
+- (NSImage *)imageForGame:(unsigned int)gameID
 {
 	if( gameID > 0 )
 	{
-		NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%lu",gameID]];
+		NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%u",gameID]];
 		if( ! image )
+		{
 			image = [NSImage imageNamed:@"-1"];
+			
+			// found a missing icon, should we add it or not ?
+			BOOL found = false;
+			for(NSNumber *game in _missingIcons)
+			{
+				if( [game unsignedIntValue] == gameID )
+				{
+					found = true;
+					break;
+				}
+			}
+			if( ! found )
+			{
+				[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
+				if( ! _download )
+					[self downloadNextMissingIcon];
+			}
+		}
 		[image setScalesWhenResized:true];
 		return image;
 	}

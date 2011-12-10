@@ -492,6 +492,11 @@
 	[_session exitGame];
 }
 
+- (void)gameIconDidDownload
+{
+	[_friendsListController reloadData];
+}
+
 #pragma mark - Friends list toolbar
 
 - (IBAction)selectStatus:(id)sender

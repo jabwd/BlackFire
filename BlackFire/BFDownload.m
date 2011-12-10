@@ -11,6 +11,8 @@
 @implementation BFDownload
 
 @synthesize destinationPath = _destinationPath;
+@synthesize context			= _context;
+@synthesize delegate		= _delegate;
 
 + (BFDownload *)imageDownload:(NSURL *)remoteURL withDelegate:(id<BFDownloadDelegate>)delegate
 {
@@ -24,7 +26,7 @@
 	
 	[download downloadFromURL:remoteURL];
 	
-	return download;
+	return [download autorelease];
 }
 
 - (id)init
@@ -35,12 +37,15 @@
 		_data				= nil;
 		_connection			= nil;
 		_delegate			= nil;
+		_context			= nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_context release];
+	_context = nil;
 	[_destinationPath release];
 	_destinationPath = nil;
 	[_connection release];

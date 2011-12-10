@@ -22,10 +22,12 @@
 	
 	NSString *_destinationPath;
 	
+	id _context;
 	id <BFDownloadDelegate> _delegate;
 }
 
 @property (assign) id <BFDownloadDelegate> delegate;
+@property (nonatomic, retain) id context;
 
 @property (nonatomic, retain) NSString *destinationPath;
 
