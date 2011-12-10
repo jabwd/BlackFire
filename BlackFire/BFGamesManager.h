@@ -22,6 +22,7 @@
 	NSMutableDictionary *_macGames;
 	NSMutableArray		*_runningGames;
 	NSMutableArray		*_missingIcons;
+	NSString			*_cachesPath;
 	
 	BFDownload *_download;
 	

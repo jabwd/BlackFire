@@ -174,6 +174,8 @@ typedef enum{
  */
 - (void)receivedSearchResults:(NSArray *)results;
 
+- (void)receivedFriendInformation;
+
 
 //--------------------------------------------------------------------------------
 // User options

@@ -20,12 +20,16 @@
 		_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
 		_runningGames	= [[NSMutableArray alloc] init];
 		_missingIcons	= [[NSMutableArray alloc] init];
+		
+		_cachesPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_cachesPath release];
+	_cachesPath = nil;
 	[_missingIcons release];
 	_missingIcons = nil;
 	[_runningGames release];
@@ -52,15 +56,20 @@
 		NSLog(@"*** Context of BFDownload is invalid, cannot move image file");
 		return;
 	}
-	NSString *finalPath = [NSString stringWithFormat:@"%@/%u.png",[[NSBundle mainBundle] resourcePath],[game unsignedIntValue]];
-	
-	NSError *error = nil;
-	[[NSFileManager defaultManager] moveItemAtPath:path toPath:finalPath error:&error];
-	
-	if( error )
+	BOOL isDir = false;
+	NSString *finalPath = [[NSString alloc] initWithFormat:@"%@/BlackFire",_cachesPath];
+	if( ![[NSFileManager defaultManager] fileExistsAtPath:finalPath isDirectory:&isDir] )
 	{
-		NSLog(@"*** An error occured while moving %@ to %@\n%@",path,finalPath,error);
+		NSError *error = nil;
+		[[NSFileManager defaultManager] createDirectoryAtPath:finalPath withIntermediateDirectories:true attributes:nil error:&error];
+		if( error )
+		{
+			NSLog(@"*** Cannot create cache folder directory");
+		}
 	}
+	NSString *cacheFile = [NSString stringWithFormat:@"%@/%u.png",finalPath,[game unsignedIntValue]];
+	
+	[[NSFileManager defaultManager] moveItemAtPath:path toPath:cacheFile error:nil];
 	
 	if( [_delegate respondsToSelector:@selector(gameIconDidDownload)] )
 		[_delegate gameIconDidDownload];
@@ -69,6 +78,8 @@
 	
 	[_download release];
 	_download = nil;
+	[finalPath release];
+	finalPath = nil;
 	
 	[self downloadNextMissingIcon];
 }
@@ -97,10 +108,11 @@
 {
 	if( gameID > 0 )
 	{
-		NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%u",gameID]];
+		NSString *path = [NSString stringWithFormat:@"%@/BlackFire/%u.png",_cachesPath];
+		NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
 		if( ! image )
 		{
-			image = [NSImage imageNamed:@"-1"];
+			image = [[NSImage imageNamed:@"-1"] retain];
 			
 			// found a missing icon, should we add it or not ?
 			BOOL found = false;
@@ -114,13 +126,21 @@
 			}
 			if( ! found )
 			{
+				NSString *imagePath = [NSString stringWithFormat:@"%@/BlackFire/%u.png",_cachesPath,gameID];
+				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
+				{
+					//NSLog(@"*** Requested a download but the image file already exists.");
+					NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+					[image setScalesWhenResized:true];
+					return [image autorelease];
+				}
 				[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
 				if( ! _download )
 					[self downloadNextMissingIcon];
 			}
 		}
 		[image setScalesWhenResized:true];
-		return image;
+		return [image autorelease];
 	}
 	NSImage *tmp = [NSImage imageNamed:@"-1"];
 	[tmp setScalesWhenResized:true];

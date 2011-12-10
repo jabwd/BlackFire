@@ -395,4 +395,12 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	}
 }
 
+- (void)requestFriendInformation:(XFFriend *)remoteFriend
+{
+	if( remoteFriend )
+	{
+		[_tcpConnection requestFriendInfo:remoteFriend.userID];
+	}
+}
+
 @end

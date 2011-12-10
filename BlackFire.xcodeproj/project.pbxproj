@@ -87,7 +87,6 @@
 		36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36ADF20D1469AC9600F46E9E /* blue_bubble.png */; };
 		36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B62C871483CDB400D9B11E /* BFGamesManager.m */; };
 		36B64261148414ED00D9B11E /* Games.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36B64260148414ED00D9B11E /* Games.plist */; };
-		36B64269148421EB00D9B11E /* 81.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 36B64268148421EB00D9B11E /* 81.pdf */; };
 		36B642751484464700D9B11E /* connected.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B6426E1484464400D9B11E /* connected.m4v */; };
 		36B642761484464700D9B11E /* gamesTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B6426F1484464500D9B11E /* gamesTemplate.png */; };
 		36B642771484464700D9B11E /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B642701484464500D9B11E /* joystick.png */; };
@@ -261,7 +260,6 @@
 		36B62C861483CDB400D9B11E /* BFGamesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesManager.h; sourceTree = "<group>"; };
 		36B62C871483CDB400D9B11E /* BFGamesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesManager.m; sourceTree = "<group>"; };
 		36B64260148414ED00D9B11E /* Games.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Games.plist; sourceTree = "<group>"; };
-		36B64268148421EB00D9B11E /* 81.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 81.pdf; sourceTree = "<group>"; };
 		36B6426E1484464400D9B11E /* connected.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = connected.m4v; sourceTree = "<group>"; };
 		36B6426F1484464500D9B11E /* gamesTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gamesTemplate.png; sourceTree = "<group>"; };
 		36B642701484464500D9B11E /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
@@ -688,7 +686,6 @@
 			isa = PBXGroup;
 			children = (
 				36DAB7E314935C50001A7039 /* -1.png */,
-				36B64268148421EB00D9B11E /* 81.pdf */,
 				36529846146697C00010FD7F /* xfire.jpg */,
 				36B642701484464500D9B11E /* joystick.png */,
 				36B642831484486900D9B11E /* offline_bubble.png */,
@@ -813,7 +810,6 @@
 				36EBDDAF1479B2F500D219D7 /* inactiveWTabHover.png in Resources */,
 				36EBDDB01479B2F500D219D7 /* inactiveWTabPressed.png in Resources */,
 				36B64261148414ED00D9B11E /* Games.plist in Resources */,
-				36B64269148421EB00D9B11E /* 81.pdf in Resources */,
 				36B642751484464700D9B11E /* connected.m4v in Resources */,
 				36B642761484464700D9B11E /* gamesTemplate.png in Resources */,
 				36B642771484464700D9B11E /* joystick.png in Resources */,
