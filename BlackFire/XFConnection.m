@@ -864,7 +864,7 @@
 // Ignore mutual friends for now
 - (void)processFriendOfFriendPacket:(XFPacket *)pkt
 {
-	NSArray *sessionIDs, *userIDs, *userNames, *nickNames, *commonFriends, *common;
+	NSArray *sessionIDs, *userIDs, *userNames, *nickNames, *common;
 	NSString *username, *nickname;
 	
 	sessionIDs		= [pkt attributeValuesForKey:XFPacketFriendSIDKey];
@@ -1613,7 +1613,7 @@
 	if( _status != XFConnectionConnected )
 		return;
 	
-	XFPacket *pkt = [XFPacket removeFriendRequestWithUserID:[fr userID]];
+	XFPacket *pkt = [XFPacket removeFriendRequestWithUserID:(unsigned int)fr.userID];
 	[self sendPacket:pkt];
 }
 
@@ -1622,7 +1622,7 @@
 	if( _status != XFConnectionConnected )
 		return;
 	
-	XFPacket *pkt = [XFPacket acceptFriendRequestPacketWithUserName:[fr userName]];
+	XFPacket *pkt = [XFPacket acceptFriendRequestPacketWithUserName:fr.username];
 	[self sendPacket:pkt];
 }
 
@@ -1631,7 +1631,7 @@
 	if( _status != XFConnectionConnected )
 		return;
 	
-	XFPacket *pkt = [XFPacket declineFriendRequestPacketWithUserName:[fr userName]];
+	XFPacket *pkt = [XFPacket declineFriendRequestPacketWithUserName:fr.username];
 	[self sendPacket:pkt];
 }
 

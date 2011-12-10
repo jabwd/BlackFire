@@ -93,56 +93,6 @@
 }
 
 
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
-{
-	switch([menuItem tag])
-	{
-		case 2:
-		{
-			// previou stab
-			if( [_chatControllers count] > 0 )
-			{
-				return true;
-			}
-		}
-			break;
-			
-		case 3:
-		{
-			// next tab
-			if( [_chatControllers count] > 0 )
-			{
-				return true;
-			}
-		}
-			break;
-			
-		case 4:
-		{
-			// remove friend
-		}
-			break;
-			
-		case 5:
-		{
-			// show profile
-		}
-			break;
-			
-		default:
-		{
-			return true;
-		}
-			break;
-	}
-	return false;
-}
-
-- (IBAction)help:(id)sender
-{
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.macxfire.com/"]];
-}
-
 - (IBAction)selectNextTab:(id)sender
 {
 	// detect if a window is in front
@@ -587,5 +537,83 @@
 	[_stringPromptController release];
 	_stringPromptController = nil;
 }
+
+
+#pragma mark - Menu items
+
+- (IBAction)showProfile:(id)sender
+{
+	XFFriend *selectedFriend = [_friendsListController selectedOnlineFriend];
+	if( selectedFriend )
+	{
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.xfire.com/profile/%@",selectedFriend.username]]];
+	}
+}
+
+- (IBAction)removeSelectedFriend:(id)sender
+{
+	return; // not done yet.
+	XFFriend *selectedFriend = [_friendsListController selectedFriendNotFoF];
+	if( !selectedFriend.clanFriend )
+	{
+		[_session sendRemoveFriend:selectedFriend];
+	}
+}
+
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	switch([menuItem tag])
+	{
+		case 2:
+		{
+			// previou stab
+			if( [_chatControllers count] > 0 )
+			{
+				return true;
+			}
+		}
+			break;
+			
+		case 3:
+		{
+			// next tab
+			if( [_chatControllers count] > 0 )
+			{
+				return true;
+			}
+		}
+			break;
+			
+		case 4:
+		{
+			// remove friend
+			if( [_friendsListController selectedFriendNotFoF] )
+				return true;
+		}
+			break;
+			
+		case 5:
+		{
+			// show profile
+			if( [_friendsListController selectedOnlineFriend] )
+				return true;
+		}
+			break;
+			
+		default:
+		{
+			return true;
+		}
+			break;
+	}
+	return false;
+}
+
+- (IBAction)help:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.macxfire.com/"]];
+}
+
 
 @end
