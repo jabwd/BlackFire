@@ -65,6 +65,11 @@
 	if( [_delegate respondsToSelector:@selector(gameIconDidDownload)] )
 		[_delegate gameIconDidDownload];
 	
+	[_missingIcons removeObjectAtIndex:0];
+	
+	[_download release];
+	_download = nil;
+	
 	[self downloadNextMissingIcon];
 }
 
@@ -81,7 +86,6 @@
 		return; // break the cycle
 	}
 	NSNumber *game = [[_missingIcons objectAtIndex:0] retain];
-	[_missingIcons removeObjectAtIndex:0];
 	
 	_download = [[BFDownload imageDownload:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.exurion.com/xfire/icons/%u.png",[game unsignedIntValue]]] withDelegate:self] retain];
 	_download.context = game;

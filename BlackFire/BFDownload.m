@@ -29,6 +29,21 @@
 	return [download autorelease];
 }
 
++ (BFDownload *)avatarDownload:(NSURL *)remoteURL withDelegate:(id<BFDownloadDelegate>)delegate
+{
+	BFDownload *download = [[BFDownload alloc] init];
+	
+	NSString *path		= [remoteURL relativePath];
+	NSString *fileName	= [path lastPathComponent];
+	
+	download.destinationPath	= [[NSString alloc] initWithFormat:@"%@/%@.avatar.download",NSTemporaryDirectory(),fileName];
+	download.delegate			= delegate;
+	
+	[download downloadFromURL:remoteURL];
+	
+	return [download autorelease];
+}
+
 - (id)init
 {
 	if( (self = [super init]) )

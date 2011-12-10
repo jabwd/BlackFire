@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSString *destinationPath;
 
 + (BFDownload *)imageDownload:(NSURL *)remoteURL withDelegate:(id<BFDownloadDelegate>)delegate;
++ (BFDownload *)avatarDownload:(NSURL *)remoteURL withDelegate:(id<BFDownloadDelegate>)delegate;
 
 - (void)downloadFromURL:(NSURL *)remoteURL;
 

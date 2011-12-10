@@ -192,4 +192,6 @@ typedef enum{
 
 - (void)sendRemoveFriend:(XFFriend *)remoteFriend;
 
+- (void)requestFriendInformation:(XFFriend *)remoteFriend;
+
 @end
