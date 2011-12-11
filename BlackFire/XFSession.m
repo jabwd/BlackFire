@@ -186,7 +186,12 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError
 {
-	[self disconnect];
+	if( _status == XFSessionStatusOnline )
+		[self disconnect];
+	else
+	{
+		NSLog(@"*** A call to willDisconnect was made while the session is not even online.");
+	}
 }
 
 #pragma mark - Managing friends
