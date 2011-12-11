@@ -24,6 +24,8 @@
 	NSMutableArray		*_missingIcons;
 	NSString			*_cachesPath;
 	
+	NSMutableDictionary *_gameIcons;
+	
 	BFDownload *_download;
 	
 	id <BFGameDetectionDelegate> _delegate;

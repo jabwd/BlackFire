@@ -20,6 +20,7 @@
 		_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
 		_runningGames	= [[NSMutableArray alloc] init];
 		_missingIcons	= [[NSMutableArray alloc] init];
+		_gameIcons		= [[NSMutableDictionary alloc] init];
 		
 		_cachesPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
 	}
@@ -28,6 +29,8 @@
 
 - (void)dealloc
 {
+	[_gameIcons release];
+	_gameIcons = nil;
 	[_cachesPath release];
 	_cachesPath = nil;
 	[_missingIcons release];
@@ -108,39 +111,45 @@
 {
 	if( gameID > 0 )
 	{
-		NSString *path = [NSString stringWithFormat:@"%@/BlackFire/%u.png",_cachesPath];
-		NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
+		NSString *key = [[NSString alloc] initWithFormat:@"%u",gameID];
+		NSImage *image = [_gameIcons objectForKey:key];
 		if( ! image )
 		{
-			image = [[NSImage imageNamed:@"-1"] retain];
+			NSString *path = [[NSString alloc] initWithFormat:@"%@/BlackFire/%u.png",_cachesPath,gameID];
+			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
+			if( ! image )
+			{
+				image = [NSImage imageNamed:@"-1"];
+				
+				// found a missing icon, should we add it or not ?
+				BOOL found = false;
+				for(NSNumber *game in _missingIcons)
+				{
+					if( [game unsignedIntValue] == gameID )
+					{
+						found = true;
+						break;
+					}
+				}
+				if( ! found )
+				{
+					[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
+					if( ! _download )
+						[self downloadNextMissingIcon];
+				}
+			}
+			else
+			{
+				// cache the image, as we actually have an image! yay :D
+				[_gameIcons setObject:image forKey:key];
+			}
 			
-			// found a missing icon, should we add it or not ?
-			BOOL found = false;
-			for(NSNumber *game in _missingIcons)
-			{
-				if( [game unsignedIntValue] == gameID )
-				{
-					found = true;
-					break;
-				}
-			}
-			if( ! found )
-			{
-				NSString *imagePath = [NSString stringWithFormat:@"%@/BlackFire/%u.png",_cachesPath,gameID];
-				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
-				{
-					//NSLog(@"*** Requested a download but the image file already exists.");
-					NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
-					[image setScalesWhenResized:true];
-					return [image autorelease];
-				}
-				[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
-				if( ! _download )
-					[self downloadNextMissingIcon];
-			}
+			[path release];
 		}
 		[image setScalesWhenResized:true];
-		return [image autorelease];
+		
+		[key release];
+		return image;
 	}
 	NSImage *tmp = [NSImage imageNamed:@"-1"];
 	[tmp setScalesWhenResized:true];
