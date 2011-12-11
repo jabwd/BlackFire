@@ -66,6 +66,11 @@
 	[_friendsList reloadData];
 }
 
+- (void)expandItem:(id)item
+{
+	[_friendsList expandItem:item];
+}
+
 
 #pragma mark - Outlineview datasource
 
@@ -178,7 +183,24 @@
 			else
 			{
 				// determine whether the image exists on the disk
-				[imageCell setImage:[NSImage imageNamed:@"xfire"]];
+				
+				NSImage *image = nil;
+				NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+				
+				NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/BlackFire/%@.jpg",cachesPath,friend.username];
+				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
+				{
+					image = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+				}
+				else
+				{
+					image = [NSImage imageNamed:@"xfire"];
+				}
+				[imagePath release];
+				
+				[image setScalesWhenResized:true];
+				friend.avatar = image;
+				[imageCell setImage:image];
 			}
 		}
 		

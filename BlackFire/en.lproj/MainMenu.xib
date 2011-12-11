@@ -883,13 +883,13 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{816, 363}, {206, 337}}</string>
+				<string key="NSWindowRect">{{816, 363}, {183, 309}}</string>
 				<int key="NSWTFlags">1954021376</int>
 				<string key="NSWindowTitle">BlackFire</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
-				<string key="NSWindowContentMinSize">{186, 255}</string>
+				<string key="NSWindowContentMinSize">{183, 309}</string>
 				<object class="NSView" key="NSWindowView" id="439893737">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -897,7 +897,7 @@
 						<object class="NSCustomView" id="243777411">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{-1, 30}, {207, 308}}</string>
+							<string key="NSFrame">{{-1, 30}, {184, 280}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="581243776"/>
@@ -980,13 +980,13 @@
 							</object>
 						</object>
 					</array>
-					<string key="NSFrameSize">{206, 337}</string>
+					<string key="NSFrameSize">{183, 309}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="243777411"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
-				<string key="NSMinSize">{186, 277}</string>
+				<string key="NSMinSize">{183, 331}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">mainWindow</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -1174,7 +1174,6 @@
 								<bool key="NSNoAutoenable">YES</bool>
 								<reference key="NSMenuFont" ref="474206734"/>
 							</object>
-							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>

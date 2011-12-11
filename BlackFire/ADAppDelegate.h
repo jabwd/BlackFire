@@ -42,6 +42,7 @@ typedef enum
 	
 	NSMutableArray *_chatControllers;
 	
+	
 	BFDownload		*_download;
 	
 	BFLoginViewController		*_loginViewController;

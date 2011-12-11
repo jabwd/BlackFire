@@ -539,6 +539,8 @@
 	[_session receivedFriendInformation:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue]
 							   getValue:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]
 								   type:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue]];
+	
+	NSLog(@"PKT: %@",pkt);
 }
 
 - (void)processSystemBroadcast:(XFPacket *)pkt
@@ -803,7 +805,7 @@
 	NSArray *gameIDs     = [pkt attributeValuesForKey:XFPacketGameIDKey];
 	NSArray *gameIPAddrs = [pkt attributeValuesForKey:XFPacketGameIPKey];
 	NSArray *gamePorts   = [pkt attributeValuesForKey:XFPacketGamePortKey];
-	NSLog(@"GamePort: %@",gamePorts);
+
 	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{

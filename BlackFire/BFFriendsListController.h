@@ -21,6 +21,7 @@
 - (id)initWithSession:(XFSession *)session;
 
 - (void)reloadData;
+- (void)expandItem:(id)item;
 
 //--------------------------------------------------------------------------
 // Getting friends and groups

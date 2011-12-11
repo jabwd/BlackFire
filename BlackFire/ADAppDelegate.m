@@ -10,6 +10,7 @@
 #import "XFSession.h"
 #import "XFFriend.h"
 #import "XFChat.h"
+#import "XFGroupController.h"
 
 #import "BFAccount.h"
 
@@ -426,6 +427,7 @@
 		[[BFGamesManager sharedGamesManager] startMonitoring];
 		[self changeToMode:BFApplicationModeOnline];
 		
+		[_friendsListController expandItem:[_session.groupController onlineFriendsGroup]];
 		[_session requestFriendInformation:_session.loginIdentity];
 	}
 	else if( newStatus == XFSessionStatusConnecting )
