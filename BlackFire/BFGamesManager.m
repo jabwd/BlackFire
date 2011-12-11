@@ -142,6 +142,9 @@
 			{
 				// cache the image, as we actually have an image! yay :D
 				[_gameIcons setObject:image forKey:key];
+				[path release];
+				[image setScalesWhenResized:true];
+				return image;
 			}
 			
 			[path release];
@@ -149,6 +152,11 @@
 		[image setScalesWhenResized:true];
 		
 		[key release];
+		if( ! image )
+		{
+			NSLog(@"WTF hoe kan dit nou weer?");
+			image = [NSImage imageNamed:@"-1"];
+		}
 		return image;
 	}
 	NSImage *tmp = [NSImage imageNamed:@"-1"];

@@ -206,7 +206,12 @@
 
 - (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation
 {
-	return @"Tooltip";
+	if( [item isKindOfClass:[XFFriend class]] )
+	{
+		XFFriend *friend = (XFFriend *)item;
+		return [NSString stringWithFormat:@"username: %@\nuserID: %u",friend.username,friend.userID];
+	}
+	return nil;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
