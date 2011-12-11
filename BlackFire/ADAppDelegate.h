@@ -46,6 +46,8 @@ typedef enum
 	ADStringPromptController	*_stringPromptController;
 	
 	BFApplicationMode		_currentMode;
+	
+	BOOL _changingNickname;
 }
 
 @property (readonly) XFSession			*session;
@@ -83,6 +85,9 @@ typedef enum
 
 //----------------------------------------------------------------------------
 // Friends list toolbar
+
+- (IBAction)selectAvailable:(id)sender;
+- (IBAction)selectAway:(id)sender;
 
 - (IBAction)selectStatus:(id)sender;
 - (IBAction)selectNicknameOption:(id)sender;

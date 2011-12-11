@@ -359,6 +359,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		{
 			_loginIdentity.status = text;
 			[_tcpConnection setStatusText:text];
+			if( [_delegate respondsToSelector:@selector(session:userStatusChanged:)] )
+			   [_delegate session:self userStatusChanged:text];
 		}
 	}
 }

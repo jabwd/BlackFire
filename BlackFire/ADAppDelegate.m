@@ -469,6 +469,12 @@
 	[_friendsListController reloadData];
 }
 
+- (void)session:(XFSession *)session userStatusChanged:(NSString *)newStatus
+{
+	[_statusPopUpButton setTitle:newStatus];
+	[_friendsListController reloadData];
+}
+
 
 - (NSString *)username
 {
@@ -499,9 +505,42 @@
 
 #pragma mark - Friends list toolbar
 
-- (IBAction)selectStatus:(id)sender
+- (IBAction)selectAvailable:(id)sender
 {
-	
+	if( _session.status == XFSessionStatusOnline )
+	{
+		[_session setStatusString:@""];
+		[_statusPopUpButton setTitle:@"Available"];
+	}
+}
+
+- (IBAction)selectAway:(id)sender
+{
+	if( _session.status == XFSessionStatusOnline )
+	{
+		[_session setStatusString:@"(AFK) Away from keyboard"];
+		[_statusPopUpButton setTitle:@"Away"];
+	}
+}
+
+- (IBAction)selectCustomStatus:(id)sender
+{
+	if( _stringPromptController )
+	{
+		NSLog(@"*** Cannot change status while another string prompt is running");
+	}
+	else
+	{
+		_changingNickname = false;
+		_stringPromptController = [[ADStringPromptController alloc] initWithWindow:_window];
+		NSString *status = _session.loginIdentity.status;
+		if( ! status )
+			status = @"";
+		_stringPromptController.messageField.stringValue = status;
+		_stringPromptController.titleField.stringValue = @"Change your status:";
+		_stringPromptController.delegate = self;
+		[_stringPromptController show];
+	}
 }
 
 - (IBAction)selectNicknameOption:(id)sender
@@ -512,8 +551,9 @@
 	}
 	else
 	{
+		_changingNickname = true;
 		_stringPromptController = [[ADStringPromptController alloc] initWithWindow:_window];
-		NSString *nickname = [[_session loginIdentity] nickname];
+		NSString *nickname = _session.loginIdentity.nickname;
 		if( ! nickname )
 			nickname = @"";
 		_stringPromptController.messageField.stringValue = nickname;
@@ -532,7 +572,15 @@
 	[_stringPromptController release];
 	_stringPromptController = nil;
 	
-	[_session setNickname:nickname];
+	if( _changingNickname )
+	{
+		[_session setNickname:nickname];
+		_changingNickname = false;
+	}
+	else
+	{
+		[_session setStatusString:nickname];
+	}
 	
 	[nickname release];
 }
@@ -541,6 +589,17 @@
 {
 	[_stringPromptController release];
 	_stringPromptController = nil;
+}
+
+- (void)setSessionStatusString:(NSString *)status
+{
+	if( status > 0 )
+		[_session setStatusString:status];
+}
+
+- (NSString *)sessionStatusString
+{
+	return [_session loginIdentity].status;
 }
 
 

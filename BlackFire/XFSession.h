@@ -60,7 +60,9 @@ typedef enum{
 @protocol XFSessionDelegate <NSObject>
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason;
 - (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus;
+
 - (void)session:(XFSession *)session nicknameChanged:(NSString *)newNickname;
+- (void)session:(XFSession *)session userStatusChanged:(NSString *)newStatus;
 
 - (void)session:(XFSession *)session chatDidStart:(XFChat *)chat;
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat;

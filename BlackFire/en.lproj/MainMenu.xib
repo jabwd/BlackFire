@@ -1055,7 +1055,6 @@
 									<int key="NSfFlags">1044</int>
 								</object>
 							</object>
-							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1101,6 +1100,17 @@
 								<string key="NSTitle"/>
 								<array class="NSMutableArray" key="NSMenuItems">
 									<reference ref="110199343"/>
+									<object class="NSMenuItem" id="340017495">
+										<reference key="NSMenu" ref="294385808"/>
+										<string key="NSTitle">Available</string>
+										<string key="NSKeyEquiv"/>
+										<int key="NSMnemonicLoc">2147483647</int>
+										<reference key="NSOnImage" ref="35465992"/>
+										<reference key="NSMixedImage" ref="502551668"/>
+										<string key="NSAction">_popUpItemAction:</string>
+										<int key="NSTag">2</int>
+										<reference key="NSTarget" ref="16073081"/>
+									</object>
 									<object class="NSMenuItem" id="686428474">
 										<reference key="NSMenu" ref="294385808"/>
 										<string key="NSTitle">Away</string>
@@ -1151,7 +1161,7 @@
 									</object>
 									<object class="NSMenuItem" id="1017315150">
 										<reference key="NSMenu" ref="294385808"/>
-										<string key="NSTitle">Custom status..</string>
+										<string key="NSTitle">Custom status…</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSMnemonicLoc">2147483647</int>
 										<reference key="NSOnImage" ref="35465992"/>
@@ -1164,6 +1174,7 @@
 								<bool key="NSNoAutoenable">YES</bool>
 								<reference key="NSMenuFont" ref="474206734"/>
 							</object>
+							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1718,6 +1729,38 @@
 					</object>
 					<int key="connectionID">839</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectCustomStatus:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1017315150"/>
+					</object>
+					<int key="connectionID">841</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">disconnect:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="953330344"/>
+					</object>
+					<int key="connectionID">842</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectAway:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="686428474"/>
+					</object>
+					<int key="connectionID">843</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectAvailable:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="340017495"/>
+					</object>
+					<int key="connectionID">844</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2091,6 +2134,7 @@
 							<reference ref="110199343"/>
 							<reference ref="793603725"/>
 							<reference ref="1017315150"/>
+							<reference ref="340017495"/>
 						</array>
 						<reference key="parent" ref="16073081"/>
 					</object>
@@ -2572,6 +2616,11 @@
 						<reference key="object" ref="1023134856"/>
 						<reference key="parent" ref="686602257"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">840</int>
+						<reference key="object" ref="340017495"/>
+						<reference key="parent" ref="294385808"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2705,13 +2754,14 @@
 				<string key="835.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="836.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="837.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="840.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">839</int>
+			<int key="maxID">844</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2722,6 +2772,8 @@
 						<string key="closeAction:">id</string>
 						<string key="disconnect:">id</string>
 						<string key="help:">id</string>
+						<string key="selectAvailable:">id</string>
+						<string key="selectAway:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectNicknameOption:">id</string>
 						<string key="selectPreviousTab:">id</string>
@@ -2738,6 +2790,14 @@
 						</object>
 						<object class="IBActionInfo" key="help:">
 							<string key="name">help:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectAvailable:">
+							<string key="name">selectAvailable:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectAway:">
+							<string key="name">selectAway:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
