@@ -337,6 +337,12 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		[_delegate session:self didReceiveSearchResults:results];
 }
 
+- (void)receivedFriendInformation:(unsigned int)userID getValue:(unsigned int)value type:(unsigned int)type
+{
+	if( [_delegate respondsToSelector:@selector(session:receivedAvatarInformation:type:)] )
+		[_delegate session:self receivedAvatarInformation:userID getValue:value type:type];
+}
+
 
 
 #pragma mark - User session
@@ -401,7 +407,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 {
 	if( remoteFriend )
 	{
-		[_tcpConnection requestFriendInfo:remoteFriend.userID];
+		[_tcpConnection requestFriendInfo:(unsigned int)remoteFriend.userID];
 	}
 }
 

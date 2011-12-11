@@ -64,6 +64,8 @@ typedef enum{
 - (void)session:(XFSession *)session nicknameChanged:(NSString *)newNickname;
 - (void)session:(XFSession *)session userStatusChanged:(NSString *)newStatus;
 
+- (void)session:(XFSession *)session receivedAvatarInformation:(unsigned int)userID getValue:(unsigned int)getValue type:(unsigned int)type;
+
 - (void)session:(XFSession *)session chatDidStart:(XFChat *)chat;
 - (void)session:(XFSession *)session chatDidEnd:(XFChat *)chat;
 
@@ -176,7 +178,7 @@ typedef enum{
  */
 - (void)receivedSearchResults:(NSArray *)results;
 
-- (void)receivedFriendInformation;
+- (void)receivedFriendInformation:(unsigned int)userID getValue:(unsigned int)value type:(unsigned int)type;
 
 
 //--------------------------------------------------------------------------------

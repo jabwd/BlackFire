@@ -536,14 +536,14 @@
 
 - (void)processFriendAvatarPacket:(XFPacket *)pkt
 {
-	// TODO: Implement this
-	/*[_session gotAvatarInfo:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue] 
-                  andUserID:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue] 
-                       type:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]];*/
+	[_session receivedFriendInformation:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue] 
+							   getValue:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue] 
+								   type:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]];
 }
 
 - (void)processSystemBroadcast:(XFPacket *)pkt
 {
+	NSLog(@"System broadcast: %@",pkt);
 	// TODO: Implement this
     //[_session delegate_sessionGotSystemBroadcast:[[pkt attributeForKey:@"0x2E"] value]];
 }
@@ -803,7 +803,7 @@
 	NSArray *gameIDs     = [pkt attributeValuesForKey:XFPacketGameIDKey];
 	NSArray *gameIPAddrs = [pkt attributeValuesForKey:XFPacketGameIPKey];
 	NSArray *gamePorts   = [pkt attributeValuesForKey:XFPacketGamePortKey];
-	
+	NSLog(@"GamePort: %@",gamePorts);
 	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
@@ -864,7 +864,7 @@
 // Ignore mutual friends for now
 - (void)processFriendOfFriendPacket:(XFPacket *)pkt
 {
-	NSArray *sessionIDs, *userIDs, *userNames, *nickNames, *common;
+	NSArray *sessionIDs, *userIDs, *userNames, *nickNames;
 	NSString *username, *nickname;
 	
 	sessionIDs		= [pkt attributeValuesForKey:XFPacketFriendSIDKey];

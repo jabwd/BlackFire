@@ -96,7 +96,6 @@
 	}
 	if( [_missingIcons count] < 1 )
 	{
-		NSLog(@"Done downloading all the game icons needed for this session.");
 		return; // break the cycle
 	}
 	NSNumber *game = [[_missingIcons objectAtIndex:0] retain];
@@ -154,7 +153,6 @@
 		[key release];
 		if( ! image )
 		{
-			NSLog(@"WTF hoe kan dit nou weer?");
 			image = [NSImage imageNamed:@"-1"];
 		}
 		return image;

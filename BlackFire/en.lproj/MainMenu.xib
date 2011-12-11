@@ -1100,7 +1100,7 @@
 								<string key="NSTitle"/>
 								<array class="NSMutableArray" key="NSMenuItems">
 									<reference ref="110199343"/>
-									<object class="NSMenuItem" id="340017495">
+									<object class="NSMenuItem" id="536057613">
 										<reference key="NSMenu" ref="294385808"/>
 										<string key="NSTitle">Available</string>
 										<string key="NSKeyEquiv"/>
@@ -1651,14 +1651,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">selectStatus:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="1019595056"/>
-					</object>
-					<int key="connectionID">701</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">selectNicknameOption:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="70425166"/>
@@ -1757,7 +1749,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">selectAvailable:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="340017495"/>
+						<reference key="destination" ref="536057613"/>
 					</object>
 					<int key="connectionID">844</int>
 				</object>
@@ -2134,7 +2126,7 @@
 							<reference ref="110199343"/>
 							<reference ref="793603725"/>
 							<reference ref="1017315150"/>
-							<reference ref="340017495"/>
+							<reference ref="536057613"/>
 						</array>
 						<reference key="parent" ref="16073081"/>
 					</object>
@@ -2618,7 +2610,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">840</int>
-						<reference key="object" ref="340017495"/>
+						<reference key="object" ref="536057613"/>
 						<reference key="parent" ref="294385808"/>
 					</object>
 				</array>
