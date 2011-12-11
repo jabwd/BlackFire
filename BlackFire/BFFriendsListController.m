@@ -167,13 +167,24 @@
 			{
 				statusString = [NSString stringWithFormat:@"%@Playing %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:friend.gameID]];
 			}
+			[imageCell setImage:[[BFGamesManager sharedGamesManager] imageForGame:(unsigned int)friend.gameID]];
+		}
+		else
+		{
+			if( friend.avatar )
+			{
+				[imageCell setImage:friend.avatar];
+			}
+			else
+			{
+				// determine whether the image exists on the disk
+				[imageCell setImage:[NSImage imageNamed:@"xfire"]];
+			}
 		}
 		
 		// always show this for offline friends
 		if( !friend.online )
 			statusString = @"Offline";
-		
-		[imageCell setImage:[[BFGamesManager sharedGamesManager] imageForGame:friend.gameID]];
 		
 		if( [statusString rangeOfString:@"AFK"].length > 0 )
 			[imageCell setFriendStatus:CellStatusAFK];
@@ -232,15 +243,11 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
-	/*NSLog(@"Should be selecting an item :/");
-	if( [item isKindOfClass:[XFGroup class]] )
+	XFFriend *remoteFriend = (XFFriend *)item;
+	if( [remoteFriend isKindOfClass:[XFFriend class]] )
 	{
-		if( [outlineView isItemExpanded:item] )
-			[outlineView collapseItem:item];
-		else
-			[outlineView expandItem:item];
-		return true;
-	}*/
+		[_delegate requestAvatarForFriend:remoteFriend];
+	}
 	return true;
 }
 

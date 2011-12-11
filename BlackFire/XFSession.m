@@ -339,7 +339,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)receivedFriendInformation:(unsigned int)userID getValue:(unsigned int)value type:(unsigned int)type
 {
-	if( [_delegate respondsToSelector:@selector(session:receivedAvatarInformation:type:)] )
+	if( [_delegate respondsToSelector:@selector(session:receivedAvatarInformation:getValue:type:)] )
 		[_delegate session:self receivedAvatarInformation:userID getValue:value type:type];
 }
 

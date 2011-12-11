@@ -21,6 +21,7 @@
 @synthesize lastName	= _lastname;
 @synthesize status		= _statusString;
 @synthesize sessionID	= _sessionID;
+@synthesize avatar		= _avatar;
 
 @synthesize userID			= _userID;
 @synthesize messageIndex	= _messageIndex;
@@ -38,6 +39,7 @@
 {
 	if( (self = [super init]) )
 	{
+		_avatar			= nil;
 		_session		= session;
 		_username		= nil;
 		_nickname		= nil;
@@ -66,6 +68,7 @@
 {
 	if( (self = [super init]) )
 	{
+		_avatar			= nil;
 		_session		= nil;
 		_username		= nil;
 		_nickname		= nil;
@@ -94,6 +97,7 @@
 {
 	if( (self = [super init]) )
 	{
+		_avatar			= nil;
 		_session		= nil;
 		_username		= nil;
 		_nickname		= nil;
@@ -120,6 +124,8 @@
 
 - (void)dealloc
 {
+	[_avatar release];
+	_avatar = nil;
 	[_username release];
 	_username = nil;
 	[_nickname release];

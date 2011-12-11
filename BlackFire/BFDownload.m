@@ -63,6 +63,7 @@
 	_context = nil;
 	[_destinationPath release];
 	_destinationPath = nil;
+	[_connection cancel];
 	[_connection release];
 	_connection = nil;
 	[_data release];

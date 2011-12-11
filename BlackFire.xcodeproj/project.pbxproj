@@ -103,7 +103,6 @@
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
 		36D9C9FC1465CAF600C4A162 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9C9FB1465CAF600C4A162 /* LoginView.xib */; };
 		36DAA20914935816001A7039 /* BFDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DAA20814935816001A7039 /* BFDownload.m */; };
-		36DAB7E414935C50001A7039 /* -1.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DAB7E314935C50001A7039 /* -1.png */; };
 		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
 		36EBDDA51479B2F500D219D7 /* activeTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD991479B2F500D219D7 /* activeTabClose.png */; };
 		36EBDDA61479B2F500D219D7 /* activeTabCloseHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */; };
@@ -279,7 +278,6 @@
 		36D9C9FB1465CAF600C4A162 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		36DAA20714935816001A7039 /* BFDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDownload.h; sourceTree = "<group>"; };
 		36DAA20814935816001A7039 /* BFDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDownload.m; sourceTree = "<group>"; };
-		36DAB7E314935C50001A7039 /* -1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-1.png"; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36EBDD991479B2F500D219D7 /* activeTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClose.png; sourceTree = "<group>"; };
 		36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabCloseHover.png; sourceTree = "<group>"; };
@@ -685,7 +683,6 @@
 		36B6427D1484468B00D9B11E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				36DAB7E314935C50001A7039 /* -1.png */,
 				36529846146697C00010FD7F /* xfire.jpg */,
 				36B642701484464500D9B11E /* joystick.png */,
 				36B642831484486900D9B11E /* offline_bubble.png */,
@@ -821,7 +818,6 @@
 				360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */,
 				36E41296148D318C003BABE9 /* License.rtf in Resources */,
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
-				36DAB7E414935C50001A7039 /* -1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

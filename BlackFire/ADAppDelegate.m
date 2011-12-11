@@ -37,6 +37,8 @@
 
 - (void)dealloc
 {
+	[_download release];
+	_download = nil;
 	[_session disconnect];
 	[_session release];
 	_session = nil;
@@ -50,7 +52,8 @@
 - (void)awakeFromNib
 {
 	[[BFGamesManager sharedGamesManager] setDelegate:self];
-	_chatControllers = [[NSMutableArray alloc] init];
+	_chatControllers	= [[NSMutableArray alloc] init];
+	_download			= nil;
 	
 	
 	[self changeToMode:BFApplicationModeOffline];
@@ -422,6 +425,8 @@
 	{
 		[[BFGamesManager sharedGamesManager] startMonitoring];
 		[self changeToMode:BFApplicationModeOnline];
+		
+		[_session requestFriendInformation:_session.loginIdentity];
 	}
 	else if( newStatus == XFSessionStatusConnecting )
 	{
@@ -463,6 +468,51 @@
 }
 
 
+- (void)session:(XFSession *)session receivedAvatarInformation:(unsigned int)userID getValue:(unsigned int)getValue type:(unsigned int)type
+{
+	//	http://media.xfire.com/xfire/xf/images/avatars/gallery/default/492.gif
+	//	http://www.xfire.com/avatar/160/username.jpg?getValue
+	//  #define GALLERY_AVATAR_URL @"http://media.xfire.com/xfire/xf/images/avatars/gallery/default/%.3d.gif"
+	//	#define DEFAULT_AVATAR_URL @"http://media.xfire.com/xfire/xf/images/avatars/gallery/default/xfire100.jpg"
+	//	#define CUSTOM_AVATAR_URL  @"http://screenshot.xfire.com/avatar/100/%@.jpg?%d"
+	XFFriend *remoteFriend = [_session friendForUserID:userID];
+	if( ! remoteFriend && userID == _session.loginIdentity.userID )
+		remoteFriend = _session.loginIdentity;
+	
+	NSURL *url = nil;
+
+	switch(type)
+	{
+		case 0x01:
+		{
+			// stock xfire avatar
+			url = [NSURL URLWithString:[NSString stringWithFormat:@"http://media.xfire.com/xfire/xf/images/avatars/gallery/default/%u.gif",getValue]];
+		}
+			break;
+			
+		case 0x02:
+		{
+			// uploaded avatar
+			url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.xfire.com/avatar/160/%@.jpg?%u",remoteFriend.username,getValue]];
+		}
+			break;
+			
+		default:
+			// no avatar.
+			remoteFriend.avatar = [NSImage imageNamed:@"xfire"];
+			return;
+			break;
+	}
+	
+	// only allow the download if its possible at this time
+	if( !_download )
+	{
+		_download = [[BFDownload avatarDownload:url withDelegate:self] retain];
+		_download.context = remoteFriend;
+	}
+}
+
+
 - (void)session:(XFSession *)session nicknameChanged:(NSString *)newNickname
 {
 	[_nicknamePopUpButton setTitle:newNickname];
@@ -485,6 +535,56 @@
 {
 	return _account.password;
 }
+
+
+
+#pragma mark - BFDownload
+
+- (void)download:(BFDownload *)download didFailWithError:(NSError *)error
+{
+	[_download release];
+	_download = nil;
+	NSLog(@"*** Unable to download avatar image %@",error);
+}
+
+- (void)download:(BFDownload *)download didFinishWithPath:(NSString *)path
+{
+	[_download release];
+	_download = nil;
+	XFFriend *remoteFriend = (XFFriend *)download.context;
+	if( remoteFriend )
+	{
+		NSString *cachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
+		NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/BlackFire/%@.jpg",cachePath,remoteFriend.username];
+		
+		if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
+			[[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+		
+		[[NSFileManager defaultManager] moveItemAtPath:path toPath:imagePath error:nil];
+		
+		NSImage *avatarImage = [[NSImage alloc] initWithContentsOfFile:imagePath];
+		[avatarImage setScalesWhenResized:true];
+		remoteFriend.avatar = avatarImage;
+		
+		if( remoteFriend.userID == _session.loginIdentity.userID && avatarImage )
+		{
+			[_avatarImageView setImage:avatarImage];
+		}
+		
+		
+		[avatarImage release];
+		[imagePath release];
+	}
+	
+	[_friendsListController reloadData];
+}
+
+- (void)requestAvatarForFriend:(XFFriend *)remoteFriend
+{
+	[_session requestFriendInformation:remoteFriend];
+}
+
+
 
 #pragma mark - Game detection
 

@@ -536,9 +536,9 @@
 
 - (void)processFriendAvatarPacket:(XFPacket *)pkt
 {
-	[_session receivedFriendInformation:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue] 
-							   getValue:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue] 
-								   type:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]];
+	[_session receivedFriendInformation:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue]
+							   getValue:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]
+								   type:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue]];
 }
 
 - (void)processSystemBroadcast:(XFPacket *)pkt

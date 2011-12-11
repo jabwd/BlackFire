@@ -10,6 +10,7 @@
 #import "XFSession.h"
 
 #import "BFGamesManager.h"
+#import "BFDownload.h"
 #import "ADStringPromptController.h"
 
 typedef enum
@@ -23,7 +24,7 @@ typedef enum
 
 @class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController;
 
-@interface ADAppDelegate : NSObject <ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
+@interface ADAppDelegate : NSObject <BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
 	XFSession				*_session;
 	BFAccount				*_account;
@@ -40,6 +41,8 @@ typedef enum
 	// end toolbar outlets
 	
 	NSMutableArray *_chatControllers;
+	
+	BFDownload		*_download;
 	
 	BFLoginViewController		*_loginViewController;
 	BFFriendsListController		*_friendsListController;
@@ -82,6 +85,7 @@ typedef enum
 - (IBAction)disconnect:(id)sender;
 
 - (void)beginChatWithFriend:(XFFriend *)remoteFriend;
+- (void)requestAvatarForFriend:(XFFriend *)remoteFriend;
 
 //----------------------------------------------------------------------------
 // Friends list toolbar

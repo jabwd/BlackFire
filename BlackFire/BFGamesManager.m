@@ -118,7 +118,7 @@
 			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
 			if( ! image )
 			{
-				image = [NSImage imageNamed:@"-1"];
+				image = [NSImage imageNamed:@"xfire"];
 				
 				// found a missing icon, should we add it or not ?
 				BOOL found = false;
@@ -153,11 +153,11 @@
 		[key release];
 		if( ! image )
 		{
-			image = [NSImage imageNamed:@"-1"];
+			image = [NSImage imageNamed:@"xfire"];
 		}
 		return image;
 	}
-	NSImage *tmp = [NSImage imageNamed:@"-1"];
+	NSImage *tmp = [NSImage imageNamed:@"xfire"];
 	[tmp setScalesWhenResized:true];
 	return tmp;
 }
