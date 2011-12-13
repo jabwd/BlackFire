@@ -158,6 +158,11 @@
 	[style release];
 }
 
+- (void)drawWithExpansionFrame:(NSRect)cellFrame inView:(NSView *)view
+{
+	// no implementation, hope this fixes the tooltip bug in the friends list
+}
+
 
 - (NSAttributedString *)statusString
 {

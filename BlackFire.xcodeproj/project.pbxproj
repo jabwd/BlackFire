@@ -952,7 +952,7 @@
 		3616F678145F0E5500E5066D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -961,7 +961,6 @@
 				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -969,7 +968,7 @@
 		3616F679145F0E5500E5066D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -978,7 +977,6 @@
 				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
