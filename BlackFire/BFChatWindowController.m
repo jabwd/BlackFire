@@ -73,6 +73,7 @@
 
 - (void)didBecomeMain:(NSNotification *)notification
 {
+	[_messageField becomeFirstResponder];
 	[_currentlySelectedChat becameMainChat];
 }
 
