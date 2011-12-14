@@ -80,6 +80,34 @@
 	return [_members objectAtIndex:index];
 }
 
+
+- (NSUInteger)onlineMembersCount
+{
+	NSUInteger count = 0;
+	for(XFFriend *friend in _members)
+	{
+		if( friend.online )
+			count++;
+	}
+	return count;
+}
+
+- (XFFriend *)onlineMemberAtIndex:(NSUInteger)index
+{
+	// this most likely works. Might be glitchy if the order of the array is changed
+	// during the reloadData..
+	for(XFFriend *friend in _members)
+	{
+		if( friend.online )
+		{
+			if( index == 0 )
+				return friend;
+			else
+				index--; // loop till the index is on 0
+		}
+	}
+}
+
 - (void)sortMembers
 {
 	[_members sortUsingSelector:@selector(compare:)];
