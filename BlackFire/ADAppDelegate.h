@@ -89,6 +89,12 @@ typedef enum
 - (void)requestAvatarForFriend:(XFFriend *)remoteFriend;
 
 //----------------------------------------------------------------------------
+// Main menu
+
+- (IBAction)showProfile:(id)sender;
+- (IBAction)removeSelectedFriend:(id)sender;
+
+//----------------------------------------------------------------------------
 // Friends list toolbar
 
 - (IBAction)showUserProfile:(id)sender;

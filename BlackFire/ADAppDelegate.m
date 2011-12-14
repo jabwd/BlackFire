@@ -788,7 +788,8 @@
 		case 4:
 		{
 			// remove friend
-			if( [_friendsListController selectedFriendNotFoF] )
+			XFFriend *selectedFriend = [_friendsListController selectedFriend];
+			if( !selectedFriend.clanFriend && !selectedFriend.friendOfFriend )
 				return true;
 		}
 			break;

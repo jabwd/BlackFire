@@ -10,7 +10,7 @@
 
 @class XFSession, XFFriend, XFGroup;
 
-@interface BFFriendsListController : BFTabViewController <NSOutlineViewDelegate, NSOutlineViewDataSource>
+@interface BFFriendsListController : BFTabViewController <NSMenuDelegate ,NSOutlineViewDelegate, NSOutlineViewDataSource>
 {
 	NSOutlineView *_friendsList;
 	XFSession	  *_session;
@@ -22,6 +22,12 @@
 
 - (void)reloadData;
 - (void)expandItem:(id)item;
+
+//--------------------------------------------------------------------------
+// Friends list menu handling
+
+- (IBAction)removeFriend:(id)sender;
+- (IBAction)showProfile:(id)sender;
 
 //--------------------------------------------------------------------------
 // Getting friends and groups

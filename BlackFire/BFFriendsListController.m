@@ -71,6 +71,42 @@
 	[_friendsList expandItem:item];
 }
 
+#pragma mark - Friends list menu
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	XFFriend *selectedFriend = [self selectedFriend];
+	switch([menuItem tag])
+	{
+		case 1: // show profile
+		{
+			if( [selectedFriend.username length] > 0 )
+				return true;
+		}
+			break;
+			
+		case 2: // remove friend
+		{
+			if( !selectedFriend.clanFriend && !selectedFriend.friendOfFriend )
+				return true;
+		}
+			break;
+	}
+	return false;
+}
+
+- (IBAction)removeFriend:(id)sender
+{
+	if( _delegate )
+		[_delegate removeSelectedFriend:sender];
+}
+
+- (IBAction)showProfile:(id)sender
+{
+	if( _delegate )
+		[_delegate showProfile:sender];
+}
+
 
 #pragma mark - Outlineview datasource
 
