@@ -624,6 +624,9 @@
 		[_session setStatusString:@""];
 		[_statusPopUpButton setTitle:@"Available"];
 	}
+	else {
+		[self connectionCheck];
+	}
 }
 
 - (IBAction)selectAway:(id)sender
@@ -637,6 +640,9 @@
 
 - (IBAction)selectCustomStatus:(id)sender
 {
+	if( _session.status != XFSessionStatusOnline )
+		return;
+	
 	if( _stringPromptController )
 	{
 		NSLog(@"*** Cannot change status while another string prompt is running");
@@ -657,6 +663,9 @@
 
 - (IBAction)selectNicknameOption:(id)sender
 {
+	if( _session.status != XFSessionStatusOnline )
+		return;
+	
 	if( _stringPromptController )
 	{
 		NSLog(@"*** Cannot change nickname while another string prompt is running");
@@ -690,6 +699,11 @@
 			NSRunAlertPanel(@"incorrect nickname", @"The nickname you chose was too long. Your old nickname has been restored.", @"OK", nil, nil);
 		else
 			NSRunAlertPanel(@"incorrect status", @"The status you entered is too long. Please choose one that is shorter.", @"OK", nil, nil);
+		[nickname release];
+		return;
+	}
+	else if( [nickname length] < 1 )
+	{
 		[nickname release];
 		return;
 	}
@@ -753,7 +767,7 @@
 	{
 		case 2:
 		{
-			// previou stab
+			// previous stab
 			if( [_chatControllers count] > 0 )
 			{
 				return true;
@@ -783,6 +797,13 @@
 		{
 			// show profile
 			if( [_friendsListController selectedOnlineFriend] )
+				return true;
+		}
+			break;
+			
+		case 6: // Account controls
+		{
+			if( _session.status == XFSessionStatusOnline )
 				return true;
 		}
 			break;
