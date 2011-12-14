@@ -82,6 +82,10 @@
 		3694B53A1466AFE700D0A105 /* BFChatWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5391466AFE700D0A105 /* BFChatWindowController.m */; };
 		3694B53C1466B11B00D0A105 /* BFChatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3694B53B1466B11B00D0A105 /* BFChatWindow.xib */; };
 		3694B53F1466B3EB00D0A105 /* BFMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B53E1466B3EB00D0A105 /* BFMessageCell.m */; };
+		3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698A09614991409004AA061 /* ADInvitationWindowController.m */; };
+		3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698A0981499141A004AA061 /* InvitationWindow.xib */; };
+		3698A09D1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698A09B1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m */; };
+		3698A09E1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698A09C1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib */; };
 		369D9DD91465FD6B00CB15FF /* BFFriendsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */; };
 		369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369D9DDB1466006200CB15FF /* FriendsList.xib */; };
 		36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36ADF20D1469AC9600F46E9E /* blue_bubble.png */; };
@@ -252,6 +256,12 @@
 		3694B53B1466B11B00D0A105 /* BFChatWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFChatWindow.xib; sourceTree = "<group>"; };
 		3694B53D1466B3EB00D0A105 /* BFMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMessageCell.h; sourceTree = "<group>"; };
 		3694B53E1466B3EB00D0A105 /* BFMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMessageCell.m; sourceTree = "<group>"; };
+		3698A09514991409004AA061 /* ADInvitationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADInvitationWindowController.h; sourceTree = "<group>"; };
+		3698A09614991409004AA061 /* ADInvitationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADInvitationWindowController.m; sourceTree = "<group>"; };
+		3698A0981499141A004AA061 /* InvitationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationWindow.xib; sourceTree = "<group>"; };
+		3698A09A1499348F004AA061 /* BFPreferencesWindowControllerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPreferencesWindowControllerWindowController.h; sourceTree = "<group>"; };
+		3698A09B1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferencesWindowControllerWindowController.m; sourceTree = "<group>"; };
+		3698A09C1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFPreferencesWindowControllerWindowController.xib; sourceTree = "<group>"; };
 		369D9DD71465FD6B00CB15FF /* BFFriendsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFFriendsListController.h; sourceTree = "<group>"; };
 		369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFriendsListController.m; sourceTree = "<group>"; };
 		369D9DDB1466006200CB15FF /* FriendsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsList.xib; sourceTree = "<group>"; };
@@ -614,6 +624,12 @@
 				361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */,
 				361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */,
 				361D2EEF148FFA0D008EE54C /* StringPrompt.xib */,
+				3698A09514991409004AA061 /* ADInvitationWindowController.h */,
+				3698A09614991409004AA061 /* ADInvitationWindowController.m */,
+				3698A0981499141A004AA061 /* InvitationWindow.xib */,
+				3698A09A1499348F004AA061 /* BFPreferencesWindowControllerWindowController.h */,
+				3698A09B1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m */,
+				3698A09C1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -818,6 +834,8 @@
 				360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */,
 				36E41296148D318C003BABE9 /* License.rtf in Resources */,
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
+				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
+				3698A09E1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,6 +889,8 @@
 				360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */,
 				361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */,
 				36DAA20914935816001A7039 /* BFDownload.m in Sources */,
+				3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */,
+				3698A09D1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -953,6 +973,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
