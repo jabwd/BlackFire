@@ -91,6 +91,8 @@ typedef enum
 //----------------------------------------------------------------------------
 // Friends list toolbar
 
+- (IBAction)showUserProfile:(id)sender;
+
 - (IBAction)selectAvailable:(id)sender;
 - (IBAction)selectAway:(id)sender;
 

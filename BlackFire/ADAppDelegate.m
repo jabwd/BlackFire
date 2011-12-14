@@ -607,6 +607,16 @@
 
 #pragma mark - Friends list toolbar
 
+- (IBAction)showUserProfile:(id)sender
+{
+	// actually never happens, but just to be sure ( we don't want a (NULL) in the URL now do we! ).
+	if( [_session.loginIdentity.username length] < 1 )
+		return;
+	
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.xfire.com/profile/%@",_session.loginIdentity.username]]];
+}
+
+
 - (IBAction)selectAvailable:(id)sender
 {
 	if( _session.status == XFSessionStatusOnline )
@@ -673,6 +683,16 @@
 	NSString *nickname = [_stringPromptController.messageField.stringValue copy];
 	[_stringPromptController release];
 	_stringPromptController = nil;
+	
+	if( [nickname length] > 100 )
+	{
+		if( _changingNickname )
+			NSRunAlertPanel(@"incorrect nickname", @"The nickname you chose was too long. Your old nickname has been restored.", @"OK", nil, nil);
+		else
+			NSRunAlertPanel(@"incorrect status", @"The status you entered is too long. Please choose one that is shorter.", @"OK", nil, nil);
+		[nickname release];
+		return;
+	}
 	
 	if( _changingNickname )
 	{
