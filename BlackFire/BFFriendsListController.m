@@ -17,6 +17,8 @@
 #import "XFGroup.h"
 #import "XFFriend.h"
 
+#import "BFDefaults.h"
+
 @implementation BFFriendsListController
 
 @synthesize friendsList = _friendsList;
@@ -41,6 +43,7 @@
 {
 	if( (self = [super init]) )
 	{
+		NSLog(@"*** [BFFriendsListController initWithSession:] is deprecated and shouldn't be used.");
 		[NSBundle loadNibNamed:@"FriendsList" owner:self];
 		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
 		BFImageAndTextCell *cell = [column dataCell];
@@ -49,15 +52,12 @@
 		
 		[_friendsList setDoubleAction:@selector(doubleClicked)];
 		[_friendsList setTarget:self];
-		
-		_session = session;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	_session = nil;
 	[super dealloc];
 }
 
@@ -129,11 +129,17 @@
 {
 	if( item == nil )
 	{
-		return [_session.groupController.groups count];
+		return [_delegate.session.groupController.groups count];
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{
-		return [(XFGroup *)item membersCount];
+		XFGroup *group = (XFGroup *)item;
+		if( group.groupType == XFGroupTypeClanGroup )
+		{
+			if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineClanFriends] )
+				return [group onlineMembersCount];
+		}
+		return [group membersCount];
 	}
 	return 0;
 }
@@ -149,11 +155,21 @@
 {
 	if( item == nil )
 	{
-		return [_session.groupController.groups objectAtIndex:index];
+		return [_delegate.session.groupController.groups objectAtIndex:index];
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{
-		return [(XFGroup *)item memberAtIndex:index];
+		XFGroup *group = (XFGroup *)item;
+		if( group.groupType == XFGroupTypeClanGroup )
+		{
+			// don't handle the "else" clause here as the default behavior of the method is fine if this 
+			// pref is on "true"
+			if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineClanFriends] )
+			{
+				return [group onlineMemberAtIndex:index];
+			}
+		}
+		return [group memberAtIndex:index];
 	}
 	return nil;
 }

@@ -22,6 +22,8 @@
 
 #import "BFNotificationCenter.h"
 
+#import "BFDefaults.h"
+
 @implementation ADAppDelegate
 
 @synthesize window			= _window;
@@ -809,6 +811,30 @@
 		}
 			break;
 			
+		case 7: // show / hide clan friend groups
+			break;
+			
+		case 8: // show / hide custom friend groups
+			break;
+			
+		case 9: // show / hide offline friends group
+			break;
+			
+		case 10: // show / hide offline clan friends
+		{
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineClanFriends] )
+			{
+				[menuItem setTitle:@"Hide offline clan friends"];
+			}
+			else 
+			{
+				[menuItem setTitle:@"Show offline clan friends"];
+			}
+			return true;
+				
+		}
+			break;
+			
 		default:
 		{
 			return true;
@@ -821,6 +847,22 @@
 - (IBAction)help:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.macxfire.com/"]];
+}
+
+
+
+- (IBAction)toggleShowOfflineClanFriends:(id)sender
+{
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineClanFriends] )
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:false forKey:BFShowOfflineClanFriends];
+	}
+	else
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:true forKey:BFShowOfflineClanFriends];
+	}
+
+	[_friendsListController reloadData];
 }
 
 

@@ -106,6 +106,7 @@
 				index--; // loop till the index is on 0
 		}
 	}
+	return nil;
 }
 
 - (void)sortMembers

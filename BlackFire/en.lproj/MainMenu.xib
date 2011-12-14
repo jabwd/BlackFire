@@ -665,6 +665,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">10</int>
 								</object>
 								<object class="NSMenuItem" id="956530036">
 									<reference key="NSMenu" ref="466310130"/>
@@ -964,7 +965,6 @@
 							<string key="NSFrame">{{39, 2}, {89, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="118632682">
@@ -1086,7 +1086,6 @@
 									<int key="NSfFlags">1044</int>
 								</object>
 							</object>
-							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1207,7 +1206,6 @@
 								<bool key="NSNoAutoenable">YES</bool>
 								<reference key="NSMenuFont" ref="474206734"/>
 							</object>
-							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1257,7 +1255,6 @@
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="180167131">
@@ -1801,6 +1798,14 @@
 						<reference key="destination" ref="143122971"/>
 					</object>
 					<int key="connectionID">850</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleShowOfflineClanFriends:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="982026151"/>
+					</object>
+					<int key="connectionID">853</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2823,7 +2828,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">852</int>
+			<int key="maxID">853</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2834,13 +2839,16 @@
 						<string key="closeAction:">id</string>
 						<string key="disconnect:">id</string>
 						<string key="help:">id</string>
+						<string key="removeSelectedFriend:">id</string>
 						<string key="selectAvailable:">id</string>
 						<string key="selectAway:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectNicknameOption:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectStatus:">id</string>
+						<string key="showProfile:">id</string>
 						<string key="showUserProfile:">id</string>
+						<string key="toggleShowOfflineClanFriends:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="closeAction:">
@@ -2853,6 +2861,10 @@
 						</object>
 						<object class="IBActionInfo" key="help:">
 							<string key="name">help:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeSelectedFriend:">
+							<string key="name">removeSelectedFriend:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectAvailable:">
@@ -2879,8 +2891,16 @@
 							<string key="name">selectStatus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="showProfile:">
+							<string key="name">showProfile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showUserProfile:">
 							<string key="name">showUserProfile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleShowOfflineClanFriends:">
+							<string key="name">toggleShowOfflineClanFriends:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

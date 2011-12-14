@@ -13,7 +13,6 @@
 @interface BFFriendsListController : BFTabViewController <NSMenuDelegate ,NSOutlineViewDelegate, NSOutlineViewDataSource>
 {
 	NSOutlineView *_friendsList;
-	XFSession	  *_session;
 }
 
 @property (assign) IBOutlet NSOutlineView *friendsList;

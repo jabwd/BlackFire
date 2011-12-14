@@ -94,6 +94,8 @@ typedef enum
 - (IBAction)showProfile:(id)sender;
 - (IBAction)removeSelectedFriend:(id)sender;
 
+- (IBAction)toggleShowOfflineClanFriends:(id)sender;
+
 //----------------------------------------------------------------------------
 // Friends list toolbar
 

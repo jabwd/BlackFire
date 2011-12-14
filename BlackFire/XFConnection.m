@@ -539,8 +539,6 @@
 	[_session receivedFriendInformation:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue]
 							   getValue:[(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] unsignedIntValue]
 								   type:[(NSNumber *)[[pkt attributeForKey:@"0x34"] value] unsignedIntValue]];
-	
-	NSLog(@"PKT: %@",pkt);
 }
 
 - (void)processSystemBroadcast:(XFPacket *)pkt
