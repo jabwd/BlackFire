@@ -337,9 +337,16 @@
 				statusString = [NSString stringWithFormat:@"%@Playing %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:remoteFriend.gameID]];
 			}
 		}
-		else
+		else if( remoteFriend.avatar )
+		{
+			displayImage = remoteFriend.avatar;
+		}
+		else {
 			displayImage = [NSImage imageNamed:@"xfire"];
+		}
 
+		[displayImage setScalesWhenResized:true];
+		[displayImage setSize:NSMakeSize(64, 64)]; 
 		[_avatarImageView setImage:displayImage];
 		
 		if( remoteFriend.online )

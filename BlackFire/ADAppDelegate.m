@@ -216,7 +216,7 @@
 			
 			if( ! _friendsListController )
 			{
-				_friendsListController = [[BFFriendsListController alloc] initWithSession:_session];
+				_friendsListController = [[BFFriendsListController alloc] init];
 				_friendsListController.delegate = self;
 			}
 			
@@ -461,13 +461,11 @@
 
 - (void)session:(XFSession *)session didReceiveFriendShipRequests:(NSArray *)requests
 {
-#warning implement this method
 	NSLog(@"Received friend ship request: %@",requests);
 }
 
 - (void)session:(XFSession *)session didReceiveSearchResults:(NSArray *)results
 {
-#warning implement this method
 	NSLog(@"Received search results: %@",results);
 }
 
@@ -572,6 +570,8 @@
 		
 		if( remoteFriend.userID == _session.loginIdentity.userID && avatarImage )
 		{
+			[avatarImage setScalesWhenResized:true];
+			[avatarImage setSize:NSMakeSize(32, 32)]; // make sure that the image view resizes the image to its own size.
 			[_avatarImageView setImage:avatarImage];
 		}
 		

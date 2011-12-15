@@ -39,23 +39,6 @@
 	return self;
 }
 
-- (id)initWithSession:(XFSession *)session
-{
-	if( (self = [super init]) )
-	{
-		NSLog(@"*** [BFFriendsListController initWithSession:] is deprecated and shouldn't be used.");
-		[NSBundle loadNibNamed:@"FriendsList" owner:self];
-		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
-		BFImageAndTextCell *cell = [column dataCell];
-		[cell setEditable:NO];
-		[cell setDisplayImageSize:NSMakeSize(24.0f, 24.0f)];
-		
-		[_friendsList setDoubleAction:@selector(doubleClicked)];
-		[_friendsList setTarget:self];
-	}
-	return self;
-}
-
 - (void)dealloc
 {
 	[super dealloc];
