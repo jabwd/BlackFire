@@ -36,6 +36,7 @@
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
 		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		_typing = false;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
 	}
@@ -44,7 +45,9 @@
 
 - (void)dealloc
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[_chat setDelegate:nil];
 	[_chat release];
 	_chat = nil;
 	[_windowController release];
@@ -56,11 +59,13 @@
 
 - (void)closeChat
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	_missedMessages = 0;
 	SFTabView *tab = [_windowController tabViewForChat:self];
 	tab.missedMessages = _missedMessages;
 	[tab setNeedsDisplay:true]; // reset the missed messages count
+	[_chat setDelegate:nil];
 	[_chat closeChat];
 	[_chat release];
 	_chat = nil;
@@ -104,7 +109,34 @@
 	[[BFNotificationCenter defaultNotificationCenter] playSendSound];
 }
 
+- (void)friendStartedTyping
+{
+	[_windowController tabViewForChat:self].image = [NSImage imageNamed:@"tab-typing"];
+	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
+}
+
+- (void)friendStoppedTyping
+{
+	[_windowController tabViewForChat:self].image = nil;
+	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
+}
+
 #pragma mark - Misc methods
+
+- (void)textDidChange:(NSNotification *)notification
+{
+	if( ! _typing )
+	{
+		_typing = true;
+		[_chat sendTypingNotification];
+		[self performSelector:@selector(userTypingDidEnd) withObject:nil afterDelay:5.0f];
+	}
+}
+
+- (void)userTypingDidEnd
+{
+	_typing = false;
+}
 
 - (void)friendDidChange:(NSNotification *)notification
 {

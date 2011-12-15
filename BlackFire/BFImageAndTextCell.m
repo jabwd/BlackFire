@@ -9,6 +9,8 @@
 
 #import "BFImageAndTextCell.h"
 
+#import "XFFriend.h"
+
 @implementation BFImageAndTextCell
 
 @synthesize statusImage = _statusImage;
@@ -76,6 +78,35 @@
 // let the superview (NSTextFieldCell) draw the image
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 {
+	if( cellFrame.size.height > 20 )
+	{
+		if( ! _image )
+			_image = [[NSImage imageNamed:@"xfire"] retain];
+		if( ! _statusImage )
+		{
+			_statusImage = [[NSImage imageNamed:@"avi_bubble"] retain];
+		}
+	}
+	/*id objectValue = [self objectValue];
+	if( [objectValue isKindOfClass:[XFFriend class]] )
+	{
+		XFFriend *friend = (XFFriend *)objectValue;
+		if( ! _image )
+			_image = [friend.avatar retain];
+		if( ! _statusImage )
+		{
+			if( friend.online )
+			{
+				_statusImage = [[NSImage imageNamed:@"avi_bubble"] retain];
+			}
+			else {
+				_statusImage = [[NSImage imageNamed:@"away_bubble"] retain];
+			}
+		}
+		
+		// for the text drawing
+		[self setObjectValue:[friend displayName]];
+	}*/
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
 	[style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];

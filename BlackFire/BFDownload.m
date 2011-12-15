@@ -113,7 +113,7 @@
 {
 	if( _connection )
 	{
-		[_connection stop];
+		[_connection cancel];
 		[_connection release];
 		_connection = nil;
 	}

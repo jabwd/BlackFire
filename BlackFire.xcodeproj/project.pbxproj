@@ -61,6 +61,7 @@
 		362FFAAA146742D0007E3BD8 /* inactiveTabRightSL.png in Resources */ = {isa = PBXBuildFile; fileRef = 362FFA95146742D0007E3BD8 /* inactiveTabRightSL.png */; };
 		362FFAAD14674363007E3BD8 /* SFTabStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFAAC14674363007E3BD8 /* SFTabStripView.m */; };
 		362FFAAF14674D3E007E3BD8 /* inactiveWTabFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 362FFAAE14674D3E007E3BD8 /* inactiveWTabFill.png */; };
+		363082C61499F9E1001B47CC /* tab-typing.png in Resources */ = {isa = PBXBuildFile; fileRef = 363082C51499F9E1001B47CC /* tab-typing.png */; };
 		3645873A149937AF00460195 /* BFDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 36458739149937AF00460195 /* BFDefaults.m */; };
 		3646BBDD1464802D008FD6D4 /* XFGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBDC1464802D008FD6D4 /* XFGroupController.m */; };
 		3646BBE11464A548008FD6D4 /* XFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE01464A548008FD6D4 /* XFChat.m */; };
@@ -221,6 +222,7 @@
 		362FFAAB14674363007E3BD8 /* SFTabStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTabStripView.h; sourceTree = "<group>"; };
 		362FFAAC14674363007E3BD8 /* SFTabStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTabStripView.m; sourceTree = "<group>"; };
 		362FFAAE14674D3E007E3BD8 /* inactiveWTabFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabFill.png; sourceTree = "<group>"; };
+		363082C51499F9E1001B47CC /* tab-typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-typing.png"; sourceTree = "<group>"; };
 		36458738149937AF00460195 /* BFDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDefaults.h; sourceTree = "<group>"; };
 		36458739149937AF00460195 /* BFDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDefaults.m; sourceTree = "<group>"; };
 		3646BBDB1464802D008FD6D4 /* XFGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGroupController.h; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				363082C51499F9E1001B47CC /* tab-typing.png */,
 				360D99B8148BEB6F00A529F6 /* MacGames.plist */,
 				36B6427D1484468B00D9B11E /* Images */,
 				36B6427C1484467300D9B11E /* Sounds */,
@@ -849,6 +852,7 @@
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
 				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
 				3698A09E1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib in Resources */,
+				363082C61499F9E1001B47CC /* tab-typing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

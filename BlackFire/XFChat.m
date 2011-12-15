@@ -41,6 +41,7 @@
 
 - (void)dealloc
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[_remoteFriend release];
 	_remoteFriend = nil;
 	_connection = nil;
@@ -69,10 +70,9 @@
 	}
 }
 
-- (void)notifyIsTyping
+- (void)sendTypingNotification
 {
-	XFFriend *us = _connection.session.loginIdentity;
-	XFPacket *packet = [XFPacket chatTypingNotificationPacketWithSID:us.sessionID imIndex:(unsigned int)us.messageIndex typing:true];
+	XFPacket *packet = [XFPacket chatTypingNotificationPacketWithSID:_remoteFriend.sessionID imIndex:(unsigned int)_remoteFriend.messageIndex typing:true];
 	[_connection sendPacket:packet];
 }
 
@@ -88,11 +88,23 @@
 {
 	if( [_delegate respondsToSelector:@selector(receivedMessage:)] )
 		[_delegate receivedMessage:message];
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	[self friendStoppedTypingNotification];
 }
 
 - (void)receivedIsTypingNotification
 {
+	if( [_delegate respondsToSelector:@selector(friendStartedTyping)] )
+		[_delegate friendStartedTyping];
 	
+	[self performSelector:@selector(friendStoppedTypingNotification) withObject:nil afterDelay:10.0f];
+}
+
+- (void)friendStoppedTypingNotification
+{
+	if( [_delegate respondsToSelector:@selector(friendStoppedTyping)] )
+		[_delegate friendStoppedTyping];
 }
 
 - (void)receivedNetworkInformation
@@ -142,6 +154,11 @@
 - (void)closeChat
 {
 	[_connection.session closeChat:self];
+}
+
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<XFChat with %@>",[_remoteFriend displayName]];
 }
 
 @end

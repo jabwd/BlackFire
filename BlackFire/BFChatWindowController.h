@@ -12,7 +12,7 @@
 @class BFChat;
 
 
-@interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate>
+@interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate, NSTextFieldDelegate>
 {
 	NSWindow	*_window;
 	NSView		*_switchView;

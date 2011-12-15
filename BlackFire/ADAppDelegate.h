@@ -104,7 +104,6 @@ typedef enum
 - (IBAction)selectAvailable:(id)sender;
 - (IBAction)selectAway:(id)sender;
 
-- (IBAction)selectStatus:(id)sender;
 - (IBAction)selectNicknameOption:(id)sender;
 
 @end

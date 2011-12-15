@@ -28,6 +28,8 @@ typedef enum
 	NSDateFormatter *_dateFormatter;
 	
 	NSUInteger _missedMessages;
+	
+	BOOL _typing;
 }
 
 @property (nonatomic, retain) BFChatWindowController *windowController;
@@ -47,6 +49,7 @@ typedef enum
 
 
 - (void)displayWarning:(NSString *)warningMessage;
+- (void)textDidChange:(NSNotification *)notification;
 
 /*
  * Processes a plain text string to a NSAttributedString according to the given

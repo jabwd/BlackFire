@@ -179,7 +179,7 @@
 	// draw the close button on top of everything
 	if( _mouseInside )
 		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
-	else if( _tabImage && _missedMessages < 1 )
+	else if( _tabImage )
 		[_tabImage drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 13, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	else if( _missedMessages > 0 )
 	{

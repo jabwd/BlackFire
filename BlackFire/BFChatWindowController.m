@@ -245,6 +245,11 @@
 
 #pragma mark - User interface controls
 
+- (void)controlTextDidChange:(NSNotification *)obj
+{
+	[_currentlySelectedChat textDidChange:obj];
+}
+
 - (IBAction)sendMessage:(id)sender
 {
 	[_currentlySelectedChat sendMessage:[_messageField stringValue]];

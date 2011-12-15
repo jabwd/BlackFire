@@ -12,6 +12,8 @@
 
 @protocol XFChatDelegate <NSObject>
 - (void)receivedMessage:(NSString *)message;
+- (void)friendStartedTyping;
+- (void)friendStoppedTyping;
 @end
 
 @interface XFChat : NSObject
@@ -36,7 +38,7 @@
 //--------------------------------------------------------------------
 // Sending messages
 - (void)sendMessage:(NSString *)message;
-- (void)notifyIsTyping;
+- (void)sendTypingNotification;
 - (void)sendNetworkInformation;
 
 //--------------------------------------------------------------------
