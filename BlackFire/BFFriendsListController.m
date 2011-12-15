@@ -105,7 +105,12 @@
 
 - (void)doubleClicked
 {
-	[_delegate beginChatWithFriend:[self selectedOnlineFriend]];
+	// this also allows with offline friends, so someone can "observe" his online status
+	XFFriend *selectedFriend = [self selectedFriend];
+	if( selectedFriend )
+	{
+		[_delegate beginChatWithFriend:selectedFriend];
+	}
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item

@@ -164,7 +164,7 @@
 
 #pragma mark - Mac Games
 
-- (unsigned int)gameIDForApplication:(NSDictionary *)applicationInfo
+- (unsigned int)gameIDForApplication:(NSRunningApplication *)applicationInfo
 {
 	NSDictionary *output = nil;
 	
@@ -184,9 +184,24 @@
 	//NSLog(@"ApplicationInfo: %@",applicationInfo);
 	//[BFProcessInformation argumentsForProcess:[[applicationInfo objectForKey:@"NSApplicationProcessIdentifier"] intValue]];
 
-	output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationName"]];
+	output = [_macGames objectForKey:applicationInfo.bundleIdentifier];
 	if( !output )
-		output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationBundleIdentifier"]];
+		output = [_macGames objectForKey:applicationInfo.localizedName];
+	
+	if( !output )
+	{
+		NSString *parentFolderName = [[[applicationInfo.executableURL relativePath] stringByDeletingLastPathComponent] lastPathComponent];
+		output = [_macGames objectForKey:parentFolderName];
+	}
+	return [[output objectForKey:@"gameID"] intValue];
+}
+
+- (unsigned int)gameIDForApplicationDict:(NSDictionary *)applicationInfo
+{
+	NSDictionary *output = nil;
+	output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationBundleIdentifier"]];
+	if( !output )
+		output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationName"]];
 	
 	if( !output )
 	{
@@ -203,8 +218,10 @@
 	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(applicationDidExit:) name:NSWorkspaceDidTerminateApplicationNotification object:nil];
 	
 	// Use Running applications for after Lion versions when leopard support will be dropped.
-	NSArray *runningApplications = [[NSWorkspace sharedWorkspace] launchedApplications];
-	for(NSDictionary *app in runningApplications)
+	//NSArray *runningApplications = [[NSWorkspace sharedWorkspace] launchedApplications];
+	// Fuck leopard, we are not supporting PPC anyways.
+	NSArray *runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+	for(NSRunningApplication *app in runningApplications)
 	{
 		NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplication:app]];
 		if( gameInfo )
@@ -223,7 +240,7 @@
 - (void)applicationDidLaunch:(NSNotification *)notification
 {
 	NSDictionary *userInfo = [notification userInfo];
-	NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplication:userInfo]];
+	NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplicationDict:userInfo]];
 	if( gameInfo )
 	{
 		[_runningGames addObject:gameInfo];
@@ -234,7 +251,7 @@
 - (void)applicationDidExit:(NSNotification *)notification
 {
 	NSDictionary *userInfo = [notification userInfo];
-	NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplication:userInfo]];
+	NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplicationDict:userInfo]];
 	if( gameInfo && [_runningGames containsObject:gameInfo] )
 	{
 		[_runningGames removeObject:gameInfo];

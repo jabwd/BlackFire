@@ -43,7 +43,8 @@
 //-----------------------------------------------------------------------------
 // Mac games
 
-- (unsigned int)gameIDForApplication:(NSDictionary *)applicationInfo;
+- (unsigned int)gameIDForApplication:(NSRunningApplication *)applicationInfo;
+- (unsigned int)gameIDForApplicationDict:(NSDictionary *)applicationInfo;
 
 - (void)startMonitoring;
 - (void)stopMonitoring;

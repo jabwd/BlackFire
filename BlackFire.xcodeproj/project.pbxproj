@@ -122,6 +122,10 @@
 		36EBDDAE1479B2F500D219D7 /* inactiveWTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDDA21479B2F500D219D7 /* inactiveWTabClose.png */; };
 		36EBDDAF1479B2F500D219D7 /* inactiveWTabHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDDA31479B2F500D219D7 /* inactiveWTabHover.png */; };
 		36EBDDB01479B2F500D219D7 /* inactiveWTabPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDDA41479B2F500D219D7 /* inactiveWTabPressed.png */; };
+		36F5F06B149A460000214DEF /* BFServerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F06A149A460000214DEF /* BFServerListController.m */; };
+		36F5F06F149A460C00214DEF /* BFGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F06E149A460C00214DEF /* BFGamesListController.m */; };
+		36F5F071149A466200214DEF /* ServerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5F070149A466200214DEF /* ServerList.xib */; };
+		36F5F073149A466B00214DEF /* GamesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5F072149A466B00214DEF /* GamesList.xib */; };
 		36FD1186147953B5009F70DE /* XFGamesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD1185147953B5009F70DE /* XFGamesManager.m */; };
 		36FD118A14795400009F70DE /* XFGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD118914795400009F70DE /* XFGame.m */; };
 /* End PBXBuildFile section */
@@ -306,6 +310,12 @@
 		36EBDDA21479B2F500D219D7 /* inactiveWTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabClose.png; sourceTree = "<group>"; };
 		36EBDDA31479B2F500D219D7 /* inactiveWTabHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabHover.png; sourceTree = "<group>"; };
 		36EBDDA41479B2F500D219D7 /* inactiveWTabPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabPressed.png; sourceTree = "<group>"; };
+		36F5F069149A460000214DEF /* BFServerListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFServerListController.h; sourceTree = "<group>"; };
+		36F5F06A149A460000214DEF /* BFServerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFServerListController.m; sourceTree = "<group>"; };
+		36F5F06D149A460C00214DEF /* BFGamesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesListController.h; sourceTree = "<group>"; };
+		36F5F06E149A460C00214DEF /* BFGamesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesListController.m; sourceTree = "<group>"; };
+		36F5F070149A466200214DEF /* ServerList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerList.xib; sourceTree = "<group>"; };
+		36F5F072149A466B00214DEF /* GamesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesList.xib; sourceTree = "<group>"; };
 		36FD1184147953B5009F70DE /* XFGamesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGamesManager.h; sourceTree = "<group>"; };
 		36FD1185147953B5009F70DE /* XFGamesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFGamesManager.m; sourceTree = "<group>"; };
 		36FD118814795400009F70DE /* XFGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGame.h; sourceTree = "<group>"; };
@@ -609,6 +619,12 @@
 				369D9DD71465FD6B00CB15FF /* BFFriendsListController.h */,
 				369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */,
 				369D9DDB1466006200CB15FF /* FriendsList.xib */,
+				36F5F069149A460000214DEF /* BFServerListController.h */,
+				36F5F06A149A460000214DEF /* BFServerListController.m */,
+				36F5F06D149A460C00214DEF /* BFGamesListController.h */,
+				36F5F06E149A460C00214DEF /* BFGamesListController.m */,
+				36F5F070149A466200214DEF /* ServerList.xib */,
+				36F5F072149A466B00214DEF /* GamesList.xib */,
 			);
 			name = TabViews;
 			sourceTree = "<group>";
@@ -853,6 +869,8 @@
 				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
 				3698A09E1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib in Resources */,
 				363082C61499F9E1001B47CC /* tab-typing.png in Resources */,
+				36F5F071149A466200214DEF /* ServerList.xib in Resources */,
+				36F5F073149A466B00214DEF /* GamesList.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,6 +927,8 @@
 				3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */,
 				3698A09D1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m in Sources */,
 				3645873A149937AF00460195 /* BFDefaults.m in Sources */,
+				36F5F06B149A460000214DEF /* BFServerListController.m in Sources */,
+				36F5F06F149A460C00214DEF /* BFGamesListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
