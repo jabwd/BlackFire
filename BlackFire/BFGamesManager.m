@@ -120,21 +120,25 @@
 			{
 				image = [NSImage imageNamed:@"xfire"];
 				
-				// found a missing icon, should we add it or not ?
-				BOOL found = false;
-				for(NSNumber *game in _missingIcons)
+				if( [self gameForGameID:gameID] )
 				{
-					if( [game unsignedIntValue] == gameID )
+					
+					// found a missing icon, should we add it or not ?
+					BOOL found = false;
+					for(NSNumber *game in _missingIcons)
 					{
-						found = true;
-						break;
+						if( [game unsignedIntValue] == gameID )
+						{
+							found = true;
+							break;
+						}
 					}
-				}
-				if( ! found )
-				{
-					[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
-					if( ! _download )
-						[self downloadNextMissingIcon];
+					if( ! found )
+					{
+						[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
+						if( ! _download )
+							[self downloadNextMissingIcon];
+					}
 				}
 			}
 			else

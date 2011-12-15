@@ -418,6 +418,8 @@
 	{
 		NSRunAlertPanel(@"Error", [NSString stringWithFormat:@"An error occured %lu",reason], @"OK", nil, nil);
 	}
+	
+	[self changeToMode:BFApplicationModeOffline];
 }
 
 
@@ -570,9 +572,12 @@
 		
 		if( remoteFriend.userID == _session.loginIdentity.userID && avatarImage )
 		{
-			[avatarImage setScalesWhenResized:true];
-			[avatarImage setSize:NSMakeSize(32, 32)]; // make sure that the image view resizes the image to its own size.
-			[_avatarImageView setImage:avatarImage];
+			NSImage *userImage = [avatarImage copy];
+			[userImage setScalesWhenResized:true];
+			[userImage setSize:NSMakeSize(32, 32)]; // make sure that the image view resizes the image to its own size
+			[_avatarImageView setImage:userImage];
+			
+			[userImage release];
 		}
 		
 		

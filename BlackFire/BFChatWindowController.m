@@ -345,9 +345,11 @@
 			displayImage = [NSImage imageNamed:@"xfire"];
 		}
 
-		[displayImage setScalesWhenResized:true];
-		[displayImage setSize:NSMakeSize(64, 64)]; 
-		[_avatarImageView setImage:displayImage];
+		NSImage *newImage = [displayImage copy];
+		[newImage setScalesWhenResized:true];
+		[newImage setSize:NSMakeSize(32, 32)];
+		[_avatarImageView setImage:newImage];
+		[newImage release];
 		
 		if( remoteFriend.online )
 		{
