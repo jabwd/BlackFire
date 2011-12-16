@@ -17,8 +17,6 @@
 
 @property (assign) IBOutlet NSOutlineView *friendsList;
 
-- (id)initWithSession:(XFSession *)session;
-
 - (void)reloadData;
 - (void)expandItem:(id)item;
 

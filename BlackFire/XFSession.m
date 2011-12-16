@@ -16,7 +16,7 @@
 
 // the amount of seconds before sending a keepalive request
 // lower this if you are on an unstable connection
-#define KEEPALIVE_TIME 60.0f
+#define KEEPALIVE_TIME 120.0f
 
 NSString *XFFriendDidChangeNotification		= @"XFFriendDidChangeNotification";
 NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";

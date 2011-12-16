@@ -442,7 +442,7 @@ bool hashSha1(  char *string, int len, char *sha)
 	
 	SHA1Reset(&sha1Context);
 	
-	SHA1Input(&sha1Context,string, len);
+	SHA1Input(&sha1Context,(const unsigned char*)string, len);
 	
 	
 	if (!SHA1Result(&sha1Context))

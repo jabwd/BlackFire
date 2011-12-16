@@ -212,6 +212,7 @@
 
 - (void)sendKeepAliveRequest
 {
+	NSLog(@"Sending keep alive");
 	[_keepAliveResponseTimer invalidate];
 	_keepAliveResponseTimer = nil;
 	_keepAliveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:30.0
@@ -814,6 +815,7 @@
 	{
 		NSData *sid         = [sessionIDs objectAtIndex:i];
 		unsigned int gid    = [[gameIDs objectAtIndex:i] unsignedIntValue];
+		//unsigned int port	= [[gamePorts objectAtIndex:i] unsignedIntValue];
 		
 		XFFriend *friend = [_session friendForSessionID:sid];
 		if( ! friend )
@@ -825,7 +827,7 @@
 			fof.sessionID		= sid;
 			fof.gameID			= gid;
 			fof.gameIP			= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
-			fof.gamePort		= [[gamePorts objectAtIndex:i] unsignedIntValue];
+			fof.gamePort		= ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
 			fof.friendOfFriend	= true; // can't be any one else.. as far as I know
 			[_session addFriend:fof]; // this shouldn't add the friend to any group.
 			[fof release];
@@ -844,7 +846,7 @@
 			}
 			friend.gameID	= gid;
 			friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
-			friend.gamePort = [[gamePorts objectAtIndex:i] unsignedIntValue];
+			friend.gamePort = ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
 			[_session raiseFriendNotification:XFFriendNotificationGameStatusChanged forFriend:friend];
 		}
 	}
@@ -1190,6 +1192,7 @@
 
 - (void)processKeepAliveResponse:(XFPacket *)pkt
 {
+	NSLog(@"KeepAlive response");
     if( _keepAliveResponseTimer )
     {
         [_keepAliveResponseTimer invalidate];

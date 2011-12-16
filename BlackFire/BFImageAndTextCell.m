@@ -181,12 +181,12 @@
 			drawPt.y -= 6.1f;
 			NSMutableAttributedString *finalSt  = [[NSMutableAttributedString alloc] initWithAttributedString:statusString];
 			[finalSt addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalSt length])];
-			[finalSt drawInRect:NSMakeRect(cellFrame.origin.x+6.0f, (9.0f + cellFrame.origin.y + (cellFrame.size.height - bndSize.height)/2.0f), cellFrame.size.width-_displayImageSize.width-2.0f, _displayImageSize.height)];
+			[finalSt drawInRect:NSMakeRect(cellFrame.origin.x+6.0f, (9.0f + cellFrame.origin.y + (cellFrame.size.height - bndSize.height)/2.0f), cellFrame.size.width-_displayImageSize.width-4.0f, _displayImageSize.height)];
 			[finalSt release];
 		}
 		NSMutableAttributedString *finalStr = [[NSMutableAttributedString alloc] initWithAttributedString:attrStr];
 		[finalStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalStr length])];
-		[finalStr drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-_displayImageSize.width-2.0f, _displayImageSize.height)];
+		[finalStr drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-_displayImageSize.width-4.0f, _displayImageSize.height)];
 		[finalStr release];
 	}
     [_statusImage setScalesWhenResized:YES];
