@@ -39,6 +39,10 @@
 //     4:                    +-----------+ Covers end but not start    Trunc only, no copy
 - (void)removeBytesInRange:(NSRange)delRange
 {
+	NSLog(@"*** Deprecated method called, removeBytesInRange (NSMutableData additions)");
+	[self replaceBytesInRange:delRange withBytes:NULL length:0];
+	return;
+	
 	NSRange ourRange = NSMakeRange(0, [self length]);
 	char* mutBytes = [self mutableBytes];
 	NSRange endRange;

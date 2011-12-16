@@ -268,11 +268,13 @@
 		{
 			[(BFImageAndTextCell *)cell setShowsStatus:false];
 		}
+		[(BFImageAndTextCell *)cell setGroupRow:false];
 	} 
 	else
 	{
 		[(BFImageAndTextCell *)cell setStatusImage:nil];
 		[(BFImageAndTextCell *)cell setShowsStatus:NO];
+		[(BFImageAndTextCell *)cell setGroupRow:true];
 		[cell setImage:nil];
 	}
 }

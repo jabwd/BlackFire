@@ -25,7 +25,6 @@
 		3616F6A0145F278300E5066D /* XFPacketAttributeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F69C145F278300E5066D /* XFPacketAttributeValue.m */; };
 		3616F6A1145F278300E5066D /* XFPacketDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F69E145F278300E5066D /* XFPacketDictionary.m */; };
 		3616F6A4145F29D800E5066D /* XFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F6A3145F29D800E5066D /* XFSession.m */; };
-		3616F6A9145F5CE400E5066D /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F6A8145F5CE400E5066D /* libcrypto.dylib */; };
 		361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */; };
 		361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361D2EEF148FFA0D008EE54C /* StringPrompt.xib */; };
 		36276EC71468152900F84E7B /* SFTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EC61468152900F84E7B /* SFTabView.m */; };
@@ -75,6 +74,7 @@
 		366AC22B14655185002A1F50 /* XFGroupChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC22A14655185002A1F50 /* XFGroupChat.m */; };
 		366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23A14658C8D002A1F50 /* BFAccount.m */; };
 		366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23D14658D21002A1F50 /* BFKeychainManager.m */; };
+		367A9619149AB9CE00CF3833 /* sha1.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F079149AB6A300214DEF /* sha1.m */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
 		368EC5BA147172CF00EEDC07 /* AHMarkedHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B7147172CF00EEDC07 /* AHMarkedHyperlink.m */; };
@@ -183,7 +183,6 @@
 		3616F69E145F278300E5066D /* XFPacketDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFPacketDictionary.m; sourceTree = "<group>"; };
 		3616F6A2145F29D800E5066D /* XFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFSession.h; sourceTree = "<group>"; };
 		3616F6A3145F29D800E5066D /* XFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFSession.m; sourceTree = "<group>"; };
-		3616F6A8145F5CE400E5066D /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADStringPromptController.h; sourceTree = "<group>"; };
 		361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADStringPromptController.m; sourceTree = "<group>"; };
 		361D2EEF148FFA0D008EE54C /* StringPrompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringPrompt.xib; sourceTree = "<group>"; };
@@ -316,6 +315,8 @@
 		36F5F06E149A460C00214DEF /* BFGamesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesListController.m; sourceTree = "<group>"; };
 		36F5F070149A466200214DEF /* ServerList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerList.xib; sourceTree = "<group>"; };
 		36F5F072149A466B00214DEF /* GamesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesList.xib; sourceTree = "<group>"; };
+		36F5F078149AB6A300214DEF /* sha1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		36F5F079149AB6A300214DEF /* sha1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sha1.m; sourceTree = "<group>"; };
 		36FD1184147953B5009F70DE /* XFGamesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGamesManager.h; sourceTree = "<group>"; };
 		36FD1185147953B5009F70DE /* XFGamesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFGamesManager.m; sourceTree = "<group>"; };
 		36FD118814795400009F70DE /* XFGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGame.h; sourceTree = "<group>"; };
@@ -328,7 +329,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */,
-				3616F6A9145F5CE400E5066D /* libcrypto.dylib in Frameworks */,
 				3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */,
 				36B6427F1484474700D9B11E /* Growl.framework in Frameworks */,
 			);
@@ -359,7 +359,6 @@
 			children = (
 				36B6427E1484474700D9B11E /* Growl.framework */,
 				36D9C9F114659B9600C4A162 /* Security.framework */,
-				3616F6A8145F5CE400E5066D /* libcrypto.dylib */,
 				3616F65D145F0E5500E5066D /* Cocoa.framework */,
 				3616F65F145F0E5500E5066D /* Other Frameworks */,
 			);
@@ -406,6 +405,8 @@
 		3616F67E145F0FF800E5066D /* XfireKit */ = {
 			isa = PBXGroup;
 			children = (
+				36F5F078149AB6A300214DEF /* sha1.h */,
+				36F5F079149AB6A300214DEF /* sha1.m */,
 				3616F68B145F175600E5066D /* XfireKit.h */,
 				3646BBDE1464A53B008FD6D4 /* Chatting */,
 				3646BBD914647FA4008FD6D4 /* Misc */,
@@ -919,6 +920,7 @@
 				368EC5BA147172CF00EEDC07 /* AHMarkedHyperlink.m in Sources */,
 				36FD1186147953B5009F70DE /* XFGamesManager.m in Sources */,
 				36FD118A14795400009F70DE /* XFGame.m in Sources */,
+				367A9619149AB9CE00CF3833 /* sha1.m in Sources */,
 				36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */,
 				36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */,
 				360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */,

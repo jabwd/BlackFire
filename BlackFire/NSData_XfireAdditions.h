@@ -57,8 +57,8 @@ static const unsigned int crc32table[] = {
 
 //+ (NSData *)newUUID;
 - (unsigned int)crc32;
-- (NSString *)sha1HexHash;
-- (NSData*)sha1Hash;
+/*- (NSString *)sha1HexHash;
+- (NSData*)sha1Hash;*/
 - (NSString*)stringRepresentation;
 
 - (unsigned char)byteAtIndex:(unsigned int)index;

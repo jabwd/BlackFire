@@ -188,7 +188,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError
 {
 	NSLog(@"Connection will disconnect: %u",connectionError);
-	if( _status == XFSessionStatusOnline )
+	if( _status == XFSessionStatusOnline || _status == XFSessionStatusConnecting )
 		[self disconnect];
 	else
 	{

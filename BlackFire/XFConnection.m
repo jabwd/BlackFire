@@ -12,6 +12,8 @@
 #import "XFPacket.h"
 #import "XFPacketDictionary.h"
 
+#import "sha1.h"
+
 #import "XFGroupChat.h"
 #import "XFChat.h"
 
@@ -233,6 +235,7 @@
 		
 		// this will also disconnect the connection therefore we are not doing it manually
 		// in this method
+		NSLog(@"Server Stopped responding");
 		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
     }
 }
@@ -562,16 +565,18 @@
 	
 	NSString *salt = [[pkt attributeForKey:XFPacketSaltKey] value];
 	
-    NSString *cur = [[NSString alloc] initWithFormat:@"%@%@UltimateArena",username,password];
+  /*  NSString *cur = [[NSString alloc] initWithFormat:@"%@%@UltimateArena",username,password];
     NSData *hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
     [cur release];
 	
     cur = [[NSString alloc] initWithFormat:@"%@%@",[hash stringRepresentation], salt];
     hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
-    [cur release];
+    [cur release];*/
+	
+	char *cp= cryptPassword([username UTF8String],[password UTF8String],[salt UTF8String]);
 	
 	XFPacket *loginPkt = [XFPacket loginPacketWithUsername:username
-                                                  password:[hash stringRepresentation]
+                                                  password:[NSString stringWithFormat:@"%s",cp]
                                                      flags:0];
     
 	[self sendPacket:loginPkt];

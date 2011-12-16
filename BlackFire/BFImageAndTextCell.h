@@ -24,6 +24,7 @@ typedef enum
     NSAttributedString *statusString;
     BOOL showsStatus;
     BOOL wasHighlighted;
+	BOOL groupRow;
 	
 	CellStatus status;
 }
@@ -31,6 +32,7 @@ typedef enum
 @property (nonatomic, retain) NSImage *image;
 @property (nonatomic, assign) CellStatus status;
 @property (nonatomic, retain) NSImage *statusImage;
+@property (assign) BOOL groupRow;
 
 
 - (void)setImage:(NSImage *)anImage;

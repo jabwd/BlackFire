@@ -65,10 +65,10 @@ static inline NSNumber *NSNumberFromPort(UInt16 port)
 	return [NSNumber numberWithUnsignedShort:port];
 }
 
-static inline NSString *XFSaltString() 
+/*static inline NSString *XFSaltString() 
 {
 	return [[[NSString stringWithFormat:@"%d", rand()] dataUsingEncoding:NSUTF8StringEncoding] sha1HexHash];
-}
+}*/
 
 static inline NSInteger createHashCRC32(NSData *hashData)
 {
@@ -93,10 +93,10 @@ static inline NSInteger createHashCRC32(NSData *hashData)
 	return crc32;
 }
 
-static inline NSData *XFMonikerFromSessionIDAndSalt(NSData *sessionID, NSString *salt)
+/*static inline NSData *XFMonikerFromSessionIDAndSalt(NSData *sessionID, NSString *salt)
 {
 	NSString *stringRep = [[sessionID stringRepresentation] stringByAppendingString:salt];
 	NSData *moniker = [[stringRep dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
 	return moniker;
-}
+}*/
 // EOF

@@ -19,6 +19,15 @@
 	[super drawRow:row clipRect:clipRect];
 }*/
 
+
+- (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row
+{
+	NSRect cellFrame		= [super frameOfCellAtColumn:column row:row];
+	cellFrame.size.width	+= cellFrame.origin.x - 8;
+	cellFrame.origin.x		= 8;
+	return cellFrame;
+}
+
 /*
  * This draws our nice "iOS" like highlight on the selection of a row.
  * OS X Just doesn't look as nice :D

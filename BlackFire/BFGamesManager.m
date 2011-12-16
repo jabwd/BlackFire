@@ -120,7 +120,8 @@
 			{
 				image = [NSImage imageNamed:@"xfire"];
 				
-				if( [self gameForGameID:gameID] )
+				// check if we know the game
+				if( [self gameForGameID:gameID].gameID != -1 )
 				{
 					
 					// found a missing icon, should we add it or not ?

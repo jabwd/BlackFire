@@ -17,7 +17,7 @@
 *******************************************************************/
 
 #import "NSData_XfireAdditions.h"
-#include <openssl/sha.h>
+//#include <openssl/sha.h>
 
 @implementation NSData (XfireAdditions)
 
@@ -41,7 +41,7 @@
 	return crc32;
 }
 
-- (NSData *)sha1Hash
+/*- (NSData *)sha1Hash
 {
 	SHA_CTX			ctx;
 	unsigned char	hash[SHA_DIGEST_LENGTH];
@@ -68,7 +68,7 @@
 	hashString[currentIndex * 2] = 0;
 	
 	return [NSString stringWithUTF8String:(const char *)hashString];
-}
+}*/
 
 // prints raw hex + ascii
 - (NSString *)enhancedDescription

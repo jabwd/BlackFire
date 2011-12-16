@@ -16,6 +16,7 @@
 @synthesize statusImage = _statusImage;
 @synthesize status;
 @synthesize image = _image;
+@synthesize groupRow;
 
 
 - (id)copyWithZone:(NSZone *)zone
@@ -87,6 +88,13 @@
 			_statusImage = [[NSImage imageNamed:@"avi_bubble"] retain];
 		}
 	}
+	
+	if( groupRow )
+	{
+		cellFrame.origin.x += 10;
+		cellFrame.size.width -= 10;
+	}
+	
 	/*id objectValue = [self objectValue];
 	if( [objectValue isKindOfClass:[XFFriend class]] )
 	{
@@ -112,8 +120,8 @@
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
 	if( _image )
 	{
-		cellFrame.origin.x = cellFrame.origin.x - 12.0f;
-		cellFrame.size.width += 20.0f;
+		//cellFrame.origin.x = cellFrame.origin.x - 12.0f;
+		cellFrame.size.width += 8.0f; // was 20.0f
 		NSRect imageFrame;
 		
 		NSDivideRect(cellFrame,&imageFrame,&cellFrame, 3.0f+_displayImageSize.width,NSMinXEdge);
