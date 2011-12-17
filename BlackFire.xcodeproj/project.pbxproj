@@ -27,6 +27,8 @@
 		3616F6A0145F278300E5066D /* XFPacketAttributeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F69C145F278300E5066D /* XFPacketAttributeValue.m */; };
 		3616F6A1145F278300E5066D /* XFPacketDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F69E145F278300E5066D /* XFPacketDictionary.m */; };
 		3616F6A4145F29D800E5066D /* XFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F6A3145F29D800E5066D /* XFSession.m */; };
+		361849AC149CF01800614603 /* BFPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361849AB149CF01800614603 /* BFPreferencesWindow.xib */; };
+		361849AF149CF07B00614603 /* BFPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361849AE149CF07B00614603 /* BFPreferencesWindowController.m */; };
 		361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */; };
 		361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361D2EEF148FFA0D008EE54C /* StringPrompt.xib */; };
 		36276EC71468152900F84E7B /* SFTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EC61468152900F84E7B /* SFTabView.m */; };
@@ -89,8 +91,6 @@
 		3694B53F1466B3EB00D0A105 /* BFMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B53E1466B3EB00D0A105 /* BFMessageCell.m */; };
 		3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698A09614991409004AA061 /* ADInvitationWindowController.m */; };
 		3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698A0981499141A004AA061 /* InvitationWindow.xib */; };
-		3698A09D1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698A09B1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m */; };
-		3698A09E1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698A09C1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib */; };
 		369D9DD91465FD6B00CB15FF /* BFFriendsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */; };
 		369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369D9DDB1466006200CB15FF /* FriendsList.xib */; };
 		36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36ADF20D1469AC9600F46E9E /* blue_bubble.png */; };
@@ -186,6 +186,9 @@
 		3616F69E145F278300E5066D /* XFPacketDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFPacketDictionary.m; sourceTree = "<group>"; };
 		3616F6A2145F29D800E5066D /* XFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFSession.h; sourceTree = "<group>"; };
 		3616F6A3145F29D800E5066D /* XFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFSession.m; sourceTree = "<group>"; };
+		361849AB149CF01800614603 /* BFPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFPreferencesWindow.xib; sourceTree = "<group>"; };
+		361849AD149CF07B00614603 /* BFPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPreferencesWindowController.h; sourceTree = "<group>"; };
+		361849AE149CF07B00614603 /* BFPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferencesWindowController.m; sourceTree = "<group>"; };
 		361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADStringPromptController.h; sourceTree = "<group>"; };
 		361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADStringPromptController.m; sourceTree = "<group>"; };
 		361D2EEF148FFA0D008EE54C /* StringPrompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringPrompt.xib; sourceTree = "<group>"; };
@@ -275,9 +278,6 @@
 		3698A09514991409004AA061 /* ADInvitationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADInvitationWindowController.h; sourceTree = "<group>"; };
 		3698A09614991409004AA061 /* ADInvitationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADInvitationWindowController.m; sourceTree = "<group>"; };
 		3698A0981499141A004AA061 /* InvitationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationWindow.xib; sourceTree = "<group>"; };
-		3698A09A1499348F004AA061 /* BFPreferencesWindowControllerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPreferencesWindowControllerWindowController.h; sourceTree = "<group>"; };
-		3698A09B1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferencesWindowControllerWindowController.m; sourceTree = "<group>"; };
-		3698A09C1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFPreferencesWindowControllerWindowController.xib; sourceTree = "<group>"; };
 		369D9DD71465FD6B00CB15FF /* BFFriendsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFFriendsListController.h; sourceTree = "<group>"; };
 		369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFriendsListController.m; sourceTree = "<group>"; };
 		369D9DDB1466006200CB15FF /* FriendsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsList.xib; sourceTree = "<group>"; };
@@ -670,9 +670,9 @@
 				3698A09514991409004AA061 /* ADInvitationWindowController.h */,
 				3698A09614991409004AA061 /* ADInvitationWindowController.m */,
 				3698A0981499141A004AA061 /* InvitationWindow.xib */,
-				3698A09A1499348F004AA061 /* BFPreferencesWindowControllerWindowController.h */,
-				3698A09B1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m */,
-				3698A09C1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib */,
+				361849AD149CF07B00614603 /* BFPreferencesWindowController.h */,
+				361849AE149CF07B00614603 /* BFPreferencesWindowController.m */,
+				361849AB149CF01800614603 /* BFPreferencesWindow.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -882,10 +882,10 @@
 				36E41296148D318C003BABE9 /* License.rtf in Resources */,
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
 				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
-				3698A09E1499348F004AA061 /* BFPreferencesWindowControllerWindowController.xib in Resources */,
 				363082C61499F9E1001B47CC /* tab-typing.png in Resources */,
 				36F5F071149A466200214DEF /* ServerList.xib in Resources */,
 				36F5F073149A466B00214DEF /* GamesList.xib in Resources */,
+				361849AC149CF01800614603 /* BFPreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,10 +943,10 @@
 				361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */,
 				36DAA20914935816001A7039 /* BFDownload.m in Sources */,
 				3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */,
-				3698A09D1499348F004AA061 /* BFPreferencesWindowControllerWindowController.m in Sources */,
 				3645873A149937AF00460195 /* BFDefaults.m in Sources */,
 				36F5F06B149A460000214DEF /* BFServerListController.m in Sources */,
 				36F5F06F149A460C00214DEF /* BFGamesListController.m in Sources */,
+				361849AF149CF07B00614603 /* BFPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1028,7 +1028,7 @@
 		3616F678145F0E5500E5066D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1037,6 +1037,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1045,7 +1046,7 @@
 		3616F679145F0E5500E5066D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1053,6 +1054,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlackFire/BlackFire-Prefix.pch";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

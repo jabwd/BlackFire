@@ -22,7 +22,7 @@ typedef enum
 	BFApplicationModeServers	= 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController;
 
 @interface ADAppDelegate : NSObject <BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
@@ -45,9 +45,10 @@ typedef enum
 	
 	BFDownload		*_download;
 	
-	BFLoginViewController		*_loginViewController;
-	BFFriendsListController		*_friendsListController;
-	ADStringPromptController	*_stringPromptController;
+	BFLoginViewController			*_loginViewController;
+	BFFriendsListController			*_friendsListController;
+	BFPreferencesWindowController	*_preferencesWindowController;
+	ADStringPromptController		*_stringPromptController;
 	
 	BFApplicationMode		_currentMode;
 	
@@ -73,13 +74,6 @@ typedef enum
 - (void)changeToMode:(BFApplicationMode)newMode;
 - (void)changeMainView:(NSView *)newView;
 
-- (IBAction)selectNextTab:(id)sender;
-- (IBAction)selectPreviousTab:(id)sender;
-
-- (IBAction)help:(id)sender;
-- (IBAction)closeAction:(id)sender; // overrides the default close found in 
-									// in the file menu: close tab not the window
-
 //----------------------------------------------------------------------------
 // Xfire Session
 - (void)connectionCheck;
@@ -91,9 +85,17 @@ typedef enum
 //----------------------------------------------------------------------------
 // Main menu
 
+- (IBAction)selectNextTab:(id)sender;
+- (IBAction)selectPreviousTab:(id)sender;
+
+- (IBAction)help:(id)sender;
+- (IBAction)closeAction:(id)sender; // overrides the default close found in 
+// in the file menu: close tab not the window
+
+
+- (IBAction)showPreferences:(id)sender;
 - (IBAction)showProfile:(id)sender;
 - (IBAction)removeSelectedFriend:(id)sender;
-
 - (IBAction)toggleShowOfflineClanFriends:(id)sender;
 
 //----------------------------------------------------------------------------

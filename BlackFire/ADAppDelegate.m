@@ -16,7 +16,7 @@
 
 #import "BFLoginViewController.h"
 #import "BFFriendsListController.h"
-
+#import "BFPreferencesWindowController.h"
 #import "BFChatWindowController.h"
 #import "BFChat.h"
 
@@ -49,6 +49,8 @@
 	_account = nil;
 	[_chatControllers release];
 	_chatControllers = nil;
+	[_preferencesWindowController release];
+	_preferencesWindowController = nil;
     [super dealloc];
 }
 
@@ -57,8 +59,11 @@
 	[[BFGamesManager sharedGamesManager] setDelegate:self];
 	_chatControllers	= [[NSMutableArray alloc] init];
 	_download			= nil;
+	_preferencesWindowController = nil;
 	
 	
+	
+	// setup the mainwindow
 	[self changeToMode:BFApplicationModeOffline];
 	[_window setContentBorderThickness:30.0 forEdge:NSMinYEdge];
 	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
@@ -96,51 +101,6 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	[self connectionCheck];
-}
-
-
-- (IBAction)selectNextTab:(id)sender
-{
-	// detect if a window is in front
-	for(BFChat *chat in _chatControllers)
-	{
-		NSWindow *window = chat.windowController.window;
-		if( [window isMainWindow] )
-		{
-			[chat.windowController selectNextTab];
-			return;
-		}
-	}
-}
-
-- (IBAction)selectPreviousTab:(id)sender
-{
-	for(BFChat *chat in _chatControllers)
-	{
-		NSWindow *window = chat.windowController.window;
-		if( [window isMainWindow] )
-		{
-			[chat.windowController selectPreviousTab];
-			return;
-		}
-	}
-}
-
-- (IBAction)closeAction:(id)sender
-{
-	for(BFChat *chat in _chatControllers)
-	{
-		NSWindow *window = chat.windowController.window;
-		if( [window isMainWindow] && chat.windowController.currentChat == chat )
-		{
-			[chat.windowController closeChat:chat];
-			return;
-		}
-	}
-	if( [[NSApplication sharedApplication] mainWindow] )
-	{
-		[[[NSApplication sharedApplication] mainWindow] performClose:nil];
-	}
 }
 
 #pragma mark - Toolbar delegate
@@ -380,6 +340,9 @@
 		return;
 	}
 	
+	
+	[changedFriend retain];
+	
 	// make sure that the friends list displays the latest data
 	[_friendsListController reloadData];
 	
@@ -402,6 +365,9 @@
 	NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:notificationType],@"type", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:XFFriendDidChangeNotification object:changedFriend userInfo:userInfo];
 	[userInfo release];
+	
+	// done with it.
+	[changedFriend release];
 }
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
@@ -747,6 +713,65 @@
 
 
 #pragma mark - Menu items
+
+- (IBAction)selectNextTab:(id)sender
+{
+	// detect if a window is in front
+	for(BFChat *chat in _chatControllers)
+	{
+		NSWindow *window = chat.windowController.window;
+		if( [window isMainWindow] )
+		{
+			[chat.windowController selectNextTab];
+			return;
+		}
+	}
+}
+
+- (IBAction)selectPreviousTab:(id)sender
+{
+	for(BFChat *chat in _chatControllers)
+	{
+		NSWindow *window = chat.windowController.window;
+		if( [window isMainWindow] )
+		{
+			[chat.windowController selectPreviousTab];
+			return;
+		}
+	}
+}
+
+- (IBAction)closeAction:(id)sender
+{
+	for(BFChat *chat in _chatControllers)
+	{
+		NSWindow *window = chat.windowController.window;
+		if( [window isMainWindow] && chat.windowController.currentChat == chat )
+		{
+			[chat.windowController closeChat:chat];
+			return;
+		}
+	}
+	if( [[NSApplication sharedApplication] mainWindow] )
+	{
+		[[[NSApplication sharedApplication] mainWindow] performClose:nil];
+	}
+}
+
+- (IBAction)showPreferences:(id)sender
+{
+	// don't know if i should ever release this, because the user loaded it once
+	// and there is no real reason to get rid of it then..
+	if( _preferencesWindowController )
+	{
+		[_preferencesWindowController showWindow:nil];
+	}
+	else
+	{
+		_preferencesWindowController = [[BFPreferencesWindowController alloc] init];
+		[_preferencesWindowController showWindow:nil];
+	}
+}
 
 - (IBAction)showProfile:(id)sender
 {

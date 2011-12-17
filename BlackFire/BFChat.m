@@ -43,6 +43,10 @@
 		
 		_messages = [[NSMutableArray alloc] init];
 		
+		if( ! chat.remoteFriend )
+		{
+			NSLog(@"*** No remotefriend object 0x589129");
+		}
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
 	}
 	return self;
