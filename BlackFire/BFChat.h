@@ -14,8 +14,8 @@
 typedef enum
 {
 	BFUserMessageType		= 0,
-	BFFriendMessageType		= 1,
-	BFWarningMessageType	= 2
+	BFFriendMessageType,
+	BFWarningMessageType
 } BFIMType;
 
 @interface BFChat : NSObject <XFChatDelegate>
@@ -26,6 +26,7 @@ typedef enum
 	NSTextView *_chatHistoryView;
 	NSScrollView *_chatScrollView;
 	NSDateFormatter *_dateFormatter;
+	NSMutableArray *_messages;
 	
 	NSUInteger _missedMessages;
 	

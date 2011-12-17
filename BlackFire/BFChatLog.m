@@ -42,7 +42,7 @@
 
 - (NSString *)getDatabasePath
 {
-	NSString *path2 = [[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject] retain];
+	NSString *path2 = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
     NSString *path = [[NSString alloc] initWithFormat:@"%@/BlackFire/ChatLogs/%@.xfl",path2,friendUsername];
     return [path autorelease];
 }
@@ -65,6 +65,12 @@
     NSString *path = [self getDatabasePath];
     if( ![[NSFileManager defaultManager] fileExistsAtPath:path] )
     {
+		NSString *appSupport = [NSString stringWithFormat:@"%@/BlackFire/ChatLogs",[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject]];
+		if( ! [[NSFileManager defaultManager] fileExistsAtPath:appSupport isDirectory:nil] )
+		{
+			NSLog(@"Creating appsupport ChatLogs directory");
+			[[NSFileManager defaultManager] createDirectoryAtPath:appSupport withIntermediateDirectories:true attributes:nil error:nil];
+		}
         NSLog(@"Creating new chatlog at path: %@",path);
         // create the database from template
         NSError *error = nil;
@@ -211,7 +217,7 @@
             [message release];
         }
         
-        sqlite3_finalize(statement);
+		sqlite3_finalize(statement);
         sqlite3_close(database);
         [query release];
         return [arr autorelease];

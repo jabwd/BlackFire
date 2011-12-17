@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36030AEA149C9A0800E4B8F4 /* BFChatLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 363941C7149C0D2000DDECB4 /* BFChatLog.m */; };
+		36030AEC149C9A0C00E4B8F4 /* BFMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 363941CA149C0E1F00DDECB4 /* BFMessage.m */; };
 		360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 360D99B8148BEB6F00A529F6 /* MacGames.plist */; };
 		360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 360D99C0148C267D00A529F6 /* BFProcessInformation.m */; };
 		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; };
@@ -61,6 +63,7 @@
 		362FFAAD14674363007E3BD8 /* SFTabStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFAAC14674363007E3BD8 /* SFTabStripView.m */; };
 		362FFAAF14674D3E007E3BD8 /* inactiveWTabFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 362FFAAE14674D3E007E3BD8 /* inactiveWTabFill.png */; };
 		363082C61499F9E1001B47CC /* tab-typing.png in Resources */ = {isa = PBXBuildFile; fileRef = 363082C51499F9E1001B47CC /* tab-typing.png */; };
+		363941CC149C0E7C00DDECB4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */; };
 		3645873A149937AF00460195 /* BFDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 36458739149937AF00460195 /* BFDefaults.m */; };
 		3646BBDD1464802D008FD6D4 /* XFGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBDC1464802D008FD6D4 /* XFGroupController.m */; };
 		3646BBE11464A548008FD6D4 /* XFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE01464A548008FD6D4 /* XFChat.m */; };
@@ -226,6 +229,11 @@
 		362FFAAC14674363007E3BD8 /* SFTabStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTabStripView.m; sourceTree = "<group>"; };
 		362FFAAE14674D3E007E3BD8 /* inactiveWTabFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabFill.png; sourceTree = "<group>"; };
 		363082C51499F9E1001B47CC /* tab-typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-typing.png"; sourceTree = "<group>"; };
+		363941C6149C0D2000DDECB4 /* BFChatLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFChatLog.h; sourceTree = "<group>"; };
+		363941C7149C0D2000DDECB4 /* BFChatLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFChatLog.m; sourceTree = "<group>"; };
+		363941C9149C0E1F00DDECB4 /* BFMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFMessage.h; sourceTree = "<group>"; };
+		363941CA149C0E1F00DDECB4 /* BFMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFMessage.m; sourceTree = "<group>"; };
+		363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		36458738149937AF00460195 /* BFDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDefaults.h; sourceTree = "<group>"; };
 		36458739149937AF00460195 /* BFDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDefaults.m; sourceTree = "<group>"; };
 		3646BBDB1464802D008FD6D4 /* XFGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGroupController.h; sourceTree = "<group>"; };
@@ -328,6 +336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				363941CC149C0E7C00DDECB4 /* libsqlite3.dylib in Frameworks */,
 				36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */,
 				3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */,
 				36B6427F1484474700D9B11E /* Growl.framework in Frameworks */,
@@ -357,6 +366,7 @@
 		3616F65C145F0E5500E5066D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */,
 				36B6427E1484474700D9B11E /* Growl.framework */,
 				36D9C9F114659B9600C4A162 /* Security.framework */,
 				3616F65D145F0E5500E5066D /* Cocoa.framework */,
@@ -696,6 +706,10 @@
 		3694B5341466AF0200D0A105 /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
+				363941C9149C0E1F00DDECB4 /* BFMessage.h */,
+				363941CA149C0E1F00DDECB4 /* BFMessage.m */,
+				363941C6149C0D2000DDECB4 /* BFChatLog.h */,
+				363941C7149C0D2000DDECB4 /* BFChatLog.m */,
 				3694B5381466AFE600D0A105 /* BFChatWindowController.h */,
 				3694B5391466AFE700D0A105 /* BFChatWindowController.m */,
 				3694B5351466AF1200D0A105 /* BFChat.h */,
@@ -905,7 +919,9 @@
 				369D9DD91465FD6B00CB15FF /* BFFriendsListController.m in Sources */,
 				36529838146692FA0010FD7F /* ADOutlineView.m in Sources */,
 				3652983C146693920010FD7F /* BFImageAndTextCell.m in Sources */,
+				36030AEC149C9A0C00E4B8F4 /* BFMessage.m in Sources */,
 				3694B5321466AC8500D0A105 /* BFTexturedTextFieldCell.m in Sources */,
+				36030AEA149C9A0800E4B8F4 /* BFChatLog.m in Sources */,
 				3694B5371466AF1200D0A105 /* BFChat.m in Sources */,
 				3694B53A1466AFE700D0A105 /* BFChatWindowController.m in Sources */,
 				3694B53F1466B3EB00D0A105 /* BFMessageCell.m in Sources */,

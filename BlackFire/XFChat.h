@@ -46,6 +46,7 @@
 - (void)receivedNetworkInformation;
 - (void)receivedIsTypingNotification;
 - (void)receivedMessage:(NSString *)message;
+- (void)friendStoppedTypingNotification;
 
 - (void)receivedPacket:(XFPacket *)packet;
 

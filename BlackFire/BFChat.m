@@ -13,6 +13,9 @@
 
 #import "BFGamesManager.h"
 
+#import "BFMessage.h"
+#import "BFChatLog.h"
+
 #import "XFSession.h"
 #import "XFFriend.h"
 
@@ -38,6 +41,8 @@
 		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 		_typing = false;
 		
+		_messages = [[NSMutableArray alloc] init];
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
 	}
 	return self;
@@ -50,6 +55,8 @@
 	[_chat setDelegate:nil];
 	[_chat release];
 	_chat = nil;
+	[_messages release];
+	_messages = nil;
 	[_windowController release];
 	_windowController = nil;
 	[_dateFormatter release];
@@ -62,6 +69,16 @@
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	_missedMessages = 0;
+	
+	BFChatLog *chatLog = [[BFChatLog alloc] init];
+	chatLog.friendUsername = _chat.remoteFriend.username;
+	chatLog.date = [NSDate date];
+	[chatLog addMessages:_messages];
+	[chatLog release];
+	
+	[_messages release];
+	_messages = nil;
+	
 	SFTabView *tab = [_windowController tabViewForChat:self];
 	tab.missedMessages = _missedMessages;
 	[tab setNeedsDisplay:true]; // reset the missed messages count
@@ -84,6 +101,10 @@
 - (void)receivedMessage:(NSString *)message
 {
 	[self processMessage:message ofFriend:[_chat.remoteFriend displayName] ofType:BFFriendMessageType];
+
+	BFMessage *msg = [[BFMessage alloc] initWithMessage:message timestamp:[[NSDate date] timeIntervalSince1970] user:BFFriendMessageType];
+	[_messages addObject:msg];
+	[msg release];
 	
 	if( ![self.windowController.window isMainWindow] || _windowController.currentChat != self )
 	{
@@ -105,6 +126,10 @@
 	[self processMessage:message ofFriend:[[_chat loginIdentity] displayName] ofType:BFUserMessageType];
 	
 	[_chat sendMessage:message];
+
+	BFMessage *msg = [[BFMessage alloc] initWithMessage:message timestamp:[[NSDate date] timeIntervalSince1970] user:BFUserMessageType];
+	[_messages addObject:msg];
+	[msg release];
 	
 	[[BFNotificationCenter defaultNotificationCenter] playSendSound];
 }
@@ -235,6 +260,12 @@
 		[fmtMsg release];
 		[boldFont release];
 		[chatFont release];
+		
+		BFMessage *message = [[BFMessage alloc] initWithMessage:warningMessage timestamp:[[NSDate date] timeIntervalSince1970] user:BFWarningMessageType];
+		[_messages addObject:message];
+		[message release];
+		
+		
 	}
 }
 

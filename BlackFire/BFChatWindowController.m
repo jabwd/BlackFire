@@ -322,7 +322,7 @@
 
 		if( remoteFriend.gameID > 0 )
 		{
-			displayImage = [[BFGamesManager sharedGamesManager] imageForGame:remoteFriend.gameID];
+			displayImage = [[BFGamesManager sharedGamesManager] imageForGame:(unsigned int)remoteFriend.gameID];
 			if( [statusString length] > 0 )
 			{
 				statusString = [NSString stringWithFormat:@"%@, ",statusString];
