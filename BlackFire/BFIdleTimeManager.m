@@ -7,7 +7,6 @@
 //
 
 #import "BFIdleTimeManager.h"
-#import "BFAppController.h"
 #import "BFDefaults.h"
 
 static BFIdleTimeManager *sharedManager = nil;
@@ -26,7 +25,7 @@ static BFIdleTimeManager *sharedManager = nil;
 
 - (id)init {
 	if( (self = [super init]) ) {
-		setAwayStatusAutomatically = [[NSUserDefaults standardUserDefaults] boolForKey:@"autoAFK"];
+		setAwayStatusAutomatically = [[NSUserDefaults standardUserDefaults] boolForKey:BFAutomaticlyGoAFK];
 		timer = nil;
 		eventSourceRef = NULL;
 		isIdle = NO;
@@ -35,8 +34,8 @@ static BFIdleTimeManager *sharedManager = nil;
 			if (eventSourceRef == NULL) {
 				eventSourceRef = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
 			}
-      unsigned short time = [[[NSUserDefaults standardUserDefaults] objectForKey:BFafkTime] intValue];
-      time = (time * 60.0);
+      unsigned short time = [[[NSUserDefaults standardUserDefaults] objectForKey:BFAutoAFKTime] intValue];
+      //time = (time * 60.0);
 			timer = [NSTimer scheduledTimerWithTimeInterval:time
 													 target:self
 												   selector:@selector(checkIdleState:)
@@ -67,8 +66,8 @@ static BFIdleTimeManager *sharedManager = nil;
 
 
 - (void)checkIdleState:(NSTimer *)aTimer {
-	unsigned short time = [[[NSUserDefaults standardUserDefaults] objectForKey:BFafkTime] intValue];
-  time = (time * 60.0);
+	unsigned short time = [[[NSUserDefaults standardUserDefaults] objectForKey:BFAutoAFKTime] intValue];
+  //time = (time * 60.0);
 	NSTimeInterval seconds = (NSTimeInterval)CGEventSourceSecondsSinceLastEventType(kCGEventSourceStateCombinedSessionState, kCGAnyInputEventType);
 	
 	
@@ -81,7 +80,6 @@ static BFIdleTimeManager *sharedManager = nil;
 		/*	[[NSNotificationCenter defaultCenter] postNotificationName:BFUserDidBecomeActiveNotification
 																object:nil
 															  userInfo:nil];*/
-      [_delegate userBecameActive];
 			
 			timer = [NSTimer scheduledTimerWithTimeInterval:2.0
 													 target:self
@@ -99,7 +97,6 @@ static BFIdleTimeManager *sharedManager = nil;
 			/*[[NSNotificationCenter defaultCenter] postNotificationName:BFUserDidBecomeIdleNotification 
 																object:nil
 															  userInfo:nil];*/
-      [_delegate userBecameAFK];
 			
 			// previous non-repeating timer is invalidated automatically
 			timer = [NSTimer scheduledTimerWithTimeInterval:2.0
@@ -134,8 +131,8 @@ static BFIdleTimeManager *sharedManager = nil;
 		if (eventSourceRef == NULL) {
 			eventSourceRef = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
 		}
-    unsigned short time = [[[NSUserDefaults standardUserDefaults] objectForKey:BFafkTime] intValue];
-    time = (time * 60.0);
+    unsigned short time = [[[NSUserDefaults standardUserDefaults] objectForKey:BFAutoAFKTime] intValue];
+   // time = (time * 60.0);
 		timer = [NSTimer scheduledTimerWithTimeInterval:time
 												 target:self
 											   selector:@selector(checkIdleState:)

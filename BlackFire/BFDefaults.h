@@ -11,3 +11,6 @@ extern NSString *BFShowClanGroups;
 extern NSString *BFShowCustomFriendGroups;
 extern NSString *BFShowFriendsOfFriendsGroup;
 extern NSString *BFShowOfflineFriendsGroup;
+
+extern NSString *BFAutomaticlyGoAFK;
+extern NSString *BFAutoAFKTime;
