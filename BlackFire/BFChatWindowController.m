@@ -81,7 +81,6 @@
 {
 	[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
 	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
-	[_window makeKeyAndOrderFront:self];
 	[_tabStripView setDelegate:self];
 	
 	NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"chatWindowToolbar"];
@@ -99,6 +98,8 @@
 	[toolbar      setDelegate:self];
 	[_window	setToolbar:toolbar];
 	[toolbar      release];
+	
+	[_window makeKeyAndOrderFront:self];
 }
 
 #pragma mark - Managing chats
