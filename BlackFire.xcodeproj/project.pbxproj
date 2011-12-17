@@ -91,6 +91,9 @@
 		3694B53F1466B3EB00D0A105 /* BFMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B53E1466B3EB00D0A105 /* BFMessageCell.m */; };
 		3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698A09614991409004AA061 /* ADInvitationWindowController.m */; };
 		3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698A0981499141A004AA061 /* InvitationWindow.xib */; };
+		3698AC20149D1C900015AB9C /* BFRequestWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698AC1F149D1C900015AB9C /* BFRequestWindowController.m */; };
+		3698AC23149D1C9E0015AB9C /* RequestWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698AC22149D1C9E0015AB9C /* RequestWindow.xib */; };
+		3698AC26149D1CDD0015AB9C /* BFIdleTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698AC25149D1CDD0015AB9C /* BFIdleTimeManager.m */; };
 		369D9DD91465FD6B00CB15FF /* BFFriendsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */; };
 		369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369D9DDB1466006200CB15FF /* FriendsList.xib */; };
 		36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36ADF20D1469AC9600F46E9E /* blue_bubble.png */; };
@@ -278,6 +281,11 @@
 		3698A09514991409004AA061 /* ADInvitationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADInvitationWindowController.h; sourceTree = "<group>"; };
 		3698A09614991409004AA061 /* ADInvitationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADInvitationWindowController.m; sourceTree = "<group>"; };
 		3698A0981499141A004AA061 /* InvitationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationWindow.xib; sourceTree = "<group>"; };
+		3698AC1E149D1C900015AB9C /* BFRequestWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRequestWindowController.h; sourceTree = "<group>"; };
+		3698AC1F149D1C900015AB9C /* BFRequestWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFRequestWindowController.m; sourceTree = "<group>"; };
+		3698AC22149D1C9E0015AB9C /* RequestWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestWindow.xib; sourceTree = "<group>"; };
+		3698AC24149D1CDD0015AB9C /* BFIdleTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFIdleTimeManager.h; sourceTree = "<group>"; };
+		3698AC25149D1CDD0015AB9C /* BFIdleTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFIdleTimeManager.m; sourceTree = "<group>"; };
 		369D9DD71465FD6B00CB15FF /* BFFriendsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFFriendsListController.h; sourceTree = "<group>"; };
 		369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFriendsListController.m; sourceTree = "<group>"; };
 		369D9DDB1466006200CB15FF /* FriendsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsList.xib; sourceTree = "<group>"; };
@@ -673,6 +681,9 @@
 				361849AD149CF07B00614603 /* BFPreferencesWindowController.h */,
 				361849AE149CF07B00614603 /* BFPreferencesWindowController.m */,
 				361849AB149CF01800614603 /* BFPreferencesWindow.xib */,
+				3698AC1E149D1C900015AB9C /* BFRequestWindowController.h */,
+				3698AC1F149D1C900015AB9C /* BFRequestWindowController.m */,
+				3698AC22149D1C9E0015AB9C /* RequestWindow.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -680,6 +691,8 @@
 		366AC23814658C7C002A1F50 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				3698AC24149D1CDD0015AB9C /* BFIdleTimeManager.h */,
+				3698AC25149D1CDD0015AB9C /* BFIdleTimeManager.m */,
 				366AC23C14658D21002A1F50 /* BFKeychainManager.h */,
 				366AC23D14658D21002A1F50 /* BFKeychainManager.m */,
 				366AC23914658C8D002A1F50 /* BFAccount.h */,
@@ -886,6 +899,7 @@
 				36F5F071149A466200214DEF /* ServerList.xib in Resources */,
 				36F5F073149A466B00214DEF /* GamesList.xib in Resources */,
 				361849AC149CF01800614603 /* BFPreferencesWindow.xib in Resources */,
+				3698AC23149D1C9E0015AB9C /* RequestWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,6 +961,8 @@
 				36F5F06B149A460000214DEF /* BFServerListController.m in Sources */,
 				36F5F06F149A460C00214DEF /* BFGamesListController.m in Sources */,
 				361849AF149CF07B00614603 /* BFPreferencesWindowController.m in Sources */,
+				3698AC20149D1C900015AB9C /* BFRequestWindowController.m in Sources */,
+				3698AC26149D1CDD0015AB9C /* BFIdleTimeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
