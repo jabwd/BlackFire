@@ -258,10 +258,6 @@
 		if( [statusString length] > 0 )
 		{
 			[(BFImageAndTextCell *)cell setShowsStatus:true];
-			if( friend.gameIP != 0 )
-			{
-				statusString = [NSString stringWithFormat:@"%@ %@",statusString,[friend gameIPString]];
-			}
 			[(BFImageAndTextCell *)cell setCellStatusString:statusString];
 		}
 		else
