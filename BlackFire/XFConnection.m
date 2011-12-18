@@ -1296,7 +1296,7 @@
     {
 		XFGameServer *server = [[XFGameServer alloc] init];
 		server.IPAddress	= [[gameIPs objectAtIndex:i] unsignedIntValue];
-		server.Port			= [[gamePorts objectAtIndex:i] unsignedIntValue];
+		server.port			= [[gamePorts objectAtIndex:i] unsignedIntValue];
 		server.gameID		= [[gamesArray objectAtIndex:i] unsignedIntValue];
         [serverList addObject:server];
 		

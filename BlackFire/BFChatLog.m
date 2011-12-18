@@ -211,7 +211,7 @@
             const char *msg = (const char*)sqlite3_column_text(statement, 4);
             if( msg )
                 message.message = [NSString stringWithUTF8String:msg];
-            message.timestamp = sqlite3_column_int64(statement, 3);
+            message.timestamp = (unsigned long)sqlite3_column_int64(statement, 3);
             message.user = sqlite3_column_int(statement, 2);
             [arr addObject:message];
             [message release];

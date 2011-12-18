@@ -23,7 +23,7 @@
     return self;
 }
 
-- (id)initWithMessage:(NSString *)msg timestamp:(unsigned int)tstamp user:(unsigned int)usr
+- (id)initWithMessage:(NSString *)msg timestamp:(unsigned long)tstamp user:(unsigned int)usr
 {
     if( (self = [super init]) )
     {
