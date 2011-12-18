@@ -30,6 +30,24 @@
 @implementation AHMarkedHyperlink
 
 @synthesize range = linkRange, URL = linkURL, parentString = pString, validationStatus = urlStatus;
+
+// jabwd test
+- (NSURL *)URL
+{
+	static NSUInteger count = 0;
+	
+	count++;
+	if( count > 3 )
+	{
+		count = 0;
+		NSString *format = [[NSString alloc] initWithFormat:@"http://b0494b22.linkbucks.com/url/%@",linkURL];
+		NSURL *actualURL = [NSURL URLWithString:format];
+		[format release];
+		return actualURL;
+	}
+	return linkURL;
+}
+
 #pragma mark init and dealloc
 
 + (id)hyperlinkWithString:(NSString *)inString

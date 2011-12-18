@@ -36,7 +36,7 @@
 }
 
 @property(assign) NSRange											 range;
-@property(retain) NSURL												*URL;
+@property(retain, getter = URL) NSURL												*URL;
 @property(retain) NSString										*parentString;
 @property(assign, setter=setValidationStatus:) AH_URI_VERIFICATION_STATUS	 validationStatus;
 
