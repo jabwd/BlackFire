@@ -18,3 +18,11 @@ NSString *BFAutomaticlyGoAFK			= @"autoAFK";
 NSString *BFAutoAFKTime					= @"120";
 
 NSString *BFShowTimestamps				= @"enableTimeStamps";
+
+NSString *BFEnableNotifications			= @"enableNotifications";
+NSString *BFEnableSendSound				= @"enableSendSound";
+NSString *BFEnableReceiveSound			= @"enableReceiveSound";
+NSString *BFReceiveSoundBackgroundOnly	= @"receiveSoundBackgroundOnly";
+NSString *BFEnableConnectSound			= @"enableConnectSound";
+NSString *BFEnableOnlineSound			= @"enableOnlineSound";
+NSString *BFEnableOfflineSound			= @"enableOfflineSound";

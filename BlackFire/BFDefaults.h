@@ -16,3 +16,11 @@ extern NSString *BFAutomaticlyGoAFK;
 extern NSString *BFAutoAFKTime;
 
 extern NSString *BFShowTimestamps;
+
+extern NSString *BFEnableNotifications;
+extern NSString *BFEnableSendSound;
+extern NSString *BFEnableReceiveSound;
+extern NSString *BFReceiveSoundBackgroundOnly;
+extern NSString *BFEnableConnectSound;
+extern NSString *BFEnableOnlineSound;
+extern NSString *BFEnableOfflineSound;

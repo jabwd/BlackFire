@@ -38,6 +38,29 @@
 
 @synthesize currentMode = _currentMode;
 
++ (void)initialize
+{
+	NSNumber *n_true	= [[NSNumber alloc] initWithBool:true];
+	NSNumber *n_false	= [[NSNumber alloc] initWithBool:false];
+	
+	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+						  n_true,BFEnableNotifications,
+						  n_true,BFEnableSendSound,
+						  n_true,BFEnableReceiveSound,
+						  n_true,BFReceiveSoundBackgroundOnly,
+						  n_true,BFEnableConnectSound,
+						  n_true,BFEnableOnlineSound,
+						  n_true,BFEnableOfflineSound,
+						  nil];
+	
+	// register the defaults
+	[[NSUserDefaults standardUserDefaults] registerDefaults:dict];
+	
+	[dict		release];
+	[n_true		release];
+	[n_false	release];
+}
+
 - (void)dealloc
 {
 	[_download release];
@@ -399,6 +422,8 @@
 		
 		[_friendsListController expandItem:[_session.groupController onlineFriendsGroup]];
 		[_session requestFriendInformation:_session.loginIdentity];
+		
+		[[BFNotificationCenter defaultNotificationCenter] playConnectedSound];
 	}
 	else if( newStatus == XFSessionStatusConnecting )
 	{

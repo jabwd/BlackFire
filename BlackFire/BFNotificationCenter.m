@@ -7,6 +7,7 @@
 //
 
 #import "BFNotificationCenter.h"
+#import "BFDefaults.h"
 
 static BFNotificationCenter *notificationCenter = nil;
 
@@ -49,6 +50,9 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playConnectedSound
 {
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableConnectSound] )
+		return;
+	
 	if( ! _connectSound )
 		_connectSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"connected" ofType:@"m4v"] byReference:false];
 	if( [_connectSound isPlaying] )
@@ -60,6 +64,9 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playOnlineSound
 {
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableOnlineSound] )
+		return;
+	
 	if( ! _onlineSound )
 		_onlineSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"online" ofType:@"m4v"] byReference:false];
 	if( [_onlineSound isPlaying] )
@@ -71,6 +78,9 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playOfflineSound
 {
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableOfflineSound] )
+		return;
+	
 	if( ! _offlineSound )
 		_offlineSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"offline" ofType:@"m4v"] byReference:false];
 	if( [_offlineSound isPlaying] )
@@ -82,6 +92,9 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playReceivedSound
 {
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableReceiveSound] )
+		return;
+	
 	if( ! _receiveSound )
 		_receiveSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"receive" ofType:@"m4v"] byReference:false];
 	
@@ -94,6 +107,9 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playSendSound
 {
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableSendSound] )
+		return;
+	
 	if( ! _sendSound )
 		_sendSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Send" ofType:@"m4v"] byReference:false];
 	if( [_sendSound isPlaying] )
@@ -130,6 +146,10 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body
 {
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableNotifications] )
+		return;
+	
+	
 	[GrowlApplicationBridge
      notifyWithTitle:notificationTitle
      description:body

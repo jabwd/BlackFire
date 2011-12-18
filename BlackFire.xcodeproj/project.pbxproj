@@ -80,6 +80,7 @@
 		366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23A14658C8D002A1F50 /* BFAccount.m */; };
 		366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23D14658D21002A1F50 /* BFKeychainManager.m */; };
 		367A9619149AB9CE00CF3833 /* sha1.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F079149AB6A300214DEF /* sha1.m */; };
+		368C6B47149E00CF00723E9A /* notification.icns in Resources */ = {isa = PBXBuildFile; fileRef = 368C6B46149E00CF00723E9A /* notification.icns */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
 		368EC5BA147172CF00EEDC07 /* AHMarkedHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B7147172CF00EEDC07 /* AHMarkedHyperlink.m */; };
@@ -262,6 +263,7 @@
 		366AC23A14658C8D002A1F50 /* BFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAccount.m; sourceTree = "<group>"; };
 		366AC23C14658D21002A1F50 /* BFKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFKeychainManager.h; sourceTree = "<group>"; };
 		366AC23D14658D21002A1F50 /* BFKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFKeychainManager.m; sourceTree = "<group>"; };
+		368C6B46149E00CF00723E9A /* notification.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = notification.icns; sourceTree = "<group>"; };
 		368EC5B2147172CF00EEDC07 /* AHHyperlinkScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHHyperlinkScanner.h; sourceTree = "<group>"; };
 		368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHHyperlinkScanner.m; sourceTree = "<group>"; };
 		368EC5B4147172CF00EEDC07 /* AHLinkLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHLinkLexer.h; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				368C6B46149E00CF00723E9A /* notification.icns */,
 				363082C51499F9E1001B47CC /* tab-typing.png */,
 				360D99B8148BEB6F00A529F6 /* MacGames.plist */,
 				36B6427D1484468B00D9B11E /* Images */,
@@ -900,6 +903,7 @@
 				36F5F073149A466B00214DEF /* GamesList.xib in Resources */,
 				361849AC149CF01800614603 /* BFPreferencesWindow.xib in Resources */,
 				3698AC23149D1C9E0015AB9C /* RequestWindow.xib in Resources */,
+				368C6B47149E00CF00723E9A /* notification.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

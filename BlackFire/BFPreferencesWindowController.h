@@ -10,22 +10,24 @@
 
 typedef enum
 {
-	generalMode = 1
+	generalMode = 1,
+	notificationsMode
 } BFPrefsMode;
 
 @interface BFPreferencesWindowController : NSWindowController <NSToolbarDelegate> 
 {
 }
 
-@property (assign) IBOutlet NSView						*generalView;
+@property (assign) IBOutlet NSView	*generalView;
+@property (assign) IBOutlet NSView	*notificationsView;
+
 @property (assign) IBOutlet NSToolbarItem				*generalItem;
-@property (assign) IBOutlet NSUserDefaultsController	*defaultsController;
 
 //-------------------------------------------------------------------------------------------
 // Mode switching
-- (void)removeAllSubviews:(NSView *)aView;
-- (void)changeToMode:(BFPrefsMode)aMode;
+- (void)removeAllSubviewsAndReplaceWithView:(NSView *)aView;
 
 - (IBAction)generalMode:(id)sender;
+- (IBAction)notificationsMode:(id)sender;
 
 @end

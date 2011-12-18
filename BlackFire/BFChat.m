@@ -10,6 +10,7 @@
 #import "BFChatWindowController.h"
 #import "SFTabView.h"
 #import "BFNotificationCenter.h"
+#import "BFDefaults.h"
 
 #import "BFGamesManager.h"
 
@@ -132,6 +133,10 @@
 		SFTabView *tab = [_windowController tabViewForChat:self];
 		tab.missedMessages = _missedMessages;
 		[tab setNeedsDisplay:true];
+	}
+	else if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFReceiveSoundBackgroundOnly] )
+	{
+		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 	}
 }
 

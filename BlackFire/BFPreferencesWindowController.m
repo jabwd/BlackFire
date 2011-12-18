@@ -11,8 +11,9 @@
 @implementation BFPreferencesWindowController
 
 @synthesize generalView			= _generalView;
+@synthesize notificationsView	= _notificationsView;
+
 @synthesize generalItem			= _generalItem;
-@synthesize defaultsController	= _defaultsController;
 
 - (id)init
 {
@@ -30,7 +31,7 @@
 - (void)awakeFromNib
 {
 	[[[self window] toolbar] setSelectedItemIdentifier:[_generalItem itemIdentifier]];
-	[self changeToMode:generalMode];
+	[self generalMode:nil];
 	[self showWindow:self];
 }
 
@@ -61,25 +62,15 @@
 
 - (IBAction)generalMode:(id)sender
 {
-	[self changeToMode:generalMode];
+	[self removeAllSubviewsAndReplaceWithView:_generalView];
 }
 
-// switches the window content view to another view
-// removes its subviews and addss the one of the new view.
-// also resizes the window if needed.
-- (void)changeToMode:(BFPrefsMode)aMode
+- (IBAction)notificationsMode:(id)sender
 {
-	// make sure all the settings are up-to-date
-	[_defaultsController save:nil];
-	switch( aMode )
-	{
-		case generalMode:
-			[self removeAllSubviews:_generalView];
-			break;
-	}
+	[self removeAllSubviewsAndReplaceWithView:_notificationsView];
 }
 
-- (void)removeAllSubviews:(NSView *)aView
+- (void)removeAllSubviewsAndReplaceWithView:(NSView *)aView
 {
 	NSWindow *window = [self window];
 	NSView *mainView = [window contentView];
