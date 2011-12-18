@@ -256,7 +256,10 @@
 		[_chatHistoryView setNeedsDisplay:true];
 		[scanner release];
 		
-		[self scrollAnimated:true];
+		if( _windowController.currentChat == self )
+			[self scrollAnimated:true];
+		else
+			[self scrollAnimated:false];
 		
 		
 		[fmtMsg release];
@@ -311,7 +314,10 @@
 	[scanner release];
 	[fmtMsg release];
 	
-	[self scrollAnimated:true];
+	if( _windowController.currentChat == self )
+		[self scrollAnimated:true];
+	else
+		[self scrollAnimated:false];
 	
 	[chatFont release];
 	[boldFont release];
