@@ -91,7 +91,7 @@ typedef enum
 
 - (void)processBroadCastPacket:(XFPacket *)pkt;
 
-- (void)processChatRoomMotdChanged:(XFPacket *)pkt;
+/*- (void)processChatRoomMotdChanged:(XFPacket *)pkt;
 - (void)processChatRoomNameChanged:(XFPacket *)pkt;
 - (void)processChatRoomUserLevelChanged:(XFPacket *)pkt;
 - (void)processChatRoomUserGotKickedPacket:(XFPacket *)pkt;
@@ -103,7 +103,7 @@ typedef enum
 - (void)processChatRoomMessage:(XFPacket *)pkt;
 - (void)processMemberJoined:(XFPacket *)pkt;
 - (void)processMemberLeft:(XFPacket *)pkt;
-- (void)processChatRoomMembers:(XFPacket *)pkt;
+- (void)processChatRoomMembers:(XFPacket *)pkt;*/
 
 - (void)processServerList:(XFPacket *)pkt;
 
@@ -128,6 +128,7 @@ typedef enum
 - (void)removeCustomFriendGroup:(unsigned)groupID;
 - (void)addFriend:(XFFriend *)fr toGroup:(XFGroup *)group;
 - (void)removeFriend:(XFFriend *)fr fromGroup:(XFGroup *)group;
+
 // TODO: Implement user options
 //- (void)setUserOptions:(EXBlist *)options;
 - (void)createNewChatRoom:(NSString *)name andPassword:(NSString *)password;

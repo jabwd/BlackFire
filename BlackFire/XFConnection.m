@@ -394,7 +394,7 @@
             break;
             
         case XFSystemBroadcastPacketID:
-            [self processSystemBroadcast:packet];
+           // [self processSystemBroadcast:packet];
             break;
             
         case XFClanEventsPacketID:
@@ -447,57 +447,57 @@
             break;
             
         case XFGroupChatRoomNameChangedPacketID:
-            [self processChatRoomNameChanged:packet];
+          //  [self processChatRoomNameChanged:packet];
             break;
             
         case XFGroupChatJoinInfoPacketID:
-            [self processChatRoomJoinInfo:packet];
+           // [self processChatRoomJoinInfo:packet];
             break;
             
         case XFGroupChatUserJoinedPacketID:
-            [self processMemberJoined:packet];
+           // [self processMemberJoined:packet];
             break;
             
         case XFGroupChatUserLeftPacketID:
-            [self processMemberLeft:packet];
+           // [self processMemberLeft:packet];
             break;
             
         case XFGroupChatMessagePacketID:
-            [self processChatRoomMessage:packet];
+           // [self processChatRoomMessage:packet];
             break;
             
         case XFGroupChatInvitePacketID:
-            [self processChatRoomInvite:packet];
+            //[self processChatRoomInvite:packet];
             break;
             
         case XFGroupChatUserRankChangedPacketID:
-            [self processChatRoomUserLevelChanged:packet];
+            //[self processChatRoomUserLevelChanged:packet];
             break;
             
         case XFGroupChatPersistentInfoPacketID:
             break;
             
         case XFGroupChatUserKickedPacketID:
-            [self processChatRoomUserGotKickedPacket:packet];
+            //[self processChatRoomUserGotKickedPacket:packet];
             break;
             
         case XFGroupChatDomainChangedPacketID:
-            [self processChatRoomAccessChangedPacket:packet];
+            //[self processChatRoomAccessChangedPacket:packet];
             break;
             
         case XFGroupChatMessageOfTheDayChangedPacketID:
-            [self processChatRoomMotdChanged:packet];
+            //[self processChatRoomMotdChanged:packet];
             break;
             
         case XFGroupChatVoiceChatStatusChangedPacketID:
             break;
             
         case XFGroupChatInfoPacketID:
-            [self processChatRoomMembers:packet];
+            //[self processChatRoomMembers:packet];
             break;
             
         case XFGroupChatPasswordChangedPacketID:
-            [self processChatRoomPasswordChangedPacket:packet];
+            //[self processChatRoomPasswordChangedPacket:packet];
             break;
             
         case XFGroupChatRejectConfirmationPacketID:
@@ -1567,39 +1567,24 @@
 
 - (void)setGameStatus:(unsigned)gameID gameIP:(unsigned)gip gamePort:(unsigned)gp
 {
-	if( _status != XFConnectionConnected ) 
-		return;
-	
 	XFPacket *pkt = [XFPacket gameStatusChangePacketWithGameID:gameID gameIP:gip gamePort:gp];
 	[self sendPacket:pkt];
 }
 
 - (void)setStatusText:(NSString *)text
-{
-	if( _status != XFConnectionConnected )
-    {
-        NSLog(@"Tried to send a packet to a disconnected XFConnection");
-		return;
-    }
-	
+{	
 	XFPacket *pkt = [XFPacket statusTextChangePacket:text];
 	[self sendPacket:pkt];
 }
 
 - (void)changeNickname:(NSString *)text
 {
-	if( _status != XFConnectionConnected )
-		return;
-	
 	XFPacket *pkt = [XFPacket changeNicknamePacketWithName:text];
 	[self sendPacket:pkt];
 }
 
 - (void)beginUserSearch:(NSString *)searchString
 {
-	if( _status != XFConnectionConnected )
-		return;
-	
 	XFPacket *pkt = [XFPacket userSearchPacketWithName:searchString
                                                  fname:nil
                                                  lname:nil
@@ -1609,39 +1594,79 @@
 
 - (void)sendFriendInvitation:(NSString *)username message:(NSString *)msg
 {
-	if( _status != XFConnectionConnected )
-		return;
-	
 	XFPacket *pkt = [XFPacket addFriendRequestPacketWithUserName:username message:msg];
 	[self sendPacket:pkt];
 }
 
 - (void)sendRemoveFriend:(XFFriend *)fr
 {
-	if( _status != XFConnectionConnected )
-		return;
-	
 	XFPacket *pkt = [XFPacket removeFriendRequestWithUserID:(unsigned int)fr.userID];
 	[self sendPacket:pkt];
 }
 
 - (void)acceptFriendRequest:(XFFriend *)fr
 {
-	if( _status != XFConnectionConnected )
-		return;
-	
 	XFPacket *pkt = [XFPacket acceptFriendRequestPacketWithUserName:fr.username];
 	[self sendPacket:pkt];
 }
 
 - (void)declineFriendRequest:(XFFriend *)fr
 {
-	if( _status != XFConnectionConnected )
-		return;
-	
 	XFPacket *pkt = [XFPacket declineFriendRequestPacketWithUserName:fr.username];
 	[self sendPacket:pkt];
 }
+
+
+- (void)addCustomFriendGroup:(NSString *)groupName
+{
+	XFPacket *pkt = [XFPacket addCustomFriendGroupPacketWithName:groupName];
+	[self sendPacket:pkt];
+}
+
+- (void)renameCustomFriendGroup:(unsigned)groupID newName:(NSString *)groupName
+{
+	XFPacket *pkt = [XFPacket renameCustomFriendGroupPacket:groupID newName:groupName];
+	[self sendPacket:pkt];
+}
+
+- (void)removeCustomFriendGroup:(unsigned)groupID
+{
+	XFPacket *pkt = [XFPacket removeCustomFriendGroupPacket:groupID];
+	[self sendPacket:pkt];
+}
+
+- (void)addFriend:(XFFriend *)fr toGroup:(XFGroup *)group
+{
+	XFPacket *pkt = [XFPacket addFriendPacket:(unsigned int)fr.userID toCustomGroup:group.groupID];
+	[self sendPacket:pkt];
+	[_session.groupController addMember:fr toGroup:group];
+}
+
+- (void)removeFriend:(XFFriend *)fr fromGroup:(XFGroup *)group
+{
+	XFPacket *pkt = [XFPacket removeFriendPacket:(unsigned int)fr.userID fromCustomGroup:group.groupID];
+	[self sendPacket:pkt];
+	[_session.groupController removeMember:fr fromGroup:group];
+}
+
+- (void)addFavoriteServer:(unsigned int)gameID withIP:(NSString *)ip andPort:(NSString *)port
+{
+    XFPacket *pkt = [XFPacket addFavoriteServerPacket:gameID serverIP:ip serverPort:port];
+    [self sendPacket:pkt];
+}
+
+- (void)removeFavoriteServer:(unsigned int)gameID withIP:(NSString *)ip andPort:(NSString *)port
+{
+    XFPacket *pkt = [XFPacket removeFavoriteServerPacket:gameID serverIP:ip serverPort:port];
+    [self sendPacket:pkt];
+}
+
+- (void)createNewChatRoom:(NSString *)name andPassword:(NSString *)password
+{
+    XFPacket *pkt = [XFPacket createNewChatRoom:name withPassword:password];
+    [self sendPacket:pkt];
+}
+
 
 
 @end
