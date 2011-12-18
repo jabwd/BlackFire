@@ -16,3 +16,5 @@ NSString *BFShowOfflineFriendsGroup		= @"showOfflineFriendsGroup";
 
 NSString *BFAutomaticlyGoAFK			= @"autoAFK";
 NSString *BFAutoAFKTime					= @"120";
+
+NSString *BFShowTimestamps				= @"enableTimeStamps";

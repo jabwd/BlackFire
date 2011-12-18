@@ -39,7 +39,12 @@
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
 		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-		_typing = false;
+		_typing			= false;
+		
+		_userColor		= [[NSColor blueColor] retain];
+		_friendColor	= [[NSColor redColor] retain];
+		_chatFont		= [[NSFont fontWithName:@"Lucida Grande" size:12.0f] retain];
+		_boldChatFont	= [[[NSFontManager sharedFontManager] convertWeight:true ofFont:_chatFont] retain];
 		
 		_messages = [[NSMutableArray alloc] init];
 		
@@ -65,6 +70,14 @@
 	_windowController = nil;
 	[_dateFormatter release];
 	_dateFormatter = nil;
+	[_userColor release];
+	_userColor = nil;
+	[_friendColor release];
+	_friendColor = nil;
+	[_chatFont release];
+	_chatFont = nil;
+	[_boldChatFont release];
+	_boldChatFont = nil;
 	[super dealloc];
 }
 
@@ -289,22 +302,19 @@
 	if([[NSUserDefaults standardUserDefaults] boolForKey:@"enableTimeStamps"])
 		timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
 	
-	NSFont *chatFont		= [[NSFont fontWithName:@"Helvetica" size:12.0f] retain];
-	NSFont *boldFont		= [[[NSFontManager sharedFontManager] convertWeight:YES ofFont:chatFont] retain];
-	
 	boldStyleRange.length    = [shortDispName length] + 2 + [timeStamp length];  // the time plus name plus colon
 	
 	NSString *fmtMessage = [[NSString alloc] initWithFormat:@"%@%@ %@: %@",newline,timeStamp,shortDispName,msg];
 	fmtMsg = [[NSMutableAttributedString alloc] initWithString:fmtMessage];
 	[fmtMessage release];
 	
-	[fmtMsg addAttribute:NSFontAttributeName value:chatFont range:NSMakeRange(0, [fmtMsg length])];
-	[fmtMsg addAttribute:NSFontAttributeName value:boldFont range:boldStyleRange];
+	[fmtMsg addAttribute:NSFontAttributeName value:_chatFont range:NSMakeRange(0, [fmtMsg length])];
+	[fmtMsg addAttribute:NSFontAttributeName value:_boldChatFont range:boldStyleRange];
 	
 	if( type == BFFriendMessageType )
-		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:boldStyleRange];
+		[fmtMsg addAttribute:NSForegroundColorAttributeName value:_friendColor range:boldStyleRange];
 	else 
-		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:boldStyleRange];
+		[fmtMsg addAttribute:NSForegroundColorAttributeName value:_userColor range:boldStyleRange];
 	
 	[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange([newline length], [timeStamp length])];
 	
@@ -318,9 +328,6 @@
 		[self scrollAnimated:true];
 	else
 		[self scrollAnimated:false];
-	
-	[chatFont release];
-	[boldFont release];
 }
 
 - (void)scrollAnimated:(BOOL)animated

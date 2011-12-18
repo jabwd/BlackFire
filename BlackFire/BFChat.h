@@ -23,14 +23,18 @@ typedef enum
 	BFChatWindowController	*_windowController;
 	XFChat					*_chat;
 	
-	NSTextView *_chatHistoryView;
-	NSScrollView *_chatScrollView;
+	NSTextView		*_chatHistoryView;
+	NSScrollView	*_chatScrollView;
 	NSDateFormatter *_dateFormatter;
-	NSMutableArray *_messages;
+	NSMutableArray	*_messages;
 	
-	NSUInteger _missedMessages;
+	NSColor			*_userColor;
+	NSColor			*_friendColor;
+	NSFont			*_chatFont;
+	NSFont			*_boldChatFont;
 	
-	BOOL _typing;
+	NSUInteger		_missedMessages;
+	BOOL			_typing;
 }
 
 @property (nonatomic, retain) BFChatWindowController *windowController;
