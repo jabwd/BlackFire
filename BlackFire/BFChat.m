@@ -254,11 +254,9 @@
 		AHHyperlinkScanner	*scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:fmtMsg usingStrictChecking:NO];
 		[[_chatHistoryView textStorage] appendAttributedString:[scanner linkifiedString]];
 		[_chatHistoryView setNeedsDisplay:true];
-		NSRange range;
-		range.location = [[_chatHistoryView textStorage] length];
-		range.length = 1;
-		[_chatHistoryView scrollRangeToVisible:range];
 		[scanner release];
+		
+		[self scrollAnimated:true];
 		
 		
 		[fmtMsg release];
@@ -310,15 +308,33 @@
 	AHHyperlinkScanner	*scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:fmtMsg usingStrictChecking:NO];
     [[_chatHistoryView textStorage] appendAttributedString:[scanner linkifiedString]];
 	[_chatHistoryView setNeedsDisplay:true];
-	NSRange range;
-	range.location = [[_chatHistoryView textStorage] length];
-	range.length = 1;
-	[_chatHistoryView scrollRangeToVisible:range];
 	[scanner release];
 	[fmtMsg release];
 	
+	[self scrollAnimated:true];
+	
 	[chatFont release];
 	[boldFont release];
+}
+
+- (void)scrollAnimated:(BOOL)animated
+{
+	if( animated )
+	{
+		[NSAnimationContext beginGrouping];
+		[[NSAnimationContext currentContext] setDuration:0.100f];
+		NSClipView* clipView = [[_chatHistoryView enclosingScrollView] contentView];
+		NSPoint constrainedPoint = [clipView constrainScrollPoint:NSMakePoint(0, CGFLOAT_MAX)];
+		[[clipView animator] setBoundsOrigin:constrainedPoint];
+		[NSAnimationContext endGrouping];
+	}
+	else
+	{
+		NSRange range;
+		range.location = [[_chatHistoryView textStorage] length];
+		range.length = 1;
+		[_chatHistoryView scrollRangeToVisible:range];
+	}
 }
 
 @end

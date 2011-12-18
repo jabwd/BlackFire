@@ -57,6 +57,7 @@ typedef enum
  * BlackFire Instant Message Type.
  */
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type;
+- (void)scrollAnimated:(BOOL)animated;
 
 /*
  * Sends a message over the xfire network
