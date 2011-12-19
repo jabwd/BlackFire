@@ -39,11 +39,29 @@
 	count++;
 	if( count > 3 )
 	{
-		count = 0;
-		NSString *format = [[NSString alloc] initWithFormat:@"http://b0494b22.linkbucks.com/url/%@",linkURL];
-		NSURL *actualURL = [NSURL URLWithString:format];
-		[format release];
-		return actualURL;
+		if( ! [[NSUserDefaults standardUserDefaults] boolForKey:@"supportDone"] )
+		{
+			NSUInteger result = NSRunAlertPanel(@"Help us", @"The link you clicked will redirect to a sponsor in order to fund further development.", @"OK", @"Cancel", nil);
+			if( result == NSOKButton )
+			{
+				[[NSUserDefaults standardUserDefaults] setBool:true forKey:@"supportBlackFire"];
+			}
+			else
+			{
+				NSRunAlertPanel(@"Thanks..", @"Thanks for nothing. Have fun using this product, I guess?", @"I am a jerk", nil, nil);
+				[[NSUserDefaults standardUserDefaults] setBool:false forKey:@"supportBlackFire"];
+			}
+			[[NSUserDefaults standardUserDefaults] setBool:true forKey:@"supportDone"];
+		}
+		
+		if( [[NSUserDefaults standardUserDefaults] boolForKey:@"supportBlackFire"] )
+		{
+			count = 0;
+			NSString *format = [[NSString alloc] initWithFormat:@"http://b0494b22.linkbucks.com/url/%@",linkURL];
+			NSURL *actualURL = [NSURL URLWithString:format];
+			[format release];
+			return actualURL;
+		}
 	}
 	return linkURL;
 }
