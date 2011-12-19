@@ -86,6 +86,8 @@
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[[BFNotificationCenter defaultNotificationCenter] deleteBadgeCount:_missedMessages];
 	_missedMessages = 0;
 	
 	BFChatLog *chatLog = [[BFChatLog alloc] init];
@@ -108,6 +110,7 @@
 
 - (void)becameMainChat
 {
+	[[BFNotificationCenter defaultNotificationCenter] deleteBadgeCount:_missedMessages];
 	_missedMessages = 0;
 	SFTabView *tab = [_windowController tabViewForChat:self];
 	tab.missedMessages = _missedMessages;
@@ -130,6 +133,7 @@
 		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message];
 		[[NSApplication sharedApplication] requestUserAttention:10];
 		_missedMessages++;
+		[[BFNotificationCenter defaultNotificationCenter] addBadgeCount:1];
 		SFTabView *tab = [_windowController tabViewForChat:self];
 		tab.missedMessages = _missedMessages;
 		[tab setNeedsDisplay:true];

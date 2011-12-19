@@ -16,6 +16,8 @@
 	NSSound *_offlineSound;
 	NSSound *_receiveSound;
 	NSSound *_sendSound;
+	
+	NSUInteger _badgeCount;
 }
 
 + (id)defaultNotificationCenter;
@@ -33,5 +35,11 @@
 // Growl
 
 - (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body;
+
+
+//------------------------------------------------------------------------------
+// Dock Icon
+- (void)addBadgeCount:(NSUInteger)add;
+- (void)deleteBadgeCount:(NSUInteger)remove;
 
 @end

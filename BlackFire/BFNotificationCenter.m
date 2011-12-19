@@ -159,4 +159,35 @@ static BFNotificationCenter *notificationCenter = nil;
      isSticky:NO
      clickContext:nil];
 }
+
+#pragma mark - Badge count
+
+- (void)addBadgeCount:(NSUInteger)add
+{
+	_badgeCount += add;
+	
+	[[NSApp dockTile] setBadgeLabel:[NSString stringWithFormat:@"%lu",_badgeCount]];
+}
+
+- (void)deleteBadgeCount:(NSUInteger)remove
+{
+	if( remove > _badgeCount )
+	{
+		_badgeCount = 0;
+	}
+	else
+	{
+		_badgeCount -= remove;
+	}
+	
+	if( _badgeCount == 0 )
+	{
+		[[NSApp dockTile] setBadgeLabel:nil];
+	}
+	else
+	{
+		[[NSApp dockTile] setBadgeLabel:[NSString stringWithFormat:@"%lu",_badgeCount]];
+	}
+}
+
 @end
