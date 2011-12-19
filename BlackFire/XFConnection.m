@@ -652,7 +652,6 @@
 //   int[]    User IDs     (userid)
 - (void)processFriendsListPacket:(XFPacket *)pkt
 {
-	
 	if( !_session ) { [self disconnect]; return; }
 	
 	// SCR 37 - This prevents the main app from sending packets before we have a friends list

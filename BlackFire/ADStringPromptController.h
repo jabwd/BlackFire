@@ -6,13 +6,14 @@
 //  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @class ADStringPromptController;
 
 @protocol ADStringPromptDelegate <NSObject>
 - (void)stringPromptDidCancel:(ADStringPromptController *)prompt;
 - (void)stringPromptDidSucceed:(ADStringPromptController *)prompt;
+- (void)stringPromptDidDefer:(ADStringPromptController *)prompt;
 @end
 
 @interface ADStringPromptController : NSObject

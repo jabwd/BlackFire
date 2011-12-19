@@ -32,6 +32,7 @@
 
 - (void)dealloc
 {
+	_mainWindow = nil;
 	_delegate = nil;
 	[super dealloc];
 }

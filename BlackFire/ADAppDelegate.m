@@ -19,6 +19,7 @@
 #import "BFPreferencesWindowController.h"
 #import "BFChatWindowController.h"
 #import "BFChat.h"
+#import "BFRequestWindowController.h"
 
 #import "BFNotificationCenter.h"
 
@@ -74,6 +75,8 @@
 	_chatControllers = nil;
 	[_preferencesWindowController release];
 	_preferencesWindowController = nil;
+	[_friendshipRequests release];
+	_friendshipRequests = nil;
     [super dealloc];
 }
 
@@ -454,7 +457,31 @@
 
 - (void)session:(XFSession *)session didReceiveFriendShipRequests:(NSArray *)requests
 {
-	NSLog(@"Received friend ship request: %@",requests);
+	[_friendshipRequests release];
+	_friendshipRequests = [[NSMutableArray alloc] initWithArray:requests];
+	
+	[self checkForFriendRequest];
+}
+
+- (void)checkForFriendRequest
+{
+	if( ! _stringPromptController )
+	{
+		XFFriend *requestFriend = [_friendshipRequests objectAtIndex:0];
+		if( requestFriend )
+		{
+			_stringPromptController = [[BFRequestWindowController alloc] initWithWindow:self.window];
+			[(BFRequestWindowController *)_stringPromptController fillWithXfireFriend:requestFriend];
+			[_stringPromptController show];
+			_stringPromptController.delegate = self;
+		}
+		[_friendshipRequests removeObjectAtIndex:0];
+		if( [_friendshipRequests count] == 0 )
+		{
+			[_friendshipRequests release];
+			_friendshipRequests = nil;
+		}
+	}
 }
 
 - (void)session:(XFSession *)session didReceiveSearchResults:(NSArray *)results
@@ -687,6 +714,17 @@
 
 - (void)stringPromptDidSucceed:(ADStringPromptController *)prompt
 {	
+	// determine what kind of prompt it was.
+	if( [prompt isKindOfClass:[BFRequestWindowController class]] )
+	{
+		XFFriend *remoteFriend = [(BFRequestWindowController *)prompt remoteFriend];
+		[_session acceptFriendRequest:remoteFriend];
+		[_stringPromptController release];
+		_stringPromptController = nil;
+		[self checkForFriendRequest];
+		return;
+	}
+	
 	NSString *nickname = [_stringPromptController.messageField.stringValue copy];
 	[_stringPromptController release];
 	_stringPromptController = nil;
@@ -721,8 +759,26 @@
 
 - (void)stringPromptDidCancel:(ADStringPromptController *)prompt
 {
+	// determine what kind of prompt it was.
+	if( [prompt isKindOfClass:[BFRequestWindowController class]] )
+	{
+		XFFriend *remoteFriend = [(BFRequestWindowController *)prompt remoteFriend];
+		[_session declineFriendRequest:remoteFriend];
+		[_stringPromptController release];
+		_stringPromptController = nil;
+		[self checkForFriendRequest];
+		return;
+	}
+	
 	[_stringPromptController release];
 	_stringPromptController = nil;
+}
+
+- (void)stringPromptDidDefer:(ADStringPromptController *)prompt
+{
+	[_stringPromptController release];
+	_stringPromptController = nil;
+	[self checkForFriendRequest];
 }
 
 - (void)setSessionStatusString:(NSString *)status

@@ -6,8 +6,19 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "ADStringPromptController.h"
 
-@interface BFRequestWindowController : NSObject
+@class XFFriend;
+
+@interface BFRequestWindowController : ADStringPromptController
+{
+	XFFriend *_remoteFriend;
+}
+
+@property (nonatomic, retain) XFFriend *remoteFriend;
+
+- (IBAction)defer:(id)sender;
+
+- (void)fillWithXfireFriend:(XFFriend *)remoteFriend;
 
 @end

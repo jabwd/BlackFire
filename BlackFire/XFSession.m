@@ -267,6 +267,11 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		if( [[_friends objectAtIndex:i] userID] == userID )
 		{
 			friend = [[_friends objectAtIndex:i] retain];
+			for(XFGroup *group in _groupController.groups)
+			{
+				if( [group friendIsMember:friend] )
+					[group removeMember:friend];
+			}
 			[_friends removeObjectAtIndex:i];
 			break;
 		}
@@ -353,6 +358,22 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 
 #pragma mark - User session
+
+- (void)acceptFriendRequest:(XFFriend *)fr
+{
+	if( _status == XFSessionStatusOnline )
+	{
+		[_tcpConnection acceptFriendRequest:fr];
+	}
+}
+
+- (void)declineFriendRequest:(XFFriend *)fr
+{
+	if( _status == XFSessionStatusOnline )
+	{
+		[_tcpConnection declineFriendRequest:fr];
+	}
+}
 
 - (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port
 {

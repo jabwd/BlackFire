@@ -41,6 +41,7 @@ typedef enum
 	// end toolbar outlets
 	
 	NSMutableArray *_chatControllers;
+	NSMutableArray *_friendshipRequests;
 	
 	
 	BFDownload		*_download;
@@ -81,6 +82,7 @@ typedef enum
 
 - (void)beginChatWithFriend:(XFFriend *)remoteFriend;
 - (void)requestAvatarForFriend:(XFFriend *)remoteFriend;
+- (void)checkForFriendRequest;
 
 //----------------------------------------------------------------------------
 // Main menu
