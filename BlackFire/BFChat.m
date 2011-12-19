@@ -231,6 +231,14 @@
 		}
 			break;
 			
+		case XFFriendNotificationJoinedGameServer:
+			[self displayWarning:[NSString stringWithFormat:@"%@ joined a server on %@",[_chat.remoteFriend displayName],[_chat.remoteFriend gameIPString]]];
+			break;
+			
+		case XFFriendNotificationLeftGameServer:
+			[self displayWarning:[NSString stringWithFormat:@"%@ left a server",[_chat.remoteFriend displayName]]];
+			break;
+			
 		case XFFriendNotificationFriendAdded:
 		{
 		}

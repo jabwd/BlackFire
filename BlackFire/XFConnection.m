@@ -844,10 +844,30 @@
 				[_session removeFriend:friend];
 				continue;
 			}
-			friend.gameID	= gid;
-			friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
-			friend.gamePort = ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
-			[_session raiseFriendNotification:XFFriendNotificationGameStatusChanged forFriend:friend];
+			
+			// now do advanced notification processing
+			if( gid != 0 && friend.gameID == gid )
+			{
+				unsigned int gameIP = [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
+				unsigned int gamePort = ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
+				friend.gameIP = gameIP;
+				friend.gamePort = gamePort;
+				if( gameIP > 0 )
+				{
+					[_session raiseFriendNotification:XFFriendNotificationJoinedGameServer forFriend:friend];
+				}
+				else
+				{
+					[_session raiseFriendNotification:XFFriendNotificationLeftGameServer forFriend:friend];
+				}
+			}
+			else
+			{
+				friend.gameID	= gid;
+				friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
+				friend.gamePort = ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
+				[_session raiseFriendNotification:XFFriendNotificationGameStatusChanged forFriend:friend];
+			}
 		}
 	}
 	

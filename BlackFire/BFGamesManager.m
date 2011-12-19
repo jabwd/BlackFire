@@ -70,6 +70,24 @@
 			NSLog(@"*** Cannot create cache folder directory");
 		}
 	}
+	
+	// validate the image
+	NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
+	if( !image )
+	{
+		[image release];
+		[finalPath release];
+		[_download release];
+		_download = nil;
+		// don't remove from missingIcons directory
+		NSLog(@"*** Image for %@ could not be downloaded",game);
+		
+		// continue the cycle anyways
+		[self downloadNextMissingIcon];
+		return;
+	}
+	[image release];
+	
 	NSString *cacheFile = [NSString stringWithFormat:@"%@/%u.png",finalPath,[game unsignedIntValue]];
 	
 	[[NSFileManager defaultManager] moveItemAtPath:path toPath:cacheFile error:nil];

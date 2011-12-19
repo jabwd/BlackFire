@@ -44,6 +44,8 @@ typedef enum
 	XFFriendNotificationOnlineStatusChanged = 0,
 	XFFriendNotificationStatusChanged,
 	XFFriendNotificationGameStatusChanged,
+	XFFriendNotificationJoinedGameServer,
+	XFFriendNotificationLeftGameServer,
 	XFFriendNotificationFriendAdded,
 	XFFriendNotificationFriendRemoved
 } XFFriendNotification;
