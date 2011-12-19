@@ -192,9 +192,10 @@ typedef enum{
 //--------------------------------------------------------------------------------
 // User session
 
-// Accept incoming friendship requests
+
 - (void)acceptFriendRequest:(XFFriend *)fr;
 - (void)declineFriendRequest:(XFFriend *)fr;
+- (void)sendFriendRequest:(NSString *)username message:(NSString *)message;
 
 - (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port;
 - (void)exitGame;

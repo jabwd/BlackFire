@@ -77,12 +77,15 @@ typedef enum
 
 //----------------------------------------------------------------------------
 // Xfire Session
+
 - (void)connectionCheck;
 - (IBAction)disconnect:(id)sender;
 
 - (void)beginChatWithFriend:(XFFriend *)remoteFriend;
 - (void)requestAvatarForFriend:(XFFriend *)remoteFriend;
+
 - (void)checkForFriendRequest;
+- (void)startUserSearching:(NSString *)searchQuery;
 
 //----------------------------------------------------------------------------
 // Main menu
@@ -103,6 +106,7 @@ typedef enum
 //----------------------------------------------------------------------------
 // Friends list toolbar
 
+- (IBAction)addAction:(id)sender;
 - (IBAction)showUserProfile:(id)sender;
 
 - (IBAction)selectAvailable:(id)sender;

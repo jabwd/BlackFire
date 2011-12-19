@@ -20,6 +20,7 @@
 #import "BFChatWindowController.h"
 #import "BFChat.h"
 #import "BFRequestWindowController.h"
+#import "ADInvitationWindowController.h"
 
 #import "BFNotificationCenter.h"
 
@@ -486,8 +487,20 @@
 
 - (void)session:(XFSession *)session didReceiveSearchResults:(NSArray *)results
 {
-	NSLog(@"Received search results: %@",results);
+	if( [_stringPromptController isKindOfClass:[ADInvitationWindowController class]] )
+	{
+		ADInvitationWindowController *controller = (ADInvitationWindowController *)_stringPromptController;
+		[controller setSearchResults:[NSMutableArray arrayWithArray:results]];
+		[controller reloadData];
+	}
 }
+
+- (void)startUserSearching:(NSString *)searchQuery
+{
+	[_session beginUserSearch:searchQuery];
+}
+
+
 
 
 - (void)session:(XFSession *)session receivedAvatarInformation:(unsigned int)userID getValue:(unsigned int)getValue type:(unsigned int)type
@@ -724,6 +737,15 @@
 		[self checkForFriendRequest];
 		return;
 	}
+	else if( [prompt isKindOfClass:[ADInvitationWindowController class]] )
+	{
+		XFFriend *selectedFriend = [(ADInvitationWindowController *)prompt selectedFriend];
+		if( selectedFriend )
+		{
+			[_session sendFriendRequest:selectedFriend.username message:prompt.messageField.stringValue];
+		}
+		return;
+	}
 	
 	NSString *nickname = [_stringPromptController.messageField.stringValue copy];
 	[_stringPromptController release];
@@ -795,6 +817,16 @@
 
 #pragma mark - Menu items
 
+- (IBAction)addAction:(id)sender
+{
+	if( ! _stringPromptController && _session.status == XFSessionStatusOnline )
+	{
+		_stringPromptController = [[ADInvitationWindowController alloc] initWithWindow:self.window];
+		_stringPromptController.delegate = self;
+		[_stringPromptController show];
+	}
+}
+
 - (IBAction)selectNextTab:(id)sender
 {
 	// detect if a window is in front
@@ -865,9 +897,10 @@
 
 - (IBAction)removeSelectedFriend:(id)sender
 {
-	return; // not done yet.
 	XFFriend *selectedFriend = [_friendsListController selectedFriendNotFoF];
-	if( !selectedFriend.clanFriend )
+	NSUInteger result = NSRunAlertPanel([NSString stringWithFormat:@"Are you sure you want to delete %@",[selectedFriend displayName]], @"This will permanently delete him or her from your friends list", @"OK", @"Cancel", nil);
+	
+	if( !selectedFriend.clanFriend && result == NSOKButton )
 	{
 		[_session sendRemoveFriend:selectedFriend];
 	}

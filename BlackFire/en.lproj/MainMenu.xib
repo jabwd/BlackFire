@@ -926,7 +926,7 @@
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="133575571">
-								<int key="NSCellFlags">604110336</int>
+								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">0</int>
 								<object class="NSFont" key="NSSupport" id="237592437">
 									<string key="NSName">LucidaGrande</string>
@@ -996,7 +996,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="243777411"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{183, 331}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">mainWindow</string>
@@ -1797,6 +1797,14 @@
 						<reference key="destination" ref="609285721"/>
 					</object>
 					<int key="connectionID">854</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addAction:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="581243776"/>
+					</object>
+					<int key="connectionID">855</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2812,7 +2820,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">854</int>
+			<int key="maxID">855</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2820,6 +2828,7 @@
 					<string key="className">ADAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="addAction:">id</string>
 						<string key="closeAction:">id</string>
 						<string key="disconnect:">id</string>
 						<string key="help:">id</string>
@@ -2835,6 +2844,10 @@
 						<string key="toggleShowOfflineClanFriends:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addAction:">
+							<string key="name">addAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="closeAction:">
 							<string key="name">closeAction:</string>
 							<string key="candidateClassName">id</string>

@@ -361,18 +361,17 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)acceptFriendRequest:(XFFriend *)fr
 {
-	if( _status == XFSessionStatusOnline )
-	{
-		[_tcpConnection acceptFriendRequest:fr];
-	}
+	[_tcpConnection acceptFriendRequest:fr];
 }
 
 - (void)declineFriendRequest:(XFFriend *)fr
 {
-	if( _status == XFSessionStatusOnline )
-	{
-		[_tcpConnection declineFriendRequest:fr];
-	}
+	[_tcpConnection declineFriendRequest:fr];
+}
+
+- (void)sendFriendRequest:(NSString *)username message:(NSString *)message
+{
+	[_tcpConnection sendFriendInvitation:username message:message];
 }
 
 - (void)enterGame:(unsigned int)gameID IP:(unsigned int)IPAddress port:(unsigned short)port

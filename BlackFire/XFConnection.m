@@ -212,7 +212,6 @@
 
 - (void)sendKeepAliveRequest
 {
-	NSLog(@"Sending keep alive");
 	[_keepAliveResponseTimer invalidate];
 	_keepAliveResponseTimer = nil;
 	_keepAliveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:30.0
@@ -1211,7 +1210,6 @@
 
 - (void)processKeepAliveResponse:(XFPacket *)pkt
 {
-	NSLog(@"KeepAlive response");
     if( _keepAliveResponseTimer )
     {
         [_keepAliveResponseTimer invalidate];

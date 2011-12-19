@@ -3,11 +3,27 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 12/14/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Exurion. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "ADStringPromptController.h"
 
-@interface ADInvitationWindowController : NSObject
+@class XFFriend;
+
+@interface ADInvitationWindowController : ADStringPromptController <NSTableViewDelegate, NSTableViewDataSource>
+{
+	NSMutableArray *_searchResults;
+}
+
+@property (assign) IBOutlet NSSearchField	*searchField;
+@property (assign) IBOutlet NSTableView		*tableView;
+
+@property (nonatomic, retain) NSMutableArray *searchResults;
+
+- (IBAction)startSearching:(id)sender;
+
+- (XFFriend *)selectedFriend;
+- (NSString *)invitationMessage;
+- (void)reloadData;
 
 @end
