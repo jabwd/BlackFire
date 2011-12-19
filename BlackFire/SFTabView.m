@@ -161,17 +161,17 @@
 	
 	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:_title attributes:attributes];
 	CGFloat height = [titleAttrStr size].height/2;
-	CGFloat baseX = 25;
+	CGFloat baseX = 26;
 	CGFloat width = [titleAttrStr size].width;
-	if( (dirtyRect.size.width-36) < width )
-		width = dirtyRect.size.width-36;
+	if( (dirtyRect.size.width-40) < width )
+		width = dirtyRect.size.width-40;
 	else
 	{
 		baseX = (dirtyRect.size.width/2)-(width/2);
 	}
 	// safeguard
-	if( baseX < 25 )
-		baseX = 25;
+	if( baseX < 26 )
+		baseX = 26;
 	NSRect stringRect = NSMakeRect(baseX, (dirtyRect.size.height/2)-height-2.0f, width, 24-height);
 	[titleAttrStr drawInRect:stringRect];
 	[titleAttrStr release];
@@ -180,10 +180,17 @@
 	if( _mouseInside )
 		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	else if( _tabImage )
-		[_tabImage drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 13, 13) operation:NSCompositeSourceOver fraction:1.0f];
+		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSMakeRect(0, 0, 14, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	else if( _missedMessages > 0 )
 	{
 		NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"(%lu)",_missedMessages] attributes:attributes];
+		
+		// draw some sort of bezel around it
+		//NSRect stringRect = NSMakeRect(10, 4, [countString size].width, 13);
+		/*NSBezierPath *bezelPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(stringRect.origin.x-2, stringRect.origin.y, stringRect.size.width+2, stringRect.size.height) xRadius:5.0f yRadius:5.0f];
+		[[NSColor grayColor] set];
+		[bezelPath fill];*/
+		
 		[countString drawInRect:NSMakeRect(10, 4, [countString size].width, 13)];
 		[countString release];
 	}
