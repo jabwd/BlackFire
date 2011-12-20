@@ -2,12 +2,36 @@
 //  BFGamesListController.h
 //  BlackFire
 //
-//  Created by Antwan van Houdt on 12/15/11.
-//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
+//  Created by Antwan van Houdt on 11/15/10.
+//  Copyright 2010 Excurion. All rights reserved.
 //
 
 #import "BFTabViewController.h"
 
-@interface BFGamesListController : BFTabViewController
+@class BFStringPromptController, BFGamesGroup;
 
+@interface BFGamesListController : BFTabViewController <NSOutlineViewDataSource, NSOutlineViewDelegate>
+{
+    BFGamesGroup *detectedGamesGroup;
+    BFGamesGroup *undetectedGamesGroup;
+}
+
+@property (assign) IBOutlet NSOutlineView *tableView;
+
+- (void)reloadData;
+- (void)expandItem;
+
+- (IBAction)doubleClicked:(id)sender;
+- (IBAction)removeSelected:(id)sender;
+
+@end
+
+@interface NSDictionary (Utilities)
+- (NSComparisonResult)compareMacGame:(id)game;
+- (NSComparisonResult)compareXfireGame:(id)game;
+@end
+
+@interface NSNumber (Utilities)
+- (NSComparisonResult)compareMacGame:(id)game;
+- (NSComparisonResult)compareXfireGame:(id)game;
 @end

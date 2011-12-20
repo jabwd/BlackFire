@@ -16,6 +16,7 @@
 
 #import "BFLoginViewController.h"
 #import "BFFriendsListController.h"
+#import "BFGamesListController.h"
 #import "BFPreferencesWindowController.h"
 #import "BFChatWindowController.h"
 #import "BFChat.h"
@@ -37,6 +38,9 @@
 @synthesize statusBubbleView		= _statusBubbleView;
 @synthesize nicknamePopUpButton		= _nicknamePopUpButton;
 @synthesize statusPopUpButton		= _statusPopUpButton;
+
+@synthesize addButton = _addButton;
+@synthesize modeControl = _modeControl;
 
 @synthesize currentMode = _currentMode;
 
@@ -169,6 +173,9 @@
 				_stringPromptController = nil;
 			}
 			
+			[_addButton setHidden:true];
+			[_modeControl setHidden:true];
+			
 			if( ! _loginViewController )
 			{
 				_loginViewController = [[BFLoginViewController alloc] init];
@@ -199,6 +206,8 @@
 			
 		case BFApplicationModeOnline:
 		{
+			[_addButton setHidden:false];
+			[_modeControl setHidden:false];
 			[_loginViewController session:_session changedStatus:XFSessionStatusOnline];
 			
 			if( ! _friendsListController )
@@ -223,7 +232,14 @@
 			
 		case BFApplicationModeGames:
 		{
+			if( ! _gamesListController )
+			{
+				_gamesListController = [[BFGamesListController alloc] init];
+			}
+			[_gamesListController expandItem];
+			[_gamesListController reloadData];
 			
+			[self changeMainView:_gamesListController.view];
 		}
 			break;
 			
@@ -255,6 +271,22 @@
 	[newView setFrame:[_mainView bounds]];
 }
 
+- (IBAction)modeControl:(id)sender
+{
+	NSInteger tag = [(NSSegmentedControl *)sender selectedSegment];
+	if( tag == 0 )
+	{
+		[self changeToMode:BFApplicationModeOnline];
+	}
+	else if( tag == 1 )
+	{
+		[self changeToMode:BFApplicationModeGames];
+	}
+	else
+	{
+		[self changeToMode:BFApplicationModeServers];
+	}
+}
 
 #pragma mark - Xfire Session
 
@@ -640,7 +672,14 @@
 
 - (void)gameIconDidDownload
 {
-	[_friendsListController reloadData];
+	if( _gamesListController && _currentMode == BFApplicationModeGames )
+	{
+		[_gamesListController reloadData];
+	}
+	else
+	{
+		[_friendsListController reloadData];
+	}
 }
 
 #pragma mark - Friends list toolbar

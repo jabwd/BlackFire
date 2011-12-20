@@ -22,6 +22,8 @@ extern NSString *XFGameIDKey;
 	NSMutableDictionary *_games;
 }
 
+@property (readonly) NSMutableDictionary *xfireGames;
+
 + (id)sharedGamesManager;
 
 - (XFGame *)gameForGameID:(NSUInteger)gameID;

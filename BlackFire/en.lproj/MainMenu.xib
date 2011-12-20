@@ -721,7 +721,8 @@
 								<object class="NSMenuItem" id="103602938">
 									<reference key="NSMenu" ref="686602257"/>
 									<string key="NSTitle">Remove selected friend</string>
-									<string key="NSKeyEquiv"/>
+									<string type="base64-UTF8" key="NSKeyEquiv">CA</string>
+									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -730,7 +731,8 @@
 								<object class="NSMenuItem" id="1023134856">
 									<reference key="NSMenu" ref="686602257"/>
 									<string key="NSTitle">Show profile</string>
-									<string key="NSKeyEquiv"/>
+									<string key="NSKeyEquiv">p</string>
+									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -918,7 +920,7 @@
 						</object>
 						<object class="NSSegmentedControl" id="581243776">
 							<reference key="NSNextResponder" ref="439893737"/>
-							<int key="NSvFlags">292</int>
+							<int key="NSvFlags">-2147483356</int>
 							<string key="NSFrame">{{7, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
@@ -956,6 +958,7 @@
 							<string key="NSFrame">{{39, 2}, {89, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="118632682">
@@ -971,22 +974,31 @@
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">NSEveryone</string>
 										</object>
-										<string key="NSSegmentItemLabel"/>
+										<string key="NSSegmentItemTooltip">Friends</string>
+										<bool key="NSSegmentItemSelected">YES</bool>
 										<int key="NSSegmentItemImageScaling">0</int>
 									</object>
 									<object class="NSSegmentItem">
 										<double key="NSSegmentItemWidth">28</double>
-										<string key="NSSegmentItemLabel"/>
+										<object class="NSCustomResource" key="NSSegmentItemImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">gamesTemplate</string>
+										</object>
+										<string key="NSSegmentItemTooltip">Games</string>
 										<int key="NSSegmentItemTag">1</int>
 										<int key="NSSegmentItemImageScaling">0</int>
 									</object>
 									<object class="NSSegmentItem">
 										<double key="NSSegmentItemWidth">28</double>
+										<object class="NSCustomResource" key="NSSegmentItemImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSBonjour</string>
+										</object>
+										<string key="NSSegmentItemTooltip">Servers</string>
+										<int key="NSSegmentItemTag">2</int>
 										<int key="NSSegmentItemImageScaling">0</int>
 									</object>
 								</array>
-								<int key="NSSelectedSegment">1</int>
-								<int key="NSTrackingMode">2</int>
 								<int key="NSSegmentStyle">4</int>
 							</object>
 						</object>
@@ -1246,6 +1258,7 @@
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="180167131">
@@ -1805,6 +1818,30 @@
 						<reference key="destination" ref="581243776"/>
 					</object>
 					<int key="connectionID">855</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">modeControl:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="734160504"/>
+					</object>
+					<int key="connectionID">856</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">addButton</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="581243776"/>
+					</object>
+					<int key="connectionID">857</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">modeControl</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="734160504"/>
+					</object>
+					<int key="connectionID">858</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2721,6 +2758,7 @@
 				<integer value="0" key="586.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="586.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="587.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<integer value="0" key="588.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="588.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="651.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="652.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2820,7 +2858,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">855</int>
+			<int key="maxID">858</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2832,6 +2870,7 @@
 						<string key="closeAction:">id</string>
 						<string key="disconnect:">id</string>
 						<string key="help:">id</string>
+						<string key="modeControl:">id</string>
 						<string key="removeSelectedFriend:">id</string>
 						<string key="selectAvailable:">id</string>
 						<string key="selectAway:">id</string>
@@ -2858,6 +2897,10 @@
 						</object>
 						<object class="IBActionInfo" key="help:">
 							<string key="name">help:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="modeControl:">
+							<string key="name">modeControl:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="removeSelectedFriend:">
@@ -2902,8 +2945,10 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="addButton">NSSegmentedControl</string>
 						<string key="avatarImageView">NSImageView</string>
 						<string key="mainView">NSView</string>
+						<string key="modeControl">NSSegmentedControl</string>
 						<string key="nicknamePopUpButton">NSPopUpButton</string>
 						<string key="statusBubbleView">NSImageView</string>
 						<string key="statusPopUpButton">NSPopUpButton</string>
@@ -2911,6 +2956,10 @@
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="addButton">
+							<string key="name">addButton</string>
+							<string key="candidateClassName">NSSegmentedControl</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="avatarImageView">
 							<string key="name">avatarImageView</string>
 							<string key="candidateClassName">NSImageView</string>
@@ -2918,6 +2967,10 @@
 						<object class="IBToOneOutletInfo" key="mainView">
 							<string key="name">mainView</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="modeControl">
+							<string key="name">modeControl</string>
+							<string key="candidateClassName">NSSegmentedControl</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="nicknamePopUpButton">
 							<string key="name">nicknamePopUpButton</string>
@@ -2953,9 +3006,11 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NSAddTemplate">{8, 8}</string>
+			<string key="NSBonjour">{32, 32}</string>
 			<string key="NSEveryone">{32, 32}</string>
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
+			<string key="gamesTemplate">{128, 128}</string>
 		</dictionary>
 	</data>
 </archive>

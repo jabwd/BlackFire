@@ -19,6 +19,8 @@ static XFGamesManager *sharedGameManager = nil;
 
 @implementation XFGamesManager
 
+@synthesize xfireGames = _games;
+
 + (id)sharedGamesManager
 {
 	if( ! sharedGameManager )

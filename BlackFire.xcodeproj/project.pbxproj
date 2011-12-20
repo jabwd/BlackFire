@@ -80,6 +80,10 @@
 		366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23A14658C8D002A1F50 /* BFAccount.m */; };
 		366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23D14658D21002A1F50 /* BFKeychainManager.m */; };
 		367A9619149AB9CE00CF3833 /* sha1.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F079149AB6A300214DEF /* sha1.m */; };
+		368238E314A09C1400C60D5E /* BFGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238E014A09C1400C60D5E /* BFGamesListController.m */; };
+		368238E414A09C1400C60D5E /* GamesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E114A09C1400C60D5E /* GamesList.xib */; };
+		368238E514A09C1400C60D5E /* ServerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E214A09C1400C60D5E /* ServerList.xib */; };
+		368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238EB14A0A15C00C60D5E /* BFGamesGroup.m */; };
 		368C6B47149E00CF00723E9A /* notification.icns in Resources */ = {isa = PBXBuildFile; fileRef = 368C6B46149E00CF00723E9A /* notification.icns */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
@@ -129,10 +133,6 @@
 		36EBDDAE1479B2F500D219D7 /* inactiveWTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDDA21479B2F500D219D7 /* inactiveWTabClose.png */; };
 		36EBDDAF1479B2F500D219D7 /* inactiveWTabHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDDA31479B2F500D219D7 /* inactiveWTabHover.png */; };
 		36EBDDB01479B2F500D219D7 /* inactiveWTabPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDDA41479B2F500D219D7 /* inactiveWTabPressed.png */; };
-		36F5F06B149A460000214DEF /* BFServerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F06A149A460000214DEF /* BFServerListController.m */; };
-		36F5F06F149A460C00214DEF /* BFGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F06E149A460C00214DEF /* BFGamesListController.m */; };
-		36F5F071149A466200214DEF /* ServerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5F070149A466200214DEF /* ServerList.xib */; };
-		36F5F073149A466B00214DEF /* GamesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5F072149A466B00214DEF /* GamesList.xib */; };
 		36FD1186147953B5009F70DE /* XFGamesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD1185147953B5009F70DE /* XFGamesManager.m */; };
 		36FD118A14795400009F70DE /* XFGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD118914795400009F70DE /* XFGame.m */; };
 /* End PBXBuildFile section */
@@ -263,6 +263,12 @@
 		366AC23A14658C8D002A1F50 /* BFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAccount.m; sourceTree = "<group>"; };
 		366AC23C14658D21002A1F50 /* BFKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFKeychainManager.h; sourceTree = "<group>"; };
 		366AC23D14658D21002A1F50 /* BFKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFKeychainManager.m; sourceTree = "<group>"; };
+		368238DF14A09C1400C60D5E /* BFGamesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesListController.h; sourceTree = "<group>"; };
+		368238E014A09C1400C60D5E /* BFGamesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesListController.m; sourceTree = "<group>"; };
+		368238E114A09C1400C60D5E /* GamesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesList.xib; sourceTree = "<group>"; };
+		368238E214A09C1400C60D5E /* ServerList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerList.xib; sourceTree = "<group>"; };
+		368238EA14A0A15C00C60D5E /* BFGamesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesGroup.h; sourceTree = "<group>"; };
+		368238EB14A0A15C00C60D5E /* BFGamesGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesGroup.m; sourceTree = "<group>"; };
 		368C6B46149E00CF00723E9A /* notification.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = notification.icns; sourceTree = "<group>"; };
 		368EC5B2147172CF00EEDC07 /* AHHyperlinkScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHHyperlinkScanner.h; sourceTree = "<group>"; };
 		368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHHyperlinkScanner.m; sourceTree = "<group>"; };
@@ -327,12 +333,6 @@
 		36EBDDA21479B2F500D219D7 /* inactiveWTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabClose.png; sourceTree = "<group>"; };
 		36EBDDA31479B2F500D219D7 /* inactiveWTabHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabHover.png; sourceTree = "<group>"; };
 		36EBDDA41479B2F500D219D7 /* inactiveWTabPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabPressed.png; sourceTree = "<group>"; };
-		36F5F069149A460000214DEF /* BFServerListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFServerListController.h; sourceTree = "<group>"; };
-		36F5F06A149A460000214DEF /* BFServerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFServerListController.m; sourceTree = "<group>"; };
-		36F5F06D149A460C00214DEF /* BFGamesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesListController.h; sourceTree = "<group>"; };
-		36F5F06E149A460C00214DEF /* BFGamesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesListController.m; sourceTree = "<group>"; };
-		36F5F070149A466200214DEF /* ServerList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerList.xib; sourceTree = "<group>"; };
-		36F5F072149A466B00214DEF /* GamesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesList.xib; sourceTree = "<group>"; };
 		36F5F078149AB6A300214DEF /* sha1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
 		36F5F079149AB6A300214DEF /* sha1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sha1.m; sourceTree = "<group>"; };
 		36FD1184147953B5009F70DE /* XFGamesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGamesManager.h; sourceTree = "<group>"; };
@@ -641,12 +641,12 @@
 				369D9DD71465FD6B00CB15FF /* BFFriendsListController.h */,
 				369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */,
 				369D9DDB1466006200CB15FF /* FriendsList.xib */,
-				36F5F069149A460000214DEF /* BFServerListController.h */,
-				36F5F06A149A460000214DEF /* BFServerListController.m */,
-				36F5F06D149A460C00214DEF /* BFGamesListController.h */,
-				36F5F06E149A460C00214DEF /* BFGamesListController.m */,
-				36F5F070149A466200214DEF /* ServerList.xib */,
-				36F5F072149A466B00214DEF /* GamesList.xib */,
+				368238DF14A09C1400C60D5E /* BFGamesListController.h */,
+				368238E014A09C1400C60D5E /* BFGamesListController.m */,
+				368238EA14A0A15C00C60D5E /* BFGamesGroup.h */,
+				368238EB14A0A15C00C60D5E /* BFGamesGroup.m */,
+				368238E114A09C1400C60D5E /* GamesList.xib */,
+				368238E214A09C1400C60D5E /* ServerList.xib */,
 			);
 			name = TabViews;
 			sourceTree = "<group>";
@@ -898,12 +898,12 @@
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
 				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
 				363082C61499F9E1001B47CC /* tab-typing.png in Resources */,
-				36F5F071149A466200214DEF /* ServerList.xib in Resources */,
-				36F5F073149A466B00214DEF /* GamesList.xib in Resources */,
 				361849AC149CF01800614603 /* BFPreferencesWindow.xib in Resources */,
 				3698AC23149D1C9E0015AB9C /* RequestWindow.xib in Resources */,
 				368C6B47149E00CF00723E9A /* notification.icns in Resources */,
 				36C8A9B2149F8630000695B6 /* Games.plist in Resources */,
+				368238E414A09C1400C60D5E /* GamesList.xib in Resources */,
+				368238E514A09C1400C60D5E /* ServerList.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -962,11 +962,11 @@
 				36DAA20914935816001A7039 /* BFDownload.m in Sources */,
 				3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */,
 				3645873A149937AF00460195 /* BFDefaults.m in Sources */,
-				36F5F06B149A460000214DEF /* BFServerListController.m in Sources */,
-				36F5F06F149A460C00214DEF /* BFGamesListController.m in Sources */,
 				361849AF149CF07B00614603 /* BFPreferencesWindowController.m in Sources */,
 				3698AC20149D1C900015AB9C /* BFRequestWindowController.m in Sources */,
 				3698AC26149D1CDD0015AB9C /* BFIdleTimeManager.m in Sources */,
+				368238E314A09C1400C60D5E /* BFGamesListController.m in Sources */,
+				368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

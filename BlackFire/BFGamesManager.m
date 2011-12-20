@@ -11,7 +11,8 @@
 
 @implementation BFGamesManager
 
-@synthesize delegate = _delegate;
+@synthesize delegate	= _delegate;
+@synthesize macGames	= _macGames;
 
 - (id)init
 {
@@ -20,6 +21,7 @@
 		_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
 		_runningGames	= [[NSMutableArray alloc] init];
 		_missingIcons	= [[NSMutableArray alloc] init];
+		_knownMissing	= [[NSMutableArray alloc] init];
 		_gameIcons		= [[NSMutableDictionary alloc] init];
 		
 		_cachesPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
@@ -39,10 +41,23 @@
 	_runningGames = nil;
 	[_macGames release];
 	_macGames = nil;
+	[_knownMissing release];
+	_knownMissing = nil;
 	[super dealloc];
 }
 
 #pragma mark - Xfire games
+
+- (NSUInteger)gamesCount
+{
+	return [_games count];
+}
+
+- (NSDictionary *)gameAtIndex:(NSInteger)index
+{
+	NSArray *keys = [_games allKeys];
+	return [_games objectForKey:[keys objectAtIndex:index]];
+}
 
 - (void)download:(BFDownload *)download didFailWithError:(NSError *)error
 {
@@ -75,16 +90,8 @@
 	NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
 	if( !image )
 	{
-		[image release];
-		[finalPath release];
-		[_download release];
-		_download = nil;
-		// don't remove from missingIcons directory
 		NSLog(@"*** Image for %@ could not be downloaded",game);
-		
-		// continue the cycle anyways
-		[self downloadNextMissingIcon];
-		return;
+		[_knownMissing addObject:game];
 	}
 	[image release];
 	
@@ -145,6 +152,14 @@
 					// found a missing icon, should we add it or not ?
 					BOOL found = false;
 					for(NSNumber *game in _missingIcons)
+					{
+						if( [game unsignedIntValue] == gameID )
+						{
+							found = true;
+							break;
+						}
+					}
+					for(NSNumber *game in _knownMissing)
 					{
 						if( [game unsignedIntValue] == gameID )
 						{

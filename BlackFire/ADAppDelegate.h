@@ -22,7 +22,7 @@ typedef enum
 	BFApplicationModeServers	= 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController;
 
 @interface ADAppDelegate : NSObject <BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
@@ -49,6 +49,7 @@ typedef enum
 	BFLoginViewController			*_loginViewController;
 	BFFriendsListController			*_friendsListController;
 	BFPreferencesWindowController	*_preferencesWindowController;
+	BFGamesListController			*_gamesListController;
 	ADStringPromptController		*_stringPromptController;
 	
 	BFApplicationMode		_currentMode;
@@ -67,6 +68,9 @@ typedef enum
 @property (assign) IBOutlet NSView *mainView;
 @property (assign) IBOutlet NSView *toolbarView;
 
+@property (assign) IBOutlet NSSegmentedControl *addButton;
+@property (assign) IBOutlet NSSegmentedControl *modeControl;
+
 @property (readonly) BFApplicationMode currentMode;
 
 //----------------------------------------------------------------------------
@@ -74,6 +78,7 @@ typedef enum
 
 - (void)changeToMode:(BFApplicationMode)newMode;
 - (void)changeMainView:(NSView *)newView;
+- (IBAction)modeControl:(id)sender;
 
 //----------------------------------------------------------------------------
 // Xfire Session

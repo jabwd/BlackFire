@@ -22,6 +22,7 @@
 	NSMutableDictionary *_macGames;
 	NSMutableArray		*_runningGames;
 	NSMutableArray		*_missingIcons;
+	NSMutableArray		*_knownMissing;
 	NSString			*_cachesPath;
 	
 	NSMutableDictionary *_gameIcons;
@@ -32,12 +33,16 @@
 }
 
 @property (assign) id <BFGameDetectionDelegate> delegate;
+@property (readonly) NSMutableDictionary *macGames;
 
 //----------------------------------------------------------------------------
 // Xfire games
 
 - (NSImage *)imageForGame:(unsigned int)gameID;
 - (void)downloadNextMissingIcon;
+
+- (NSUInteger)gamesCount;
+- (NSDictionary *)gameAtIndex:(NSInteger)index;
 
 
 //-----------------------------------------------------------------------------
