@@ -733,6 +733,8 @@
 		
 		XFFriend *friend = [_session friendForUserID:uid];
 		
+		[friend retain];
+		
 		if( [sid isClear] )
 		{
 			// makes sure that no clan members are shown in these groups.
@@ -758,6 +760,8 @@
 			friend.sessionID	= sid;
 			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
 		}
+		
+		[friend release];
 	}
 	[offlineGroup sortMembers];
 	[onlineGroup sortMembers];

@@ -44,6 +44,8 @@
 		36276EDD1468261700F84E7B /* inactiveWTabRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276ED31468261700F84E7B /* inactiveWTabRight.png */; };
 		36276EDE1468261700F84E7B /* inactiveWTabRightSL.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276ED41468261700F84E7B /* inactiveWTabRightSL.png */; };
 		36276EE51468442B00F84E7B /* NSViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EE41468442B00F84E7B /* NSViewAdditions.m */; };
+		362FCBB914A0D01200DED0DD /* BFServerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBB814A0D01200DED0DD /* BFServerListController.m */; };
+		362FCBBD14A0D07000DED0DD /* TaskWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBBC14A0D07000DED0DD /* TaskWrapper.m */; };
 		362FFA75146734BA007E3BD8 /* CTTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA70146734BA007E3BD8 /* CTTabController.m */; };
 		362FFA76146734BA007E3BD8 /* CTTabStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA72146734BA007E3BD8 /* CTTabStripView.m */; };
 		362FFA77146734BA007E3BD8 /* CTTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA74146734BA007E3BD8 /* CTTabView.m */; };
@@ -211,6 +213,10 @@
 		36276ED41468261700F84E7B /* inactiveWTabRightSL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactiveWTabRightSL.png; sourceTree = "<group>"; };
 		36276EE31468442B00F84E7B /* NSViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSViewAdditions.h; sourceTree = "<group>"; };
 		36276EE41468442B00F84E7B /* NSViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSViewAdditions.m; sourceTree = "<group>"; };
+		362FCBB714A0D01200DED0DD /* BFServerListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFServerListController.h; sourceTree = "<group>"; };
+		362FCBB814A0D01200DED0DD /* BFServerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFServerListController.m; sourceTree = "<group>"; };
+		362FCBBB14A0D07000DED0DD /* TaskWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskWrapper.h; sourceTree = "<group>"; };
+		362FCBBC14A0D07000DED0DD /* TaskWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskWrapper.m; sourceTree = "<group>"; };
 		362FFA6F146734BA007E3BD8 /* CTTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabController.h; sourceTree = "<group>"; };
 		362FFA70146734BA007E3BD8 /* CTTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTabController.m; sourceTree = "<group>"; };
 		362FFA71146734BA007E3BD8 /* CTTabStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabStripView.h; sourceTree = "<group>"; };
@@ -646,6 +652,8 @@
 				368238EA14A0A15C00C60D5E /* BFGamesGroup.h */,
 				368238EB14A0A15C00C60D5E /* BFGamesGroup.m */,
 				368238E114A09C1400C60D5E /* GamesList.xib */,
+				362FCBB714A0D01200DED0DD /* BFServerListController.h */,
+				362FCBB814A0D01200DED0DD /* BFServerListController.m */,
 				368238E214A09C1400C60D5E /* ServerList.xib */,
 			);
 			name = TabViews;
@@ -694,6 +702,8 @@
 		366AC23814658C7C002A1F50 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				362FCBBB14A0D07000DED0DD /* TaskWrapper.h */,
+				362FCBBC14A0D07000DED0DD /* TaskWrapper.m */,
 				3698AC24149D1CDD0015AB9C /* BFIdleTimeManager.h */,
 				3698AC25149D1CDD0015AB9C /* BFIdleTimeManager.m */,
 				366AC23C14658D21002A1F50 /* BFKeychainManager.h */,
@@ -967,6 +977,8 @@
 				3698AC26149D1CDD0015AB9C /* BFIdleTimeManager.m in Sources */,
 				368238E314A09C1400C60D5E /* BFGamesListController.m in Sources */,
 				368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */,
+				362FCBB914A0D01200DED0DD /* BFServerListController.m in Sources */,
+				362FCBBD14A0D07000DED0DD /* TaskWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

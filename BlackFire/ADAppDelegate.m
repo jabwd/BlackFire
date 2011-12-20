@@ -124,6 +124,14 @@
 	return false;
 }
 
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+	for(BFChat *chat in _chatControllers)
+	{
+		[chat closeChat]; // primarily for saving chatlogs
+	}
+}
+
 - (NSMenu *)applicationDockMenu:(NSApplication *)sender
 {
 	return nil;
@@ -218,15 +226,8 @@
 			
 			[self changeMainView:_friendsListController.view];
 			
-			[_statusBubbleView setImage:[NSImage imageNamed:@"avi_bubble"]];
-			[_avatarImageView setImage:[NSImage imageNamed:@"xfire"]];
-			
-			[_statusPopUpButton setTitle:@"Available"];
-			NSString *nickname = [[_session loginIdentity] displayName];
-			if( ! nickname )
-				nickname = @":D"; // this should actually never ever happen
-			[_nicknamePopUpButton setTitle:nickname];
-			
+			[_friendsListController reloadData];
+			[_friendsListController.view setNeedsDisplay:true];
 		}
 			break;
 			
@@ -453,6 +454,14 @@
 {
 	if( newStatus == XFSessionStatusOnline )
 	{
+		[_statusBubbleView setImage:[NSImage imageNamed:@"avi_bubble"]];
+		[_avatarImageView setImage:[NSImage imageNamed:@"xfire"]];
+		
+		[_statusPopUpButton setTitle:@"Available"];
+		NSString *nickname = [[_session loginIdentity] displayName];
+		if( ! nickname )
+			nickname = @":D"; // this should actually never ever happen
+		[_nicknamePopUpButton setTitle:nickname];
 		[[BFGamesManager sharedGamesManager] startMonitoring];
 		[self changeToMode:BFApplicationModeOnline];
 		

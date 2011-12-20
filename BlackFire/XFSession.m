@@ -205,6 +205,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	
 	if( [_delegate respondsToSelector:@selector(session:friendChanged:type:)] )
 		[_delegate session:self friendChanged:fr type:notification];
+	else
+		NSLog(@"*** Friend notification was raised but the delegate does not respond");
 }
 
 - (XFFriend *)friendForUserID:(unsigned int)userID
