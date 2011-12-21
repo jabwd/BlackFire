@@ -35,12 +35,17 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"BFChatWindow" owner:self];
-
+		[_window setAlphaValue:0.0f];
 		
 		_chats = [[NSMutableArray alloc] init];
 		_currentlySelectedChat = nil;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
+		
+		[NSAnimationContext beginGrouping];
+		[[NSAnimationContext currentContext] setDuration:0.1f];
+		[[_window animator] setAlphaValue:1.0f];
+		[NSAnimationContext endGrouping];
 	}
 	return self;
 }
@@ -65,10 +70,34 @@
 	[_chats release];
 	_chats = [[NSMutableArray alloc] init];
 	
-	// get rid of this chatwindow controller
+	NSArray *windows = [[NSApplication sharedApplication] windows];
+	for(NSWindow *window in windows)
+	{
+		if( window == _window )
+		{
+			continue;
+		}
+		else
+		{
+			[window makeKeyAndOrderFront:nil];
+			break;
+		}
+	}
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:.10f];
+	[[NSAnimationContext currentContext] setCompletionHandler:^{
+		[self destroy];
+	}];
+	[[_window animator] setAlphaValue:0.0f];
+	[NSAnimationContext endGrouping];
+	return false;
+}
+
+- (void)destroy
+{
+	[_window close];
 	[self release];
 	self = nil;
-	return true;
 }
 
 - (void)didBecomeMain:(NSNotification *)notification

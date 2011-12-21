@@ -25,8 +25,8 @@
 @implementation BFChat
 
 @synthesize windowController	= _windowController;
-@synthesize chatHistoryView  = _chatHistoryView;
-@synthesize chatScrollView = _chatScrollView;
+@synthesize chatHistoryView		= _chatHistoryView;
+@synthesize chatScrollView		= _chatScrollView;
 
 @synthesize chat = _chat;
 
@@ -49,6 +49,7 @@
 		_boldChatFont	= [[[NSFontManager sharedFontManager] convertWeight:true ofFont:_chatFont] retain];
 		
 		_messages = [[NSMutableArray alloc] init];
+	
 		
 		if( ! chat.remoteFriend )
 		{
@@ -352,15 +353,12 @@
 {
 	if( [self shouldScroll] )
 	{
-		if( animated && ! _animating )
+		if( animated )
 		{
-			_animating = true;
+			NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];
+			
 			[NSAnimationContext beginGrouping];
 			[[NSAnimationContext currentContext] setDuration:0.100f];
-			[[NSAnimationContext currentContext] setCompletionHandler:^{
-				_animating = false;
-			}];
-			NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];
 			NSPoint constrainedPoint = [clipView constrainScrollPoint:NSMakePoint(0, CGFLOAT_MAX)];
 			[[clipView animator] setBoundsOrigin:constrainedPoint];
 			[NSAnimationContext endGrouping];
@@ -383,7 +381,7 @@
 	NSRect visibleRect		= clipView.documentVisibleRect;
 	
 	CGFloat difference = (documentRect.size.height-visibleRect.origin.y);
-	if( difference == 0 )
+	if( difference < actualRect.size.height )
 		return false;
 	
 	if( difference == actualRect.size.height )
