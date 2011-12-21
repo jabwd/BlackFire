@@ -943,7 +943,7 @@
 
 - (IBAction)showProfile:(id)sender
 {
-	XFFriend *selectedFriend = [_friendsListController selectedOnlineFriend];
+	XFFriend *selectedFriend = [_friendsListController selectedFriend];
 	if( selectedFriend )
 	{
 		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.xfire.com/profile/%@",selectedFriend.username]]];
