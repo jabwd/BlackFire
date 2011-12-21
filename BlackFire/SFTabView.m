@@ -263,6 +263,10 @@
 	[trackingArea release];*/
 }
 
+- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
+{
+	return true;
+}
 
 - (void)mouseDown:(NSEvent *)theEvent
 {

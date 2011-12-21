@@ -945,10 +945,16 @@
 
 - (IBAction)removeSelectedFriend:(id)sender
 {
+	if( ![_window isMainWindow] )
+	{
+		return;
+	}
 	XFFriend *selectedFriend = [_friendsListController selectedFriendNotFoF];
-	NSUInteger result = NSRunAlertPanel([NSString stringWithFormat:@"Are you sure you want to delete %@",[selectedFriend displayName]], @"This will permanently delete him or her from your friends list", @"OK", @"Cancel", nil);
+	if( ! selectedFriend || selectedFriend.clanFriend || selectedFriend.friendOfFriend )
+		return;
 	
-	if( !selectedFriend.clanFriend && result == NSOKButton )
+	NSUInteger result = NSRunAlertPanel([NSString stringWithFormat:@"Are you sure you want to delete %@",[selectedFriend displayName]], @"This will permanently delete him or her from your friends list", @"OK", @"Cancel", nil);
+	if( result == NSOKButton )
 	{
 		[_session sendRemoveFriend:selectedFriend];
 	}

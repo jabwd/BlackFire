@@ -988,6 +988,17 @@
 		{
 			friend.nickname = nickname;
 		}
+		
+		// make sure that the friend is re-ordered
+		for(XFGroup *group in _session.groupController.groups)
+		{
+			if( [group friendIsMember:friend] )
+			{
+				[group sortMembers];
+			}
+		}
+		// just make it update
+		[_session raiseFriendNotification:XFFriendNotificationStatusChanged forFriend:nil];
 	}
 }
 

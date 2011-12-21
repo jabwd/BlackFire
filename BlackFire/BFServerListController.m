@@ -117,29 +117,6 @@
 	[self nextTask];
 }
 
-- (void)controlTextDidChange:(NSNotification *)obj
-{
-    NSString *ip   = [addServerIPField stringValue];
-	if( [ip length] < 6 )
-	{
-		[acceptButton setEnabled:NO];
-		return;
-	}
-	NSArray		*comp = [ip componentsSeparatedByString:@":"];
-	if( [comp count] != 2 )
-	{
-		[acceptButton setEnabled:NO];
-		return; // invalid IP address
-	}
-    if( [[[comp objectAtIndex:0] componentsSeparatedByString:@"."] count] < 4 )
-    {
-        [acceptButton setEnabled:NO];
-        return;
-    }
-    [acceptButton setEnabled:YES];
-}
-
-
 - (IBAction) doubleClicked:(id)sender
 {
 	NSDictionary *dict = [self selectedServer];
@@ -182,7 +159,8 @@
 			return; // the server is offline
 		}
 		//NSString *name = stringFromQuakeString([serverInfo objectForKey:@"name"]);
-		NSString *name = [BFAppSupport stripQuakeColorCodes:[serverInfo objectForKey:@"name"]];
+		//NSString *name = [BFAppSupport stripQuakeColorCodes:[serverInfo objectForKey:@"name"]];
+		NSString *name = nil;
 		NSString *ip   = [serverInfo objectForKey:@"address"];
 		if( name )
 		{
@@ -192,7 +170,7 @@
 				{
 					[game setObject:name forKey:@"name"];
 					[serverListView reloadData];
-					[[delegate drawer] handleOutput:serverInfoOutput];
+					//[[delegate drawer] handleOutput:serverInfoOutput];
 					//[[delegate drawer] appendOutput:serverInfoOutput];
 					break; // not done here
 				}
