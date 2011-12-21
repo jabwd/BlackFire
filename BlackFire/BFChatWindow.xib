@@ -65,7 +65,7 @@
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="505610617">
 								<int key="NSCellFlags">-1805517311</int>
-								<int key="NSCellFlags2">272637952</int>
+								<int key="NSCellFlags2">268443648</int>
 								<string key="NSContents"/>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">Helvetica</string>
