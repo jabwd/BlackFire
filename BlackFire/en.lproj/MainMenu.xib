@@ -924,7 +924,6 @@
 							<string key="NSFrame">{{7, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="133575571">
@@ -954,7 +953,7 @@
 						</object>
 						<object class="NSCustomView" id="433550647">
 							<reference key="NSNextResponder" ref="439893737"/>
-							<int key="NSvFlags">268</int>
+							<int key="NSvFlags">266</int>
 							<string key="NSFrame">{{-1, 284}, {185, 26}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
@@ -1218,7 +1217,6 @@
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="180167131">
