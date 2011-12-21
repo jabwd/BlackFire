@@ -22,7 +22,7 @@ typedef enum
 	BFApplicationModeServers	= 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, ADModeSwitchView;
 
 @interface ADAppDelegate : NSObject <BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
@@ -69,7 +69,7 @@ typedef enum
 @property (assign) IBOutlet NSView *toolbarView;
 
 @property (assign) IBOutlet NSSegmentedControl *addButton;
-@property (assign) IBOutlet NSSegmentedControl *modeControl;
+@property (assign) IBOutlet ADModeSwitchView *modeSwitch;
 
 @property (readonly) BFApplicationMode currentMode;
 

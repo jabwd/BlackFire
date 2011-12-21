@@ -24,6 +24,7 @@
 #import "ADInvitationWindowController.h"
 
 #import "BFNotificationCenter.h"
+#import "ADModeSwitchView.h"
 
 #import "BFDefaults.h"
 
@@ -40,7 +41,7 @@
 @synthesize statusPopUpButton		= _statusPopUpButton;
 
 @synthesize addButton = _addButton;
-@synthesize modeControl = _modeControl;
+@synthesize modeSwitch = _modeSwitch;
 
 @synthesize currentMode = _currentMode;
 
@@ -113,6 +114,9 @@
     [toolbar      setDelegate:self];
     [_window	setToolbar:toolbar];
     [toolbar      release];
+	
+	[_modeSwitch setTarget:self];
+	[_modeSwitch setSelector:@selector(modeControl:)];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
@@ -182,7 +186,7 @@
 			}
 			
 			[_addButton setHidden:true];
-			[_modeControl setHidden:true];
+			[_modeSwitch setHidden:true];
 			
 			if( ! _loginViewController )
 			{
@@ -215,7 +219,7 @@
 		case BFApplicationModeOnline:
 		{
 			[_addButton setHidden:false];
-			[_modeControl setHidden:false];
+			[_modeSwitch setHidden:false];
 			[_loginViewController session:_session changedStatus:XFSessionStatusOnline];
 			
 			if( ! _friendsListController )
@@ -274,7 +278,7 @@
 
 - (IBAction)modeControl:(id)sender
 {
-	NSInteger tag = [(NSSegmentedControl *)sender selectedSegment];
+	NSInteger tag = [(ADModeSwitchView *)sender selectedItemIndex];
 	if( tag == 0 )
 	{
 		[self changeToMode:BFApplicationModeOnline];

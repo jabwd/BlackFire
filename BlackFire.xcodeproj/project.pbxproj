@@ -46,6 +46,8 @@
 		36276EE51468442B00F84E7B /* NSViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EE41468442B00F84E7B /* NSViewAdditions.m */; };
 		362FCBB914A0D01200DED0DD /* BFServerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBB814A0D01200DED0DD /* BFServerListController.m */; };
 		362FCBBD14A0D07000DED0DD /* TaskWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBBC14A0D07000DED0DD /* TaskWrapper.m */; };
+		362FCBFC14A16BF300DED0DD /* ADModeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBF914A16BF300DED0DD /* ADModeItem.m */; };
+		362FCBFD14A16BF300DED0DD /* ADModeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */; };
 		362FFA75146734BA007E3BD8 /* CTTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA70146734BA007E3BD8 /* CTTabController.m */; };
 		362FFA76146734BA007E3BD8 /* CTTabStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA72146734BA007E3BD8 /* CTTabStripView.m */; };
 		362FFA77146734BA007E3BD8 /* CTTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA74146734BA007E3BD8 /* CTTabView.m */; };
@@ -217,6 +219,10 @@
 		362FCBB814A0D01200DED0DD /* BFServerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFServerListController.m; sourceTree = "<group>"; };
 		362FCBBB14A0D07000DED0DD /* TaskWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskWrapper.h; sourceTree = "<group>"; };
 		362FCBBC14A0D07000DED0DD /* TaskWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskWrapper.m; sourceTree = "<group>"; };
+		362FCBF814A16BF300DED0DD /* ADModeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADModeItem.h; sourceTree = "<group>"; };
+		362FCBF914A16BF300DED0DD /* ADModeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModeItem.m; sourceTree = "<group>"; };
+		362FCBFA14A16BF300DED0DD /* ADModeSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADModeSwitchView.h; sourceTree = "<group>"; };
+		362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModeSwitchView.m; sourceTree = "<group>"; };
 		362FFA6F146734BA007E3BD8 /* CTTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabController.h; sourceTree = "<group>"; };
 		362FFA70146734BA007E3BD8 /* CTTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTabController.m; sourceTree = "<group>"; };
 		362FFA71146734BA007E3BD8 /* CTTabStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabStripView.h; sourceTree = "<group>"; };
@@ -613,6 +619,10 @@
 		36529834146692F00010FD7F /* NSView subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				362FCBF814A16BF300DED0DD /* ADModeItem.h */,
+				362FCBF914A16BF300DED0DD /* ADModeItem.m */,
+				362FCBFA14A16BF300DED0DD /* ADModeSwitchView.h */,
+				362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */,
 				36276EE31468442B00F84E7B /* NSViewAdditions.h */,
 				36276EE41468442B00F84E7B /* NSViewAdditions.m */,
 				362FFA7F146742B6007E3BD8 /* Safari tabs */,
@@ -979,6 +989,8 @@
 				368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */,
 				362FCBB914A0D01200DED0DD /* BFServerListController.m in Sources */,
 				362FCBBD14A0D07000DED0DD /* TaskWrapper.m in Sources */,
+				362FCBFC14A16BF300DED0DD /* ADModeItem.m in Sources */,
+				362FCBFD14A16BF300DED0DD /* ADModeSwitchView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
