@@ -130,9 +130,10 @@
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-	for(BFChat *chat in _chatControllers)
+	NSUInteger i, cnt = [_chatControllers count];
+	for(i=0;i<cnt;i++)
 	{
-		[chat closeChat]; // primarily for saving chatlogs
+		[[_chatControllers objectAtIndex:0] closeChat];
 	}
 }
 
@@ -796,6 +797,8 @@
 		{
 			[_session sendFriendRequest:selectedFriend.username message:prompt.messageField.stringValue];
 		}
+		[_stringPromptController release];
+		_stringPromptController = nil;
 		return;
 	}
 	

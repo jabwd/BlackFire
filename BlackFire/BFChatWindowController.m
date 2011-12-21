@@ -43,7 +43,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
 		
 		[NSAnimationContext beginGrouping];
-		[[NSAnimationContext currentContext] setDuration:0.1f];
+		[[NSAnimationContext currentContext] setDuration:0.125f];
 		[[_window animator] setAlphaValue:1.0f];
 		[NSAnimationContext endGrouping];
 	}
@@ -84,7 +84,7 @@
 		}
 	}
 	[NSAnimationContext beginGrouping];
-	[[NSAnimationContext currentContext] setDuration:.10f];
+	[[NSAnimationContext currentContext] setDuration:.125f];
 	[[NSAnimationContext currentContext] setCompletionHandler:^{
 		[self destroy];
 	}];

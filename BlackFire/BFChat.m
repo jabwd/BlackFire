@@ -56,6 +56,37 @@
 			NSLog(@"*** No remotefriend object 0x589129");
 		}
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
+		
+		BFChatLog *chatLog = [[BFChatLog alloc] init];
+		chatLog.friendUsername = _chat.remoteFriend.username;
+		NSArray *messages = [chatLog getLastMessages:5];
+		NSMutableString *str = [[NSMutableString alloc] init];
+		for(BFMessage *message in messages)
+		{
+			NSString *newLine = @"";
+			if( [str length] > 0 )
+				newLine = @"\n";
+			NSString *timestamp = [_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:message.timestamp]];
+			if( message.user != BFWarningMessageType )
+			{
+				NSString *displayName = nil;
+				if( message.user == BFFriendMessageType )
+					displayName = [_chat.remoteFriend displayName];
+				else
+					displayName = [[_chat loginIdentity] displayName];
+				[str appendFormat:@"%@%@ %@: %@",newLine,timestamp,displayName,message.message];
+			}
+			else
+			{
+				[str appendFormat:@"%@%@ <%@>",newLine,timestamp,message.message];
+			}
+		}
+		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:_chatFont,NSFontAttributeName,[NSColor darkGrayColor],NSForegroundColorAttributeName, nil];
+		NSAttributedString *string = [[NSAttributedString alloc] initWithString:str attributes:attributes];
+		[[_chatHistoryView textStorage] setAttributedString:string];
+		[attributes release];
+		[string release];
+		[str release];
 	}
 	return self;
 }

@@ -15,7 +15,7 @@
 	NSMutableArray *_searchResults;
 }
 
-@property (assign) IBOutlet NSSearchField	*searchField;
+@property (assign) IBOutlet NSTextField	*searchField;
 @property (assign) IBOutlet NSTableView		*tableView;
 
 @property (nonatomic, retain) NSMutableArray *searchResults;

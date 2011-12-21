@@ -11,6 +11,7 @@
 		36030AEC149C9A0C00E4B8F4 /* BFMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 363941CA149C0E1F00DDECB4 /* BFMessage.m */; };
 		360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 360D99B8148BEB6F00A529F6 /* MacGames.plist */; };
 		360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 360D99C0148C267D00A529F6 /* BFProcessInformation.m */; };
+		361268CE14A26C3E00ACDEA4 /* ADShadowScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */; };
 		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; };
 		3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3616F666145F0E5500E5066D /* InfoPlist.strings */; };
 		3616F66A145F0E5500E5066D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F669145F0E5500E5066D /* main.m */; };
@@ -160,6 +161,8 @@
 		360D99B8148BEB6F00A529F6 /* MacGames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MacGames.plist; sourceTree = "<group>"; };
 		360D99BF148C267D00A529F6 /* BFProcessInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFProcessInformation.h; sourceTree = "<group>"; };
 		360D99C0148C267D00A529F6 /* BFProcessInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFProcessInformation.m; sourceTree = "<group>"; };
+		361268CC14A26C3E00ACDEA4 /* ADShadowScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADShadowScrollView.h; sourceTree = "<group>"; };
+		361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADShadowScrollView.m; sourceTree = "<group>"; };
 		3616F659145F0E5500E5066D /* BlackFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3616F65D145F0E5500E5066D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3616F660145F0E5500E5066D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -368,6 +371,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		361268D014A26C4300ACDEA4 /* ModeSwitchView */ = {
+			isa = PBXGroup;
+			children = (
+				362FCBF814A16BF300DED0DD /* ADModeItem.h */,
+				362FCBF914A16BF300DED0DD /* ADModeItem.m */,
+				362FCBFA14A16BF300DED0DD /* ADModeSwitchView.h */,
+				362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */,
+			);
+			name = ModeSwitchView;
+			sourceTree = "<group>";
+		};
 		3616F64E145F0E5400E5066D = {
 			isa = PBXGroup;
 			children = (
@@ -619,16 +633,15 @@
 		36529834146692F00010FD7F /* NSView subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				362FCBF814A16BF300DED0DD /* ADModeItem.h */,
-				362FCBF914A16BF300DED0DD /* ADModeItem.m */,
-				362FCBFA14A16BF300DED0DD /* ADModeSwitchView.h */,
-				362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */,
 				36276EE31468442B00F84E7B /* NSViewAdditions.h */,
 				36276EE41468442B00F84E7B /* NSViewAdditions.m */,
+				361268D014A26C4300ACDEA4 /* ModeSwitchView */,
 				362FFA7F146742B6007E3BD8 /* Safari tabs */,
 				362FFA79146734BF007E3BD8 /* Chromium tabs */,
 				36529836146692FA0010FD7F /* ADOutlineView.h */,
 				36529837146692FA0010FD7F /* ADOutlineView.m */,
+				361268CC14A26C3E00ACDEA4 /* ADShadowScrollView.h */,
+				361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */,
 			);
 			name = "NSView subclasses";
 			sourceTree = "<group>";
@@ -991,6 +1004,7 @@
 				362FCBBD14A0D07000DED0DD /* TaskWrapper.m in Sources */,
 				362FCBFC14A16BF300DED0DD /* ADModeItem.m in Sources */,
 				362FCBFD14A16BF300DED0DD /* ADModeSwitchView.m in Sources */,
+				361268CE14A26C3E00ACDEA4 /* ADShadowScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -211,15 +211,23 @@
 		
 		if( item.selected )
 		{
+			/*[[NSGraphicsContext currentContext] setShouldAntialias:false];
 			NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(totalSize-6, (dirtyRect.size.height/2 - size.height/2)-2, size.width+10, size.height+4) xRadius:2.0f yRadius:2.0f];
 			if( [self.window isMainWindow] )
 				[[NSColor colorWithCalibratedWhite:0.4 alpha:1.0f] set];
 			else
 				[[NSColor colorWithCalibratedWhite:0.65 alpha:1.0f] set];
 			[path fill];
+			[[NSGraphicsContext currentContext] setShouldAntialias:true];*/
+			
+			if( [self.window isMainWindow] )
+				[[NSColor colorWithCalibratedWhite:0.4 alpha:1.0f] set];
+			else
+				[[NSColor colorWithCalibratedWhite:0.65 alpha:1.0f] set];
+			NSRectFill(NSMakeRect(totalSize-6, 0, size.width+10, dirtyRect.size.height));
 		}
 		
-		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2), size.width, size.height)];
+		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2)+2, size.width, size.height-1)];
 		[str release];
 		
 		totalSize += size.width + 10;

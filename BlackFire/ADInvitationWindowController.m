@@ -70,7 +70,11 @@
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
 	XFFriend *friend = [_searchResults objectAtIndex:row];
-	return friend.username;
+	if( [[tableColumn identifier] isEqualToString:@"username"] )
+		return friend.username;
+	else if( [[tableColumn identifier] isEqualToString:@"firstname"] )
+		return friend.firstName;
+	return friend.lastName;
 }
 
 @end

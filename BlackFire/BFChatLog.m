@@ -175,8 +175,8 @@
  */
 - (NSArray *)getLastMessages:(unsigned int)amount
 {
-    if( amount > 100 )
-        amount = 100;
+    if( amount > 20 )
+        amount = 20;
     if( amount == 0 )
         amount = 5;
     
