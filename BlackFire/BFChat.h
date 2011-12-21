@@ -35,6 +35,7 @@ typedef enum
 	
 	NSUInteger		_missedMessages;
 	BOOL			_typing;
+	BOOL			_animating;
 }
 
 @property (nonatomic, retain) BFChatWindowController *windowController;
@@ -62,6 +63,7 @@ typedef enum
  */
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type;
 - (void)scrollAnimated:(BOOL)animated;
+- (BOOL)shouldScroll;
 
 /*
  * Sends a message over the xfire network

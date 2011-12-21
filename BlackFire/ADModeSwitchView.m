@@ -131,31 +131,33 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {	
-	NSGradient *gradient = nil;
+	NSGradient	*gradient	= nil;
 	if( [self.window isMainWindow] )
 	{
 		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.7377 alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.8588 alpha:1.0f]];
+		[gradient drawInRect:dirtyRect angle:90.0f];
+		[gradient release];
+		[[NSColor colorWithCalibratedWhite:0.4f alpha:1.0f] set];
+		NSRectFill(NSMakeRect(0, dirtyRect.origin.y, dirtyRect.size.width+1, 1));
 		
 	}
 	else
 	{
 		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.85 alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.96 alpha:1.0f]];
-	}
-	[gradient drawInRect:dirtyRect angle:90.0f];
-	[gradient release];
-	
-	if( [self.window isMainWindow] )
-		[[NSColor colorWithCalibratedWhite:0.4f alpha:1.0f] set];
-	else
+		[gradient drawInRect:dirtyRect angle:90.0f];
+		[gradient release];
 		[[NSColor colorWithCalibratedWhite:0.65f alpha:1.0f] set];
-	NSRectFill(NSMakeRect(0, dirtyRect.origin.y, dirtyRect.size.width+1, 1));
+		NSRectFill(NSMakeRect(0, dirtyRect.origin.y, dirtyRect.size.width+1, 1));
+	}
 	
-	CGFloat totalSize = 5.0f;
+	
+	CGFloat totalSize  = 0.0f; // 16.886230f
 	for(ADModeItem *item in _items)
 	{
-		totalSize += [item size].width + 10;
+		totalSize += [item size].width;
 	}
-	totalSize -= 20;
+	
+	totalSize += 15; // fix the centering.
 	
 	// now calculate the starting position
 	totalSize = (dirtyRect.size.width-totalSize)/2;
@@ -164,9 +166,7 @@
 	for(i=0;i<cnt;i++)
 	{
 		ADModeItem *item = [_items objectAtIndex:i];
-		[NSGraphicsContext saveGraphicsState];
-		NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
-		[style setLineBreakMode:NSLineBreakByTruncatingTail];
+		
 		NSShadow *shadow = [[NSShadow alloc] init];
 		if( item.selected )
 		{
@@ -175,10 +175,8 @@
 				[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1.0f]];
 			else
 				[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.4 alpha:1.0f]];
-			//[shadow setShadowColor:[NSColor colorWithCalibratedRed:.4f green:0.6f blue:.8f alpha:1.0f]];
 			[shadow setShadowOffset:NSMakeSize(0, -1)];
 			[shadow setShadowBlurRadius:2.5f];
-			//[shadow set
 			
 		}
 		else
@@ -191,7 +189,6 @@
 		
 		if( [self.window isMainWindow] )
 		{
-			//textColor = [NSColor controlTextColor];
 			if( item.selected )
 				textColor = [NSColor whiteColor];
 			else
@@ -205,9 +202,11 @@
 				textColor = [NSColor disabledControlTextColor];
 		}
 		
-		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:[NSFont systemFontSize]],NSFontAttributeName, style,NSParagraphStyleAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
+		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:[NSFont systemFontSize]],NSFontAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
 		
 		NSAttributedString *str = [[NSAttributedString alloc] initWithString:item.name attributes:attributes];
+		[attributes release];
+		
 		NSSize size = [str size];
 		
 		if( item.selected )
@@ -222,7 +221,6 @@
 		
 		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2), size.width, size.height)];
 		[str release];
-		[NSGraphicsContext restoreGraphicsState];
 		
 		totalSize += size.width + 10;
 	}

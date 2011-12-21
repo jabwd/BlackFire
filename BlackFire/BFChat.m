@@ -41,6 +41,7 @@
 		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
 		[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 		_typing			= false;
+		_animating		= false;
 		
 		_userColor		= [[NSColor blueColor] retain];
 		_friendColor	= [[NSColor redColor] retain];
@@ -349,22 +350,52 @@
 
 - (void)scrollAnimated:(BOOL)animated
 {
-	if( animated )
+	if( [self shouldScroll] )
 	{
-		[NSAnimationContext beginGrouping];
-		[[NSAnimationContext currentContext] setDuration:0.100f];
-		NSClipView* clipView = [[_chatHistoryView enclosingScrollView] contentView];
-		NSPoint constrainedPoint = [clipView constrainScrollPoint:NSMakePoint(0, CGFLOAT_MAX)];
-		[[clipView animator] setBoundsOrigin:constrainedPoint];
-		[NSAnimationContext endGrouping];
+		if( animated && ! _animating )
+		{
+			_animating = true;
+			[NSAnimationContext beginGrouping];
+			[[NSAnimationContext currentContext] setDuration:0.100f];
+			[[NSAnimationContext currentContext] setCompletionHandler:^{
+				_animating = false;
+			}];
+			NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];
+			NSPoint constrainedPoint = [clipView constrainScrollPoint:NSMakePoint(0, CGFLOAT_MAX)];
+			[[clipView animator] setBoundsOrigin:constrainedPoint];
+			[NSAnimationContext endGrouping];
+		}
+		else
+		{
+			NSRange range;
+			range.location = [[_chatHistoryView textStorage] length];
+			range.length = 1;
+			[_chatHistoryView scrollRangeToVisible:range];
+		}
 	}
-	else
+}
+
+- (BOOL)shouldScroll
+{
+	NSClipView *clipView	= [[_chatHistoryView enclosingScrollView] contentView];
+	NSRect actualRect		= clipView.frame;
+	NSRect documentRect		= clipView.documentRect;
+	NSRect visibleRect		= clipView.documentVisibleRect;
+	
+	CGFloat difference = (documentRect.size.height-visibleRect.origin.y);
+	if( difference == 0 )
+		return false;
+	
+	if( difference == actualRect.size.height )
 	{
-		NSRange range;
-		range.location = [[_chatHistoryView textStorage] length];
-		range.length = 1;
-		[_chatHistoryView scrollRangeToVisible:range];
+		return true;
 	}
+	else if( difference >= (actualRect.size.height+100) )
+	{
+		// annoying if you scroll here
+		return false;
+	}
+	return true;
 }
 
 @end
