@@ -121,8 +121,8 @@
 	
 	_toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:@"status"];
 	[_toolbarItem setView:_toolbarView];
-	[_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame])-5)];
-	[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame])-5)];
+	[_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame]))];
+	[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame]))];
 	
 	[toolbar      setDelegate:self];
 	[_window	setToolbar:toolbar];
