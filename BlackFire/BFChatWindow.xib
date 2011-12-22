@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11D33</string>
+		<string key="IBDocument.SystemVersion">11D36</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.28</string>
+		<string key="IBDocument.AppKitVersion">1138.29</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -61,6 +61,7 @@
 							<string key="NSFrame">{{18, 6}, {184, 22}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:903</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="505610617">
@@ -135,7 +136,7 @@
 					<object class="NSTextField" id="715604813">
 						<reference key="NSNextResponder" ref="1023256652"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{27, 4}, {97, 14}}</string>
+						<string key="NSFrame">{{25, 4}, {101, 14}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="933966783"/>
@@ -170,7 +171,7 @@
 					<object class="NSTextField" id="524336039">
 						<reference key="NSNextResponder" ref="1023256652"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{20, 17}, {104, 17}}</string>
+						<string key="NSFrame">{{18, 17}, {108, 17}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="715604813"/>
@@ -211,7 +212,7 @@
 								<string>NeXT TIFF v4.0 pasteboard type</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{5, 11}, {12, 12}}</string>
+						<string key="NSFrame">{{4, 11}, {12, 12}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="524336039"/>
@@ -243,9 +244,10 @@
 								<string>NeXT TIFF v4.0 pasteboard type</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{129, 2}, {32, 32}}</string>
+						<string key="NSFrame">{{130, 4}, {30, 30}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="1003972465">

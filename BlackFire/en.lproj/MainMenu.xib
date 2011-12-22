@@ -985,7 +985,7 @@
 					<object class="NSPopUpButton" id="70425166">
 						<reference key="NSNextResponder" ref="498587111"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{19, 18}, {100, 17}}</string>
+						<string key="NSFrame">{{17, 19}, {102, 17}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1019595056"/>
@@ -1056,7 +1056,7 @@
 					<object class="NSPopUpButton" id="1019595056">
 						<reference key="NSNextResponder" ref="498587111"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{31, 0}, {89, 17}}</string>
+						<string key="NSFrame">{{18, 1}, {101, 17}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="407376819"/>
@@ -1185,7 +1185,7 @@
 							<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
 							<string>NeXT TIFF v4.0 pasteboard type</string>
 						</set>
-						<string key="NSFrame">{{5, 13}, {12, 12}}</string>
+						<string key="NSFrame">{{3, 13}, {12, 12}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="70425166"/>
