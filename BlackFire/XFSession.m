@@ -144,6 +144,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	if( _status == XFSessionStatusOnline )
 	{
 		[self performSelector:@selector(allowNotifications) withObject:nil afterDelay:3.0f];
+		[self sendKeepAlive:_keepAliveTimer];
 	}
 	
 	if( [_delegate respondsToSelector:@selector(session:statusChanged:)] )

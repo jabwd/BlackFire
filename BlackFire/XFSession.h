@@ -117,6 +117,7 @@ typedef enum{
 // Connecting to xfire
 - (void)connect;
 - (void)disconnect;
+- (void)sendKeepAlive:(NSTimer *)timer;
 
 //--------------------------------------------------------------------------------
 // Handling messages from the connection

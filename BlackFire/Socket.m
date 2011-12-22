@@ -209,7 +209,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
         else if( error == kCFSocketError )
         {
             // close the connection
-            NSLog(@"Socket error on sending data, should close the connection now");
+            NSLog(@"*** Socket error on sending data, should close the connection now");
             [_delegate didDisconnectWithReason:SocketErrorUnknownError];
             return NO;
         }

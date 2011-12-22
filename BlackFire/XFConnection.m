@@ -31,7 +31,7 @@
 {
 	if( (self = [super init]) )
 	{
-		_session				= session;
+		_session				= [session retain];
 		_socket					= nil;
 		_availableData			= [[NSMutableData alloc] init];
 		_keepAliveResponseTimer = nil;
@@ -58,12 +58,13 @@
 - (void)dealloc
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[_socket setDelegate:nil];
+	_socket.delegate = nil;
 	[_socket release];
 	_socket = nil;
 	[_availableData release];
 	_availableData = nil;
 	_status = XFConnectionDisconnected;
+	[_session release];
 	_session = nil;
 	if( [_keepAliveResponseTimer isValid] )
 	{
@@ -80,6 +81,7 @@
 	if( _status != XFConnectionDisconnected )
 		return;
 	
+	_socket.delegate = nil;
 	[_socket release]; // prevent leaking
 	_socket = nil;
 	
@@ -109,6 +111,7 @@
 	_availableData = nil;
 	
 	_status = XFConnectionDisconnected;
+	_socket.delegate = nil;
 	[_socket release];
 	_socket = nil;
 }
@@ -1253,10 +1256,10 @@
 
 - (void)processClanMembersPacket:(XFPacket *)pkt
 {
-	XFGroupController *ctl = [_session groupController];
+	XFGroupController *ctl = _session.groupController;
 	NSArray *userIDs, *userNames, *nickNames, *groupIDs;
 	
-	XFFriend *me = [_session loginIdentity];
+	XFFriend *me = _session.loginIdentity;
 	
 	// arrays of member info
 	userIDs   = [pkt attributeValuesForKey:@"0x01"];
