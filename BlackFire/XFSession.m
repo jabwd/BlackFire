@@ -162,12 +162,14 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)systemWillPowerOff:(NSNotification *)notification
 {
-	[self disconnect];
+	if( _status == XFSessionStatusOnline )
+		[self disconnect];
 }
 
 - (void)systemWillSleep:(NSNotification *)notification
 {
-	[self disconnect];
+	if( _status == XFSessionStatusOnline )
+		[self disconnect];
 }
 
 #pragma mark - Handling connection messages
@@ -188,13 +190,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError
 {
-	NSLog(@"Connection will disconnect: %u",connectionError);
-	if( _status == XFSessionStatusOnline || _status == XFSessionStatusConnecting )
-		[self disconnect];
-	else
-	{
-		NSLog(@"*** A call to willDisconnect was made while the session is not even online.");
-	}
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[self disconnect];
 }
 
 #pragma mark - Managing friends

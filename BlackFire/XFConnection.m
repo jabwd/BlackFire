@@ -114,6 +114,8 @@
 	_socket.delegate = nil;
 	[_socket release];
 	_socket = nil;
+	[_session release];
+	_session = nil;
 }
 
 - (void)connectionTimedOut
@@ -129,7 +131,8 @@
 - (void)didDisconnectWithReason:(SocketError)reason
 {
 	[_session connection:self willDisconnect:XFConnectionErrorHungUp];
-	
+	[_session release];
+	_session = nil; // the session is gone here.
 	[self disconnect];
 }
 
