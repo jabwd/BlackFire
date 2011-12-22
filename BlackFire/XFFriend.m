@@ -175,4 +175,9 @@
 	_gameID = 0;
 }
 
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"[%@ userID=%lu]",_username,_userID];
+}
+
 @end

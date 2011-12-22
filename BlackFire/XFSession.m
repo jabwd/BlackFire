@@ -156,6 +156,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)allowNotifications
 {
 	_canPostNotifications = true;
+	
+	// will notify the gui that it has to refresh.
+	[self raiseFriendNotification:XFFriendNotificationFriendAdded forFriend:nil];
 }
 
 

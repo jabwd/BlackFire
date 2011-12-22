@@ -133,6 +133,7 @@
 	NSUInteger i, cnt = [_chatControllers count];
 	for(i=0;i<cnt;i++)
 	{
+		//NSLog(@"Closing chat: %@",[[_chatControllers objectAtIndex:0] chat].remoteFriend);
 		[[_chatControllers objectAtIndex:0] closeChat];
 	}
 }
