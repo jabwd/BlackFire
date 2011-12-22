@@ -241,6 +241,15 @@
 		}
 			break;
 			
+		case XFFriendNotificationSessionChanged:
+		{
+			if( _chat.remoteFriend.online )
+			{
+				[self displayWarning:[NSString stringWithFormat:@"%@ switched to another computer",[_chat.remoteFriend displayName]]];
+			}
+		}
+			break;
+			
 		case XFFriendNotificationStatusChanged:
 		{
 			if( [[_chat.remoteFriend status] length] > 0 )

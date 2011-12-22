@@ -193,6 +193,8 @@
 				textColor = [NSColor whiteColor];
 			else
 				textColor = [NSColor controlTextColor];
+			
+			//textColor = [NSColor controlTextColor];
 		}
 		else
 		{
@@ -200,9 +202,11 @@
 				textColor = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0f];
 			else
 				textColor = [NSColor disabledControlTextColor];
+			
+			//textColor = [NSColor disabledControlTextColor];
 		}
 		
-		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:[NSFont systemFontSize]],NSFontAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
+		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:([NSFont systemFontSize])],NSFontAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
 		
 		NSAttributedString *str = [[NSAttributedString alloc] initWithString:item.name attributes:attributes];
 		[attributes release];
@@ -225,6 +229,12 @@
 			else
 				[[NSColor colorWithCalibratedWhite:0.65 alpha:1.0f] set];
 			NSRectFill(NSMakeRect(totalSize-6, 0, size.width+10, dirtyRect.size.height));
+			
+			/*NSImage *left = [NSImage imageNamed:@"selection_left"];
+			NSImage *right = [NSImage imageNamed:@"selection_right"];
+			
+			[left drawInRect:NSMakeRect(totalSize-6, 3, 3, dirtyRect.size.height-2) fromRect:NSMakeRect(0, 0, 3, dirtyRect.size.height-1) operation:NSCompositeSourceOver fraction:1.0f];
+			[right drawInRect:NSMakeRect(totalSize+size.width+3, 3, 3, dirtyRect.size.height-2) fromRect:NSMakeRect(0, 0, 3, dirtyRect.size.height-1) operation:NSCompositeSourceOver fraction:1.0f];*/
 		}
 		
 		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2)+2, size.width, size.height-1)];

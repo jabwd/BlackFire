@@ -362,6 +362,11 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 #pragma mark - User session
 
+- (void)updateUserSettings
+{
+	[_tcpConnection updateUserOptions];
+}
+
 - (void)acceptFriendRequest:(XFFriend *)fr
 {
 	[_tcpConnection acceptFriendRequest:fr];

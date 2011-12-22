@@ -79,6 +79,8 @@ typedef enum
 - (void)changeToMode:(BFApplicationMode)newMode;
 - (void)changeMainView:(NSView *)newView;
 - (IBAction)modeControl:(id)sender;
+- (IBAction)gamesMode:(id)sender;
+- (IBAction)friendsMode:(id)sender;
 
 //----------------------------------------------------------------------------
 // Xfire Session
@@ -107,6 +109,10 @@ typedef enum
 - (IBAction)showProfile:(id)sender;
 - (IBAction)removeSelectedFriend:(id)sender;
 - (IBAction)toggleShowOfflineClanFriends:(id)sender;
+- (IBAction)toggleShowOfflineFriends:(id)sender;
+- (IBAction)toggleShowFriendsOfFriends:(id)sender;
+- (IBAction)toggleShowNicknames:(id)sender;
+- (IBAction)toggleShowClans:(id)sender;
 
 //----------------------------------------------------------------------------
 // Friends list toolbar

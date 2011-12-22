@@ -616,6 +616,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">13</int>
 								</object>
 								<object class="NSMenuItem" id="1025143972">
 									<reference key="NSMenu" ref="466310130"/>
@@ -626,6 +627,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">13</int>
 								</object>
 								<object class="NSMenuItem" id="878221087">
 									<reference key="NSMenu" ref="466310130"/>
@@ -655,6 +657,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">7</int>
 								</object>
 								<object class="NSMenuItem" id="982026151">
 									<reference key="NSMenu" ref="466310130"/>
@@ -675,6 +678,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">11</int>
 								</object>
 								<object class="NSMenuItem" id="463937498">
 									<reference key="NSMenu" ref="466310130"/>
@@ -684,6 +688,17 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">9</int>
+								</object>
+								<object class="NSMenuItem" id="1068709610">
+									<reference key="NSMenu" ref="466310130"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<string key="NSTitle">Hide nicknames</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">12</int>
 								</object>
 								<object class="NSMenuItem" id="102536639">
 									<reference key="NSMenu" ref="466310130"/>
@@ -910,7 +925,7 @@
 						<object class="NSCustomView" id="243777411">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{-1, 30}, {184, 253}}</string>
+							<string key="NSFrame">{{-1, 30}, {184, 254}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="581243776"/>
@@ -923,6 +938,7 @@
 							<string key="NSFrame">{{7, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="133575571">
@@ -953,7 +969,7 @@
 						<object class="NSCustomView" id="433550647">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">266</int>
-							<string key="NSFrame">{{-1, 283}, {185, 27}}</string>
+							<string key="NSFrame">{{-1, 284}, {185, 26}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="243777411"/>
@@ -1216,6 +1232,7 @@
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="180167131">
@@ -1792,6 +1809,54 @@
 					</object>
 					<int key="connectionID">860</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleShowFriendsOfFriends:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="956530036"/>
+					</object>
+					<int key="connectionID">861</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleShowOfflineFriends:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="463937498"/>
+					</object>
+					<int key="connectionID">862</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleShowNicknames:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1068709610"/>
+					</object>
+					<int key="connectionID">865</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleShowClans:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="192732779"/>
+					</object>
+					<int key="connectionID">866</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">gamesMode:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1025143972"/>
+					</object>
+					<int key="connectionID">867</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">friendsMode:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="512242306"/>
+					</object>
+					<int key="connectionID">868</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2008,6 +2073,7 @@
 							<reference ref="512242306"/>
 							<reference ref="1025143972"/>
 							<reference ref="878221087"/>
+							<reference ref="1068709610"/>
 						</array>
 						<reference key="parent" ref="586577488"/>
 					</object>
@@ -2656,6 +2722,11 @@
 						<reference key="object" ref="433550647"/>
 						<reference key="parent" ref="439893737"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">863</int>
+						<reference key="object" ref="1068709610"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2791,13 +2862,14 @@
 				<string key="848.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="849.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="859.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="863.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">860</int>
+			<int key="maxID">868</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2808,6 +2880,8 @@
 						<string key="addAction:">id</string>
 						<string key="closeAction:">id</string>
 						<string key="disconnect:">id</string>
+						<string key="friendsMode:">id</string>
+						<string key="gamesMode:">id</string>
 						<string key="help:">id</string>
 						<string key="modeControl:">id</string>
 						<string key="removeSelectedFriend:">id</string>
@@ -2819,7 +2893,11 @@
 						<string key="showPreferences:">id</string>
 						<string key="showProfile:">id</string>
 						<string key="showUserProfile:">id</string>
+						<string key="toggleShowClans:">id</string>
+						<string key="toggleShowFriendsOfFriends:">id</string>
+						<string key="toggleShowNicknames:">id</string>
 						<string key="toggleShowOfflineClanFriends:">id</string>
+						<string key="toggleShowOfflineFriends:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addAction:">
@@ -2832,6 +2910,14 @@
 						</object>
 						<object class="IBActionInfo" key="disconnect:">
 							<string key="name">disconnect:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="friendsMode:">
+							<string key="name">friendsMode:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="gamesMode:">
+							<string key="name">gamesMode:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="help:">
@@ -2878,8 +2964,24 @@
 							<string key="name">showUserProfile:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleShowClans:">
+							<string key="name">toggleShowClans:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleShowFriendsOfFriends:">
+							<string key="name">toggleShowFriendsOfFriends:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleShowNicknames:">
+							<string key="name">toggleShowNicknames:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="toggleShowOfflineClanFriends:">
 							<string key="name">toggleShowOfflineClanFriends:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleShowOfflineFriends:">
+							<string key="name">toggleShowOfflineFriends:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

@@ -11,15 +11,6 @@
 
 @implementation ADOutlineView
 
-/*- (void)drawRow:(NSInteger)row clipRect:(NSRect)clipRect
-{
-	clipRect.origin.x -= 10;
-	[[NSColor blueColor] set];
-	NSRectFill(clipRect);
-	[super drawRow:row clipRect:clipRect];
-}*/
-
-
 - (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row
 {
 	NSRect cellFrame		= [super frameOfCellAtColumn:column row:row];
@@ -28,6 +19,13 @@
 	return cellFrame;
 }
 
+/*- (void)drawRow:(NSInteger)row clipRect:(NSRect)clipRect
+{
+	[[NSColor redColor] set];
+	NSRectFill(clipRect);
+	[super drawRow:row clipRect:clipRect];
+}*/
+
 /*
  * This draws our nice "iOS" like highlight on the selection of a row.
  * OS X Just doesn't look as nice :D
@@ -35,9 +33,9 @@
 - (void)highlightSelectionInClipRect:(NSRect)rect
 {
 	NSGradient *gradient;
-	NSUInteger row = [self selectedRow];
-	NSRect cellFrame = [self rectOfRow:row];
-	if( [[self window] isKeyWindow] )
+	NSUInteger row		= [self selectedRow];
+	NSRect cellFrame	= [self rectOfRow:row];
+	if( [[self window] isMainWindow] )
 	{
 		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:0.41f green:0.48f blue:1.0f alpha:1.0f]
 												 endingColor:[NSColor colorWithCalibratedRed:0.22f green:0.27f blue:0.99f alpha:1.0f]];

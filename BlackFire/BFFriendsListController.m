@@ -117,7 +117,8 @@
 {
 	if( item == nil )
 	{
-		return [_delegate.session.groupController.groups count];
+		//return [_delegate.session.groupController.groups count];
+		return [_delegate.session.groupController groupsCount];
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{
@@ -143,7 +144,8 @@
 {
 	if( item == nil )
 	{
-		return [_delegate.session.groupController.groups objectAtIndex:index];
+		//return [_delegate.session.groupController.groups objectAtIndex:index];
+		return [_delegate.session.groupController groupAtIndex:index];
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{

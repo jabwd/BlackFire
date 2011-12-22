@@ -13,6 +13,7 @@ NSString *BFShowClanGroups				= @"showClanGroups";
 NSString *BFShowCustomFriendGroups		= @"showCustomFriendGroups";
 NSString *BFShowFriendsOfFriendsGroup	= @"showFriendsOfFriendsGroup";
 NSString *BFShowOfflineFriendsGroup		= @"showOfflineFriendsGroup";
+NSString *BFShowUsernames				= @"forceUsername";
 
 NSString *BFAutomaticlyGoAFK			= @"autoAFK";
 NSString *BFAutoAFKTime					= @"120";

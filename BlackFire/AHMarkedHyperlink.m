@@ -48,7 +48,7 @@
 			}
 			else
 			{
-				NSRunAlertPanel(@"Thanks..", @"Thanks for nothing. Have fun using this product, I guess?", @"I am a jerk", nil, nil);
+				NSRunAlertPanel(@"Thanks..", @"Thanks for nothing. Have fun using this product.", @"OK", nil, nil);
 				[[NSUserDefaults standardUserDefaults] setBool:false forKey:@"supportBlackFire"];
 			}
 			[[NSUserDefaults standardUserDefaults] setBool:true forKey:@"supportDone"];

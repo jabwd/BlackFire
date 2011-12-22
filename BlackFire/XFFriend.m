@@ -8,6 +8,7 @@
 
 #import "XFFriend.h"
 #import "XfireKit.h"
+#import "BFDefaults.h"
 
 #import "XFSession.h"
 
@@ -150,6 +151,9 @@
 
 - (NSString *)displayName
 {
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowUsernames] )
+		return _username;
+	
 	if( [_nickname length] > 0 )
 		return _nickname;
 	

@@ -762,6 +762,12 @@
 				[offlineGroup removeMember:friend];
 				[onlineGroup addMember:friend];
 			}
+			if( friend.online )
+			{
+				friend.sessionID = sid;
+				[_session raiseFriendNotification:XFFriendNotificationSessionChanged forFriend:friend];
+				return;
+			}
 			friend.online		= true;
 			friend.sessionID	= sid;
 			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
@@ -1128,6 +1134,12 @@
 #if 0
 	//[[[self session] friendGroupController] setGroupList:[pkt attributeValuesForKey:@"0x19"]];
 #endif
+}
+
+- (void)updateUserOptions
+{
+	XFPacket *packet = [XFPacket changeOptionsPacket];
+	[self sendPacket:packet];
 }
 
 - (void)processUserOptionsPacket:(XFPacket *)pkt

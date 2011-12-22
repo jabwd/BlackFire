@@ -8,6 +8,7 @@
 
 #import "XFGroupController.h"
 #import "XFGroup.h"
+#import "BFDefaults.h"
 
 @implementation XFGroupController
 
@@ -143,6 +144,78 @@
 - (void)removeMember:(XFFriend *)fr fromGroup:(XFGroup *)group
 {
 	[group removeMember:fr];
+}
+
+#pragma mark - Handling groups
+
+- (NSUInteger)groupsCount
+{
+	NSUInteger count = 0;
+	for(XFGroup *group in _groups)
+	{
+		if( group.groupType == XFGroupTypeFriendOfFriends )
+		{
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowFriendsOfFriendsGroup] )
+				count++;
+		}
+		else if( group.groupType == XFGroupTypeOfflineFriends )
+		{
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
+				count++;
+		}
+		else if( group.groupType == XFGroupTypeClanGroup )
+		{
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowClanGroups] )
+				count++;
+		}
+		else
+			count++;
+	}
+	return count;
+}
+
+- (XFGroup *)groupAtIndex:(NSInteger)index
+{
+	NSUInteger i, cnt = [_groups count];
+	for(i=0;i<cnt;i++)
+	{
+		XFGroup *group = [_groups objectAtIndex:i];
+		if( group.groupType == XFGroupTypeFriendOfFriends )
+		{
+			if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFShowFriendsOfFriendsGroup] )
+			{
+				index++;
+			}
+			else if( index == i )
+				return group;
+		}
+		else if( group.groupType == XFGroupTypeOfflineFriends )
+		{
+			if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
+			{
+				index++;
+			}
+			else if( index == i )
+				return group;
+		}
+		else if( group.groupType == XFGroupTypeClanGroup )
+		{
+			if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFShowClanGroups] )
+			{
+				index++;
+			}
+			else if( index == i )
+				return group;
+		}
+		else
+		{
+			if( i==index )
+			{
+				return group;
+			}
+		}
+	}
+	return NULL;
 }
 
 @end

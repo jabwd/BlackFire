@@ -46,4 +46,7 @@
 - (void)addMember:(XFFriend *)fr toGroup:(XFGroup *)group;
 - (void)removeMember:(XFFriend *)fr fromGroup:(XFGroup *)group;
 
+- (NSUInteger)groupsCount;
+- (XFGroup *)groupAtIndex:(NSInteger)index;
+
 @end

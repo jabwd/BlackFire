@@ -44,6 +44,7 @@ typedef enum
 	XFFriendNotificationOnlineStatusChanged = 0,
 	XFFriendNotificationStatusChanged,
 	XFFriendNotificationGameStatusChanged,
+	XFFriendNotificationSessionChanged,
 	XFFriendNotificationJoinedGameServer,
 	XFFriendNotificationLeftGameServer,
 	XFFriendNotificationFriendAdded,
@@ -193,7 +194,7 @@ typedef enum{
 //--------------------------------------------------------------------------------
 // User session
 
-
+- (void)updateUserSettings;
 - (void)acceptFriendRequest:(XFFriend *)fr;
 - (void)declineFriendRequest:(XFFriend *)fr;
 - (void)sendFriendRequest:(NSString *)username message:(NSString *)message;

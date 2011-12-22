@@ -114,6 +114,7 @@ typedef enum
 // Sending packets
 
 // Stuff you can only do on the log-in connection (to the Xfire master server)
+- (void)updateUserOptions;
 - (void)sendNetworkInfoPacketWithIP:(unsigned int)ip andNATType:(unsigned int)natType;
 - (void)setGameStatus:(unsigned)gameID gameIP:(unsigned)gip gamePort:(unsigned)gp;
 - (void)setStatusText:(NSString *)text;

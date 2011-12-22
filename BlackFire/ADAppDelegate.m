@@ -58,6 +58,7 @@
 						  n_true,BFEnableConnectSound,
 						  n_true,BFEnableOnlineSound,
 						  n_true,BFEnableOfflineSound,
+						  n_true,BFShowClanGroups,
 						  nil];
 	
 	// register the defaults
@@ -293,6 +294,22 @@
 	{
 		[self changeToMode:BFApplicationModeServers];
 	}
+}
+
+- (IBAction)friendsMode:(id)sender
+{
+	if( _session.status != XFSessionStatusOnline )
+		return;
+	
+	[self changeToMode:BFApplicationModeOnline];
+}
+
+- (IBAction)gamesMode:(id)sender
+{
+	if( _session.status != XFSessionStatusOnline )
+		return;
+	
+	[self changeToMode:BFApplicationModeGames];
 }
 
 #pragma mark - Xfire Session
@@ -1018,16 +1035,48 @@
 			break;
 			
 		case 7: // show / hide clan friend groups
+		{
+			if( _session.status != XFSessionStatusOnline )
+				return false;
+			
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowClanGroups] )
+			{
+				[menuItem setTitle:@"Hide clans"];
+			}
+			else
+			{
+				[menuItem setTitle:@"Show clans"];
+			}
+			
+			return true;
+		}
 			break;
 			
 		case 8: // show / hide custom friend groups
 			break;
 			
 		case 9: // show / hide offline friends group
+		{
+			if( _session.status != XFSessionStatusOnline )
+				return false;
+			
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
+			{
+				[menuItem setTitle:@"Hide offline friends"];
+			}
+			else
+			{
+				[menuItem setTitle:@"Show offline friends"];
+			}
+			return true;
+		}
 			break;
 			
 		case 10: // show / hide offline clan friends
 		{
+			if( _session.status != XFSessionStatusOnline )
+				return false;
+			
 			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineClanFriends] )
 			{
 				[menuItem setTitle:@"Hide offline clan friends"];
@@ -1038,6 +1087,48 @@
 			}
 			return true;
 				
+		}
+			break;
+			
+		case 11:
+		{
+			if( _session.status != XFSessionStatusOnline )
+				return false;
+			
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowFriendsOfFriendsGroup] )
+			{
+				[menuItem setTitle:@"Hide friends of friends"];
+			}
+			else 
+			{
+				[menuItem setTitle:@"Show friends of friends"];
+			}
+			return true;
+		}
+			break;
+			
+		case 12:
+		{
+			if( _session.status != XFSessionStatusOnline )
+				return false;
+			
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowUsernames] )
+			{
+				[menuItem setTitle:@"Show nicknames"];
+			}
+			else
+			{
+				[menuItem setTitle:@"Hide nicknames"];
+			}
+			
+			return true;
+		}
+			break;
+			
+		case 13: // blackfire modes
+		{
+			if( _session.status == XFSessionStatusOnline )
+				return true;
 		}
 			break;
 			
@@ -1071,5 +1162,64 @@
 	[_friendsListController reloadData];
 }
 
+- (IBAction)toggleShowOfflineFriends:(id)sender
+{
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:false forKey:BFShowOfflineFriendsGroup];
+	}
+	else
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:true forKey:BFShowOfflineFriendsGroup];
+	}
+	
+	[_friendsListController reloadData];
+}
+
+- (IBAction)toggleShowFriendsOfFriends:(id)sender
+{
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowFriendsOfFriendsGroup] )
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:false forKey:BFShowFriendsOfFriendsGroup];
+	}
+	else
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:true forKey:BFShowFriendsOfFriendsGroup];
+	}
+	
+	[_session updateUserSettings];
+	[_friendsListController reloadData];
+}
+
+
+- (IBAction)toggleShowNicknames:(id)sender
+{
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowUsernames] )
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:false forKey:BFShowUsernames];
+	}
+	else
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:true forKey:BFShowUsernames];
+	}
+	
+	[_session updateUserSettings];
+	[_friendsListController reloadData];
+}
+
+
+- (IBAction)toggleShowClans:(id)sender
+{
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowClanGroups] )
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:false forKey:BFShowClanGroups];
+	}
+	else
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:true forKey:BFShowClanGroups];
+	}
+	
+	[_friendsListController reloadData];
+}
 
 @end
