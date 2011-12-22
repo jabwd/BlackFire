@@ -86,6 +86,10 @@
 
 - (void)receivedMessage:(NSString *)message
 {
+	if( [message length] < 1 )
+		return;
+	
+	
 	if( [_delegate respondsToSelector:@selector(receivedMessage:)] )
 		[_delegate receivedMessage:message];
 	
