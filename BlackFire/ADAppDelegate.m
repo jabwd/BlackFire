@@ -235,6 +235,8 @@
 			
 			[_friendsListController reloadData];
 			[_friendsListController.view setNeedsDisplay:true];
+			
+			[_modeSwitch selectItemAtIndex:0];
 		}
 			break;
 			
@@ -248,12 +250,14 @@
 			[_gamesListController reloadData];
 			
 			[self changeMainView:_gamesListController.view];
+			
+			[_modeSwitch selectItemAtIndex:1];
 		}
 			break;
 			
 		case BFApplicationModeServers:
 		{
-			
+			[_modeSwitch selectItemAtIndex:2];
 		}
 			break;
 			

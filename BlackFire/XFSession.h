@@ -53,9 +53,10 @@ typedef enum
 
 typedef enum{
 	XFSessionStatusOffline			= 0,
-	XFSessionStatusConnecting		= 1,
-	XFSessionStatusOnline			= 2,
-	XFSessionStatusDisconnecting	= 3
+	XFSessionStatusConnecting,
+	XFSessionStatusWaiting,
+	XFSessionStatusOnline,
+	XFSessionStatusDisconnecting
 } XFSessionStatus;
 
 @class XFConnection, XFFriend, XFGroup, XFSession, XFGroupController, XFChat;

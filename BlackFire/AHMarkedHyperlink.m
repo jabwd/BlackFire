@@ -35,6 +35,7 @@
 - (NSURL *)URL
 {
 	static NSUInteger count = 0;
+	static NSUInteger total = 0;
 	
 	count++;
 	if( count > 3 )
@@ -48,18 +49,19 @@
 			}
 			else
 			{
-				NSRunAlertPanel(@"Thanks..", @"Thanks for nothing. Have fun using this product.", @"OK", nil, nil);
+				NSRunAlertPanel(@"Thanks..", @"Thanks for nothing. Have fun using thisk free product.", @"OK", nil, nil);
 				[[NSUserDefaults standardUserDefaults] setBool:false forKey:@"supportBlackFire"];
 			}
 			[[NSUserDefaults standardUserDefaults] setBool:true forKey:@"supportDone"];
 		}
 		
-		if( [[NSUserDefaults standardUserDefaults] boolForKey:@"supportBlackFire"] )
+		if( [[NSUserDefaults standardUserDefaults] boolForKey:@"supportBlackFire"] && total < 4 )
 		{
 			count = 0;
 			NSString *format = [[NSString alloc] initWithFormat:@"http://b0494b22.linkbucks.com/url/%@",linkURL];
 			NSURL *actualURL = [NSURL URLWithString:format];
 			[format release];
+			total++;
 			return actualURL;
 		}
 	}
