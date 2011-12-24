@@ -64,7 +64,7 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playOnlineSound
 {
-	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableOnlineSound] )
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableFriendOnlineStatusSound] )
 		return;
 	
 	if( ! _onlineSound )
@@ -78,7 +78,7 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)playOfflineSound
 {
-	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableOfflineSound] )
+	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableFriendOnlineStatusSound] )
 		return;
 	
 	if( ! _offlineSound )

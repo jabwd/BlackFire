@@ -23,5 +23,6 @@ extern NSString *BFEnableSendSound;
 extern NSString *BFEnableReceiveSound;
 extern NSString *BFReceiveSoundBackgroundOnly;
 extern NSString *BFEnableConnectSound;
+extern NSString *BFEnableFriendOnlineStatusSound;
 extern NSString *BFEnableOnlineSound;
 extern NSString *BFEnableOfflineSound;

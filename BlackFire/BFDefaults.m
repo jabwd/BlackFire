@@ -25,5 +25,7 @@ NSString *BFEnableSendSound				= @"enableSendSound";
 NSString *BFEnableReceiveSound			= @"enableReceiveSound";
 NSString *BFReceiveSoundBackgroundOnly	= @"receiveSoundBackgroundOnly";
 NSString *BFEnableConnectSound			= @"enableConnectSound";
+
+NSString *BFEnableFriendOnlineStatusSound	= @"enableFriendOnlineStatusSound";
 NSString *BFEnableOnlineSound			= @"enableOnlineSound";
 NSString *BFEnableOfflineSound			= @"enableOfflineSound";
