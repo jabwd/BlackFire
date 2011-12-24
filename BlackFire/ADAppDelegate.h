@@ -23,7 +23,7 @@ typedef enum
 	BFApplicationModeServers	= 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, ADModeSwitchView;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, ADModeSwitchView, NSNonRetardedImageView;
 
 @interface ADAppDelegate : NSObject <BFIdleTimeManagerDelegate,BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
@@ -35,7 +35,8 @@ typedef enum
 	NSToolbarItem	*_toolbarItem;
 	
 	// toolbar outlets
-	NSImageView		*_avatarImageView;
+	//NSImageView		*_avatarImageView;
+	NSNonRetardedImageView *_avatarImageView;
 	NSImageView		*_statusBubbleView;
 	NSPopUpButton	*_nicknamePopUpButton;
 	NSPopUpButton	*_statusPopUpButton;
@@ -61,7 +62,7 @@ typedef enum
 @property (readonly) XFSession			*session;
 @property (assign) IBOutlet NSWindow	*window;
 
-@property (assign) IBOutlet NSImageView		*avatarImageView;
+@property (assign) IBOutlet NSNonRetardedImageView	*avatarImageView;
 @property (assign) IBOutlet NSImageView		*statusBubbleView;
 @property (assign) IBOutlet NSPopUpButton	*nicknamePopUpButton;
 @property (assign) IBOutlet NSPopUpButton	*statusPopUpButton;

@@ -25,6 +25,7 @@
 
 #import "BFNotificationCenter.h"
 #import "ADModeSwitchView.h"
+#import "NSNonRetardedImageView.h"
 
 #import "BFIdleTimeManager.h"
 

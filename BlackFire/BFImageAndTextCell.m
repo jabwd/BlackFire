@@ -139,7 +139,10 @@
 		
 		[_image setSize:_displayImageSize];
 		
+	
 		[_image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+		
+		//[_image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 	}
 	
 	NSAttributedString *attrStr = [self attributedStringValue];
