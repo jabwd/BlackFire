@@ -9,19 +9,25 @@
 #import <Cocoa/Cocoa.h>
 #include <ApplicationServices/ApplicationServices.h>
 
+@protocol BFIdleTimeManagerDelegate <NSObject>
+- (void)userWentAway;
+- (void)userBecameActive;
+@end
+
 @interface BFIdleTimeManager : NSObject 
 {
 	NSTimer				*timer;
 	CGEventSourceRef	eventSourceRef;
-    id					_delegate;
+    id <BFIdleTimeManagerDelegate>	_delegate;
 	
 	BOOL              isIdle;
 	BOOL              setAwayStatusAutomatically;
 
 }
+
+@property (assign) id <BFIdleTimeManagerDelegate> delegate;
+
 + (BFIdleTimeManager *)defaultManager;
 - (void)setSetAwayStatusAutomatically:(BOOL)shouldSetAutomatically;
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
 
 @end

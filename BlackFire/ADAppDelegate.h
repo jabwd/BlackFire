@@ -12,6 +12,7 @@
 #import "BFGamesManager.h"
 #import "BFDownload.h"
 #import "ADStringPromptController.h"
+#import "BFIdleTimeManager.h"
 
 typedef enum
 {
@@ -24,7 +25,7 @@ typedef enum
 
 @class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, ADModeSwitchView;
 
-@interface ADAppDelegate : NSObject <BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
+@interface ADAppDelegate : NSObject <BFIdleTimeManagerDelegate,BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
 	XFSession				*_session;
 	BFAccount				*_account;

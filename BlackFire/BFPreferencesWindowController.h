@@ -30,4 +30,11 @@ typedef enum
 - (IBAction)generalMode:(id)sender;
 - (IBAction)notificationsMode:(id)sender;
 
+
+
+//-------------------------------------------------------------------------------------------
+// Controlling preferences
+
+- (IBAction)updateIdleTimer:(id)sender;
+
 @end

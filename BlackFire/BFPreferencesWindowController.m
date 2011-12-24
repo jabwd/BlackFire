@@ -7,6 +7,8 @@
 //
 
 #import "BFPreferencesWindowController.h"
+#import "BFIdleTimeManager.h"
+#import "BFDefaults.h"
 
 @implementation BFPreferencesWindowController
 
@@ -96,6 +98,14 @@
 	
 	[mainView addSubview:aView];
 	aView.frame = mainView.bounds;
+}
+
+
+#pragma mark - Controlling preferences
+
+- (IBAction)updateIdleTimer:(id)sender
+{	
+	[[BFIdleTimeManager defaultManager] setSetAwayStatusAutomatically:[[NSUserDefaults standardUserDefaults] boolForKey:BFAutoGoAFK]];
 }
 
 @end

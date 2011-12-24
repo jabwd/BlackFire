@@ -26,6 +26,8 @@
 #import "BFNotificationCenter.h"
 #import "ADModeSwitchView.h"
 
+#import "BFIdleTimeManager.h"
+
 #import "BFDefaults.h"
 
 @implementation ADAppDelegate
@@ -59,6 +61,7 @@
 						  n_true,BFEnableOnlineSound,
 						  n_true,BFEnableOfflineSound,
 						  n_true,BFShowClanGroups,
+						  [NSNumber numberWithInt:120],BFAutoAFKTime,
 						  nil];
 	
 	// register the defaults
@@ -147,6 +150,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	[self connectionCheck];
+	[[BFIdleTimeManager defaultManager] setDelegate:self];
 }
 
 #pragma mark - Toolbar delegate
@@ -626,6 +630,15 @@
 {
 	[_statusPopUpButton setTitle:newStatus];
 	[_friendsListController reloadData];
+	
+	if( [newStatus length] > 1 && [newStatus rangeOfString:@"AFK"].length > 0 )
+	{
+		[_statusBubbleView setImage:[NSImage imageNamed:@"away_bubble"]];
+	}
+	else
+	{
+		[_statusBubbleView setImage:[NSImage imageNamed:@"avi_bubble"]];
+	}
 }
 
 
@@ -638,7 +651,6 @@
 {
 	return _account.password;
 }
-
 
 
 #pragma mark - BFDownload
@@ -889,6 +901,26 @@
 - (NSString *)sessionStatusString
 {
 	return [_session loginIdentity].status;
+}
+
+#pragma mark - Custom status
+
+- (void)userWentAway
+{
+	if( _session.status == XFSessionStatusOnline && [_session.loginIdentity.status length] < 1 )
+	{
+		[_session setStatusString:@"(AFK) Away from keyboard"];
+		[_statusPopUpButton setTitle:@"Away"];
+	}
+}
+
+- (void)userBecameActive
+{
+	if( _session.status == XFSessionStatusOnline && [_session.loginIdentity.status length] > 1 )
+	{
+		[_session setStatusString:@""];
+		[_statusPopUpButton setTitle:@"Available"];
+	}
 }
 
 
