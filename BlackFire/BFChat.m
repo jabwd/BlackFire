@@ -63,8 +63,10 @@
 			chatLog.friendUsername = _chat.remoteFriend.username;
 			NSArray *messages = [chatLog getLastMessages:5];
 			NSMutableString *str = [[NSMutableString alloc] init];
-			for(BFMessage *message in messages)
+			NSUInteger i, cnt = [messages count];
+			for(i=cnt;i>0;i--)
 			{
+				BFMessage *message = [messages objectAtIndex:(i-1)];
 				NSString *newLine = @"";
 				if( [str length] > 0 )
 					newLine = @"\n";

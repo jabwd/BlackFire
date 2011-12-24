@@ -59,10 +59,11 @@
 						  n_true,BFEnableReceiveSound,
 						  n_true,BFReceiveSoundBackgroundOnly,
 						  n_true,BFEnableConnectSound,
-						  n_true,BFEnableOnlineSound,
-						  n_true,BFEnableOfflineSound,
+						  n_true,BFEnableFriendOnlineStatusSound,
 						  n_true,BFShowClanGroups,
 						  n_true,BFAutoGoAFK,
+						  n_true,BFEnableChatHistory,
+						  n_true,BFEnableChatlogs,
 						  [NSNumber numberWithInt:120],BFAutoAFKTime,
 						  nil];
 	
