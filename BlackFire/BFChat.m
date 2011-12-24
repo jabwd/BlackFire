@@ -321,7 +321,7 @@
 		
 		[fmtMsg addAttribute:NSFontAttributeName value:boldFont range:NSMakeRange(0, [fmtMsg length])];
 
-		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0 ,[fmtMsg length])];
+		[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.2f alpha:1.0f] range:NSMakeRange(0 ,[fmtMsg length])];
 		
 		AHHyperlinkScanner	*scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:fmtMsg usingStrictChecking:NO];
 		[[_chatHistoryView textStorage] appendAttributedString:[scanner linkifiedString]];
@@ -375,7 +375,7 @@
 	else 
 		[fmtMsg addAttribute:NSForegroundColorAttributeName value:_userColor range:boldStyleRange];
 	
-	[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange([newline length], [timeStamp length])];
+	[fmtMsg addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.2f alpha:1.0f] range:NSMakeRange([newline length], [timeStamp length])];
 	
 	AHHyperlinkScanner	*scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:fmtMsg usingStrictChecking:NO];
     [[_chatHistoryView textStorage] appendAttributedString:[scanner linkifiedString]];

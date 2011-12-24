@@ -72,6 +72,7 @@
 		363082C61499F9E1001B47CC /* tab-typing.png in Resources */ = {isa = PBXBuildFile; fileRef = 363082C51499F9E1001B47CC /* tab-typing.png */; };
 		363941CC149C0E7C00DDECB4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */; };
 		363DC6C114A65C9800FBE38E /* NSNonRetardedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 363DC6C014A65C9800FBE38E /* NSNonRetardedImageView.m */; };
+		363DC6C414A66DC900FBE38E /* chatLogTemplate.db in Resources */ = {isa = PBXBuildFile; fileRef = 363DC6C314A66DC900FBE38E /* chatLogTemplate.db */; };
 		3645873A149937AF00460195 /* BFDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 36458739149937AF00460195 /* BFDefaults.m */; };
 		3646BBDD1464802D008FD6D4 /* XFGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBDC1464802D008FD6D4 /* XFGroupController.m */; };
 		3646BBE11464A548008FD6D4 /* XFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE01464A548008FD6D4 /* XFChat.m */; };
@@ -259,6 +260,7 @@
 		363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		363DC6BF14A65C9800FBE38E /* NSNonRetardedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNonRetardedImageView.h; sourceTree = "<group>"; };
 		363DC6C014A65C9800FBE38E /* NSNonRetardedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNonRetardedImageView.m; sourceTree = "<group>"; };
+		363DC6C314A66DC900FBE38E /* chatLogTemplate.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = chatLogTemplate.db; sourceTree = "<group>"; };
 		36458738149937AF00460195 /* BFDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDefaults.h; sourceTree = "<group>"; };
 		36458739149937AF00460195 /* BFDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDefaults.m; sourceTree = "<group>"; };
 		3646BBDB1464802D008FD6D4 /* XFGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGroupController.h; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				363DC6C314A66DC900FBE38E /* chatLogTemplate.db */,
 				368C6B46149E00CF00723E9A /* notification.icns */,
 				363082C51499F9E1001B47CC /* tab-typing.png */,
 				36C8A9B1149F8630000695B6 /* Games.plist */,
@@ -942,6 +945,7 @@
 				36C8A9B2149F8630000695B6 /* Games.plist in Resources */,
 				368238E414A09C1400C60D5E /* GamesList.xib in Resources */,
 				368238E514A09C1400C60D5E /* ServerList.xib in Resources */,
+				363DC6C414A66DC900FBE38E /* chatLogTemplate.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
