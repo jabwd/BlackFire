@@ -70,7 +70,9 @@
 				NSString *newLine = @"";
 				if( [str length] > 0 )
 					newLine = @"\n";
-				NSString *timestamp = [_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:message.timestamp]];
+				NSString *timestamp = @"";
+				if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps] )
+					timestamp = [_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:message.timestamp]];
 				if( message.user != BFWarningMessageType )
 				{
 					NSString *displayName = nil;
