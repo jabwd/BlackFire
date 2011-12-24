@@ -26,3 +26,7 @@ extern NSString *BFEnableConnectSound;
 extern NSString *BFEnableFriendOnlineStatusSound;
 extern NSString *BFEnableOnlineSound;
 extern NSString *BFEnableOfflineSound;
+
+
+extern NSString *BFEnableChatlogs;
+extern NSString *BFEnableChatHistory;

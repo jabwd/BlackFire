@@ -14,6 +14,7 @@
 
 @synthesize generalView			= _generalView;
 @synthesize notificationsView	= _notificationsView;
+@synthesize chatView			= _chatView;
 
 @synthesize generalItem			= _generalItem;
 
@@ -72,6 +73,11 @@
 	[self removeAllSubviewsAndReplaceWithView:_notificationsView];
 }
 
+- (IBAction)chatMode:(id)sender
+{
+	[self removeAllSubviewsAndReplaceWithView:_chatView];
+}
+
 - (void)removeAllSubviewsAndReplaceWithView:(NSView *)aView
 {
 	NSWindow *window = [self window];
@@ -79,17 +85,11 @@
 	
 	NSArray *subViews = [mainView subviews];
 	[subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-	/*NSUInteger i, cnt = [subViews count];
-	for(i=0; i < cnt ; i++)
-	{
-		[[subViews objectAtIndex:i] removeFromSuperview];
-	}*/
 	
 	NSRect frame      = window.frame;
 	NSRect frameMain  = mainView.frame;
 	NSRect frameView  = aView.frame;
 	
-	// now we know whether our window has to grow (or get smaller when its negative)
 	float ADDITIONS_HEIGHT = frameView.size.height - frameMain.size.height;
 	frame.size.height += ADDITIONS_HEIGHT;
 	frame.origin.y    -= ADDITIONS_HEIGHT;

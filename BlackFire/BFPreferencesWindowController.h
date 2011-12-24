@@ -8,18 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-typedef enum
-{
-	generalMode = 1,
-	notificationsMode
-} BFPrefsMode;
-
 @interface BFPreferencesWindowController : NSWindowController <NSToolbarDelegate> 
 {
 }
 
 @property (assign) IBOutlet NSView	*generalView;
 @property (assign) IBOutlet NSView	*notificationsView;
+@property (assign) IBOutlet NSView	*chatView;
 
 @property (assign) IBOutlet NSToolbarItem				*generalItem;
 
@@ -29,6 +24,7 @@ typedef enum
 
 - (IBAction)generalMode:(id)sender;
 - (IBAction)notificationsMode:(id)sender;
+- (IBAction)chatMode:(id)sender;
 
 
 

@@ -29,3 +29,6 @@ NSString *BFEnableConnectSound			= @"enableConnectSound";
 NSString *BFEnableFriendOnlineStatusSound	= @"enableFriendOnlineStatusSound";
 NSString *BFEnableOnlineSound			= @"enableOnlineSound";
 NSString *BFEnableOfflineSound			= @"enableOfflineSound";
+
+NSString *BFEnableChatlogs		= @"enableChatlogs";
+NSString *BFEnableChatHistory	= @"enableChatHistory";

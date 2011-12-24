@@ -57,36 +57,39 @@
 		}
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
 		
-		BFChatLog *chatLog = [[BFChatLog alloc] init];
-		chatLog.friendUsername = _chat.remoteFriend.username;
-		NSArray *messages = [chatLog getLastMessages:5];
-		NSMutableString *str = [[NSMutableString alloc] init];
-		for(BFMessage *message in messages)
+		if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatHistory] )
 		{
-			NSString *newLine = @"";
-			if( [str length] > 0 )
-				newLine = @"\n";
-			NSString *timestamp = [_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:message.timestamp]];
-			if( message.user != BFWarningMessageType )
+			BFChatLog *chatLog = [[BFChatLog alloc] init];
+			chatLog.friendUsername = _chat.remoteFriend.username;
+			NSArray *messages = [chatLog getLastMessages:5];
+			NSMutableString *str = [[NSMutableString alloc] init];
+			for(BFMessage *message in messages)
 			{
-				NSString *displayName = nil;
-				if( message.user == BFFriendMessageType )
-					displayName = [_chat.remoteFriend displayName];
+				NSString *newLine = @"";
+				if( [str length] > 0 )
+					newLine = @"\n";
+				NSString *timestamp = [_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:message.timestamp]];
+				if( message.user != BFWarningMessageType )
+				{
+					NSString *displayName = nil;
+					if( message.user == BFFriendMessageType )
+						displayName = [_chat.remoteFriend displayName];
+					else
+						displayName = [[_chat loginIdentity] displayName];
+					[str appendFormat:@"%@%@ %@: %@",newLine,timestamp,displayName,message.message];
+				}
 				else
-					displayName = [[_chat loginIdentity] displayName];
-				[str appendFormat:@"%@%@ %@: %@",newLine,timestamp,displayName,message.message];
+				{
+					[str appendFormat:@"%@%@ <%@>",newLine,timestamp,message.message];
+				}
 			}
-			else
-			{
-				[str appendFormat:@"%@%@ <%@>",newLine,timestamp,message.message];
-			}
+			NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:_chatFont,NSFontAttributeName,[NSColor darkGrayColor],NSForegroundColorAttributeName, nil];
+			NSAttributedString *string = [[NSAttributedString alloc] initWithString:str attributes:attributes];
+			[[_chatHistoryView textStorage] setAttributedString:string];
+			[attributes release];
+			[string release];
+			[str release];
 		}
-		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:_chatFont,NSFontAttributeName,[NSColor darkGrayColor],NSForegroundColorAttributeName, nil];
-		NSAttributedString *string = [[NSAttributedString alloc] initWithString:str attributes:attributes];
-		[[_chatHistoryView textStorage] setAttributedString:string];
-		[attributes release];
-		[string release];
-		[str release];
 	}
 	return self;
 }
@@ -123,11 +126,14 @@
 	[[BFNotificationCenter defaultNotificationCenter] deleteBadgeCount:_missedMessages];
 	_missedMessages = 0;
 	
-	BFChatLog *chatLog = [[BFChatLog alloc] init];
-	chatLog.friendUsername = _chat.remoteFriend.username;
-	chatLog.date = [NSDate date];
-	[chatLog addMessages:_messages];
-	[chatLog release];
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatlogs] )
+	{
+		BFChatLog *chatLog = [[BFChatLog alloc] init];
+		chatLog.friendUsername = _chat.remoteFriend.username;
+		chatLog.date = [NSDate date];
+		[chatLog addMessages:_messages];
+		[chatLog release];
+	}
 	
 	[_messages release];
 	_messages = nil;
@@ -309,7 +315,7 @@
 			newline = @"\n";
 		}
 		
-		if([[NSUserDefaults standardUserDefaults] boolForKey:@"enableTimeStamps"])
+		if([[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps])
 			timestamp = [_dateFormatter stringFromDate:[NSDate date]];
 		
 		NSFont *chatFont = [[NSFont fontWithName:@"Helvetica" size:12.0f] retain];
@@ -358,7 +364,7 @@
 		boldStyleRange.location += 1;
 	}
 	
-	if([[NSUserDefaults standardUserDefaults] boolForKey:@"enableTimeStamps"])
+	if([[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps])
 		timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
 	
 	boldStyleRange.length    = [shortDispName length] + 2 + [timeStamp length];  // the time plus name plus colon
