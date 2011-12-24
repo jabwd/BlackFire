@@ -61,6 +61,7 @@
 						  n_true,BFEnableOnlineSound,
 						  n_true,BFEnableOfflineSound,
 						  n_true,BFShowClanGroups,
+						  n_true,BFAutoGoAFK,
 						  [NSNumber numberWithInt:120],BFAutoAFKTime,
 						  nil];
 	

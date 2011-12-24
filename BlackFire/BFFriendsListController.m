@@ -178,7 +178,8 @@
 {
 	if( [item isKindOfClass:[XFGroup class]] )
 	{
-		return [(XFGroup *)item name];
+		NSString *name = [NSString stringWithFormat:@"%@ (%lu)",[(XFGroup *)item name],[(XFGroup *)item membersCount]];
+		return name;
 	}
 	else if( [item isKindOfClass:[XFFriend class]] )
 	{

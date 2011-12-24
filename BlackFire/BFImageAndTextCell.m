@@ -202,6 +202,11 @@
 	// no implementation, hope this fixes the tooltip bug in the friends list
 }
 
+- (NSRect)expansionFrameWithFrame:(NSRect)cellFrame inView:(NSView *)view 
+{
+    return NSZeroRect;
+}
+
 
 - (NSAttributedString *)statusString
 {
