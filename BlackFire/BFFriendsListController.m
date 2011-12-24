@@ -283,7 +283,37 @@
 	if( [item isKindOfClass:[XFFriend class]] )
 	{
 		XFFriend *friend = (XFFriend *)item;
-		return [NSString stringWithFormat:@"username: %@\nuserID: %u",friend.username,friend.userID];
+		NSMutableString *tooltip = [[NSMutableString alloc] init];
+		if( [friend.nickname length] > 0 )
+			[tooltip appendFormat:@"Nickname: %@",friend.nickname];
+		[tooltip appendFormat:@"\nUsername: %@",friend.username];
+		if( [friend.status length] > 0 )
+		{
+			[tooltip appendFormat:@"\nStatus: %@",friend.status];
+		}
+		if( friend.gameID > 0 )
+		{
+			if( friend.gameIP && friend.gamePort )
+			{
+				[tooltip appendFormat:@"\nPlaying: %@ on server %@",[[BFGamesManager sharedGamesManager]  longNameForGameID:friend.gameID],[friend gameIPString]];
+			}
+			else
+			{
+				[tooltip appendFormat:@"\nPlaying: %@",[[BFGamesManager sharedGamesManager]  longNameForGameID:friend.gameID]];
+			}
+		}
+		return [tooltip autorelease];
+	}
+	else if( [item isKindOfClass:[XFGroup class]] )
+	{
+		XFGroup *group = (XFGroup *)item;
+		if( group.groupType == XFGroupTypeOnlineFriends )
+		{
+			XFSession *session = _delegate.session;
+			XFGroup *offlineFriendsGroup = [session.groupController offlineFriendsGroup];
+			return [NSString stringWithFormat:@"%lu friends are online\n%lu friends are offline",[group membersCount],[offlineFriendsGroup membersCount]];
+		}
+		return nil;
 	}
 	return nil;
 }
