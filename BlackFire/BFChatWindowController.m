@@ -12,6 +12,7 @@
 #import "XFFriend.h"
 
 #import "BFGamesManager.h"
+#import "NSNonRetardedImageView.h"
 
 #import "SFTabView.h"
 

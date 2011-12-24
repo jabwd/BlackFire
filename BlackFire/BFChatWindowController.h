@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h> 
 #import "SFTabStripView.h"
 
-@class BFChat;
+@class BFChat, NSNonRetardedImageView;
 
 
 @interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate, NSTextFieldDelegate>
@@ -22,7 +22,7 @@
 	NSToolbarItem *_toolbarItem;
 	
 	// chat toolbar
-	NSImageView *_avatarImageView;
+	NSNonRetardedImageView *_avatarImageView;
 	NSImageView *_statusIconView;
 	NSTextField *_nicknameField;
 	NSTextField *_statusField;
@@ -38,7 +38,7 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *messageField;
 
-@property (assign) IBOutlet NSImageView *avatarImageView;
+@property (assign) IBOutlet NSNonRetardedImageView *avatarImageView;
 @property (assign) IBOutlet NSImageView *statusIconView;
 @property (assign) IBOutlet NSTextField *nicknameField;
 @property (assign) IBOutlet NSTextField *statusField;
