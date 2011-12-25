@@ -75,7 +75,7 @@
 		return;
 	}
 	BOOL isDir = false;
-	NSString *finalPath = [[NSString alloc] initWithFormat:@"%@/BlackFire",_cachesPath];
+	NSString *finalPath = [[NSString alloc] initWithFormat:@"%@/com.jabwd.BlackFire",_cachesPath];
 	if( ![[NSFileManager defaultManager] fileExistsAtPath:finalPath isDirectory:&isDir] )
 	{
 		NSError *error = nil;
@@ -139,7 +139,7 @@
 		NSImage *image = [_gameIcons objectForKey:key];
 		if( ! image )
 		{
-			NSString *path = [[NSString alloc] initWithFormat:@"%@/BlackFire/%u.png",_cachesPath,gameID];
+			NSString *path = [[NSString alloc] initWithFormat:@"%@/com.jabwd.BlackFire/%u.png",_cachesPath,gameID];
 			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
 			if( ! image )
 			{

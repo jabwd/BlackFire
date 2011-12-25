@@ -237,11 +237,6 @@
 	[self setNeedsDisplay:true];
 }
 
-- (void)mouseMoved:(NSEvent *)theEvent
-{
-	NSLog(@"Mouse moved");
-}
-
 - (void)updateTrackingAreas
 {
 	[super updateTrackingAreas];
@@ -271,11 +266,6 @@
 - (void)mouseDown:(NSEvent *)theEvent
 {
 	_dragging = false;
-	if( !_selected )
-	{
-		SFTabStripView *strip = (SFTabStripView *)[self superview];
-		[strip selectTab:self];
-	}
 	
 	_originalPoint	= [NSEvent mouseLocation];
 	_originalRect	= [self frame];
@@ -284,9 +274,18 @@
 	NSPoint actual = [self convertPoint:new fromView:[[[self window] contentView] superview]];
 	
 	if( actual.x > 10 && actual.x < 22 && actual.y > 3 && actual.y < 19 )
+	{
 		_mouseDownInsideClose = true;
+		return;
+	}
 	else
 		_mouseDownInsideClose = false;
+	
+	if( !_selected )
+	{
+		SFTabStripView *strip = (SFTabStripView *)[self superview];
+		[strip selectTab:self];
+	}
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
@@ -389,8 +388,18 @@
 		NSPoint actual = [self convertPoint:new fromView:[[[self window] contentView] superview]];
 		if( actual.x > 10 && actual.x < 22 && actual.y > 3 && actual.y < 19 )
 		{
+			/*[NSAnimationContext beginGrouping];
+			[[NSAnimationContext currentContext] setDuration:0.100f];
+			[[NSAnimationContext currentContext] setCompletionHandler:^{
+				if( [_target respondsToSelector:_selector] )
+					[_target performSelector:_selector withObject:self];
+			}];
+			NSRect frame = self.frame;
+			[[self animator] setFrame:NSMakeRect(frame.origin.x, frame.origin.y, 30, frame.size.height)];
+			[NSAnimationContext endGrouping];*/ // enable this later on
 			if( [_target respondsToSelector:_selector] )
 				[_target performSelector:_selector withObject:self];
+			
 		}
 		_mouseDownInsideClose = false;
 	}

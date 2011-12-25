@@ -202,11 +202,12 @@
 
 - (void)drawWithExpansionFrame:(NSRect)cellFrame inView:(NSView *)view
 {
-	// no implementation, hope this fixes the tooltip bug in the friends list
+	// no implementation
 }
 
 - (NSRect)expansionFrameWithFrame:(NSRect)cellFrame inView:(NSView *)view 
 {
+	// fix the extra tooltip
     return NSZeroRect;
 }
 

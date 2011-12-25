@@ -41,6 +41,7 @@
 - (void)update
 {
 	[self setNeedsDisplay:true];
+	[self layoutTabs];
 }
 
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize
@@ -100,8 +101,6 @@
 			selected = tab;
 		[tab setFrame:viewFrame];
 		[tab updateTrackingAreas];
-	//	[tab removeFromSuperview];
-	//	[self addSubview:tab];
 		
 		if( ! selected )
 		{
@@ -112,15 +111,6 @@
 		{
 			tab.tabRightSide = true;
 		}
-		/*else
-		{
-			// we passed the selected tab so now we need to do it a bit more advanced.
-			if( (i+1) < cnt )
-			{
-				SFTabView *nextTab = [_tabs objectAtIndex:(i+1)];
-				[nextTab orderOnTopOfView:tab];
-			}
-		}*/ // done in the second loop
 	}
 	
 	// reverse loop
@@ -164,9 +154,9 @@
 	if( tabView.selected && [_tabs count] > 0  )
 	{
 		[self selectTab:[_tabs objectAtIndex:0]];
-		[self layoutTabs];
 	}
 	
+	[self layoutTabs];
 	[tabView release];
 }
 
@@ -189,26 +179,12 @@
 }
 
 - (void)tabDoneDragging
-{
-	// make sure that the drawing is done ok again
-	/*BOOL selected = false;
-	for(SFTabView *view in _tabs)
-	{
-		if( view.selected )
-		{
-			selected = true;
-			continue;
-		}
-		if( selected )
-		{
-			view.tabRightSide = true;
-		}
-	}*/
-	
+{	
 	for(SFTabView *view in _tabs)
 	{
 		view.tabDragAction = false;
 	}
+	[self layoutTabs];
 }
 
 @end

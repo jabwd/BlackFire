@@ -230,7 +230,7 @@
 				NSImage *image = nil;
 				NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
 				
-				NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/BlackFire/%@.jpg",cachesPath,friend.username];
+				NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.jabwd.BlackFire/%@.jpg",cachesPath,friend.username];
 				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
 				{
 					image = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
