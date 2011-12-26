@@ -13,16 +13,17 @@
 @interface ADInvitationWindowController : ADStringPromptController <NSTableViewDelegate, NSTableViewDataSource>
 {
 	NSMutableArray *_searchResults;
+	XFFriend		*_selectedFriend;
 }
 
 @property (assign) IBOutlet NSTextField	*searchField;
 @property (assign) IBOutlet NSTableView		*tableView;
+@property (readonly) XFFriend *selectedFriend;
 
 @property (nonatomic, retain) NSMutableArray *searchResults;
 
 - (IBAction)startSearching:(id)sender;
 
-- (XFFriend *)selectedFriend;
 - (NSString *)invitationMessage;
 - (void)reloadData;
 

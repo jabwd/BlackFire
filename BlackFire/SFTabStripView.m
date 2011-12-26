@@ -41,7 +41,6 @@
 - (void)update
 {
 	[self setNeedsDisplay:true];
-	[self layoutTabs];
 }
 
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize

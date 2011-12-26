@@ -830,10 +830,12 @@
 	else if( [prompt isKindOfClass:[ADInvitationWindowController class]] )
 	{
 		XFFriend *selectedFriend = [(ADInvitationWindowController *)prompt selectedFriend];
+		[selectedFriend retain];
 		if( selectedFriend )
 		{
 			[_session sendFriendRequest:selectedFriend.username message:prompt.messageField.stringValue];
 		}
+		[selectedFriend release];
 		[_stringPromptController release];
 		_stringPromptController = nil;
 		return;

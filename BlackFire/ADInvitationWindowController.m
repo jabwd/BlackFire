@@ -14,6 +14,7 @@
 
 @synthesize searchField = _searchField;
 @synthesize tableView	= _tableView;
+@synthesize selectedFriend = _selectedFriend;
 
 @synthesize searchResults = _searchResults;
 
@@ -22,6 +23,7 @@
 	if( (self = [super init]) )
 	{
 		_mainWindow = mainWindow;
+		_selectedFriend = nil;
 		
 		[NSBundle loadNibNamed:@"InvitationWindow" owner:self];
 	}
@@ -30,9 +32,23 @@
 
 - (void)dealloc
 {
+	[_tableView setDataSource:nil];
+	[_tableView setDelegate:nil];
+	_tableView = nil;
 	[_searchResults release];
 	_searchResults = nil;
+	[_selectedFriend release];
+	_selectedFriend = nil;
 	[super dealloc];
+}
+
+- (IBAction)doneAction:(id)sender
+{
+	[_selectedFriend release];
+	_selectedFriend = [[_searchResults objectAtIndex:[_tableView selectedRow]] retain];
+	[_tableView setDelegate:nil];
+	[_tableView setDataSource:nil];
+	[super doneAction:sender];
 }
 
 - (IBAction)startSearching:(id)sender
@@ -42,12 +58,6 @@
 	
 	ADAppDelegate *app = (ADAppDelegate *)_delegate;
 	[app startUserSearching:_searchField.stringValue];
-}
-
-- (XFFriend *)selectedFriend
-{
-	XFFriend *selected = [_searchResults objectAtIndex:[_tableView selectedRow]];
-	return selected;
 }
 
 - (NSString *)invitationMessage

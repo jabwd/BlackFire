@@ -55,6 +55,11 @@
 	[super dealloc];
 }
 
+- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
+{
+	return true;
+}
+
 - (void)drawRect:(NSRect)useless
 {
 	NSRect dirtyRect = [self bounds];
@@ -258,14 +263,15 @@
 	[trackingArea release];*/
 }
 
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
-{
-	return true;
-}
-
 - (void)mouseDown:(NSEvent *)theEvent
 {
 	_dragging = false;
+	
+	if( !_selected )
+	{
+		SFTabStripView *strip = (SFTabStripView *)[self superview];
+		[strip selectTab:self];
+	}
 	
 	_originalPoint	= [NSEvent mouseLocation];
 	_originalRect	= [self frame];
@@ -280,12 +286,6 @@
 	}
 	else
 		_mouseDownInsideClose = false;
-	
-	if( !_selected )
-	{
-		SFTabStripView *strip = (SFTabStripView *)[self superview];
-		[strip selectTab:self];
-	}
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
