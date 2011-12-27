@@ -43,6 +43,8 @@ typedef enum
 @property (assign) IBOutlet NSScrollView *chatScrollView;
 @property (nonatomic, retain) XFChat *chat;
 
+@property (readonly) NSUInteger missedMessages;
+
 - (id)initWithChat:(XFChat *)chat;
 
 - (void)closeChat;

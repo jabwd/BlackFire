@@ -28,6 +28,8 @@
 @synthesize chatHistoryView		= _chatHistoryView;
 @synthesize chatScrollView		= _chatScrollView;
 
+@synthesize missedMessages		= _missedMessages;
+
 @synthesize chat = _chat;
 
 - (id)initWithChat:(XFChat *)chat
@@ -56,6 +58,7 @@
 			NSLog(@"*** No remotefriend object 0x589129");
 		}
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatNotificationWasClicked:) name:@"chatFriendClicked" object:chat.remoteFriend];
 		
 		if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatHistory] )
 		{
@@ -160,6 +163,13 @@
 	[tab setNeedsDisplay:true];
 }
 
+- (void)chatNotificationWasClicked:(NSNotification *)notification
+{
+	[_windowController selectChat:self];
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:true];
+	[_windowController.window makeKeyAndOrderFront:self];
+}
+
 #pragma mark - XFChat Delegate
 
 - (void)receivedMessage:(NSString *)message
@@ -173,7 +183,7 @@
 	if( ![self.windowController.window isMainWindow] || _windowController.currentChat != self )
 	{
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
-		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message];
+		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message forChatFriend:_chat.remoteFriend];
 		[[NSApplication sharedApplication] requestUserAttention:10];
 		_missedMessages++;
 		[[BFNotificationCenter defaultNotificationCenter] addBadgeCount:1];

@@ -128,6 +128,29 @@
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
 {
+	// for awesome behaviour!
+	if( [_chatControllers count] > 0 )
+	{
+		BFChat *targetChat = nil;
+		NSUInteger top = 0;
+		for(BFChat *chat in _chatControllers)
+		{
+			if( chat.missedMessages > 0 )
+			{
+				if( chat.missedMessages > top )
+				{
+					top = chat.missedMessages;
+					targetChat = chat;
+				}
+			}
+		}
+		if( targetChat )
+		{
+			[targetChat.windowController selectChat:targetChat];
+			[targetChat.windowController.window makeKeyAndOrderFront:self];
+		}
+		return false;
+	}
 	if( ![_window isVisible] )
 	{
 		[_window makeKeyAndOrderFront:self];
@@ -140,7 +163,6 @@
 	NSUInteger i, cnt = [_chatControllers count];
 	for(i=0;i<cnt;i++)
 	{
-		//NSLog(@"Closing chat: %@",[[_chatControllers objectAtIndex:0] chat].remoteFriend);
 		[[_chatControllers objectAtIndex:0] closeChat];
 	}
 }

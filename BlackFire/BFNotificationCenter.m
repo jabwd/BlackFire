@@ -8,6 +8,7 @@
 
 #import "BFNotificationCenter.h"
 #import "BFDefaults.h"
+#import "XFFriend.h"
 
 static BFNotificationCenter *notificationCenter = nil;
 
@@ -27,12 +28,15 @@ static BFNotificationCenter *notificationCenter = nil;
 	if( (self = [super init]) )
 	{
 		[GrowlApplicationBridge setGrowlDelegate:self];
+		_remoteFriends = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_remoteFriends release];
+	_remoteFriends = nil;
 	[_connectSound release];
 	_connectSound = nil;
 	[_sendSound release];
@@ -144,7 +148,46 @@ static BFNotificationCenter *notificationCenter = nil;
 	
 }
 
+- (void)growlNotificationTimedOut:(id)clickContext
+{
+	if( clickContext && [clickContext isKindOfClass:[NSString class]] && [clickContext length] > 0 )
+	{
+		[_remoteFriends removeObjectForKey:clickContext];
+	}
+}
+
+- (void)growlNotificationWasClicked:(id)clickContext
+{
+	if( clickContext && [clickContext isKindOfClass:[NSString class]] && [clickContext length] > 0 )
+	{
+		XFFriend *remoteFriend = [[_remoteFriends objectForKey:clickContext] retain];
+		[_remoteFriends removeObjectForKey:clickContext];
+		if( remoteFriend )
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"chatFriendClicked" object:remoteFriend];
+		[remoteFriend release];
+	}
+	else
+	{
+		NSLog(@"*** Growl notification was clicked with unknown click context %@",clickContext);
+	}
+}
+
 - (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body
+{
+	[self postNotificationWithTitle:notificationTitle body:body context:nil];
+}
+
+- (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body forChatFriend:(XFFriend *)remoteFriend;
+{
+	if( remoteFriend )
+	{
+		if( ! [_remoteFriends objectForKey:remoteFriend.username] )
+			[_remoteFriends setObject:remoteFriend forKey:remoteFriend.username];
+		[self postNotificationWithTitle:notificationTitle body:body context:remoteFriend.username];
+	}
+}
+
+- (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body context:(id)context
 {
 	if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFEnableNotifications] )
 		return;
@@ -157,7 +200,7 @@ static BFNotificationCenter *notificationCenter = nil;
      iconData:nil
      priority:0
      isSticky:NO
-     clickContext:nil];
+     clickContext:context];
 }
 
 #pragma mark - Badge count
@@ -189,5 +232,4 @@ static BFNotificationCenter *notificationCenter = nil;
 		[[NSApp dockTile] setBadgeLabel:[NSString stringWithFormat:@"%lu",_badgeCount]];
 	}
 }
-
 @end

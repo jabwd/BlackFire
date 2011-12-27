@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <Growl/GrowlApplicationBridge.h>
 
+@class XFFriend;
+
 @interface BFNotificationCenter : NSObject <GrowlApplicationBridgeDelegate>
 {
+	NSMutableDictionary *_remoteFriends;
+	
 	NSSound *_connectSound;
 	NSSound *_onlineSound;
 	NSSound *_offlineSound;
@@ -35,6 +39,8 @@
 // Growl
 
 - (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body;
+- (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body forChatFriend:(XFFriend *)remoteFriend;
+- (void)postNotificationWithTitle:(NSString *)notificationTitle body:(NSString *)body context:(id)context;
 
 
 //------------------------------------------------------------------------------
