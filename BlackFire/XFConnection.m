@@ -58,7 +58,7 @@
 - (void)dealloc
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	_socket.delegate = nil;
+	[_socket setDelegate:nil];
 	[_socket release];
 	_socket = nil;
 	[_availableData release];
@@ -81,7 +81,7 @@
 	if( _status != XFConnectionDisconnected )
 		return;
 	
-	_socket.delegate = nil;
+	[_socket setDelegate:nil];
 	[_socket release]; // prevent leaking
 	_socket = nil;
 	
@@ -111,7 +111,7 @@
 	_availableData = nil;
 	
 	_status = XFConnectionDisconnected;
-	_socket.delegate = nil;
+	[_socket setDelegate:nil];
 	[_socket release];
 	_socket = nil;
 	[_session release];
@@ -124,12 +124,14 @@
 	if( _status == XFConnectionStarting )
 	{
 		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
+		_socket.delegate = nil;
 		[self disconnect];
 	}
 }
 
 - (void)didDisconnectWithReason:(SocketError)reason
 {
+	_socket.delegate = nil;
 	[_session connection:self willDisconnect:XFConnectionErrorHungUp];
 	[_session release];
 	_session = nil; // the session is gone here.
@@ -242,6 +244,7 @@
 		// this will also disconnect the connection therefore we are not doing it manually
 		// in this method
 		NSLog(@"Server Stopped responding");
+		_socket.delegate = nil;
 		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
     }
 }
@@ -766,6 +769,7 @@
 			{
 				friend.sessionID = sid;
 				[_session raiseFriendNotification:XFFriendNotificationSessionChanged forFriend:friend];
+				[friend release];
 				return;
 			}
 			friend.online		= true;

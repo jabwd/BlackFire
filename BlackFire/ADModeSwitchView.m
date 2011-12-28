@@ -210,7 +210,7 @@
 		
 		NSAttributedString *str = [[NSAttributedString alloc] initWithString:item.name attributes:attributes];
 		[attributes release];
-		
+		[shadow release];
 		NSSize size = [str size];
 		
 		if( item.selected )

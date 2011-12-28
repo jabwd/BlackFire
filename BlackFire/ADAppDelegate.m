@@ -411,6 +411,8 @@
 	[chatController addChat:blackfireChat];
 	[chat setDelegate:blackfireChat];
 	
+	// not leaking, releases itself.
+	
 	[_chatControllers addObject:blackfireChat];
 	[blackfireChat release];
 }
@@ -717,7 +719,7 @@
 			[userImage release];
 		}
 		
-		
+		[cachePath release];
 		[avatarImage release];
 		[imagePath release];
 	}
