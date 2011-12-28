@@ -21,7 +21,7 @@
 	NSString *path		= [remoteURL relativePath];
 	NSString *fileName	= [path lastPathComponent];
 	
-	download.destinationPath	= [[NSString alloc] initWithFormat:@"%@/%@.image.download",NSTemporaryDirectory(),fileName];
+	download.destinationPath	= [[[NSString alloc] initWithFormat:@"%@/%@.image.download",NSTemporaryDirectory(),fileName] autorelease];
 	download.delegate			= delegate;
 	
 	[download downloadFromURL:remoteURL];
@@ -36,7 +36,7 @@
 	NSString *path		= [remoteURL relativePath];
 	NSString *fileName	= [path lastPathComponent];
 	
-	download.destinationPath	= [[NSString alloc] initWithFormat:@"%@/%@.avatar.download",NSTemporaryDirectory(),fileName];
+	download.destinationPath	= [[[NSString alloc] initWithFormat:@"%@/%@.avatar.download",NSTemporaryDirectory(),fileName] autorelease];
 	download.delegate			= delegate;
 	
 	[download downloadFromURL:remoteURL];

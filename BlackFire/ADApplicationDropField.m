@@ -34,9 +34,9 @@
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender 
 {
     NSPasteboard *pboard;
-    NSDragOperation sourceDragMask;
+    //NSDragOperation sourceDragMask;
 	
-    sourceDragMask	= [sender draggingSourceOperationMask];
+    //sourceDragMask	= [sender draggingSourceOperationMask];
     pboard			= [sender draggingPasteboard];
 	
     if( [[pboard types] containsObject:NSFilenamesPboardType] ) 

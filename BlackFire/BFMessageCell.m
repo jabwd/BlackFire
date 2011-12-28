@@ -41,6 +41,7 @@
 		[message drawInRect:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+16, cellFrame.size.width, cellFrame.size.height-20)];		
 		[message release];
 	}
+	[dateFormatter release];
 }
 
 @end

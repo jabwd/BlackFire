@@ -43,7 +43,7 @@ typedef enum
     SocketStatus        _status;
     unsigned short      _port;
 }
-@property (nonatomic, assign) id <SocketDelegate> delegate;
+@property (nonatomic, retain) id <SocketDelegate> delegate;
 @property (nonatomic, assign) unsigned short port;
 
 // initializes this class with a delegate

@@ -18,7 +18,7 @@ BOOL createFolderIfNeeded(NSString *path)
 	else
 	{
 		NSError *error = nil;
-		[[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:true attributes:nil error:error];
+		[[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:true attributes:nil error:&error];
 		if( error )
 		{
 			NSLog(@"*** Error while creating %@ %@",path,error);

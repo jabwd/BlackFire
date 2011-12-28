@@ -221,6 +221,7 @@ const CGFloat kRapidCloseDist = 2.5;
 		[highlightTransform translateXBy:-2.0 yBy:0.0];
 		[highlightPath transformUsingAffineTransform:highlightTransform];
 		[highlightPath stroke];
+		[highlightPath release];
 	}
 	
 	[context restoreGraphicsState];

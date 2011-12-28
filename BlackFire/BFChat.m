@@ -96,6 +96,7 @@
 			[attributes release];
 			[string release];
 			[str release];
+			[chatLog release];
 		}
 	}
 	return self;

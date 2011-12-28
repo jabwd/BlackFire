@@ -143,7 +143,7 @@
 			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
 			if( ! image )
 			{
-				image = [NSImage imageNamed:@"xfire"];
+				//image = [NSImage imageNamed:@"xfire"];
 				
 				// check if we know the game
 				if( [self gameForGameID:gameID].gameID != -1 )
@@ -181,6 +181,7 @@
 				[_gameIcons setObject:image forKey:key];
 				[path release];
 				[image setScalesWhenResized:true];
+				[key release];
 				return image;
 			}
 			

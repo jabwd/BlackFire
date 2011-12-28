@@ -48,8 +48,8 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 
 - (void)dealloc
 {
+	[_delegate release];
     _delegate = nil;
-    [self stopHostnameResolution];
     [self disconnect];
     [super dealloc];
 }
