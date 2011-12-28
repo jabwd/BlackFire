@@ -21,6 +21,7 @@
 #import "BFChatWindowController.h"
 #import "BFChat.h"
 #import "BFRequestWindowController.h"
+#import "BFAddGameSheetController.h"
 #import "ADInvitationWindowController.h"
 
 #import "BFNotificationCenter.h"
@@ -862,6 +863,12 @@
 		_stringPromptController = nil;
 		return;
 	}
+	else if( [prompt isKindOfClass:[BFAddGameSheetController class]] )
+	{
+		[_stringPromptController release];
+		_stringPromptController = nil;
+		return;
+	}
 	
 	NSString *nickname = [_stringPromptController.messageField.stringValue copy];
 	[_stringPromptController release];
@@ -957,6 +964,13 @@
 {
 	if( ! _stringPromptController && _session.status == XFSessionStatusOnline )
 	{
+		if( _currentMode == BFApplicationModeGames )
+		{
+			_stringPromptController = [[BFAddGameSheetController alloc] initWithWindow:self.window];
+			_stringPromptController.delegate = self;
+			[_stringPromptController show];
+			return;
+		}
 		_stringPromptController = [[ADInvitationWindowController alloc] initWithWindow:self.window];
 		_stringPromptController.delegate = self;
 		[_stringPromptController show];

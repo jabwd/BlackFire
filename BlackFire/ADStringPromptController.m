@@ -32,8 +32,13 @@
 
 - (void)dealloc
 {
-	_mainWindow = nil;
-	_delegate = nil;
+	_titleField		= nil;
+	_doneButton		= nil;
+	_cancelButton	= nil;
+	_messageField	= nil;
+	_sheet			= nil;
+	_mainWindow		= nil;
+	_delegate		= nil;
 	[super dealloc];
 }
 
@@ -64,18 +69,14 @@
 {
 	[self hide];
 	if( [_delegate respondsToSelector:@selector(stringPromptDidCancel:)] )
-	{
 		[_delegate stringPromptDidCancel:self];
-	}
 }
 
 - (IBAction)doneAction:(id)sender
 {
 	[self hide];
 	if( [_delegate respondsToSelector:@selector(stringPromptDidSucceed:)] )
-	{
 		[_delegate stringPromptDidSucceed:self];
-	}
 }
 
 @end
