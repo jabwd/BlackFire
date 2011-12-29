@@ -36,7 +36,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 {
     if( (self = [super init]) )
     {
-        _delegate       = delegate;
+        _delegate       = [delegate retain];
         _cfHost         = NULL;
         _cfSocket       = NULL;
         _runLoopSource  = NULL;

@@ -92,6 +92,7 @@
 		366AC22B14655185002A1F50 /* XFGroupChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC22A14655185002A1F50 /* XFGroupChat.m */; };
 		366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23A14658C8D002A1F50 /* BFAccount.m */; };
 		366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23D14658D21002A1F50 /* BFKeychainManager.m */; };
+		36737EAA14AC64D10046C33F /* BFSoundSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 36737EA914AC64D10046C33F /* BFSoundSet.m */; };
 		367A9619149AB9CE00CF3833 /* sha1.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F5F079149AB6A300214DEF /* sha1.m */; };
 		368238E314A09C1400C60D5E /* BFGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238E014A09C1400C60D5E /* BFGamesListController.m */; };
 		368238E414A09C1400C60D5E /* GamesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E114A09C1400C60D5E /* GamesList.xib */; };
@@ -299,6 +300,8 @@
 		366AC23A14658C8D002A1F50 /* BFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAccount.m; sourceTree = "<group>"; };
 		366AC23C14658D21002A1F50 /* BFKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFKeychainManager.h; sourceTree = "<group>"; };
 		366AC23D14658D21002A1F50 /* BFKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFKeychainManager.m; sourceTree = "<group>"; };
+		36737EA814AC64D10046C33F /* BFSoundSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFSoundSet.h; sourceTree = "<group>"; };
+		36737EA914AC64D10046C33F /* BFSoundSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSoundSet.m; sourceTree = "<group>"; };
 		368238DF14A09C1400C60D5E /* BFGamesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesListController.h; sourceTree = "<group>"; };
 		368238E014A09C1400C60D5E /* BFGamesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesListController.m; sourceTree = "<group>"; };
 		368238E114A09C1400C60D5E /* GamesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesList.xib; sourceTree = "<group>"; };
@@ -772,6 +775,8 @@
 				3616011B14A9EB44003E6A9E /* BFWindow.m */,
 				36F8771714AB256500C6E6E4 /* BFApplicationSupport.h */,
 				36F8771814AB256500C6E6E4 /* BFApplicationSupport.m */,
+				36737EA814AC64D10046C33F /* BFSoundSet.h */,
+				36737EA914AC64D10046C33F /* BFSoundSet.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -1051,6 +1056,7 @@
 				3616012314AA2EC7003E6A9E /* BFAddGameSheetController.m in Sources */,
 				3616012914AA3381003E6A9E /* ADApplicationDropField.m in Sources */,
 				36F8771914AB256500C6E6E4 /* BFApplicationSupport.m in Sources */,
+				36737EAA14AC64D10046C33F /* BFSoundSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
