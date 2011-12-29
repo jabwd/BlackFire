@@ -28,7 +28,7 @@
 		if( [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] && isDir )
 		{
 			// determine what kind of bundle we are handling here.
-			if( [path hasSuffix:@"AdiumSoundset"] )
+			if( [path hasSuffix:@"AdiumSoundset"] || [path hasSuffix:@"AdiumSoundSet"])
 			{
 				[self decodeAdiumSoundSetAtPath:path];
 			}
@@ -75,6 +75,101 @@
 	NSString *informationPath = [[NSString alloc] initWithFormat:@"%@/Sounds.plist",path];
 	NSDictionary *information = [[NSDictionary alloc] initWithContentsOfFile:informationPath];
 	
+	if( ! information )
+	{
+		//NSLog(@"Notice: no info property list found in the adium soundset, probably some retard who thinks using a plain text file is handier");
+		// scan the plain text file, *sigh*
+		// oh, another bonus from these retards, the file can have a random name :D
+		NSError *error = nil;
+		NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:&error];
+		if( ! error )
+		{
+			NSString *filePath = nil;
+			for(NSString *fileName in directoryContents)
+			{
+				if( [fileName rangeOfString:@".txt"].length > 0 )
+				{
+					filePath = [NSString stringWithFormat:@"%@/%@",path,fileName];
+					break;
+				}
+			}
+			
+			if( ! filePath )
+			{
+				[informationPath release];
+				return;
+			}
+			else
+			{
+				NSString *contents = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+				if( error )
+				{
+					NSLog(@"*** Unable to decode adium soundset");
+					[contents release];
+					[informationPath release];
+					return;
+				}
+				else
+				{
+					// scan the file for the information we need
+					NSArray *components = [contents componentsSeparatedByString:@"\n"];
+					BOOL useful = false;
+					information = (NSDictionary *)[[NSMutableDictionary alloc] init];
+					if( [components count] > 0 )
+					{
+						NSString *name = [components objectAtIndex:0];
+						[(NSMutableDictionary *)information setObject:name forKey:@"Info"];
+					}
+					else
+					{
+						[informationPath release];
+						[information release];
+						return;
+					}
+					for(NSString *line in components)
+					{
+						if( ! useful )
+						{
+							if( [line length] > 8 )
+							{
+								if( [line rangeOfString:@"SoundSet:"].length == 9 )
+								{
+									useful = true;
+								}
+							}
+						}
+						else
+						{
+							NSString *key	= nil;
+							NSString *value = nil;
+							NSArray *comp = [line componentsSeparatedByString:@"\""];
+							if( [comp count] > 2 )
+							{
+								key		= [comp objectAtIndex:1];
+								value	= [comp objectAtIndex:2];
+								
+								// finish the value
+								NSRange valueRange = [value rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]];
+								valueRange.length = [value length] - valueRange.location;
+								value = [value substringWithRange:valueRange];
+							}
+							if( key && value )
+							{
+								[(NSMutableDictionary *)information setObject:value forKey:key];
+							}
+						}
+					}
+				}
+				[contents release];
+			}
+		}
+		else
+		{
+			[informationPath release];
+			return;
+		}
+	}
+	
 	if( information )
 	{
 		NSString *name = [information objectForKey:@"Info"];
@@ -86,6 +181,8 @@
 		
 		
 		NSDictionary *sounds = [information objectForKey:@"Sounds"];
+		if( ! sounds )
+			sounds = information;
 		
 		[_receiveSoundpath release];
 		_receiveSoundpath = nil;
