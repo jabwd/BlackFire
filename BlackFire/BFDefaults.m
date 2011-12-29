@@ -32,3 +32,4 @@ NSString *BFEnableOfflineSound			= @"enableOfflineSound";
 
 NSString *BFEnableChatlogs		= @"enableChatlogs";
 NSString *BFEnableChatHistory	= @"enableChatHistory";
+NSString *BFSoundSetPath		= @"soundSetPath";

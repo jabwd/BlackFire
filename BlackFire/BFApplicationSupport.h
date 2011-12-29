@@ -17,7 +17,15 @@ static inline NSString *BFApplicationSupportPath()
 
 static inline NSString *BFChatLogDirectoryPath()
 {
-	NSString *path = [NSString stringWithFormat:@"%@/ChatLogs",BFApplicationSupportPath()];
+	NSString *path = [NSString stringWithFormat:@"%@/BlackFire/ChatLogs",BFApplicationSupportPath()];
+	if( ! createFolderIfNeeded(path) )
+		return nil;
+	return path;
+}
+
+static inline NSString *BFSoundsetsDirectoryPath()
+{
+	NSString *path = [NSString stringWithFormat:@"%@/BlackFire/SoundSets",BFApplicationSupportPath()];
 	if( ! createFolderIfNeeded(path) )
 		return nil;
 	return path;
@@ -28,5 +36,5 @@ static inline NSString *BFExtraMacGameSupportFilePath()
 	NSString *path = BFApplicationSupportPath();
 	if( ! createFolderIfNeeded(path) )
 		return nil;
-	return [NSString stringWithFormat:@"%@/MacGameAdditions.plist",path];
+	return [NSString stringWithFormat:@"%@/BlackFire/MacGameAdditions.plist",path];
 }

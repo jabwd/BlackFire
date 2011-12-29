@@ -30,5 +30,20 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>AdiumSoundset</string>
+				<string>BlackFireSoundset</string>
+				<string>BlackFireSnd</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>BlackFire Soundset</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+	</array>
 </dict>
 </plist>

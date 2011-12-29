@@ -9,6 +9,7 @@
 #import "BFNotificationCenter.h"
 #import "BFDefaults.h"
 #import "XFFriend.h"
+#import "BFSoundSet.h"
 
 static BFNotificationCenter *notificationCenter = nil;
 
@@ -29,6 +30,13 @@ static BFNotificationCenter *notificationCenter = nil;
 	{
 		[GrowlApplicationBridge setGrowlDelegate:self];
 		_remoteFriends = [[NSMutableDictionary alloc] init];
+		
+		if( [[NSUserDefaults standardUserDefaults] objectForKey:BFSoundSetPath] )
+		{
+			BFSoundSet *soundSet = [[BFSoundSet alloc] initWithContentsOfFile:[[NSUserDefaults standardUserDefaults] objectForKey:BFSoundSetPath]];
+			[self setSoundSet:soundSet];
+			[soundSet release];
+		}
 	}
 	return self;
 }
@@ -51,6 +59,39 @@ static BFNotificationCenter *notificationCenter = nil;
 }
 
 #pragma mark - Handling sounds
+
+- (void)setSoundSet:(BFSoundSet *)soundSet
+{
+	if( soundSet.connectedSoundPath )
+	{
+		[_connectSound release];
+		_connectSound = [[NSSound alloc] initWithContentsOfFile:soundSet.connectedSoundPath byReference:false];
+	}
+	
+	if( soundSet.offlineSoundPath )
+	{
+		[_offlineSound release];
+		_offlineSound = [[NSSound alloc] initWithContentsOfFile:soundSet.offlineSoundPath byReference:false];
+	}
+	
+	if( soundSet.onlineSoundPath )
+	{
+		[_onlineSound release];
+		_onlineSound = [[NSSound alloc] initWithContentsOfFile:soundSet.onlineSoundPath byReference:false];
+	}
+	
+	if( soundSet.sendSoundPath )
+	{
+		[_sendSound release];
+		_sendSound = [[NSSound alloc] initWithContentsOfFile:soundSet.sendSoundPath byReference:false];
+	}
+	
+	if( soundSet.receiveSoundPath )
+	{
+		[_receiveSound release];
+		_receiveSound = [[NSSound alloc] initWithContentsOfFile:soundSet.receiveSoundPath byReference:false];
+	}
+}
 
 - (void)playConnectedSound
 {

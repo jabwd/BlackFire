@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Growl/GrowlApplicationBridge.h>
 
-@class XFFriend;
+@class XFFriend, BFSoundSet;
 
 @interface BFNotificationCenter : NSObject <GrowlApplicationBridgeDelegate>
 {
@@ -29,6 +29,7 @@
 //-------------------------------------------------------------------------------
 // Sounds
 
+- (void)setSoundSet:(BFSoundSet *)soundSet;
 - (void)playConnectedSound;
 - (void)playOnlineSound;
 - (void)playOfflineSound;
@@ -45,6 +46,7 @@
 
 //------------------------------------------------------------------------------
 // Dock Icon
+
 - (void)addBadgeCount:(NSUInteger)add;
 - (void)deleteBadgeCount:(NSUInteger)remove;
 

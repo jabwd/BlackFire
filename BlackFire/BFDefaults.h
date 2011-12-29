@@ -30,3 +30,4 @@ extern NSString *BFEnableOfflineSound;
 
 extern NSString *BFEnableChatlogs;
 extern NSString *BFEnableChatHistory;
+extern NSString *BFSoundSetPath;

@@ -29,6 +29,8 @@
 #import "NSNonRetardedImageView.h"
 
 #import "BFIdleTimeManager.h"
+#import "BFApplicationSupport.h"
+#import "BFSoundSet.h"
 
 #import "BFDefaults.h"
 
@@ -177,6 +179,27 @@
 {
 	[self connectionCheck];
 	[[BFIdleTimeManager defaultManager] setDelegate:self];
+}
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
+{
+	NSString *folderPath = BFSoundsetsDirectoryPath();
+	NSLog(@"FolderPath: %@",folderPath);
+	for(NSString *file in filenames)
+	{
+		[[NSFileManager defaultManager] copyItemAtPath:file toPath:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] error:nil];
+		BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]]];
+		if( [set.name length] > 0 )
+		{
+			NSInteger result = NSRunAlertPanel(@"Soundset installed!", [NSString stringWithFormat:@"Soundset %@ was successfully installed",set.name], @"Set as default soundset", @"OK", nil);
+			if( result == NSOKButton )
+			{
+				[[BFNotificationCenter defaultNotificationCenter] setSoundSet:set];
+				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] forKey:BFSoundSetPath];
+			}
+		}
+		[set release];
+	}
 }
 
 #pragma mark - Toolbar delegate
