@@ -436,6 +436,8 @@
 
 - (BOOL)shouldScroll
 {
+	// TODO: Make this work properly.
+	return true;
 	NSClipView *clipView	= [[_chatHistoryView enclosingScrollView] contentView];
 	NSRect actualRect		= clipView.frame;
 	NSRect documentRect		= clipView.documentRect;

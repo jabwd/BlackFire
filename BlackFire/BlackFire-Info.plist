@@ -36,13 +36,17 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>AdiumSoundset</string>
+				<string>AdiumSoundSet</string>
 				<string>BlackFireSoundset</string>
 				<string>BlackFireSnd</string>
+				<string>BlackFireSoundSet</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>BlackFire Soundset</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>soundSet.icns</string>
 		</dict>
 	</array>
 </dict>

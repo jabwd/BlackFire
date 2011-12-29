@@ -16,7 +16,6 @@
 		3616012314AA2EC7003E6A9E /* BFAddGameSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616012214AA2EC7003E6A9E /* BFAddGameSheetController.m */; };
 		3616012614AA3067003E6A9E /* AddGameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3616012514AA3067003E6A9E /* AddGameSheet.xib */; };
 		3616012914AA3381003E6A9E /* ADApplicationDropField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616012814AA3381003E6A9E /* ADApplicationDropField.m */; };
-		3616012F14AA38ED003E6A9E /* game_here.png in Resources */ = {isa = PBXBuildFile; fileRef = 3616012E14AA38ED003E6A9E /* game_here.png */; };
 		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; };
 		3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3616F666145F0E5500E5066D /* InfoPlist.strings */; };
 		3616F66A145F0E5500E5066D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F669145F0E5500E5066D /* main.m */; };
@@ -83,6 +82,8 @@
 		3646BBDD1464802D008FD6D4 /* XFGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBDC1464802D008FD6D4 /* XFGroupController.m */; };
 		3646BBE11464A548008FD6D4 /* XFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE01464A548008FD6D4 /* XFChat.m */; };
 		3646BBE41464A849008FD6D4 /* XFGameServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE31464A849008FD6D4 /* XFGameServer.m */; };
+		364F27C014AC90F4002ACFD7 /* game_here.png in Resources */ = {isa = PBXBuildFile; fileRef = 364F27BF14AC90F4002ACFD7 /* game_here.png */; };
+		364F27C214AC95D5002ACFD7 /* soundSet.icns in Resources */ = {isa = PBXBuildFile; fileRef = 364F27C114AC95D5002ACFD7 /* soundSet.icns */; };
 		36529838146692FA0010FD7F /* ADOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36529837146692FA0010FD7F /* ADOutlineView.m */; };
 		3652983C146693920010FD7F /* BFImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3652983B146693920010FD7F /* BFImageAndTextCell.m */; };
 		36529847146697C00010FD7F /* xfire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36529846146697C00010FD7F /* xfire.jpg */; };
@@ -180,7 +181,6 @@
 		3616012514AA3067003E6A9E /* AddGameSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddGameSheet.xib; sourceTree = "<group>"; };
 		3616012714AA3381003E6A9E /* ADApplicationDropField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADApplicationDropField.h; sourceTree = "<group>"; };
 		3616012814AA3381003E6A9E /* ADApplicationDropField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADApplicationDropField.m; sourceTree = "<group>"; };
-		3616012E14AA38ED003E6A9E /* game_here.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_here.png; sourceTree = "<group>"; };
 		3616F659145F0E5500E5066D /* BlackFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3616F65D145F0E5500E5066D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3616F660145F0E5500E5066D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -286,6 +286,8 @@
 		3646BBE01464A548008FD6D4 /* XFChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFChat.m; sourceTree = "<group>"; };
 		3646BBE21464A849008FD6D4 /* XFGameServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGameServer.h; sourceTree = "<group>"; };
 		3646BBE31464A849008FD6D4 /* XFGameServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFGameServer.m; sourceTree = "<group>"; };
+		364F27BF14AC90F4002ACFD7 /* game_here.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_here.png; sourceTree = "<group>"; };
+		364F27C114AC95D5002ACFD7 /* soundSet.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = soundSet.icns; sourceTree = "<group>"; };
 		36529836146692FA0010FD7F /* ADOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADOutlineView.h; sourceTree = "<group>"; };
 		36529837146692FA0010FD7F /* ADOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADOutlineView.m; sourceTree = "<group>"; };
 		3652983A146693920010FD7F /* BFImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFImageAndTextCell.h; sourceTree = "<group>"; };
@@ -547,7 +549,8 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3616012E14AA38ED003E6A9E /* game_here.png */,
+				364F27C114AC95D5002ACFD7 /* soundSet.icns */,
+				364F27BF14AC90F4002ACFD7 /* game_here.png */,
 				363DC6C314A66DC900FBE38E /* chatLogTemplate.db */,
 				363DC6C514A68A3400FBE38E /* notifications.icns */,
 				368C6B46149E00CF00723E9A /* chatting.icns */,
@@ -982,7 +985,8 @@
 				363DC6C414A66DC900FBE38E /* chatLogTemplate.db in Resources */,
 				363DC6C614A68A3400FBE38E /* notifications.icns in Resources */,
 				3616012614AA3067003E6A9E /* AddGameSheet.xib in Resources */,
-				3616012F14AA38ED003E6A9E /* game_here.png in Resources */,
+				364F27C014AC90F4002ACFD7 /* game_here.png in Resources */,
+				364F27C214AC95D5002ACFD7 /* soundSet.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

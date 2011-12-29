@@ -32,7 +32,7 @@
 			{
 				[self decodeAdiumSoundSetAtPath:path];
 			}
-			else if( [path hasSuffix:@".BlackFireSnd"] || [path hasSuffix:@".BlackFireSoundset"] )
+			else if( [path hasSuffix:@".BlackFireSnd"] || [path hasSuffix:@".BlackFireSoundset"] || [path hasSuffix:@".BlackFireSoundSet"] )
 			{
 				[self decodeBlackFireSoundSetAtPath:path];
 			}
@@ -222,7 +222,50 @@
 
 - (void)decodeBlackFireSoundSetAtPath:(NSString *)path
 {
+	NSString *informationPath = [[NSString alloc] initWithFormat:@"%@/Info.plist",path];
+	NSDictionary *information = [[NSDictionary alloc] initWithContentsOfFile:informationPath];
 	
+	if( information )
+	{
+		NSString *name = [information objectForKey:@"soundsetName"];
+		if( ! name )
+			name = @"Untitled soundset";
+		
+		[_name release];
+		_name = [name retain];
+		
+		
+		[_receiveSoundpath release];
+		_receiveSoundpath = nil;
+		if( [[information objectForKey:@"receiveSound"] length] > 0 )
+			_receiveSoundpath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"receiveSound"]];
+		
+		[_sendSoundPath release];
+		_sendSoundPath = nil;
+		if( [[information objectForKey:@"sendSound"] length] > 0 )
+			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"sendSound"]];
+		
+		[_onlineSoundPath release];
+		_onlineSoundPath = nil;
+		if( [[information objectForKey:@"onlineSound"] length] > 0 )
+			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"onlineSound"]];
+		
+		[_offlineSoundPath release];
+		_offlineSoundPath = nil;
+		if( [[information objectForKey:@"offlineSound"] length] > 0 )
+			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"offlineSound"]];
+		
+		[_connectedSoundPath release];
+		_connectedSoundPath = nil;
+		if( [[information objectForKey:@"connectedSound"] length] > 0 )
+			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"connectedSound"]];
+		else if( [[information objectForKey:@"onlineSound"] length] > 0 )
+			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"onlineSound"]];
+
+	}
+	
+	[informationPath release];
+	[information release];
 }
 
 @end
