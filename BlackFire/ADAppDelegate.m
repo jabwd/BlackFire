@@ -184,21 +184,43 @@
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
 	NSString *folderPath = BFSoundsetsDirectoryPath();
-	NSLog(@"FolderPath: %@",folderPath);
 	for(NSString *file in filenames)
 	{
-		[[NSFileManager defaultManager] copyItemAtPath:file toPath:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] error:nil];
-		BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]]];
-		if( [set.name length] > 0 )
+		if( [file hasSuffix:@".BlackFireSnd"] || [file hasSuffix:@"AdiumSoundset"] || [file hasSuffix:@"AdiumSoundSet"] || [file hasSuffix:@".BlackFireSoundset"] || [file hasSuffix:@".BlackFireSoundSet"] )
 		{
-			NSInteger result = NSRunAlertPanel(@"Soundset installed!", [NSString stringWithFormat:@"Soundset %@ was successfully installed",set.name], @"Set as default soundset", @"OK", nil);
-			if( result == NSOKButton )
+			[[NSFileManager defaultManager] copyItemAtPath:file toPath:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] error:nil];
+			BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]]];
+			if( [set.name length] > 0 )
 			{
-				[[BFNotificationCenter defaultNotificationCenter] setSoundSet:set];
-				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] forKey:BFSoundSetPath];
+				NSInteger result = NSRunAlertPanel(@"Soundset installed!", [NSString stringWithFormat:@"Soundset %@ was successfully installed",set.name], @"Set as default soundset", @"OK", nil);
+				if( result == NSOKButton )
+				{
+					[[BFNotificationCenter defaultNotificationCenter] setSoundSet:set];
+					[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] forKey:BFSoundSetPath];
+				}
+			}
+			[set release];
+		}
+		else
+		{
+			NSURL *URL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@",file]]];
+			NSString *message = nil;
+			NSString *secondButton = nil;
+			if( URL )
+			{
+				NSString *appname = [[URL relativePath] lastPathComponent];
+				appname = [appname stringByReplacingOccurrencesOfString:@".app" withString:@""];
+				message = [NSString stringWithFormat:@"The file you tried to open with BlackFire is unsupported by BlackFire. However it seems that %@ is able to open your file.",appname];
+				secondButton = [NSString stringWithFormat:@"Open with %@",appname];
+			}
+			if( ! message )
+				message = @"BlackFire cannot open this file.";
+			NSInteger result = NSRunAlertPanel(@"Unrecognized file", message, @"OK", secondButton, nil);
+			if( result == NSCancelButton && [secondButton length] > 0 )
+			{
+				[[NSWorkspace sharedWorkspace] openFile:file];
 			}
 		}
-		[set release];
 	}
 }
 

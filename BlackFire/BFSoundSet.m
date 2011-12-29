@@ -28,7 +28,7 @@
 		if( [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] && isDir )
 		{
 			// determine what kind of bundle we are handling here.
-			if( [path hasSuffix:@"AdiumSoundset"] || [path hasSuffix:@"AdiumSoundSet"])
+			if( [path hasSuffix:@"AdiumSoundset"] || [path hasSuffix:@"AdiumSoundSet"] )
 			{
 				[self decodeAdiumSoundSetAtPath:path];
 			}

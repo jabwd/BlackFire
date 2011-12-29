@@ -134,7 +134,7 @@
 	[[BFNotificationCenter defaultNotificationCenter] deleteBadgeCount:_missedMessages];
 	_missedMessages = 0;
 	
-	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatlogs] )
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatlogs] && [_messages count] > 0 )
 	{
 		BFChatLog *chatLog = [[BFChatLog alloc] init];
 		chatLog.friendUsername = _chat.remoteFriend.username;
