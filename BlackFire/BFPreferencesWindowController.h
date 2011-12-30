@@ -15,6 +15,7 @@
 @property (assign) IBOutlet NSView	*generalView;
 @property (assign) IBOutlet NSView	*notificationsView;
 @property (assign) IBOutlet NSView	*chatView;
+@property (assign) IBOutlet NSView  *gamesView;
 
 @property (assign) IBOutlet NSToolbarItem				*generalItem;
 
@@ -25,6 +26,7 @@
 - (IBAction)generalMode:(id)sender;
 - (IBAction)notificationsMode:(id)sender;
 - (IBAction)chatMode:(id)sender;
+- (IBAction)gamesMode:(id)sender;
 
 
 

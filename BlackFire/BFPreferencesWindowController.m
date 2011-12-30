@@ -15,6 +15,7 @@
 @synthesize generalView			= _generalView;
 @synthesize notificationsView	= _notificationsView;
 @synthesize chatView			= _chatView;
+@synthesize gamesView			= _gamesView;
 
 @synthesize generalItem			= _generalItem;
 
@@ -76,6 +77,11 @@
 - (IBAction)chatMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_chatView];
+}
+
+- (IBAction)gamesMode:(id)sender
+{
+	[self removeAllSubviewsAndReplaceWithView:_gamesView];
 }
 
 - (void)removeAllSubviewsAndReplaceWithView:(NSView *)aView
