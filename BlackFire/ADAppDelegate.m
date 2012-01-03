@@ -190,9 +190,12 @@
 		{
 			[[NSFileManager defaultManager] copyItemAtPath:file toPath:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] error:nil];
 			BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]]];
-			if( [set.name length] > 0 )
+			if( set )
 			{
-				NSInteger result = NSRunAlertPanel(@"Soundset installed!", [NSString stringWithFormat:@"Soundset %@ was successfully installed",set.name], @"Set as default soundset", @"OK", nil);
+				NSString *name = set.name;
+				if( ! name )
+					name = @"Untitled soundset";
+				NSInteger result = NSRunAlertPanel(@"Soundset installed!", [NSString stringWithFormat:@"Soundset %@ was successfully installed",name], @"Set as default soundset", @"OK", nil);
 				if( result == NSOKButton )
 				{
 					[[BFNotificationCenter defaultNotificationCenter] setSoundSet:set];

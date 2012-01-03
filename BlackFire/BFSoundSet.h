@@ -19,6 +19,8 @@
 @property (readonly) NSString *offlineSoundPath;
 @property (readonly) NSString *connectedSoundPath;
 
+@property (readonly) BOOL valid;
+
 
 - (id)initWithContentsOfFile:(NSString *)path;
 

@@ -96,9 +96,9 @@
 	NSRect frameMain  = mainView.frame;
 	NSRect frameView  = aView.frame;
 	
-	float ADDITIONS_HEIGHT = frameView.size.height - frameMain.size.height;
-	frame.size.height += ADDITIONS_HEIGHT;
-	frame.origin.y    -= ADDITIONS_HEIGHT;
+	float add_height = frameView.size.height - frameMain.size.height;
+	frame.size.height += add_height;
+	frame.origin.y    -= add_height;
 	
 	[window setFrame:frame display:YES animate:YES];
 	

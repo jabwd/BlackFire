@@ -19,6 +19,8 @@
 @synthesize offlineSoundPath	= _offlineSoundPath;
 @synthesize connectedSoundPath	= _connectedSoundPath;
 
+@synthesize valid				= _valid;
+
 - (id)initWithContentsOfFile:(NSString *)path
 {
 	if( (self = [super init]) )
@@ -124,6 +126,7 @@
 					{
 						[informationPath release];
 						[information release];
+						[contents release];
 						return;
 					}
 					for(NSString *line in components)

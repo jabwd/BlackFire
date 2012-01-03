@@ -54,7 +54,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)dealloc
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
 	[_tcpConnection release];
@@ -111,7 +111,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)disconnect
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[[NSWorkspace sharedWorkspace] defaultCenter] removeObserver:self];
 	[self setStatus:XFSessionStatusDisconnecting];
 	
 	[_keepAliveTimer invalidate];
@@ -193,7 +193,6 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self disconnect];
 }
 
