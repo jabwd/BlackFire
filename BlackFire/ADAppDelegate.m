@@ -151,8 +151,8 @@
 		{
 			[targetChat.windowController selectChat:targetChat];
 			[targetChat.windowController.window makeKeyAndOrderFront:self];
+			return false;
 		}
-		return false;
 	}
 	if( ![_window isVisible] )
 	{

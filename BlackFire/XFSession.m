@@ -111,7 +111,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 - (void)disconnect
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[[[NSWorkspace sharedWorkspace] defaultCenter] removeObserver:self];
+	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 	[self setStatus:XFSessionStatusDisconnecting];
 	
 	[_keepAliveTimer invalidate];
