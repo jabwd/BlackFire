@@ -117,7 +117,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
 	[_tcpConnection disconnect];
-	[_tcpConnection release];
+	[_tcpConnection autorelease];
 	_tcpConnection = nil;
 	[_groupController release];
 	_groupController = nil;
