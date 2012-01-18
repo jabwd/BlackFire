@@ -720,7 +720,7 @@
 
 - (NSString *)username
 {
-	return _account.username;
+	return [_account.username lowercaseString];
 }
 
 - (NSString *)password
