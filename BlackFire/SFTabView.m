@@ -190,15 +190,20 @@
 		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSMakeRect(0, 0, 14, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	else if( _missedMessages > 0 )
 	{
-		NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"(%lu)",_missedMessages] attributes:attributes];
+		NSDictionary *newAttr = [[NSDictionary alloc] initWithObjectsAndKeys:[NSColor whiteColor],NSForegroundColorAttributeName,style,NSParagraphStyleAttributeName, nil];
+		NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu",_missedMessages] attributes:newAttr];
+		[newAttr release];
 		
 		// draw some sort of bezel around it
-		//NSRect stringRect = NSMakeRect(10, 4, [countString size].width, 13);
-		/*NSBezierPath *bezelPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(stringRect.origin.x-2, stringRect.origin.y, stringRect.size.width+2, stringRect.size.height) xRadius:5.0f yRadius:5.0f];
-		[[NSColor grayColor] set];
-		[bezelPath fill];*/
+		NSRect stringRect = NSMakeRect(10, 4, [countString size].width, 13);
+		NSBezierPath *bezelPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(stringRect.origin.x, stringRect.origin.y, stringRect.size.width+8, stringRect.size.height+2) xRadius:8.0f yRadius:8.0f];
+		if( [[self window] isMainWindow] )
+			[[NSColor darkGrayColor] set];
+		else
+			[[NSColor colorWithCalibratedWhite:0.6f alpha:1.0f] set];
+		[bezelPath fill];
 		
-		[countString drawInRect:NSMakeRect(10, 4, [countString size].width, 13)];
+		[countString drawInRect:NSMakeRect(15, 6, [countString size].width, 13)];
 		[countString release];
 	}
 }
