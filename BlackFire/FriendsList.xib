@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11D36</string>
+		<string key="IBDocument.SystemVersion">11D50</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.29</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -56,7 +56,7 @@
 								<string key="NSFrameSize">{110, 259}</string>
 								<reference key="NSSuperview" ref="663555997"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="111840352"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:1703</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="_NSCornerView" key="NSCornerView">
@@ -161,7 +161,7 @@
 						<string key="NSReuseIdentifierKey">_NS:1701</string>
 						<reference key="NSDocView" ref="645778714"/>
 						<reference key="NSBGColor" ref="756540622"/>
-						<int key="NScvFlags">4</int>
+						<int key="NScvFlags">2</int>
 					</object>
 					<object class="NSScroller" id="111840352">
 						<reference key="NSNextResponder" ref="1070522099"/>
@@ -192,7 +192,7 @@
 				<string key="NSFrameSize">{110, 259}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="663555997"/>
+				<reference key="NSNextKeyView" ref="111840352"/>
 				<string key="NSReuseIdentifierKey">_NS:1699</string>
 				<int key="NSsFlags">133648</int>
 				<reference key="NSVScroller" ref="111840352"/>

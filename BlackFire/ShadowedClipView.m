@@ -8,7 +8,7 @@
 
 #import "ShadowedClipView.h"
 
-#define SHADOW_HEIGHT 5.0f
+#define SHADOW_HEIGHT 10.0f
 
 @implementation ShadowedClipView
 
@@ -18,6 +18,11 @@
     // call super
     
     [super drawRect:dirtyRect];
+	
+	NSLog(@"Test!");
+	
+	[[NSColor blackColor] set];
+	NSRectFill(dirtyRect);
     
     // work our the rects
     

@@ -11,6 +11,14 @@
 
 @implementation ADOutlineView
 
+- (void)drawRect:(NSRect)dirtyRect
+{
+	[super drawRect:dirtyRect];
+	
+	[[NSColor blackColor] set];
+	NSRectFill(NSMakeRect(0, 0, 50, 50));
+}
+
 - (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row
 {
 	NSRect cellFrame		= [super frameOfCellAtColumn:column row:row];

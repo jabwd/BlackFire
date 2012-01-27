@@ -16,6 +16,7 @@
 #import "XFGroupController.h"
 #import "XFGroup.h"
 #import "XFFriend.h"
+#import "ShadowedClipView.h"
 
 #import "BFDefaults.h"
 
@@ -35,6 +36,24 @@
 		
 		[_friendsList setDoubleAction:@selector(doubleClicked)];
 		[_friendsList setTarget:self];
+		/*
+		NSClipView *clip = (NSClipView *)[_friendsList superview];
+		if( clip )
+		{
+			NSScrollView *scrollView = (NSScrollView *)[clip superview];
+			if( [scrollView isKindOfClass:[scrollView class]] )
+			{
+				NSArray *subviews = [clip subviews];
+				ShadowedClipView *clipView = [[ShadowedClipView alloc] init];
+				[clipView setDrawsBackground:true];
+				for(NSView *view in subviews)
+				{
+					[clipView addSubview:view];
+				}
+				[scrollView setContentView:clipView];
+				[clipView release];
+			}
+		}*/
 	}
 	return self;
 }
