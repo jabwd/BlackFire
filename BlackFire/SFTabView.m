@@ -184,7 +184,7 @@
 	// draw the close button on top of everything
 	if( _mouseInside )
 	{
-		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceIn fraction:1.0f];
+		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
 	}
 	else if( _tabImage )
 		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSMakeRect(0, 0, 14, 13) operation:NSCompositeSourceOver fraction:1.0f];
