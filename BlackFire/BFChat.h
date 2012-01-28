@@ -58,6 +58,7 @@ typedef enum
 
 - (void)displayWarning:(NSString *)warningMessage;
 - (void)textDidChange:(NSNotification *)notification;
+- (void)updateTabIcon;
 
 /*
  * Processes a plain text string to a NSAttributedString according to the given

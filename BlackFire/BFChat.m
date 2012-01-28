@@ -49,7 +49,7 @@
 		_friendColor	= [[NSColor redColor] retain];
 		_chatFont		= [[NSFont fontWithName:@"Lucida Grande" size:12.0f] retain];
 		_boldChatFont	= [[[NSFontManager sharedFontManager] convertWeight:true ofFont:_chatFont] retain];
-		
+		[self updateTabIcon];
 		_messages = [[NSMutableArray alloc] init];
 	
 		
@@ -222,7 +222,8 @@
 
 - (void)friendStoppedTyping
 {
-	[_windowController tabViewForChat:self].image = nil;
+	//[_windowController tabViewForChat:self].image = nil;
+	[self updateTabIcon];
 	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
 }
 
@@ -243,9 +244,26 @@
 	_typing = false;
 }
 
+- (void)updateTabIcon
+{
+	NSImage *displayImage;
+	if( _chat.remoteFriend.avatar )
+	{
+		displayImage = _chat.remoteFriend.avatar;
+	}
+	else 
+	{
+		displayImage = [NSImage imageNamed:@"xfire"];
+	}
+	[_windowController tabViewForChat:self].image = displayImage;
+	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
+}
+
 - (void)friendDidChange:(NSNotification *)notification
 {
 	XFFriendNotification notificationType = [[[notification userInfo] objectForKey:@"type"] intValue];
+	
+	[self updateTabIcon];
 	
 	switch(notificationType)
 	{
