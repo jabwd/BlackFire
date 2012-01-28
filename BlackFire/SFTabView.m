@@ -122,25 +122,25 @@
 	// improves the way the tabs are drawn on the screen
 	if( _tabDragAction || _selected )
 	{
-		[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
-		[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+		[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+		[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	}
 	else
 	{
 		if( _tabRightSide )
 		{
-			[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+			[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 		}
 		else
 		{
-			[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSMakeRect(0, 0, 11, 24) operation:NSCompositeSourceOver fraction:1.0f];
+			[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 		}
 	}
 	
 	
 	// optimizes the drawing. the tabstrip already has this fill.
 	if( _selected )
-		[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSMakeRect(0, 0, 10, 24) operation:NSCompositeSourceOver fraction:1.0f];
+		[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -184,10 +184,10 @@
 	// draw the close button on top of everything
 	if( _mouseInside )
 	{
-		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSMakeRect(0, 0, 12, 13) operation:NSCompositeSourceOver fraction:1.0f];
+		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	}
 	else if( _tabImage )
-		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSMakeRect(0, 0, 14, 13) operation:NSCompositeSourceOver fraction:1.0f];
+		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	else if( _missedMessages > 0 )
 	{
 		NSDictionary *newAttr = [[NSDictionary alloc] initWithObjectsAndKeys:[NSColor whiteColor],NSForegroundColorAttributeName,style,NSParagraphStyleAttributeName, nil];
@@ -196,7 +196,7 @@
 		
 		// draw some sort of bezel around it
 		NSRect stringRect = NSMakeRect(10, 4, [countString size].width, 13);
-		NSBezierPath *bezelPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(stringRect.origin.x, stringRect.origin.y, stringRect.size.width+8, stringRect.size.height+2) xRadius:8.0f yRadius:8.0f];
+		NSBezierPath *bezelPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(stringRect.origin.x, stringRect.origin.y, stringRect.size.width+10, stringRect.size.height+2) xRadius:8.0f yRadius:7.0f];
 		if( [[self window] isMainWindow] )
 			[[NSColor darkGrayColor] set];
 		else
@@ -274,12 +274,6 @@
 {
 	_dragging = false;
 	
-	if( !_selected )
-	{
-		SFTabStripView *strip = (SFTabStripView *)[self superview];
-		[strip selectTab:self];
-	}
-	
 	_originalPoint	= [NSEvent mouseLocation];
 	_originalRect	= [self frame];
 	
@@ -289,16 +283,29 @@
 	if( actual.x > 10 && actual.x < 22 && actual.y > 3 && actual.y < 19 )
 	{
 		_mouseDownInsideClose = true;
+		_mouseInsideClose = true;
+		[self setNeedsDisplay:true];
 		return;
 	}
 	else
+	{
+		if( !_selected )
+		{
+			SFTabStripView *strip = (SFTabStripView *)[self superview];
+			[strip selectTab:self];
+		}
+		_mouseInsideClose = false;
 		_mouseDownInsideClose = false;
+	}
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-	//if( !_selected )
-	//	return;
+	// for some reason mouseDragged is called when vigorously dragging with the window around your screen,
+	// in order not to make the tab feel retarded: do this.
+	if( ! _mouseInside )
+		return;
+
 	NSPoint newPoint = [NSEvent mouseLocation];
 	CGFloat deltaX = _originalPoint.x - newPoint.x;
 	
@@ -408,6 +415,7 @@
 				[_target performSelector:_selector withObject:self];
 			
 		}
+		_mouseInsideClose = false;
 		_mouseDownInsideClose = false;
 	}
 	

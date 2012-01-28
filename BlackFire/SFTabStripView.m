@@ -87,14 +87,14 @@
 - (void)layoutTabs
 {
 	CGFloat availableSpace = [self frame].size.width+(TAB_OVERLAP*([_tabs count]-1));
-	CGFloat tabWidth = (CGFloat)availableSpace/((CGFloat)[_tabs count]);
+	CGFloat tabWidth = floor((CGFloat)availableSpace/((CGFloat)[_tabs count]));
 	NSUInteger i, cnt = [_tabs count];
 	SFTabView *selected = nil;
 	for(i=0;i<cnt;i++)
 	{
 		if( tabWidth > TAB_WIDTHMAX )
 			tabWidth = TAB_WIDTHMAX;
-		NSRect viewFrame = NSMakeRect(tabWidth*i-(i*TAB_OVERLAP), 0, tabWidth, TAB_HEIGHT);
+		NSRect viewFrame = NSMakeRect(floor(tabWidth*i-(i*TAB_OVERLAP)), 0, tabWidth, TAB_HEIGHT);
 		SFTabView *tab = [_tabs objectAtIndex:i];
 		if( tab.selected )
 			selected = tab;
