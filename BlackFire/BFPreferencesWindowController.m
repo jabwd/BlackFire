@@ -90,7 +90,7 @@
 			for(NSString *soundset in contents)
 			{
 				if( [soundset isEqualToString:@".DS_Store"] )
-					return;
+					continue;
 				NSString *finalPath = [[NSString alloc] initWithFormat:@"%@/%@",soundsetsPath,soundset];
 				BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:finalPath];
 				if( [set.name length] > 0 )
@@ -106,6 +106,8 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			NSMenu *menu = [[NSMenu alloc] initWithTitle:@""];
 			NSInteger i, cnt = [_soundsets count];
+			NSString *currentPath = [[NSUserDefaults standardUserDefaults] objectForKey:BFSoundSetPath];
+			NSMenuItem *current = nil;
 			for(i=0;i<cnt;i++)
 			{
 				BFSoundSet *set = [_soundsets objectAtIndex:i];
@@ -113,9 +115,13 @@
 				[item setTarget:self];
 				[item setTag:i];
 				[menu addItem:item];
+				if( [set.path isEqualToString:currentPath] )
+					current = item;
 				[item release];
 			}
 			[_soundsetDropDown setMenu:menu];
+			if( current )
+				[_soundsetDropDown selectItem:current];
 			
 			if( [_soundsets count] > 0 )
 				[_soundsetDropDown setEnabled:true];

@@ -38,7 +38,7 @@
 	static NSUInteger total = 0;
 	
 	count++;
-	if( count > 3 )
+	if( count > 5 )
 	{
 		if( ! [[NSUserDefaults standardUserDefaults] boolForKey:@"supportDone"] )
 		{
