@@ -31,4 +31,5 @@ extern NSString *BFEnableOfflineSound;
 extern NSString *BFEnableChatlogs;
 extern NSString *BFEnableChatHistory;
 extern NSString *BFSoundSetPath;
+extern NSString *BFSoundVolume;
 extern NSString *BFCustomMacGamesList;

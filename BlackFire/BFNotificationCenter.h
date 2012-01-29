@@ -29,6 +29,9 @@
 //-------------------------------------------------------------------------------
 // Sounds
 
+
+- (void)updateSoundVolume;
+- (CGFloat)soundVolume;
 - (void)setSoundSet:(BFSoundSet *)soundSet;
 - (void)playConnectedSound;
 - (void)playOnlineSound;

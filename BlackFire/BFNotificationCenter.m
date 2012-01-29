@@ -91,6 +91,23 @@ static BFNotificationCenter *notificationCenter = nil;
 		[_receiveSound release];
 		_receiveSound = [[NSSound alloc] initWithContentsOfFile:soundSet.receiveSoundPath byReference:false];
 	}
+	[self updateSoundVolume];
+}
+
+- (CGFloat)soundVolume
+{
+	return ([[NSUserDefaults standardUserDefaults] floatForKey:BFSoundVolume]/100);
+}
+
+- (void)updateSoundVolume
+{
+	CGFloat volume = [self soundVolume];
+	
+	_sendSound.volume		= volume;
+	_receiveSound.volume	= volume;
+	_onlineSound.volume		= volume;
+	_offlineSound.volume	= volume;
+	_connectSound.volume	= volume;
 }
 
 - (void)playConnectedSound
@@ -99,12 +116,14 @@ static BFNotificationCenter *notificationCenter = nil;
 		return;
 	
 	if( ! _connectSound )
+	{
 		_connectSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"connected" ofType:@"m4v"] byReference:false];
+		_connectSound.volume = [self soundVolume];
+	}
 	if( [_connectSound isPlaying] )
 	{
 		[_connectSound stop];
 	}
-	
 	[_connectSound play];
 }
 
@@ -115,7 +134,10 @@ static BFNotificationCenter *notificationCenter = nil;
 		return;
 	
 	if( ! _onlineSound )
+	{
 		_onlineSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"online" ofType:@"m4v"] byReference:false];
+		_onlineSound.volume = [self soundVolume];
+	}
 	if( [_onlineSound isPlaying] )
 	{
 		[_onlineSound stop];
@@ -131,7 +153,10 @@ static BFNotificationCenter *notificationCenter = nil;
 		return;
 	
 	if( ! _offlineSound )
+	{
 		_offlineSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"offline" ofType:@"m4v"] byReference:false];
+		_offlineSound.volume = [self soundVolume];
+	}
 	if( [_offlineSound isPlaying] )
 	{
 		[_offlineSound stop];
@@ -147,7 +172,10 @@ static BFNotificationCenter *notificationCenter = nil;
 		return;
 	
 	if( ! _receiveSound )
+	{
 		_receiveSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"receive" ofType:@"m4v"] byReference:false];
+		_receiveSound.volume = [self soundVolume];
+	}
 	
 	if( [_receiveSound isPlaying] )
 	{
@@ -164,7 +192,10 @@ static BFNotificationCenter *notificationCenter = nil;
 		return;
 	
 	if( ! _sendSound )
+	{
 		_sendSound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Send" ofType:@"m4v"] byReference:false];
+		_sendSound.volume = [self soundVolume];
+	}
 	if( [_sendSound isPlaying] )
 	{
 		[_sendSound stop];

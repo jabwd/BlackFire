@@ -67,6 +67,7 @@
 						  n_true,BFAutoGoAFK,
 						  n_true,BFEnableChatHistory,
 						  n_true,BFEnableChatlogs,
+						  [NSNumber numberWithFloat:1.0f],BFSoundVolume,
 						  [NSNumber numberWithInt:120],BFAutoAFKTime,
 						  nil];
 	

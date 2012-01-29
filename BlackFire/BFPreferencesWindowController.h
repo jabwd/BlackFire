@@ -34,5 +34,6 @@
 // Controlling preferences
 
 - (IBAction)updateIdleTimer:(id)sender;
+- (IBAction)updateVolume:(id)sender;
 
 @end

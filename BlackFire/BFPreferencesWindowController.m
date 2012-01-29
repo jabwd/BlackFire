@@ -9,6 +9,7 @@
 #import "BFPreferencesWindowController.h"
 #import "BFIdleTimeManager.h"
 #import "BFDefaults.h"
+#import "BFNotificationCenter.h"
 
 @implementation BFPreferencesWindowController
 
@@ -112,6 +113,11 @@
 - (IBAction)updateIdleTimer:(id)sender
 {	
 	[[BFIdleTimeManager defaultManager] setSetAwayStatusAutomatically:[[NSUserDefaults standardUserDefaults] boolForKey:BFAutoGoAFK]];
+}
+
+- (IBAction)updateVolume:(id)sender
+{
+	[[BFNotificationCenter defaultNotificationCenter] updateSoundVolume];
 }
 
 @end

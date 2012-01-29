@@ -161,6 +161,7 @@
 	
 	// now calculate the starting position
 	totalSize = (dirtyRect.size.width-totalSize)/2;
+	floor(totalSize);
 	
 	NSUInteger i, cnt = [_items count];
 	for(i=0;i<cnt;i++)
@@ -193,8 +194,6 @@
 				textColor = [NSColor whiteColor];
 			else
 				textColor = [NSColor controlTextColor];
-			
-			//textColor = [NSColor controlTextColor];
 		}
 		else
 		{
@@ -202,8 +201,6 @@
 				textColor = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0f];
 			else
 				textColor = [NSColor disabledControlTextColor];
-			
-			//textColor = [NSColor disabledControlTextColor];
 		}
 		
 		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:([NSFont systemFontSize])],NSFontAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
@@ -215,32 +212,18 @@
 		
 		if( item.selected )
 		{
-			/*[[NSGraphicsContext currentContext] setShouldAntialias:false];
-			NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(totalSize-6, (dirtyRect.size.height/2 - size.height/2)-2, size.width+10, size.height+4) xRadius:2.0f yRadius:2.0f];
-			if( [self.window isMainWindow] )
-				[[NSColor colorWithCalibratedWhite:0.4 alpha:1.0f] set];
-			else
-				[[NSColor colorWithCalibratedWhite:0.65 alpha:1.0f] set];
-			[path fill];
-			[[NSGraphicsContext currentContext] setShouldAntialias:true];*/
 			
 			if( [self.window isMainWindow] )
 				[[NSColor colorWithCalibratedWhite:0.4 alpha:1.0f] set];
 			else
 				[[NSColor colorWithCalibratedWhite:0.65 alpha:1.0f] set];
-			NSRectFill(NSMakeRect(totalSize-6, 0, size.width+10, dirtyRect.size.height));
-			
-			/*NSImage *left = [NSImage imageNamed:@"selection_left"];
-			NSImage *right = [NSImage imageNamed:@"selection_right"];
-			
-			[left drawInRect:NSMakeRect(totalSize-6, 3, 3, dirtyRect.size.height-2) fromRect:NSMakeRect(0, 0, 3, dirtyRect.size.height-1) operation:NSCompositeSourceOver fraction:1.0f];
-			[right drawInRect:NSMakeRect(totalSize+size.width+3, 3, 3, dirtyRect.size.height-2) fromRect:NSMakeRect(0, 0, 3, dirtyRect.size.height-1) operation:NSCompositeSourceOver fraction:1.0f];*/
+			NSRectFill(NSMakeRect(totalSize-6, 0, floor(size.width+10), dirtyRect.size.height));
 		}
 		
 		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2)+2, size.width, size.height-1)];
 		[str release];
 		
-		totalSize += size.width + 10;
+		totalSize += floor(size.width + 10);
 	}
 }
 		 
