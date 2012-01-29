@@ -10,6 +10,8 @@
 #import "BFIdleTimeManager.h"
 #import "BFDefaults.h"
 #import "BFNotificationCenter.h"
+#import "BFApplicationSupport.h"
+#import "BFSoundSet.h"
 
 @implementation BFPreferencesWindowController
 
@@ -20,16 +22,21 @@
 
 @synthesize generalItem			= _generalItem;
 
+@synthesize soundsetDropDown	= _soundsetDropDown;
+
 - (id)init
 {
 	if( (self = [super initWithWindowNibName:@"BFPreferencesWindow"]) )
 	{
+		_soundsets = nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_soundsets release];
+	_soundsets = nil;
 	[super dealloc];
 }
 
@@ -73,6 +80,47 @@
 - (IBAction)notificationsMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_notificationsView];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		NSString *soundsetsPath = BFSoundsetsDirectoryPath();
+		[_soundsets release];
+		_soundsets = [[NSMutableArray alloc] init];
+		NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:soundsetsPath error:nil];
+		if( [contents count] > 0 )
+		{
+			for(NSString *soundset in contents)
+			{
+				NSString *finalPath = [[NSString alloc] initWithFormat:@"%@/%@",soundsetsPath,soundset];
+				BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:finalPath];
+				if( [set.name length] > 0 )
+				{
+					[_soundsets addObject:set];
+				}
+				[set release];
+				[finalPath release];
+			}
+		}
+		
+		// now update the menu.
+		dispatch_async(dispatch_get_main_queue(), ^{
+			NSMenu *menu = [[NSMenu alloc] initWithTitle:@""];
+			NSInteger i, cnt = [_soundsets count];
+			for(i=0;i<cnt;i++)
+			{
+				BFSoundSet *set = [_soundsets objectAtIndex:i];
+				NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:set.name action:@selector(selectSoundset:) keyEquivalent:@""];
+				[item setTarget:self];
+				[item setTag:i];
+				[menu addItem:item];
+				[item release];
+			}
+			[_soundsetDropDown setMenu:menu];
+			
+			if( [_soundsets count] > 0 )
+				[_soundsetDropDown setEnabled:true];
+			else
+				[_soundsetDropDown setEnabled:false];
+		});
+	});
 }
 
 - (IBAction)chatMode:(id)sender
@@ -118,6 +166,33 @@
 - (IBAction)updateVolume:(id)sender
 {
 	[[BFNotificationCenter defaultNotificationCenter] updateSoundVolume];
+}
+
+- (IBAction)selectSoundset:(id)sender
+{
+	NSMenuItem *item = (NSMenuItem *)sender;
+	if( [item isKindOfClass:[NSMenuItem class]] )
+	{
+		NSInteger index = [item tag];
+		if( index > 0 && index < [_soundsets count] )
+		{
+			BFSoundSet *soundSet = [_soundsets objectAtIndex:index];
+			if( soundSet )
+			{
+				[[BFNotificationCenter defaultNotificationCenter] setSoundSet:soundSet];
+				[[NSUserDefaults standardUserDefaults] setObject:soundSet.path forKey:BFSoundSetPath];
+			}
+		}
+		else
+			NSLog(@"*** Incorrect BFSoundSet index %lu for count %lu",index,[_soundsets count]);
+	}
+	else
+		NSLog(@"*** Unknown object %@ called selectSoundset",sender);
+}
+
+- (IBAction)moreSoundsets:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.adiumxtras.com/index.php?a=search&cat_id=3"]];
 }
 
 @end

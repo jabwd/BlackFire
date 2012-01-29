@@ -265,6 +265,30 @@
 				<int key="NSvFlags">268</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="NSButton" id="349425679">
+						<reference key="NSNextResponder" ref="442389407"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{310, 41}, {112, 32}}</string>
+						<reference key="NSSuperview" ref="442389407"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="440144330"/>
+						<string key="NSReuseIdentifierKey">_NS:687</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="55773594">
+							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags2">134217728</int>
+							<string key="NSContents">Get more…</string>
+							<reference key="NSSupport" ref="568697957"/>
+							<string key="NSCellIdentifier">_NS:687</string>
+							<reference key="NSControlView" ref="349425679"/>
+							<int key="NSButtonFlags">-2038284033</int>
+							<int key="NSButtonFlags2">129</int>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">200</int>
+							<int key="NSPeriodicInterval">25</int>
+						</object>
+					</object>
 					<object class="NSSlider" id="99642237">
 						<reference key="NSNextResponder" ref="442389407"/>
 						<int key="NSvFlags">268</int>
@@ -313,14 +337,14 @@
 					<object class="NSPopUpButton" id="137415451">
 						<reference key="NSNextResponder" ref="442389407"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{107, 45}, {188, 26}}</string>
+						<string key="NSFrame">{{107, 45}, {202, 26}}</string>
 						<reference key="NSSuperview" ref="442389407"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="440144330"/>
+						<reference key="NSNextKeyView" ref="349425679"/>
 						<string key="NSReuseIdentifierKey">_NS:868</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSPopUpButtonCell" key="NSCell" id="967471726">
-							<int key="NSCellFlags">-2076049856</int>
+							<int key="NSCellFlags">-1539178944</int>
 							<int key="NSCellFlags2">2048</int>
 							<reference key="NSSupport" ref="568697957"/>
 							<string key="NSCellIdentifier">_NS:868</string>
@@ -950,6 +974,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">soundsetDropDown</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="137415451"/>
+					</object>
+					<int key="connectionID">1067</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">moreSoundsets:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="349425679"/>
+					</object>
+					<int key="connectionID">1070</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1005"/>
 						<reference key="destination" ref="1001"/>
@@ -1242,6 +1282,7 @@
 							<reference ref="167480337"/>
 							<reference ref="440144330"/>
 							<reference ref="99642237"/>
+							<reference ref="349425679"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Sounds</string>
@@ -1581,6 +1622,20 @@
 						<reference key="object" ref="6764990"/>
 						<reference key="parent" ref="99642237"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1068</int>
+						<reference key="object" ref="349425679"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="55773594"/>
+						</object>
+						<reference key="parent" ref="442389407"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1069</int>
+						<reference key="object" ref="55773594"/>
+						<reference key="parent" ref="349425679"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1618,6 +1673,8 @@
 					<string>1060.IBPluginDependency</string>
 					<string>1061.IBPluginDependency</string>
 					<string>1062.IBPluginDependency</string>
+					<string>1068.IBPluginDependency</string>
+					<string>1069.IBPluginDependency</string>
 					<string>11.IBPluginDependency</string>
 					<string>11.toolbarItem.selectable</string>
 					<string>2.IBPluginDependency</string>
@@ -1687,6 +1744,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1734,7 +1793,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1066</int>
+			<int key="maxID">1070</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1749,12 +1808,14 @@
 							<string>chatMode:</string>
 							<string>gamesMode:</string>
 							<string>generalMode:</string>
+							<string>moreSoundsets:</string>
 							<string>notificationsMode:</string>
 							<string>updateIdleTimer:</string>
 							<string>updateVolume:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1770,6 +1831,7 @@
 							<string>chatMode:</string>
 							<string>gamesMode:</string>
 							<string>generalMode:</string>
+							<string>moreSoundsets:</string>
 							<string>notificationsMode:</string>
 							<string>updateIdleTimer:</string>
 							<string>updateVolume:</string>
@@ -1786,6 +1848,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">generalMode:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">moreSoundsets:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -1811,6 +1877,7 @@
 							<string>generalItem</string>
 							<string>generalView</string>
 							<string>notificationsView</string>
+							<string>soundsetDropDown</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1819,6 +1886,7 @@
 							<string>NSToolbarItem</string>
 							<string>NSView</string>
 							<string>NSView</string>
+							<string>NSPopUpButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1830,6 +1898,7 @@
 							<string>generalItem</string>
 							<string>generalView</string>
 							<string>notificationsView</string>
+							<string>soundsetDropDown</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1852,6 +1921,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">notificationsView</string>
 								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">soundsetDropDown</string>
+								<string key="candidateClassName">NSPopUpButton</string>
 							</object>
 						</object>
 					</object>

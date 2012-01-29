@@ -10,6 +10,7 @@
 
 @interface BFPreferencesWindowController : NSWindowController <NSToolbarDelegate> 
 {
+	NSMutableArray *_soundsets;
 }
 
 @property (assign) IBOutlet NSView	*generalView;
@@ -18,6 +19,8 @@
 @property (assign) IBOutlet NSView  *gamesView;
 
 @property (assign) IBOutlet NSToolbarItem				*generalItem;
+
+@property (assign) IBOutlet NSPopUpButton *soundsetDropDown;
 
 //-------------------------------------------------------------------------------------------
 // Mode switching
@@ -35,5 +38,6 @@
 
 - (IBAction)updateIdleTimer:(id)sender;
 - (IBAction)updateVolume:(id)sender;
+- (IBAction)moreSoundsets:(id)sender;
 
 @end
