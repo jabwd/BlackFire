@@ -35,6 +35,8 @@
 @property (assign) id <BFGameDetectionDelegate> delegate;
 @property (readonly) NSMutableDictionary *macGames;
 
+- (void)reloadData;
+
 //----------------------------------------------------------------------------
 // Xfire games
 
@@ -48,6 +50,7 @@
 //-----------------------------------------------------------------------------
 // Mac games
 
+- (void)addMacGame:(NSDictionary *)newGame forKey:(NSString *)detectionKey;
 - (unsigned int)gameIDForApplication:(NSRunningApplication *)applicationInfo;
 - (unsigned int)gameIDForApplicationDict:(NSDictionary *)applicationInfo;
 

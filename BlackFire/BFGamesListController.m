@@ -10,6 +10,7 @@
 #import "BFGamesManager.h"
 #import "BFGamesGroup.h"
 #import "BFImageAndTextCell.h"
+#import "BFDefaults.h"
 
 
 @implementation BFGamesListController
@@ -87,6 +88,46 @@
     [super dealloc];
 }
 
+- (void)reloadMacGames
+{
+	[detectedGamesGroup release];
+	detectedGamesGroup = [[BFGamesGroup alloc] init];
+	detectedGamesGroup.members = [[[NSMutableArray alloc] init] autorelease];
+	detectedGamesGroup.name = @"Detected games";
+	
+	NSMutableArray *knownID = [[NSMutableArray alloc] init];
+	NSMutableDictionary *macGames = [[BFGamesManager sharedGamesManager] macGames];
+	NSArray *macG = [macGames allValues];
+	for(NSDictionary *macGame in macG)
+	{
+		if( [macGame isKindOfClass:[NSDictionary class]] )
+		{
+			NSString *appName = [macGame objectForKey:@"AppName"];
+			if( appName && [appName length] > 0 )
+			{
+				if( [[[NSWorkspace sharedWorkspace] fullPathForApplication:appName] length] > 1 )
+				{
+					BOOL found = NO;
+					for(NSString *name in knownID)
+					{
+						if( [name isEqualToString:appName] )
+						{
+							found = YES;
+						}
+					}
+					if( ! found )
+					{
+						[knownID addObject:appName];
+						[detectedGamesGroup.members addObject:macGame];
+					}
+				}
+			}
+		}
+	}
+	[knownID release];
+	[self reloadData];
+}
+
 - (void)reloadData
 {
 	[tableView reloadData];
@@ -117,6 +158,19 @@
 - (IBAction)removeSelected:(id)sender
 {
     NSLog(@"-removeSelected is not implemented anymore");
+}
+
+- (NSUInteger)selectedGameID
+{
+	id item = [tableView itemAtRow:[tableView selectedRow]];
+	if( item )
+	{
+		if( [item isKindOfClass:[NSDictionary class]] )
+		{
+			return [[item objectForKey:@"ID"] intValue];
+		}
+	}
+	return 0;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item

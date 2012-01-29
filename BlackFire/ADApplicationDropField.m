@@ -11,6 +11,7 @@
 @implementation ADApplicationDropField
 
 @synthesize delegate = _delegate;
+@synthesize applicationPath = _applicationPath;
 
 - (void)dealloc
 {

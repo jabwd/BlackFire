@@ -8,6 +8,7 @@
 
 #import "BFGamesManager.h"
 #import "BFProcessInformation.h"
+#import "BFDefaults.h"
 
 @implementation BFGamesManager
 
@@ -19,6 +20,9 @@
 	if( (self = [super init]) )
 	{
 		_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
+		NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:BFCustomMacGamesList];
+		if( dict )
+			[_macGames addEntriesFromDictionary:dict];
 		_runningGames	= [[NSMutableArray alloc] init];
 		_missingIcons	= [[NSMutableArray alloc] init];
 		_knownMissing	= [[NSMutableArray alloc] init];
@@ -44,6 +48,15 @@
 	[_knownMissing release];
 	_knownMissing = nil;
 	[super dealloc];
+}
+
+- (void)reloadData
+{
+	[_macGames release];
+	_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
+	NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:BFCustomMacGamesList];
+	if( dict )
+		[_macGames addEntriesFromDictionary:dict];
 }
 
 #pragma mark - Xfire games
@@ -202,6 +215,22 @@
 }
 
 #pragma mark - Mac Games
+
+- (void)addMacGame:(NSDictionary *)newGame forKey:(NSString *)detectionKey
+{
+	if( newGame && detectionKey )
+	{
+		NSMutableDictionary *new = [[NSMutableDictionary alloc] init];
+		[new setObject:newGame forKey:detectionKey];
+		NSDictionary *old = [[NSUserDefaults standardUserDefaults] objectForKey:BFCustomMacGamesList];
+		if( old )
+			[new addEntriesFromDictionary:old];
+		[[NSUserDefaults standardUserDefaults] setObject:new forKey:BFCustomMacGamesList];
+		[new release];
+		
+		[self reloadData];
+	}
+}
 
 - (unsigned int)gameIDForApplication:(NSRunningApplication *)applicationInfo
 {

@@ -20,6 +20,7 @@
 }
 
 @property (nonatomic, assign) id <ADApplicationDropFieldDelegate> delegate;
+@property (nonatomic, retain) NSString *applicationPath;
 
 
 

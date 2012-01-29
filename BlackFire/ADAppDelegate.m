@@ -915,6 +915,35 @@
 	}
 	else if( [prompt isKindOfClass:[BFAddGameSheetController class]] )
 	{
+		BFAddGameSheetController *controller = (BFAddGameSheetController *)_stringPromptController;
+		NSString *appPath = controller.dropField.applicationPath;
+		BOOL isDir = false;
+		if( [[NSFileManager defaultManager] fileExistsAtPath:appPath isDirectory:&isDir] && isDir && [appPath hasSuffix:@".app"] )
+		{
+			NSDictionary *appInfo = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/Info.plist",appPath]];
+			NSString *detectionKey = nil;
+			NSString *appName = [[[appPath lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
+			if( ! appInfo )
+			{
+				NSLog(@"No information property list was found!");
+			}
+			else
+			{
+				detectionKey = [appInfo objectForKey:(NSString *)kCFBundleIdentifierKey];
+			}
+			if( ! detectionKey )
+				detectionKey = appName;
+			NSUInteger gameID = [_gamesListController selectedGameID];
+			if( gameID > 0 )
+			{
+				NSDictionary *detectionDict = [[NSDictionary alloc] initWithObjectsAndKeys:appName,@"AppName",[NSNumber numberWithUnsignedInteger:gameID],@"gameID", nil];
+				// add the detection set to the custom mac games in the user defaults.
+				[[BFGamesManager sharedGamesManager] addMacGame:detectionDict forKey:detectionKey];
+				[_gamesListController reloadMacGames];
+				[detectionDict release];
+			}
+			[appInfo release];
+		}
 		[_stringPromptController release];
 		_stringPromptController = nil;
 		return;
@@ -1016,9 +1045,16 @@
 	{
 		if( _currentMode == BFApplicationModeGames )
 		{
-			_stringPromptController = [[BFAddGameSheetController alloc] initWithWindow:self.window];
-			_stringPromptController.delegate = self;
-			[_stringPromptController show];
+			if( [_gamesListController selectedGameID] > 0 )
+			{
+				_stringPromptController = [[BFAddGameSheetController alloc] initWithWindow:self.window];
+				_stringPromptController.delegate = self;
+				[_stringPromptController show];
+			}
+			else
+			{
+				NSBeep();
+			}
 			return;
 		}
 		_stringPromptController = [[ADInvitationWindowController alloc] initWithWindow:self.window];

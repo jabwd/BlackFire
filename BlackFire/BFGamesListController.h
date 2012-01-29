@@ -18,11 +18,13 @@
 
 @property (assign) IBOutlet NSOutlineView *tableView;
 
+- (void)reloadMacGames;
 - (void)reloadData;
 - (void)expandItem;
 
 - (IBAction)doubleClicked:(id)sender;
 - (IBAction)removeSelected:(id)sender;
+- (NSUInteger)selectedGameID;
 
 @end
 
