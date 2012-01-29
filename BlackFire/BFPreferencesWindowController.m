@@ -89,6 +89,8 @@
 		{
 			for(NSString *soundset in contents)
 			{
+				if( [soundset isEqualToString:@".DS_Store"] )
+					return;
 				NSString *finalPath = [[NSString alloc] initWithFormat:@"%@/%@",soundsetsPath,soundset];
 				BFSoundSet *set = [[BFSoundSet alloc] initWithContentsOfFile:finalPath];
 				if( [set.name length] > 0 )
