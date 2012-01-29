@@ -203,6 +203,10 @@
 					[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@/%@",folderPath,[file lastPathComponent]] forKey:BFSoundSetPath];
 				}
 			}
+			else
+			{
+				NSRunAlertPanel(@"Error", @"Could not open this soundset, sorry! :/", @"OK", nil, nil);
+			}
 			[set release];
 		}
 		else
