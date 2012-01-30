@@ -136,9 +136,8 @@
 			imageFrame.origin.y += (ceil(cellFrame.size.height+imageFrame.size.height)/2.0f);
 		else
 			imageFrame.origin.y += (ceil(cellFrame.size.height-imageFrame.size.height)/2.0f);
-		
+
 		[_image setSize:_displayImageSize];
-		
 	
 		[_image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 		

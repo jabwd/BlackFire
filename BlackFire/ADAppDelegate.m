@@ -1182,7 +1182,7 @@
 		{
 			// remove friend
 			XFFriend *selectedFriend = [_friendsListController selectedFriend];
-			if( !selectedFriend.clanFriend && !selectedFriend.friendOfFriend )
+			if( !selectedFriend.clanFriend && !selectedFriend.friendOfFriend && selectedFriend )
 				return true;
 		}
 			break;
@@ -1297,6 +1297,21 @@
 		{
 			if( _session.status == XFSessionStatusOnline )
 				return true;
+			else
+				return false;
+		}
+			break;
+			
+		case 14: // Show 'nickname' profile
+		{
+			if( [_friendsListController selectedFriend] )
+			{
+				XFFriend * friend = [_friendsListController selectedFriend];
+				[menuItem setTitle:[NSString stringWithFormat:@"Show %@'s profile",[friend displayName]]];
+				return true;
+			}
+			[menuItem setTitle:@"Show friend's profile"];
+			return false;
 		}
 			break;
 			
