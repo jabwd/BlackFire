@@ -1220,6 +1220,9 @@
 	XFChat *chat = [_session chatForSessionID:sessionID];
 	if( !chat )
 	{
+		XFPacketDictionary *peermsg = (XFPacketDictionary *)[[pkt attributeForKey:XFPacketPeerMessageKey] value];
+		if( [[[peermsg objectForKey:XFPacketMessageTypeKey] value] intValue] != 0 )
+			return; // only open a chat with actual good chat packets
 		XFFriend *friend = [_session friendForSessionID:sessionID];
 		if( friend )
 			chat = [_session beginNewChatForFriend:friend];
