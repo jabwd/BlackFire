@@ -27,6 +27,8 @@ typedef enum
 	NSTimer				*_keepAliveResponseTimer;
 	
 	XFConnectionStatus	_status;
+	
+	BOOL _firstTimeout; // used for enhanced keepalive system
 }
 
 @property (readonly) XFConnectionStatus status;

@@ -239,6 +239,26 @@
 {
     if( _keepAliveResponseTimer )
     {
+		if( !_firstTimeout )
+		{
+			NSLog(@"Connection timing out.. retrying..");
+			_keepAliveResponseTimer = nil;
+			[_keepAliveResponseTimer invalidate];
+			_keepAliveResponseTimer = nil;
+			_keepAliveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+																	   target:self
+																	 selector:@selector(keepAliveResponseTimeout:)
+																	 userInfo:nil
+																	  repeats:NO];
+			
+			// I don't know what they want in the statistics parameter..
+			// it still works when its empty thuogh, so this is fine.
+			NSArray *stats = [[NSArray alloc] init];
+			[self sendPacket:[XFPacket keepAlivePacketWithValue:0 stats:stats]];
+			[stats release];
+			_firstTimeout = true;
+			return;
+		}
         _keepAliveResponseTimer = nil;
 		
 		// this will also disconnect the connection therefore we are not doing it manually
@@ -1250,7 +1270,8 @@
 
 - (void)processKeepAliveResponse:(XFPacket *)pkt
 {
-    if( _keepAliveResponseTimer )
+	_firstTimeout = false;
+	if( _keepAliveResponseTimer )
     {
         [_keepAliveResponseTimer invalidate];
         _keepAliveResponseTimer = nil;
