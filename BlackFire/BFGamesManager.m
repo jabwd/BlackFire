@@ -332,4 +332,98 @@
 	}
 }
 
+#pragma mark - Launching games
+
+- (NSDictionary *)macGameInfoForGID:(unsigned int)gameID
+{
+	for(NSDictionary *value in [_macGames allValues])
+	{
+		if( [[value objectForKey:@"gameID"] intValue] == gameID )
+		{
+			return value;
+		}
+	}
+	return nil;
+}
+
+
+- (void)launchGame:(unsigned int)gameID withAddress:(NSString *)address{
+	NSDictionary *gameInfo = [self macGameInfoForGID:gameID];
+	
+	NSString  *gameName   = [gameInfo objectForKey:@"AppName"  ];
+	NSArray   *arguments  = [gameInfo objectForKey:@"arguments"];
+	if(       gameName    == nil ) return;
+	
+	if(arguments && [arguments count] != 0)
+	{
+		if( [[arguments objectAtIndex:0] length] > 0 && [[arguments objectAtIndex:0] isEqualToString:@"NSServices"]){
+			if(address)
+			{
+				NSPasteboard *paste = [NSPasteboard pasteboardWithName:@"paste"];
+				[paste declareTypes: [NSArray arrayWithObject: NSStringPboardType] owner: nil];
+				[paste setString:address forType:NSStringPboardType];
+				NSString *str = [NSString stringWithFormat:@"%@/Connect To Server", gameName];
+				NSPerformService(str, paste);
+			}
+		}
+		else {
+			NSMutableArray *arguements = [[NSMutableArray alloc] init];
+			
+			if(address && [[arguments objectAtIndex:0] length] > 0 )
+			{
+				[arguements addObject:[arguments objectAtIndex:0]];
+				[arguements addObject:address];
+			}
+			[self startGame:gameName withArguments:arguements];
+			[arguements release];
+		}
+	}
+	else
+		[[NSWorkspace sharedWorkspace] launchApplication:gameName];
+}
+
+- (NSString *)serverTypeForGID:(unsigned int)gid
+{
+    NSDictionary *dict = [_macGames objectForKey:@"serverTypes"];
+	return [dict objectForKey:[NSString stringWithFormat:@"%u",gid]];
+}
+
+- (void)launchGame:(unsigned int)gameID
+{
+    NSDictionary *macGameInfo = [self macGameInfoForGID:gameID];
+    NSArray *arg = [macGameInfo objectForKey:@"arguments"];
+    if( [arg count] > 0 )
+    {
+        // ask for the user's ip address
+        return;
+    }
+    NSString *gameName = [macGameInfo objectForKey:@"AppName"];
+	[[NSWorkspace sharedWorkspace] launchApplication:gameName];
+	
+	// try launching with .app extension
+	//[[NSWorkspace sharedWorkspace] launchApplication:[NSString stringWithFormat:@"%@.app",gameName]];
+}
+
+- (NSArray *)getLaunchArgumentsForMacGame:(NSString *)game
+{
+    return [[_macGames objectForKey:game] objectForKey:@"arguments"];
+}
+
+- (BOOL)startGame:(NSString *)game withArguments:(NSArray *)arguments
+{
+	NSMutableString *fullName = [NSMutableString stringWithString:game];
+	[fullName appendString:@".app"];
+	NSString *fullAppPath = [[NSWorkspace sharedWorkspace] fullPathForApplication:fullName];
+	if( !fullAppPath ) 
+	{
+		return NO;
+	}
+	NSMutableString *path = [NSMutableString stringWithString:fullAppPath];
+	[path appendString:@"/Contents/MacOS/"];
+	[path appendString:game];
+	[NSTask launchedTaskWithLaunchPath:path arguments:arguments];
+	return TRUE; //TODO!!
+}
+
+
 @end

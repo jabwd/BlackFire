@@ -56,4 +56,16 @@
 
 - (void)startMonitoring;
 - (void)stopMonitoring;
+
+
+//----------------------------------------------------------------------------
+// Launching games
+
+- (NSDictionary *)macGameInfoForGID:(unsigned int)gameID;
+- (void)launchGame:(unsigned int)gameID withAddress:(NSString *)address;
+- (NSString *)serverTypeForGID:(unsigned int)gid;
+- (void)launchGame:(unsigned int)gameID;
+- (NSArray *)getLaunchArgumentsForMacGame:(NSString *)game;
+- (BOOL)startGame:(NSString *)game withArguments:(NSArray *)arguments;
+
 @end
