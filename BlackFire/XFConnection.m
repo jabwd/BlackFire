@@ -1178,7 +1178,6 @@
 		NSLog(@"Got something unexpected: %@",map);
 		return;
 	}
-	
 	// As far as I know, we only get this at login and possibly when explicitly setting
 	// options, so not triggering notifications should be ok in all cases.
 	//[_session _privateSetUserOptions:prefs];
@@ -1191,29 +1190,45 @@
     attr = [map objectForKey:@"0x01"];
     if( attr )
         [std setBool:[[attr value] boolValue] forKey:@"showOthersGameStatus"];
+	else
+		[std setBool:true forKey:@"showOthersGameStatus"];
+	
     attr = [map objectForKey:@"0x02"];
     if( attr )
         [std setBool:[[attr value] boolValue] forKey:@"xfireShowGameServerData"];
+	else
+		[std setBool:true forKey:@"xfireShowGameServerData"];
+	
     attr = [map objectForKey:@"0x03"];
     if( attr )
         [std setBool:[[attr value] boolValue] forKey:@"xfireStatusOnProfile"];
+	else
+		[std setBool:true forKey:@"xfireStatusOnProfile"];
     //  [std setBool:[[[map objectForKey:@"0x04"] value] boolValue] forKey:@"playReceiveOrSendSound"];
     //  [std setBool:[[[map objectForKey:@"0x05"] value] boolValue] forKey:@"playReceiveIngameSound"];
     attr = [map objectForKey:@"0x06"];
     if( attr )
         [std setBool:[[attr value] boolValue] forKey:@"enableTimeStamps"];
+	else
+		[std setBool:true forKey:@"enableTimeStamps"];
     
     attr = [map objectForKey:@"0x08"];
     if( attr )
         [std setBool:[[attr value] boolValue] forKey:@"showFriendsOfFriendsGroup"];
+	else
+		[std setBool:true forKey:@"showFriendsOfFriendsGroup"];
     
     attr = [map objectForKey:@"0x09"];
     if( attr )
         [std setBool:[[attr value] boolValue] forKey:@"showOfflineFriendsGroup"];
+	else
+		[std setBool:true forKey:@"showOfflineFriendsGroup"];
     
     attr = [map objectForKey:@"0x0a"];
     if( attr )
-        [std setBool:([[attr value] boolValue]) forKey:@"forceUsername"];
+        [std setBool:true forKey:@"forceUsername"];
+	else
+		[std setBool:false forKey:@"forceUsername"];
     
     attr = [map objectForKey:@"0x0c"];
     if( attr )

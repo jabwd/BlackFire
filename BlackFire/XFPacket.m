@@ -1446,7 +1446,7 @@ NSString * const XFPacketDataKey			= @"data";
             forKey:@"0x09"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:([std boolForKey:@"forceUsername"])] stringValue]] 
+                    attributeValueWithString:[[NSNumber numberWithBool:(![std boolForKey:@"forceUsername"])] stringValue]] 
             forKey:@"0x0a"];
     
     [map setObject:[XFPacketAttributeValue 

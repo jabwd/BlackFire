@@ -1355,7 +1355,7 @@
 	{
 		[[NSUserDefaults standardUserDefaults] setBool:true forKey:BFShowOfflineFriendsGroup];
 	}
-	
+	[_session updateUserSettings];
 	[_friendsListController reloadData];
 }
 
