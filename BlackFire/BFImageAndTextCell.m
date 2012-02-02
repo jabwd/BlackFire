@@ -94,6 +94,12 @@
 		cellFrame.origin.x += 10;
 		cellFrame.size.width -= 10;
 	}
+	/*else if( ! [self isHighlighted] )
+	{
+		NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.99f alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:.95f alpha:1.0f]];
+		[gradient drawInRect:NSMakeRect(0, cellFrame.origin.y-1, cellFrame.size.width+8, cellFrame.size.height+2) angle:90.0f];
+		[gradient release];
+	}*/
 	
 	/*id objectValue = [self objectValue];
 	if( [objectValue isKindOfClass:[XFFriend class]] )
@@ -155,7 +161,7 @@
 	[[NSGraphicsContext currentContext] saveGraphicsState];
 	[NSBezierPath clipRect:cellFrame];
 	
-	if( [self isHighlighted] && [[controlView window] isKeyWindow] )
+	if( [self isHighlighted] && ([[controlView window] isKeyWindow]) )
 	{
 		NSShadow *shadow = [[NSShadow alloc] init];
 		[shadow setShadowOffset:NSMakeSize(1.0f, -1.0f)];

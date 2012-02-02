@@ -392,6 +392,9 @@
 
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type
 {
+	// determine this BEFORE we add the new message, otherwise the incoming message could be too big
+	// which would disable the scrolling feature => SUCKS
+	BOOL shouldScroll = [self shouldScroll];
 	NSMutableAttributedString *fmtMsg;
 	NSString *newline = @"", *timeStamp = @"";
 	NSRange boldStyleRange = NSMakeRange(0, 0);
@@ -427,40 +430,38 @@
 	[scanner release];
 	[fmtMsg release];
 	
-	if( _windowController.currentChat == self )
-		[self scrollAnimated:true];
-	else
-		[self scrollAnimated:false];
+	if( shouldScroll )
+	{
+		if( _windowController.currentChat == self )
+			[self scrollAnimated:false];
+		else
+			[self scrollAnimated:false];
+	}
 }
 
 - (void)scrollAnimated:(BOOL)animated
 {
-	if( [self shouldScroll] )
+	if( animated )
 	{
-		if( animated )
-		{
-			NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];
-			
-			[NSAnimationContext beginGrouping];
-			[[NSAnimationContext currentContext] setDuration:0.100f];
-			NSPoint constrainedPoint = [clipView constrainScrollPoint:NSMakePoint(0, CGFLOAT_MAX)];
-			[[clipView animator] setBoundsOrigin:constrainedPoint];
-			[NSAnimationContext endGrouping];
-		}
-		else
-		{
-			NSRange range;
-			range.location = [[_chatHistoryView textStorage] length];
-			range.length = 1;
-			[_chatHistoryView scrollRangeToVisible:range];
-		}
+		NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];
+		
+		[NSAnimationContext beginGrouping];
+		[[NSAnimationContext currentContext] setDuration:0.100f];
+		NSPoint constrainedPoint = [clipView constrainScrollPoint:NSMakePoint(0, CGFLOAT_MAX)];
+		[[clipView animator] setBoundsOrigin:constrainedPoint];
+		[NSAnimationContext endGrouping];
+	}
+	else
+	{
+		NSRange range;
+		range.location = [[_chatHistoryView textStorage] length];
+		range.length = 1;
+		[_chatHistoryView scrollRangeToVisible:range];
 	}
 }
 
 - (BOOL)shouldScroll
 {
-	// TODO: Make this work properly.
-	return true;
 	NSClipView *clipView	= [[_chatHistoryView enclosingScrollView] contentView];
 	NSRect actualRect		= clipView.frame;
 	NSRect documentRect		= clipView.documentRect;
