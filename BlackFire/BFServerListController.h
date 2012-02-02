@@ -41,7 +41,7 @@
  * Handy accessor method for getting the current selected row,
  * YES NSTableView has methods for this but this one is what we call *safe*
  */ 
-- (int)activeRow;
+- (NSInteger)activeRow;
 
 - (IBAction)clicked:(id)sender;
 - (IBAction)doubleClicked:(id)sender;

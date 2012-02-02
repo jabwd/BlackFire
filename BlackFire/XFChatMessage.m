@@ -13,7 +13,7 @@
 @synthesize packet = _packet;
 @synthesize index = _index;
 
-- (id)initWithIndex:(unsigned int)index packet:(XFPacket *)packet
+- (id)initWithIndex:(NSUInteger)index packet:(XFPacket *)packet
 {
 	if( (self = [super init]) )
 	{

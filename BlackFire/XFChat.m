@@ -153,14 +153,14 @@
 		{
 			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
 			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
-			if( [_receivedMessages isSet:imIndex] )
+			if( [_receivedMessages isSet:(unsigned int)imIndex] )
 			{
 				NSLog(@"[Notice] Received a duplicate chat message %@",packet);
 			}
 			else
 			{
 				[self receivedMessage:message];
-				[_receivedMessages set:imIndex];
+				[_receivedMessages set:(unsigned int)imIndex];
 			}
 			XFPacket *sendPkt = [XFPacket chatAcknowledgementPacketWithSID:[_remoteFriend sessionID] 
 																   imIndex:(unsigned int)imIndex];

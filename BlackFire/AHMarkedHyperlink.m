@@ -32,7 +32,7 @@
 @synthesize range = linkRange, URL = linkURL, parentString = pString, validationStatus = urlStatus;
 
 // jabwd test
-- (NSURL *)URL
+/*- (NSURL *)URL
 {
 	static NSUInteger count = 0;
 	static NSUInteger total = 0;
@@ -66,7 +66,7 @@
 		}
 	}
 	return linkURL;
-}
+}*/
 
 #pragma mark init and dealloc
 

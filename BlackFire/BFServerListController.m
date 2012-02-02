@@ -92,7 +92,7 @@
 	{
 		// TODO: Fetch game Name for game ID
 		// NSString *gameName = [[[BFGamesManager sharedManager] gameInfo:[[selected objectForKey:@"gameID"] intValue]] objectForKey:@""];
-		NSString *gameType = [[BFGamesManager sharedManager] serverTypeForGID:[[selected objectForKey:@"gameID"] intValue]];
+		NSString *gameType = [[BFGamesManager sharedGamesManager] serverTypeForGID:[[selected objectForKey:@"gameID"] intValue]];
 		[self getServerInfoWithIP:[selected objectForKey:@"ip"] andGameName:gameType];
 	}
 	else if( task )
@@ -203,7 +203,7 @@
 	if( [taskList count] > 0 )
 	{
 		NSDictionary *dict = [taskList lastObject];
-		[self getServerInfoWithIP:[dict objectForKey:@"ip"] andGameName:[[BFGamesManager sharedManager] serverTypeForGID:[[dict objectForKey:@"gameID"] intValue]]];
+		[self getServerInfoWithIP:[dict objectForKey:@"ip"] andGameName:[[BFGamesManager sharedGamesManager] serverTypeForGID:[[dict objectForKey:@"gameID"] intValue]]];
 		[taskList removeLastObject];
 	}
 }
@@ -236,7 +236,7 @@
 
 - (NSDictionary *)selectedServer
 {
-	unsigned int activeRow = [self activeRow];
+	NSInteger activeRow = [self activeRow];
 	if( activeRow < [serverList count] )
 	{
 		return [serverList objectAtIndex:activeRow];
@@ -244,10 +244,10 @@
 	return nil;
 }
 
-- (int)activeRow 
+- (NSInteger)activeRow 
 {
-	int selRow    = [serverListView selectedRow];
-	int clickRow  = [serverListView clickedRow];
+	NSInteger selRow    = [serverListView selectedRow];
+	NSInteger clickRow  = [serverListView clickedRow];
 	
 	if ( selRow == clickRow ) 
 	{
@@ -295,7 +295,8 @@
 	return YES;
 }
 
-- (int)outlineView:(NSOutlineView *)anOutlineView numberOfChildrenOfItem:(id)item {
+- (NSUInteger)outlineView:(NSOutlineView *)anOutlineView numberOfChildrenOfItem:(id)item 
+{
 	return [serverList count];
 }
 
@@ -336,7 +337,7 @@
 		NSString *name = [item objectForKey:@"name"];
 		if( gameID != 0 )
 		{
-			[(BFImageAndTextCell *)cell setImage:[[BFGamesManager sharedManager] imageForGame:gameID]];
+			[(BFImageAndTextCell *)cell setImage:[[BFGamesManager sharedGamesManager] imageForGame:gameID]];
 		}
 		else 
 		{
