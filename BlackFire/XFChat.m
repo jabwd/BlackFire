@@ -11,6 +11,8 @@
 #import "XFSession.h"
 #import "XFConnection.h"
 #import "XFPacket.h"
+#import "ADBitList.h"
+#import "XFChatMessage.h"
 
 @implementation XFChat
 
@@ -23,8 +25,10 @@
 {
 	if( (self = [super init]) )
 	{
-		_remoteFriend	= [remoteFriend retain];
-		_connection		= nil;
+		_remoteFriend		= [remoteFriend retain];
+		_connection			= nil;
+		_receivedMessages	= [[ADBitList alloc] init];
+		_messageBuffer		= [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -33,8 +37,10 @@
 {
 	if( (self = [super init]) )
 	{
-		_remoteFriend	= nil;
-		_connection		= nil;
+		_remoteFriend		= nil;
+		_connection			= nil;
+		_receivedMessages	= [[ADBitList alloc] init];
+		_messageBuffer		= [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -45,6 +51,10 @@
 	[_remoteFriend release];
 	_remoteFriend = nil;
 	_connection = nil;
+	[_messageBuffer release];
+	_messageBuffer = nil;
+	[_receivedMessages release];
+	_receivedMessages = nil;
 	[super dealloc];
 }
 
@@ -57,14 +67,30 @@
 
 #pragma mark - Sending messages
 
+- (void)messageTimedOut:(XFChatMessage *)message
+{
+	if( message )
+	{
+		if( [_delegate respondsToSelector:@selector(messageDidTimeout)] )
+			[_delegate messageDidTimeout];
+		
+		[_messageBuffer removeObject:message];
+	}
+}
+
 - (void)sendMessage:(NSString *)message
 {
 	if( [message length] > 0 )
 	{
-		XFPacket *packet = [XFPacket chatInstantMessagePacketWithSID:_remoteFriend.sessionID imIndex:(unsigned int)_remoteFriend.messageIndex message:message];
+		NSUInteger messageIndex = _remoteFriend.messageIndex;
+		XFPacket *packet = [XFPacket chatInstantMessagePacketWithSID:_remoteFriend.sessionID imIndex:(unsigned int)messageIndex message:message];
 		[_connection sendPacket:packet];
 		
-		NSUInteger messageIndex = _remoteFriend.messageIndex;
+		XFChatMessage *message = [[XFChatMessage alloc] initWithIndex:messageIndex packet:packet];
+		[_messageBuffer addObject:message];
+		[self performSelector:@selector(messageTimedOut:) withObject:message afterDelay:15.0f];
+		[message release];
+		
 		messageIndex++;
 		_remoteFriend.messageIndex = messageIndex;
 	}
@@ -127,7 +153,15 @@
 		{
 			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
 			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
-			[self receivedMessage:message];
+			if( [_receivedMessages isSet:imIndex] )
+			{
+				NSLog(@"[Notice] Received a duplicate chat message %@",packet);
+			}
+			else
+			{
+				[self receivedMessage:message];
+				[_receivedMessages set:imIndex];
+			}
 			XFPacket *sendPkt = [XFPacket chatAcknowledgementPacketWithSID:[_remoteFriend sessionID] 
 																   imIndex:(unsigned int)imIndex];
 			[_connection sendPacket:sendPkt];
@@ -136,8 +170,18 @@
 			
 		case 1: // acknowledgement
 		{
-			//NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
-			// TODO: handle this
+			NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
+			NSInteger i, cnt = [_messageBuffer count];
+			for(i=0;i<cnt;i++)
+			{
+				XFChatMessage *message = [_messageBuffer objectAtIndex:i];
+				if( message.index == idx )
+				{
+					[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(messageTimedOut:)object:message];
+					[_messageBuffer removeObjectAtIndex:i];
+					return;
+				}
+			}
 		}
 			break;
 			
@@ -151,6 +195,8 @@
 			[self receivedIsTypingNotification];
 			break;
 	}
+	
+	// No code here, can cause bugs ( the switch can end this method ).
 }
 
 #pragma mark - Misc

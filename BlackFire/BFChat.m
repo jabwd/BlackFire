@@ -214,6 +214,11 @@
 	[[BFNotificationCenter defaultNotificationCenter] playSendSound];
 }
 
+- (void)messageDidTimeout
+{
+	[self displayWarning:@"High latency detected, your friend might not see your messages"];
+}
+
 - (void)friendStartedTyping
 {
 	[_windowController tabViewForChat:self].image = [NSImage imageNamed:@"tab-typing"];

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		36030AEA149C9A0800E4B8F4 /* BFChatLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 363941C7149C0D2000DDECB4 /* BFChatLog.m */; };
 		36030AEC149C9A0C00E4B8F4 /* BFMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 363941CA149C0E1F00DDECB4 /* BFMessage.m */; };
+		3603957E14DAE8ED006E67AC /* ADBitList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603957D14DAE8ED006E67AC /* ADBitList.m */; };
+		3603958214DAEF3D006E67AC /* XFChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603958114DAEF3D006E67AC /* XFChatMessage.m */; };
 		360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 360D99B8148BEB6F00A529F6 /* MacGames.plist */; };
 		360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 360D99C0148C267D00A529F6 /* BFProcessInformation.m */; };
 		361268CE14A26C3E00ACDEA4 /* ADShadowScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */; };
@@ -168,6 +170,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3603957C14DAE8ED006E67AC /* ADBitList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBitList.h; sourceTree = "<group>"; };
+		3603957D14DAE8ED006E67AC /* ADBitList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBitList.m; sourceTree = "<group>"; };
+		3603958014DAEF3D006E67AC /* XFChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFChatMessage.h; sourceTree = "<group>"; };
+		3603958114DAEF3D006E67AC /* XFChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFChatMessage.m; sourceTree = "<group>"; };
 		360809EA1491810F0081C05A /* Bugs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bugs.txt; sourceTree = "<group>"; };
 		360809ED149181180081C05A /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 		360D99B8148BEB6F00A529F6 /* MacGames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MacGames.plist; sourceTree = "<group>"; };
@@ -521,6 +527,8 @@
 				3646BBE31464A849008FD6D4 /* XFGameServer.m */,
 				36FD118814795400009F70DE /* XFGame.h */,
 				36FD118914795400009F70DE /* XFGame.m */,
+				3603958014DAEF3D006E67AC /* XFChatMessage.h */,
+				3603958114DAEF3D006E67AC /* XFChatMessage.m */,
 			);
 			name = "Data types";
 			sourceTree = "<group>";
@@ -769,6 +777,8 @@
 		366AC23814658C7C002A1F50 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				3603957C14DAE8ED006E67AC /* ADBitList.h */,
+				3603957D14DAE8ED006E67AC /* ADBitList.m */,
 				362FCBBB14A0D07000DED0DD /* TaskWrapper.h */,
 				362FCBBC14A0D07000DED0DD /* TaskWrapper.m */,
 				3698AC24149D1CDD0015AB9C /* BFIdleTimeManager.h */,
@@ -1068,6 +1078,8 @@
 				36F8771914AB256500C6E6E4 /* BFApplicationSupport.m in Sources */,
 				36737EAA14AC64D10046C33F /* BFSoundSet.m in Sources */,
 				364088E814D01B8400902346 /* ShadowedClipView.m in Sources */,
+				3603957E14DAE8ED006E67AC /* ADBitList.m in Sources */,
+				3603958214DAEF3D006E67AC /* XFChatMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

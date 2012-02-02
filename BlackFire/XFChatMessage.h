@@ -15,12 +15,12 @@
 @interface XFChatMessage : NSObject
 {
 	XFPacket *_packet;
-	unsigned int _index;
+	NSUInteger _index;
 }
 
 @property (readonly) XFPacket *packet;
-@property (readonly) unsigned int index;
+@property (readonly) NSUInteger index;
 
-- (id)initWithIndex:(unsigned int)index packet:(XFPacket *)packet;
+- (id)initWithIndex:(NSUInteger)index packet:(XFPacket *)packet;
 
 @end

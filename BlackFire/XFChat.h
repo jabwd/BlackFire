@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class XFFriend, XFConnection, XFChat, XFPacket;
+@class XFFriend, XFConnection, XFChat, XFPacket, ADBitList;
 
 @protocol XFChatDelegate <NSObject>
 - (void)receivedMessage:(NSString *)message;
+- (void)messageDidTimeout;
 - (void)friendStartedTyping;
 - (void)friendStoppedTyping;
 @end
@@ -20,6 +21,9 @@
 {
 	XFFriend		*_remoteFriend;
 	XFConnection	*_connection;
+	ADBitList		*_receivedMessages;
+	
+	NSMutableArray	*_messageBuffer; // used for resending chat messages when they timeout
 	
 	id <XFChatDelegate> _delegate;
 }
