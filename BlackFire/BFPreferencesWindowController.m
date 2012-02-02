@@ -189,6 +189,7 @@
 			{
 				[[BFNotificationCenter defaultNotificationCenter] setSoundSet:soundSet];
 				[[NSUserDefaults standardUserDefaults] setObject:soundSet.path forKey:BFSoundSetPath];
+				[[BFNotificationCenter defaultNotificationCenter] playDemoSound];
 			}
 		}
 		else

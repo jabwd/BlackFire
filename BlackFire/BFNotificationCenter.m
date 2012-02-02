@@ -62,33 +62,39 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)setSoundSet:(BFSoundSet *)soundSet
 {
+	[_connectSound release];
+	[_offlineSound release];
+	[_onlineSound release];
+	[_sendSound release];
+	[_receiveSound release];
+	_receiveSound = nil;
+	_sendSound = nil;
+	_onlineSound = nil;
+	_offlineSound = nil;
+	_connectSound = nil;
+	
 	if( soundSet.connectedSoundPath )
 	{
-		[_connectSound release];
 		_connectSound = [[NSSound alloc] initWithContentsOfFile:soundSet.connectedSoundPath byReference:false];
 	}
 	
 	if( soundSet.offlineSoundPath )
 	{
-		[_offlineSound release];
 		_offlineSound = [[NSSound alloc] initWithContentsOfFile:soundSet.offlineSoundPath byReference:false];
 	}
 	
 	if( soundSet.onlineSoundPath )
 	{
-		[_onlineSound release];
 		_onlineSound = [[NSSound alloc] initWithContentsOfFile:soundSet.onlineSoundPath byReference:false];
 	}
 	
 	if( soundSet.sendSoundPath )
 	{
-		[_sendSound release];
 		_sendSound = [[NSSound alloc] initWithContentsOfFile:soundSet.sendSoundPath byReference:false];
 	}
 	
 	if( soundSet.receiveSoundPath )
 	{
-		[_receiveSound release];
 		_receiveSound = [[NSSound alloc] initWithContentsOfFile:soundSet.receiveSoundPath byReference:false];
 	}
 	[self updateSoundVolume];
@@ -108,6 +114,22 @@ static BFNotificationCenter *notificationCenter = nil;
 	_onlineSound.volume		= volume;
 	_offlineSound.volume	= volume;
 	_connectSound.volume	= volume;
+}
+
+- (void)playDemoSound
+{
+	if( _connectSound )
+		[self playConnectedSound];
+	else if( _onlineSound )
+		[self playOnlineSound];
+	else if( _sendSound )
+		[self playSendSound];
+	else if( _offlineSound )
+		[self playOfflineSound];
+	else if( _receiveSound )
+		[self playReceivedSound];
+	else
+		NSBeep();
 }
 
 - (void)playConnectedSound

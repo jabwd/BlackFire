@@ -8,7 +8,7 @@
 
 
 #import "BFImageAndTextCell.h"
-
+#import "AHHyperlinkScanner.h"
 #import "XFFriend.h"
 
 @implementation BFImageAndTextCell
@@ -255,6 +255,10 @@
 						  nil];
 	[statusString release];
 	statusString = [[NSAttributedString alloc] initWithString:aString attributes:attr];
+	/*AHHyperlinkScanner *scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:statusString usingStrictChecking:false];
+	[statusString release];
+	statusString = [[scanner linkifiedString] retain];
+	[scanner release];*/
 	[attr release];
 }
 

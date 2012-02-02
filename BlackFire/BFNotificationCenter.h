@@ -38,6 +38,7 @@
 - (void)playOfflineSound;
 - (void)playReceivedSound;
 - (void)playSendSound;
+- (void)playDemoSound;
 
 //-------------------------------------------------------------------------------
 // Growl
