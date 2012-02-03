@@ -1387,15 +1387,16 @@
     NSUInteger i, cnt = [gameIPs count];
     for(i=0;i<cnt;i++)
     {
-		XFGameServer *server = [[XFGameServer alloc] init];
-		server.IPAddress	= [[gameIPs objectAtIndex:i] unsignedIntValue];
-		server.port			= [[gamePorts objectAtIndex:i] unsignedIntValue];
-		server.gameID		= [[gamesArray objectAtIndex:i] unsignedIntValue];
+		XFGameServer *server	= [[XFGameServer alloc] init];
+		server.IPAddress		= [[gameIPs objectAtIndex:i]	unsignedIntValue];
+		server.port				= [[gamePorts objectAtIndex:i]	unsignedIntValue];
+		server.gameID			= [[gamesArray objectAtIndex:i] unsignedIntValue];
+		
         [serverList addObject:server];
 		
 		[server release];
     }
-   // [_session setServerList:serverList];
+	_session.serverList =  serverList;
     [serverList release];
 }
 

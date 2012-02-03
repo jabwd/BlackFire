@@ -96,6 +96,8 @@ typedef enum{
 	NSMutableArray	*_chats;
 	NSMutableArray	*_groupChats;
 	
+	NSMutableArray *_servers;
+	
 	XFSessionStatus _status;
 	
 	// yeath this seems odd, but we need this in order to make sure that we aren't doing any excessive
@@ -108,6 +110,7 @@ typedef enum{
 @property (nonatomic, assign) XFFriend *loginIdentity;
 @property (nonatomic, assign) id <XFSessionDelegate> delegate;
 @property (nonatomic, retain) XFGroupController *groupController;
+@property (nonatomic, retain) NSMutableArray *serverList;
 
 @property (readonly) XFSessionStatus status;
 

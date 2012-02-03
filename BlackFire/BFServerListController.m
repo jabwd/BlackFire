@@ -9,46 +9,35 @@
 #import "BFServerListController.h"
 #import "BFGamesManager.h"
 #import "BFImageAndTextCell.h"
+#import "XFGameServer.h"
+#import "XFSession.h"
+#import "ADOutlineView.h"
 
 
 @implementation BFServerListController
 
-@synthesize serverListView;
-@synthesize delegate;
+@synthesize serverListView	= _serverListView;
+@synthesize session			= _session;
 
 
-- (id)init
+- (id)initWithSession:(XFSession *)session
 {
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"ServerList" owner:self];
-		serverList = nil;
-		NSTableColumn *col = [serverListView tableColumnWithIdentifier:@"server"];
-		taskList = [[NSMutableArray alloc] init];
+		
+		_session	= [session retain];
+		taskList	= [[NSMutableArray alloc] init];
+		_serverList	= [session.serverList retain];
+		
+		
+		NSTableColumn *col = [_serverListView tableColumnWithIdentifier:@"server"];
 		BFImageAndTextCell *cell = [[BFImageAndTextCell alloc] init];
 		[cell setEditable:NO];
-		[cell setDisplayImageSize:NSMakeSize(23.0f,23.0f)];
+		[cell setDisplayImageSize:NSMakeSize(24.0f,24.0f)];
 		[col  setDataCell:cell];
 		[cell release];
-		[serverListView setDoubleAction:@selector(doubleClicked:)];
-	}
-	return self;
-}
-
-- (id)initWithServerList:(NSArray *)newList
-{
-	if( (self = [super init]) )
-	{
-		[NSBundle loadNibNamed:@"ServerList" owner:self];
-		serverList = [newList retain];
-		NSTableColumn *col = [serverListView tableColumnWithIdentifier:@"server"];
-		taskList = [[NSMutableArray alloc] init];
-		BFImageAndTextCell *cell = [[BFImageAndTextCell alloc] init];
-		[cell setEditable:NO];
-		[cell setDisplayImageSize:NSMakeSize(23.0f,23.0f)];
-		[col  setDataCell:cell];
-		[cell release];
-		[serverListView setDoubleAction:@selector(doubleClicked:)];
+		[_serverListView setDoubleAction:@selector(doubleClicked:)];
 	}
 	return self;
 }
@@ -59,20 +48,22 @@
 	serverInfoOutput = nil;
 	[taskList release];
 	taskList = nil;
-	[serverList release];
-	serverList = nil;
+	[_serverList release];
+	_serverList = nil;
+	[_session release];
+	_session = nil;
 	[super dealloc];
 }
 
 - (IBAction)clicked:(id)sender
 {
-	NSDictionary *selected = [self selectedServer];
+	XFGameServer *selected = [self selectedServer];
 	if( ! task && selected )
 	{
 		// TODO: Fetch game Name for game ID
 		// NSString *gameName = [[[BFGamesManager sharedManager] gameInfo:[[selected objectForKey:@"gameID"] intValue]] objectForKey:@""];
-		NSString *gameType = [[BFGamesManager sharedGamesManager] serverTypeForGID:[[selected objectForKey:@"gameID"] intValue]];
-		[self getServerInfoWithIP:[selected objectForKey:@"ip"] andGameName:gameType];
+		NSString *gameType = [[BFGamesManager sharedGamesManager] serverTypeForGID:selected.gameID];
+		[self getServerInfoWithIP:[selected address] andGameName:gameType];
 	}
 	else if( task )
 	{
@@ -87,13 +78,13 @@
 
 - (IBAction)refresh:(id)sender
 {
-	NSDictionary *selected = [self selectedServer];
+	XFGameServer *selected = [self selectedServer];
 	if( ! task && selected )
 	{
 		// TODO: Fetch game Name for game ID
 		// NSString *gameName = [[[BFGamesManager sharedManager] gameInfo:[[selected objectForKey:@"gameID"] intValue]] objectForKey:@""];
-		NSString *gameType = [[BFGamesManager sharedGamesManager] serverTypeForGID:[[selected objectForKey:@"gameID"] intValue]];
-		[self getServerInfoWithIP:[selected objectForKey:@"ip"] andGameName:gameType];
+		NSString *gameType = [[BFGamesManager sharedGamesManager] serverTypeForGID:selected.gameID];
+		[self getServerInfoWithIP:[selected address] andGameName:gameType];
 	}
 	else if( task )
 	{
@@ -110,7 +101,7 @@
 {
 	[taskList release];
 	taskList = [[NSMutableArray alloc] init];
-	for(NSDictionary *dict in serverList)
+	for(XFGameServer *dict in _serverList)
 	{
 		[taskList addObject:dict];
 	}
@@ -119,8 +110,8 @@
 
 - (IBAction) doubleClicked:(id)sender
 {
-	NSDictionary *dict = [self selectedServer];
-	[[BFGamesManager sharedGamesManager] launchGame:[[dict objectForKey:@"gameID"] intValue] withAddress:[dict objectForKey:@"ip"]];
+	XFGameServer *dict = [self selectedServer];
+	[[BFGamesManager sharedGamesManager] launchGame:dict.gameID withAddress:[dict address]];
 }
 
 #pragma mark - Getting server information
@@ -131,22 +122,24 @@
 
 - (void) processFinished
 {
+	if( ! serverInfoOutput )
+		return;
 	id serverInfo = [serverInfoOutput propertyList];
 	if ([serverInfo isKindOfClass:[NSDictionary class]]) 
 	{
 		if(	! [[serverInfo objectForKey:@"status"] isEqualToString:@"UP"] )
 		{
 			NSString *ip = [serverInfo objectForKey:@"address"];
-			for(NSMutableDictionary *game in serverList)
+			for(XFGameServer *server in _serverList)
 			{
-				if( [[game objectForKey:@"ip"] isEqualToString:ip] )
+				if( [[server address] isEqualToString:ip] )
 				{
-					[game setObject:@"(Offline)" forKey:@"name"];
-					[serverListView reloadData];
+					server.name = @"Server offline";
+					[_serverListView reloadData];
 					break; // not done here
 				}
 			}
-			[serverListView reloadData];
+			[_serverListView reloadData];
 			[serverInfoOutput release];
 			serverInfoOutput = nil;
 			/*
@@ -160,18 +153,16 @@
 		}
 		//NSString *name = stringFromQuakeString([serverInfo objectForKey:@"name"]);
 		//NSString *name = [BFAppSupport stripQuakeColorCodes:[serverInfo objectForKey:@"name"]];
-		NSString *name = nil;
+		NSString *name = removeQuakeColorCodes([serverInfo objectForKey:@"name"]);
 		NSString *ip   = [serverInfo objectForKey:@"address"];
 		if( name )
 		{
-			for(NSMutableDictionary *game in serverList)
+			for(XFGameServer *server in _serverList)
 			{
-				if( [[game objectForKey:@"ip"] isEqualToString:ip] )
+				if( [[server address] isEqualToString:ip] )
 				{
-					[game setObject:name forKey:@"name"];
-					[serverListView reloadData];
-					//[[delegate drawer] handleOutput:serverInfoOutput];
-					//[[delegate drawer] appendOutput:serverInfoOutput];
+					server.name = name;
+					[_serverListView reloadData];
 					break; // not done here
 				}
 			}
@@ -189,6 +180,21 @@
 	}
 }
 
+NSString *removeQuakeColorCodes(NSString *string)
+{
+	NSRange range = [string rangeOfString:@"^"];
+	while(range.length > 0)
+	{
+		NSRange actualRange = NSMakeRange(range.location, 2);
+		if( (range.location+2) <= [string length] )
+		{
+			string = [string stringByReplacingCharactersInRange:actualRange withString:@""];
+		}
+		range = [string rangeOfString:@"^"];
+	}
+	return string;
+}
+
 - (void)appendOutput:(NSString *)output
 {
 	if( ! serverInfoOutput )
@@ -202,8 +208,8 @@
 {
 	if( [taskList count] > 0 )
 	{
-		NSDictionary *dict = [taskList lastObject];
-		[self getServerInfoWithIP:[dict objectForKey:@"ip"] andGameName:[[BFGamesManager sharedGamesManager] serverTypeForGID:[[dict objectForKey:@"gameID"] intValue]]];
+		XFGameServer *server = [taskList lastObject];
+		[self getServerInfoWithIP:[server address] andGameName:[[BFGamesManager sharedGamesManager] serverTypeForGID:server.gameID]];
 		[taskList removeLastObject];
 	}
 }
@@ -229,25 +235,32 @@
 						  ip,
 						  nil];
 	NSString *qstatPath = [[NSBundle mainBundle] pathForResource:@"qstat" ofType:@""];
+	if( ! qstatPath )
+	{
+		NSRunAlertPanel(@"Error", @"BlackFire is not properly installed, please reinstall the application", @"OK", nil, nil);
+		NSLog(@"*** QSTAT Path invalid, application bundle is not correct");
+		[arguments release];
+		return;
+	}
 	task = [[TaskWrapper alloc] initWithController:self arguments:arguments];
 	[task startProcess:qstatPath];
 	[arguments release];
 }
 
-- (NSDictionary *)selectedServer
+- (XFGameServer *)selectedServer
 {
 	NSInteger activeRow = [self activeRow];
-	if( activeRow < [serverList count] )
+	if( activeRow < [_serverList count] )
 	{
-		return [serverList objectAtIndex:activeRow];
+		return [_serverList objectAtIndex:activeRow];
 	}
 	return nil;
 }
 
 - (NSInteger)activeRow 
 {
-	NSInteger selRow    = [serverListView selectedRow];
-	NSInteger clickRow  = [serverListView clickedRow];
+	NSInteger selRow    = [_serverListView selectedRow];
+	NSInteger clickRow  = [_serverListView clickedRow];
 	
 	if ( selRow == clickRow ) 
 	{
@@ -264,13 +277,6 @@
 	return 0;
 }
 
-
-- (void)setServerListReference:(NSArray *)servers
-{
-	[serverList release];
-	serverList = [servers retain];
-}
-
 - (BOOL) validateMenuItem:(NSMenuItem *)anItem
 {
 	return YES;
@@ -280,7 +286,7 @@
 #pragma mark EXOutlineView datasource
 
 - (id) outlineView:(NSOutlineView *)olView child:(int)index ofItem:(id)item {
-	return [serverList objectAtIndex:index];
+	return [_serverList objectAtIndex:index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)anOutlineView isItemExpandable:(id)item {
@@ -297,16 +303,25 @@
 
 - (NSUInteger)outlineView:(NSOutlineView *)anOutlineView numberOfChildrenOfItem:(id)item 
 {
-	return [serverList count];
+	return [_serverList count];
 }
 
-- (id)outlineView:(NSOutlineView *)anOutlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-	//return [item objectForKey:@"name"];
-	if(! item ) return nil;
-	NSString *name = [item objectForKey:@"name"];
-	if( ! name )
-		name = [item objectForKey:@"ip"];
-	return name;
+- (id)outlineView:(NSOutlineView *)anOutlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item 
+{
+	if( !item ) 
+		return nil;
+	
+	if( [item isKindOfClass:[XFGameServer class]] )
+	{
+		XFGameServer *server = (XFGameServer *)item;
+		if( [server.name length] > 0 )
+		{
+			return server.name;
+		}
+		else
+			return [server address];
+	}
+	return nil;
 }
 
 - (id)outlineView:(NSOutlineView *)anOutlineView itemForPersistentObject:(id)object
@@ -316,25 +331,35 @@
 
 - (id)outlineView:(NSOutlineView *)anOutlineView persistentObjectForItem:(id)item
 {
-	if(! item ) return nil;
-	NSString *name = [item objectForKey:@"name"];
-	if( ! name )
-		name = [item objectForKey:@"ip"];
-	return name;
+	if( !item ) 
+		return nil;
+	
+	if( [item isKindOfClass:[XFGameServer class]] )
+	{
+		XFGameServer *server = (XFGameServer *)item;
+		if( [server.name length] > 0 )
+		{
+			return server.name;
+		}
+		else
+			return [server address];
+	}
+	return nil;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
 {
-	// return [outlineView isExpandable:item];
 	return NO;
 }
 
 - (void)outlineView:(NSOutlineView *)anOutlineView willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if( cell )
+    if( cell && [item isKindOfClass:[XFGameServer class]] )
     {
-		unsigned int gameID = [[item objectForKey:@"gameID"] intValue];
-		NSString *name = [item objectForKey:@"name"];
+		[(BFImageAndTextCell *)cell setGroupRow:false];
+		XFGameServer *server = (XFGameServer *)item;
+		unsigned int gameID = server.gameID;
+		NSString *name = server.name;
 		if( gameID != 0 )
 		{
 			[(BFImageAndTextCell *)cell setImage:[[BFGamesManager sharedGamesManager] imageForGame:gameID]];
@@ -345,7 +370,7 @@
 		}
 		if( name && [name length] > 0 )
 		{
-			[(BFImageAndTextCell *)cell setCellStatusString:[item objectForKey:@"ip"]];
+			[(BFImageAndTextCell *)cell setCellStatusString:[server address]];
 			[(BFImageAndTextCell *)cell setStringValue:name];
 			[(BFImageAndTextCell *)cell setShowsStatus:YES];
 		}
@@ -374,7 +399,7 @@
 	if( (item == nil) || ([anOutlineView isExpandable:item]) ){
 		return 14.0f;
 	}
-	return 24.0f;
+	return 28.0f;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)index {

@@ -138,6 +138,8 @@
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
 		36D9C9FC1465CAF600C4A162 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9C9FB1465CAF600C4A162 /* LoginView.xib */; };
 		36DAA20914935816001A7039 /* BFDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DAA20814935816001A7039 /* BFDownload.m */; };
+		36DB12BD14DBFC0500706971 /* qstat in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12BC14DBFC0500706971 /* qstat */; };
+		36DB12C414DBFE3300706971 /* server.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12C314DBFE3300706971 /* server.cfg */; };
 		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
 		36EBDDA51479B2F500D219D7 /* activeTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD991479B2F500D219D7 /* activeTabClose.png */; };
 		36EBDDA61479B2F500D219D7 /* activeTabCloseHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */; };
@@ -370,6 +372,8 @@
 		36D9C9FB1465CAF600C4A162 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		36DAA20714935816001A7039 /* BFDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDownload.h; sourceTree = "<group>"; };
 		36DAA20814935816001A7039 /* BFDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDownload.m; sourceTree = "<group>"; };
+		36DB12BC14DBFC0500706971 /* qstat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = qstat; sourceTree = "<group>"; };
+		36DB12C314DBFE3300706971 /* server.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36EBDD991479B2F500D219D7 /* activeTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClose.png; sourceTree = "<group>"; };
 		36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabCloseHover.png; sourceTree = "<group>"; };
@@ -560,6 +564,8 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				36DB12C314DBFE3300706971 /* server.cfg */,
+				36DB12BC14DBFC0500706971 /* qstat */,
 				364F27C114AC95D5002ACFD7 /* soundSet.icns */,
 				364F27BF14AC90F4002ACFD7 /* game_here.png */,
 				363DC6C314A66DC900FBE38E /* chatLogTemplate.db */,
@@ -1003,6 +1009,8 @@
 				3616012614AA3067003E6A9E /* AddGameSheet.xib in Resources */,
 				364F27C014AC90F4002ACFD7 /* game_here.png in Resources */,
 				364F27C214AC95D5002ACFD7 /* soundSet.icns in Resources */,
+				36DB12BD14DBFC0500706971 /* qstat in Resources */,
+				36DB12C414DBFE3300706971 /* server.cfg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

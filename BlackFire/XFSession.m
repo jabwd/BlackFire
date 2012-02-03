@@ -28,6 +28,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 @synthesize delegate		= _delegate;
 @synthesize groupController = _groupController;
 
+@synthesize serverList = _servers;
+
 @synthesize status = _status;
 
 - (id)initWithDelegate:(id<XFSessionDelegate>)delegate

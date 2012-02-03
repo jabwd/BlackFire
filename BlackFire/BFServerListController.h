@@ -9,13 +9,13 @@
 #import "BFTabViewController.h"
 #import "TaskWrapper.h"
 
-@class XFSession;
+@class XFSession, XFGameServer, ADOutlineView;
 
 @interface BFServerListController : BFTabViewController  <TaskWrapperController>
 {
-	NSOutlineView	*serverListView;
-	NSArray			*serverList;
+	NSMutableArray *_serverList;
 	
+	XFSession *_session;
 	TaskWrapper *task;
 	unsigned int idx;
 	
@@ -23,9 +23,12 @@
 	NSMutableString *serverInfoOutput;
 }
 
-@property (nonatomic, assign) IBOutlet NSOutlineView *serverListView;
+@property (nonatomic, assign) IBOutlet ADOutlineView *serverListView;
+@property (nonatomic, retain) XFSession *session;
 
-- (id)initWithServerList:(NSArray *)newList;
+- (id)initWithSession:(XFSession *)session;
+
+NSString *removeQuakeColorCodes(NSString *string);
 
 /*
  * Will return a NSDictionary object containing the current selected xfire server.
@@ -35,7 +38,7 @@
  *
  * Return NIL if no server is selected.
  */
-- (NSDictionary *)selectedServer;
+- (XFGameServer *)selectedServer;
 
 /*
  * Handy accessor method for getting the current selected row,

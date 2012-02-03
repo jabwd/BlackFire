@@ -13,13 +13,19 @@
 
 @interface XFGameServer : NSObject
 {
+	NSString *_name;
+	
 	unsigned int	_IPAddress;
 	unsigned short	_port;
 	unsigned int	_gameID;
 }
 
+@property (nonatomic, retain) NSString *name;
+
 @property (nonatomic, assign) unsigned int IPAddress;
 @property (nonatomic, assign) unsigned short port;
 @property (nonatomic, assign) unsigned int gameID;
+
+- (NSString *)address;
 
 @end

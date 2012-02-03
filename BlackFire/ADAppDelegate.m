@@ -19,6 +19,7 @@
 #import "BFFriendsListController.h"
 #import "BFGamesListController.h"
 #import "BFPreferencesWindowController.h"
+#import "BFServerListController.h"
 #import "BFChatWindowController.h"
 #import "BFChat.h"
 #import "BFRequestWindowController.h"
@@ -341,6 +342,11 @@
 			
 		case BFApplicationModeServers:
 		{
+			if( ! _serverListController )
+			{
+				_serverListController = [[BFServerListController alloc] initWithSession:_session];
+			}
+			[self changeMainView:_serverListController.view];
 			[_modeSwitch selectItemAtIndex:2];
 		}
 			break;
