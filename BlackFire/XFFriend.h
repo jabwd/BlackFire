@@ -78,7 +78,9 @@ typedef UIImage NSImage; // to fix the avatar property, actually not sure whethe
 - (NSString *)displayName;
 - (NSString *)gameIPString;
 
+- (BOOL)isAFK;
 - (NSComparisonResult)compare:(XFFriend *)other;
+- (NSComparisonResult)statusCompare:(XFFriend *)other;
 
 /*
  * This method will make sure that we have no useful information

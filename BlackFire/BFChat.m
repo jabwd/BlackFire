@@ -433,9 +433,15 @@
 	if( shouldScroll )
 	{
 		if( _windowController.currentChat == self )
+		{
+			//[self performSelector:@selector(scrollAnimated:) withObject:[NSNumber numberWithBool:true] afterDelay:
+			 //0.1f];
 			[self scrollAnimated:false];
+		}
 		else
+		{
 			[self scrollAnimated:false];
+		}
 	}
 }
 

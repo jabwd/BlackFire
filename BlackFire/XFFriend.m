@@ -149,6 +149,33 @@
 	return [[self displayName] caseInsensitiveCompare:[other displayName]];
 }
 
+- (BOOL)isAFK
+{
+	if( [_statusString length] > 0 && [_statusString rangeOfString:@"AFK"].length > 2 )
+	{
+		return true;
+	}
+	return false;
+}
+
+- (NSComparisonResult)statusCompare:(XFFriend *)other
+{
+	if( ![self  isAFK] && ![other isAFK] )
+	{
+		return [self compare:other];
+	}
+	else if( [self isAFK] && ![other isAFK] )
+	{
+		return NSOrderedDescending;
+	}
+	else if( ![self isAFK] && [other isAFK] )
+	{
+		return NSOrderedAscending;
+	}
+	else
+		return [self compare:other];
+}
+
 - (NSString *)displayName
 {
 	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowUsernames] )

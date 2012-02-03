@@ -11,6 +11,7 @@
 #import "XFFriend.h"
 #import "XFChat.h"
 #import "XFGroupController.h"
+#import "XFGroup.h"
 
 #import "BFAccount.h"
 
@@ -515,9 +516,6 @@
 	
 	[changedFriend retain];
 	
-	// make sure that the friends list displays the latest data
-	[_friendsListController reloadData];
-	
 	if( notificationType == XFFriendNotificationOnlineStatusChanged && [[changedFriend displayName] length] > 0 )
 	{
 		if( changedFriend.online )
@@ -531,6 +529,10 @@
 			[[BFNotificationCenter defaultNotificationCenter] playOfflineSound];
 		}
 	}
+	else if( notificationType == XFFriendNotificationStatusChanged )
+	{
+		//[[_session.groupController onlineFriendsGroup] sortMembers];
+	}
 	
 	// now post an application wide notification so other classes can update their shit too
 	// ( mainly for the chat anyways ).
@@ -540,6 +542,9 @@
 	
 	// done with it.
 	[changedFriend release];
+	
+	// make sure that the friends list displays the latest data
+	[_friendsListController reloadData];
 }
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
