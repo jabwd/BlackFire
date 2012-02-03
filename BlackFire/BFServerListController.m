@@ -151,8 +151,6 @@
 			}
 			return; // the server is offline
 		}
-		//NSString *name = stringFromQuakeString([serverInfo objectForKey:@"name"]);
-		//NSString *name = [BFAppSupport stripQuakeColorCodes:[serverInfo objectForKey:@"name"]];
 		NSString *name = removeQuakeColorCodes([serverInfo objectForKey:@"name"]);
 		NSString *ip   = [serverInfo objectForKey:@"address"];
 		if( name )
