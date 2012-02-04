@@ -21,7 +21,6 @@
 {
 	XFFriend		*_remoteFriend;
 	XFConnection	*_connection;
-	ADBitList		*_receivedMessages;
 	
 	NSMutableArray	*_messageBuffer; // used for resending chat messages when they timeout
 	

@@ -9,12 +9,14 @@
 #import "XFFriend.h"
 #import "XfireKit.h"
 #import "BFDefaults.h"
+#import "ADBitList.h"
 
 #import "XFSession.h"
 
 @implementation XFFriend
 
 @synthesize session		= _session;
+@synthesize receivedMessages = _receivedMessages;
 
 @synthesize username	= _username;
 @synthesize nickname	= _nickname;
@@ -48,6 +50,7 @@
 		_lastName		= nil;
 		_statusString	= nil;
 		_sessionID		= nil;
+		_receivedMessages = nil;
 		
 		_userID			= 0;
 		_messageIndex	= 0;
@@ -76,6 +79,7 @@
 		_firstName		= nil;
 		_lastName		= nil;
 		_statusString	= nil;
+		_receivedMessages = nil;
 		_sessionID		= nil;
 		
 		_userID			= userID;
@@ -101,6 +105,7 @@
 		_avatar			= nil;
 		_session		= nil;
 		_username		= nil;
+		_receivedMessages = nil;
 		_nickname		= nil;
 		_firstName		= nil;
 		_lastName		= nil;
@@ -139,10 +144,23 @@
 	_statusString = nil;
 	[_sessionID release];
 	_sessionID = nil;
+	[_receivedMessages release];
+	_receivedMessages = nil;
 	[super dealloc];
 }
 
 #pragma mark - Handy methods
+
+- (void)setOnlineStatus:(BOOL)online
+{
+	_online = online;
+	if( ! _online )
+	{
+		[_receivedMessages release];
+		_receivedMessages = nil;
+		_messageIndex = 0;
+	}
+}
 
 - (NSComparisonResult)compare:(XFFriend *)other
 {

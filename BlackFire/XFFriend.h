@@ -14,11 +14,12 @@
 typedef UIImage NSImage; // to fix the avatar property, actually not sure whether this works or not..
 #endif
 
-@class XFSession;
+@class XFSession, ADBitList;
 
 @interface XFFriend : NSObject
 {
-	XFSession *_session;
+	XFSession	*_session;
+	ADBitList	*_receivedMessages;
 	
 	NSString	*_username;
 	NSString	*_nickname;
@@ -48,6 +49,7 @@ typedef UIImage NSImage; // to fix the avatar property, actually not sure whethe
 }
 
 @property (nonatomic, assign) XFSession *session;
+@property (nonatomic, retain) ADBitList *receivedMessages;
 
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *nickname;
@@ -65,7 +67,7 @@ typedef UIImage NSImage; // to fix the avatar property, actually not sure whethe
 @property (nonatomic, assign) NSUInteger teamspeakIP;
 @property (nonatomic, assign) NSUInteger teamspeakPort;
 
-@property (nonatomic, assign) BOOL online;
+@property (nonatomic, assign, setter = setOnlineStatus:) BOOL online;
 @property (nonatomic, assign) BOOL friendOfFriend;
 @property (nonatomic, assign) BOOL clanFriend;
 

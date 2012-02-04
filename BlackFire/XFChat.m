@@ -27,7 +27,6 @@
 	{
 		_remoteFriend		= [remoteFriend retain];
 		_connection			= nil;
-		_receivedMessages	= [[ADBitList alloc] init];
 		_messageBuffer		= [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -39,7 +38,6 @@
 	{
 		_remoteFriend		= nil;
 		_connection			= nil;
-		_receivedMessages	= [[ADBitList alloc] init];
 		_messageBuffer		= [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -53,8 +51,6 @@
 	_connection = nil;
 	[_messageBuffer release];
 	_messageBuffer = nil;
-	[_receivedMessages release];
-	_receivedMessages = nil;
 	[super dealloc];
 }
 
@@ -153,14 +149,14 @@
 		{
 			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
 			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
-			if( [_receivedMessages isSet:(unsigned int)imIndex] )
+			if( [_remoteFriend.receivedMessages isSet:(unsigned int)imIndex] )
 			{
-				NSLog(@"[Notice] Received a duplicate chat message %@",packet);
+				NSLog(@"[Notice] Received a duplicate chat message\n\n '%@'\n\n with index: %lu",message,imIndex);
 			}
 			else
 			{
 				[self receivedMessage:message];
-				[_receivedMessages set:(unsigned int)imIndex];
+				[_remoteFriend.receivedMessages set:(unsigned int)imIndex];
 			}
 			XFPacket *sendPkt = [XFPacket chatAcknowledgementPacketWithSID:[_remoteFriend sessionID] 
 																   imIndex:(unsigned int)imIndex];
