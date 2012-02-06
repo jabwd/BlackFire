@@ -866,6 +866,24 @@
 									<reference key="NSMixedImage" ref="502551668"/>
 									<int key="NSTag">3</int>
 								</object>
+								<object class="NSMenuItem" id="840815843">
+									<reference key="NSMenu" ref="835318025"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="525122155">
+									<reference key="NSMenu" ref="835318025"/>
+									<string key="NSTitle">Show chat history</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="299356726">
 									<reference key="NSMenu" ref="835318025"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1856,6 +1874,14 @@
 					</object>
 					<int key="connectionID">873</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showChatLogViewer:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="525122155"/>
+					</object>
+					<int key="connectionID">876</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2027,6 +2053,8 @@
 							<reference ref="830238279"/>
 							<reference ref="963869760"/>
 							<reference ref="1007146851"/>
+							<reference ref="525122155"/>
+							<reference ref="840815843"/>
 						</array>
 						<reference key="parent" ref="713487014"/>
 					</object>
@@ -2724,6 +2752,16 @@
 						<reference key="object" ref="751866906"/>
 						<reference key="parent" ref="626334003"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">874</int>
+						<reference key="object" ref="525122155"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">875</int>
+						<reference key="object" ref="840815843"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2860,13 +2898,15 @@
 				<string key="863.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="869.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="871.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="874.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="875.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">873</int>
+			<int key="maxID">876</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2887,6 +2927,7 @@
 						<string key="selectNextTab:">id</string>
 						<string key="selectNicknameOption:">id</string>
 						<string key="selectPreviousTab:">id</string>
+						<string key="showChatLogViewer:">id</string>
 						<string key="showPreferences:">id</string>
 						<string key="showProfile:">id</string>
 						<string key="showUserProfile:">id</string>
@@ -2947,6 +2988,10 @@
 						</object>
 						<object class="IBActionInfo" key="selectPreviousTab:">
 							<string key="name">selectPreviousTab:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showChatLogViewer:">
+							<string key="name">showChatLogViewer:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showPreferences:">

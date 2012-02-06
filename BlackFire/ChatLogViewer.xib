@@ -235,7 +235,7 @@
 							</object>
 						</object>
 					</object>
-					<object class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<object class="NSArray" key="NSToolbarIBAllowedItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="986061925"/>
 						<reference ref="237844565"/>
@@ -244,7 +244,7 @@
 						<reference ref="766194255"/>
 						<reference ref="464754939"/>
 					</object>
-					<object class="NSMutableArray" key="NSToolbarIBDefaultItems">
+					<object class="NSArray" key="NSToolbarIBDefaultItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="1073062402"/>
 						<reference ref="766194255"/>
@@ -480,7 +480,7 @@
 																			<string key="NSFrameSize">{340, 107}</string>
 																			<reference key="NSSuperview" ref="725040919"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="788960581"/>
+																			<reference key="NSNextKeyView" ref="493067648"/>
 																			<string key="NSReuseIdentifierKey">_NS:1828</string>
 																			<bool key="NSEnabled">YES</bool>
 																			<object class="NSTableHeaderView" key="NSHeaderView" id="70222351">
@@ -601,7 +601,7 @@
 															<string key="NSFrame">{{0, -1}, {342, 125}}</string>
 															<reference key="NSSuperview" ref="483813479"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="493067648"/>
+															<reference key="NSNextKeyView" ref="725040919"/>
 															<string key="NSReuseIdentifierKey">_NS:1824</string>
 															<int key="NSsFlags">133682</int>
 															<reference key="NSVScroller" ref="679890672"/>
@@ -662,7 +662,7 @@
 																			<string key="NSFrameSize">{340, 93}</string>
 																			<reference key="NSSuperview" ref="679211249"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="836415606"/>
+																			<reference key="NSNextKeyView" ref="974234453"/>
 																			<string key="NSReuseIdentifierKey">_NS:1480</string>
 																			<object class="NSTextContainer" key="NSTextContainer" id="705720741">
 																				<object class="NSLayoutManager" key="NSLayoutManager">
@@ -781,7 +781,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																	<string key="NSFrame">{{326, 1}, {15, 164}}</string>
 																	<reference key="NSSuperview" ref="240968800"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView"/>
 																	<string key="NSReuseIdentifierKey">_NS:1494</string>
 																	<reference key="NSTarget" ref="240968800"/>
 																	<string key="NSAction">_doScroller:</string>
@@ -806,7 +805,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 															<string key="NSFrame">{{0, 1}, {342, 166}}</string>
 															<reference key="NSSuperview" ref="1047553329"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="974234453"/>
+															<reference key="NSNextKeyView" ref="679211249"/>
 															<string key="NSReuseIdentifierKey">_NS:940</string>
 															<int key="NSsFlags">133138</int>
 															<reference key="NSVScroller" ref="836415606"/>
@@ -917,6 +916,54 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="464754939"/>
 					</object>
 					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectedAFriend:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="83806583"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectedAChat:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="458926478"/>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="83806583"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="83806583"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="458926478"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="458926478"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">61</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1282,7 +1329,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">57</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1297,9 +1344,15 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string>cleanAllChatlogs:</string>
 							<string>cleanOldChatlogs:</string>
 							<string>saveChatlog:</string>
+							<string>selectedAChat:</string>
+							<string>selectedAFriend:</string>
+							<string>showWindow:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1312,6 +1365,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string>cleanAllChatlogs:</string>
 							<string>cleanOldChatlogs:</string>
 							<string>saveChatlog:</string>
+							<string>selectedAChat:</string>
+							<string>selectedAFriend:</string>
+							<string>showWindow:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1325,6 +1381,18 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">saveChatlog:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">selectedAChat:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">selectedAFriend:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showWindow:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

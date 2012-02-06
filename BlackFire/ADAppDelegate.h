@@ -23,7 +23,7 @@ typedef enum
 	BFApplicationModeServers	= 5
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, BFServerListController, ADModeSwitchView, NSNonRetardedImageView;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, BFServerListController, ADModeSwitchView, NSNonRetardedImageView, BFChatLogViewer;
 
 @interface ADAppDelegate : NSObject <BFIdleTimeManagerDelegate,BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
@@ -53,6 +53,7 @@ typedef enum
 	BFPreferencesWindowController	*_preferencesWindowController;
 	BFGamesListController			*_gamesListController;
 	BFServerListController			*_serverListController;
+	BFChatLogViewer					*_chatlogViewer;
 	ADStringPromptController		*_stringPromptController;
 	
 	BFApplicationMode		_currentMode;
@@ -100,6 +101,7 @@ typedef enum
 //----------------------------------------------------------------------------
 // Main menu
 
+- (IBAction)showChatLogViewer:(id)sender;
 - (IBAction)selectNextTab:(id)sender;
 - (IBAction)selectPreviousTab:(id)sender;
 

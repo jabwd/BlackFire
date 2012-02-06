@@ -54,6 +54,7 @@
 - (unsigned int)gameIDForApplication:(NSRunningApplication *)applicationInfo;
 - (unsigned int)gameIDForApplicationDict:(NSDictionary *)applicationInfo;
 
+- (void)reCheckRunningGames;
 - (void)startMonitoring;
 - (void)stopMonitoring;
 

@@ -10,9 +10,11 @@
 
 @class BFChatLog;
 
-@interface BFChatLogViewer : NSWindowController
+@interface BFChatLogViewer : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
 {
 	NSMutableArray	*_friends;
+	NSMutableArray	*_chats;
+	
 	BFChatLog		*_currentChatLog;
 }
 
@@ -22,8 +24,17 @@
 
 - (IBAction)showWindow:(id)sender;
 
+//----------------------------------------------------------------------------
+// Toolbar
+
 - (IBAction)cleanOldChatlogs:(id)sender;
 - (IBAction)cleanAllChatlogs:(id)sender;
 - (IBAction)saveChatlog:(id)sender;
+
+//----------------------------------------------------------------------------
+// Table view crap
+
+- (IBAction)selectedAFriend:(id)sender;
+- (IBAction)selectedAChat:(id)sender;
 
 @end

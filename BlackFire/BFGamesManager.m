@@ -279,6 +279,20 @@
 	return [[output objectForKey:@"gameID"] intValue];
 }
 
+- (void)reCheckRunningGames
+{
+	NSArray *runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
+	for(NSRunningApplication *app in runningApplications)
+	{
+		NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplication:app]];
+		if( gameInfo )
+		{
+			[_runningGames addObject:gameInfo];
+			[_delegate gameDidLaunch:[gameInfo intValue]];
+		}
+	}
+}
+
 - (void)startMonitoring
 {
 	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];

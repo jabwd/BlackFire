@@ -25,6 +25,7 @@
 #import "BFRequestWindowController.h"
 #import "BFAddGameSheetController.h"
 #import "ADInvitationWindowController.h"
+#import "BFChatLogViewer.h"
 
 #import "BFNotificationCenter.h"
 #import "ADModeSwitchView.h"
@@ -96,6 +97,8 @@
 	_preferencesWindowController = nil;
 	[_friendshipRequests release];
 	_friendshipRequests = nil;
+	[_chatlogViewer release];
+	_chatlogViewer = nil;
     [super dealloc];
 }
 
@@ -346,6 +349,7 @@
 			{
 				_serverListController = [[BFServerListController alloc] initWithSession:_session];
 			}
+			_serverListController.session = _session;
 			[self changeMainView:_serverListController.view];
 			[_modeSwitch selectItemAtIndex:2];
 		}
@@ -956,6 +960,7 @@
 				// add the detection set to the custom mac games in the user defaults.
 				[[BFGamesManager sharedGamesManager] addMacGame:detectionDict forKey:detectionKey];
 				[_gamesListController reloadMacGames];
+				[[BFGamesManager sharedGamesManager] reCheckRunningGames];
 				[detectionDict release];
 			}
 			[appInfo release];
@@ -1054,6 +1059,16 @@
 
 
 #pragma mark - Menu items
+
+- (IBAction)showChatLogViewer:(id)sender
+{
+	if( _chatlogViewer ){
+		[_chatlogViewer showWindow:nil];
+		return;
+	}
+	_chatlogViewer = [[BFChatLogViewer alloc] init];
+	[_chatlogViewer showWindow:nil];
+}
 
 - (IBAction)addAction:(id)sender
 {

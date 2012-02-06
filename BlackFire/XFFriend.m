@@ -158,7 +158,8 @@
 	{
 		[_receivedMessages release];
 		_receivedMessages = nil;
-		_messageIndex = 0;
+		
+		// the real client does not reset the message index here either.
 	}
 }
 

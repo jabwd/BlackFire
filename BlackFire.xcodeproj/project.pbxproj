@@ -140,6 +140,10 @@
 		36DB12C414DBFE3300706971 /* server.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12C314DBFE3300706971 /* server.cfg */; };
 		36DB12CA14DC0F1400706971 /* qstat in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12C914DC0F1400706971 /* qstat */; };
 		36DB12CC14DC110200706971 /* Games.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12CB14DC110200706971 /* Games.plist */; };
+		36DB12CF14DC477500706971 /* BFChatLogViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DB12CE14DC477500706971 /* BFChatLogViewer.m */; };
+		36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D014DC478200706971 /* ChatLogViewer.xib */; };
+		36DB12D314DC4AC600706971 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D214DC4AC600706971 /* history.png */; };
+		36DB12D514DC4AFA00706971 /* submodule.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D414DC4AFA00706971 /* submodule.png */; };
 		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
 		36EBDDA51479B2F500D219D7 /* activeTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD991479B2F500D219D7 /* activeTabClose.png */; };
 		36EBDDA61479B2F500D219D7 /* activeTabCloseHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */; };
@@ -374,6 +378,11 @@
 		36DB12C314DBFE3300706971 /* server.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
 		36DB12C914DC0F1400706971 /* qstat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = qstat; sourceTree = "<group>"; };
 		36DB12CB14DC110200706971 /* Games.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Games.plist; sourceTree = "<group>"; };
+		36DB12CD14DC477500706971 /* BFChatLogViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFChatLogViewer.h; sourceTree = "<group>"; };
+		36DB12CE14DC477500706971 /* BFChatLogViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFChatLogViewer.m; sourceTree = "<group>"; };
+		36DB12D014DC478200706971 /* ChatLogViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLogViewer.xib; sourceTree = "<group>"; };
+		36DB12D214DC4AC600706971 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
+		36DB12D414DC4AFA00706971 /* submodule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submodule.png; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36EBDD991479B2F500D219D7 /* activeTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClose.png; sourceTree = "<group>"; };
 		36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabCloseHover.png; sourceTree = "<group>"; };
@@ -564,6 +573,8 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				36DB12D414DC4AFA00706971 /* submodule.png */,
+				36DB12D214DC4AC600706971 /* history.png */,
 				36DB12C314DBFE3300706971 /* server.cfg */,
 				36DB12C914DC0F1400706971 /* qstat */,
 				364F27C114AC95D5002ACFD7 /* soundSet.icns */,
@@ -776,6 +787,9 @@
 				3616012114AA2EC7003E6A9E /* BFAddGameSheetController.h */,
 				3616012214AA2EC7003E6A9E /* BFAddGameSheetController.m */,
 				3616012514AA3067003E6A9E /* AddGameSheet.xib */,
+				36DB12CD14DC477500706971 /* BFChatLogViewer.h */,
+				36DB12CE14DC477500706971 /* BFChatLogViewer.m */,
+				36DB12D014DC478200706971 /* ChatLogViewer.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -1011,6 +1025,9 @@
 				36DB12C414DBFE3300706971 /* server.cfg in Resources */,
 				36DB12CA14DC0F1400706971 /* qstat in Resources */,
 				36DB12CC14DC110200706971 /* Games.plist in Resources */,
+				36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */,
+				36DB12D314DC4AC600706971 /* history.png in Resources */,
+				36DB12D514DC4AFA00706971 /* submodule.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1088,6 +1105,7 @@
 				364088E814D01B8400902346 /* ShadowedClipView.m in Sources */,
 				3603957E14DAE8ED006E67AC /* ADBitList.m in Sources */,
 				3603958214DAEF3D006E67AC /* XFChatMessage.m in Sources */,
+				36DB12CF14DC477500706971 /* BFChatLogViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
