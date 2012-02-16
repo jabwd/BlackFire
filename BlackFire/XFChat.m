@@ -147,7 +147,7 @@
 	{
 		case 0: // chat message
 		{
-			unsigned long imIndex = [[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
+			unsigned long imIndex = (unsigned long)[[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
 			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
 			if( [_remoteFriend.receivedMessages isSet:(unsigned int)imIndex] )
 			{

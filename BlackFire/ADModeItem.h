@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface ADModeItem : NSObject
+{
+	NSString *_name;
+	BOOL _selected;
+}
 
 @property (nonatomic, retain) NSString	*name;
 @property (nonatomic, assign) BOOL selected;

@@ -132,7 +132,7 @@
     {
         while( sqlite3_step(statement) == SQLITE_ROW )
         {
-            unsigned long timestamp = sqlite3_column_int64(statement, 1);
+            unsigned long timestamp = (unsigned long)sqlite3_column_int64(statement, 1);
             unsigned int chat		= sqlite3_column_int(statement, 0);
             if( timestamp != 0 )
             {

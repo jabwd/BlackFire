@@ -21,6 +21,8 @@
 	
 	NSMutableArray	*taskList;
 	NSMutableString *serverInfoOutput;
+	
+	ADOutlineView *_serverListView;
 }
 
 @property (nonatomic, assign) IBOutlet ADOutlineView *serverListView;

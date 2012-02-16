@@ -27,6 +27,10 @@ typedef enum
 
 @interface ADAppDelegate : NSObject <BFIdleTimeManagerDelegate,BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
+	NSWindow *_window;
+	NSSegmentedControl *_addButton;
+	ADModeSwitchView *_modeSwitch;
+	
 	XFSession				*_session;
 	BFAccount				*_account;
 	

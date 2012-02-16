@@ -10,7 +10,7 @@
 
 @interface NSNonRetardedImageView : NSView
 {
-	
+	NSImage *_image;
 }
 
 @property (nonatomic, retain) NSImage *image;

@@ -11,6 +11,14 @@
 @interface BFPreferencesWindowController : NSWindowController <NSToolbarDelegate> 
 {
 	NSMutableArray *_soundsets;
+	
+	NSView *_generalView;
+	NSView *_notificationsView;
+	NSView *_chatView;
+	NSView *_gamesView;
+	
+	NSToolbarItem *_generalItem;
+	NSPopUpButton *_soundsetDropDown;
 }
 
 @property (assign) IBOutlet NSView	*generalView;

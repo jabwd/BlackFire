@@ -64,7 +64,7 @@ static XFGamesManager *sharedGameManager = nil;
 	}
 	else
 	{
-		NSLog(@"*** Unknown gameID: %lu",gameID);
+		NSLog(@"*** Unknown gameID: %lu",(unsigned long)gameID);
 		game.longName	= @"Unknown game";
 		game.gameID		= -1;
 		game.shortName	= @"-1";

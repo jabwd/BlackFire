@@ -12,7 +12,9 @@
 
 @interface ADInvitationWindowController : ADStringPromptController <NSTableViewDelegate, NSTableViewDataSource>
 {
-	NSMutableArray *_searchResults;
+	NSMutableArray	*_searchResults;
+	NSTextField		*_searchField;
+	NSTableView		*_tableView;
 	XFFriend		*_selectedFriend;
 }
 

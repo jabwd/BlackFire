@@ -13,6 +13,7 @@
 
 @interface BFAddGameSheetController : ADStringPromptController <ADApplicationDropFieldDelegate>
 {
+	ADApplicationDropField *_dropField;
 }
 
 @property (nonatomic, assign) IBOutlet ADApplicationDropField *dropField;

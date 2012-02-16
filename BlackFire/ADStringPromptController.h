@@ -19,6 +19,11 @@
 @interface ADStringPromptController : NSObject
 {
 	NSWindow *_mainWindow;
+	NSWindow *_sheet;
+	NSTextField *_titleField;
+	NSTextField *_messageField;
+	NSButton *_cancelButton;
+	NSButton *_doneButton;
 	
 	id <ADStringPromptDelegate> _delegate;
 }

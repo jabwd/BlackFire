@@ -16,6 +16,10 @@
 	NSMutableArray	*_chats;
 	
 	BFChatLog		*_currentChatLog;
+	
+	NSTextView *_chatlogView;
+	NSTableView *_friendsList;
+	NSTableView *_chatlogList;
 }
 
 @property (assign) IBOutlet NSTextView *chatlogView;

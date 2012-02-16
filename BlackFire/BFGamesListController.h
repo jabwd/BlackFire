@@ -14,6 +14,8 @@
 {
     BFGamesGroup *detectedGamesGroup;
     BFGamesGroup *undetectedGamesGroup;
+	
+	NSOutlineView *tableView;
 }
 
 @property (assign) IBOutlet NSOutlineView *tableView;

@@ -192,8 +192,6 @@
 				[[BFNotificationCenter defaultNotificationCenter] playDemoSound];
 			}
 		}
-		else
-			NSLog(@"*** Incorrect BFSoundSet index %lu for count %lu",index,[_soundsets count]);
 	}
 	else
 		NSLog(@"*** Unknown object %@ called selectSoundset",sender);

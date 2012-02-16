@@ -9,6 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @interface BFSoundSet : NSObject
+{
+	NSString *_name;
+	NSString *_path;
+	
+	NSString *_sendSoundPath;
+	NSString *_receiveSoundPath;
+	NSString *_onlineSoundPath;
+	NSString *_offlineSoundPath;
+	NSString *_connectedSoundPath;
+	
+	BOOL _valid;
+}
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *path;

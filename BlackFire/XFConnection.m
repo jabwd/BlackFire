@@ -157,7 +157,7 @@
 {
 	if( _status != XFConnectionConnected )
 	{
-		NSLog(@"*** Tried sending data of length %lu over disconnected XFConnection",[data length]);
+		NSLog(@"*** Tried sending data of length %lu over disconnected XFConnection",(unsigned long)[data length]);
 		return;
 	}
 	[_socket sendData:data];

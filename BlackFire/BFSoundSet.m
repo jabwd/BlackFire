@@ -14,7 +14,7 @@
 @synthesize path				= _path;
 
 @synthesize sendSoundPath		= _sendSoundPath;
-@synthesize receiveSoundPath	= _receiveSoundpath;
+@synthesize receiveSoundPath	= _receiveSoundPath;
 @synthesize onlineSoundPath		= _onlineSoundPath;
 @synthesize offlineSoundPath	= _offlineSoundPath;
 @synthesize connectedSoundPath	= _connectedSoundPath;
@@ -63,8 +63,8 @@
 	_offlineSoundPath = nil;
 	[_sendSoundPath release];
 	_sendSoundPath = nil;
-	[_receiveSoundpath release];
-	_receiveSoundpath = nil;
+	[_receiveSoundPath release];
+	_receiveSoundPath = nil;
 	[_connectedSoundPath release];
 	_connectedSoundPath = nil;
 	[super dealloc];
@@ -197,10 +197,10 @@
 		if( ! sounds )
 			sounds = information;
 		
-		[_receiveSoundpath release];
-		_receiveSoundpath = nil;
+		[_receiveSoundPath release];
+		_receiveSoundPath = nil;
 		if( [[sounds objectForKey:@"Message Received"] length] > 0 )
-			_receiveSoundpath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Message Received"]];
+			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Message Received"]];
 		
 		[_sendSoundPath release];
 		_sendSoundPath = nil;
@@ -248,10 +248,10 @@
 		_name = [name retain];
 		
 		
-		[_receiveSoundpath release];
-		_receiveSoundpath = nil;
+		[_receiveSoundPath release];
+		_receiveSoundPath = nil;
 		if( [[information objectForKey:@"receiveSound"] length] > 0 )
-			_receiveSoundpath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"receiveSound"]];
+			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"receiveSound"]];
 		
 		[_sendSoundPath release];
 		_sendSoundPath = nil;
