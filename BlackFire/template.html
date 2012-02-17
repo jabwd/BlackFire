@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<script type="text/javascript">
+var lastMessage;
+function insertMessage(timestamp,nickname,message,type)
+{
+  if( message.length > 0 && nickname.length > 0 )
+  {
+  	if( lastMessage == type )
+  	{
+  		extendMessage(message);
+  		return;
+  	}
+  	lastMessage = type;
+    document.getElementById("container").innerHTML+='<li class="'+type+'"><table><tr><td class="text"><div class="userInfo">'+nickname+'</div><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
+    scrollToBottom();
+  }
+}
+	
+function insertWarning(timestamp,message)
+{
+	if( message.length > 0 )
+	{
+		if( lastMessage == "warningMessage" )
+		{
+			extendMessage(message);
+			return;
+		}
+		//document.write("Test");
+		lastMessage = "warningMessage";
+		document.getElementById("container").innerHTML+='<li class="warningMessage"><table><tr><td class="text"><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
+		scrollToBottom();
+	}
+}
+
+function extendMessage(newMessage)
+{
+	var element = getElementByClass("texter");
+	element.innerHTML+="<br /><br />"+newMessage;
+	scrollToBottom();
+}
+
+function nearBottom()
+{
+    return ( document.body.scrollTop >= ( document.body.offsetHeight - ( window.innerHeight * 1.2 ) ) );
+}
+
+var intervall_scroll;
+
+function scrollToBottom()
+{
+    //document.body.scrollTop = (document.body.scrollHeight-window.innerHeight);
+    //return;
+    if ( intervall_scroll ) clearInterval( intervall_scroll );
+    intervall_scroll = setInterval( function() {
+        var target_scroll = (document.body.scrollHeight-window.innerHeight);
+        var scrolldiff = target_scroll - document.body.scrollTop;
+        if ( document.body.scrollTop != target_scroll ) {
+            var saved_scroll = document.body.scrollTop;
+            document.body.scrollTop += scrolldiff / 5 + ( scrolldiff >= 0 ? (scrolldiff != 0 ) : -1 );
+         } else {
+             saved_scroll = -1;
+            clearInterval( intervall_scroll );
+         }
+    } , 10 );
+    return;
+}
+
+function getElementByClass(searchClass,node,tag) {
+	var classElements = new Array();
+	if ( node == null )
+		node = document;
+	if ( tag == null )
+		tag = '*';
+	var els = node.getElementsByTagName(tag);
+	var elsLen = els.length;
+	var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
+	for (i = 0, j = 0; i < elsLen; i++) {
+		if ( pattern.test(els[i].className) ) {
+			classElements[j] = els[i];
+			j++;
+		}
+	}
+	return classElements[classElements.length-1];
+}
+</script>
+<style type="text/css">
+html,body
+{
+  border:0px;
+  margin:0px;
+  padding:0px;
+}
+
+body
+{
+  background-color:rgb(240,240,240);
+  font-size:9pt;
+	margin-top:0px;
+	margin-bottom:2px;
+  color: #000000;
+  font-family:"Helvetica";
+	overflow-x:hidden;
+	word-wrap: break-word !important;
+		word-break: break-word;
+		text-shadow: 1px 1px rgba(255,255,255,0.5); 
+}
+
+ul
+{
+  padding:0px;
+  margin:0px;
+}
+
+li
+{
+	padding:3px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	background:-webkit-gradient(
+						linear, left top, left bottom, 
+						to(#bec5cd), 
+						from(#d8dde4)
+						);
+	border-top:1px solid rgba(255,255,255,0.9);
+	border-bottom:1px solid rgba(50,50,50,0.5);
+	-webkit-box-shadow:0px 2px 4px rgba(80,80,80,0.4) ;
+}
+
+li.userMessage
+{
+/* was c8d5e4   e3ebf3 */
+	background:-webkit-gradient(
+						linear, left top, left bottom, 
+						to(rgb(200,200,197)), 
+						from(rgb(228,226,226)) /* 228 221 216 */
+						)!important;
+} 
+	
+li.warningMessage
+{
+background:-webkit-gradient(
+						linear, left top, left bottom, 
+						to(rgb(240,200,140)), 
+						from(rgb(255,230,140))
+						)!important;
+}
+
+.userInfo
+{
+	min-width:100px;
+	color:rgba(0,0,0,0.5);
+	font-weight:bold;
+	font-size:10pt;
+	padding-right:5px;
+	margin-bottom:2px;
+}
+	
+.texter
+	{
+		float:left;
+	}
+
+table
+{
+	width:100%;
+	height:auto;
+	margin-top:-17px;
+}
+
+td.text
+{
+	width:auto;
+}
+
+td.timestamp
+{
+	color:#707070;
+	width:100px;
+	text-align:right;
+}
+
+a:link {
+			color:rgb(50,50,235);
+			text-decoration:underline;
+			-webkit-transition-property: color;
+			-webkit-transition-duration: 400ms;
+		}
+		
+		a:hover {
+			color:rgb(20,20,155);
+		}
+		
+		a:active {
+			color:#5579D5;
+		}
+</style>
+</head>
+<body>
+<ul id="container">
+</ul>
+</body>
+</html>

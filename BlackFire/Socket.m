@@ -265,6 +265,10 @@ static void socketCallback(CFSocketRef sock, CFSocketCallBackType cbType, CFData
     {
         [(Socket *)info didConnect];
     }
+	else
+	{
+		NSLog(@"*** Received an unknown socket notification");
+	}
 }
 
 

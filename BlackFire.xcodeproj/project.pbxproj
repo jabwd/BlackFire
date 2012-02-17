@@ -38,6 +38,7 @@
 		361849AF149CF07B00614603 /* BFPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361849AE149CF07B00614603 /* BFPreferencesWindowController.m */; };
 		361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */; };
 		361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361D2EEF148FFA0D008EE54C /* StringPrompt.xib */; };
+		36205BF314EF1F380041FDBF /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 36205BF214EF1F380041FDBF /* template.html */; };
 		36276EC71468152900F84E7B /* SFTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EC61468152900F84E7B /* SFTabView.m */; };
 		36276ECA1468252900F84E7B /* activeWTabFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276EC91468252900F84E7B /* activeWTabFill.png */; };
 		36276ED51468261700F84E7B /* activeWTabFillSL.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276ECB1468261700F84E7B /* activeWTabFillSL.png */; };
@@ -102,6 +103,7 @@
 		368238E414A09C1400C60D5E /* GamesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E114A09C1400C60D5E /* GamesList.xib */; };
 		368238E514A09C1400C60D5E /* ServerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E214A09C1400C60D5E /* ServerList.xib */; };
 		368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238EB14A0A15C00C60D5E /* BFGamesGroup.m */; };
+		368467B114EECBB6006669D5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368467B014EECBB6006669D5 /* WebKit.framework */; };
 		368C6B47149E00CF00723E9A /* chatting.icns in Resources */ = {isa = PBXBuildFile; fileRef = 368C6B46149E00CF00723E9A /* chatting.icns */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
@@ -234,6 +236,9 @@
 		361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADStringPromptController.h; sourceTree = "<group>"; };
 		361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADStringPromptController.m; sourceTree = "<group>"; };
 		361D2EEF148FFA0D008EE54C /* StringPrompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringPrompt.xib; sourceTree = "<group>"; };
+		36205BF214EF1F380041FDBF /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
+		36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XNResizingMessageView.h; sourceTree = "<group>"; };
+		36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XNResizingMessageView.m; sourceTree = "<group>"; };
 		36276EC51468152900F84E7B /* SFTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTabView.h; sourceTree = "<group>"; };
 		36276EC61468152900F84E7B /* SFTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTabView.m; sourceTree = "<group>"; };
 		36276EC91468252900F84E7B /* activeWTabFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeWTabFill.png; sourceTree = "<group>"; };
@@ -325,6 +330,9 @@
 		368238E214A09C1400C60D5E /* ServerList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerList.xib; sourceTree = "<group>"; };
 		368238EA14A0A15C00C60D5E /* BFGamesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesGroup.h; sourceTree = "<group>"; };
 		368238EB14A0A15C00C60D5E /* BFGamesGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesGroup.m; sourceTree = "<group>"; };
+		368467B014EECBB6006669D5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		368467B714EECF20006669D5 /* BFWebview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWebview.h; sourceTree = "<group>"; };
+		368467B814EECF20006669D5 /* BFWebview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWebview.m; sourceTree = "<group>"; };
 		368C6B46149E00CF00723E9A /* chatting.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = chatting.icns; sourceTree = "<group>"; };
 		368EC5B2147172CF00EEDC07 /* AHHyperlinkScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHHyperlinkScanner.h; sourceTree = "<group>"; };
 		368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHHyperlinkScanner.m; sourceTree = "<group>"; };
@@ -411,6 +419,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368467B114EECBB6006669D5 /* WebKit.framework in Frameworks */,
 				363941CC149C0E7C00DDECB4 /* libsqlite3.dylib in Frameworks */,
 				36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */,
 				3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */,
@@ -452,6 +461,7 @@
 		3616F65C145F0E5500E5066D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				368467B014EECBB6006669D5 /* WebKit.framework */,
 				363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */,
 				36B6427E1484474700D9B11E /* Growl.framework */,
 				36D9C9F114659B9600C4A162 /* Security.framework */,
@@ -573,6 +583,7 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				36205BF214EF1F380041FDBF /* template.html */,
 				36DB12D414DC4AFA00706971 /* submodule.png */,
 				36DB12D214DC4AC600706971 /* history.png */,
 				36DB12C314DBFE3300706971 /* server.cfg */,
@@ -693,6 +704,10 @@
 		36529834146692F00010FD7F /* NSView subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */,
+				36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */,
+				368467B714EECF20006669D5 /* BFWebview.h */,
+				368467B814EECF20006669D5 /* BFWebview.m */,
 				36276EE31468442B00F84E7B /* NSViewAdditions.h */,
 				36276EE41468442B00F84E7B /* NSViewAdditions.m */,
 				361268D014A26C4300ACDEA4 /* ModeSwitchView */,
@@ -1028,6 +1043,7 @@
 				36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */,
 				36DB12D314DC4AC600706971 /* history.png in Resources */,
 				36DB12D514DC4AFA00706971 /* submodule.png in Resources */,
+				36205BF314EF1F380041FDBF /* template.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
