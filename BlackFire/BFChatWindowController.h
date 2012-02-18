@@ -8,15 +8,18 @@
 
 #import <Cocoa/Cocoa.h> 
 #import "SFTabStripView.h"
+#import "XNResizingMessageView.h"
 
-@class BFChat, NSNonRetardedImageView;
+@class BFChat, NSNonRetardedImageView, XNResizingMessageView, XNBorderedScrollView;
 
 
-@interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate, NSTextFieldDelegate>
+@interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate, BFChatMessageViewDelegate>
 {
 	NSWindow	*_window;
 	NSView		*_switchView;
-	NSTextField *_messageField;
+	
+	XNBorderedScrollView	*_messageScrollView;
+	XNResizingMessageView	*_messageView;
 	
 	NSView *_toolbarView;
 	NSToolbarItem *_toolbarItem;
@@ -36,7 +39,9 @@
 
 @property (assign) IBOutlet NSView *switchView;
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSTextField *messageField;
+
+@property (assign) IBOutlet XNBorderedScrollView *messageScrollView;
+@property (assign) IBOutlet XNResizingMessageView *messageView;
 
 @property (assign) IBOutlet NSNonRetardedImageView *avatarImageView;
 @property (assign) IBOutlet NSImageView *statusIconView;
@@ -69,8 +74,6 @@
 
 //----------------------------------------------------------------------
 // User interface controls
-
-- (IBAction)sendMessage:(id)sender;
 
 /*
  * Updates the toolbar information using the currently selected chat

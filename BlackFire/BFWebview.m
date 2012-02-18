@@ -12,6 +12,7 @@
 
 
 @implementation BFWebview
+
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if( (self = [super initWithFrame:frameRect]) )
@@ -20,7 +21,7 @@
 		// It can happen sometimes that the message is sent so quickly that the WebView 
 		// has no time to load the page in time.
         [self setAutoresizingMask:63];
-        webView = [[WebView alloc] initWithFrame:NSMakeRect(frameRect.origin.x, frameRect.origin.y+1, frameRect.size.width, frameRect.size.height-1) frameName:nil groupName:nil];
+        webView = [[WebView alloc] initWithFrame:NSMakeRect(frameRect.origin.x, frameRect.origin.y-1, frameRect.size.width, frameRect.size.height+2) frameName:nil groupName:nil];
         [webView setAutoresizingMask:63];
         [self addSubview:webView];
 		isLoaded = NO;
@@ -35,18 +36,17 @@
 	NSBundle *bundle = [NSBundle mainBundle];
 
     NSString *str = [[NSString alloc] initWithContentsOfFile:[bundle pathForResource:@"template" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSURL *baseURL = [[NSURL alloc] initWithString:[bundle resourcePath]];
+	NSURL *baseURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"file://",[bundle resourcePath]]];
 	if( ! str || [str length] < 10 )
 	{
 		[baseURL release];
 		[str release];
 		return;
 	}
-    NSURL *url = [[NSURL alloc] initWithString:[bundle pathForResource:@"template" ofType:@"html"]];
+    /*NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"file://",[bundle pathForResource:@"template" ofType:@"html"]]];
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:url];
-    [url release];
-    [[webView mainFrame] loadRequest:req];
-    [req release];
+    [url release];*/
+    [[webView mainFrame] loadHTMLString:str baseURL:baseURL];
     [baseURL release];	
 	[str release];
 	scriptObject = [webView windowScriptObject];
@@ -55,6 +55,7 @@
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
+	/*
 	NSString *urlString = [[NSString alloc] initWithFormat:@"file://%@",[[NSBundle mainBundle] pathForResource:@"template" ofType:@"html"]];
 	NSString *url = [[[[frame provisionalDataSource] request] URL] absoluteString];
 	if( [url isEqualToString:urlString] )
@@ -64,7 +65,7 @@
 	}
 	[[NSWorkspace sharedWorkspace] openURL:[[[frame provisionalDataSource] request] URL]];
 	[sender stopLoading:self];
-	[urlString release];
+	[urlString release];*/
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame

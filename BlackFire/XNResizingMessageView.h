@@ -8,15 +8,27 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol BFChatMessageViewDelegate
+- (void)controlTextChanged;
+- (void)sendMessage:(NSString *)message;
+- (void)resizeMessageView:(id)messageView;
+@end
+
 @interface XNResizingMessageView : NSTextView
 {
 	NSInteger			_maxLength;
 	NSSize               lastPostedSize;
 	NSSize               _desiredSizeCached;
 	
+	id <BFChatMessageViewDelegate> _messageDelegate;
+	
+	NSMutableArray	*previousMessages;
+    unsigned int	current;
+	
 	BOOL				_resizing;
 }
 
+@property (assign) id <BFChatMessageViewDelegate> messageDelegate;
 @property (assign) NSInteger maxLength;
 
 
@@ -24,5 +36,13 @@
 // Auto resizing
 
 - (NSSize)desiredSize;
+
+//------------------------------------------------------------------------------------
+// Misc
+
+- (void)previousMessage;
+- (void)nextMessage;
+- (void)addMessage:(NSString *)message;
+- (void)becomeKey;
 
 @end

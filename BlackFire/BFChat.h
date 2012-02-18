@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "XFChat.h"
 
-@class BFChatWindowController;
+@class BFChatWindowController, BFWebview;
 
 typedef enum
 {
@@ -23,8 +23,7 @@ typedef enum
 	BFChatWindowController	*_windowController;
 	XFChat					*_chat;
 	
-	NSTextView		*_chatHistoryView;
-	NSScrollView	*_chatScrollView;
+	BFWebview				*_webView;
 	NSDateFormatter *_dateFormatter;
 	NSMutableArray	*_messages;
 	
@@ -39,8 +38,7 @@ typedef enum
 }
 
 @property (nonatomic, retain) BFChatWindowController *windowController;
-@property (assign) IBOutlet NSTextView *chatHistoryView;
-@property (assign) IBOutlet NSScrollView *chatScrollView;
+@property (assign) IBOutlet BFWebview *webView;
 @property (nonatomic, retain) XFChat *chat;
 
 @property (readonly) NSUInteger missedMessages;

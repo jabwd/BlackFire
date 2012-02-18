@@ -10,8 +10,14 @@
 
 #define ENTRY_TEXTVIEW_PADDING	6
 #define BASE_HEIGHT				22
-#define MAX_EXTRA_HEIGHT		80
+#define MAX_EXTRA_HEIGHT		120
 #define MAX_HEIGHT				BASE_HEIGHT+MAX_EXTRA_HEIGHT
+
+#define UPKEY 126
+#define DOWNKEY 125
+#define ENTER  36
+#define ENTER2 76
+#define MAX_MESSAGE_HISTORY 5
 
 @interface XNResizingMessageView (Private)
 
@@ -21,6 +27,8 @@
 @end
 
 @implementation XNResizingMessageView
+
+@synthesize messageDelegate = _messageDelegate;
 
 @synthesize maxLength = _maxLength;
 
@@ -34,7 +42,7 @@
 											 selector:@selector(textDidChange:)
 												 name:NSTextDidChangeNotification 
 											   object:self];
-	_maxLength = -1;
+	_maxLength = 4000;
 	[self setFont:[NSFont fontWithName:@"Helvetica" size:13.0f]];
 }
 
@@ -72,40 +80,51 @@
 	[self resetCacheAndPostSizeChanged]; 
 }
 
-- (void)keyDown:(NSEvent *)inEvent
+- (void)keyDown:(NSEvent *)theEvent
 {
-	NSString *charactersIgnoringModifiers = [inEvent charactersIgnoringModifiers];
-	
-	if( [charactersIgnoringModifiers length] ) 
-	{
-		unichar		inChar	= [charactersIgnoringModifiers characterAtIndex:0];
-		NSUInteger	flags	= [inEvent modifierFlags];
-		
-		if (false && 
-				   (flags & NSAlternateKeyMask) && !(flags & NSShiftKeyMask))
-		{
-			if (inChar == NSUpArrowFunctionKey) 
-			{
-				//[self historyUp];
-			} else if (inChar == NSDownArrowFunctionKey) {
-				//[self historyDown];
-			} else {
-				[super keyDown:inEvent];
-			}
-			
-		}
-		else 
-		{
-			if( _maxLength > 0 && [[self textStorage] length] >= (_maxLength) )
-			{
-				NSBeep();
-				return;
-			}
-			[super keyDown:inEvent];
-		}
-	} 
-	else 
-		[super keyDown:inEvent]; // no actual text input
+    unsigned int keyCode = [theEvent keyCode];
+    if( keyCode == ENTER || keyCode == ENTER2 )
+    {
+        unsigned int modifierFlags = [theEvent modifierFlags];
+        if( !(modifierFlags & NSControlKeyMask) && !(modifierFlags & NSAlternateKeyMask) )
+        {
+            NSString *message = [[[self textStorage] string] copy];
+            [_messageDelegate sendMessage:message];
+            [self addMessage:message];
+            [message release];
+            [self setString:@""];
+            [self setNeedsDisplay:YES];
+			[self resetCacheAndPostSizeChanged];
+            return;
+        }
+        else 
+        {
+            /*
+             * This ensures that the user can type a newline in his
+             * message if he wants to
+             */
+            [super keyDown:theEvent];
+            return;
+        }
+    }
+    else if( keyCode == UPKEY )
+    {
+        if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"messageFieldHistory"] )
+            [self previousMessage];
+		else
+			[super keyDown:theEvent];
+        return;
+    }
+    else if( keyCode == DOWNKEY )
+    {
+        if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"messageFieldHistory"] )
+            [self nextMessage];
+		else
+			[super keyDown:theEvent];
+        return;
+    }
+	[_messageDelegate controlTextChanged];
+    [super keyDown:theEvent];
 }
 
 
@@ -165,11 +184,73 @@
 		lastPostedSize = [self desiredSize];
 		if( lastPostedSize.height >= MAX_HEIGHT )
 			return; // don't go bigger than this!!
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"TextViewSizeShouldChange" object:self];
+		//[[NSNotificationCenter defaultCenter] postNotificationName:@"TextViewSizeShouldChange" object:self];
+		[_messageDelegate resizeMessageView:self];
 	}
 }
 
 #pragma mark - Misc
 
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
+}
+
+- (void)becomeKey
+{
+	[[self window] makeFirstResponder:self];
+}
+
+
+- (void) previousMessage
+{
+    current++;
+    if( current > [previousMessages count] ) // musnt be larger then 5
+        current = [previousMessages count];
+    
+    NSString *message = [previousMessages objectAtIndex:(current-1)];
+    if( ! message || current == 0 )
+        message = @"";
+    
+    // load message here
+    [self setString:message];
+    [self    setNeedsDisplay:YES];
+	[self resetCacheAndPostSizeChanged];
+}
+
+- (void) nextMessage
+{
+	if( current > MAX_MESSAGE_HISTORY ) current = MAX_MESSAGE_HISTORY;
+	if( current > 0 )
+		current--;
+	
+	NSString *message;
+	if( current != 0 )
+	{
+		// load message here
+		message = [previousMessages objectAtIndex:(current-1)];
+		if( ! message )
+			message = @"";
+	}
+	else {
+		message = @"";
+	}
+	
+    [self setString:message];
+	[self    setNeedsDisplay:YES];
+	[self resetCacheAndPostSizeChanged];
+}
+
+- (void) addMessage:(NSString *)message
+{
+	current = 0;
+	if(! previousMessages )
+	{
+		previousMessages = [[NSMutableArray alloc] initWithCapacity:MAX_MESSAGE_HISTORY];
+	}
+	if( [previousMessages count] >= MAX_MESSAGE_HISTORY )
+		[previousMessages removeObjectAtIndex:4];
+	[previousMessages insertObject:message atIndex:0];
+}
 
 @end

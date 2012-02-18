@@ -39,6 +39,10 @@
 		361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */; };
 		361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361D2EEF148FFA0D008EE54C /* StringPrompt.xib */; };
 		36205BF314EF1F380041FDBF /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 36205BF214EF1F380041FDBF /* template.html */; };
+		36205BF714EF22AA0041FDBF /* BFWebview.m in Frameworks */ = {isa = PBXBuildFile; fileRef = 368467B814EECF20006669D5 /* BFWebview.m */; };
+		36205BF814EF22AD0041FDBF /* BFWebview.m in Sources */ = {isa = PBXBuildFile; fileRef = 368467B814EECF20006669D5 /* BFWebview.m */; };
+		36205BF914EF24AB0041FDBF /* XNResizingMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */; };
+		36205C0014EF26E10041FDBF /* XNBorderedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36205BFF14EF26E00041FDBF /* XNBorderedScrollView.m */; };
 		36276EC71468152900F84E7B /* SFTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36276EC61468152900F84E7B /* SFTabView.m */; };
 		36276ECA1468252900F84E7B /* activeWTabFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276EC91468252900F84E7B /* activeWTabFill.png */; };
 		36276ED51468261700F84E7B /* activeWTabFillSL.png in Resources */ = {isa = PBXBuildFile; fileRef = 36276ECB1468261700F84E7B /* activeWTabFillSL.png */; };
@@ -239,6 +243,8 @@
 		36205BF214EF1F380041FDBF /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
 		36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XNResizingMessageView.h; sourceTree = "<group>"; };
 		36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XNResizingMessageView.m; sourceTree = "<group>"; };
+		36205BFE14EF26E00041FDBF /* XNBorderedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XNBorderedScrollView.h; sourceTree = "<group>"; };
+		36205BFF14EF26E00041FDBF /* XNBorderedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XNBorderedScrollView.m; sourceTree = "<group>"; };
 		36276EC51468152900F84E7B /* SFTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTabView.h; sourceTree = "<group>"; };
 		36276EC61468152900F84E7B /* SFTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTabView.m; sourceTree = "<group>"; };
 		36276EC91468252900F84E7B /* activeWTabFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeWTabFill.png; sourceTree = "<group>"; };
@@ -419,6 +425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36205BF714EF22AA0041FDBF /* BFWebview.m in Frameworks */,
 				368467B114EECBB6006669D5 /* WebKit.framework in Frameworks */,
 				363941CC149C0E7C00DDECB4 /* libsqlite3.dylib in Frameworks */,
 				36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */,
@@ -704,6 +711,8 @@
 		36529834146692F00010FD7F /* NSView subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				36205BFE14EF26E00041FDBF /* XNBorderedScrollView.h */,
+				36205BFF14EF26E00041FDBF /* XNBorderedScrollView.m */,
 				36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */,
 				36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */,
 				368467B714EECF20006669D5 /* BFWebview.h */,
@@ -1121,7 +1130,10 @@
 				364088E814D01B8400902346 /* ShadowedClipView.m in Sources */,
 				3603957E14DAE8ED006E67AC /* ADBitList.m in Sources */,
 				3603958214DAEF3D006E67AC /* XFChatMessage.m in Sources */,
+				36205BF814EF22AD0041FDBF /* BFWebview.m in Sources */,
 				36DB12CF14DC477500706971 /* BFChatLogViewer.m in Sources */,
+				36205BF914EF24AB0041FDBF /* XNResizingMessageView.m in Sources */,
+				36205C0014EF26E10041FDBF /* XNBorderedScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

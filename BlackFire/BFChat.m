@@ -20,13 +20,14 @@
 #import "XFSession.h"
 #import "XFFriend.h"
 
+#import "BFWebview.h"
+
 #import "AHHyperlinkScanner.h"
 
 @implementation BFChat
 
 @synthesize windowController	= _windowController;
-@synthesize chatHistoryView		= _chatHistoryView;
-@synthesize chatScrollView		= _chatScrollView;
+@synthesize webView = _webView;
 
 @synthesize missedMessages		= _missedMessages;
 
@@ -92,7 +93,7 @@
 			}
 			NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:_chatFont,NSFontAttributeName,[NSColor darkGrayColor],NSForegroundColorAttributeName, nil];
 			NSAttributedString *string = [[NSAttributedString alloc] initWithString:str attributes:attributes];
-			[[_chatHistoryView textStorage] setAttributedString:string];
+			//[[_chatHistoryView textStorage] setAttributedString:string];
 			[attributes release];
 			[string release];
 			[str release];
@@ -240,7 +241,7 @@
 	{
 		_typing = true;
 		[_chat sendTypingNotification];
-		[self performSelector:@selector(userTypingDidEnd) withObject:nil afterDelay:5.0f];
+		[self performSelector:@selector(userTypingDidEnd) withObject:nil afterDelay:3.0f];
 	}
 }
 
@@ -343,7 +344,7 @@
 
 - (void)displayWarning:(NSString *)warningMessage
 {
-	if( [warningMessage length] > 0 )
+	/*if( [warningMessage length] > 0 )
 	{
 		NSMutableAttributedString *fmtMsg = nil;
 		NSString *newline = @"", *timestamp = @"";
@@ -387,14 +388,24 @@
 		[message release];
 		
 		
-	}
+	}*/
 }
 
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type
 {
+	NSString *timeStamp = @"";
+	if([[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps])
+		timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
+	if( type == BFFriendMessageType )
+	{
+		[_webView newMessage:msg timeStamp:timeStamp withNickName:shortDispName ofType:true];
+	}
+	else {
+		[_webView newMessage:msg timeStamp:timeStamp withNickName:shortDispName ofType:false];
+	}
 	// determine this BEFORE we add the new message, otherwise the incoming message could be too big
 	// which would disable the scrolling feature => SUCKS
-	BOOL shouldScroll = [self shouldScroll];
+	/*BOOL shouldScroll = [self shouldScroll];
 	NSMutableAttributedString *fmtMsg;
 	NSString *newline = @"", *timeStamp = @"";
 	NSRange boldStyleRange = NSMakeRange(0, 0);
@@ -442,12 +453,12 @@
 		{
 			[self scrollAnimated:false];
 		}
-	}
+	}*/
 }
 
 - (void)scrollAnimated:(BOOL)animated
 {
-	if( animated )
+	/*if( animated )
 	{
 		NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];
 		
@@ -463,12 +474,12 @@
 		range.location = [[_chatHistoryView textStorage] length];
 		range.length = 1;
 		[_chatHistoryView scrollRangeToVisible:range];
-	}
+	}*/
 }
 
 - (BOOL)shouldScroll
 {
-	NSClipView *clipView	= [[_chatHistoryView enclosingScrollView] contentView];
+	/*NSClipView *clipView	= [[_chatHistoryView enclosingScrollView] contentView];
 	NSRect actualRect		= clipView.frame;
 	NSRect documentRect		= clipView.documentRect;
 	NSRect visibleRect		= clipView.documentVisibleRect;
@@ -486,6 +497,7 @@
 		// annoying if you scroll here
 		return false;
 	}
+	return true;*/
 	return true;
 }
 

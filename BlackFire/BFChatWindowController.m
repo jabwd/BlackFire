@@ -20,7 +20,11 @@
 
 @synthesize switchView		= _switchView;
 @synthesize window			= _window;
-@synthesize messageField	= _messageField;
+
+@synthesize messageScrollView = _messageScrollView;
+@synthesize messageView = _messageView;
+
+
 @synthesize toolbarView		= _toolbarView;
 
 @synthesize avatarImageView = _avatarImageView;
@@ -37,7 +41,7 @@
 	{
 		[NSBundle loadNibNamed:@"BFChatWindow" owner:self];
 		[_window setAlphaValue:0.0f];
-		
+		[_messageView setMessageDelegate:self];
 		_chats = [[NSMutableArray alloc] init];
 		_currentlySelectedChat = nil;
 		
@@ -103,7 +107,7 @@
 
 - (void)didBecomeMain:(NSNotification *)notification
 {
-	[_messageField becomeFirstResponder];
+	[_messageView becomeKey];
 	[_currentlySelectedChat becameMainChat];
 }
 
@@ -152,7 +156,7 @@
 	[_tabStripView layoutTabs];
 	
 	_currentlySelectedChat = chat;
-	[self changeSwitchView:chat.chatScrollView];
+	[self changeSwitchView:(NSView *)chat.webView];
 	[self updateToolbar];
 }
 
@@ -163,7 +167,7 @@
 		if( chat.chat.remoteFriend.userID == tabView.tag )
 		{
 			_currentlySelectedChat = chat;
-			[self changeSwitchView:chat.chatScrollView];
+			[self changeSwitchView:(NSView *)chat.webView];
 			[self updateToolbar];
 			return;
 		}
@@ -184,7 +188,7 @@
 	if( ! _currentlySelectedChat )
 	{
 		_currentlySelectedChat = chat;
-		[self changeSwitchView:chat.chatScrollView];
+		[self changeSwitchView:(NSView *)chat.webView];
 		tabView.selected = true;
 	}
 	[tabView setTarget:self];
@@ -254,7 +258,7 @@
 	[_switchView addSubview:newView];
 	[newView setFrame:[_switchView bounds]];
 	
-	[_messageField becomeFirstResponder];
+	[_messageView becomeKey];
 	[_currentlySelectedChat becameMainChat];
 }
 
@@ -281,13 +285,6 @@
 	[_currentlySelectedChat textDidChange:obj];
 }
 
-- (IBAction)sendMessage:(id)sender
-{
-	[_currentlySelectedChat sendMessage:[_messageField stringValue]];
-	
-	[_messageField setStringValue:@""];
-	[_messageField setNeedsDisplay:true];
-}
 
 - (void)selectNextTab
 {
@@ -412,11 +409,11 @@
 	
 	if( remoteFriend.online )
 	{
-		[_messageField setHidden:false];
+		[_messageScrollView setHidden:false];
 	}
 	else
 	{
-		[_messageField setHidden:true];
+		[_messageScrollView setHidden:true];
 	}
 }
 
@@ -436,6 +433,35 @@
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem 
 {
 	return YES;
+}
+
+#pragma mark - Message view
+
+- (void)controlTextChanged
+{
+	[_currentlySelectedChat textDidChange:nil];
+}
+
+- (void)sendMessage:(NSString *)message
+{
+	[_currentlySelectedChat sendMessage:message];
+}
+
+- (void)resizeMessageView:(id)messageView{
+	NSSize size = [(XNResizingMessageView *)messageView desiredSize];
+	NSRect frame = [_messageScrollView frame];
+	CGFloat heightAddition = size.height - frame.size.height;
+	frame.size.height += heightAddition;
+	[_messageScrollView setFrame:frame];
+	
+	// change the window frame
+	NSRect windowFrame = [_window frame];
+	windowFrame.size.height += heightAddition;
+	windowFrame.origin.y -= heightAddition;
+	CGFloat height = [_window contentBorderThicknessForEdge:NSMinYEdge];
+	height += heightAddition;
+	[_window setContentBorderThickness:height forEdge:NSMinYEdge];
+	[_window setFrame:windowFrame display:true animate:false];
 }
 
 @end
