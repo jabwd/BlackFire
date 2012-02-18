@@ -461,6 +461,10 @@
 	CGFloat height = [_window contentBorderThicknessForEdge:NSMinYEdge];
 	height += heightAddition;
 	[_window setContentBorderThickness:height forEdge:NSMinYEdge];
+	NSRect mainView = [_switchView frame];
+	mainView.origin.y += heightAddition;
+	mainView.size.height -= heightAddition;
+	[_switchView setFrame:mainView];
 	[_window setFrame:windowFrame display:true animate:false];
 }
 

@@ -55,17 +55,16 @@
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-	/*
 	NSString *urlString = [[NSString alloc] initWithFormat:@"file://%@",[[NSBundle mainBundle] pathForResource:@"template" ofType:@"html"]];
 	NSString *url = [[[[frame provisionalDataSource] request] URL] absoluteString];
-	if( [url isEqualToString:urlString] )
+	if( [url isEqualToString:@"file:///"] )
 	{
 		[urlString release];
 		return; // dont do anything
 	}
 	[[NSWorkspace sharedWorkspace] openURL:[[[frame provisionalDataSource] request] URL]];
 	[sender stopLoading:self];
-	[urlString release];*/
+	[urlString release];
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
