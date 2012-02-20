@@ -14,7 +14,7 @@ function insertMessage(timestamp,nickname,message,type)
   		return;
   	}
   	lastMessage = type;
-    document.getElementById("container").innerHTML+='<li class="'+type+'"><table><tr><td class="text"><div class="userInfo">'+nickname+'</div><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
+    document.getElementById("container").innerHTML+='<li class="'+type+'"><div class="glare"></div><table><tr><td class="text"><div class="userInfo">'+nickname+'</div><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
     scrollToBottom();
   }
 }
@@ -30,7 +30,7 @@ function insertWarning(timestamp,message)
 		}
 		//document.write("Test");
 		lastMessage = "warningMessage";
-		document.getElementById("container").innerHTML+='<li class="warningMessage"><table><tr><td class="text"><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
+		document.getElementById("container").innerHTML+='<li class="warningMessage"><div class="glare"></div><table><tr><td class="text"><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
 		scrollToBottom();
 	}
 }
@@ -96,16 +96,17 @@ html,body
 
 body
 {
-  background-color:rgb(240,240,240);
-  font-size:9pt;
+	padding:5px;
+  	background-color:rgb(219,226,236);
+  	font-size:9pt;
 	margin-top:0px;
 	margin-bottom:0px;
-  color: #000000;
-  font-family:"Helvetica";
+  	color: #000000;
+  	font-family:"Helvetica";
 	overflow-x:hidden;
 	word-wrap: break-word !important;
-		word-break: break-word;
-		text-shadow: 1px 1px rgba(255,255,255,0.5); 
+	word-break: break-word;
+	text-shadow: 1px 1px rgba(255,255,255,0.5); 
 }
 
 ul
@@ -116,28 +117,49 @@ ul
 
 li
 {
-	padding:3px;
+	width:90%;
+	border:1px solid rgb(128,132,135);
+	border-radius:15px;
 	overflow-x:hidden;
 	overflow-y:hidden;
-	background:-webkit-gradient(
-						linear, left top, left bottom, 
-						to(#bec5cd), 
-						from(#d8dde4)
-						);
-	border-top:1px solid rgba(255,255,255,0.9);
-	border-bottom:1px solid rgba(50,50,50,0.5);
-	-webkit-box-shadow:0px 2px 4px rgba(80,80,80,0.4) ;
+						
+  	position: relative;
+
+  	/* Label */
+  	font-family: Lucida Sans, Helvetica, sans-serif;
+  	font-weight: 800;
+  	text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 0px;
+  	vertical-align: middle;
+  	white-space: nowrap;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
 }
 
 li.userMessage
 {
 /* was c8d5e4   e3ebf3 */
-	background:-webkit-gradient(
-						linear, left top, left bottom, 
-						to(rgb(200,200,197)), 
-						from(rgb(228,226,226)) /* 228 221 216 */
-						)!important;
+	background-color: rgba(60, 132, 198, 0.8);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(28, 91, 155, 0.8)), to(rgba(108, 191, 255, .9)));
+  border-top-color: #8ba2c1;
+  border-right-color: #5890bf;
+  border-bottom-color: #4f93ca;
+  border-left-color: #768fa5;
 } 
+
+li.userMessage .glare
+{
+	position: absolute;
+  top: 1px;
+  left: 5px;
+  right:5px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  height: 1px;
+  width: 100%;
+  padding: 8px 0;
+  background-color: rgba(255, 255, 255, 0.10);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0)));
+}
 	
 li.warningMessage
 {
@@ -198,7 +220,7 @@ a:link {
 		}
 </style>
 </head>
-<body>
+<body onload="insertMessage('00:00','excite','bla','userMessage');">
 <ul id="container">
 </ul>
 </body>
