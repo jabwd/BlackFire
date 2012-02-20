@@ -77,6 +77,7 @@
 	//Update typing status
 	
     //Reset cache and resize
+	[[self enclosingScrollView] setNeedsDisplay:true];
 	[self resetCacheAndPostSizeChanged]; 
 }
 

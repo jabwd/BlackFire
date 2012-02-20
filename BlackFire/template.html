@@ -1,43 +1,222 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<script type="text/javascript">
-var lastMessage;
-function insertMessage(timestamp,nickname,message,type)
+	<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+		<style type="text/css">
+		html,body
+		{
+			height:100%;
+			margin:0px;
+			border:0px;
+			padding:0px;
+		}
+		
+		body
+		{
+			background-color:rgb(221,227,236);
+			color:black;
+			font-family:"Helvetica";
+		}
+		.chat-bubble 
+		{
+        	font-size:13px;
+        	font-weight:550;
+			margin:3px auto;
+			margin-bottom:8px;
+			margin-right:10%;
+			
+			padding:8px;
+			padding-top:4px;
+			padding-bottom:4px;
+			position:relative;
+			width:auto;
+			min-width:5px;
+			height:auto;
+			min-height:3px;
+			float:left;
+			margin-left:5px;
+			margin-right:5px;
+			/* background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(140,190,55)), color-stop(0.28, rgb(160,215,60)), color-stop(1, rgb(165,255,69))); */
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(210,210,210)), color-stop(0.28, rgb(215,215,215)), color-stop(1, rgb(228,228,228)));
+        	border-radius: 12px;
+        	border:1px solid rgb(115,115,115);
+        	text-shadow: 1px 1px rgba(255,255,255,0.68);
+        	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 0px rgba(150,150,150, 0.40);
+        	z-index:-2;
+		}
+
+.chat-bubble-glare {
+	position: absolute;
+	top: 0px;
+	left:0px;
+	height: 6px;
+	z-index:-1;
+	width:100%;
+}
+
+.actual-glare
 {
-  if( message.length > 0 && nickname.length > 0 )
+	margin-left:5px;
+	margin-right:5px;
+	height:12px;
+	z-index:-1;
+    border-radius: 10px;
+	background: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0.5)));
+}
+
+
+.chat-bubble-arrow {
+	border-color: transparent rgb(228,228,228) transparent transparent;
+	border-style: solid;
+	border-width: 6px;
+    height:0;
+	width:0;
+	position:absolute;
+	bottom:0px;
+	left:-2px;
+	-webkit-transform: rotate(75deg);
+	z-index:-2;
+}
+
+
+.chat-bubble-arrow-border {
+	border-color: transparent rgb(105,105,105) transparent transparent;
+	border-style: solid;
+	border-width: 6px;
+	height:0;
+	width:0;
+	position:absolute;
+	bottom:-2px;
+	left:-4px;
+	-webkit-transform: rotate(75deg);
+	z-index:-2;
+}
+
+div.text
+{
+	float:left;
+	height:auto;
+	width:auto;
+	z-index:10;
+}
+
+div.red 
+{
+	margin-right:3px;
+	margin-left:10%;
+	border:1px solid rgb(116,116,135);
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(145,185,255)), color-stop(0.28, rgb(159,207,245)), color-stop(1, rgb(177,219,255)))!important;
+	float:right;
+	text-shadow: 1px 1px rgba(255,255,255,0.5);
+	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 0px rgba(150,150,150, 0.40);
+}
+			
+			div.red .actual-glare
+			{
+				margin-left:5px;
+				margin-right:5px;
+				height:12px;
+				z-index:-1;
+				border-radius: 10px;
+				background: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.45)));
+			}
+
+
+div.red .chat-bubble-arrow
+{
+	border-color: transparent rgb(177,219,255) transparent transparent!important;
+	-webkit-transform:rotate(100deg)!important;
+	left:auto;
+	bottom:-1px;
+	right:-2px;
+}
+
+div.red .chat-bubble-arrow-border
+{
+	border-color: transparent rgb(16,16,15) transparent transparent!important;
+	-webkit-transform:rotate(100deg)!important;
+	left:auto;
+	bottom:-2px;
+	right:-3px;
+}
+
+ul
+{
+	padding:0px;
+ 	 margin:0px;
+}
+
+li
+{
+	overflow:hidden;
+	width:100%;
+	float:left;
+	list-style-type: none;
+}
+
+li.warning
+{
+	width:100%;
+	text-align:center;
+	color:rgb(118,126,146);
+	text-shadow: 1px 1px rgba(255,255,255,0.7);
+	font-weight:700;
+	font-size:12px;
+}
+li.timestamp
+{
+	width:100%;
+	text-align:center;
+	color:rgb(118,126,146);
+	text-shadow: 1px 1px rgba(255,255,255,0.7);
+	font-weight:550;
+	font-size:11px;
+}
+		</style>
+		
+		<script type="text/javascript">
+		var lastMessage;
+		
+		function insertMessage(timestamp,nickname,message,type)
+		{
+			if( type == 'userMessage' )
+			{
+				insertUserMessage(message);
+			}
+			else
+				insertFriendMessage(message);
+		}
+function insertUserMessage(message)
+{
+  if( message.length > 0 )
   {
-  	if( lastMessage == type )
-  	{
-  		extendMessage(message);
-  		return;
-  	}
-  	lastMessage = type;
-    document.getElementById("container").innerHTML+='<li class="'+type+'"><div class="glare"></div><table><tr><td class="text"><div class="userInfo">'+nickname+'</div><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
+    document.getElementById("container").innerHTML+='<li><div class="chat-bubble"><div class="chat-bubble-glare"><div class="actual-glare"></div></div><div class="text">'+message+'</div><div class="chat-bubble-arrow-border"></div><div class="chat-bubble-arrow"></div></div></li>';
     scrollToBottom();
   }
+}
+
+function insertFriendMessage(message)
+{
+	if( message.length > 0 )
+  	{
+    	document.getElementById("container").innerHTML+='<li><div class="chat-bubble red"><div class="chat-bubble-glare"><div class="actual-glare"></div></div><div class="text">'+message+'</div><div class="chat-bubble-arrow-border"></div><div class="chat-bubble-arrow"></div></div></li>';
+   		scrollToBottom();
+  	}
 }
 	
 function insertWarning(timestamp,message)
 {
 	if( message.length > 0 )
 	{
-		if( lastMessage == "warningMessage" )
-		{
-			extendMessage(message);
-			return;
-		}
-		//document.write("Test");
-		lastMessage = "warningMessage";
-		document.getElementById("container").innerHTML+='<li class="warningMessage"><div class="glare"></div><table><tr><td class="text"><div class="texter">'+message+'</div></td><td class="timestamp">'+timestamp+'</td></tr></table></li>';
+		document.getElementById("container").innerHTML+='<li class="timestamp">'+timestamp+'</li>';
+		document.getElementById("container").innerHTML+='<li class="warning">'+message+'</li>';
 		scrollToBottom();
 	}
 }
 
 function extendMessage(newMessage)
 {
-	var element = getElementByClass("texter");
+	var element = getElementByClass("text");
 	element.innerHTML+="<br /><br />"+newMessage;
 	scrollToBottom();
 }
@@ -85,143 +264,13 @@ function getElementByClass(searchClass,node,tag) {
 	}
 	return classElements[classElements.length-1];
 }
-</script>
-<style type="text/css">
-html,body
-{
-  border:0px;
-  margin:0px;
-  padding:0px;
-}
-
-body
-{
-	padding:5px;
-  	background-color:rgb(219,226,236);
-  	font-size:9pt;
-	margin-top:0px;
-	margin-bottom:0px;
-  	color: #000000;
-  	font-family:"Helvetica";
-	overflow-x:hidden;
-	word-wrap: break-word !important;
-	word-break: break-word;
-	text-shadow: 1px 1px rgba(255,255,255,0.5); 
-}
-
-ul
-{
-  padding:0px;
-  margin:0px;
-}
-
-li
-{
-	width:90%;
-	border:1px solid rgb(128,132,135);
-	border-radius:15px;
-	overflow-x:hidden;
-	overflow-y:hidden;
-						
-  	position: relative;
-
-  	/* Label */
-  	font-family: Lucida Sans, Helvetica, sans-serif;
-  	font-weight: 800;
-  	text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 0px;
-  	vertical-align: middle;
-  	white-space: nowrap;
-  	text-overflow: ellipsis;
-  	overflow: hidden;
-}
-
-li.userMessage
-{
-/* was c8d5e4   e3ebf3 */
-	background-color: rgba(60, 132, 198, 0.8);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(28, 91, 155, 0.8)), to(rgba(108, 191, 255, .9)));
-  border-top-color: #8ba2c1;
-  border-right-color: #5890bf;
-  border-bottom-color: #4f93ca;
-  border-left-color: #768fa5;
-} 
-
-li.userMessage .glare
-{
-	position: absolute;
-  top: 1px;
-  left: 5px;
-  right:5px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  height: 1px;
-  width: 100%;
-  padding: 8px 0;
-  background-color: rgba(255, 255, 255, 0.10);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0)));
-}
+		</script>
+	</head>
 	
-li.warningMessage
-{
-background:-webkit-gradient(
-						linear, left top, left bottom, 
-						to(rgb(240,200,140)), 
-						from(rgb(255,230,140))
-						)!important;
-}
+	<body>
+		<ul id="container">
 
-.userInfo
-{
-	min-width:100px;
-	color:rgba(0,0,0,0.5);
-	font-weight:bold;
-	font-size:10pt;
-	padding-right:5px;
-	margin-bottom:2px;
-}
+ 		</ul>
 	
-.texter
-	{
-		float:left;
-	}
-
-table
-{
-	width:100%;
-	height:auto;
-	margin-top:-17px;
-}
-
-td.text
-{
-	width:auto;
-}
-
-td.timestamp
-{
-	color:#707070;
-	width:100px;
-	text-align:right;
-}
-
-a:link {
-			color:rgb(50,50,235);
-			text-decoration:underline;
-			-webkit-transition-property: color;
-			-webkit-transition-duration: 400ms;
-		}
-		
-		a:hover {
-			color:rgb(20,20,155);
-		}
-		
-		a:active {
-			color:#5579D5;
-		}
-</style>
-</head>
-<body onload="insertMessage('00:00','excite','bla','userMessage');">
-<ul id="container">
-</ul>
-</body>
+	</body>
 </html>

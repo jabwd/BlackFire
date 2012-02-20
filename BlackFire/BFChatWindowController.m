@@ -23,6 +23,7 @@
 
 @synthesize messageScrollView = _messageScrollView;
 @synthesize messageView = _messageView;
+@synthesize backgroundView = _backgroundView;
 
 
 @synthesize toolbarView		= _toolbarView;
@@ -113,8 +114,8 @@
 
 - (void)awakeFromNib
 {
-	[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
-	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
+	//[_window setContentBorderThickness:34.0 forEdge:NSMinYEdge];
+	//[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 	[_tabStripView setDelegate:self];
 	
 	NSToolbar*toolbar = [[NSToolbar alloc] initWithIdentifier:@"chatWindowToolbar"];
@@ -458,13 +459,16 @@
 	NSRect windowFrame = [_window frame];
 	windowFrame.size.height += heightAddition;
 	windowFrame.origin.y -= heightAddition;
-	CGFloat height = [_window contentBorderThicknessForEdge:NSMinYEdge];
-	height += heightAddition;
-	[_window setContentBorderThickness:height forEdge:NSMinYEdge];
+	//CGFloat height = [_window contentBorderThicknessForEdge:NSMinYEdge];
+	//height += heightAddition;
+	//[_window setContentBorderThickness:height forEdge:NSMinYEdge];
 	NSRect mainView = [_switchView frame];
 	mainView.origin.y += heightAddition;
 	mainView.size.height -= heightAddition;
 	[_switchView setFrame:mainView];
+	NSRect bottom = [_backgroundView frame];
+	bottom.size.height += heightAddition;
+	[_backgroundView setFrame:bottom];
 	[_window setFrame:windowFrame display:true animate:false];
 }
 

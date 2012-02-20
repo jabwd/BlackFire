@@ -20,6 +20,7 @@
 	
 	XNBorderedScrollView	*_messageScrollView;
 	XNResizingMessageView	*_messageView;
+	NSView					*_backgroundView;
 	
 	NSView *_toolbarView;
 	NSToolbarItem *_toolbarItem;
@@ -47,6 +48,7 @@
 @property (assign) IBOutlet NSImageView *statusIconView;
 @property (assign) IBOutlet NSTextField *nicknameField;
 @property (assign) IBOutlet NSTextField *statusField;
+@property (assign) IBOutlet NSView *backgroundView;
 
 @property (assign) IBOutlet NSView *toolbarView;
 

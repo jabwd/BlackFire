@@ -344,6 +344,13 @@
 
 - (void)displayWarning:(NSString *)warningMessage
 {
+	if( [warningMessage length] > 0 )
+	{
+		NSString *timeStamp = @"";
+		if([[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps])
+			timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
+		[_webView newWarning:warningMessage timeStamp:timeStamp];
+	}
 	/*if( [warningMessage length] > 0 )
 	{
 		NSMutableAttributedString *fmtMsg = nil;

@@ -38,7 +38,6 @@
 		361849AF149CF07B00614603 /* BFPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361849AE149CF07B00614603 /* BFPreferencesWindowController.m */; };
 		361D2EED148FF9B5008EE54C /* ADStringPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */; };
 		361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361D2EEF148FFA0D008EE54C /* StringPrompt.xib */; };
-		36205BF314EF1F380041FDBF /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 36205BF214EF1F380041FDBF /* template.html */; };
 		36205BF714EF22AA0041FDBF /* BFWebview.m in Frameworks */ = {isa = PBXBuildFile; fileRef = 368467B814EECF20006669D5 /* BFWebview.m */; };
 		36205BF814EF22AD0041FDBF /* BFWebview.m in Sources */ = {isa = PBXBuildFile; fileRef = 368467B814EECF20006669D5 /* BFWebview.m */; };
 		36205BF914EF24AB0041FDBF /* XNResizingMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */; };
@@ -151,6 +150,8 @@
 		36DB12D314DC4AC600706971 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D214DC4AC600706971 /* history.png */; };
 		36DB12D514DC4AFA00706971 /* submodule.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D414DC4AFA00706971 /* submodule.png */; };
 		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
+		36E895E114F2A54E00341106 /* EXBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E895E014F2A54D00341106 /* EXBackgroundView.m */; };
+		36E895E414F2A7F200341106 /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 36E895E314F2A7F200341106 /* template.html */; };
 		36EBDDA51479B2F500D219D7 /* activeTabClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD991479B2F500D219D7 /* activeTabClose.png */; };
 		36EBDDA61479B2F500D219D7 /* activeTabCloseHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */; };
 		36EBDDA71479B2F500D219D7 /* activeTabClosePressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBDD9B1479B2F500D219D7 /* activeTabClosePressed.png */; };
@@ -240,7 +241,6 @@
 		361D2EEB148FF9B5008EE54C /* ADStringPromptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADStringPromptController.h; sourceTree = "<group>"; };
 		361D2EEC148FF9B5008EE54C /* ADStringPromptController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADStringPromptController.m; sourceTree = "<group>"; };
 		361D2EEF148FFA0D008EE54C /* StringPrompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringPrompt.xib; sourceTree = "<group>"; };
-		36205BF214EF1F380041FDBF /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
 		36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XNResizingMessageView.h; sourceTree = "<group>"; };
 		36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XNResizingMessageView.m; sourceTree = "<group>"; };
 		36205BFE14EF26E00041FDBF /* XNBorderedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XNBorderedScrollView.h; sourceTree = "<group>"; };
@@ -398,6 +398,9 @@
 		36DB12D214DC4AC600706971 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
 		36DB12D414DC4AFA00706971 /* submodule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submodule.png; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
+		36E895DF14F2A54D00341106 /* EXBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXBackgroundView.h; sourceTree = "<group>"; };
+		36E895E014F2A54D00341106 /* EXBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXBackgroundView.m; sourceTree = "<group>"; };
+		36E895E314F2A7F200341106 /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
 		36EBDD991479B2F500D219D7 /* activeTabClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClose.png; sourceTree = "<group>"; };
 		36EBDD9A1479B2F500D219D7 /* activeTabCloseHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabCloseHover.png; sourceTree = "<group>"; };
 		36EBDD9B1479B2F500D219D7 /* activeTabClosePressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabClosePressed.png; sourceTree = "<group>"; };
@@ -590,7 +593,7 @@
 		3616F6A7145F5CC500E5066D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				36205BF214EF1F380041FDBF /* template.html */,
+				36E895E314F2A7F200341106 /* template.html */,
 				36DB12D414DC4AFA00706971 /* submodule.png */,
 				36DB12D214DC4AC600706971 /* history.png */,
 				36DB12C314DBFE3300706971 /* server.cfg */,
@@ -732,6 +735,8 @@
 				3616012814AA3381003E6A9E /* ADApplicationDropField.m */,
 				364088E614D01B8400902346 /* ShadowedClipView.h */,
 				364088E714D01B8400902346 /* ShadowedClipView.m */,
+				36E895DF14F2A54D00341106 /* EXBackgroundView.h */,
+				36E895E014F2A54D00341106 /* EXBackgroundView.m */,
 			);
 			name = "NSView subclasses";
 			sourceTree = "<group>";
@@ -1052,7 +1057,7 @@
 				36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */,
 				36DB12D314DC4AC600706971 /* history.png in Resources */,
 				36DB12D514DC4AFA00706971 /* submodule.png in Resources */,
-				36205BF314EF1F380041FDBF /* template.html in Resources */,
+				36E895E414F2A7F200341106 /* template.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1134,6 +1139,7 @@
 				36DB12CF14DC477500706971 /* BFChatLogViewer.m in Sources */,
 				36205BF914EF24AB0041FDBF /* XNResizingMessageView.m in Sources */,
 				36205C0014EF26E10041FDBF /* XNBorderedScrollView.m in Sources */,
+				36E895E114F2A54E00341106 /* EXBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
