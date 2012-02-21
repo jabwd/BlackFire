@@ -66,37 +66,21 @@
 			BFChatLog *chatLog = [[BFChatLog alloc] init];
 			chatLog.friendUsername = _chat.remoteFriend.username;
 			NSArray *messages = [chatLog getLastMessages:5];
-			NSMutableString *str = [[NSMutableString alloc] init];
 			NSUInteger i, cnt = [messages count];
 			for(i=cnt;i>0;i--)
 			{
 				BFMessage *message = [messages objectAtIndex:(i-1)];
-				NSString *newLine = @"";
-				if( [str length] > 0 )
-					newLine = @"\n";
-				NSString *timestamp = @"";
-				if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps] )
-					timestamp = [_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:message.timestamp]];
-				if( message.user != BFWarningMessageType )
+				if( message.user == BFFriendMessageType )
 				{
-					NSString *displayName = nil;
-					if( message.user == BFFriendMessageType )
-						displayName = [_chat.remoteFriend displayName];
-					else
-						displayName = [[_chat loginIdentity] displayName];
-					[str appendFormat:@"%@%@ %@: %@",newLine,timestamp,displayName,message.message];
+					[_webView newMessage:message.message timeStamp:@"" withNickName:@"" ofType:true];
 				}
-				else
-				{
-					[str appendFormat:@"%@%@ <%@>",newLine,timestamp,message.message];
+				else if( message.user == BFUserMessageType ) {
+					[_webView newMessage:message.message timeStamp:@"" withNickName:@"" ofType:true];
+				}
+				else {
+					[_webView newWarning:message.message timeStamp:@""];
 				}
 			}
-			NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:_chatFont,NSFontAttributeName,[NSColor darkGrayColor],NSForegroundColorAttributeName, nil];
-			NSAttributedString *string = [[NSAttributedString alloc] initWithString:str attributes:attributes];
-			//[[_chatHistoryView textStorage] setAttributedString:string];
-			[attributes release];
-			[string release];
-			[str release];
 			[chatLog release];
 		}
 	}
@@ -350,6 +334,10 @@
 		if([[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps])
 			timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
 		[_webView newWarning:warningMessage timeStamp:timeStamp];
+		
+		BFMessage *message = [[BFMessage alloc] initWithMessage:warningMessage timestamp:[[NSDate date] timeIntervalSince1970] user:BFWarningMessageType];
+		[_messages addObject:message];
+		[message release];
 	}
 	/*if( [warningMessage length] > 0 )
 	{

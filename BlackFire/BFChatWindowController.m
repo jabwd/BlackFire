@@ -465,7 +465,13 @@
 	NSRect mainView = [_switchView frame];
 	mainView.origin.y += heightAddition;
 	mainView.size.height -= heightAddition;
-	[_switchView setFrame:mainView];
+	if( heightAddition < 0 )
+	{
+		[_switchView setFrame:mainView];
+		[_currentlySelectedChat scrollAnimated:false];
+	}
+	else
+		[_switchView setFrame:mainView];
 	NSRect bottom = [_backgroundView frame];
 	bottom.size.height += heightAddition;
 	[_backgroundView setFrame:bottom];

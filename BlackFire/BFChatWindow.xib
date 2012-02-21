@@ -46,7 +46,7 @@
 			<object class="NSWindowTemplate" id="1005">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 240}, {221, 272}}</string>
+				<string key="NSWindowRect">{{196, 240}, {221, 277}}</string>
 				<int key="NSWTFlags">544735232</int>
 				<string key="NSWindowTitle"/>
 				<string key="NSWindowClass">NSWindow</string>
@@ -61,7 +61,7 @@
 						<object class="NSCustomView" id="454028044">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">266</int>
-							<string key="NSFrame">{{0, 248}, {221, 24}}</string>
+							<string key="NSFrame">{{0, 253}, {221, 24}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="892551735"/>
@@ -71,7 +71,7 @@
 						<object class="NSCustomView" id="892551735">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{0, 34}, {221, 214}}</string>
+							<string key="NSFrame">{{0, 39}, {221, 214}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="117330036"/>
@@ -122,7 +122,7 @@
 													<string key="NSFrameSize">{191, 14}</string>
 													<reference key="NSSuperview" ref="891488384"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="93515472"/>
+													<reference key="NSNextKeyView" ref="614745815"/>
 													<string key="NSReuseIdentifierKey">_NS:1480</string>
 													<object class="NSTextContainer" key="NSTextContainer" id="761867737">
 														<object class="NSLayoutManager" key="NSLayoutManager">
@@ -274,10 +274,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<double key="NSPercent">0.94565218687057495</double>
 										</object>
 									</object>
-									<string key="NSFrame">{{14, 6}, {193, 22}}</string>
+									<string key="NSFrame">{{14, 11}, {193, 22}}</string>
 									<reference key="NSSuperview" ref="117330036"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="614745815"/>
+									<reference key="NSNextKeyView" ref="891488384"/>
 									<string key="NSReuseIdentifierKey">_NS:940</string>
 									<int key="NSsFlags">133138</int>
 									<reference key="NSVScroller" ref="93515472"/>
@@ -285,7 +285,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<reference key="NSContentView" ref="891488384"/>
 								</object>
 							</object>
-							<string key="NSFrameSize">{221, 34}</string>
+							<string key="NSFrame">{{0, -1}, {221, 40}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="334301451"/>
@@ -293,7 +293,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSClassName">EXBackgroundView</string>
 						</object>
 					</object>
-					<string key="NSFrameSize">{221, 272}</string>
+					<string key="NSFrameSize">{221, 277}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="454028044"/>
