@@ -23,9 +23,12 @@
 	BOOL isLoaded;
 	NSMutableArray *messageBuffer;
 }
-- (void)newMessage:(NSString *)message timeStamp:(NSString *)timestamp withNickName:(NSString *)nickName ofType:(BOOL)type;
+- (void)newMessage:(NSString *)message ofType:(BOOL)type;
 - (void)newWarning:(NSString *)warning timeStamp:(NSString *)timestamp;
+- (void)insertTimestamp:(NSString *)timestamp;
 
 + (NSString *)filteredNSString:(NSString *)p_in;
 - (void)close;
+
+- (void)scrollDown;
 @end

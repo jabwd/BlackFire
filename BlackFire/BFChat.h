@@ -33,6 +33,7 @@ typedef enum
 	NSFont			*_boldChatFont;
 	
 	NSUInteger		_missedMessages;
+	NSTimeInterval  _lastTimestamp;
 	BOOL			_typing;
 	BOOL			_animating;
 }

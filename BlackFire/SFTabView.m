@@ -13,6 +13,8 @@
 
 @implementation SFTabView
 
+@synthesize tabStrip = _tabStrip;
+
 @synthesize title		= _title;
 @synthesize selected	= _selected;
 @synthesize tag			= _tag;
@@ -48,6 +50,7 @@
 
 - (void)dealloc
 {
+	_tabStrip = nil;
 	[_tabImage release];
 	_tabImage = nil;
 	[_title release];
@@ -57,6 +60,13 @@
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
 {
+	return true;
+}
+
+- (BOOL)mouseDownCanMoveWindow
+{
+	if( [_tabStrip.tabs count] > 1 )
+		return false;
 	return true;
 }
 
@@ -144,6 +154,7 @@
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
+	[style setAlignment:NSCenterTextAlignment];
 	
 	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
 	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
@@ -165,7 +176,7 @@
 		_title = [@"" retain];
 	
 	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:_title attributes:attributes];
-	CGFloat height = [titleAttrStr size].height/2;
+	/*CGFloat height = [titleAttrStr size].height/2;
 	CGFloat baseX = 26;
 	CGFloat width = [titleAttrStr size].width;
 	if( (dirtyRect.size.width-40) < width )
@@ -177,7 +188,9 @@
 	// safeguard
 	if( baseX < 26 )
 		baseX = 26;
-	NSRect stringRect = NSMakeRect(baseX, (dirtyRect.size.height/2)-height-2.0f, width, 24-height);
+	NSRect stringRect = NSMakeRect(baseX, (dirtyRect.size.height/2)-height-2.0f, width, 24-height);*/
+	CGFloat height = [titleAttrStr size].height/2;
+	NSRect stringRect = NSMakeRect(dirtyRect.origin.x+26, (dirtyRect.size.height/2)-height-2.0f, dirtyRect.size.width-52, 24-height);
 	[titleAttrStr drawInRect:stringRect];
 	[titleAttrStr release];
 	
@@ -303,8 +316,11 @@
 {
 	// for some reason mouseDragged is called when vigorously dragging with the window around your screen,
 	// in order not to make the tab feel retarded: do this.
-	if( ! _mouseInside )
+	if( ! _mouseInside || [_tabStrip.tabs count] < 2 )
+	{
+		[super mouseDragged:theEvent];
 		return;
+	}
 
 	NSPoint newPoint = [NSEvent mouseLocation];
 	CGFloat deltaX = _originalPoint.x - newPoint.x;

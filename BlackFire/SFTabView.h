@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SFTabStripView;
+
 @interface SFTabView : NSView
 {
+	SFTabStripView *_tabStrip;
 	NSString *_title;
 	NSImage *_tabImage;
 	
@@ -32,6 +35,8 @@
 	BOOL _tabDragAction;
 	BOOL _tabRightSide; // used for the drawing, set in layoutTabs of the tabstripview
 }
+
+@property (nonatomic, assign) SFTabStripView *tabStrip;
 
 @property (nonatomic, retain) NSString *title;
 @property (assign) NSInteger tag;

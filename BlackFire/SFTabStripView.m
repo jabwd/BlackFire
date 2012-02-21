@@ -8,7 +8,7 @@
 
 #define TAB_OVERLAP 10.0f
 #define TAB_HEIGHT	24.0f
-#define TAB_WIDTHMAX 160.0f
+#define TAB_WIDTHMAX 480.0f
 
 #import "SFTabStripView.h"
 #import "SFTabView.h"
@@ -41,6 +41,11 @@
 - (void)update
 {
 	[self setNeedsDisplay:true];
+}
+
+- (BOOL)mouseDownCanMoveWindow
+{
+	return true;
 }
 
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize
@@ -129,6 +134,7 @@
 
 - (void)addTabView:(SFTabView *)tabView
 {
+	tabView.tabStrip = self;
 	[self addSubview:tabView];
 	[_tabs addObject:tabView];
 	[self layoutTabs];
@@ -136,6 +142,7 @@
 
 - (void)removeTabView:(SFTabView *)tabView
 {
+	tabView.tabStrip = nil;
 	[tabView retain];
 	[tabView removeFromSuperview];
 	

@@ -70,6 +70,22 @@
 	[super dealloc];
 }
 
+- (void)update
+{
+	[self setNeedsDisplay:true];
+}
+
+/*- (void)drawRect:(NSRect)dirtyRect
+{
+	if( [[self window] firstResponder] == self ) {
+		[NSGraphicsContext saveGraphicsState];
+        NSSetFocusRingStyle(NSFocusRingOnly);
+        NSRectFill(dirtyRect);
+		[NSGraphicsContext restoreGraphicsState];
+    }
+	[super drawRect:dirtyRect];
+}*/
+
 #pragma mark - Text input
 
 - (void)textDidChange:(NSNotification *)notification

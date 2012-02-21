@@ -31,7 +31,7 @@
 	return self;
 }
 
-- (void) awakeFromNib
+- (void)awakeFromNib
 {
 	NSBundle *bundle = [NSBundle mainBundle];
 
@@ -75,8 +75,6 @@
 		for(NSDictionary *message in messageBuffer)
 		{
 			[self newMessage:[message objectForKey:@"message"] 
-				   timeStamp:[message objectForKey:@"timestamp"] 
-				withNickName:[message objectForKey:@"nickName"] 
 					  ofType:[[message objectForKey:@"type"] boolValue]];
 		}
 		[messageBuffer release]; 
@@ -105,22 +103,19 @@
  *
  * Will save a message in the messageBuffer if the webview is not yet done with loading
  */
-- (void)newMessage:(NSString *)message timeStamp:(NSString *)timestamp withNickName:(NSString *)nickName ofType:(BOOL)type
+- (void)newMessage:(NSString *)message ofType:(BOOL)type
 {
 	// preventing some ugly errors
 	if( [message length] < 1 ) return;
-	if( [nickName length] < 1 ) return;
-	if( ! timestamp ) timestamp = @"00:00";
 	
 	if( !isLoaded )
 	{
-		NSDictionary *messages = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",timestamp,@"timestamp",nickName,@"nickName",[NSNumber numberWithBool:type],@"type", nil];
+		NSDictionary *messages = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",[NSNumber numberWithBool:type],@"type", nil];
 		[messageBuffer addObject:messages];
 		[messages release];
 		return;
 	}
 	message = [BFWebview filteredNSString:message];
-	nickName = [BFWebview filteredNSString:nickName];
 	
 	AHHyperlinkScanner *scanner = [[AHHyperlinkScanner alloc] initWithString:message usingStrictChecking:NO];
 	NSArray *all = [scanner allURIs];
@@ -139,17 +134,24 @@
 	
 	if( type )
 	{
-		// insertMessage(timeStamp,nickname,message,type)
-		// user message
-		NSArray *arg = [[NSArray alloc] initWithObjects:timestamp,nickName,message,@"userMessage",nil];
-		[scriptObject callWebScriptMethod:@"insertMessage" withArguments:arg];
+		NSArray *arg = [[NSArray alloc] initWithObjects:message,nil];
+		[scriptObject callWebScriptMethod:@"insertUserMessage" withArguments:arg];
 		[arg release];
 	}
-	else {
-		NSArray *arg = [[NSArray alloc] initWithObjects:timestamp,nickName,message,@"friendMessage",nil];
-		[scriptObject callWebScriptMethod:@"insertMessage" withArguments:arg];
+	else 
+	{
+		NSArray *arg = [[NSArray alloc] initWithObjects:message,nil];
+		[scriptObject callWebScriptMethod:@"insertFriendMessage" withArguments:arg];
 		[arg release];
 	}
+}
+
+
+- (void)insertTimestamp:(NSString *)timestamp
+{
+	NSArray *arg = [[NSArray alloc] initWithObjects:timestamp, nil];
+	[scriptObject callWebScriptMethod:@"insertTimestamp" withArguments:arg];
+	[arg release];
 }
 
 - (void)newWarning:(NSString *)warning timeStamp:(NSString *)timestamp
@@ -164,6 +166,8 @@
 	
 	AHHyperlinkScanner *scanner = [[AHHyperlinkScanner alloc] initWithString:warning usingStrictChecking:NO];
 	NSArray *all = [scanner allURIs];
+	
+	
 	// the padding because we are making the string bigger, thus the range wouldn't fit anymore
 	unsigned int padding = 0;
 	for(AHMarkedHyperlink *link in all)
@@ -308,5 +312,10 @@
 	
 	[[NSColor grayColor] set];
 	NSRectFill(NSMakeRect(dirtyRect.origin.x, dirtyRect.size.height-1, dirtyRect.size.width, 1));
+}
+
+- (void)scrollDown
+{
+	[scriptObject callWebScriptMethod:@"scrollToBottom" withArguments:nil];
 }
 @end

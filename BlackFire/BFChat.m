@@ -24,6 +24,8 @@
 
 #import "AHHyperlinkScanner.h"
 
+#define TIMESTAMP_INTERVAL 60
+
 @implementation BFChat
 
 @synthesize windowController	= _windowController;
@@ -61,7 +63,8 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendDidChange:) name:XFFriendDidChangeNotification object:chat.remoteFriend];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatNotificationWasClicked:) name:@"chatFriendClicked" object:chat.remoteFriend];
 		
-		if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatHistory] )
+		// disable this for now
+		if( [[NSUserDefaults standardUserDefaults] boolForKey:BFEnableChatHistory] && false )
 		{
 			BFChatLog *chatLog = [[BFChatLog alloc] init];
 			chatLog.friendUsername = _chat.remoteFriend.username;
@@ -72,10 +75,10 @@
 				BFMessage *message = [messages objectAtIndex:(i-1)];
 				if( message.user == BFFriendMessageType )
 				{
-					[_webView newMessage:message.message timeStamp:@"" withNickName:@"" ofType:true];
+					[_webView newMessage:message.message ofType:true];
 				}
 				else if( message.user == BFUserMessageType ) {
-					[_webView newMessage:message.message timeStamp:@"" withNickName:@"" ofType:true];
+					[_webView newMessage:message.message ofType:true];
 				}
 				else {
 					[_webView newWarning:message.message timeStamp:@""];
@@ -388,15 +391,21 @@
 
 - (void)processMessage:(NSString *)msg ofFriend:(NSString *)shortDispName ofType:(BFIMType)type
 {
+	NSDate *date = [NSDate date];
 	NSString *timeStamp = @"";
 	if([[NSUserDefaults standardUserDefaults] boolForKey:BFShowTimestamps])
-		timeStamp = [_dateFormatter stringFromDate:[NSDate date]];
+		timeStamp = [_dateFormatter stringFromDate:date];
+	if( ([date timeIntervalSince1970] - _lastTimestamp) >= TIMESTAMP_INTERVAL )
+	{
+		[_webView insertTimestamp:timeStamp];
+		_lastTimestamp = [date timeIntervalSince1970];
+	}
 	if( type == BFFriendMessageType )
 	{
-		[_webView newMessage:msg timeStamp:timeStamp withNickName:shortDispName ofType:true];
+		[_webView newMessage:msg ofType:true];
 	}
 	else {
-		[_webView newMessage:msg timeStamp:timeStamp withNickName:shortDispName ofType:false];
+		[_webView newMessage:msg ofType:false];
 	}
 	// determine this BEFORE we add the new message, otherwise the incoming message could be too big
 	// which would disable the scrolling feature => SUCKS
@@ -453,6 +462,7 @@
 
 - (void)scrollAnimated:(BOOL)animated
 {
+	[_webView scrollDown];
 	/*if( animated )
 	{
 		NSClipView *clipView = [[_chatHistoryView enclosingScrollView] contentView];

@@ -46,9 +46,10 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+	
 		NSRect frame = [self bounds];
 		
-		NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(frame.origin.x+.5, frame.origin.y+.5, frame.size.width-1, frame.size.height-1) xRadius:8 yRadius:8];
+		NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(frame.origin.x+.5, frame.origin.y+.5, frame.size.width-1, frame.size.height-1) xRadius:5 yRadius:5];
 		[[NSColor whiteColor] set];
 		[path setLineWidth:1.0f];
 		[path fill];
@@ -58,7 +59,8 @@
 	else {
 		[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0f] set];
 	}
-		[path stroke];
+	
+	[path stroke];
 }
 
 

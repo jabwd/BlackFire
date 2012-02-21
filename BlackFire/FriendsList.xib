@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">2177</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -56,7 +56,7 @@
 								<string key="NSFrameSize">{110, 259}</string>
 								<reference key="NSSuperview" ref="663555997"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="111840352"/>
 								<string key="NSReuseIdentifierKey">_NS:1703</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="_NSCornerView" key="NSCornerView">
@@ -140,7 +140,7 @@
 										<bytes key="NSWhite">MC41AA</bytes>
 									</object>
 								</object>
-								<double key="NSRowHeight">17</double>
+								<double key="NSRowHeight">28</double>
 								<int key="NSTvFlags">1405124608</int>
 								<reference key="NSDelegate"/>
 								<reference key="NSDataSource"/>
@@ -192,13 +192,13 @@
 				<string key="NSFrameSize">{110, 259}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="111840352"/>
+				<reference key="NSNextKeyView" ref="663555997"/>
 				<string key="NSReuseIdentifierKey">_NS:1699</string>
 				<int key="NSsFlags">133648</int>
 				<reference key="NSVScroller" ref="111840352"/>
 				<reference key="NSHScroller" ref="971481211"/>
 				<reference key="NSContentView" ref="663555997"/>
-				<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
+				<bytes key="NSScrollAmts">QSAAAEEgAABB8AAAQfAAAA</bytes>
 			</object>
 			<object class="NSMenu" id="1015314448">
 				<string key="NSTitle"/>
@@ -413,7 +413,7 @@
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -466,7 +466,7 @@
 							<string>removeFriend:</string>
 							<string>showProfile:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>id</string>
 							<string>id</string>
@@ -479,7 +479,7 @@
 							<string>removeFriend:</string>
 							<string>showProfile:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">removeFriend:</string>
@@ -551,7 +551,7 @@
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
 			</object>
-			<object class="NSMutableArray" key="dict.values">
+			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{11, 11}</string>
 				<string>{10, 3}</string>
