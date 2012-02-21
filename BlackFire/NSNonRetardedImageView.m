@@ -44,7 +44,7 @@
 	if( _image )
 	{
 		[NSGraphicsContext saveGraphicsState];
-		[[NSColor darkGrayColor] set];
+		[[NSColor colorWithCalibratedWhite:0.5 alpha:1.0f] set];
 		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
 		[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
 		[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.41]];

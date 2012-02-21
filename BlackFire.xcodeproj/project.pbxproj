@@ -397,6 +397,7 @@
 		36DB12D014DC478200706971 /* ChatLogViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLogViewer.xib; sourceTree = "<group>"; };
 		36DB12D214DC4AC600706971 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
 		36DB12D414DC4AFA00706971 /* submodule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submodule.png; sourceTree = "<group>"; };
+		36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = BlackFire.entitlements; path = BlackFire/BlackFire.entitlements; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36E895DF14F2A54D00341106 /* EXBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXBackgroundView.h; sourceTree = "<group>"; };
 		36E895E014F2A54D00341106 /* EXBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXBackgroundView.m; sourceTree = "<group>"; };
@@ -454,6 +455,7 @@
 		3616F64E145F0E5400E5066D = {
 			isa = PBXGroup;
 			children = (
+				36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */,
 				3616F663145F0E5500E5066D /* OSXFire */,
 				3616F65C145F0E5500E5066D /* Frameworks */,
 				3616F65A145F0E5500E5066D /* Products */,

@@ -766,7 +766,7 @@
 	if( remoteFriend )
 	{
 		NSString *cachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
-		NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.jabwd.BlackFire/%@.jpg",cachePath,remoteFriend.username];
+		NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%@.jpg",cachePath,remoteFriend.username];
 		
 		if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
 			[[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];

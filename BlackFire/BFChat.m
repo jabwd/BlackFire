@@ -24,7 +24,7 @@
 
 #import "AHHyperlinkScanner.h"
 
-#define TIMESTAMP_INTERVAL 60
+#define TIMESTAMP_INTERVAL 30
 
 @implementation BFChat
 
@@ -398,8 +398,8 @@
 	if( ([date timeIntervalSince1970] - _lastTimestamp) >= TIMESTAMP_INTERVAL )
 	{
 		[_webView insertTimestamp:timeStamp];
-		_lastTimestamp = [date timeIntervalSince1970];
 	}
+	_lastTimestamp = [date timeIntervalSince1970];
 	if( type == BFFriendMessageType )
 	{
 		[_webView newMessage:msg ofType:true];
