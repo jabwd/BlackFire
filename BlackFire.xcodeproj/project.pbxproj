@@ -936,6 +936,7 @@
 				3616F656145F0E5500E5066D /* Frameworks */,
 				3616F657145F0E5500E5066D /* Resources */,
 				36B6428614844F0300D9B11E /* CopyFiles */,
+				360223A914F407360087195D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1062,6 +1063,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		360223A914F407360087195D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "# Xcode auto-versioning script for git\n#\n# Based on original Perl script by Marcus S. Zarra and Matt Long at\n#   (http://www.cimgf.com/2008/04/13/git-and-xcode-a-git-build-number-script/)\n\n# Fail if not run from Xcode\nraise \"Must be run from Xcode\" unless ENV['XCODE_VERSION_ACTUAL']\n\ninfo_plist = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\n\n# Get the current git revision hash\nrevision = `git rev-parse --short HEAD`.chomp!\n\n# Open Info.plist and set the CFBundleVersion value to the revision hash\nlines = IO.readlines(info_plist).join\nlines.gsub! /(<key>CFBundleVersion<\\/key>\\n\\t<string>).*?(<\\/string>)/, \"\\\\1#{revision}\\\\2\"\n\n# Overwrite the original Info.plist file with our updated version\nFile.open(info_plist, 'w') {|f| f.puts lines}\n\n# Report to the user\nputs \"CFBundleVersion in #{info_plist} set to '#{revision}'\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3616F655145F0E5500E5066D /* Sources */ = {
