@@ -32,6 +32,9 @@
 		{
 			BFAccount *account = [[BFAccount alloc] initWithUsername:username];
 			[_usernameField setStringValue:username];
+			NSString *password = account.password;
+			if( ! password )
+				password = @"";
 			[_passwordField setStringValue:account.password];
 			[account release];
 		}
