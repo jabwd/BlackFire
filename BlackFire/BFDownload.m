@@ -3,7 +3,7 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 12/10/11.
-//  Copyright (c) 2011 Antwan van Houdt. All rights reserved.
+//  Copyright (c) 2011 Exurion. All rights reserved.
 //
 
 #import "BFDownload.h"
@@ -89,7 +89,6 @@
 	[_destinationPath release];
 	_destinationPath = nil;
 }
-
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {

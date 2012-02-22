@@ -3,7 +3,7 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 12/10/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Exurion. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,7 +15,7 @@
 - (void)download:(BFDownload *)download didFinishWithPath:(NSString *)path;
 @end
 
-@interface BFDownload : NSObject <NSURLConnectionDelegate>
+@interface BFDownload : NSObject
 {
 	NSURLConnection *_connection;
 	NSMutableData	*_data;

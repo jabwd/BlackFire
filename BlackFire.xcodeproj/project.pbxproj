@@ -18,7 +18,7 @@
 		3616012314AA2EC7003E6A9E /* BFAddGameSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616012214AA2EC7003E6A9E /* BFAddGameSheetController.m */; };
 		3616012614AA3067003E6A9E /* AddGameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3616012514AA3067003E6A9E /* AddGameSheet.xib */; };
 		3616012914AA3381003E6A9E /* ADApplicationDropField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616012814AA3381003E6A9E /* ADApplicationDropField.m */; };
-		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; };
+		3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3616F65D145F0E5500E5066D /* Cocoa.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3616F668145F0E5500E5066D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3616F666145F0E5500E5066D /* InfoPlist.strings */; };
 		3616F66A145F0E5500E5066D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616F669145F0E5500E5066D /* main.m */; };
 		3616F66E145F0E5500E5066D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3616F66C145F0E5500E5066D /* Credits.rtf */; };
@@ -106,7 +106,7 @@
 		368238E414A09C1400C60D5E /* GamesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E114A09C1400C60D5E /* GamesList.xib */; };
 		368238E514A09C1400C60D5E /* ServerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E214A09C1400C60D5E /* ServerList.xib */; };
 		368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238EB14A0A15C00C60D5E /* BFGamesGroup.m */; };
-		368467B114EECBB6006669D5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368467B014EECBB6006669D5 /* WebKit.framework */; };
+		368467B114EECBB6006669D5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368467B014EECBB6006669D5 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3688BB1F14F4EF340050F5E4 /* BFChatTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3688BB1E14F4EF340050F5E4 /* BFChatTextFormatter.m */; };
 		368C6B47149E00CF00723E9A /* chatting.icns in Resources */ = {isa = PBXBuildFile; fileRef = 368C6B46149E00CF00723E9A /* chatting.icns */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
@@ -138,7 +138,7 @@
 		36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B64281148447EC00D9B11E /* BFNotificationCenter.m */; };
 		36B642841484486900D9B11E /* offline_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B642831484486900D9B11E /* offline_bubble.png */; };
 		36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
-		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; };
+		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
 		36D9C9FC1465CAF600C4A162 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9C9FB1465CAF600C4A162 /* LoginView.xib */; };
@@ -1259,6 +1259,7 @@
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1278,6 +1279,7 @@
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

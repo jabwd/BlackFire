@@ -91,9 +91,15 @@
 	}
 	[NSAnimationContext beginGrouping];
 	[[NSAnimationContext currentContext] setDuration:.125f];
-	[[NSAnimationContext currentContext] setCompletionHandler:^{
-		[self destroy];
-	}];
+	if( [[NSAnimationContext currentContext] respondsToSelector:@selector(setCompletionHandler:)] )
+	{
+		[[NSAnimationContext currentContext] performSelector:@selector(setCompletionHandler:) withObject:^{
+			[self destroy];
+		}];
+	}
+	else {
+		[self performSelector:@selector(destroy) withObject:nil afterDelay:0.125f];
+	}
 	[[_window animator] setAlphaValue:0.0f];
 	[NSAnimationContext endGrouping];
 	return false;
