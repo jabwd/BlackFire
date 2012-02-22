@@ -11,7 +11,15 @@
 @interface NSNonRetardedImageView : NSView
 {
 	NSImage *_image;
+	NSColor *_borderColor;
 }
 
 @property (nonatomic, retain) NSImage *image;
+@property (nonatomic, retain) NSColor *borderColor;
+
+//-------------------------------------------------------------------------
+// Image processing
+
+- (NSColor *)proposedBorderColorForImage:(NSImage *)image;
+
 @end
