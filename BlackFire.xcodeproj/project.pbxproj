@@ -107,6 +107,7 @@
 		368238E514A09C1400C60D5E /* ServerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368238E214A09C1400C60D5E /* ServerList.xib */; };
 		368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238EB14A0A15C00C60D5E /* BFGamesGroup.m */; };
 		368467B114EECBB6006669D5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368467B014EECBB6006669D5 /* WebKit.framework */; };
+		3688BB1F14F4EF340050F5E4 /* BFChatTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3688BB1E14F4EF340050F5E4 /* BFChatTextFormatter.m */; };
 		368C6B47149E00CF00723E9A /* chatting.icns in Resources */ = {isa = PBXBuildFile; fileRef = 368C6B46149E00CF00723E9A /* chatting.icns */; };
 		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
@@ -339,6 +340,8 @@
 		368467B014EECBB6006669D5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		368467B714EECF20006669D5 /* BFWebview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWebview.h; sourceTree = "<group>"; };
 		368467B814EECF20006669D5 /* BFWebview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWebview.m; sourceTree = "<group>"; };
+		3688BB1D14F4EF340050F5E4 /* BFChatTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFChatTextFormatter.h; sourceTree = "<group>"; };
+		3688BB1E14F4EF340050F5E4 /* BFChatTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFChatTextFormatter.m; sourceTree = "<group>"; };
 		368C6B46149E00CF00723E9A /* chatting.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = chatting.icns; sourceTree = "<group>"; };
 		368EC5B2147172CF00EEDC07 /* AHHyperlinkScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHHyperlinkScanner.h; sourceTree = "<group>"; };
 		368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHHyperlinkScanner.m; sourceTree = "<group>"; };
@@ -876,6 +879,8 @@
 				3694B5361466AF1200D0A105 /* BFChat.m */,
 				3694B53B1466B11B00D0A105 /* BFChatWindow.xib */,
 				368EC5C11471A1F000EEDC07 /* BFChat.xib */,
+				3688BB1D14F4EF340050F5E4 /* BFChatTextFormatter.h */,
+				3688BB1E14F4EF340050F5E4 /* BFChatTextFormatter.m */,
 			);
 			name = Chatting;
 			sourceTree = "<group>";
@@ -1159,6 +1164,7 @@
 				36205BF914EF24AB0041FDBF /* XNResizingMessageView.m in Sources */,
 				36205C0014EF26E10041FDBF /* XNBorderedScrollView.m in Sources */,
 				36E895E114F2A54E00341106 /* EXBackgroundView.m in Sources */,
+				3688BB1F14F4EF340050F5E4 /* BFChatTextFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

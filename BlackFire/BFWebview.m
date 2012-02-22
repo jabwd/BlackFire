@@ -39,6 +39,7 @@
 	NSURL *baseURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"file://",[bundle resourcePath]]];
 	if( ! str || [str length] < 10 )
 	{
+		NSLog(@"*** Unable to load webview template, please verify your blackfire installation");
 		[baseURL release];
 		[str release];
 		return;
