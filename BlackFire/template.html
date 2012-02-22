@@ -42,10 +42,12 @@
 			/* background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(140,190,55)), color-stop(0.28, rgb(160,215,60)), color-stop(1, rgb(165,255,69))); */
 			background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(210,210,210)), color-stop(0.28, rgb(220,220,220)), color-stop(1, rgb(233,233,233)));
         	border-radius: 10px;
-        	border:1px solid rgb(115,115,115);
+        	border:1px solid rgb(155,155,155);
         	/*text-shadow: 1px 1px rgba(255,255,255,0.68);*/
         	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 1px rgba(120,120,120, 0.30);
         	z-index:1;
+			word-wrap: break-word !important;
+			word-break: break-word;
 		}
 
 .chat-bubble-glare {
@@ -69,29 +71,29 @@
 
 
 .chat-bubble-arrow {
-	border-color: transparent rgb(228,228,228) transparent transparent;
+	border-color: transparent rgb(233,233,233) transparent transparent;
 	border-style: solid;
 	border-width: 6px;
     height:0;
 	width:0;
 	position:absolute;
 	bottom:0px;
-	left:-2px;
-	-webkit-transform: rotate(75deg);
+	left:-3px;
+	-webkit-transform: rotate(78deg);
 	z-index:-2;
 }
 
 
 .chat-bubble-arrow-border {
-	border-color: transparent rgb(105,105,105) transparent transparent;
+	border-color: transparent rgb(155,155,155) transparent transparent;
 	border-style: solid;
 	border-width: 6px;
 	height:0;
 	width:0;
 	position:absolute;
 	bottom:-2px;
-	left:-4px;
-	-webkit-transform: rotate(75deg);
+	left:-5px;
+	-webkit-transform: rotate(78deg);
 	z-index:-2;
 }
 
@@ -107,7 +109,7 @@ div.red
 {
 	margin-right:3px;
 	margin-left:30%;
-	border:1px solid rgb(116,116,125);
+	border:1px solid rgb(145,145,165);
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(145,185,255)), color-stop(0.28, rgb(159,207,245)), color-stop(1, rgb(167,209,245)))!important;
 	float:right;
 	text-shadow: 1px 1px rgba(255,255,255,0.5);
@@ -122,26 +124,27 @@ div.red
 
 div.red .chat-bubble-arrow
 {
-	border-color: transparent rgb(177,219,255) transparent transparent!important;
+	border-color: transparent rgb(167,209,245) transparent transparent!important;
 	-webkit-transform:rotate(100deg)!important;
 	left:auto;
 	bottom:-1px;
-	right:-2px;
+	right:-3px;
 }
 
 div.red .chat-bubble-arrow-border
 {
-	border-color: transparent rgb(16,16,15) transparent transparent!important;
+	border-color: transparent rgb(126,126,155) transparent transparent!important;
 	-webkit-transform:rotate(100deg)!important;
 	left:auto;
 	bottom:-2px;
-	right:-3px;
+	right:-4px;
 }
 
 ul
 {
 	padding:0px;
  	 margin:0px;
+	list-style-type: none;
 }
 
 li
@@ -163,6 +166,7 @@ li.warning
 	font-weight:700;
 	font-size:12px;
 	margin-bottom:2px;
+	list-style-type: none;
 }
 li.timestamp
 {
@@ -173,6 +177,7 @@ li.timestamp
 	text-shadow: 1px 1px rgba(255,255,255,0.7);
 	font-weight:550;
 	font-size:11px;
+	list-style-type: none;
 }
 		</style>
 		

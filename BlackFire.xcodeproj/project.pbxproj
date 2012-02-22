@@ -300,7 +300,7 @@
 		363941CA149C0E1F00DDECB4 /* BFMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFMessage.m; sourceTree = "<group>"; };
 		363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		363DC6BF14A65C9800FBE38E /* NSNonRetardedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNonRetardedImageView.h; sourceTree = "<group>"; };
-		363DC6C014A65C9800FBE38E /* NSNonRetardedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNonRetardedImageView.m; sourceTree = "<group>"; };
+		363DC6C014A65C9800FBE38E /* NSNonRetardedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNonRetardedImageView.m; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		363DC6C314A66DC900FBE38E /* chatLogTemplate.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = chatLogTemplate.db; sourceTree = "<group>"; };
 		363DC6C514A68A3400FBE38E /* notifications.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = notifications.icns; sourceTree = "<group>"; };
 		364088E614D01B8400902346 /* ShadowedClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowedClipView.h; sourceTree = "<group>"; };

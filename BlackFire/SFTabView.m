@@ -150,7 +150,13 @@
 	
 	// optimizes the drawing. the tabstrip already has this fill.
 	if( _selected )
-		[fill drawInRect:NSMakeRect(10, 0, dirtyRect.size.width-20, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+	{
+		[[NSGraphicsContext currentContext] saveGraphicsState];
+		[[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint(0, [[self superview] frame].origin.y)];
+		[[NSColor colorWithPatternImage:fill] set];
+		NSRectFill(NSMakeRect(10, 0, dirtyRect.size.width-20, 24));
+		[[NSGraphicsContext currentContext] restoreGraphicsState];
+	}
 	
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];

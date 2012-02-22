@@ -66,7 +66,18 @@
 		image = [NSImage imageNamed:@"inactiveWTabFill"];
 	}
 	
-	[image drawInRect:dirtyRect fromRect:NSMakeRect(0, 0, 0, 24.0) operation:NSCompositeSourceOver fraction:1.0f];
+	[NSGraphicsContext saveGraphicsState];
+	
+	[[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint(0, [self frame].origin.y)];
+	
+	[[NSColor colorWithPatternImage:image] set];
+	NSRectFill([self bounds]);
+	
+	
+	[NSGraphicsContext restoreGraphicsState];
+	
+	//NSUInteger i, cols = ceil((dirtyRect.size.width/64));
+	 //[image drawInRect:dirtyRect fromRect:NSMakeRect(0, 0, 0, 24.0) operation:NSCompositeSourceOver fraction:1.0f];
 }
 
 #pragma mark - Laying out the tabs

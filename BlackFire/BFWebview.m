@@ -44,6 +44,7 @@
 		[str release];
 		return;
 	}
+	[webView setFrameLoadDelegate:self];
     /*NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"file://",[bundle pathForResource:@"template" ofType:@"html"]]];
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:url];
     [url release];*/
@@ -51,7 +52,6 @@
     [baseURL release];	
 	[str release];
 	scriptObject = [webView windowScriptObject];
-	[webView setFrameLoadDelegate:self];
 }
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
@@ -66,6 +66,12 @@
 	[[NSWorkspace sharedWorkspace] openURL:[[[frame provisionalDataSource] request] URL]];
 	[sender stopLoading:self];
 	[urlString release];
+}
+
+- (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+	NSLog(@"*** Unable to load chat template %@",error);
+	abort();
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
