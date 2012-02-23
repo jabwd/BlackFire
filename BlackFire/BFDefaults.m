@@ -35,3 +35,5 @@ NSString *BFEnableChatHistory	= @"enableChatHistory";
 NSString *BFSoundSetPath		= @"soundSetPath";
 NSString *BFSoundVolume			= @"volumeValue";
 NSString *BFCustomMacGamesList	= @"customMacGames";
+
+NSString *BFMessageFieldHistory = @"messageFieldHistory";

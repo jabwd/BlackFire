@@ -70,6 +70,7 @@
 						  n_true,BFAutoGoAFK,
 						  n_true,BFEnableChatHistory,
 						  n_true,BFEnableChatlogs,
+						  n_false,BFMessageFieldHistory,
 						  [NSNumber numberWithFloat:1.0f],BFSoundVolume,
 						  [NSNumber numberWithInt:120],BFAutoAFKTime,
 						  nil];
@@ -201,7 +202,7 @@
 				NSString *name = set.name;
 				if( ! name )
 					name = @"Untitled soundset";
-				NSInteger result = NSRunAlertPanel(@"Soundset installed!", [NSString stringWithFormat:@"Soundset %@ was successfully installed",name], @"Set as default soundset", @"OK", nil);
+				NSInteger result = NSRunAlertPanel(NSLocalizedString(@"Soundset installed",@"Soundset installed"), [NSString stringWithFormat:NSLocalizedString(@"Soundset %@ was successfully installed",@"Soundset installed message"),name], NSLocalizedString(@"Set as default soundset", @"Set as default soundset"), NSLocalizedString(@"OK",@"OK"), nil);
 				if( result == NSOKButton )
 				{
 					[[BFNotificationCenter defaultNotificationCenter] setSoundSet:set];

@@ -84,6 +84,7 @@
 		363DC6C114A65C9800FBE38E /* NSNonRetardedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 363DC6C014A65C9800FBE38E /* NSNonRetardedImageView.m */; };
 		363DC6C414A66DC900FBE38E /* chatLogTemplate.db in Resources */ = {isa = PBXBuildFile; fileRef = 363DC6C314A66DC900FBE38E /* chatLogTemplate.db */; };
 		363DC6C614A68A3400FBE38E /* notifications.icns in Resources */ = {isa = PBXBuildFile; fileRef = 363DC6C514A68A3400FBE38E /* notifications.icns */; };
+		363F0FFD14F69B4800C87557 /* BFChatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 363F0FFE14F69B4800C87557 /* BFChatWindow.xib */; };
 		364088E814D01B8400902346 /* ShadowedClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 364088E714D01B8400902346 /* ShadowedClipView.m */; };
 		3645873A149937AF00460195 /* BFDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 36458739149937AF00460195 /* BFDefaults.m */; };
 		3646BBDD1464802D008FD6D4 /* XFGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBDC1464802D008FD6D4 /* XFGroupController.m */; };
@@ -115,7 +116,6 @@
 		3694B5321466AC8500D0A105 /* BFTexturedTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5311466AC8500D0A105 /* BFTexturedTextFieldCell.m */; };
 		3694B5371466AF1200D0A105 /* BFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5361466AF1200D0A105 /* BFChat.m */; };
 		3694B53A1466AFE700D0A105 /* BFChatWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5391466AFE700D0A105 /* BFChatWindowController.m */; };
-		3694B53C1466B11B00D0A105 /* BFChatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3694B53B1466B11B00D0A105 /* BFChatWindow.xib */; };
 		3694B53F1466B3EB00D0A105 /* BFMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B53E1466B3EB00D0A105 /* BFMessageCell.m */; };
 		3698A09714991409004AA061 /* ADInvitationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698A09614991409004AA061 /* ADInvitationWindowController.m */; };
 		3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3698A0981499141A004AA061 /* InvitationWindow.xib */; };
@@ -303,6 +303,7 @@
 		363DC6C014A65C9800FBE38E /* NSNonRetardedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNonRetardedImageView.m; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		363DC6C314A66DC900FBE38E /* chatLogTemplate.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = chatLogTemplate.db; sourceTree = "<group>"; };
 		363DC6C514A68A3400FBE38E /* notifications.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = notifications.icns; sourceTree = "<group>"; };
+		363F0FFE14F69B4800C87557 /* BFChatWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BFChatWindow.xib; sourceTree = "<group>"; };
 		364088E614D01B8400902346 /* ShadowedClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowedClipView.h; sourceTree = "<group>"; };
 		364088E714D01B8400902346 /* ShadowedClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowedClipView.m; sourceTree = "<group>"; };
 		36458738149937AF00460195 /* BFDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDefaults.h; sourceTree = "<group>"; };
@@ -356,7 +357,6 @@
 		3694B5361466AF1200D0A105 /* BFChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFChat.m; sourceTree = "<group>"; };
 		3694B5381466AFE600D0A105 /* BFChatWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFChatWindowController.h; sourceTree = "<group>"; };
 		3694B5391466AFE700D0A105 /* BFChatWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFChatWindowController.m; sourceTree = "<group>"; };
-		3694B53B1466B11B00D0A105 /* BFChatWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFChatWindow.xib; sourceTree = "<group>"; };
 		3694B53D1466B3EB00D0A105 /* BFMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMessageCell.h; sourceTree = "<group>"; };
 		3694B53E1466B3EB00D0A105 /* BFMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMessageCell.m; sourceTree = "<group>"; };
 		3698A09514991409004AA061 /* ADInvitationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADInvitationWindowController.h; sourceTree = "<group>"; };
@@ -877,7 +877,7 @@
 				3694B5391466AFE700D0A105 /* BFChatWindowController.m */,
 				3694B5351466AF1200D0A105 /* BFChat.h */,
 				3694B5361466AF1200D0A105 /* BFChat.m */,
-				3694B53B1466B11B00D0A105 /* BFChatWindow.xib */,
+				363F0FFE14F69B4800C87557 /* BFChatWindow.xib */,
 				368EC5C11471A1F000EEDC07 /* BFChat.xib */,
 				3688BB1D14F4EF340050F5E4 /* BFChatTextFormatter.h */,
 				3688BB1E14F4EF340050F5E4 /* BFChatTextFormatter.m */,
@@ -969,6 +969,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				nl,
 			);
 			mainGroup = 3616F64E145F0E5400E5066D;
 			productRefGroup = 3616F65A145F0E5500E5066D /* Products */;
@@ -994,7 +995,7 @@
 				36529849146697EE0010FD7F /* blackfire_experimental.icns in Resources */,
 				3652984C146698140010FD7F /* avi_bubble.png in Resources */,
 				3652984D146698140010FD7F /* away_bubble.png in Resources */,
-				3694B53C1466B11B00D0A105 /* BFChatWindow.xib in Resources */,
+				363F0FFD14F69B4800C87557 /* BFChatWindow.xib in Resources */,
 				362FFA99146742D0007E3BD8 /* activeTabFill.png in Resources */,
 				362FFA9A146742D0007E3BD8 /* activeTabFillSL.png in Resources */,
 				362FFA9B146742D0007E3BD8 /* activeTabLeft.png in Resources */,

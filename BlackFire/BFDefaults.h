@@ -33,3 +33,5 @@ extern NSString *BFEnableChatHistory;
 extern NSString *BFSoundSetPath;
 extern NSString *BFSoundVolume;
 extern NSString *BFCustomMacGamesList;
+
+extern NSString *BFMessageFieldHistory;

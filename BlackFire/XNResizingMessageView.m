@@ -7,6 +7,7 @@
 //
 
 #import "XNResizingMessageView.h"
+#import "BFDefaults.h"
 
 #define ENTRY_TEXTVIEW_PADDING	6
 #define BASE_HEIGHT				22
@@ -126,7 +127,7 @@
     }
     else if( keyCode == UPKEY )
     {
-        if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"messageFieldHistory"] )
+        if( [[NSUserDefaults standardUserDefaults] boolForKey:BFMessageFieldHistory] )
             [self previousMessage];
 		else
 			[super keyDown:theEvent];
@@ -134,7 +135,7 @@
     }
     else if( keyCode == DOWNKEY )
     {
-        if( ![[NSUserDefaults standardUserDefaults] boolForKey:@"messageFieldHistory"] )
+        if( [[NSUserDefaults standardUserDefaults] boolForKey:BFMessageFieldHistory] )
             [self nextMessage];
 		else
 			[super keyDown:theEvent];
