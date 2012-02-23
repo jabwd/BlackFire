@@ -228,6 +228,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<string key="NSFrame">{{212, 1}, {15, 20}}</string>
 									<reference key="NSSuperview" ref="334301451"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:1494</string>
 									<reference key="NSTarget" ref="334301451"/>
 									<string key="NSAction">_doScroller:</string>
@@ -302,13 +303,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="NSFrame">{{130, 4}, {30, 30}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1192</string>
 						<string key="NSClassName">NSNonRetardedImageView</string>
 					</object>
 					<object class="NSTextField" id="715604813">
 						<reference key="NSNextResponder" ref="1023256652"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{25, 1}, {101, 17}}</string>
+						<string key="NSFrame">{{25, 4}, {101, 14}}</string>
 						<reference key="NSSuperview" ref="1023256652"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="159375163"/>
@@ -316,12 +318,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="835358707">
 							<int key="NSCellFlags">67239488</int>
-							<int key="NSCellFlags2">71305216</int>
+							<int key="NSCellFlags2">4327424</int>
 							<string key="NSContents"/>
-							<object class="NSFont" key="NSSupport" id="725764473">
+							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
-								<double key="NSSize">13</double>
-								<int key="NSfFlags">1044</int>
+								<double key="NSSize">11</double>
+								<int key="NSfFlags">3100</int>
 							</object>
 							<string key="NSCellIdentifier">_NS:3944</string>
 							<reference key="NSControlView" ref="715604813"/>
@@ -350,7 +352,11 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSCellFlags">67239488</int>
 							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents"/>
-							<reference key="NSSupport" ref="725764473"/>
+							<object class="NSFont" key="NSSupport">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">13</double>
+								<int key="NSfFlags">1044</int>
+							</object>
 							<string key="NSCellIdentifier">_NS:3944</string>
 							<reference key="NSControlView" ref="524336039"/>
 							<reference key="NSBackgroundColor" ref="86368289"/>
@@ -658,6 +664,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>102.CustomClassName</string>
 					<string>102.IBPluginDependency</string>
 					<string>103.IBPluginDependency</string>
+					<string>104.CustomClassName</string>
 					<string>104.IBPluginDependency</string>
 					<string>120.IBPluginDependency</string>
 					<string>124.CustomClassName</string>
@@ -685,6 +692,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>BFTexturedTextFieldCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>BFTexturedTextFieldCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>XNBorderedScrollView</string>
