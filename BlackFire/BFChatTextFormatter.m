@@ -43,6 +43,7 @@
 
 - (NSString *)plainTextFormat
 {
+	NSArray *messages;
 	return nil;
 }
 
