@@ -53,24 +53,26 @@
 
 
 
-- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-//	 
-	
+- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView 
+{
 	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
+	[style setAlignment:[self alignment]];
 	
 	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
 	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
-	[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.41]];
+	[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.43]];
 	
 	NSColor *textColor = nil;
 	
 	BOOL isMainWindow = [[controlView window] isMainWindow];
 	
 	if (isMainWindow) {
-		textColor = [NSColor controlTextColor];
+		textColor = [self textColor];
+		//textColor = [NSColor controlTextColor];
 	} else {
-		textColor = [NSColor controlTextColor];
+		//textColor = [NSColor controlTextColor];
+		textColor = [self textColor];
 //		textColor = [NSColor disabledControlTextColor];
 	}
 	

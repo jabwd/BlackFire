@@ -133,14 +133,27 @@
 	
 	_toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:@"status"];
 	[_toolbarItem setView:_toolbarView];
-	[_toolbarItem setMinSize:NSMakeSize(168.0, NSHeight([_toolbarView frame])-5)];
-	[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame])-5)];
+	[_toolbarItem setMinSize:NSMakeSize(168.0, 0)];
+	[_toolbarItem setMaxSize:NSMakeSize(1920.0, 0)];
 	
 	[toolbar      setDelegate:self];
 	[_window	setToolbar:toolbar];
 	[toolbar      release];
 	
 	[_window makeKeyAndOrderFront:self];
+	[_avatarImageView retain];
+	[_avatarImageView removeFromSuperview];
+	NSRect frame = [_window frame];
+	[_avatarImageView setFrame:NSMakeRect(frame.size.width-32-6, frame.size.height-32-6, 32, 32)];
+	[[[_window contentView] superview] addSubview:_avatarImageView];
+	[_avatarImageView release];
+	
+	[_statusField retain];
+	[_statusField removeFromSuperview];
+	[_statusField setFrame:NSMakeRect(70, frame.size.height-29, frame.size.width-110, 17)];
+	[_statusField setAlignment:NSRightTextAlignment];
+	[[[_window contentView] superview] addSubview:_statusField];
+	[_statusField release];
 }
 
 #pragma mark - Managing chats
