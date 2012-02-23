@@ -33,39 +33,21 @@
 
 - (void)awakeFromNib
 {
-	NSBundle *bundle = [NSBundle mainBundle];
-
-    NSString *str = [[NSString alloc] initWithContentsOfFile:[bundle pathForResource:@"template" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSURL *baseURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"file://",[bundle resourcePath]]];
-	if( ! str || [str length] < 10 )
-	{
-		NSLog(@"*** Unable to load webview template, please verify your blackfire installation");
-		[baseURL release];
-		[str release];
-		return;
-	}
 	[webView setFrameLoadDelegate:self];
-    /*NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"file://",[bundle pathForResource:@"template" ofType:@"html"]]];
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:url];
-    [url release];*/
-    [[webView mainFrame] loadHTMLString:str baseURL:baseURL];
-    [baseURL release];	
-	[str release];
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[[NSBundle mainBundle] URLForResource:@"template" withExtension:@"html"]];
+	[[webView mainFrame] loadRequest:req];
+    [req release];	
 	scriptObject = [webView windowScriptObject];
 }
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-	NSString *urlString = [[NSString alloc] initWithFormat:@"file://%@",[[NSBundle mainBundle] pathForResource:@"template" ofType:@"html"]];
-	NSString *url = [[[[frame provisionalDataSource] request] URL] absoluteString];
-	if( [url isEqualToString:@"file:///"] )
+	if( [[[[frame provisionalDataSource] request] URL] isFileURL] && [[[[[frame provisionalDataSource] request] URL] lastPathComponent] isEqualToString:@"template.html"] )
 	{
-		[urlString release];
 		return; // dont do anything
 	}
 	[[NSWorkspace sharedWorkspace] openURL:[[[frame provisionalDataSource] request] URL]];
 	[sender stopLoading:self];
-	[urlString release];
 }
 
 - (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
