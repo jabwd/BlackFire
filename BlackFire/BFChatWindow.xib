@@ -664,7 +664,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>102.CustomClassName</string>
 					<string>102.IBPluginDependency</string>
 					<string>103.IBPluginDependency</string>
-					<string>104.CustomClassName</string>
 					<string>104.IBPluginDependency</string>
 					<string>120.IBPluginDependency</string>
 					<string>124.CustomClassName</string>
@@ -692,7 +691,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>BFTexturedTextFieldCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>BFTexturedTextFieldCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>XNBorderedScrollView</string>

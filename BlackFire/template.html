@@ -12,7 +12,7 @@
 		
 		body
 		{
-			background-color:rgb(246,246,246) /*rgb(221,227,236)*/;
+			background-color:rgb(248,248,248) /*rgb(221,227,236)*/;
 			color:black;
 			font-family:"Helvetica";
 			margin-left:10px;
@@ -40,11 +40,11 @@
 			margin-left:5px;
 			margin-right:5px;
 			/* background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(140,190,55)), color-stop(0.28, rgb(160,215,60)), color-stop(1, rgb(165,255,69))); */
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(210,210,210)), color-stop(0.28, rgb(220,220,220)), color-stop(1, rgb(233,233,233)));
-        	border-radius: 10px;
-        	border:1px solid rgb(155,155,155);
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(222,222,222)), color-stop(0.28, rgb(227,227,227)), color-stop(1, rgb(233,233,233)));
+        	border:1px solid rgb(175,175,175);
+			border-radius:10px;
         	/*text-shadow: 1px 1px rgba(255,255,255,0.68);*/
-        	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 1px rgba(120,120,120, 0.30);
+        	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 0px rgba(228,228,228,1.0);
         	z-index:1;
 			word-wrap: break-word !important;
 			word-break: break-word;
@@ -66,7 +66,7 @@
 	height:8px;
 	z-index:-1;
     border-radius: 10px;
-	background: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.85)), to(rgba(255, 255, 255, 0.6)));
+	background: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.4)));
 }
 
 
@@ -85,7 +85,7 @@
 
 
 .chat-bubble-arrow-border {
-	border-color: transparent rgb(155,155,155) transparent transparent;
+	border-color: transparent rgb(175,175,175) transparent transparent;
 	border-style: solid;
 	border-width: 6px;
 	height:0;
@@ -110,10 +110,11 @@ div.red
 	margin-right:3px;
 	margin-left:30%;
 	border:1px solid rgb(145,145,165);
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(145,185,255)), color-stop(0.28, rgb(159,207,245)), color-stop(1, rgb(167,209,245)))!important;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(195,195,255)), color-stop(0.28, rgb(209,209,245)), color-stop(1, rgb(217,217,245)))!important;
 	float:right;
 	text-shadow: 1px 1px rgba(255,255,255,0.5);
-	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 0px rgba(120,120,120, 0.30);
+	/*box-shadow: 0px 1px 0px rgba(228,228,228,1.0);*/
+	box-shadow: inset 0px 0px 3px rgba(255,255,255,1.0), 0px 1px 0px rgba(228,228,288,1.0);
 }
 			
 			div.red .actual-glare
@@ -124,7 +125,7 @@ div.red
 
 div.red .chat-bubble-arrow
 {
-	border-color: transparent rgb(167,209,245) transparent transparent!important;
+	border-color: transparent rgb(217,217,245) transparent transparent!important;
 	-webkit-transform:rotate(100deg)!important;
 	left:auto;
 	bottom:-1px;
