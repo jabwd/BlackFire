@@ -576,6 +576,22 @@
 	[self changeToMode:BFApplicationModeOffline];
 }
 
+- (void)session:(XFSession *)session willDisconnectWithReason:(XFConnectionError)reason
+{
+	if( reason == XFConnectionErrorHungUp )
+	{
+		NSRunAlertPanel(@"Disconnected", @"The Xfire server closed the connection. Either you are very naughty or something nasty happened. Try reconnecting.", @"OK", nil, nil);
+	}
+	else if( reason == XFConnectionErrorOtherSession )
+	{
+		NSRunAlertPanel(@"Disconnected", @"Someone logged in on your account on another computer. If this wasn't you you should consider changing your password.", @"OK", nil, nil);
+	}
+	else if( reason == XFConnectionErrorStoppedResponding )
+	{
+		NSRunAlertPanel(@"Server stopped responding", @"The Xfire server stopped responding. Try to reconnect, it usually is just a temporary problem.", @"OK", nil, nil);
+	}
+}
+
 
 
 - (void)session:(XFSession *)session statusChanged:(XFSessionStatus)newStatus

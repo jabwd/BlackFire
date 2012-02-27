@@ -78,6 +78,8 @@ typedef enum{
 
 - (void)session:(XFSession *)session friendChanged:(XFFriend *)changedFriend type:(XFFriendNotification)notificationType;
 
+- (void)session:(XFSession *)session willDisconnectWithReason:(XFConnectionError)reason;
+
 - (NSString *)username;
 - (NSString *)password;
 @end

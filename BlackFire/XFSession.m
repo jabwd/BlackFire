@@ -195,6 +195,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 - (void)connection:(XFConnection *)connection willDisconnect:(XFConnectionError)connectionError
 {
+	if( [_delegate respondsToSelector:@selector(session:willDisconnectWithReason:)] )
+		[_delegate session:self willDisconnectWithReason:connectionError];
 	[self disconnect];
 }
 
