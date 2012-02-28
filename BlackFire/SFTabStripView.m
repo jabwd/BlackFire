@@ -8,7 +8,7 @@
 
 #define TAB_OVERLAP 10.0f
 #define TAB_HEIGHT	24.0f
-#define TAB_WIDTHMAX 480.0f
+#define TAB_WIDTHMAX 2560.0f
 
 #import "SFTabStripView.h"
 #import "SFTabView.h"
