@@ -108,6 +108,11 @@
 		[_keepAliveResponseTimer invalidate];
 		_keepAliveResponseTimer = nil;
 	}
+	if( _connectionTimer )
+	{
+		[_connectionTimer invalidate];
+		_connectionTimer = nil;
+	}
 	
 	[_availableData release];
 	_availableData = nil;
