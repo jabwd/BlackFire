@@ -25,6 +25,7 @@ typedef enum
 	Socket				*_socket;
 	NSMutableData		*_availableData;
 	NSTimer				*_keepAliveResponseTimer;
+	NSTimer				*_connectionTimer;
 	
 	XFConnectionStatus	_status;
 	

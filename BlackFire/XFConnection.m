@@ -71,6 +71,8 @@
 		[_keepAliveResponseTimer invalidate];
 		_keepAliveResponseTimer = nil;
 	}
+	[_connectionTimer invalidate];
+	_connectionTimer = nil;
 	[super dealloc];
 }
 
@@ -121,12 +123,23 @@
 - (void)connectionTimedOut
 {
 	// otherwise it does not make any sense to disconnect here.
+	// seems kinda weird that we have the same codeblock twice here but
+	// the error might be changed to some more detail later on..
 	if( _status == XFConnectionStarting )
 	{
 		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
 		_socket.delegate = nil;
 		[self disconnect];
 	}
+	else if( _status == XFConnectionConnected )
+	{
+		[_session connection:self willDisconnect:XFConnectionErrorStoppedResponding];
+		_socket.delegate = nil;
+		[self disconnect];
+	}
+	NSLog(@"[Notice] Connect timed out");
+	[_connectionTimer invalidate];
+	_connectionTimer = nil;
 }
 
 - (void)didDisconnectWithReason:(SocketError)reason
@@ -147,8 +160,11 @@
 	// haha, yeah the xfire server is that dumb. They actually accept this version..
 	// if this ever breaks, the version too old packet will show up what version we
 	// are supposed to have, then we simply reconnect using that version..
-	// note: that code doesn't actually exist, so.. if it ever breaks that still needs to be written
+	// note: that code doesn't actually exist, so.. if it ever breaks that still needs to be written :DDDDDDDDD
 	[self sendPacket:[XFPacket clientVersionPacket:9999999]];
+	
+	[_connectionTimer invalidate];
+	_connectionTimer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(connectionTimedOut) userInfo:nil repeats:false];
 }
 
 #pragma mark - Sending and receiving data
@@ -170,6 +186,12 @@
         NSLog(@"Received data but no XFSession exists");
         return;
     }
+	
+	if( _connectionTimer )
+	{
+		[_connectionTimer invalidate];
+		_connectionTimer = nil;
+	}
 	
 	BOOL shouldContinue = YES;
 	

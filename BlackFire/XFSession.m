@@ -107,7 +107,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	_canPostNotifications = false;
 	
 	[_keepAliveTimer invalidate];
-	_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:KEEPALIVE_TIME target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
+	_keepAliveTimer = nil;
 }
 
 - (void)disconnect
@@ -146,7 +146,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	if( _status == XFSessionStatusOnline )
 	{
 		[self performSelector:@selector(allowNotifications) withObject:nil afterDelay:1.5f];
-		[self sendKeepAlive:_keepAliveTimer];
+		//[self sendKeepAlive:_keepAliveTimer];
+		[_keepAliveTimer invalidate];
+		_keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:KEEPALIVE_TIME target:self selector:@selector(sendKeepAlive:) userInfo:nil repeats:true];
 	}
 	
 	if( [_delegate respondsToSelector:@selector(session:statusChanged:)] )

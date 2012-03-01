@@ -120,6 +120,8 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
         NSLog(@"Attempted to connect an already connected socket!");
         return;
     }
+	
+	NSLog(@"[Notice] Performing connect..");
     
     CFSocketSignature siggie;
     CFSocketContext ctx;
@@ -164,6 +166,9 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 		_runLoopSource = CFSocketCreateRunLoopSource(NULL,_cfSocket,0);
 		CFRunLoopAddSource([[NSRunLoop currentRunLoop] getCFRunLoop],_runLoopSource,kCFRunLoopDefaultMode);
 	}
+	else {
+		NSLog(@"*** Unable to create a socket, please check your internet connection");
+	}
 }
 
 /*
@@ -199,6 +204,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
         NSLog(@"Called sendData but there was no data");
         return NO;
     }
+	NSLog(@"[Notice] Sending some data of length %lu",[data length]);
     if( _cfSocket && _status == SocketStatusConnected )
     {
         CFSocketError error = CFSocketSendData(_cfSocket, NULL, (CFDataRef)data, 1.0f);
@@ -230,6 +236,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
  */
 - (void)receivedData:(NSData *)data
 {
+	NSLog(@"[Notice] Receiving some data of length %lu",[data length]);
     if( data && _delegate )
     {
         [_delegate receivedData:data];
@@ -263,6 +270,7 @@ static void socketCallback(CFSocketRef sock, CFSocketCallBackType cbType, CFData
 	}
     else if( cbType == kCFSocketConnectCallBack )
     {
+		NSLog(@"[Notice] Socket did connect");
         [(Socket *)info didConnect];
     }
 	else
