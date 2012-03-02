@@ -125,6 +125,8 @@
 		369D9DD91465FD6B00CB15FF /* BFFriendsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */; };
 		369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369D9DDB1466006200CB15FF /* FriendsList.xib */; };
 		36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36ADF20D1469AC9600F46E9E /* blue_bubble.png */; };
+		36B1504C150154BA00EF21E7 /* BFInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B1504B150154BA00EF21E7 /* BFInformationViewController.m */; };
+		36B1504F1501552300EF21E7 /* InformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B1504E1501552300EF21E7 /* InformationView.xib */; };
 		36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B62C871483CDB400D9B11E /* BFGamesManager.m */; };
 		36B642751484464700D9B11E /* connected.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B6426E1484464400D9B11E /* connected.m4v */; };
 		36B642761484464700D9B11E /* gamesTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B6426F1484464500D9B11E /* gamesTemplate.png */; };
@@ -371,6 +373,9 @@
 		369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFriendsListController.m; sourceTree = "<group>"; };
 		369D9DDB1466006200CB15FF /* FriendsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsList.xib; sourceTree = "<group>"; };
 		36ADF20D1469AC9600F46E9E /* blue_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_bubble.png; sourceTree = "<group>"; };
+		36B1504A150154BA00EF21E7 /* BFInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFInformationViewController.h; sourceTree = "<group>"; };
+		36B1504B150154BA00EF21E7 /* BFInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFInformationViewController.m; sourceTree = "<group>"; };
+		36B1504E1501552300EF21E7 /* InformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationView.xib; sourceTree = "<group>"; };
 		36B62C861483CDB400D9B11E /* BFGamesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGamesManager.h; sourceTree = "<group>"; };
 		36B62C871483CDB400D9B11E /* BFGamesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGamesManager.m; sourceTree = "<group>"; };
 		36B6426E1484464400D9B11E /* connected.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = connected.m4v; sourceTree = "<group>"; };
@@ -778,6 +783,9 @@
 				362FCBB714A0D01200DED0DD /* BFServerListController.h */,
 				362FCBB814A0D01200DED0DD /* BFServerListController.m */,
 				368238E214A09C1400C60D5E /* ServerList.xib */,
+				36B1504A150154BA00EF21E7 /* BFInformationViewController.h */,
+				36B1504B150154BA00EF21E7 /* BFInformationViewController.m */,
+				36B1504E1501552300EF21E7 /* InformationView.xib */,
 			);
 			name = TabViews;
 			sourceTree = "<group>";
@@ -1067,6 +1075,7 @@
 				36DB12D314DC4AC600706971 /* history.png in Resources */,
 				36DB12D514DC4AFA00706971 /* submodule.png in Resources */,
 				36E895E414F2A7F200341106 /* template.html in Resources */,
+				36B1504F1501552300EF21E7 /* InformationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1166,6 +1175,7 @@
 				36205C0014EF26E10041FDBF /* XNBorderedScrollView.m in Sources */,
 				36E895E114F2A54E00341106 /* EXBackgroundView.m in Sources */,
 				3688BB1F14F4EF340050F5E4 /* BFChatTextFormatter.m in Sources */,
+				36B1504C150154BA00EF21E7 /* BFInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
