@@ -121,7 +121,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
         return;
     }
 	
-	NSLog(@"[Notice] Performing connect..");
+	DLog(@"[Notice] Performing connect..");
     
     CFSocketSignature siggie;
     CFSocketContext ctx;
@@ -204,7 +204,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
         NSLog(@"Called sendData but there was no data");
         return NO;
     }
-	NSLog(@"[Notice] Sending some data of length %lu",[data length]);
+	DLog(@"[Notice] Sending some data of length %lu",[data length]);
     if( _cfSocket && _status == SocketStatusConnected )
     {
         CFSocketError error = CFSocketSendData(_cfSocket, NULL, (CFDataRef)data, 1.0f);
@@ -236,13 +236,19 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
  */
 - (void)receivedData:(NSData *)data
 {
-	NSLog(@"[Notice] Receiving some data of length %lu",[data length]);
-    if( data && _delegate )
+	DLog(@"[Notice] Receiving some data of length %lu",[data length]);
+    if( [data length] > 0 && _delegate )
     {
         [_delegate receivedData:data];
     }
+	else if( [data length] < 1 )
+	{
+		NSLog(@"[Error] Received an empty server response, disconnecting..");
+		[_delegate didDisconnectWithReason:SocketErrorUnknownError];
+	}
     else
     {
+		NSLog(@"[Error] Received some data but no delegate exists, should disconnect here.");
         [_delegate didDisconnectWithReason:SocketErrorDisconnected];
     }
 }
@@ -270,7 +276,7 @@ static void socketCallback(CFSocketRef sock, CFSocketCallBackType cbType, CFData
 	}
     else if( cbType == kCFSocketConnectCallBack )
     {
-		NSLog(@"[Notice] Socket did connect");
+		DLog(@"[Notice] Socket did connect");
         [(Socket *)info didConnect];
     }
 	else

@@ -38,7 +38,9 @@ if( ([_data length] + (_need)) > 4294967296 ) { \
 // this defines whether the packets that are received should be logged, a very useful tool
 // if something is broken in the current packet handling as xfire might change things in the
 // protocol
-#define JABWD 1
+#ifdef DEBUG
+#define JABWD 0
+#endif
 
 NSString * const XFPacketChecksumKey		= @"checksum";
 NSString * const XFPacketChunksKey			= @"chunks";
