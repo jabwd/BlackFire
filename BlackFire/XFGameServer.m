@@ -17,6 +17,13 @@
 @synthesize port		= _port;
 @synthesize gameID		= _gameID;
 
+- (void)dealloc
+{
+	[_name release];
+	_name = nil;
+	[super dealloc];
+}
+
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"[Xfire game server IP='%@' Port='%lu' GameID='%lu']",NSStringFromIPAddress(_IPAddress),_port,_gameID];

@@ -73,6 +73,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	_chats = nil;
 	[_groupChats release];
 	_groupChats = nil;
+	[_servers release];
+	_servers = nil;
 	[super dealloc];
 }
 
@@ -135,6 +137,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	
 	[_groupChats release];
 	_groupChats = nil;
+	
+	[_servers release];
+	_servers = nil;
 	
 	[self setStatus:XFSessionStatusOffline];
 }
