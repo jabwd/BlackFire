@@ -46,17 +46,26 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+	NSRect frame = [self bounds];
+	frame.size.height	-= 1;
+	frame.origin.y		+= 0;
 	
-		NSRect frame = [self bounds];
-		
-		NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(frame.origin.x+.5, frame.origin.y+.5, frame.size.width-1, frame.size.height-1) xRadius:5 yRadius:5];
-		[[NSColor whiteColor] set];
-		[path setLineWidth:1.0f];
-		[path fill];
-		
+	NSBezierPath *path2 = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(frame.origin.x+.5, frame.origin.y+.5, frame.size.width-1, frame.size.height) xRadius:5 yRadius:5];
+	[[NSColor whiteColor] set];
+	[path2 fill];
+	
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(frame.origin.x+.5, frame.origin.y+.5, frame.size.width-1, frame.size.height-1) xRadius:5 yRadius:5];
+	[path setLineWidth:1.0f];
+	
 	if( [[self window] isKeyWindow] )
+	{
 		[[NSColor colorWithCalibratedWhite:0.45 alpha:1.0f] set];
-	else {
+		//[[NSColor colorWithCalibratedRed:0.6f green:0.6f blue:1.0f alpha:1.0f] set];
+		//[path setLineWidth:2.0f];
+		// 167 197 255
+	}
+	else 
+	{
 		[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0f] set];
 	}
 	

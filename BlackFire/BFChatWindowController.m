@@ -122,7 +122,7 @@
 
 - (void)awakeFromNib
 {
-	[_window setContentBorderThickness:38.0 forEdge:NSMinYEdge];
+	[_window setContentBorderThickness:35.0 forEdge:NSMinYEdge];
 	[_window setAutorecalculatesContentBorderThickness:false forEdge:NSMinYEdge];
 	[_tabStripView setDelegate:self];
 	
