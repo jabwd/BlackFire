@@ -405,7 +405,7 @@
 		36DB12D014DC478200706971 /* ChatLogViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLogViewer.xib; sourceTree = "<group>"; };
 		36DB12D214DC4AC600706971 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
 		36DB12D414DC4AFA00706971 /* submodule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submodule.png; sourceTree = "<group>"; };
-		36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = BlackFire.entitlements; path = BlackFire/BlackFire.entitlements; sourceTree = "<group>"; };
+		36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BlackFire.entitlements; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36E895DF14F2A54D00341106 /* EXBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXBackgroundView.h; sourceTree = "<group>"; };
 		36E895E014F2A54D00341106 /* EXBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXBackgroundView.m; sourceTree = "<group>"; };
@@ -462,9 +462,7 @@
 		3616F64E145F0E5400E5066D = {
 			isa = PBXGroup;
 			children = (
-				36345A8814F5BE02006DEC4A /* WebKit.framework */,
-				36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */,
-				3616F663145F0E5500E5066D /* OSXFire */,
+				3616F663145F0E5500E5066D /* Xfire for Mac */,
 				3616F65C145F0E5500E5066D /* Frameworks */,
 				3616F65A145F0E5500E5066D /* Products */,
 			);
@@ -481,6 +479,7 @@
 		3616F65C145F0E5500E5066D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36345A8814F5BE02006DEC4A /* WebKit.framework */,
 				368467B014EECBB6006669D5 /* WebKit.framework */,
 				363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */,
 				36B6427E1484474700D9B11E /* Growl.framework */,
@@ -501,7 +500,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		3616F663145F0E5500E5066D /* OSXFire */ = {
+		3616F663145F0E5500E5066D /* Xfire for Mac */ = {
 			isa = PBXGroup;
 			children = (
 				366AC22D14655E15002A1F50 /* BlackFire */,
@@ -509,13 +508,14 @@
 				3616F67E145F0FF800E5066D /* XfireKit */,
 				3616F664145F0E5500E5066D /* Supporting Files */,
 			);
-			name = OSXFire;
+			name = "Xfire for Mac";
 			path = BlackFire;
 			sourceTree = "<group>";
 		};
 		3616F664145F0E5500E5066D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */,
 				3616F665145F0E5500E5066D /* BlackFire-Info.plist */,
 				3616F666145F0E5500E5066D /* InfoPlist.strings */,
 				3616F669145F0E5500E5066D /* main.m */,
