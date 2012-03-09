@@ -62,12 +62,14 @@
 	[_chats release];
 	_chats = nil;
 	_currentlySelectedChat = nil;
+	[_toolbarItem release];
+	_toolbarItem = nil;
+	[_tabStripView setDelegate:nil];
 	[super dealloc];
 }
 
 - (BOOL)windowShouldClose:(id)sender
 {
-	
 	for(BFChat *chat in _chats)
 	{
 		[chat closeChat];

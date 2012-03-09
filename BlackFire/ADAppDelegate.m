@@ -239,16 +239,19 @@
 }
 
 #pragma mark - Toolbar delegate
-- (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
+- (NSToolbarItem *)toolbar:(NSToolbar *)aToolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag 
+{
 	return _toolbarItem;
 }
 
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)aToolbar {
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)aToolbar 
+{
 	return [NSArray arrayWithObjects:@"status", nil];
 }
 
 
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)aToolbar {
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)aToolbar 
+{
 	return [NSArray arrayWithObjects:@"status", nil];
 }
 
