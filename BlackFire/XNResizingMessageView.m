@@ -68,6 +68,8 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[previousMessages release];
+	previousMessages = nil;
 	[super dealloc];
 }
 
@@ -96,8 +98,11 @@
         if( !(modifierFlags & NSControlKeyMask) && !(modifierFlags & NSAlternateKeyMask) )
         {
             NSString *message = [[[self textStorage] string] copy];
-            [_messageDelegate sendMessage:message];
-            [self addMessage:message];
+			
+			[_messageDelegate sendMessage:message];
+			
+			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFMessageFieldHistory] )
+				[self addMessage:message];
             [message release];
             [self setString:@""];
             [self setNeedsDisplay:YES];
