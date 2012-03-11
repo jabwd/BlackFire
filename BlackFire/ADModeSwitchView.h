@@ -19,6 +19,6 @@
 @property (assign) SEL selector;
 @property (assign) id target;
 
-- (void)selectItemAtIndex:(NSUInteger)index;
+- (void)selectItemAtIndex:(NSInteger)index;
 - (NSInteger)selectedItemIndex;
 @end

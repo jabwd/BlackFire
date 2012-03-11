@@ -104,15 +104,21 @@
 	return true;
 }
 
-- (void)selectItemAtIndex:(NSUInteger)index
+- (void)selectItemAtIndex:(NSInteger)index
 {
+	// deselect every item, then select the item of the index.
+	// Alternatively we could've used an instance variable with the currently
+	// selected index but that is just nuts, then we need to modify the drawing code
+	// and this seems to work fine
 	for(ADModeItem *item in _items)
 	{
 		if( item.selected )
 			item.selected = false;
 	}
-	
-	[[_items objectAtIndex:index] setSelected:true];
+	if( index >= 0 )
+	{
+		[[_items objectAtIndex:index] setSelected:true];
+	}
 	[self setNeedsDisplay:true];
 }
 
