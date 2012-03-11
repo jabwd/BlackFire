@@ -724,19 +724,14 @@
 		36529834146692F00010FD7F /* NSView subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				36205BFE14EF26E00041FDBF /* XNBorderedScrollView.h */,
-				36205BFF14EF26E00041FDBF /* XNBorderedScrollView.m */,
-				36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */,
-				36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */,
-				368467B714EECF20006669D5 /* BFWebview.h */,
-				368467B814EECF20006669D5 /* BFWebview.m */,
 				36276EE31468442B00F84E7B /* NSViewAdditions.h */,
 				36276EE41468442B00F84E7B /* NSViewAdditions.m */,
+				36CA2B36150CBC2700D6F5AB /* WebView */,
+				36CA2B35150CBC1400D6F5AB /* OutlineView */,
+				36CA2B33150CBB6500D6F5AB /* Message view */,
 				361268D014A26C4300ACDEA4 /* ModeSwitchView */,
 				362FFA7F146742B6007E3BD8 /* Safari tabs */,
 				362FFA79146734BF007E3BD8 /* Chromium tabs */,
-				36529836146692FA0010FD7F /* ADOutlineView.h */,
-				36529837146692FA0010FD7F /* ADOutlineView.m */,
 				361268CC14A26C3E00ACDEA4 /* ADShadowScrollView.h */,
 				361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */,
 				363DC6BF14A65C9800FBE38E /* NSNonRetardedImageView.h */,
@@ -930,6 +925,35 @@
 				362FFA80146742C2007E3BD8 /* Safari tabs */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		36CA2B33150CBB6500D6F5AB /* Message view */ = {
+			isa = PBXGroup;
+			children = (
+				36205BFE14EF26E00041FDBF /* XNBorderedScrollView.h */,
+				36205BFF14EF26E00041FDBF /* XNBorderedScrollView.m */,
+				36205BF514EF1F4A0041FDBF /* XNResizingMessageView.h */,
+				36205BF614EF1F4A0041FDBF /* XNResizingMessageView.m */,
+			);
+			name = "Message view";
+			sourceTree = "<group>";
+		};
+		36CA2B35150CBC1400D6F5AB /* OutlineView */ = {
+			isa = PBXGroup;
+			children = (
+				36529836146692FA0010FD7F /* ADOutlineView.h */,
+				36529837146692FA0010FD7F /* ADOutlineView.m */,
+			);
+			name = OutlineView;
+			sourceTree = "<group>";
+		};
+		36CA2B36150CBC2700D6F5AB /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				368467B714EECF20006669D5 /* BFWebview.h */,
+				368467B814EECF20006669D5 /* BFWebview.m */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		36D9C9F41465C4A300C4A162 /* ViewControllers */ = {
