@@ -16,6 +16,7 @@
 	{
 		[NSBundle loadNibNamed:@"InformationView" owner:self];
 	}
+	return self;
 }
 
 - (void)dealloc
