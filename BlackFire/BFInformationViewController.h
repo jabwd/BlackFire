@@ -8,6 +8,25 @@
 
 #import "BFTabViewController.h"
 
+@class XFFriend;
+
 @interface BFInformationViewController : BFTabViewController
+{
+	XFFriend *_currentFriend;
+	
+	NSTextField *_usernameField;
+	NSTextField *_nicknameField;
+	NSTextField *_statusField;
+	
+	NSImageView *_avatarView;
+}
+
+@property (assign) IBOutlet NSTextField *usernameField;
+@property (assign) IBOutlet NSTextField *nicknameField;
+@property (assign) IBOutlet NSTextField *statusField;
+
+@property (assign) IBOutlet NSImageView *avatarView;
+
+- (void)setFriend:(XFFriend *)remoteFriend;
 
 @end

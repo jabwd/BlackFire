@@ -24,6 +24,7 @@
 #import "BFChat.h"
 #import "BFRequestWindowController.h"
 #import "BFAddGameSheetController.h"
+#import "BFInformationViewController.h"
 #import "ADInvitationWindowController.h"
 #import "BFChatLogViewer.h"
 
@@ -359,6 +360,18 @@
 		}
 			break;
 			
+		case BFApplicationModeInformation:
+		{
+			if( ! _informationViewController )
+			{
+				_informationViewController = [[BFInformationViewController alloc] init];
+			}
+			[_informationViewController setFriend:[_friendsListController selectedFriend]];
+			[self changeMainView:_informationViewController.view];
+			[_modeSwitch selectItemAtIndex:-1];
+		}
+			break;
+			
 		default:
 		{
 			NSLog(@"Cannot switch to unknown BFApplication mode");
@@ -412,6 +425,19 @@
 		return;
 	
 	[self changeToMode:BFApplicationModeGames];
+}
+
+- (IBAction)showFriendInformation:(id)sender
+{
+	XFFriend *friend = [_friendsListController selectedFriend];
+	if( friend )
+	{
+		DLog(@"[Notice] Opening information view controller for %@",friend);
+		[self changeToMode:BFApplicationModeInformation];
+	}
+	else {
+		DLog(@"[Notice] Cannot open the information view controller with an empty friend");
+	}
 }
 
 #pragma mark - Xfire Session

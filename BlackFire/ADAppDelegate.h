@@ -16,14 +16,15 @@
 
 typedef enum
 {
-	BFApplicationModeOffline	= 1,
-	BFApplicationModeLoggingIn	= 2,
-	BFApplicationModeOnline		= 3,
-	BFApplicationModeGames		= 4,
-	BFApplicationModeServers	= 5
+	BFApplicationModeOffline		= 1,
+	BFApplicationModeLoggingIn		= 2,
+	BFApplicationModeOnline			= 3,
+	BFApplicationModeGames			= 4,
+	BFApplicationModeServers		= 5,
+	BFApplicationModeInformation	= 6
 } BFApplicationMode;
 
-@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, BFServerListController, ADModeSwitchView, NSNonRetardedImageView, BFChatLogViewer;
+@class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, BFServerListController, ADModeSwitchView, NSNonRetardedImageView, BFChatLogViewer, BFInformationViewController;
 
 @interface ADAppDelegate : NSObject <BFIdleTimeManagerDelegate,BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
 {
@@ -56,6 +57,7 @@ typedef enum
 	BFFriendsListController			*_friendsListController;
 	BFPreferencesWindowController	*_preferencesWindowController;
 	BFGamesListController			*_gamesListController;
+	BFInformationViewController		*_informationViewController;
 	BFServerListController			*_serverListController;
 	BFChatLogViewer					*_chatlogViewer;
 	ADStringPromptController		*_stringPromptController;
@@ -89,6 +91,7 @@ typedef enum
 - (IBAction)modeControl:(id)sender;
 - (IBAction)gamesMode:(id)sender;
 - (IBAction)friendsMode:(id)sender;
+- (IBAction)showFriendInformation:(id)sender;
 
 //----------------------------------------------------------------------------
 // Xfire Session
