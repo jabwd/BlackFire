@@ -21,6 +21,7 @@
 	if( (self = [super init]) )
 	{
 		_members = [[NSMutableArray alloc] init];
+		_groupName = nil;;
 	}
 	return self;
 }
@@ -29,6 +30,8 @@
 {
 	[_members release];
 	_members = nil;
+	[_groupName release];
+	_groupName = nil;
 	[super dealloc];
 }
 
