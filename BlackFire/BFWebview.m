@@ -42,12 +42,15 @@
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
+	if( frame == [webView mainFrame] )
+	{
 	if( [[[[frame provisionalDataSource] request] URL] isFileURL] && [[[[[frame provisionalDataSource] request] URL] lastPathComponent] isEqualToString:@"template.html"] )
 	{
 		return; // dont do anything
 	}
 	[[NSWorkspace sharedWorkspace] openURL:[[[frame provisionalDataSource] request] URL]];
 	[sender stopLoading:self];
+	}
 }
 
 - (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
