@@ -184,6 +184,7 @@
 		case 2: 
 		{
 			// for PTP connections
+			DLog(@"Packet: %@",packet);
 		}
 			break;
 			

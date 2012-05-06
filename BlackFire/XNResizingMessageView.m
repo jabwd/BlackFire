@@ -98,7 +98,8 @@
         if( !(modifierFlags & NSControlKeyMask) && !(modifierFlags & NSAlternateKeyMask) )
         {
             NSString *message = [[[self textStorage] string] copy];
-			
+			if( [message length] < 1 )
+                return; // prevent some nasty glitches
 			[_messageDelegate sendMessage:message];
 			
 			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFMessageFieldHistory] )
