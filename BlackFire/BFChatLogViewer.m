@@ -9,20 +9,24 @@
 #import "BFChatLogViewer.h"
 #import "BFApplicationSupport.h"
 #import "BFChatLog.h"
-#import <sqlite3.h>
+#import "XFSession.h"
+#import "XFFriend.h"
 
 @implementation BFChatLogViewer
 
 @synthesize friendsList = _friendsList;
 @synthesize chatlogList	= _chatlogList;
 @synthesize chatlogView	= _chatlogView;
+@synthesize session = _session;
 
 - (id)init
 {
 	if( (self = [super initWithWindowNibName:@"ChatLogViewer"]) )
 	{
-		_friends	= [[NSMutableArray alloc] init];
-		_chats		= [[NSMutableArray alloc] init];
+		_friends            = [[NSMutableArray alloc] init];
+		_chats              = [[NSMutableArray alloc] init];
+        _currentDatabase    = NULL;
+        _session            = nil;
 	}
 	return self;
 }
@@ -33,6 +37,12 @@
 	_friends = nil;
 	[_chats release];
 	_chats = nil;
+    _session = nil;
+    if( _currentDatabase )
+    {
+        sqlite3_close(_currentDatabase);
+        _currentDatabase = NULL;
+    }
 	[super dealloc];
 }
 
@@ -118,9 +128,13 @@
 {
 	[_chats release];
 	_chats = [[NSMutableArray alloc] init];
-	sqlite3 *database;
-    sqlite3_open([filePath UTF8String], &database);
-    if( ! database )
+	if( _currentDatabase )
+    {
+        sqlite3_close(_currentDatabase);
+        _currentDatabase = NULL;
+    }
+    sqlite3_open([filePath UTF8String], &_currentDatabase);
+    if( ! _currentDatabase )
     {
 		NSRunAlertPanel(@"Cannot open file", @"", @"OK", nil, nil);
         NSLog(@"*** Can't open the chats for path %@",filePath);
@@ -128,7 +142,7 @@
     }
     sqlite3_stmt *statement = nil;
     
-    if( sqlite3_prepare_v2(database, "select * from chats", -1, &statement, NULL) == SQLITE_OK )
+    if( sqlite3_prepare_v2(_currentDatabase, "select * from chats", -1, &statement, NULL) == SQLITE_OK )
     {
         while( sqlite3_step(statement) == SQLITE_ROW )
         {
@@ -151,7 +165,6 @@
 - (IBAction)selectedAFriend:(id)sender
 {
 	NSInteger selectedIndex = [_friendsList selectedRow];
-	//NSInteger clickedIndex = [_friendsList clickedRow];
 	
 	NSString *file = [NSString stringWithFormat:@"%@/%@.xfl",BFChatLogDirectoryPath(),[_friends objectAtIndex:selectedIndex]];
 	[self loadChatsForDatabase:file];
@@ -159,7 +172,61 @@
 
 - (IBAction)selectedAChat:(id)sender
 {
-	
+	NSInteger idx = [_chatlogList selectedRow];
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@""];
+    [[_chatlogView textStorage] setAttributedString:str];
+    [str release];
+    
+    NSString *username = [_friends objectAtIndex:[_friendsList selectedRow]];
+    
+    if( idx >= 0 )
+    {
+        NSInteger chatID = [[[_chats objectAtIndex:idx] objectForKey:@"chatID"] integerValue];
+        if( chatID )
+        {
+            sqlite3_stmt *statement = nil;
+            NSString *query = [[NSString alloc] initWithFormat:@"SELECT * FROM messages WHERE chatID=%lu ORDER BY timestamp",chatID];
+            if( sqlite3_prepare_v2(_currentDatabase, [query UTF8String], -1, &statement, NULL) == SQLITE_OK )
+            {
+                NSTextStorage *storage = [_chatlogView textStorage];
+                while(sqlite3_step(statement)==SQLITE_ROW)
+                {
+                    NSInteger user = sqlite3_column_int(statement, 2);
+                    const char *message = (const char*)sqlite3_column_text(statement, 4);
+                    
+                    if( message )
+                    {
+                        NSString *nickname = nil;
+                        NSDictionary *attr  = nil;
+                        if( !user )
+                        {
+                            nickname = [[_session loginIdentity] displayName];
+                            attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor blueColor], nil];
+                        }
+                        else if( user == 1 ) {
+                            nickname = [[_session friendForUsername:username] displayName];
+                            attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor redColor], nil];
+                        }
+                        else {
+                            nickname = @"";
+                            attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor grayColor], nil];
+                        }
+                        if( ! nickname )
+                            nickname = @"Unknown";
+                        NSString *fmtStr    = [[NSString alloc] initWithFormat:@"\n%@: %s",nickname,message];
+                        NSMutableAttributedString *mtb = [[NSMutableAttributedString alloc] initWithString:fmtStr];
+                        [mtb setAttributes:attr range:NSMakeRange(1, [nickname length])];
+                        [storage appendAttributedString:mtb];
+                        [mtb release];
+                        [attr release];
+                        [fmtStr release];
+                    }
+                }
+            }
+            sqlite3_finalize(statement);
+            [query release];
+        }
+    }
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

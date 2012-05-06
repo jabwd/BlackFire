@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <sqlite3.h>
 
-@class BFChatLog;
+@class BFChatLog, XFSession;
 
 @interface BFChatLogViewer : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
 {
@@ -20,11 +21,17 @@
 	NSTextView *_chatlogView;
 	NSTableView *_friendsList;
 	NSTableView *_chatlogList;
+    
+    sqlite3 *_currentDatabase;
+    
+    XFSession *_session;
 }
 
 @property (assign) IBOutlet NSTextView *chatlogView;
 @property (assign) IBOutlet NSTableView *friendsList;
 @property (assign) IBOutlet NSTableView *chatlogList;
+
+@property (assign) XFSession *session;
 
 - (IBAction)showWindow:(id)sender;
 

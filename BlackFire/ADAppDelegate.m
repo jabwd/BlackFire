@@ -1114,6 +1114,7 @@
 	}
 	_chatlogViewer = [[BFChatLogViewer alloc] init];
 	[_chatlogViewer showWindow:nil];
+    [_chatlogViewer setSession:_session];
 }
 
 - (IBAction)addAction:(id)sender
