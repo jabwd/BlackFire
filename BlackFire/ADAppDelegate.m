@@ -1386,6 +1386,17 @@
 			return false;
 		}
 			break;
+            
+        case 15:
+        {
+            if( [_friendsListController selectedFriend] )
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 			
 		default:
 		{
