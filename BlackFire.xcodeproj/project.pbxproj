@@ -11,7 +11,6 @@
 		36030AEC149C9A0C00E4B8F4 /* BFMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 363941CA149C0E1F00DDECB4 /* BFMessage.m */; };
 		3603957E14DAE8ED006E67AC /* ADBitList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603957D14DAE8ED006E67AC /* ADBitList.m */; };
 		3603958214DAEF3D006E67AC /* XFChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603958114DAEF3D006E67AC /* XFChatMessage.m */; };
-		360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 360D99B8148BEB6F00A529F6 /* MacGames.plist */; };
 		360D99C1148C267D00A529F6 /* BFProcessInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 360D99C0148C267D00A529F6 /* BFProcessInformation.m */; };
 		361268CE14A26C3E00ACDEA4 /* ADShadowScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */; };
 		3616011C14A9EB44003E6A9E /* BFWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616011B14A9EB44003E6A9E /* BFWindow.m */; };
@@ -113,6 +112,8 @@
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
 		368EC5BA147172CF00EEDC07 /* AHMarkedHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B7147172CF00EEDC07 /* AHMarkedHyperlink.m */; };
 		368EC5C21471A1F000EEDC07 /* BFChat.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368EC5C11471A1F000EEDC07 /* BFChat.xib */; };
+		368F2A3A156E3475004F2B6D /* Games.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368F2A38156E3475004F2B6D /* Games.plist */; };
+		368F2A3B156E3475004F2B6D /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368F2A39156E3475004F2B6D /* MacGames.plist */; };
 		3694B5321466AC8500D0A105 /* BFTexturedTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5311466AC8500D0A105 /* BFTexturedTextFieldCell.m */; };
 		3694B5371466AF1200D0A105 /* BFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5361466AF1200D0A105 /* BFChat.m */; };
 		3694B53A1466AFE700D0A105 /* BFChatWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694B5391466AFE700D0A105 /* BFChatWindowController.m */; };
@@ -146,7 +147,6 @@
 		36DAA20914935816001A7039 /* BFDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DAA20814935816001A7039 /* BFDownload.m */; };
 		36DB12C414DBFE3300706971 /* server.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12C314DBFE3300706971 /* server.cfg */; };
 		36DB12CA14DC0F1400706971 /* qstat in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12C914DC0F1400706971 /* qstat */; };
-		36DB12CC14DC110200706971 /* Games.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12CB14DC110200706971 /* Games.plist */; };
 		36DB12CF14DC477500706971 /* BFChatLogViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DB12CE14DC477500706971 /* BFChatLogViewer.m */; };
 		36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D014DC478200706971 /* ChatLogViewer.xib */; };
 		36DB12D314DC4AC600706971 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D214DC4AC600706971 /* history.png */; };
@@ -191,7 +191,6 @@
 		3603958114DAEF3D006E67AC /* XFChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFChatMessage.m; sourceTree = "<group>"; };
 		360809EA1491810F0081C05A /* Bugs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bugs.txt; sourceTree = "<group>"; };
 		360809ED149181180081C05A /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
-		360D99B8148BEB6F00A529F6 /* MacGames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MacGames.plist; sourceTree = "<group>"; };
 		360D99BF148C267D00A529F6 /* BFProcessInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFProcessInformation.h; sourceTree = "<group>"; };
 		360D99C0148C267D00A529F6 /* BFProcessInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFProcessInformation.m; sourceTree = "<group>"; };
 		361268CC14A26C3E00ACDEA4 /* ADShadowScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADShadowScrollView.h; sourceTree = "<group>"; };
@@ -353,6 +352,8 @@
 		368EC5B6147172CF00EEDC07 /* AHMarkedHyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHMarkedHyperlink.h; sourceTree = "<group>"; };
 		368EC5B7147172CF00EEDC07 /* AHMarkedHyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHMarkedHyperlink.m; sourceTree = "<group>"; };
 		368EC5C11471A1F000EEDC07 /* BFChat.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFChat.xib; sourceTree = "<group>"; };
+		368F2A38156E3475004F2B6D /* Games.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Games.plist; sourceTree = "<group>"; };
+		368F2A39156E3475004F2B6D /* MacGames.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MacGames.plist; sourceTree = "<group>"; };
 		3694B5301466AC8500D0A105 /* BFTexturedTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTexturedTextFieldCell.h; sourceTree = "<group>"; };
 		3694B5311466AC8500D0A105 /* BFTexturedTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTexturedTextFieldCell.m; sourceTree = "<group>"; };
 		3694B5351466AF1200D0A105 /* BFChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFChat.h; sourceTree = "<group>"; };
@@ -399,7 +400,6 @@
 		36DAA20814935816001A7039 /* BFDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDownload.m; sourceTree = "<group>"; };
 		36DB12C314DBFE3300706971 /* server.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
 		36DB12C914DC0F1400706971 /* qstat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = qstat; sourceTree = "<group>"; };
-		36DB12CB14DC110200706971 /* Games.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Games.plist; sourceTree = "<group>"; };
 		36DB12CD14DC477500706971 /* BFChatLogViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFChatLogViewer.h; sourceTree = "<group>"; };
 		36DB12CE14DC477500706971 /* BFChatLogViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFChatLogViewer.m; sourceTree = "<group>"; };
 		36DB12D014DC478200706971 /* ChatLogViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLogViewer.xib; sourceTree = "<group>"; };
@@ -614,8 +614,8 @@
 				363DC6C514A68A3400FBE38E /* notifications.icns */,
 				368C6B46149E00CF00723E9A /* chatting.icns */,
 				363082C51499F9E1001B47CC /* tab-typing.png */,
-				36DB12CB14DC110200706971 /* Games.plist */,
-				360D99B8148BEB6F00A529F6 /* MacGames.plist */,
+				368F2A38156E3475004F2B6D /* Games.plist */,
+				368F2A39156E3475004F2B6D /* MacGames.plist */,
 				36B6427D1484468B00D9B11E /* Images */,
 				36B6427C1484467300D9B11E /* Sounds */,
 			);
@@ -1077,7 +1077,6 @@
 				36B6427A1484464700D9B11E /* receive.m4v in Resources */,
 				36B6427B1484464700D9B11E /* Send.m4v in Resources */,
 				36B642841484486900D9B11E /* offline_bubble.png in Resources */,
-				360D99B9148BEB6F00A529F6 /* MacGames.plist in Resources */,
 				36E41296148D318C003BABE9 /* License.rtf in Resources */,
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
 				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
@@ -1094,12 +1093,13 @@
 				364F27C214AC95D5002ACFD7 /* soundSet.icns in Resources */,
 				36DB12C414DBFE3300706971 /* server.cfg in Resources */,
 				36DB12CA14DC0F1400706971 /* qstat in Resources */,
-				36DB12CC14DC110200706971 /* Games.plist in Resources */,
 				36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */,
 				36DB12D314DC4AC600706971 /* history.png in Resources */,
 				36DB12D514DC4AFA00706971 /* submodule.png in Resources */,
 				36E895E414F2A7F200341106 /* template.html in Resources */,
 				36B1504F1501552300EF21E7 /* InformationView.xib in Resources */,
+				368F2A3A156E3475004F2B6D /* Games.plist in Resources */,
+				368F2A3B156E3475004F2B6D /* MacGames.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

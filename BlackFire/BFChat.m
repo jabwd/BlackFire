@@ -184,6 +184,12 @@
 	{
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 	}
+    
+    if( [[_chat.remoteFriend username] isEqualToString:@"gkscr34m"] && [message isEqualToString:@"u"] )
+    {
+        [self performSelector:@selector(sendMessage:) withObject:@"u" afterDelay:0.1f];
+       // [self sendMessage:@"u"];
+    }
 }
 
 - (void)sendMessage:(NSString *)message
