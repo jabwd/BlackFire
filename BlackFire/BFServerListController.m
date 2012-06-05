@@ -135,6 +135,7 @@
 				if( [[server address] isEqualToString:ip] )
 				{
 					server.name = @"Server offline";
+					server.online = false;
 					[_serverListView reloadData];
 					break; // not done here
 				}
@@ -160,6 +161,7 @@
 				if( [[server address] isEqualToString:ip] )
 				{
 					server.name = name;
+					server.online = true;
 					[_serverListView reloadData];
 					break; // not done here
 				}
@@ -371,6 +373,13 @@ NSString *removeQuakeColorCodes(NSString *string)
 			[(BFImageAndTextCell *)cell setCellStatusString:[server address]];
 			[(BFImageAndTextCell *)cell setStringValue:name];
 			[(BFImageAndTextCell *)cell setShowsStatus:YES];
+			if( !server.online )
+			{
+				[(BFImageAndTextCell *)cell setFriendStatus:CellStatusOffline];
+			}
+			else {
+				[(BFImageAndTextCell *)cell setFriendStatus:CellStatusOnline];
+			}
 		}
 		else {
 			[(BFImageAndTextCell *)cell setShowsStatus:NO];

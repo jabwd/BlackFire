@@ -18,6 +18,8 @@
 	unsigned int	_IPAddress;
 	unsigned short	_port;
 	unsigned int	_gameID;
+	
+	BOOL _online;
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -25,6 +27,8 @@
 @property (nonatomic, assign) unsigned int IPAddress;
 @property (nonatomic, assign) unsigned short port;
 @property (nonatomic, assign) unsigned int gameID;
+
+@property (nonatomic, assign) BOOL online;
 
 - (NSString *)address;
 

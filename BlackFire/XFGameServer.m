@@ -16,6 +16,7 @@
 @synthesize IPAddress	= _IPAddress;
 @synthesize port		= _port;
 @synthesize gameID		= _gameID;
+@synthesize online		= _online;
 
 - (void)dealloc
 {
