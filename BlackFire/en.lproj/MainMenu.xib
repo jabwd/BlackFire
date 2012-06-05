@@ -986,7 +986,7 @@
 							<string key="NSFrame">{{5, 2}, {51, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="501051653"/>
+							<reference key="NSNextKeyView" ref="788535692"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSegmentedCell" key="NSCell" id="133575571">
@@ -1030,15 +1030,16 @@
 							<string key="NSReuseIdentifierKey">_NS:1192</string>
 							<string key="NSClassName">ADModeSwitchView</string>
 						</object>
-						<object class="NSButton" id="501051653">
+						<object class="NSButton" id="788535692">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">-2147483359</int>
 							<string key="NSFrame">{{152, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:22</string>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="593930395">
+							<object class="NSButtonCell" key="NSCell" id="269865637">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
@@ -1048,7 +1049,7 @@
 									<int key="NSfFlags">1044</int>
 								</object>
 								<string key="NSCellIdentifier">_NS:22</string>
-								<reference key="NSControlView" ref="501051653"/>
+								<reference key="NSControlView" ref="788535692"/>
 								<int key="NSButtonFlags">-2033958657</int>
 								<int key="NSButtonFlags2">163</int>
 								<object class="NSCustomResource" key="NSNormalImage">
@@ -1089,6 +1090,7 @@
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1192</string>
 						<string key="NSClassName">NSNonRetardedImageView</string>
 					</object>
@@ -1951,6 +1953,22 @@
 					</object>
 					<int key="connectionID">883</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">rightExtraButtonAction:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="788535692"/>
+					</object>
+					<int key="connectionID">884</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">rightExtraButton</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="788535692"/>
+					</object>
+					<int key="connectionID">885</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2193,7 +2211,7 @@
 							<reference ref="243777411"/>
 							<reference ref="433550647"/>
 							<reference ref="581243776"/>
-							<reference ref="501051653"/>
+							<reference ref="788535692"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -2846,16 +2864,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">881</int>
-						<reference key="object" ref="501051653"/>
+						<reference key="object" ref="788535692"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="593930395"/>
+							<reference ref="269865637"/>
 						</array>
 						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">882</int>
-						<reference key="object" ref="593930395"/>
-						<reference key="parent" ref="501051653"/>
+						<reference key="object" ref="269865637"/>
+						<reference key="parent" ref="788535692"/>
 					</object>
 				</array>
 			</object>
@@ -3005,7 +3023,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">883</int>
+			<int key="maxID">885</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3021,6 +3039,7 @@
 						<string key="help:">id</string>
 						<string key="modeControl:">id</string>
 						<string key="removeSelectedFriend:">id</string>
+						<string key="rightExtraButtonAction:">id</string>
 						<string key="selectAvailable:">id</string>
 						<string key="selectAway:">id</string>
 						<string key="selectNextTab:">id</string>
@@ -3068,6 +3087,10 @@
 						</object>
 						<object class="IBActionInfo" key="removeSelectedFriend:">
 							<string key="name">removeSelectedFriend:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="rightExtraButtonAction:">
+							<string key="name">rightExtraButtonAction:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectAvailable:">
@@ -3137,6 +3160,7 @@
 						<string key="mainView">NSView</string>
 						<string key="modeSwitch">ADModeSwitchView</string>
 						<string key="nicknamePopUpButton">NSPopUpButton</string>
+						<string key="rightExtraButton">NSButton</string>
 						<string key="statusBubbleView">NSImageView</string>
 						<string key="statusPopUpButton">NSPopUpButton</string>
 						<string key="toolbarView">NSView</string>
@@ -3162,6 +3186,10 @@
 						<object class="IBToOneOutletInfo" key="nicknamePopUpButton">
 							<string key="name">nicknamePopUpButton</string>
 							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightExtraButton">
+							<string key="name">rightExtraButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="statusBubbleView">
 							<string key="name">statusBubbleView</string>

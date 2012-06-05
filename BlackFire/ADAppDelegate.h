@@ -45,6 +45,7 @@ typedef enum
 	NSImageView		*_statusBubbleView;
 	NSPopUpButton	*_nicknamePopUpButton;
 	NSPopUpButton	*_statusPopUpButton;
+	NSButton		*_rightExtraButton;
 	// end toolbar outlets
 	
 	NSMutableArray *_chatControllers;
@@ -74,6 +75,7 @@ typedef enum
 @property (assign) IBOutlet NSImageView		*statusBubbleView;
 @property (assign) IBOutlet NSPopUpButton	*nicknamePopUpButton;
 @property (assign) IBOutlet NSPopUpButton	*statusPopUpButton;
+@property (assign) IBOutlet NSButton		*rightExtraButton;
 
 @property (assign) IBOutlet NSView *mainView;
 @property (assign) IBOutlet NSView *toolbarView;
@@ -129,6 +131,7 @@ typedef enum
 //----------------------------------------------------------------------------
 // Friends list toolbar
 
+- (IBAction)rightExtraButtonAction:(id)sender;
 - (IBAction)addAction:(id)sender;
 - (IBAction)showUserProfile:(id)sender;
 

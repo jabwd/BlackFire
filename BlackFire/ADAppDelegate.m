@@ -49,6 +49,7 @@
 @synthesize statusBubbleView		= _statusBubbleView;
 @synthesize nicknamePopUpButton		= _nicknamePopUpButton;
 @synthesize statusPopUpButton		= _statusPopUpButton;
+@synthesize rightExtraButton		= _rightExtraButton;
 
 @synthesize addButton = _addButton;
 @synthesize modeSwitch = _modeSwitch;
@@ -300,7 +301,7 @@
 			[_statusPopUpButton setTitle:@"Offline"];
 			[_nicknamePopUpButton setTitle:@""];
 			[_statusPopUpButton selectItemWithTag:0];
-			
+			[_rightExtraButton setHidden:true];
 			[self changeMainView:_loginViewController.view];
 		}
 			break;
@@ -309,6 +310,7 @@
 		{
 			[_loginViewController session:_session changedStatus:XFSessionStatusConnecting];
 			[_statusPopUpButton setTitle:@"Connecting…"];
+			[_rightExtraButton setHidden:true];
 		}
 			break;
 			
@@ -328,7 +330,7 @@
 			
 			[_friendsListController reloadData];
 			[_friendsListController.view setNeedsDisplay:true];
-			
+			[_rightExtraButton setHidden:true];
 			[_modeSwitch selectItemAtIndex:0];
 		}
 			break;
@@ -343,7 +345,7 @@
 			[_gamesListController reloadData];
 			
 			[self changeMainView:_gamesListController.view];
-			
+			[_rightExtraButton setHidden:true];
 			[_modeSwitch selectItemAtIndex:1];
 		}
 			break;
@@ -356,6 +358,8 @@
 			}
 			_serverListController.session = _session;
 			[self changeMainView:_serverListController.view];
+			
+			[_rightExtraButton setHidden:false];
 			[_modeSwitch selectItemAtIndex:2];
 		}
 			break;
@@ -368,6 +372,7 @@
 			}
 			[_informationViewController setFriend:[_friendsListController selectedFriend]];
 			[self changeMainView:_informationViewController.view];
+			[_rightExtraButton setHidden:true];
 			[_modeSwitch selectItemAtIndex:-1];
 		}
 			break;
@@ -1115,6 +1120,14 @@
 	_chatlogViewer = [[BFChatLogViewer alloc] init];
 	[_chatlogViewer showWindow:nil];
     [_chatlogViewer setSession:_session];
+}
+
+- (IBAction)rightExtraButtonAction:(id)sender
+{
+	if( _currentMode == BFApplicationModeServers )
+	{
+		[_serverListController refreshAll:sender];
+	}
 }
 
 - (IBAction)addAction:(id)sender
