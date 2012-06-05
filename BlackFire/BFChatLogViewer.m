@@ -213,9 +213,14 @@
                         }
                         if( ! nickname )
                             nickname = @"Unknown";
-                        NSString *fmtStr    = [[NSString alloc] initWithFormat:@"\n%@: %s",nickname,message];
+						 attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor blueColor], nil];
+						
+						NSString *newLine = @"";
+						if( [storage length] > 0)
+							newLine = @"\n";
+                        NSString *fmtStr    = [[NSString alloc] initWithFormat:@"%@%@: %s",newLine,nickname,message];
                         NSMutableAttributedString *mtb = [[NSMutableAttributedString alloc] initWithString:fmtStr];
-                        [mtb setAttributes:attr range:NSMakeRange(1, [nickname length])];
+                        [mtb setAttributes:attr range:NSMakeRange([newLine length], [nickname length])];
                         [storage appendAttributedString:mtb];
                         [mtb release];
                         [attr release];

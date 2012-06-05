@@ -185,11 +185,10 @@
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 	}
     
-    if( [[_chat.remoteFriend username] isEqualToString:@"gkscr34m"] && [message isEqualToString:@"u"] )
+   /* if( [[_chat.remoteFriend username] isEqualToString:@"gkscr34m"] && ([message isEqualToString:@"yu"] || [message isEqualToString:@"uuuu"] || [message isEqualToString:@"uuu"] || [message isEqualToString:@"u"] || [message isEqualToString:@"uu"] || [message isEqualToString:@"uh"] || [message isEqualToString:@"you"]) )
     {
-        [self performSelector:@selector(sendMessage:) withObject:@"u" afterDelay:0.1f];
-       // [self sendMessage:@"u"];
-    }
+        [self performSelector:@selector(sendMessage:) withObject:@"u" afterDelay:0.3f];
+    }*/
 }
 
 - (void)sendMessage:(NSString *)message

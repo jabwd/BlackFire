@@ -1121,23 +1121,37 @@
 {
 	if( ! _stringPromptController && _session.status == XFSessionStatusOnline )
 	{
-		if( _currentMode == BFApplicationModeGames )
+		NSInteger idx = [_addButton selectedSegment];
+		switch(idx)
 		{
-			if( [_gamesListController selectedGameID] > 0 )
+			case 0:
 			{
-				_stringPromptController = [[BFAddGameSheetController alloc] initWithWindow:self.window];
+				if( _currentMode == BFApplicationModeGames )
+				{
+					if( [_gamesListController selectedGameID] > 0 )
+					{
+						_stringPromptController = [[BFAddGameSheetController alloc] initWithWindow:self.window];
+						_stringPromptController.delegate = self;
+						[_stringPromptController show];
+					}
+					else
+					{
+						NSBeep();
+					}
+					return;
+				}
+				_stringPromptController = [[ADInvitationWindowController alloc] initWithWindow:self.window];
 				_stringPromptController.delegate = self;
 				[_stringPromptController show];
 			}
-			else
+				break;
+				
+			case 1:
 			{
-				NSBeep();
+				[self removeSelectedFriend:nil];
 			}
-			return;
+				break;
 		}
-		_stringPromptController = [[ADInvitationWindowController alloc] initWithWindow:self.window];
-		_stringPromptController.delegate = self;
-		[_stringPromptController show];
 	}
 }
 
