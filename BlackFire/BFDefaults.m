@@ -37,3 +37,6 @@ NSString *BFSoundVolume			= @"volumeValue";
 NSString *BFCustomMacGamesList	= @"customMacGames";
 
 NSString *BFMessageFieldHistory = @"messageFieldHistory";
+
+NSString *BFDetectGames					= @"detectGames";
+NSString *BFAutoUpdateGameDefinitions	= @"autoUpdateDefinitions";

@@ -12,6 +12,7 @@
 #import "BFNotificationCenter.h"
 #import "BFApplicationSupport.h"
 #import "BFSoundSet.h"
+#import "BFGamesManager.h"
 
 @implementation BFPreferencesWindowController
 
@@ -23,6 +24,9 @@
 @synthesize generalItem			= _generalItem;
 
 @synthesize soundsetDropDown	= _soundsetDropDown;
+
+
+@synthesize gamesVersionField = _gamesVersionField;
 
 - (id)init
 {
@@ -139,6 +143,8 @@
 - (IBAction)gamesMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_gamesView];
+	
+	[_gamesVersionField setStringValue:[NSString stringWithFormat:@"%lu",[[BFGamesManager sharedGamesManager] gamesVersion]]];
 }
 
 - (void)removeAllSubviewsAndReplaceWithView:(NSView *)aView
@@ -165,6 +171,11 @@
 
 
 #pragma mark - Controlling preferences
+
+- (IBAction)forceGameDefinitionsUpdate:(id)sender
+{
+	[[BFGamesManager sharedGamesManager] checkForUpdatesAndUpdate];
+}
 
 - (IBAction)updateIdleTimer:(id)sender
 {	

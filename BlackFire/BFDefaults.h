@@ -35,3 +35,6 @@ extern NSString *BFSoundVolume;
 extern NSString *BFCustomMacGamesList;
 
 extern NSString *BFMessageFieldHistory;
+
+extern NSString *BFDetectGames;
+extern NSString *BFAutoUpdateGameDefinitions;

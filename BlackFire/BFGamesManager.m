@@ -61,6 +61,24 @@
 
 #pragma mark - Xfire games
 
+
+- (NSInteger)gamesVersion
+{
+	return [[_games objectForKey:@"XfireGamesVersion"] integerValue];
+}
+
+/*
+ * Checks whether we need to update the current game definitions and 
+ * downloads the new definitions if needed.
+ */
+- (void)checkForUpdatesAndUpdate
+{
+	
+}
+
+
+
+
 - (NSUInteger)gamesCount
 {
 	return [_games count];
@@ -323,7 +341,7 @@
 {
 	NSDictionary *userInfo = [notification userInfo];
 	NSNumber *gameInfo = [NSNumber numberWithInt:[self gameIDForApplicationDict:userInfo]];
-	if( gameInfo )
+	if( gameInfo && [[NSUserDefaults standardUserDefaults] boolForKey:BFDetectGames] )
 	{
 		[_runningGames addObject:gameInfo];
 		[_delegate     gameDidLaunch:[gameInfo intValue]];

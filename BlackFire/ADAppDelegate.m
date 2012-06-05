@@ -73,6 +73,8 @@
 						  n_true,BFEnableChatHistory,
 						  n_true,BFEnableChatlogs,
 						  n_false,BFMessageFieldHistory,
+						  n_true,BFDetectGames,
+						  n_true,BFAutoUpdateGameDefinitions,
 						  [NSNumber numberWithFloat:1.0f],BFSoundVolume,
 						  [NSNumber numberWithInt:120],BFAutoAFKTime,
 						  nil];

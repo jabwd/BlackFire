@@ -19,6 +19,9 @@
 	
 	NSToolbarItem *_generalItem;
 	NSPopUpButton *_soundsetDropDown;
+	
+	
+	NSTextField *_gamesVersionField;
 }
 
 @property (assign) IBOutlet NSView	*generalView;
@@ -29,6 +32,10 @@
 @property (assign) IBOutlet NSToolbarItem				*generalItem;
 
 @property (assign) IBOutlet NSPopUpButton *soundsetDropDown;
+
+
+
+@property (assign) IBOutlet NSTextField *gamesVersionField;
 
 //-------------------------------------------------------------------------------------------
 // Mode switching
@@ -43,7 +50,7 @@
 
 //-------------------------------------------------------------------------------------------
 // Controlling preferences
-
+- (IBAction)forceGameDefinitionsUpdate:(id)sender;
 - (IBAction)updateIdleTimer:(id)sender;
 - (IBAction)updateVolume:(id)sender;
 - (IBAction)moreSoundsets:(id)sender;

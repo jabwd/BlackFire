@@ -46,6 +46,9 @@
 - (NSUInteger)gamesCount;
 - (NSDictionary *)gameAtIndex:(NSInteger)index;
 
+- (NSInteger)gamesVersion;
+- (void)checkForUpdatesAndUpdate;
+
 
 //-----------------------------------------------------------------------------
 // Mac games
