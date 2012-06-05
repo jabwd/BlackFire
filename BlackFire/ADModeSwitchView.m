@@ -140,7 +140,7 @@
 	NSGradient	*gradient	= nil;
 	if( [self.window isMainWindow] )
 	{
-		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.7377 alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.8588 alpha:1.0f]];
+		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.65f alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.81 alpha:1.0f]];
 		[gradient drawInRect:dirtyRect angle:90.0f];
 		[gradient release];
 		[[NSColor colorWithCalibratedWhite:0.4f alpha:1.0f] set];
@@ -149,7 +149,7 @@
 	}
 	else
 	{
-		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.85 alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.96 alpha:1.0f]];
+		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.83 alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.92 alpha:1.0f]];
 		[gradient drawInRect:dirtyRect angle:90.0f];
 		[gradient release];
 		[[NSColor colorWithCalibratedWhite:0.65f alpha:1.0f] set];
@@ -175,7 +175,7 @@
 		ADModeItem *item = [_items objectAtIndex:i];
 		
 		NSShadow *shadow = [[NSShadow alloc] init];
-		if( item.selected )
+		/*if( item.selected )
 		{
 			
 			if( [self.window isMainWindow] )
@@ -187,14 +187,14 @@
 			
 		}
 		else
-		{
+		{*/
 			[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
 			[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.41]];
-		}
+			//}
 		
 		NSColor *textColor = nil;
 		
-		if( [self.window isMainWindow] )
+		/*if( [self.window isMainWindow] )
 		{
 			if( item.selected )
 				textColor = [NSColor whiteColor];
@@ -207,6 +207,14 @@
 				textColor = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0f];
 			else
 				textColor = [NSColor disabledControlTextColor];
+		}*/
+		
+		if( [self.window isMainWindow] )
+		{
+			textColor = [NSColor controlTextColor];
+		}
+		else {
+			textColor = [NSColor disabledControlTextColor];
 		}
 		
 		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:([NSFont systemFontSize])],NSFontAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
@@ -219,11 +227,29 @@
 		if( item.selected )
 		{
 			
-			if( [self.window isMainWindow] )
-				[[NSColor colorWithCalibratedWhite:0.4 alpha:1.0f] set];
-			else
-				[[NSColor colorWithCalibratedWhite:0.65 alpha:1.0f] set];
-			NSRectFill(NSMakeRect(totalSize-6, 0, floor(size.width+10), dirtyRect.size.height));
+				// Create and fill the shown path
+			NSBezierPath * path = [NSBezierPath bezierPathWithRect:NSMakeRect(totalSize-6, -2, floor(size.width+10), dirtyRect.size.height+4)];
+				//[[NSColor whiteColor] set];
+				//[path fill];
+			
+				// Save the graphics state for shadow
+			[NSGraphicsContext saveGraphicsState];
+			
+			NSBezierPath *lolPath = [NSBezierPath bezierPathWithRect:NSMakeRect(totalSize-6, 0, floor(size.width+10), dirtyRect.size.height)];
+			[lolPath setClip];
+				// Create and stroke the shadow
+			NSShadow * shadow = [[[NSShadow alloc] init] autorelease];
+			[shadow setShadowColor:[NSColor blackColor]];
+			[shadow setShadowBlurRadius:5.0];
+			[shadow set];
+			[path stroke];
+			
+				// Restore the graphics state
+			[NSGraphicsContext restoreGraphicsState];
+			
+				// Add a nice stroke for a border
+			[[NSColor colorWithCalibratedWhite:0.30 alpha:1.0f] set];
+			[path stroke];
 		}
 		
 		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2)+2, size.width, size.height-1)];
