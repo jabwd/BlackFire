@@ -42,7 +42,7 @@
 			</object>
 			<object class="NSScrollView" id="1070522099">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">274</int>
+				<int key="NSvFlags">4370</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSClipView" id="663555997">
@@ -52,7 +52,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="NSOutlineView" id="645778714">
 								<reference key="NSNextResponder" ref="663555997"/>
-								<int key="NSvFlags">256</int>
+								<int key="NSvFlags">4352</int>
 								<string key="NSFrameSize">{110, 259}</string>
 								<reference key="NSSuperview" ref="663555997"/>
 								<reference key="NSWindow"/>
@@ -166,11 +166,12 @@
 					<object class="NSScroller" id="111840352">
 						<reference key="NSNextResponder" ref="1070522099"/>
 						<int key="NSvFlags">-2147483392</int>
-						<string key="NSFrame">{{-100, -100}, {15, 102}}</string>
+						<string key="NSFrame">{{99, 0}, {11, 259}}</string>
 						<reference key="NSSuperview" ref="1070522099"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="971481211"/>
 						<string key="NSReuseIdentifierKey">_NS:1726</string>
+						<int key="NSsFlags">256</int>
 						<reference key="NSTarget" ref="1070522099"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSPercent">0.99630996309963105</double>
@@ -178,12 +179,12 @@
 					<object class="NSScroller" id="971481211">
 						<reference key="NSNextResponder" ref="1070522099"/>
 						<int key="NSvFlags">-2147483392</int>
-						<string key="NSFrame">{{-100, -100}, {182, 15}}</string>
+						<string key="NSFrame">{{-100, -100}, {182, 11}}</string>
 						<reference key="NSSuperview" ref="1070522099"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="663555997"/>
 						<string key="NSReuseIdentifierKey">_NS:1728</string>
-						<int key="NSsFlags">1</int>
+						<int key="NSsFlags">257</int>
 						<reference key="NSTarget" ref="1070522099"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSPercent">0.87922705314009664</double>
