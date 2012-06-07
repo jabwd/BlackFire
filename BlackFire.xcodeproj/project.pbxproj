@@ -95,8 +95,6 @@
 		3652983C146693920010FD7F /* BFImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3652983B146693920010FD7F /* BFImageAndTextCell.m */; };
 		36529847146697C00010FD7F /* xfire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36529846146697C00010FD7F /* xfire.jpg */; };
 		36529849146697EE0010FD7F /* blackfire_experimental.icns in Resources */ = {isa = PBXBuildFile; fileRef = 36529848146697EE0010FD7F /* blackfire_experimental.icns */; };
-		3652984C146698140010FD7F /* avi_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3652984A146698140010FD7F /* avi_bubble.png */; };
-		3652984D146698140010FD7F /* away_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3652984B146698140010FD7F /* away_bubble.png */; };
 		366AC22B14655185002A1F50 /* XFGroupChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC22A14655185002A1F50 /* XFGroupChat.m */; };
 		366AC23B14658C8D002A1F50 /* BFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23A14658C8D002A1F50 /* BFAccount.m */; };
 		366AC23E14658D21002A1F50 /* BFKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 366AC23D14658D21002A1F50 /* BFKeychainManager.m */; };
@@ -125,7 +123,6 @@
 		3698AC26149D1CDD0015AB9C /* BFIdleTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3698AC25149D1CDD0015AB9C /* BFIdleTimeManager.m */; };
 		369D9DD91465FD6B00CB15FF /* BFFriendsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */; };
 		369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369D9DDB1466006200CB15FF /* FriendsList.xib */; };
-		36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36ADF20D1469AC9600F46E9E /* blue_bubble.png */; };
 		36B1504C150154BA00EF21E7 /* BFInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B1504B150154BA00EF21E7 /* BFInformationViewController.m */; };
 		36B1504F1501552300EF21E7 /* InformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B1504E1501552300EF21E7 /* InformationView.xib */; };
 		36B62C881483CDB400D9B11E /* BFGamesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B62C871483CDB400D9B11E /* BFGamesManager.m */; };
@@ -138,7 +135,6 @@
 		36B6427B1484464700D9B11E /* Send.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642741484464700D9B11E /* Send.m4v */; };
 		36B6427F1484474700D9B11E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B64281148447EC00D9B11E /* BFNotificationCenter.m */; };
-		36B642841484486900D9B11E /* offline_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B642831484486900D9B11E /* offline_bubble.png */; };
 		36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
@@ -323,8 +319,6 @@
 		3652983B146693920010FD7F /* BFImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFImageAndTextCell.m; sourceTree = "<group>"; };
 		36529846146697C00010FD7F /* xfire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xfire.jpg; sourceTree = "<group>"; };
 		36529848146697EE0010FD7F /* blackfire_experimental.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = blackfire_experimental.icns; path = ../blackfire_experimental.icns; sourceTree = "<group>"; };
-		3652984A146698140010FD7F /* avi_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avi_bubble.png; sourceTree = "<group>"; };
-		3652984B146698140010FD7F /* away_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = away_bubble.png; sourceTree = "<group>"; };
 		366AC22914655185002A1F50 /* XFGroupChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGroupChat.h; sourceTree = "<group>"; };
 		366AC22A14655185002A1F50 /* XFGroupChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFGroupChat.m; sourceTree = "<group>"; };
 		366AC23914658C8D002A1F50 /* BFAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAccount.h; sourceTree = "<group>"; };
@@ -373,7 +367,6 @@
 		369D9DD71465FD6B00CB15FF /* BFFriendsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFFriendsListController.h; sourceTree = "<group>"; };
 		369D9DD81465FD6B00CB15FF /* BFFriendsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFriendsListController.m; sourceTree = "<group>"; };
 		369D9DDB1466006200CB15FF /* FriendsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsList.xib; sourceTree = "<group>"; };
-		36ADF20D1469AC9600F46E9E /* blue_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_bubble.png; sourceTree = "<group>"; };
 		36B1504A150154BA00EF21E7 /* BFInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFInformationViewController.h; sourceTree = "<group>"; };
 		36B1504B150154BA00EF21E7 /* BFInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFInformationViewController.m; sourceTree = "<group>"; };
 		36B1504E1501552300EF21E7 /* InformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationView.xib; sourceTree = "<group>"; };
@@ -389,7 +382,6 @@
 		36B6427E1484474700D9B11E /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		36B64280148447EC00D9B11E /* BFNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNotificationCenter.h; sourceTree = "<group>"; };
 		36B64281148447EC00D9B11E /* BFNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNotificationCenter.m; sourceTree = "<group>"; };
-		36B642831484486900D9B11E /* offline_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_bubble.png; sourceTree = "<group>"; };
 		36D9C9F114659B9600C4A162 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		36D9C9F51465C63400C4A162 /* BFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFLoginViewController.h; sourceTree = "<group>"; };
 		36D9C9F61465C63400C4A162 /* BFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFLoginViewController.m; sourceTree = "<group>"; };
@@ -916,12 +908,8 @@
 			children = (
 				36529846146697C00010FD7F /* xfire.jpg */,
 				36B642701484464500D9B11E /* joystick.png */,
-				36B642831484486900D9B11E /* offline_bubble.png */,
 				36B6426F1484464500D9B11E /* gamesTemplate.png */,
 				36529848146697EE0010FD7F /* blackfire_experimental.icns */,
-				36ADF20D1469AC9600F46E9E /* blue_bubble.png */,
-				3652984A146698140010FD7F /* avi_bubble.png */,
-				3652984B146698140010FD7F /* away_bubble.png */,
 				362FFA80146742C2007E3BD8 /* Safari tabs */,
 			);
 			name = Images;
@@ -1025,8 +1013,6 @@
 				369D9DDC1466006200CB15FF /* FriendsList.xib in Resources */,
 				36529847146697C00010FD7F /* xfire.jpg in Resources */,
 				36529849146697EE0010FD7F /* blackfire_experimental.icns in Resources */,
-				3652984C146698140010FD7F /* avi_bubble.png in Resources */,
-				3652984D146698140010FD7F /* away_bubble.png in Resources */,
 				363F0FFD14F69B4800C87557 /* BFChatWindow.xib in Resources */,
 				362FFA99146742D0007E3BD8 /* activeTabFill.png in Resources */,
 				362FFA9A146742D0007E3BD8 /* activeTabFillSL.png in Resources */,
@@ -1055,7 +1041,6 @@
 				36276EDC1468261700F84E7B /* inactiveWTabLeftSL.png in Resources */,
 				36276EDD1468261700F84E7B /* inactiveWTabRight.png in Resources */,
 				36276EDE1468261700F84E7B /* inactiveWTabRightSL.png in Resources */,
-				36ADF20E1469AC9600F46E9E /* blue_bubble.png in Resources */,
 				368EC5C21471A1F000EEDC07 /* BFChat.xib in Resources */,
 				36EBDDA51479B2F500D219D7 /* activeTabClose.png in Resources */,
 				36EBDDA61479B2F500D219D7 /* activeTabCloseHover.png in Resources */,
@@ -1076,7 +1061,6 @@
 				36B642791484464700D9B11E /* online.m4v in Resources */,
 				36B6427A1484464700D9B11E /* receive.m4v in Resources */,
 				36B6427B1484464700D9B11E /* Send.m4v in Resources */,
-				36B642841484486900D9B11E /* offline_bubble.png in Resources */,
 				36E41296148D318C003BABE9 /* License.rtf in Resources */,
 				361D2EF0148FFA0D008EE54C /* StringPrompt.xib in Resources */,
 				3698A0991499141A004AA061 /* InvitationWindow.xib in Resources */,
