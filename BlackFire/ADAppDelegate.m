@@ -634,7 +634,7 @@
 {
 	if( newStatus == XFSessionStatusOnline )
 	{
-		[_statusBubbleView setImage:[NSImage imageNamed:@"avi_bubble"]];
+		[_statusBubbleView setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
 		[_avatarImageView setImage:[NSImage imageNamed:@"xfire"]];
 		
 		[_statusPopUpButton setTitle:@"Available"];
@@ -782,11 +782,11 @@
 	
 	if( [newStatus length] > 1 && [newStatus rangeOfString:@"AFK"].length > 0 )
 	{
-		[_statusBubbleView setImage:[NSImage imageNamed:@"away_bubble"]];
+		[_statusBubbleView setImage:[NSImage imageNamed:@"NSStatusUnavailable"]];
 	}
 	else
 	{
-		[_statusBubbleView setImage:[NSImage imageNamed:@"avi_bubble"]];
+		[_statusBubbleView setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
 	}
 }
 

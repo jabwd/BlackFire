@@ -58,21 +58,23 @@
 	switch(newStatus)
 	{
 		case CellStatusAFK:
-			_statusImage = [[NSImage imageNamed:@"away_bubble"] retain];
+			_statusImage = [[NSImage imageNamed:@"NSStatusUnavailable"] retain];
 			break;
 			
 		case CellStatusOnline:
-			_statusImage = [[NSImage imageNamed:@"avi_bubble"] retain];
+			_statusImage = [[NSImage imageNamed:@"NSStatusAvailable"] retain];
 			break;
 			
 		case CellStatusOffline:
-			_statusImage = [[NSImage imageNamed:@"offline_bubble"] retain];
+			_statusImage = [[NSImage imageNamed:@"NSStatusNone"] retain];
 			break;
             
         default:
-            _statusImage = [[NSImage imageNamed:@"offline_bubble"] retain];
+            _statusImage = [[NSImage imageNamed:@"NSStatusNone"] retain];
             break;
 	}
+	[_statusImage setScalesWhenResized:true];
+	[_statusImage setSize:NSMakeSize(16, 16)];
 }
 
 // we draw the image
@@ -85,7 +87,7 @@
 			_image = [[NSImage imageNamed:@"xfire"] retain];
 		if( ! _statusImage )
 		{
-			_statusImage = [[NSImage imageNamed:@"avi_bubble"] retain];
+			_statusImage = [[NSImage imageNamed:@"NSStatusAvailable"] retain];
 		}
 	}
 	
@@ -146,8 +148,6 @@
 		[_image setSize:_displayImageSize];
 	
 		[_image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
-		
-		//[_image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 	}
 	
 	NSAttributedString *attrStr = [self attributedStringValue];
@@ -197,8 +197,6 @@
 		[finalStr drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-_displayImageSize.width-4.0f, _displayImageSize.height)];
 		[finalStr release];
 	}
-    [_statusImage setScalesWhenResized:YES];
-    [_statusImage setSize:NSMakeSize(12.0f, 12.0f)];
 	[_statusImage compositeToPoint:NSMakePoint(cellFrame.origin.x+cellFrame.size.width-21.0f,cellFrame.origin.y+6.0f+(cellFrame.size.height/2.0f)) operation:NSCompositeSourceOver];
 	
 	[[NSGraphicsContext currentContext] restoreGraphicsState];

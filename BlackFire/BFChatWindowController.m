@@ -413,18 +413,18 @@
 				statusString = @"Online";
 			if( [statusString rangeOfString:@"AFK"].length > 0 )
 			{
-				[_statusIconView setImage:[NSImage imageNamed:@"away_bubble"]];
+				[_statusIconView setImage:[NSImage imageNamed:@"NSStatusUnavailable"]];
 			}
 			else
 			{
-				[_statusIconView setImage:[NSImage imageNamed:@"avi_bubble"]];
+				[_statusIconView setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
 			}
 		}
 		else
 		{
 			if( [statusString length] < 1 )
 				statusString = @"Offline";
-			[_statusIconView setImage:[NSImage imageNamed:@"offline_bubble"]];
+			[_statusIconView setImage:[NSImage imageNamed:@"NSStatusNone"]];
 		}
 		
 		[_nicknameField setStringValue:[remoteFriend displayName]];
