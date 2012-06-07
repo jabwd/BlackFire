@@ -147,6 +147,7 @@
 		36DB12D114DC478200706971 /* ChatLogViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D014DC478200706971 /* ChatLogViewer.xib */; };
 		36DB12D314DC4AC600706971 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D214DC4AC600706971 /* history.png */; };
 		36DB12D514DC4AFA00706971 /* submodule.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D414DC4AFA00706971 /* submodule.png */; };
+		36DB4A05158104C100564E5B /* bg_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB4A04158104C100564E5B /* bg_pattern.png */; };
 		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
 		36E895E114F2A54E00341106 /* EXBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E895E014F2A54D00341106 /* EXBackgroundView.m */; };
 		36E895E414F2A7F200341106 /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 36E895E314F2A7F200341106 /* template.html */; };
@@ -397,6 +398,7 @@
 		36DB12D014DC478200706971 /* ChatLogViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLogViewer.xib; sourceTree = "<group>"; };
 		36DB12D214DC4AC600706971 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
 		36DB12D414DC4AFA00706971 /* submodule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submodule.png; sourceTree = "<group>"; };
+		36DB4A04158104C100564E5B /* bg_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_pattern.png; sourceTree = "<group>"; };
 		36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BlackFire.entitlements; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36E895DF14F2A54D00341106 /* EXBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXBackgroundView.h; sourceTree = "<group>"; };
@@ -906,6 +908,7 @@
 		36B6427D1484468B00D9B11E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				36DB4A04158104C100564E5B /* bg_pattern.png */,
 				36529846146697C00010FD7F /* xfire.jpg */,
 				36B642701484464500D9B11E /* joystick.png */,
 				36B6426F1484464500D9B11E /* gamesTemplate.png */,
@@ -1084,6 +1087,7 @@
 				36B1504F1501552300EF21E7 /* InformationView.xib in Resources */,
 				368F2A3A156E3475004F2B6D /* Games.plist in Resources */,
 				368F2A3B156E3475004F2B6D /* MacGames.plist in Resources */,
+				36DB4A05158104C100564E5B /* bg_pattern.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
