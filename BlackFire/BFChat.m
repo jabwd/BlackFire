@@ -52,8 +52,7 @@
 		_friendColor	= [[NSColor redColor] retain];
 		_chatFont		= [[NSFont fontWithName:@"Lucida Grande" size:12.0f] retain];
 		_boldChatFont	= [[[NSFontManager sharedFontManager] convertWeight:true ofFont:_chatFont] retain];
-		//[self updateTabIcon];
-		_messages = [[NSMutableArray alloc] init];
+		_messages		= [[NSMutableArray alloc] init];
 	
 		
 		if( ! chat.remoteFriend )
@@ -68,7 +67,7 @@
 		{
 			BFChatLog *chatLog = [[BFChatLog alloc] init];
 			chatLog.friendUsername = _chat.remoteFriend.username;
-			NSArray *messages = [chatLog getLastMessages:5];
+			NSArray *messages = [chatLog getLastMessages:2];
 			NSUInteger i, cnt = [messages count];
 			for(i=cnt;i>0;i--)
 			{
@@ -214,15 +213,12 @@
 
 - (void)friendStartedTyping
 {
-	[_windowController tabViewForChat:self].image = [NSImage imageNamed:@"tab-typing"];
-	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
+	[self updateTabIcon];
 }
 
 - (void)friendStoppedTyping
 {
-	[_windowController tabViewForChat:self].image = nil;
-	//[self updateTabIcon];
-	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
+	[self updateTabIcon];
 }
 
 #pragma mark - Misc methods
@@ -244,8 +240,12 @@
 
 - (void)updateTabIcon
 {
-	NSImage *displayImage;
-	if( _chat.remoteFriend.avatar )
+	NSImage *displayImage = nil;
+	if( _chat.isFriendTyping )
+	{
+		displayImage = [NSImage imageNamed:@"tab-typing"];
+	}
+	else if( _chat.remoteFriend.avatar )
 	{
 		displayImage = _chat.remoteFriend.avatar;
 	}
@@ -253,15 +253,16 @@
 	{
 		displayImage = [NSImage imageNamed:@"xfire"];
 	}
-	[_windowController tabViewForChat:self].image = displayImage;
-	[[_windowController tabViewForChat:self] setNeedsDisplay:true];
+	SFTabView *tabView = [_windowController tabViewForChat:self];
+	tabView.image = displayImage;
+	[tabView setNeedsDisplay:true];
 }
 
 - (void)friendDidChange:(NSNotification *)notification
 {
 	XFFriendNotification notificationType = [[[notification userInfo] objectForKey:@"type"] intValue];
 	
-	//[self updateTabIcon];
+	[self updateTabIcon];
 	
 	switch(notificationType)
 	{

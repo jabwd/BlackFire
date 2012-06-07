@@ -224,6 +224,7 @@
 	[_tabStripView addTabView:tabView];
 	[tabView release];
 	[self updateToolbar];
+	[chat updateTabIcon];
 }
 
 - (void)closeChat:(BFChat *)chat

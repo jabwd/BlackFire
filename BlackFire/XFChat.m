@@ -21,6 +21,8 @@
 
 @synthesize delegate = _delegate;
 
+@synthesize isFriendTyping = _isFriendTyping;
+
 - (id)initWithRemoteFriend:(XFFriend *)remoteFriend 
 {
 	if( (self = [super init]) )
@@ -28,6 +30,7 @@
 		_remoteFriend		= [remoteFriend retain];
 		_connection			= nil;
 		_messageBuffer		= [[NSMutableArray alloc] init];
+		_isFriendTyping		= false;
 	}
 	return self;
 }
@@ -39,6 +42,7 @@
 		_remoteFriend		= nil;
 		_connection			= nil;
 		_messageBuffer		= [[NSMutableArray alloc] init];
+		_isFriendTyping		= false;
 	}
 	return self;
 }
@@ -121,14 +125,17 @@
 
 - (void)receivedIsTypingNotification
 {
+	_isFriendTyping = true;
 	if( [_delegate respondsToSelector:@selector(friendStartedTyping)] )
 		[_delegate friendStartedTyping];
-	
+
 	[self performSelector:@selector(friendStoppedTypingNotification) withObject:nil afterDelay:10.0f];
 }
 
 - (void)friendStoppedTypingNotification
 {
+	_isFriendTyping = false;
+	
 	if( [_delegate respondsToSelector:@selector(friendStoppedTyping)] )
 		[_delegate friendStoppedTyping];
 }

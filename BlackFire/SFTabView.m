@@ -207,14 +207,15 @@
 	}
 	else if( _tabImage )
 		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
-	else if( _missedMessages > 0 )
+	
+	if( _missedMessages > 0 )
 	{
 		NSDictionary *newAttr = [[NSDictionary alloc] initWithObjectsAndKeys:[NSColor whiteColor],NSForegroundColorAttributeName,style,NSParagraphStyleAttributeName, nil];
 		NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu",_missedMessages] attributes:newAttr];
 		[newAttr release];
 		
 		// draw some sort of bezel around it
-		NSRect stringRect = NSMakeRect(10, 4, [countString size].width, 13);
+		NSRect stringRect = NSMakeRect(dirtyRect.size.width-20-[countString size].width, 4, [countString size].width, 13);
 		NSBezierPath *bezelPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(stringRect.origin.x, stringRect.origin.y, stringRect.size.width+10, stringRect.size.height+2) xRadius:8.0f yRadius:7.0f];
 		if( [[self window] isMainWindow] )
 			[[NSColor darkGrayColor] set];
@@ -222,7 +223,7 @@
 			[[NSColor colorWithCalibratedWhite:0.6f alpha:1.0f] set];
 		[bezelPath fill];
 		
-		[countString drawInRect:NSMakeRect(15, 6, [countString size].width, 13)];
+		[countString drawInRect:NSMakeRect(dirtyRect.size.width-15-[countString size].width, 6, [countString size].width, 13)];
 		[countString release];
 	}
 }
