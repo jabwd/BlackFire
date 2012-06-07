@@ -197,7 +197,7 @@
 		[finalStr drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-_displayImageSize.width-4.0f, _displayImageSize.height)];
 		[finalStr release];
 	}
-	[_statusImage compositeToPoint:NSMakePoint(cellFrame.origin.x+cellFrame.size.width-21.0f,cellFrame.origin.y+6.0f+(cellFrame.size.height/2.0f)) operation:NSCompositeSourceOver];
+	[_statusImage compositeToPoint:NSMakePoint(cellFrame.origin.x+cellFrame.size.width-21.0f,cellFrame.origin.y+8.0f+(cellFrame.size.height/2.0f)) operation:NSCompositeSourceOver];
 	
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
 	[style release];
