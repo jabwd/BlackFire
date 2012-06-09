@@ -365,6 +365,7 @@
 	if( [remoteFriend isKindOfClass:[XFFriend class]] )
 	{
 		[_delegate requestAvatarForFriend:remoteFriend];
+		[(BFFriendInformationViewController *)_infoViewController updateForFriend:remoteFriend];
 	}
 	return true;
 }
