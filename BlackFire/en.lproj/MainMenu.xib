@@ -960,7 +960,7 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{816, 363}, {308, 309}}</string>
+				<string key="NSWindowRect">{{816, 363}, {356, 309}}</string>
 				<int key="NSWTFlags">1954021376</int>
 				<string key="NSWindowTitle">BlackFire</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -1014,7 +1014,7 @@
 						<object class="NSButton" id="788535692">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">-2147483359</int>
-							<string key="NSFrame">{{276, 2}, {26, 25}}</string>
+							<string key="NSFrame">{{325, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
@@ -1054,7 +1054,7 @@
 										<object class="NSCustomView" id="433550647">
 											<reference key="NSNextResponder" ref="788925620"/>
 											<int key="NSvFlags">4362</int>
-											<string key="NSFrame">{{0, 253}, {252, 26}}</string>
+											<string key="NSFrame">{{0, 253}, {232, 26}}</string>
 											<reference key="NSSuperview" ref="788925620"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="243777411"/>
@@ -1064,7 +1064,7 @@
 										<object class="NSCustomView" id="243777411">
 											<reference key="NSNextResponder" ref="788925620"/>
 											<int key="NSvFlags">4370</int>
-											<string key="NSFrame">{{0, -1}, {252, 253}}</string>
+											<string key="NSFrameSize">{232, 253}</string>
 											<reference key="NSSuperview" ref="788925620"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="137857928"/>
@@ -1072,7 +1072,7 @@
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
-									<string key="NSFrameSize">{252, 280}</string>
+									<string key="NSFrameSize">{232, 280}</string>
 									<reference key="NSSuperview" ref="1072407247"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="433550647"/>
@@ -1082,15 +1082,27 @@
 								<object class="NSCustomView" id="137857928">
 									<reference key="NSNextResponder" ref="1072407247"/>
 									<int key="NSvFlags">4352</int>
-									<string key="NSFrame">{{253, 0}, {55, 280}}</string>
+									<array class="NSMutableArray" key="NSSubviews">
+										<object class="NSCustomView" id="86114673">
+											<reference key="NSNextResponder" ref="137857928"/>
+											<int key="NSvFlags">274</int>
+											<string key="NSFrameSize">{123, 280}</string>
+											<reference key="NSSuperview" ref="137857928"/>
+											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="581243776"/>
+											<string key="NSReuseIdentifierKey">_NS:9</string>
+											<string key="NSClassName">BFSidebarView</string>
+										</object>
+									</array>
+									<string key="NSFrame">{{233, 0}, {123, 280}}</string>
 									<reference key="NSSuperview" ref="1072407247"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="581243776"/>
+									<reference key="NSNextKeyView" ref="86114673"/>
 									<string key="NSReuseIdentifierKey">_NS:13</string>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</array>
-							<string key="NSFrame">{{0, 30}, {308, 280}}</string>
+							<string key="NSFrame">{{0, 30}, {356, 280}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="788925620"/>
@@ -1100,12 +1112,12 @@
 							<string key="NSAutosaveName">mainSplitview</string>
 						</object>
 					</array>
-					<string key="NSFrameSize">{308, 309}</string>
+					<string key="NSFrameSize">{356, 309}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1072407247"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{183, 331}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">mainWindow</string>
@@ -2922,6 +2934,9 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">888</int>
 						<reference key="object" ref="137857928"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="86114673"/>
+						</array>
 						<reference key="parent" ref="1072407247"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2933,6 +2948,11 @@
 						<int key="objectID">859</int>
 						<reference key="object" ref="433550647"/>
 						<reference key="parent" ref="788925620"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">889</int>
+						<reference key="object" ref="86114673"/>
+						<reference key="parent" ref="137857928"/>
 					</object>
 				</array>
 			</object>
@@ -3079,13 +3099,14 @@
 				<string key="886.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="887.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="888.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="889.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">888</int>
+			<int key="maxID">889</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3281,6 +3302,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ADModeSwitchView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">BFSidebarView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/BFSidebarView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

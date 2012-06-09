@@ -12,6 +12,7 @@
 
 @synthesize view		= _view;
 @synthesize delegate	= _delegate;
+@synthesize infoViewController = _infoViewController;
 
 - (void)becomeMain
 {
