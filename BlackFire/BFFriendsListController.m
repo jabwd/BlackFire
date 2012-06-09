@@ -20,6 +20,8 @@
 
 #import "BFDefaults.h"
 
+#import "BFFriendInformationViewController.h"
+
 @implementation BFFriendsListController
 
 @synthesize friendsList = _friendsList;
@@ -36,6 +38,8 @@
 		
 		[_friendsList setDoubleAction:@selector(doubleClicked)];
 		[_friendsList setTarget:self];
+		
+		_infoViewController = [[BFFriendInformationViewController friendInformationController] retain];
 		/*
 		NSClipView *clip = (NSClipView *)[_friendsList superview];
 		if( clip )
@@ -60,6 +64,8 @@
 
 - (void)dealloc
 {
+	[_infoViewController release];
+	_infoViewController = nil;
 	[super dealloc];
 }
 

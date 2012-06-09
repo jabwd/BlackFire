@@ -46,6 +46,7 @@ typedef enum
 	NSPopUpButton	*_nicknamePopUpButton;
 	NSPopUpButton	*_statusPopUpButton;
 	NSButton		*_rightExtraButton;
+	NSView			*_sidebarView;
 	// end toolbar outlets
 	
 	NSMutableArray *_chatControllers;
@@ -79,6 +80,7 @@ typedef enum
 
 @property (assign) IBOutlet NSView *mainView;
 @property (assign) IBOutlet NSView *toolbarView;
+@property (assign) IBOutlet NSView *sidebarView;
 
 @property (assign) IBOutlet NSSegmentedControl *addButton;
 @property (assign) IBOutlet ADModeSwitchView *modeSwitch;
@@ -90,6 +92,7 @@ typedef enum
 
 - (void)changeToMode:(BFApplicationMode)newMode;
 - (void)changeMainView:(NSView *)newView;
+- (void)changeSidebarView:(NSView *)newView;
 - (IBAction)modeControl:(id)sender;
 - (IBAction)gamesMode:(id)sender;
 - (IBAction)friendsMode:(id)sender;

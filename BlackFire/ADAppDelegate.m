@@ -27,6 +27,7 @@
 #import "BFInformationViewController.h"
 #import "ADInvitationWindowController.h"
 #import "BFChatLogViewer.h"
+#import "BFInfoViewController.h"
 
 #import "BFNotificationCenter.h"
 #import "ADModeSwitchView.h"
@@ -44,6 +45,7 @@
 @synthesize session			= _session;
 @synthesize mainView		= _mainView;
 @synthesize toolbarView		= _toolbarView;
+@synthesize sidebarView		= _sidebarView;
 
 @synthesize avatarImageView			= _avatarImageView;
 @synthesize statusBubbleView		= _statusBubbleView;
@@ -299,7 +301,6 @@
 			[_statusBubbleView setImage:nil];
 			[_avatarImageView setImage:nil];
 			
-			//[_statusPopUpButton selectItemWithTitle:@"Offline"];
 			[_statusPopUpButton setTitle:@"Offline"];
 			[_nicknamePopUpButton setTitle:@""];
 			[_statusPopUpButton selectItemWithTag:0];
@@ -334,6 +335,7 @@
 			[_friendsListController.view setNeedsDisplay:true];
 			[_rightExtraButton setHidden:true];
 			[_modeSwitch selectItemAtIndex:0];
+			[self changeSidebarView:_friendsListController.infoViewController.view];
 		}
 			break;
 			
@@ -399,6 +401,18 @@
 	
 	[_mainView addSubview:newView];
 	[newView setFrame:[_mainView bounds]];
+}
+
+- (void)changeSidebarView:(NSView *)newView
+{
+	NSArray *subviews = [_sidebarView subviews];
+	for(NSView *view in subviews)
+	{
+		[view removeFromSuperview];
+	}
+	
+	[_sidebarView addSubview:newView];
+	[newView setFrame:[_sidebarView bounds]];
 }
 
 - (IBAction)modeControl:(id)sender

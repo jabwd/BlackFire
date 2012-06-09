@@ -12,7 +12,7 @@
 
 + (BFFriendInformationViewController *)friendInformationController
 {
-	BFFriendInformationViewController *controller = [[BFFriendInformationViewController alloc] initWithNibName:@"BFFriendInformation" bundle:nil];
+	BFFriendInformationViewController *controller = [[BFFriendInformationViewController alloc] initWithNibName:@"BFFriendInformationView" bundle:nil];
 	return [controller autorelease];
 }
 
