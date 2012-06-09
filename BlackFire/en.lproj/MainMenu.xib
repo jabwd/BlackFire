@@ -1017,6 +1017,7 @@
 							<string key="NSFrame">{{325, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:22</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="269865637">
@@ -1116,7 +1117,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1072407247"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{183, 331}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">mainWindow</string>
@@ -1138,6 +1139,7 @@
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1192</string>
 						<string key="NSClassName">NSNonRetardedImageView</string>
 					</object>
@@ -1178,7 +1180,7 @@
 									<reference ref="262492519"/>
 									<object class="NSMenuItem" id="229660977">
 										<reference key="NSMenu" ref="969862775"/>
-										<string key="NSTitle">Show profile</string>
+										<string key="NSTitle">Show my profile</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSMnemonicLoc">2147483647</int>
 										<reference key="NSOnImage" ref="35465992"/>
