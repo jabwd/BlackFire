@@ -59,7 +59,7 @@
 										<string key="NSFrameSize">{186, 197}</string>
 										<reference key="NSSuperview" ref="907882700"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="1036881161"/>
+										<reference key="NSNextKeyView" ref="29704184"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTableHeaderView" key="NSHeaderView" id="671187648">
@@ -193,7 +193,6 @@
 								<string key="NSFrame">{{1, 191}, {180, 15}}</string>
 								<reference key="NSSuperview" ref="567601959"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="567601959"/>
@@ -219,7 +218,7 @@
 						<string key="NSFrame">{{20, 20}, {188, 216}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="29704184"/>
+						<reference key="NSNextKeyView" ref="907882700"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133681</int>
 						<reference key="NSVScroller" ref="29704184"/>
@@ -393,8 +392,8 @@
 						<string key="NSReuseIdentifierKey">_NS:1505</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="597670813">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags">67239488</int>
+							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents"/>
 							<reference key="NSSupport" ref="284451346"/>
 							<string key="NSCellIdentifier">_NS:1505</string>
@@ -413,8 +412,8 @@
 						<string key="NSReuseIdentifierKey">_NS:1505</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="132068095">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags">67239488</int>
+							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents"/>
 							<reference key="NSSupport" ref="284451346"/>
 							<string key="NSCellIdentifier">_NS:1505</string>
@@ -433,8 +432,8 @@
 						<string key="NSReuseIdentifierKey">_NS:1505</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="979667162">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags">67239488</int>
+							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents"/>
 							<reference key="NSSupport" ref="284451346"/>
 							<string key="NSCellIdentifier">_NS:1505</string>
@@ -560,6 +559,46 @@
 						<reference key="destination" ref="865241697"/>
 					</object>
 					<int key="connectionID">45</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">serverAddressLabel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="269007374"/>
+					</object>
+					<int key="connectionID">46</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">playersLabel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="501329065"/>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mapLabel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="743046355"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="234083811"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="234083811"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">50</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -829,7 +868,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">45</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -839,11 +878,14 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="avatarView">NSImageView</string>
 						<string key="line">NSBox</string>
+						<string key="mapLabel">NSTextField</string>
 						<string key="mapNameField">NSTextField</string>
 						<string key="nicknameField">NSTextField</string>
 						<string key="playersField">NSTextField</string>
+						<string key="playersLabel">NSTextField</string>
 						<string key="playersList">NSTableView</string>
 						<string key="serverAddressField">NSTextField</string>
+						<string key="serverAddressLabel">NSTextField</string>
 						<string key="statusField">NSTextField</string>
 						<string key="usernameField">NSTextField</string>
 					</dictionary>
@@ -855,6 +897,10 @@
 						<object class="IBToOneOutletInfo" key="line">
 							<string key="name">line</string>
 							<string key="candidateClassName">NSBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mapLabel">
+							<string key="name">mapLabel</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="mapNameField">
 							<string key="name">mapNameField</string>
@@ -868,12 +914,20 @@
 							<string key="name">playersField</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="playersLabel">
+							<string key="name">playersLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="playersList">
 							<string key="name">playersList</string>
 							<string key="candidateClassName">NSTableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="serverAddressField">
 							<string key="name">serverAddressField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="serverAddressLabel">
+							<string key="name">serverAddressLabel</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="statusField">

@@ -8,6 +8,7 @@
 
 #import "BFFriendInformationViewController.h"
 #import "XFFriend.h"
+#import "XFGameServer.h"
 #import "BFGameServerInformation.h"
 
 
@@ -17,6 +18,7 @@ NSString *getString(NSString *string)
 	if( ! string ) return @"";
 	return string;
 }
+NSString *removeQuakeColorCodes(NSString *string);
 
 
 @implementation BFFriendInformationViewController
@@ -29,12 +31,24 @@ NSString *getString(NSString *string)
 @synthesize mapNameField		= _mapNameField;
 @synthesize playersList			= _playersList;
 @synthesize playersField		= _playersField;
+
+@synthesize playersLabel = _playersLabel;
+@synthesize mapLabel = _mapLabel;
+@synthesize serverAddressLabel = _serverAddressLabel;
+
 @synthesize line				= _line;
 
 + (BFFriendInformationViewController *)friendInformationController
 {
 	BFFriendInformationViewController *controller = [[BFFriendInformationViewController alloc] initWithNibName:@"BFFriendInformationView" bundle:nil];
 	return [controller autorelease];
+}
+
+- (void)dealloc
+{
+	[players release];
+	players = nil;
+	[super dealloc];
 }
 
 - (void)updateForFriend:(XFFriend *)friend
@@ -61,9 +75,19 @@ NSString *getString(NSString *string)
 		[_avatarView setHidden:true];
 	}
 	
+	[_line setHidden:true];
+	[_playersField setHidden:true];
+	[_mapNameField setHidden:true];
+	[_serverAddressLabel setHidden:true];
+	[_mapLabel setHidden:true];
+	[_playersLabel setHidden:true];
+	[_serverAddressField setHidden:true];
+	[[[_playersList superview] superview] setHidden:true];
+	
 	
 	if( friend.gameID > 0 && friend.gameIP > 0 )
 	{
+		[[BFGameServerInformation sharedInformation] setDelegate:self];
 		[[BFGameServerInformation sharedInformation] getInformationForFriend:friend];
 	}
 }
@@ -71,8 +95,45 @@ NSString *getString(NSString *string)
 
 - (void)receivedInformationForServer:(XFGameServer *)server
 {
-	
+	// update the tableview
+	if( server.online && server.raw )
+	{
+		[_line setHidden:false];
+		[_playersField setHidden:false];
+		[_mapNameField setHidden:false];
+		[_serverAddressField setHidden:false];
+		[_serverAddressLabel setHidden:false];
+		[_playersLabel setHidden:false];
+		[_mapLabel setHidden:false];
+		
+		[_serverAddressField setStringValue:[server address]];
+		[_mapNameField setStringValue:[server map]];
+		[_playersField setStringValue:[server playerString]];
+		
+		[players release];
+		players = nil;
+		
+		players = [[server players] retain];
+		if( [players count] > 0 )
+		{
+			[[[_playersList superview] superview] setHidden:false];
+		}
+		[_playersList reloadData];
+	}
 }
 
+#pragma mark - Player list datasource
+
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+	return [players count];
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	id value = [[players objectAtIndex:row] objectForKey:@"name"];
+	return removeQuakeColorCodes(value);
+}
 
 @end

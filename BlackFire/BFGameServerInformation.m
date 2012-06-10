@@ -80,7 +80,7 @@ static BFGameServerInformation *sharedInstance = nil;
 	if( ! serverInfoOutput )
 		return;
 	id serverInfo = [serverInfoOutput propertyList];
-	if ([serverInfo isKindOfClass:[NSDictionary class]]) 
+	if( [serverInfo isKindOfClass:[NSDictionary class]] ) 
 	{
 		/*if(	! [[serverInfo objectForKey:@"status"] isEqualToString:@"UP"] )
 		{
@@ -107,7 +107,6 @@ static BFGameServerInformation *sharedInstance = nil;
 		current.raw = (NSDictionary *)serverInfo;
 		if( [_delegate respondsToSelector:@selector(receivedInformationForServer:)] )
 			[_delegate receivedInformationForServer:current];
-		NSLog(@"%@",serverInfo);
 		[current release];
 		current = nil;
 	}

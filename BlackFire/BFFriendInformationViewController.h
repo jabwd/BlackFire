@@ -23,7 +23,13 @@
 	NSTextField *_playersField;
 	NSTableView *_playersList;
 	
+	NSTextField *_mapLabel;
+	NSTextField *_playersLabel;
+	NSTextField *_serverAddressLabel;
+	
 	NSBox *_line;
+	
+	NSArray *players;
 }
 
 @property (assign) IBOutlet NSImageView *avatarView;
@@ -34,6 +40,11 @@
 @property (assign) IBOutlet NSTextField *mapNameField;
 @property (assign) IBOutlet NSTextField *playersField;
 @property (assign) IBOutlet NSTableView *playersList;
+
+@property (assign) IBOutlet NSTextField *playersLabel;
+@property (assign) IBOutlet NSTextField *mapLabel;
+@property (assign) IBOutlet NSTextField *serverAddressLabel;
+
 @property (assign) IBOutlet NSBox *line;
 
 + (BFFriendInformationViewController *)friendInformationController;

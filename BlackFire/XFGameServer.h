@@ -11,6 +11,11 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *XFGameServerPingKey;
+extern NSString *XFGameServerNameKey;
+extern NSString *XFGameServerXPKey;
+
+
 @interface XFGameServer : NSObject
 {
 	NSDictionary *_raw;
@@ -34,4 +39,10 @@
 
 - (NSString *)address;
 
+// accessing the server information
+
+- (NSString *)playerString;
+- (NSString *)map;
+- (NSString *)ping;
+- (NSArray *)players;
 @end
