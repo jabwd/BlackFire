@@ -149,6 +149,8 @@
 		36DB12D514DC4AFA00706971 /* submodule.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB12D414DC4AFA00706971 /* submodule.png */; };
 		36DB4A05158104C100564E5B /* bg_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DB4A04158104C100564E5B /* bg_pattern.png */; };
 		36DB4A09158104FF00564E5B /* BFSidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DB4A08158104FF00564E5B /* BFSidebarView.m */; };
+		36DB8A6A158477C90049B9E5 /* BFGameInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DB8A69158477C90049B9E5 /* BFGameInformationViewController.m */; };
+		36DB8A6D158477D50049B9E5 /* BFGameInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DB8A6C158477D50049B9E5 /* BFGameInformationView.xib */; };
 		36E41296148D318C003BABE9 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36E41295148D318C003BABE9 /* License.rtf */; };
 		36E895E114F2A54E00341106 /* EXBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E895E014F2A54D00341106 /* EXBackgroundView.m */; };
 		36E895E414F2A7F200341106 /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = 36E895E314F2A7F200341106 /* template.html */; };
@@ -405,6 +407,9 @@
 		36DB4A04158104C100564E5B /* bg_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_pattern.png; sourceTree = "<group>"; };
 		36DB4A07158104FF00564E5B /* BFSidebarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFSidebarView.h; sourceTree = "<group>"; };
 		36DB4A08158104FF00564E5B /* BFSidebarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSidebarView.m; sourceTree = "<group>"; };
+		36DB8A68158477C90049B9E5 /* BFGameInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGameInformationViewController.h; sourceTree = "<group>"; };
+		36DB8A69158477C90049B9E5 /* BFGameInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFGameInformationViewController.m; sourceTree = "<group>"; };
+		36DB8A6C158477D50049B9E5 /* BFGameInformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFGameInformationView.xib; sourceTree = "<group>"; };
 		36DD6ECC14F45EBF00E78229 /* BlackFire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BlackFire.entitlements; sourceTree = "<group>"; };
 		36E41295148D318C003BABE9 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		36E895DF14F2A54D00341106 /* EXBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXBackgroundView.h; sourceTree = "<group>"; };
@@ -977,6 +982,9 @@
 				36F547AF1583B8DA008565AC /* BFFriendInformationViewController.h */,
 				36F547B01583B8DA008565AC /* BFFriendInformationViewController.m */,
 				36F547B21583B8EC008565AC /* BFFriendInformationView.xib */,
+				36DB8A68158477C90049B9E5 /* BFGameInformationViewController.h */,
+				36DB8A69158477C90049B9E5 /* BFGameInformationViewController.m */,
+				36DB8A6C158477D50049B9E5 /* BFGameInformationView.xib */,
 			);
 			name = "Information views";
 			sourceTree = "<group>";
@@ -1115,6 +1123,7 @@
 				368F2A3B156E3475004F2B6D /* MacGames.plist in Resources */,
 				36DB4A05158104C100564E5B /* bg_pattern.png in Resources */,
 				36F547B31583B8EC008565AC /* BFFriendInformationView.xib in Resources */,
+				36DB8A6D158477D50049B9E5 /* BFGameInformationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1218,6 +1227,7 @@
 				36DB4A09158104FF00564E5B /* BFSidebarView.m in Sources */,
 				36F547AE1583B89D008565AC /* BFInfoViewController.m in Sources */,
 				36F547B11583B8DA008565AC /* BFFriendInformationViewController.m in Sources */,
+				36DB8A6A158477C90049B9E5 /* BFGameInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

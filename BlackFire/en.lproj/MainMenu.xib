@@ -974,9 +974,8 @@
 						<object class="NSSegmentedControl" id="581243776">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">-2147483356</int>
-							<string key="NSFrame">{{5, 2}, {51, 25}}</string>
+							<string key="NSFrame">{{4, 1}, {51, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="788535692"/>
 							<string key="NSReuseIdentifierKey">_NS:2177</string>
 							<bool key="NSEnabled">YES</bool>
@@ -1016,7 +1015,6 @@
 							<int key="NSvFlags">-2147483359</int>
 							<string key="NSFrame">{{325, 2}, {26, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:22</string>
 							<bool key="NSEnabled">YES</bool>
@@ -1056,7 +1054,6 @@
 											<int key="NSvFlags">4362</int>
 											<string key="NSFrame">{{0, 253}, {232, 26}}</string>
 											<reference key="NSSuperview" ref="788925620"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="243777411"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">ADModeSwitchView</string>
@@ -1066,7 +1063,6 @@
 											<int key="NSvFlags">4370</int>
 											<string key="NSFrameSize">{232, 253}</string>
 											<reference key="NSSuperview" ref="788925620"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="137857928"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
@@ -1074,7 +1070,6 @@
 									</array>
 									<string key="NSFrameSize">{232, 280}</string>
 									<reference key="NSSuperview" ref="1072407247"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="433550647"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<string key="NSClassName">NSView</string>
@@ -1088,7 +1083,6 @@
 											<int key="NSvFlags">274</int>
 											<string key="NSFrameSize">{123, 280}</string>
 											<reference key="NSSuperview" ref="137857928"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="581243776"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<string key="NSClassName">BFSidebarView</string>
@@ -1096,7 +1090,6 @@
 									</array>
 									<string key="NSFrame">{{233, 0}, {123, 280}}</string>
 									<reference key="NSSuperview" ref="1072407247"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="86114673"/>
 									<string key="NSReuseIdentifierKey">_NS:13</string>
 									<string key="NSClassName">NSView</string>
@@ -1104,7 +1097,6 @@
 							</array>
 							<string key="NSFrame">{{0, 30}, {356, 280}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="788925620"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSIsVertical">YES</bool>
@@ -1114,10 +1106,9 @@
 					</array>
 					<string key="NSFrameSize">{356, 309}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1072407247"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{183, 331}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">mainWindow</string>
@@ -1138,7 +1129,6 @@
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{127, 2}, {34, 34}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1192</string>
 						<string key="NSClassName">NSNonRetardedImageView</string>
@@ -1148,7 +1138,6 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{17, 19}, {102, 17}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1019595056"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSPopUpButtonCell" key="NSCell" id="791221743">
@@ -1204,6 +1193,7 @@
 								<bool key="NSNoAutoenable">YES</bool>
 								<reference key="NSMenuFont" ref="474206734"/>
 							</object>
+							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1215,7 +1205,6 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{18, 1}, {101, 17}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1022507564"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSPopUpButtonCell" key="NSCell" id="16073081">
@@ -1344,7 +1333,6 @@
 						</set>
 						<string key="NSFrame">{{3, 13}, {12, 12}}</string>
 						<reference key="NSSuperview" ref="498587111"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="70425166"/>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
@@ -1362,7 +1350,6 @@
 				</array>
 				<string key="NSFrameSize">{163, 38}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="804239304"/>
 				<string key="NSReuseIdentifierKey">_NS:1192</string>
 				<string key="NSClassName">NSView</string>
@@ -3116,225 +3103,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">890</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">ADAppDelegate</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addAction:">id</string>
-						<string key="closeAction:">id</string>
-						<string key="disconnect:">id</string>
-						<string key="friendsMode:">id</string>
-						<string key="gamesMode:">id</string>
-						<string key="help:">id</string>
-						<string key="modeControl:">id</string>
-						<string key="removeSelectedFriend:">id</string>
-						<string key="rightExtraButtonAction:">id</string>
-						<string key="selectAvailable:">id</string>
-						<string key="selectAway:">id</string>
-						<string key="selectNextTab:">id</string>
-						<string key="selectNicknameOption:">id</string>
-						<string key="selectPreviousTab:">id</string>
-						<string key="showChatLogViewer:">id</string>
-						<string key="showFriendInformation:">id</string>
-						<string key="showPreferences:">id</string>
-						<string key="showProfile:">id</string>
-						<string key="showUserProfile:">id</string>
-						<string key="toggleShowClans:">id</string>
-						<string key="toggleShowFriendsOfFriends:">id</string>
-						<string key="toggleShowNicknames:">id</string>
-						<string key="toggleShowOfflineClanFriends:">id</string>
-						<string key="toggleShowOfflineFriends:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addAction:">
-							<string key="name">addAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="closeAction:">
-							<string key="name">closeAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="disconnect:">
-							<string key="name">disconnect:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="friendsMode:">
-							<string key="name">friendsMode:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="gamesMode:">
-							<string key="name">gamesMode:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="help:">
-							<string key="name">help:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="modeControl:">
-							<string key="name">modeControl:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="removeSelectedFriend:">
-							<string key="name">removeSelectedFriend:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="rightExtraButtonAction:">
-							<string key="name">rightExtraButtonAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectAvailable:">
-							<string key="name">selectAvailable:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectAway:">
-							<string key="name">selectAway:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectNextTab:">
-							<string key="name">selectNextTab:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectNicknameOption:">
-							<string key="name">selectNicknameOption:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectPreviousTab:">
-							<string key="name">selectPreviousTab:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showChatLogViewer:">
-							<string key="name">showChatLogViewer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showFriendInformation:">
-							<string key="name">showFriendInformation:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showPreferences:">
-							<string key="name">showPreferences:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showProfile:">
-							<string key="name">showProfile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showUserProfile:">
-							<string key="name">showUserProfile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleShowClans:">
-							<string key="name">toggleShowClans:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleShowFriendsOfFriends:">
-							<string key="name">toggleShowFriendsOfFriends:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleShowNicknames:">
-							<string key="name">toggleShowNicknames:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleShowOfflineClanFriends:">
-							<string key="name">toggleShowOfflineClanFriends:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleShowOfflineFriends:">
-							<string key="name">toggleShowOfflineFriends:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="addButton">NSSegmentedControl</string>
-						<string key="avatarImageView">NSNonRetardedImageView</string>
-						<string key="mainView">NSView</string>
-						<string key="modeSwitch">ADModeSwitchView</string>
-						<string key="nicknamePopUpButton">NSPopUpButton</string>
-						<string key="rightExtraButton">NSButton</string>
-						<string key="sidebarView">NSView</string>
-						<string key="statusBubbleView">NSImageView</string>
-						<string key="statusPopUpButton">NSPopUpButton</string>
-						<string key="toolbarView">NSView</string>
-						<string key="window">NSWindow</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="addButton">
-							<string key="name">addButton</string>
-							<string key="candidateClassName">NSSegmentedControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="avatarImageView">
-							<string key="name">avatarImageView</string>
-							<string key="candidateClassName">NSNonRetardedImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="mainView">
-							<string key="name">mainView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="modeSwitch">
-							<string key="name">modeSwitch</string>
-							<string key="candidateClassName">ADModeSwitchView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="nicknamePopUpButton">
-							<string key="name">nicknamePopUpButton</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="rightExtraButton">
-							<string key="name">rightExtraButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sidebarView">
-							<string key="name">sidebarView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="statusBubbleView">
-							<string key="name">statusBubbleView</string>
-							<string key="candidateClassName">NSImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="statusPopUpButton">
-							<string key="name">statusPopUpButton</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="toolbarView">
-							<string key="name">toolbarView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="window">
-							<string key="name">window</string>
-							<string key="candidateClassName">NSWindow</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ADAppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ADModeSwitchView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ADModeSwitchView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">BFSidebarView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/BFSidebarView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSNonRetardedImageView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSNonRetardedImageView.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">

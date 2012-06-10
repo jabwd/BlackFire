@@ -11,6 +11,7 @@
 #import "BFGamesGroup.h"
 #import "BFImageAndTextCell.h"
 #import "BFDefaults.h"
+#import "BFGameInformationViewController.h"
 
 
 @implementation BFGamesListController
@@ -43,6 +44,8 @@
       detectedGamesGroup = [[BFGamesGroup alloc] init];
       detectedGamesGroup.members = [[[NSMutableArray alloc] init] autorelease];
       detectedGamesGroup.name = @"Detected games";
+	  
+	  _infoViewController = [[BFGameInformationViewController alloc] initWithNibName:@"BFGameInformationView" bundle:nil];
       
       NSMutableArray *knownID = [[NSMutableArray alloc] init];
       NSMutableDictionary *macGames = [[BFGamesManager sharedGamesManager] macGames];

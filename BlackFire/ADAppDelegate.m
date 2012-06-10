@@ -306,6 +306,7 @@
 			[_statusPopUpButton selectItemWithTag:0];
 			[_rightExtraButton setHidden:true];
 			[self changeMainView:_loginViewController.view];
+			[self changeSidebarView:_loginViewController.infoViewController.view];
 		}
 			break;
 			
@@ -351,6 +352,7 @@
 			[self changeMainView:_gamesListController.view];
 			[_rightExtraButton setHidden:true];
 			[_modeSwitch selectItemAtIndex:1];
+			[self changeSidebarView:_gamesListController.infoViewController.view];
 		}
 			break;
 			
@@ -365,6 +367,7 @@
 			
 			[_rightExtraButton setHidden:false];
 			[_modeSwitch selectItemAtIndex:2];
+			[self changeSidebarView:_serverListController.infoViewController.view];
 		}
 			break;
 			
@@ -410,6 +413,7 @@
 	{
 		[view removeFromSuperview];
 	}
+	if( ! newView ) return;
 	
 	[_sidebarView addSubview:newView];
 	[newView setFrame:[_sidebarView bounds]];

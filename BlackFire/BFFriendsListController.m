@@ -64,8 +64,6 @@
 
 - (void)dealloc
 {
-	[_infoViewController release];
-	_infoViewController = nil;
 	[super dealloc];
 }
 
