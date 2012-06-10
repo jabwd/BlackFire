@@ -13,6 +13,7 @@
 
 @interface XFGameServer : NSObject
 {
+	NSDictionary *_raw;
 	NSString *_name;
 	
 	unsigned int	_IPAddress;
@@ -22,6 +23,7 @@
 	BOOL _online;
 }
 
+@property (nonatomic, retain) NSDictionary *raw;
 @property (nonatomic, retain) NSString *name;
 
 @property (nonatomic, assign) unsigned int IPAddress;

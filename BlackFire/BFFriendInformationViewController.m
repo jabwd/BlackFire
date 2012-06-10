@@ -8,6 +8,7 @@
 
 #import "BFFriendInformationViewController.h"
 #import "XFFriend.h"
+#import "BFGameServerInformation.h"
 
 
 NSString *getString(NSString *string);
@@ -63,10 +64,15 @@ NSString *getString(NSString *string)
 	
 	if( friend.gameID > 0 && friend.gameIP > 0 )
 	{
-		// populate the players list
+		[[BFGameServerInformation sharedInformation] getInformationForFriend:friend];
 	}
 }
 
+
+- (void)receivedInformationForServer:(XFGameServer *)server
+{
+	
+}
 
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import "BFInfoViewController.h"
+#import "BFGameServerInformation.h"
 
 @class XFFriend;
 
-@interface BFFriendInformationViewController : BFInfoViewController <NSTableViewDelegate, NSTableViewDataSource>
+@interface BFFriendInformationViewController : BFInfoViewController <BFGameServerInformationDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	NSImageView *_avatarView;
 	NSTextField *_nicknameField;
