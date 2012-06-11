@@ -22,10 +22,15 @@
 	NSTextField *_mapNameField;
 	NSTextField *_playersField;
 	NSTableView *_playersList;
+	NSTextField *_nameField;
 	
 	NSTextField *_mapLabel;
 	NSTextField *_playersLabel;
 	NSTextField *_serverAddressLabel;
+	NSTextField *_nameLabel;
+	
+	NSProgressIndicator *_progressIndicator;
+	NSTextField			*_progressLabel;
 	
 	NSBox *_line;
 	
@@ -40,10 +45,15 @@
 @property (assign) IBOutlet NSTextField *mapNameField;
 @property (assign) IBOutlet NSTextField *playersField;
 @property (assign) IBOutlet NSTableView *playersList;
+@property (assign) IBOutlet NSTextField *nameField;
 
 @property (assign) IBOutlet NSTextField *playersLabel;
 @property (assign) IBOutlet NSTextField *mapLabel;
 @property (assign) IBOutlet NSTextField *serverAddressLabel;
+@property (assign) IBOutlet NSTextField *progressLabel;
+@property (assign) IBOutlet NSTextField *nameLabel;
+
+@property (assign) IBOutlet NSProgressIndicator *progressIndicator;
 
 @property (assign) IBOutlet NSBox *line;
 

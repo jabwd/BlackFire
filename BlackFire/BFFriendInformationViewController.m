@@ -31,11 +31,15 @@ NSString *removeQuakeColorCodes(NSString *string);
 @synthesize mapNameField		= _mapNameField;
 @synthesize playersList			= _playersList;
 @synthesize playersField		= _playersField;
+@synthesize nameField			= _nameField;
 
 @synthesize playersLabel = _playersLabel;
 @synthesize mapLabel = _mapLabel;
 @synthesize serverAddressLabel = _serverAddressLabel;
+@synthesize nameLabel			= _nameLabel;
 
+@synthesize progressIndicator	 = _progressIndicator;
+@synthesize progressLabel		= _progressLabel;
 @synthesize line				= _line;
 
 + (BFFriendInformationViewController *)friendInformationController
@@ -82,11 +86,19 @@ NSString *removeQuakeColorCodes(NSString *string);
 	[_mapLabel setHidden:true];
 	[_playersLabel setHidden:true];
 	[_serverAddressField setHidden:true];
+	[_nameField setHidden:true];
+	[_nameLabel setHidden:true];
 	[[[_playersList superview] superview] setHidden:true];
+	[_progressLabel setHidden:true];
 	
 	
 	if( friend.gameID > 0 && friend.gameIP > 0 )
 	{
+		[_progressIndicator startAnimation:nil];
+		[_progressIndicator setHidden:false];
+		[_progressLabel setHidden:false];
+		[_progressLabel setStringValue:@"Loading server info…"];
+		
 		[[BFGameServerInformation sharedInformation] setDelegate:self];
 		[[BFGameServerInformation sharedInformation] getInformationForFriend:friend];
 	}
@@ -98,6 +110,8 @@ NSString *removeQuakeColorCodes(NSString *string);
 	// update the tableview
 	if( server.online && server.raw )
 	{
+		[_progressLabel setHidden:true];
+		
 		[_line setHidden:false];
 		[_playersField setHidden:false];
 		[_mapNameField setHidden:false];
@@ -105,10 +119,13 @@ NSString *removeQuakeColorCodes(NSString *string);
 		[_serverAddressLabel setHidden:false];
 		[_playersLabel setHidden:false];
 		[_mapLabel setHidden:false];
+		[_nameField setHidden:false];
+		[_nameLabel setHidden:false];
 		
 		[_serverAddressField setStringValue:[server address]];
 		[_mapNameField setStringValue:[server map]];
 		[_playersField setStringValue:[server playerString]];
+		[_nameField setStringValue:[server name]];
 		
 		[players release];
 		players = nil;
@@ -120,6 +137,11 @@ NSString *removeQuakeColorCodes(NSString *string);
 		}
 		[_playersList reloadData];
 	}
+	else {
+		[_progressLabel setStringValue:@"Unable to fetch server info"];
+	}
+	[_progressIndicator stopAnimation:nil];
+	[_progressIndicator setHidden:true];
 }
 
 #pragma mark - Player list datasource
