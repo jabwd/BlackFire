@@ -749,6 +749,10 @@
 			// This fixes a bug of the friend not showing up in the friends list 
 			[offlineGroup addMember:friend];
 		}
+		else if( ![offlineGroup friendIsMember:friend] && ![[_session.groupController onlineFriendsGroup] friendIsMember:friend] )
+		{
+			[offlineGroup addMember:friend];
+		}
 	}
 	
 	// the most ugly part of the Xfire protocol.
