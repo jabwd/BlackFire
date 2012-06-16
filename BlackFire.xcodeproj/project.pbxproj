@@ -136,6 +136,8 @@
 		36B6427F1484474700D9B11E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B64281148447EC00D9B11E /* BFNotificationCenter.m */; };
 		36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
+		36BC47F2158C53B7009C4ACB /* ADTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BC47F1158C53B7009C4ACB /* ADTableRowView.m */; };
+		36BC47F6158C53C5009C4ACB /* ADTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BC47F5158C53C5009C4ACB /* ADTableCellView.m */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36D9C9F71465C63400C4A162 /* BFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F61465C63400C4A162 /* BFLoginViewController.m */; };
 		36D9C9FA1465C88F00C4A162 /* BFTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D9C9F91465C88F00C4A162 /* BFTabViewController.m */; };
@@ -390,6 +392,10 @@
 		36B6427E1484474700D9B11E /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		36B64280148447EC00D9B11E /* BFNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNotificationCenter.h; sourceTree = "<group>"; };
 		36B64281148447EC00D9B11E /* BFNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNotificationCenter.m; sourceTree = "<group>"; };
+		36BC47F0158C53B7009C4ACB /* ADTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTableRowView.h; sourceTree = "<group>"; };
+		36BC47F1158C53B7009C4ACB /* ADTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTableRowView.m; sourceTree = "<group>"; };
+		36BC47F4158C53C5009C4ACB /* ADTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTableCellView.h; sourceTree = "<group>"; };
+		36BC47F5158C53C5009C4ACB /* ADTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTableCellView.m; sourceTree = "<group>"; };
 		36D9C9F114659B9600C4A162 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		36D9C9F51465C63400C4A162 /* BFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFLoginViewController.h; sourceTree = "<group>"; };
 		36D9C9F61465C63400C4A162 /* BFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFLoginViewController.m; sourceTree = "<group>"; };
@@ -957,6 +963,10 @@
 			children = (
 				36529836146692FA0010FD7F /* ADOutlineView.h */,
 				36529837146692FA0010FD7F /* ADOutlineView.m */,
+				36BC47F0158C53B7009C4ACB /* ADTableRowView.h */,
+				36BC47F1158C53B7009C4ACB /* ADTableRowView.m */,
+				36BC47F4158C53C5009C4ACB /* ADTableCellView.h */,
+				36BC47F5158C53C5009C4ACB /* ADTableCellView.m */,
 			);
 			name = OutlineView;
 			sourceTree = "<group>";
@@ -1234,6 +1244,8 @@
 				36F547B11583B8DA008565AC /* BFFriendInformationViewController.m in Sources */,
 				36DB8A6A158477C90049B9E5 /* BFGameInformationViewController.m in Sources */,
 				36DB8A7015847BC20049B9E5 /* BFGameServerInformation.m in Sources */,
+				36BC47F2158C53B7009C4ACB /* ADTableRowView.m in Sources */,
+				36BC47F6158C53C5009C4ACB /* ADTableCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@
  * This draws our nice "iOS" like highlight on the selection of a row.
  * OS X Just doesn't look as nice :D
  */
-- (void)highlightSelectionInClipRect:(NSRect)rect
+/*- (void)highlightSelectionInClipRect:(NSRect)rect
 {
 	NSGradient *gradient;
 	NSUInteger row		= [self selectedRow];
@@ -57,6 +57,6 @@
 		NSRectFill(NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+cellFrame.size.height-1.0f, cellFrame.size.width, 1.0f));
 	}
 	[gradient release];
-}
+}*/
      
 @end

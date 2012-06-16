@@ -13,6 +13,7 @@
 @interface BFFriendsListController : BFTabViewController <NSMenuDelegate ,NSOutlineViewDelegate, NSOutlineViewDataSource>
 {
 	NSOutlineView *_friendsList;
+	NSTableRowView *_rowView;
 }
 
 @property (assign) IBOutlet NSOutlineView *friendsList;

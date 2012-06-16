@@ -10,6 +10,9 @@
 #import "BFImageAndTextCell.h"
 #import "BFGamesManager.h"
 
+#import "ADTableRowView.h"
+#import "ADTableCellView.h"
+
 #import "ADAppDelegate.h"
 
 #import "XFSession.h"
@@ -64,12 +67,17 @@
 
 - (void)dealloc
 {
+	[_rowView release];
+	_rowView = nil;
 	[super dealloc];
 }
 
 - (void)reloadData
 {
+	NSIndexSet *index = [_friendsList selectedRowIndexes];
 	[_friendsList reloadData];
+	
+	[_friendsList selectRowIndexes:index byExtendingSelection:false];
 }
 
 - (void)expandItem:(id)item
@@ -209,6 +217,109 @@
 		return [(XFFriend *)item displayName];
 	}
 	return nil;
+}
+
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+	ADTableRowView *rowView = [[ADTableRowView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+	
+	return [rowView autorelease];
+}
+
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+	NSTableCellView *view = nil;
+	if( [item isKindOfClass:[XFFriend class]] )
+	{
+		XFFriend *friend = (XFFriend *)item;
+		view = [outlineView makeViewWithIdentifier:@"NoStatusCell" owner:self];
+		view.textField.stringValue = [friend displayName];
+		[view.textField setAlignment:NSLeftTextAlignment];
+		
+		NSString *statusString = friend.status;
+		if( ! statusString )
+			statusString = @"";
+		
+		if( friend.gameID > 0 )
+		{
+			if( [statusString length] > 0 )
+			{
+				statusString = [NSString stringWithFormat:@"%@, ",statusString];
+			}
+			
+			if( friend.gameIP > 0 )
+			{
+				statusString = [NSString stringWithFormat:@"%@Playing %@ on %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:friend.gameID],[friend gameIPString]];
+			}
+			else
+			{
+				statusString = [NSString stringWithFormat:@"%@Playing %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:friend.gameID]];
+			}
+			[view.imageView setImage:[[BFGamesManager sharedGamesManager] imageForGame:(unsigned int)friend.gameID]];
+		}
+		else
+		{
+			if( friend.avatar )
+			{
+				[view.imageView setImage:friend.avatar];
+			}
+			else
+			{
+				// determine whether the image exists on the disk
+				
+				NSImage *image = nil;
+				NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+				
+				NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%@.jpg",cachesPath,friend.username];
+				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
+				{
+					image = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+				}
+				else
+				{
+					image = [NSImage imageNamed:@"xfire"];
+				}
+				[imagePath release];
+				
+				[image setScalesWhenResized:true];
+				friend.avatar = image;
+				[view.imageView setImage:image];
+			}
+		}
+		
+		// always show this for offline friends
+		if( !friend.online )
+			statusString = @"Offline";
+		
+		/*if( [statusString rangeOfString:@"AFK"].length > 0 )
+			[imageCell setFriendStatus:CellStatusAFK];
+		else if( friend.online )
+			[imageCell setFriendStatus:CellStatusOnline];
+		else
+			[imageCell setFriendStatus:CellStatusOffline];
+		
+		if( [statusString length] > 0 )
+		{
+			[(BFImageAndTextCell *)cell setShowsStatus:true];
+			[(BFImageAndTextCell *)cell setCellStatusString:statusString];
+		}
+		else
+		{
+			[(BFImageAndTextCell *)cell setShowsStatus:false];
+		}
+		[(BFImageAndTextCell *)cell setGroupRow:false];*/
+	}
+	else if( [item isKindOfClass:[XFGroup class]] )
+	{
+		view = [outlineView makeViewWithIdentifier:@"GroupCell" owner:self];
+		view.textField.stringValue = [(XFGroup *)item name];
+		[view.textField setAlignment:NSCenterTextAlignment];
+	}
+	else
+	{
+		
+	}
+	return view;
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
