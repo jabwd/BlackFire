@@ -167,7 +167,6 @@
 	
 	// now calculate the starting position
 	totalSize = (dirtyRect.size.width-totalSize)/2;
-	floor(totalSize);
 	
 	NSUInteger i, cnt = [_items count];
 	for(i=0;i<cnt;i++)
