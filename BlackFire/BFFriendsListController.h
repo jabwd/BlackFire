@@ -27,6 +27,9 @@
 - (IBAction)removeFriend:(id)sender;
 - (IBAction)showProfile:(id)sender;
 
+- (void)friendCameOnline:(XFFriend *)friend;
+- (void)friendWentOffline:(XFFriend *)friend;
+
 //--------------------------------------------------------------------------
 // Getting friends and groups
 - (NSInteger)activeRow;

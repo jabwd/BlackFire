@@ -22,13 +22,12 @@
 
 - (void)drawBackgroundInRect:(NSRect)dirtyRect
 {
-	[self.backgroundColor set];
-	NSRectFill([self bounds]);
-	
 	if( !self.groupRowStyle )
 	{
+		[self.backgroundColor set];
+		NSRectFill([self bounds]);
 		NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:0.98f green:0.98f blue:0.98f alpha:1.0f]
-															 endingColor:[NSColor colorWithCalibratedRed:0.94f green:0.94f blue:0.94f alpha:1.0f]];
+															 endingColor:[NSColor colorWithCalibratedRed:0.96f green:0.96f blue:0.96f alpha:1.0f]];
 		
 		[gradient drawInRect:[self bounds] angle:90.0f];
 		[gradient release];

@@ -587,12 +587,23 @@
 		{
 			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:@"Friend came online" body:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]]];
 			[[BFNotificationCenter defaultNotificationCenter] playOnlineSound];
+			//[_friendsListController friendCameOnline:changedFriend];
+			[_friendsListController.friendsList endUpdates];
 		}
 		else
 		{
 			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:@"Friend went offline" body:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]]];
 			[[BFNotificationCenter defaultNotificationCenter] playOfflineSound];
 		}
+	}
+	else if( notificationType == XFFriendNotificationFriendWillComeOnline )
+	{
+		[_friendsListController.friendsList beginUpdates];
+		[_friendsListController friendCameOnline:changedFriend];
+	}
+	else if( notificationType == XFFriendNotificationFriendWillGoOffline )
+	{
+		//[_friendsListController.friendsList beginUpdates];
 	}
 	else if( notificationType == XFFriendNotificationStatusChanged )
 	{

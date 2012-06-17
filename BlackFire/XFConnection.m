@@ -800,6 +800,7 @@
 			// makes sure that no clan members are shown in these groups.
 			if( [onlineGroup friendIsMember:friend] )
 			{
+				[_session raiseFriendNotification:XFFriendNotificationFriendWillGoOffline forFriend:friend];
 				[onlineGroup removeMember:friend];
 				[offlineGroup addMember:friend];
 			}
@@ -811,17 +812,18 @@
 		else
 		{
 			// makes sure that no clan members are shown in these groups.
-			if( [offlineGroup friendIsMember:friend] )
-			{
-				[offlineGroup removeMember:friend];
-				[onlineGroup addMember:friend];
-			}
 			if( friend.online )
 			{
 				friend.sessionID = sid;
 				[_session raiseFriendNotification:XFFriendNotificationSessionChanged forFriend:friend];
 				[friend release];
 				return;
+			}
+			if( [offlineGroup friendIsMember:friend] )
+			{
+				[_session raiseFriendNotification:XFFriendNotificationFriendWillComeOnline forFriend:friend];
+				[offlineGroup removeMember:friend];
+				[onlineGroup addMember:friend];
 			}
 			friend.online		= true;
 			friend.sessionID	= sid;

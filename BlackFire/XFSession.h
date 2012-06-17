@@ -48,7 +48,9 @@ typedef enum
 	XFFriendNotificationJoinedGameServer,
 	XFFriendNotificationLeftGameServer,
 	XFFriendNotificationFriendAdded,
-	XFFriendNotificationFriendRemoved
+	XFFriendNotificationFriendRemoved,
+	XFFriendNotificationFriendWillComeOnline,
+	XFFriendNotificationFriendWillGoOffline
 } XFFriendNotification;
 
 typedef enum{

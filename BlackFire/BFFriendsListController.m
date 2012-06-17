@@ -76,8 +76,58 @@
 {
 	NSIndexSet *index = [_friendsList selectedRowIndexes];
 	[_friendsList reloadData];
-	
 	[_friendsList selectRowIndexes:index byExtendingSelection:false];
+}
+
+- (void)friendCameOnline:(XFFriend *)friend
+{
+	XFGroupController *groupController = _delegate.session.groupController;
+	/*if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
+	{
+		XFGroup *onlineGroup = [groupController onlineFriendsGroup];
+		NSUInteger i, cnt = onlineGroup.membersCount;
+		for(i=0;i<cnt;i++)
+		{
+			if( [onlineGroup memberAtIndex:i].userID == friend.userID )
+			{
+				// found the index
+				break;
+			}
+		}
+		[_friendsList moveItemAtIndex:0 inParent:[groupController offlineFriendsGroup] toIndex:i inParent:[groupController onlineFriendsGroup]];
+	}
+	else
+	{
+		[_friendsList insertItemsAtIndexes:nil inParent:[groupController onlineFriendsGroup] withAnimation:NSTableViewAnimationEffectFade];
+	}*/
+	NSLog(@"Friedn came online: %@",friend);
+	XFGroup *onlineGroup = [groupController onlineFriendsGroup];
+	NSUInteger i, cnt = onlineGroup.membersCount;
+	for(i=0;i<cnt;i++)
+	{
+		if( [onlineGroup memberAtIndex:i].userID == friend.userID )
+		{
+			// found the index
+			break;
+		}
+	}
+	NSIndexSet *set = [NSIndexSet indexSetWithIndex:5];
+	[_friendsList insertItemsAtIndexes:set inParent:[groupController onlineFriendsGroup] withAnimation:NSTableViewAnimationEffectFade];
+}
+
+- (void)friendWentOffline:(XFFriend *)friend
+{
+	XFGroupController *groupController = _delegate.session.groupController;
+	[_friendsList beginUpdates];
+	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
+	{
+		[_friendsList moveItemAtIndex:0 inParent:[groupController onlineFriendsGroup] toIndex:0 inParent:[groupController onlineFriendsGroup]];
+	}
+	else
+	{
+		[_friendsList removeItemsAtIndexes:nil inParent:[groupController onlineFriendsGroup] withAnimation:NSTableViewAnimationEffectFade];
+	}
+	[_friendsList endUpdates];
 }
 
 - (void)expandItem:(id)item
@@ -231,10 +281,11 @@
 	NSTableCellView *view = nil;
 	if( [item isKindOfClass:[XFFriend class]] )
 	{
+		ADTableCellView *cellView = nil;
 		XFFriend *friend = (XFFriend *)item;
-		view = [outlineView makeViewWithIdentifier:@"NoStatusCell" owner:self];
-		view.textField.stringValue = [friend displayName];
-		[view.textField setAlignment:NSLeftTextAlignment];
+		view = [outlineView makeViewWithIdentifier:@"FriendCell" owner:self];
+		cellView = (ADTableCellView *)view;
+		cellView.stringValue = [friend displayName];
 		
 		NSString *statusString = friend.status;
 		if( ! statusString )
@@ -255,13 +306,13 @@
 			{
 				statusString = [NSString stringWithFormat:@"%@Playing %@",statusString,[[BFGamesManager sharedGamesManager] longNameForGameID:friend.gameID]];
 			}
-			[view.imageView setImage:[[BFGamesManager sharedGamesManager] imageForGame:(unsigned int)friend.gameID]];
+			[cellView setImage:[[BFGamesManager sharedGamesManager] imageForGame:(unsigned int)friend.gameID]];
 		}
 		else
 		{
 			if( friend.avatar )
 			{
-				[view.imageView setImage:friend.avatar];
+				[cellView setImage:friend.avatar];
 			}
 			else
 			{
@@ -283,7 +334,7 @@
 				
 				[image setScalesWhenResized:true];
 				friend.avatar = image;
-				[view.imageView setImage:image];
+				[cellView setImage:image];
 			}
 		}
 		
@@ -291,6 +342,7 @@
 		if( !friend.online )
 			statusString = @"Offline";
 		
+		[cellView setStatusString:statusString];
 		/*if( [statusString rangeOfString:@"AFK"].length > 0 )
 			[imageCell setFriendStatus:CellStatusAFK];
 		else if( friend.online )
