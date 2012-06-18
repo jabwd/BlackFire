@@ -635,7 +635,7 @@
 	}
 	else
 	{
-		NSRunAlertPanel(@"Error", [NSString stringWithFormat:@"An error occured %lu",reason], @"OK", nil, nil);
+		NSRunAlertPanel(@"Error", [NSString stringWithFormat:@"An error occured %u",reason], @"OK", nil, nil);
 	}
 	
 	[self changeToMode:BFApplicationModeOffline];

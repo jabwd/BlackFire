@@ -21,7 +21,7 @@
 
 #define CHECK_LENGTH_EX(_need,_what)				\
 if( (_idx + (_need)) > _len ) {		\
-[self raiseException:[NSString stringWithFormat:@"Not enough bytes (%d,%d) to scan %@",(_len - (_idx)), (_need),(_what)]];	\
+[self raiseException:[NSString stringWithFormat:@"Not enough bytes (%lu,%u) to scan %@",(_len - (_idx)), (_need),(_what)]];	\
 }
 #define CHECK_LENGTH(_need)								\
 unsigned int require = 0; if( isJumbo ) require = 1047552;\
@@ -219,7 +219,7 @@ NSString * const XFPacketDataKey			= @"data";
 {
 	NSMutableString *str = [NSMutableString string];
 	
-	[str appendFormat:@"packet:  ID %d, %d attrs", _packetID, [self attributeCount]];
+	[str appendFormat:@"packet:  ID %d, %lu attrs", _packetID, [self attributeCount]];
 	
 	[str appendFormat:@"\n%@\n", [_attributes description]];
 	

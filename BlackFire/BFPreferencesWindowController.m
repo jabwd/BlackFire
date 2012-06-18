@@ -131,6 +131,7 @@
 				[_soundsetDropDown setEnabled:true];
 			else
 				[_soundsetDropDown setEnabled:false];
+			[menu release];
 		});
 	});
 }

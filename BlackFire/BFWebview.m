@@ -112,7 +112,7 @@
 	AHHyperlinkScanner *scanner = [[AHHyperlinkScanner alloc] initWithString:message usingStrictChecking:NO];
 	NSArray *all = [scanner allURIs];
 	// the padding because we are making the string bigger, thus the range wouldn't fit anymore
-	unsigned int padding = 0;
+	NSUInteger padding = 0;
 	for(AHMarkedHyperlink *link in all)
 	{		
 		NSString *linkString = [[link URL] absoluteString];
@@ -161,7 +161,7 @@
 	
 	
 	// the padding because we are making the string bigger, thus the range wouldn't fit anymore
-	unsigned int padding = 0;
+	NSUInteger padding = 0;
 	for(AHMarkedHyperlink *link in all)
 	{		
 		NSString *linkString = [[link URL] absoluteString];

@@ -91,15 +91,18 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    unsigned int keyCode = [theEvent keyCode];
+	NSUInteger keyCode = [theEvent keyCode];
     if( keyCode == ENTER || keyCode == ENTER2 )
     {
-        unsigned int modifierFlags = [theEvent modifierFlags];
+        NSUInteger modifierFlags = [theEvent modifierFlags];
         if( !(modifierFlags & NSControlKeyMask) && !(modifierFlags & NSAlternateKeyMask) )
         {
             NSString *message = [[[self textStorage] string] copy];
 			if( [message length] < 1 )
+			{
+				[message release];
                 return; // prevent some nasty glitches
+			}
 			[_messageDelegate sendMessage:message];
 			
 			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFMessageFieldHistory] )

@@ -211,6 +211,7 @@
                             nickname = @"";
                             attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor grayColor], nil];
                         }
+						[attr release];
                         if( ! nickname )
                             nickname = @"Unknown";
 						 attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor blueColor], nil];

@@ -320,13 +320,18 @@
 			break;
 			
 		case XFFriendNotificationFriendAdded:
-		{
-		}
 			break;
 			
 		case XFFriendNotificationFriendRemoved:
-		{
-		}
+			break;
+			
+		case XFFriendNotificationFriendWillComeOnline:
+			break;
+			
+		case XFFriendNotificationFriendWillGoOffline:
+			break;
+			
+		default:
 			break;
 	}
 	

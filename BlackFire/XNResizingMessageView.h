@@ -23,7 +23,7 @@
 	
 	NSMutableArray	*previousMessages;
 	NSInteger		_maxLength;
-    unsigned int	current;
+    NSUInteger		current;
 	
 	BOOL			_resizing;
 }

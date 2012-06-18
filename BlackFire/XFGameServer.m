@@ -40,14 +40,14 @@ NSString *removeQuakeColorCodes(NSString *string);
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"[Xfire game server IP='%@' Port='%lu' GameID='%lu']",NSStringFromIPAddress(_IPAddress),_port,_gameID];
+	return [NSString stringWithFormat:@"[Xfire game server IP='%@' Port='%u' GameID='%u']",NSStringFromIPAddress(_IPAddress),_port,_gameID];
 }
 
 - (NSString *)address
 {
 	if( _IPAddress == 0 )
 		return @"No IP Address";
-	return [NSString stringWithFormat:@"%@:%lu",NSStringFromIPAddress(_IPAddress),_port];
+	return [NSString stringWithFormat:@"%@:%u",NSStringFromIPAddress(_IPAddress),_port];
 }
 
 #pragma mark - Processing the 'raw' data
