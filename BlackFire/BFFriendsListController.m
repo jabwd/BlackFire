@@ -517,7 +517,7 @@
 	{
 		return 18.0f;
 	}
-	return 28.0f;
+	return 36.0f;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item

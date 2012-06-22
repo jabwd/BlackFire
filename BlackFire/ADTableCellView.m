@@ -43,14 +43,22 @@
 	
 	if( _image )
 	{
-		[_image setSize:NSMakeSize(26,27)];
-		[_image compositeToPoint:NSMakePoint(0, 1) operation:NSCompositeSourceOver];
+		[[NSGraphicsContext currentContext] saveGraphicsState];
+		CGFloat yCoordinate = 4.5f;
+		NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0, yCoordinate, 27, 27) xRadius:3.0f yRadius:3.0f];
+		if( cellFrame.size.height == 36 )
+			[path setClip];
+		[_image setSize:NSMakeSize(27,27)];
+		[_image compositeToPoint:NSMakePoint(0, yCoordinate) operation:NSCompositeSourceOver];
+		[[NSColor colorWithCalibratedWhite:0.1f alpha:1.0f] set];
+		[path stroke];
+		[[NSGraphicsContext currentContext] restoreGraphicsState];
 	}
 	
 	NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:_stringValue];
 	NSSize stringSize = [text size];
-	NSPoint drawPt = NSMakePoint(30,0);
-	drawPt.y = (cellFrame.size.height - stringSize.height)/2.0f;
+	NSPoint drawPt = NSMakePoint(35,0);
+	drawPt.y = 10.0f;
 	
 	// basic configuration of the text:
 	[text addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [_stringValue length])];
@@ -74,7 +82,7 @@
 			[finalSt addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica" size:9.0f] range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [finalSt length])];
-			[finalSt drawInRect:NSMakeRect(drawPt.x+6.0f, (drawPt.y)-7, cellFrame.size.width-drawPt.x-6, stringSize.height)];
+			[finalSt drawInRect:NSMakeRect(drawPt.x, (drawPt.y)-7, cellFrame.size.width-drawPt.x-6, stringSize.height)];
 			[finalSt release];
 			drawPt.y += 7.0f;
 		}
@@ -93,7 +101,7 @@
 			[finalSt addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.4f alpha:1.0f] range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica" size:9.0f] range:NSMakeRange(0, [finalSt length])];
-			[finalSt drawInRect:NSMakeRect(drawPt.x+6.0f, (drawPt.y)-7, cellFrame.size.width-drawPt.x-6, stringSize.height)];
+			[finalSt drawInRect:NSMakeRect(drawPt.x, (drawPt.y)-7, cellFrame.size.width-drawPt.x-6, stringSize.height)];
 			[finalSt release];
 			drawPt.y += 7.0f;
 		}

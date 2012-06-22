@@ -14,8 +14,8 @@
 - (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row
 {
 	NSRect cellFrame		= [super frameOfCellAtColumn:column row:row];
-	cellFrame.size.width	+= cellFrame.origin.x;
-	cellFrame.origin.x		= 0;
+	cellFrame.size.width	+= cellFrame.origin.x-8;
+	cellFrame.origin.x		= 8;
 	return cellFrame;
 }
 

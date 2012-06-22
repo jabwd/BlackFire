@@ -588,18 +588,19 @@
 			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:@"Friend came online" body:[NSString stringWithFormat:@"%@ came online",[changedFriend displayName]]];
 			[[BFNotificationCenter defaultNotificationCenter] playOnlineSound];
 			//[_friendsListController friendCameOnline:changedFriend];
-			[_friendsListController.friendsList endUpdates];
+			//	[_friendsListController friendCameOnline:changedFriend];
+			//[_friendsListController.friendsList endUpdates];
 		}
 		else
 		{
 			[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:@"Friend went offline" body:[NSString stringWithFormat:@"%@ went offline",[changedFriend displayName]]];
 			[[BFNotificationCenter defaultNotificationCenter] playOfflineSound];
 		}
+		[_friendsListController reloadData];
 	}
 	else if( notificationType == XFFriendNotificationFriendWillComeOnline )
 	{
-		[_friendsListController.friendsList beginUpdates];
-		[_friendsListController friendCameOnline:changedFriend];
+		//[_friendsListController.friendsList beginUpdates];
 	}
 	else if( notificationType == XFFriendNotificationFriendWillGoOffline )
 	{
@@ -608,6 +609,11 @@
 	else if( notificationType == XFFriendNotificationStatusChanged )
 	{
 		//[[_session.groupController onlineFriendsGroup] sortMembers];
+		[_friendsListController reloadData];
+	}
+	else
+	{
+		[_friendsListController reloadData];
 	}
 	
 	// now post an application wide notification so other classes can update their shit too
@@ -618,9 +624,6 @@
 	
 	// done with it.
 	[changedFriend release];
-	
-	// make sure that the friends list displays the latest data
-	[_friendsListController reloadData];
 }
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
