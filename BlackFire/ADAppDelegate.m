@@ -704,6 +704,10 @@
 			[chat.windowController closeChat:chat];
 		}
 		[[BFGamesManager sharedGamesManager] stopMonitoring];
+		_friendsListController.delegate = nil;
+		[_friendsListController reloadData];
+		[_friendsListController release];
+		_friendsListController = nil;
 		[self changeToMode:BFApplicationModeOffline];
 	}
 	else if( newStatus == XFSessionStatusOffline )
