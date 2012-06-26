@@ -396,14 +396,21 @@
 
 - (void)changeMainView:(NSView *)newView
 {
-	NSArray *subviews = [_mainView subviews];
-	for(NSView *view in subviews)
-	{
-		[view removeFromSuperview];
-	}
-	
-	[_mainView addSubview:newView];
-	[newView setFrame:[_mainView bounds]];
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:0.100f];
+	[[NSAnimationContext currentContext] setCompletionHandler:^{
+		NSArray *subviews = [_mainView subviews];
+		for(NSView *view in subviews)
+		{
+			[view removeFromSuperview];
+		}
+		
+		[_mainView addSubview:newView];
+		[newView setFrame:[_mainView bounds]];
+		[[_mainView animator] setAlphaValue:1.0f];
+	}];
+	[[_mainView animator] setAlphaValue:0.0f];
+	[NSAnimationContext endGrouping];
 }
 
 - (void)changeSidebarView:(NSView *)newView
