@@ -225,8 +225,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	NSUInteger i, cnt = [_friends count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[_friends objectAtIndex:i] userID] == userID )
-			return [_friends objectAtIndex:i];
+		if( [_friends[i] userID] == userID )
+			return _friends[i];
 	}
 	return nil;
 }
@@ -236,8 +236,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	NSUInteger i, cnt = [_friends count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[[_friends objectAtIndex:i] username] isEqualToString:username] )
-			return [_friends objectAtIndex:i];
+		if( [[_friends[i] username] isEqualToString:username] )
+			return _friends[i];
 	}
 	return nil;
 }
@@ -247,8 +247,8 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	NSUInteger i, cnt = [_friends count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[[_friends objectAtIndex:i] sessionID] isEqualToData:sessionID] )
-			return [_friends objectAtIndex:i];
+		if( [[_friends[i] sessionID] isEqualToData:sessionID] )
+			return _friends[i];
 	}
 	return nil;
 }
@@ -263,7 +263,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	NSUInteger i, cnt = [_friends count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[_friends objectAtIndex:i] userID] == oldFriend.userID )
+		if( [_friends[i] userID] == oldFriend.userID )
 		{
 			[_friends removeObjectAtIndex:i];
 			return;
@@ -277,9 +277,9 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	NSUInteger i, cnt = [_friends count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[_friends objectAtIndex:i] userID] == userID )
+		if( [_friends[i] userID] == userID )
 		{
-			friend = [[_friends objectAtIndex:i] retain];
+			friend = [_friends[i] retain];
 			for(XFGroup *group in _groupController.groups)
 			{
 				if( [group friendIsMember:friend] )
@@ -329,7 +329,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)
 	{
-		XFChat *chat_ = [_chats objectAtIndex:i];
+		XFChat *chat_ = _chats[i];
 		if( chat_.remoteFriend.userID == chat.remoteFriend.userID )
 		{
 			[_chats removeObjectAtIndex:i];

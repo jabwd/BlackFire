@@ -727,15 +727,15 @@
 	XFGroup *offlineGroup = [_session.groupController offlineFriendsGroup];
 	for( i = 0; i < cnt; i++ )
 	{
-		unsigned int uID = [[userids objectAtIndex:i] unsignedIntValue];
+		unsigned int uID = [userids[i] unsignedIntValue];
 		XFFriend *friend = [_session friendForUserID:uID];
 		
 		if( ! friend )
 		{
 			friend = [[XFFriend alloc] initWithSession:_session];
-			friend.username = [usernames objectAtIndex:i];
+			friend.username = usernames[i];
 			friend.userID	= uID;
-			friend.nickname = [nicknames objectAtIndex:i];
+			friend.nickname = nicknames[i];
 			
 			[offlineGroup addMember:friend];
 			
@@ -788,8 +788,8 @@
 	XFGroup *onlineGroup	= [_session.groupController onlineFriendsGroup];
 	for(i=0;i<cnt;i++)
 	{
-		unsigned int uid = [[userids objectAtIndex:i] unsignedIntValue];
-		NSData *sid = [sessionids objectAtIndex:i];
+		unsigned int uid = [userids[i] unsignedIntValue];
+		NSData *sid = sessionids[i];
 		
 		XFFriend *friend = [_session friendForUserID:uid];
 		
@@ -858,8 +858,8 @@
 
 	for(i=0;i<cnt;i++)
 	{
-		XFFriend *friend = [_session friendForSessionID:[sessionids objectAtIndex:i]];
-		friend.status = [msgs objectAtIndex:i];
+		XFFriend *friend = [_session friendForSessionID:sessionids[i]];
+		friend.status = msgs[i];
 		[_session raiseFriendNotification:XFFriendNotificationStatusChanged forFriend:friend];
 	}
 }
@@ -884,8 +884,8 @@
 	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
-		NSData *sid         = [sessionIDs objectAtIndex:i];
-		unsigned int gid    = [[gameIDs objectAtIndex:i] unsignedIntValue];
+		NSData *sid         = sessionIDs[i];
+		unsigned int gid    = [gameIDs[i] unsignedIntValue];
 		//unsigned int port	= [[gamePorts objectAtIndex:i] unsignedIntValue];
 		
 		XFFriend *friend = [_session friendForSessionID:sid];
@@ -897,8 +897,8 @@
 			XFFriend *fof		= [[XFFriend alloc] initWithSession:_session];
 			fof.sessionID		= sid;
 			fof.gameID			= gid;
-			fof.gameIP			= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
-			fof.gamePort		= ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
+			fof.gameIP			= [gameIPAddrs[i] unsignedIntValue];
+			fof.gamePort		= ([gamePorts[i] unsignedIntValue] & 0x0000FFFF);
 			fof.friendOfFriend	= true; // can't be any one else.. as far as I know
 			[_session addFriend:fof]; // this shouldn't add the friend to any group.
 			[fof release];
@@ -919,8 +919,8 @@
 			// now do advanced notification processing
 			if( gid != 0 && friend.gameID == gid )
 			{
-				unsigned int gameIP = [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
-				unsigned int gamePort = ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
+				unsigned int gameIP = [gameIPAddrs[i] unsignedIntValue];
+				unsigned int gamePort = ([gamePorts[i] unsignedIntValue] & 0x0000FFFF);
 				friend.gameIP = gameIP;
 				friend.gamePort = gamePort;
 				if( gameIP > 0 )
@@ -935,8 +935,8 @@
 			else
 			{
 				friend.gameID	= gid;
-				friend.gameIP	= [[gameIPAddrs objectAtIndex:i] unsignedIntValue];
-				friend.gamePort = ([[gamePorts objectAtIndex:i] unsignedIntValue] & 0x0000FFFF);
+				friend.gameIP	= [gameIPAddrs[i] unsignedIntValue];
+				friend.gamePort = ([gamePorts[i] unsignedIntValue] & 0x0000FFFF);
 				[_session raiseFriendNotification:XFFriendNotificationGameStatusChanged forFriend:friend];
 			}
 		}
@@ -975,16 +975,16 @@
 	NSUInteger i, cnt = [sessionIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
-		NSData *sid = [sessionIDs objectAtIndex:i];
-		username = [userNames objectAtIndex:i];
-		nickname = [nickNames objectAtIndex:i];
+		NSData *sid = sessionIDs[i];
+		username = userNames[i];
+		nickname = nickNames[i];
 		//common = [commonFriends objectAtIndex:i]; // it's an array of XFPacketAttributeValue objects containing NSNumbers
 		
 		XFFriend *friend = [_session friendForSessionID:sid];
 		
 		if( friend )
 		{
-			friend.userID			= [[userIDs objectAtIndex:i] unsignedIntValue];
+			friend.userID			= [userIDs[i] unsignedIntValue];
 			friend.username			= username;
 			friend.nickname			= nickname;
 			friend.online			= true;
@@ -1049,8 +1049,8 @@
 	NSUInteger i, cnt = [userIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
-		NSString *nickname = [nickNames objectAtIndex:i];
-		unsigned int uid = [[userIDs objectAtIndex:i] unsignedIntValue];
+		NSString *nickname = nickNames[i];
+		unsigned int uid = [userIDs[i] unsignedIntValue];
 		
 		XFFriend *friend = [_session friendForUserID:uid];
 		if( friend )
@@ -1086,9 +1086,9 @@
 	{
 		XFFriend *friend = [[XFFriend alloc] init];
 		
-		friend.username		= [userNames objectAtIndex:i];
-		friend.firstName	= [firstNames objectAtIndex:i];
-		friend.lastName		= [lastNames objectAtIndex:i];
+		friend.username		= userNames[i];
+		friend.firstName	= firstNames[i];
+		friend.lastName		= lastNames[i];
 		
 		[friends addObject:friend];
 		[friend release];
@@ -1104,7 +1104,7 @@
 	NSUInteger i, cnt = [userIDs count];
 	for(i=0;i<cnt;i++)
 	{
-		[_session friendWasDeleted:[[userIDs objectAtIndex:i] unsignedIntValue]];
+		[_session friendWasDeleted:[userIDs[i] unsignedIntValue]];
 	}
 }
 
@@ -1121,9 +1121,9 @@
 	{
 		XFFriend *friend = [[XFFriend alloc] init];
 		
-		friend.username = [userNames objectAtIndex:i];
-		friend.nickname = [nickNames objectAtIndex:i];
-		friend.status	= [messages objectAtIndex:i];
+		friend.username = userNames[i];
+		friend.nickname = nickNames[i];
+		friend.status	= messages[i];
 		
 		[friends addObject:friend];
 		[friend release];
@@ -1146,8 +1146,8 @@
 	NSUInteger i, cnt = [groupIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
-		groupName = [groupNames objectAtIndex:i];
-		[ctl addCustomGroup:groupName groupID:[[groupIDs objectAtIndex:i] intValue]];
+		groupName = groupNames[i];
+		[ctl addCustomGroup:groupName groupID:[groupIDs[i] intValue]];
 	}
 }
 
@@ -1163,10 +1163,10 @@
 	NSUInteger i, cnt = [userIDs count];
 	for( i = 0; i < cnt; i++ )
 	{
-		XFFriend *friend = [_session friendForUserID:[[userIDs objectAtIndex:i] unsignedIntValue]];
+		XFFriend *friend = [_session friendForUserID:[userIDs[i] unsignedIntValue]];
 		if( friend )
 		{
-			XFGroup *group = [ctl groupForID:[[groupIDs objectAtIndex:i] unsignedIntValue]];
+			XFGroup *group = [ctl groupForID:[groupIDs[i] unsignedIntValue]];
 			if( group )
 			{
 				[group addMember:friend];
@@ -1205,7 +1205,7 @@
 	if( [maps count] != 1 )
 		return;
 	
-	XFPacketDictionary *map = [maps objectAtIndex:0];
+	XFPacketDictionary *map = maps[0];
 	if( !map || ![map isKindOfClass:[XFPacketDictionary class]])
 	{
 		NSLog(@"Got something unexpected: %@",map);
@@ -1338,10 +1338,10 @@
 	NSUInteger i, cnt = [clanList count];
     for( i = 0; i < cnt;i++ ) 
     {
-		NSInteger type = [[clanTypes objectAtIndex:i] intValue];
+		NSInteger type = [clanTypes[i] intValue];
 		if( type == 1 )
 			continue; // this clan group has no members, thus ignore it
-		[ctr addClanGroup:[clanList objectAtIndex:i] groupID:[[groupIDs objectAtIndex:i] intValue]];
+		[ctr addClanGroup:clanList[i] groupID:[groupIDs[i] intValue]];
     }
 }
 
@@ -1360,12 +1360,12 @@
 	groupIDs  = [pkt attributeValuesForKey:@"0x6c"];
 	
 	NSUInteger i, cnt = [userIDs count];
-	XFGroup *clanGrp = [ctl groupForID:[[groupIDs objectAtIndex:0] intValue]];
+	XFGroup *clanGrp = [ctl groupForID:[groupIDs[0] intValue]];
 	for( i = 0; i < cnt;i++ )
 	{
-		unsigned int userID		= [[userIDs objectAtIndex:i] unsignedIntValue];
-		NSString *username		= [userNames objectAtIndex:i];
-		NSString *nickname		= [nickNames objectAtIndex:i];
+		unsigned int userID		= [userIDs[i] unsignedIntValue];
+		NSString *username		= userNames[i];
+		NSString *nickname		= nickNames[i];
 		//NSString *clanNickname	= [clanNicks objectAtIndex:i];
 		
 		
@@ -1421,9 +1421,9 @@
     for(i=0;i<cnt;i++)
     {
 		XFGameServer *server	= [[XFGameServer alloc] init];
-		server.IPAddress		= [[gameIPs objectAtIndex:i]	unsignedIntValue];
-		server.port				= [[gamePorts objectAtIndex:i]	unsignedIntValue];
-		server.gameID			= [[gamesArray objectAtIndex:i] unsignedIntValue];
+		server.IPAddress		= [gameIPs[i]	unsignedIntValue];
+		server.port				= [gamePorts[i]	unsignedIntValue];
+		server.gameID			= [gamesArray[i] unsignedIntValue];
 		
         [serverList addObject:server];
 		
@@ -1435,7 +1435,7 @@
 
 - (void)processInvitSend:(XFPacket *)pkt
 {
-    NSString *name    = [[pkt attributeValuesForKey:@"name"] objectAtIndex:0];
+    NSString *name    = [pkt attributeValuesForKey:@"name"][0];
     NSString *message = [NSString stringWithFormat:@"Friend request invitation has been sent to %@, he/she will be added to your friends list as soon as he/she accepts",name];
     NSRunAlertPanel(@"Invitation has been sent", message, @"OK", nil, nil);
 }

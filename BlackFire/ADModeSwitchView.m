@@ -77,9 +77,9 @@
 	if( actual.x > totalSize && actual.x < endSize )
 	{
 		actual.x -= totalSize;
-		if( actual.x > ([[_items objectAtIndex:0] size].width+5) )
+		if( actual.x > ([_items[0] size].width+5) )
 		{
-			if( actual.x > ([[_items objectAtIndex:0] size].width+5+[[_items objectAtIndex:1] size].width+10) )
+			if( actual.x > ([_items[0] size].width+5+[_items[1] size].width+10) )
 			{
 				// third
 				[self selectItemAtIndex:2];
@@ -117,7 +117,7 @@
 	}
 	if( index >= 0 )
 	{
-		[[_items objectAtIndex:index] setSelected:true];
+		[_items[index] setSelected:true];
 	}
 	[self setNeedsDisplay:true];
 }
@@ -127,7 +127,7 @@
 	NSInteger i, cnt = [_items count];
 	for(i=0;i<cnt;i++)
 	{
-		ADModeItem *item = [_items objectAtIndex:i];
+		ADModeItem *item = _items[i];
 		if( item.selected )
 			return i;
 	}
@@ -171,7 +171,7 @@
 	NSUInteger i, cnt = [_items count];
 	for(i=0;i<cnt;i++)
 	{
-		ADModeItem *item = [_items objectAtIndex:i];
+		ADModeItem *item = _items[i];
 		
 		NSShadow *shadow = [[NSShadow alloc] init];
 		/*if( item.selected )

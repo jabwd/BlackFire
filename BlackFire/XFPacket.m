@@ -253,7 +253,7 @@ NSString * const XFPacketDataKey			= @"data";
 		NSUInteger i, cnt = [mainAttrValArray count];
 		for( i = 0; i < cnt; i++ )
 		{
-			NSString *object = [[mainAttrValArray objectAtIndex:i] value];
+			NSString *object = [mainAttrValArray[i] value];
 			if( object != nil ){
 				[attrValues addObject:object];
 			} else {
@@ -267,7 +267,7 @@ NSString * const XFPacketDataKey			= @"data";
 	else
 	{
 		// single value
-		return [NSArray arrayWithObject:[mainAttrVal value]];
+		return @[[mainAttrVal value]];
 	}
 }
 
@@ -1032,7 +1032,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateString:[pav value]];
 			}
 			break;
@@ -1043,7 +1043,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateUInt32:[((NSNumber*)[pav value]) unsignedIntValue]];
 			}
 			break;
@@ -1054,7 +1054,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateUUID:[pav value]];
 			}
 			break;
@@ -1065,7 +1065,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateDID:[pav value]];
 			}
 			break;
@@ -1076,7 +1076,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateArray:pav];
 			}
 			break;
@@ -1087,7 +1087,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateAttributeMap:[pav value]];
 			}
 			break;
@@ -1098,7 +1098,7 @@ NSString * const XFPacketDataKey			= @"data";
 			
 			for( i = 0; i < cnt; i++ )
 			{
-				pav = [arr objectAtIndex:i];
+				pav = arr[i];
 				[self generateAttributeMap:[pav value]];
 			}
 			break;
@@ -1336,7 +1336,7 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	for( i = 0; i < cnt; i++ )
 	{
-		sid = [sessionIDs objectAtIndex:i];
+		sid = sessionIDs[i];
 		if( ! [sid isKindOfClass:[NSData class]] )
 			@throw [NSException exceptionWithName:@"XFPacket" reason:@"Attempt to create friend of friend request with invalid session ID" userInfo:nil];
 		if( [sid length] != 16 )
@@ -1424,27 +1424,27 @@ NSString * const XFPacketDataKey			= @"data";
     NSUserDefaults *std = [NSUserDefaults standardUserDefaults];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"showOthersGameStatus"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"showOthersGameStatus"]) stringValue]] 
             forKey:@"0x01"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"xfireShowGameServerData"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"xfireShowGameServerData"]) stringValue]] 
             forKey:@"0x02"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"xfireStatusOnProfile"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"xfireStatusOnProfile"]) stringValue]] 
             forKey:@"0x03"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"enableTimeStamps"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"enableTimeStamps"]) stringValue]] 
             forKey:@"0x06"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"showFriendsOfFriendsGroup"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"showFriendsOfFriendsGroup"]) stringValue]] 
             forKey:@"0x08"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"showOfflineFriendsGroup"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"showOfflineFriendsGroup"]) stringValue]] 
             forKey:@"0x09"];
     
     [map setObject:[XFPacketAttributeValue 
@@ -1452,7 +1452,7 @@ NSString * const XFPacketDataKey			= @"data";
             forKey:@"0x0a"];
     
     [map setObject:[XFPacketAttributeValue 
-                    attributeValueWithString:[[NSNumber numberWithBool:[std boolForKey:@"showOthersWhenTyping"]] stringValue]] 
+                    attributeValueWithString:[@([std boolForKey:@"showOthersWhenTyping"]) stringValue]] 
             forKey:@"0x0c"];
 	
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithAttributeMap:map]
@@ -1570,7 +1570,7 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	[pkt setPacketID: 26];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:groupName]
-			   forKey:[NSNumber numberWithInt:0x1a]];
+			   forKey:@0x1a];
 	
 	[pkt generate];
 	return pkt;
@@ -1583,7 +1583,7 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	[pkt setPacketID: 27];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:groupID]
-			   forKey:[NSNumber numberWithInt:0x19]];
+			   forKey:@0x19];
 	
 	[pkt generate];
 	return pkt;
@@ -1596,9 +1596,9 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	[pkt setPacketID: 28];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:groupID]
-			   forKey:[NSNumber numberWithInt:0x19]];
+			   forKey:@0x19];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:groupName]
-			   forKey:[NSNumber numberWithInt:0x1a]];
+			   forKey:@0x1a];
 	
 	[pkt generate];
 	return pkt;
@@ -1611,9 +1611,9 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	[pkt setPacketID: 29];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:friendID]
-			   forKey:[NSNumber numberWithInt:0x01]];
+			   forKey:@0x01];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:groupID]
-			   forKey:[NSNumber numberWithInt:0x19]];
+			   forKey:@0x19];
 	
 	[pkt generate];
 	return pkt;
@@ -1626,9 +1626,9 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	[pkt setPacketID: 30];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:friendID]
-			   forKey:[NSNumber numberWithInt:0x01]];
+			   forKey:@0x01];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:groupID]
-			   forKey:[NSNumber numberWithInt:0x19]];
+			   forKey:@0x19];
 	
 	[pkt generate];
 	return pkt;
@@ -1641,7 +1641,7 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	[pkt setPacketID: 32];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:(newText?newText:@"")]
-			   forKey:[NSNumber numberWithInt:0x2e]];
+			   forKey:@0x2e];
 	
 	[pkt generate];
 	return pkt;
@@ -1709,9 +1709,7 @@ NSString * const XFPacketDataKey			= @"data";
 	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
-	NSArray *arr = [NSArray arrayWithObjects:
-					[XFPacketAttributeValue attributeValueWithInt:userID],
-					nil];
+	NSArray *arr = @[[XFPacketAttributeValue attributeValueWithInt:userID]];
 	// set its attributes
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:0x4CFC] forKey:@"climsg"];
 	

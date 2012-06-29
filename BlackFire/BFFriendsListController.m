@@ -34,7 +34,7 @@
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"FriendsList" owner:self];
-		NSTableColumn *column = [[_friendsList tableColumns] objectAtIndex:0];
+		NSTableColumn *column = [_friendsList tableColumns][0];
 		BFImageAndTextCell *cell = [column dataCell];
 		[cell setEditable:NO];
 		[cell setDisplayImageSize:NSMakeSize(24.0f, 24.0f)];

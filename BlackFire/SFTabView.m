@@ -176,7 +176,7 @@
 		textColor = [NSColor colorWithCalibratedWhite:0.4f alpha:1.0f];
 	}
 	
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:style,NSParagraphStyleAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName: style, NSShadowAttributeName: shadow, NSForegroundColorAttributeName: textColor};
 	
 	if( ! _title )
 		_title = [@"" retain];
@@ -277,7 +277,7 @@
 	NSUInteger i, cnt = [trackingAreas count];
 	for(i=0;i<cnt;i++)
 	{
-		[self removeTrackingArea:[trackingAreas objectAtIndex:i]];
+		[self removeTrackingArea:trackingAreas[i]];
 	}
 	NSRect frame = [self frame];
 	
@@ -356,7 +356,7 @@
 	NSUInteger i, cnt = [tabStrip.tabs count];
 	for(i=0;i<cnt;i++)
 	{
-		SFTabView *tabView = [tabStrip.tabs objectAtIndex:i];
+		SFTabView *tabView = (tabStrip.tabs)[i];
 		if( tabView == self )
 			continue;
 		

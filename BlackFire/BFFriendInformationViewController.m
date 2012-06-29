@@ -154,7 +154,7 @@ NSString *removeQuakeColorCodes(NSString *string);
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-	id value = [[players objectAtIndex:row] objectForKey:@"name"];
+	id value = players[row][@"name"];
 	return removeQuakeColorCodes(value);
 }
 

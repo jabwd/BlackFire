@@ -54,16 +54,16 @@ NSString *removeQuakeColorCodes(NSString *string);
 
 - (void)setRaw:(NSDictionary *)raw
 {
-	if( raw && [[raw objectForKey:@"status"] isEqualToString:@"UP"] )
+	if( raw && [raw[@"status"] isEqualToString:@"UP"] )
 	{
 		self.online = true;
 	}
 	
 	if( raw )
 	{
-		if( [raw objectForKey:@"name"] )
+		if( raw[@"name"] )
 		{
-			self.name = removeQuakeColorCodes([raw objectForKey:@"name"]);
+			self.name = removeQuakeColorCodes(raw[@"name"]);
 		}
 	}
 	
@@ -75,7 +75,7 @@ NSString *removeQuakeColorCodes(NSString *string);
 {
 	if( _raw && self.online )
 	{
-		return [NSString stringWithFormat:@"%@/%@",[_raw objectForKey:@"numplayers"],[_raw objectForKey:@"maxplayers"]];
+		return [NSString stringWithFormat:@"%@/%@",_raw[@"numplayers"],_raw[@"maxplayers"]];
 	}
 	return nil;
 }
@@ -84,7 +84,7 @@ NSString *removeQuakeColorCodes(NSString *string);
 {
 	if( _raw && self.online )
 	{
-		return [_raw objectForKey:@"map"];
+		return _raw[@"map"];
 	}
 	return nil;
 }
@@ -93,7 +93,7 @@ NSString *removeQuakeColorCodes(NSString *string);
 {
 	if( _raw && self.online )
 	{
-		return [_raw objectForKey:@"ping"];
+		return _raw[@"ping"];
 	}
 	return nil;
 }
@@ -102,7 +102,7 @@ NSString *removeQuakeColorCodes(NSString *string);
 {
 	if( _raw && self.online )
 	{
-		return [_raw objectForKey:@"players"];
+		return _raw[@"players"];
 	}
 	return nil;
 }

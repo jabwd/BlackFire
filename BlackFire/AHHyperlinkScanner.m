@@ -83,10 +83,10 @@
 		
 		puncSet = [[NSCharacterSet characterSetWithCharactersInString:@"\"'.,:;<?!"] retain];
 		hostnameComponentSeparatorSet = [[NSCharacterSet characterSetWithCharactersInString:@"./"] retain];
-		enclosureStartArray = [[NSArray arrayWithObjects:@"(",@"[",@"{",nil] retain];
+		enclosureStartArray = [@[@"(",@"[",@"{"] retain];
 		enclosureSet = [[NSCharacterSet characterSetWithCharactersInString:@"()[]{}"] retain];
-		enclosureStopArray = [[NSArray arrayWithObjects:@")",@"]",@"}",nil] retain];
-		encKeys = [[NSArray arrayWithObjects:ENC_INDEX_KEY, ENC_CHAR_KEY, nil] retain];
+		enclosureStopArray = [@[@")",@"]",@"}"] retain];
+		encKeys = [@[ENC_INDEX_KEY, ENC_CHAR_KEY] retain];
 	}
 }
 
@@ -259,7 +259,7 @@
 			unsigned long encIdx = [enclosureStartArray indexOfObject:[m_scanString substringWithRange:NSMakeRange(scannedRange.location, 1)]];
 			NSRange encRange;
 			if(NSNotFound != encIdx) {
-				encRange = [m_scanString rangeOfString:[enclosureStopArray objectAtIndex:encIdx] options:NSBackwardsSearch range:scannedRange];
+				encRange = [m_scanString rangeOfString:enclosureStopArray[encIdx] options:NSBackwardsSearch range:scannedRange];
 				if(NSNotFound != encRange.location){
 					scannedRange.location++; scannedRange.length -= 2;
 				}
@@ -299,7 +299,7 @@
 							   fromIndex:&i];
 					
                     if(NSNotFound != firstComponent.location) {
-                    	NSString *hostnameScheme = [m_urlSchemes objectForKey:[_scanString substringWithRange:firstComponent]];
+                    	NSString *hostnameScheme = m_urlSchemes[[_scanString substringWithRange:firstComponent]];
                     	if(hostnameScheme) scheme = hostnameScheme;
                     }
 					
@@ -476,15 +476,15 @@
 		matchChar = [m_scanString substringWithRange:NSMakeRange(encScanLocation, 1)];
 		
 		if([enclosureStartArray containsObject:matchChar]) {
-			encDict = [NSDictionary	dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithUnsignedLong:encScanLocation], matchChar, nil]
+			encDict = [NSDictionary	dictionaryWithObjects:@[@(encScanLocation), matchChar]
 												  forKeys:encKeys];
 			if(!enclosureStack) enclosureStack = [NSMutableArray array];
 			[enclosureStack addObject:encDict];
 		}else if([enclosureStopArray containsObject:matchChar]) {
 			NSEnumerator *encEnumerator = [enclosureStack objectEnumerator];
 			while ((encDict = [encEnumerator nextObject])) {
-				unsigned long encTagIndex = [(NSNumber *)[encDict objectForKey:ENC_INDEX_KEY] unsignedLongValue];
-				unsigned long encStartIndex = [enclosureStartArray indexOfObjectIdenticalTo:[encDict objectForKey:ENC_CHAR_KEY]];
+				unsigned long encTagIndex = [(NSNumber *)encDict[ENC_INDEX_KEY] unsignedLongValue];
+				unsigned long encStartIndex = [enclosureStartArray indexOfObjectIdenticalTo:encDict[ENC_CHAR_KEY]];
 				if([enclosureStopArray indexOfObjectIdenticalTo:matchChar] == encStartIndex) {
 					NSRange encRange = NSMakeRange(encTagIndex, encScanLocation - encTagIndex + 1);
 					if(!enclosureStack) enclosureStack = [NSMutableArray array];

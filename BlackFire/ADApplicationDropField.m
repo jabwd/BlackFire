@@ -29,7 +29,7 @@
 
 - (void)awakeFromNib
 {
-	[self registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+	[self registerForDraggedTypes:@[NSFilenamesPboardType]];
 }
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender 
@@ -48,7 +48,7 @@
 			return NSDragOperationNone;
 		}
 		
-		NSString *file = [files objectAtIndex:0];
+		NSString *file = files[0];
 		BOOL isDirectory = false;
 		if( [[NSFileManager defaultManager] fileExistsAtPath:file isDirectory:&isDirectory] && isDirectory )
 		{
@@ -78,7 +78,7 @@
 			return NSDragOperationNone;
 		}
 		
-		NSString *file = [files objectAtIndex:0];
+		NSString *file = files[0];
 		BOOL isDirectory = false;
 		if( [[NSFileManager defaultManager] fileExistsAtPath:file isDirectory:&isDirectory] && isDirectory )
 		{

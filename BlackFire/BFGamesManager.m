@@ -64,7 +64,7 @@
 
 - (NSInteger)gamesVersion
 {
-	return [[_games objectForKey:@"XfireGamesVersion"] integerValue];
+	return [_games[@"XfireGamesVersion"] integerValue];
 }
 
 /*
@@ -87,7 +87,7 @@
 - (NSDictionary *)gameAtIndex:(NSInteger)index
 {
 	NSArray *keys = [_games allKeys];
-	return [_games objectForKey:[keys objectAtIndex:index]];
+	return _games[keys[index]];
 }
 
 - (void)download:(BFDownload *)download didFailWithError:(NSError *)error
@@ -154,7 +154,7 @@
 	{
 		return; // break the cycle
 	}
-	NSNumber *game = [[_missingIcons objectAtIndex:0] retain];
+	NSNumber *game = [_missingIcons[0] retain];
 	
 	_download = [[BFDownload imageDownload:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.exurion.com/xfire/icons/%u.png",[game unsignedIntValue]]] withDelegate:self] retain];
 	_download.context = game;
@@ -167,7 +167,7 @@
 	if( gameID > 0 )
 	{
 		NSString *key = [[NSString alloc] initWithFormat:@"%u",gameID];
-		NSImage *image = [_gameIcons objectForKey:key];
+		NSImage *image = _gameIcons[key];
 		if( ! image )
 		{
 			NSString *path = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%u.png",_cachesPath,gameID];
@@ -200,7 +200,7 @@
 					}
 					if( ! found )
 					{
-						[_missingIcons addObject:[NSNumber numberWithUnsignedInt:gameID]];
+						[_missingIcons addObject:@(gameID)];
 						if( ! _download )
 							[self downloadNextMissingIcon];
 					}
@@ -209,7 +209,7 @@
 			else
 			{
 				// cache the image, as we actually have an image! yay :D
-				[_gameIcons setObject:image forKey:key];
+				_gameIcons[key] = image;
 				[path release];
 				[image setScalesWhenResized:true];
 				[key release];
@@ -239,7 +239,7 @@
 	if( newGame && detectionKey )
 	{
 		NSMutableDictionary *new = [[NSMutableDictionary alloc] init];
-		[new setObject:newGame forKey:detectionKey];
+		new[detectionKey] = newGame;
 		NSDictionary *old = [[NSUserDefaults standardUserDefaults] objectForKey:BFCustomMacGamesList];
 		if( old )
 			[new addEntriesFromDictionary:old];
@@ -270,31 +270,31 @@
 	//NSLog(@"ApplicationInfo: %@",applicationInfo);
 	//[BFProcessInformation argumentsForProcess:[[applicationInfo objectForKey:@"NSApplicationProcessIdentifier"] intValue]];
 
-	output = [_macGames objectForKey:applicationInfo.bundleIdentifier];
+	output = _macGames[applicationInfo.bundleIdentifier];
 	if( !output )
-		output = [_macGames objectForKey:applicationInfo.localizedName];
+		output = _macGames[applicationInfo.localizedName];
 	
 	if( !output )
 	{
 		NSString *parentFolderName = [[[applicationInfo.executableURL relativePath] stringByDeletingLastPathComponent] lastPathComponent];
-		output = [_macGames objectForKey:parentFolderName];
+		output = _macGames[parentFolderName];
 	}
-	return [[output objectForKey:@"gameID"] intValue];
+	return [output[@"gameID"] intValue];
 }
 
 - (unsigned int)gameIDForApplicationDict:(NSDictionary *)applicationInfo
 {
 	NSDictionary *output = nil;
-	output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationBundleIdentifier"]];
+	output = _macGames[applicationInfo[@"NSApplicationBundleIdentifier"]];
 	if( !output )
-		output = [_macGames objectForKey:[applicationInfo objectForKey:@"NSApplicationName"]];
+		output = _macGames[applicationInfo[@"NSApplicationName"]];
 	
 	if( !output )
 	{
-		NSString *parentFolderName = [[[applicationInfo objectForKey:@"NSApplicationPath"] stringByDeletingLastPathComponent] lastPathComponent];
-		output = [_macGames objectForKey:parentFolderName];
+		NSString *parentFolderName = [[applicationInfo[@"NSApplicationPath"] stringByDeletingLastPathComponent] lastPathComponent];
+		output = _macGames[parentFolderName];
 	}
-	return [[output objectForKey:@"gameID"] intValue];
+	return [output[@"gameID"] intValue];
 }
 
 - (void)reCheckRunningGames
@@ -360,7 +360,7 @@
 	
 	if( [_runningGames count] > 0 )
 	{
-		[_delegate gameDidLaunch:[[_runningGames objectAtIndex:0] intValue]];
+		[_delegate gameDidLaunch:[_runningGames[0] intValue]];
 	}
 }
 
@@ -370,7 +370,7 @@
 {
 	for(NSDictionary *value in [_macGames allValues])
 	{
-		if( [[value objectForKey:@"gameID"] intValue] == gameID )
+		if( [value[@"gameID"] intValue] == gameID )
 		{
 			return value;
 		}
@@ -382,17 +382,17 @@
 - (void)launchGame:(unsigned int)gameID withAddress:(NSString *)address{
 	NSDictionary *gameInfo = [self macGameInfoForGID:gameID];
 	
-	NSString  *gameName   = [gameInfo objectForKey:@"AppName"  ];
-	NSArray   *arguments  = [gameInfo objectForKey:@"arguments"];
+	NSString  *gameName   = gameInfo[@"AppName"];
+	NSArray   *arguments  = gameInfo[@"arguments"];
 	if(       gameName    == nil ) return;
 	
 	if(arguments && [arguments count] != 0)
 	{
-		if( [[arguments objectAtIndex:0] length] > 0 && [[arguments objectAtIndex:0] isEqualToString:@"NSServices"]){
+		if( [arguments[0] length] > 0 && [arguments[0] isEqualToString:@"NSServices"]){
 			if(address)
 			{
 				NSPasteboard *paste = [NSPasteboard pasteboardWithName:@"paste"];
-				[paste declareTypes: [NSArray arrayWithObject: NSStringPboardType] owner: nil];
+				[paste declareTypes: @[NSStringPboardType] owner: nil];
 				[paste setString:address forType:NSStringPboardType];
 				NSString *str = [NSString stringWithFormat:@"%@/Connect To Server", gameName];
 				NSPerformService(str, paste);
@@ -401,9 +401,9 @@
 		else {
 			NSMutableArray *arguements = [[NSMutableArray alloc] init];
 			
-			if(address && [[arguments objectAtIndex:0] length] > 0 )
+			if(address && [arguments[0] length] > 0 )
 			{
-				[arguements addObject:[arguments objectAtIndex:0]];
+				[arguements addObject:arguments[0]];
 				[arguements addObject:address];
 			}
 			[self startGame:gameName withArguments:arguements];
@@ -416,20 +416,20 @@
 
 - (NSString *)serverTypeForGID:(unsigned int)gid
 {
-    NSDictionary *dict = [_macGames objectForKey:@"serverTypes"];
-	return [dict objectForKey:[NSString stringWithFormat:@"%u",gid]];
+    NSDictionary *dict = _macGames[@"serverTypes"];
+	return dict[[NSString stringWithFormat:@"%u",gid]];
 }
 
 - (void)launchGame:(unsigned int)gameID
 {
     NSDictionary *macGameInfo = [self macGameInfoForGID:gameID];
-    NSArray *arg = [macGameInfo objectForKey:@"arguments"];
+    NSArray *arg = macGameInfo[@"arguments"];
     if( [arg count] > 0 )
     {
         // ask for the user's ip address
         return;
     }
-    NSString *gameName = [macGameInfo objectForKey:@"AppName"];
+    NSString *gameName = macGameInfo[@"AppName"];
 	[[NSWorkspace sharedWorkspace] launchApplication:gameName];
 	
 	// try launching with .app extension
@@ -438,7 +438,7 @@
 
 - (NSArray *)getLaunchArgumentsForMacGame:(NSString *)game
 {
-    return [[_macGames objectForKey:game] objectForKey:@"arguments"];
+    return _macGames[game][@"arguments"];
 }
 
 - (BOOL)startGame:(NSString *)game withArguments:(NSArray *)arguments

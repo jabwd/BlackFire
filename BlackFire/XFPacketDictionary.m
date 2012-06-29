@@ -61,12 +61,12 @@
 	}
 	
 	[_orderedKeys addObject:aKey];
-	[_data setObject:value forKey:aKey];
+	_data[aKey] = value;
 }
 
 - (XFPacketAttributeValue *)objectForKey:(id)aKey
 {
-	return [_data objectForKey:aKey];
+	return _data[aKey];
 }
 
 - (NSEnumerator *)keyEnumerator
@@ -86,8 +86,8 @@
 	[s appendString:@"AttrMap {\n"];
 	for( i = 0; i < cnt; i++ )
 	{
-		k = [_orderedKeys objectAtIndex:i];
-		v = [_data objectForKey:k];
+		k = _orderedKeys[i];
+		v = _data[k];
 		if( [k isKindOfClass:[NSNumber class]] )
 			//k = [[NSString alloc] initWithFormat:@"0x%x",[k unsignedIntValue]];
 			k = [NSString stringWithFormat:@"0x%x",[k unsignedIntValue]];

@@ -240,9 +240,8 @@ static BFNotificationCenter *notificationCenter = nil;
 					  @"Normal",
 					  nil];
 	
-	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:notes,GROWL_NOTIFICATIONS_ALL,
-						  notes,GROWL_NOTIFICATIONS_DEFAULT,
-						  nil];
+	NSDictionary *dict = @{GROWL_NOTIFICATIONS_ALL: notes,
+						  GROWL_NOTIFICATIONS_DEFAULT: notes};
 	[notes release];
 	return dict;
 }
@@ -264,7 +263,7 @@ static BFNotificationCenter *notificationCenter = nil;
 {
 	if( clickContext && [clickContext isKindOfClass:[NSString class]] && [clickContext length] > 0 )
 	{
-		XFFriend *remoteFriend = [[_remoteFriends objectForKey:clickContext] retain];
+		XFFriend *remoteFriend = [_remoteFriends[clickContext] retain];
 		[_remoteFriends removeObjectForKey:clickContext];
 		if( remoteFriend )
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"chatFriendClicked" object:remoteFriend];
@@ -285,8 +284,8 @@ static BFNotificationCenter *notificationCenter = nil;
 {
 	if( remoteFriend )
 	{
-		if( ! [_remoteFriends objectForKey:remoteFriend.username] )
-			[_remoteFriends setObject:remoteFriend forKey:remoteFriend.username];
+		if( ! _remoteFriends[remoteFriend.username] )
+			_remoteFriends[remoteFriend.username] = remoteFriend;
 		[self postNotificationWithTitle:notificationTitle body:body context:remoteFriend.username];
 	}
 }

@@ -119,8 +119,8 @@
 					information = (NSDictionary *)[[NSMutableDictionary alloc] init];
 					if( [components count] > 0 )
 					{
-						NSString *name = [components objectAtIndex:0];
-						[(NSMutableDictionary *)information setObject:name forKey:@"Info"];
+						NSString *name = components[0];
+						((NSMutableDictionary *)information)[@"Info"] = name;
 					}
 					else
 					{
@@ -148,8 +148,8 @@
 							NSArray *comp = [line componentsSeparatedByString:@"\""];
 							if( [comp count] > 2 )
 							{
-								key		= [comp objectAtIndex:1];
-								value	= [comp objectAtIndex:2];
+								key		= comp[1];
+								value	= comp[2];
 								
 								// finish the value
 								NSRange valueRange = [value rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]];
@@ -158,7 +158,7 @@
 							}
 							if( key && value )
 							{
-								[(NSMutableDictionary *)information setObject:value forKey:key];
+								((NSMutableDictionary *)information)[key] = value;
 							}
 						}
 					}
@@ -186,43 +186,43 @@
 		NSArray *comp = [soundsetFile componentsSeparatedByString:@"."];
 		if( [comp count] > 0 )
 		{
-			_name = [[comp objectAtIndex:0] retain];
+			_name = [comp[0] retain];
 		}
 		
 		if( ! _name )
 			_name = [@"Untitled" retain];
 		
 		
-		NSDictionary *sounds = [information objectForKey:@"Sounds"];
+		NSDictionary *sounds = information[@"Sounds"];
 		if( ! sounds )
 			sounds = information;
 		
 		[_receiveSoundPath release];
 		_receiveSoundPath = nil;
-		if( [[sounds objectForKey:@"Message Received"] length] > 0 )
-			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Message Received"]];
+		if( [sounds[@"Message Received"] length] > 0 )
+			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Message Received"]];
 		
 		[_sendSoundPath release];
 		_sendSoundPath = nil;
-		if( [[sounds objectForKey:@"Message Sent"] length] > 0 )
-			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Message Sent"]];
+		if( [sounds[@"Message Sent"] length] > 0 )
+			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Message Sent"]];
 		
 		[_onlineSoundPath release];
 		_onlineSoundPath = nil;
-		if( [[sounds objectForKey:@"Contact Signed On"] length] > 0 )
-			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Contact Signed On"]];
+		if( [sounds[@"Contact Signed On"] length] > 0 )
+			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Contact Signed On"]];
 		
 		[_offlineSoundPath release];
 		_offlineSoundPath = nil;
-		if( [[sounds objectForKey:@"Contact Signed Off"] length] > 0 )
-			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Contact Signed Off"]];
+		if( [sounds[@"Contact Signed Off"] length] > 0 )
+			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Contact Signed Off"]];
 		
 		[_connectedSoundPath release];
 		_connectedSoundPath = nil;
-		if( [[sounds objectForKey:@"Connected"] length] > 0 )
-			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Connected"]];
-		else if( [[sounds objectForKey:@"Contact Signed On"] length] > 0 )
-			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[sounds objectForKey:@"Contact Signed On"]];
+		if( [sounds[@"Connected"] length] > 0 )
+			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Connected"]];
+		else if( [sounds[@"Contact Signed On"] length] > 0 )
+			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Contact Signed On"]];
 	}
 	else
 	{
@@ -240,7 +240,7 @@
 	
 	if( information )
 	{
-		NSString *name = [information objectForKey:@"soundsetName"];
+		NSString *name = information[@"soundsetName"];
 		if( ! name )
 			name = @"Untitled soundset";
 		
@@ -250,30 +250,30 @@
 		
 		[_receiveSoundPath release];
 		_receiveSoundPath = nil;
-		if( [[information objectForKey:@"receiveSound"] length] > 0 )
-			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"receiveSound"]];
+		if( [information[@"receiveSound"] length] > 0 )
+			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"receiveSound"]];
 		
 		[_sendSoundPath release];
 		_sendSoundPath = nil;
-		if( [[information objectForKey:@"sendSound"] length] > 0 )
-			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"sendSound"]];
+		if( [information[@"sendSound"] length] > 0 )
+			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"sendSound"]];
 		
 		[_onlineSoundPath release];
 		_onlineSoundPath = nil;
-		if( [[information objectForKey:@"onlineSound"] length] > 0 )
-			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"onlineSound"]];
+		if( [information[@"onlineSound"] length] > 0 )
+			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"onlineSound"]];
 		
 		[_offlineSoundPath release];
 		_offlineSoundPath = nil;
-		if( [[information objectForKey:@"offlineSound"] length] > 0 )
-			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"offlineSound"]];
+		if( [information[@"offlineSound"] length] > 0 )
+			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"offlineSound"]];
 		
 		[_connectedSoundPath release];
 		_connectedSoundPath = nil;
-		if( [[information objectForKey:@"connectedSound"] length] > 0 )
-			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"connectedSound"]];
-		else if( [[information objectForKey:@"onlineSound"] length] > 0 )
-			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,[information objectForKey:@"onlineSound"]];
+		if( [information[@"connectedSound"] length] > 0 )
+			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"connectedSound"]];
+		else if( [information[@"onlineSound"] length] > 0 )
+			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"onlineSound"]];
 
 	}
 	

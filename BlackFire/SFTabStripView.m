@@ -111,7 +111,7 @@
 		if( tabWidth > TAB_WIDTHMAX )
 			tabWidth = TAB_WIDTHMAX;
 		NSRect viewFrame = NSMakeRect(floor(tabWidth*i-(i*TAB_OVERLAP)), 0, tabWidth, TAB_HEIGHT);
-		SFTabView *tab = [_tabs objectAtIndex:i];
+		SFTabView *tab = _tabs[i];
 		if( tab.selected )
 			selected = tab;
 		[tab setFrame:viewFrame];
@@ -131,7 +131,7 @@
 	// reverse loop
 	for(i=cnt;i>0;i--)
 	{
-		SFTabView *tab = [_tabs objectAtIndex:(i-1)]; // compensate for the 0 index
+		SFTabView *tab = _tabs[(i-1)]; // compensate for the 0 index
 		if( tab.selected )
 			break; // done here.
 		
@@ -160,7 +160,7 @@
 	NSUInteger i,cnt = [_tabs count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[_tabs objectAtIndex:i] tag] == tabView.tag )
+		if( [_tabs[i] tag] == tabView.tag )
 		{
 			[_tabs removeObjectAtIndex:i];
 			break;
@@ -170,7 +170,7 @@
 	
 	if( tabView.selected && [_tabs count] > 0  )
 	{
-		[self selectTab:[_tabs objectAtIndex:0]];
+		[self selectTab:_tabs[0]];
 	}
 	
 	[self layoutTabs];

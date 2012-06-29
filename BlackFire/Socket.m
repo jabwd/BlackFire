@@ -295,7 +295,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
     NSArray *resolvedAddresses = (NSArray *) CFHostGetAddressing(theHost, NULL);
     if( [resolvedAddresses count] > 0 )
     {
-        [(Socket *)info performConnect:[resolvedAddresses objectAtIndex:0]];
+        [(Socket *)info performConnect:resolvedAddresses[0]];
     }
 }
 

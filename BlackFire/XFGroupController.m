@@ -78,7 +78,7 @@
 	NSUInteger i, cnt = [_groups count];
 	for(i=0;i<cnt;i++)
 	{
-		if( [[_groups objectAtIndex:i] groupID] == oldGroup.groupID )
+		if( [_groups[i] groupID] == oldGroup.groupID )
 		{
 			[_groups removeObjectAtIndex:i];
 			return;
@@ -179,7 +179,7 @@
 	NSUInteger i, cnt = [_groups count];
 	for(i=0;i<cnt;i++)
 	{
-		XFGroup *group = [_groups objectAtIndex:i];
+		XFGroup *group = _groups[i];
 		if( group.groupType == XFGroupTypeFriendOfFriends )
 		{
 			if( ![[NSUserDefaults standardUserDefaults] boolForKey:BFShowFriendsOfFriendsGroup] )

@@ -256,7 +256,7 @@
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)
 	{
-		BFChat *chat = [_chats objectAtIndex:i];
+		BFChat *chat = _chats[i];
 		if( chat.chat.remoteFriend.userID == userID )
 		{
 			[chat closeChat];
@@ -267,7 +267,7 @@
 				_currentlySelectedChat = nil;
 				if( [_chats count] > 0 )
 				{
-					_currentlySelectedChat = [_chats objectAtIndex:0];
+					_currentlySelectedChat = _chats[0];
 				}
 			}
 			return;
@@ -281,7 +281,7 @@
 	NSUInteger i, cnt = [subViews count];
 	for(i=0;i<cnt;i++)
 	{
-		[[subViews objectAtIndex:i] removeFromSuperview];
+		[subViews[i] removeFromSuperview];
 	}
 	
 	[_switchView addSubview:newView];
@@ -320,20 +320,20 @@
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)
 	{
-		BFChat *chat = [_chats objectAtIndex:i];
+		BFChat *chat = _chats[i];
 		if( chat != _currentlySelectedChat )
 		{
 			continue;
 		}
 		if( i == (cnt - 1) )
 		{
-			BFChat *nextChat = [_chats objectAtIndex:0];
+			BFChat *nextChat = _chats[0];
 			[self selectChat:nextChat];
 			return;
 		}
 		else
 		{
-			BFChat *nextChat = [_chats objectAtIndex:(i+1)];
+			BFChat *nextChat = _chats[(i+1)];
 			[self selectChat:nextChat];
 			return;
 		}
@@ -345,20 +345,20 @@
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)
 	{
-		BFChat *chat = [_chats objectAtIndex:i];
+		BFChat *chat = _chats[i];
 		if( chat != _currentlySelectedChat )
 		{
 			continue;
 		}
 		if( i == 0 )
 		{
-			BFChat *nextChat = [_chats objectAtIndex:(cnt-1)];
+			BFChat *nextChat = _chats[(cnt-1)];
 			[self selectChat:nextChat];
 			return;
 		}
 		else
 		{
-			BFChat *nextChat = [_chats objectAtIndex:(i-1)];
+			BFChat *nextChat = _chats[(i-1)];
 			[self selectChat:nextChat];
 			return;
 		}
@@ -451,12 +451,12 @@
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)aToolbar {
-	return [NSArray arrayWithObjects:@"status", nil];
+	return @[@"status"];
 }
 
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)aToolbar {
-	return [NSArray arrayWithObjects:@"status", nil];
+	return @[@"status"];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem 

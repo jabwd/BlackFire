@@ -1327,7 +1327,7 @@
 		3616F678145F0E5500E5066D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "Mac Developer: Antwan van Houdt (YSWD3CRMG5)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1339,10 +1339,10 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
 				LEX_SUPPRESS_WARNINGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "52EDBC4E-C318-4977-80F7-C4CA2669C304";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1350,7 +1350,7 @@
 		3616F679145F0E5500E5066D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "Mac Developer: Antwan van Houdt (YSWD3CRMG5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1361,10 +1361,10 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "BlackFire/BlackFire-Info.plist";
 				LEX_SUPPRESS_WARNINGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "52EDBC4E-C318-4977-80F7-C4CA2669C304";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -55,11 +55,11 @@ static XFGamesManager *sharedGameManager = nil;
 {
 	NSString *key = [[NSString alloc] initWithFormat:@"%lu",gameID];
 	XFGame *game = [[[XFGame alloc] init] autorelease];
-	NSDictionary *info = [_games objectForKey:key];
+	NSDictionary *info = _games[key];
 	if( info )
 	{
-		game.longName	= [info objectForKey:XFLongNameKey];
-		game.shortName	= [info objectForKey:XFShortNameKey];
+		game.longName	= info[XFLongNameKey];
+		game.shortName	= info[XFShortNameKey];
 		game.gameID		= (unsigned int)gameID;
 	}
 	else

@@ -77,8 +77,8 @@
 						  n_false,BFMessageFieldHistory,
 						  n_true,BFDetectGames,
 						  n_true,BFAutoUpdateGameDefinitions,
-						  [NSNumber numberWithFloat:1.0f],BFSoundVolume,
-						  [NSNumber numberWithInt:120],BFAutoAFKTime,
+						  @1.0f,BFSoundVolume,
+						  @120,BFAutoAFKTime,
 						  nil];
 	
 	// register the defaults
@@ -179,7 +179,7 @@
 	NSUInteger i, cnt = [_chatControllers count];
 	for(i=0;i<cnt;i++)
 	{
-		[[_chatControllers objectAtIndex:0] closeChat];
+		[_chatControllers[0] closeChat];
 	}
 }
 
@@ -252,13 +252,13 @@
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)aToolbar 
 {
-	return [NSArray arrayWithObjects:@"status", nil];
+	return @[@"status"];
 }
 
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)aToolbar 
 {
-	return [NSArray arrayWithObjects:@"status", nil];
+	return @[@"status"];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem 
@@ -512,7 +512,7 @@
 	NSUInteger i, cnt = [_chatControllers count];
 	for(i=0;i<cnt;i++)
 	{
-		BFChat *bfchat = [_chatControllers objectAtIndex:i];
+		BFChat *bfchat = _chatControllers[i];
 		if( bfchat.chat.remoteFriend.userID == chat.remoteFriend.userID )
 		{
 			[_chatControllers removeObjectAtIndex:i];
@@ -526,7 +526,7 @@
 	BFChatWindowController *chatController;
 	if( [_chatControllers count] > 0 )
 	{
-		chatController = [[_chatControllers objectAtIndex:0] windowController];
+		chatController = [_chatControllers[0] windowController];
 	}
 	else
 	{
@@ -700,7 +700,7 @@
 		for(i=0;i<cnt;i++)
 		{
 			// this should work as the BFChat object is removed from the array when we call closeChat
-			BFChat *chat = [_chatControllers objectAtIndex:0];
+			BFChat *chat = _chatControllers[0];
 			[chat.windowController closeChat:chat];
 		}
 		[[BFGamesManager sharedGamesManager] stopMonitoring];
@@ -732,7 +732,7 @@
 {
 	if( ! _stringPromptController )
 	{
-		XFFriend *requestFriend = [_friendshipRequests objectAtIndex:0];
+		XFFriend *requestFriend = _friendshipRequests[0];
 		if( requestFriend )
 		{
 			_stringPromptController = [[BFRequestWindowController alloc] initWithWindow:self.window];
@@ -1038,21 +1038,21 @@
 		{
 			NSDictionary *appInfo = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/Info.plist",appPath]];
 			NSString *detectionKey = nil;
-			NSString *appName = [[[appPath lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
+			NSString *appName = [[appPath lastPathComponent] componentsSeparatedByString:@"."][0];
 			if( ! appInfo )
 			{
 				NSLog(@"No information property list was found!");
 			}
 			else
 			{
-				detectionKey = [appInfo objectForKey:(NSString *)kCFBundleIdentifierKey];
+				detectionKey = appInfo[(NSString *)kCFBundleIdentifierKey];
 			}
 			if( ! detectionKey )
 				detectionKey = appName;
 			NSUInteger gameID = [_gamesListController selectedGameID];
 			if( gameID > 0 )
 			{
-				NSDictionary *detectionDict = [[NSDictionary alloc] initWithObjectsAndKeys:appName,@"AppName",[NSNumber numberWithUnsignedInteger:gameID],@"gameID", nil];
+				NSDictionary *detectionDict = [[NSDictionary alloc] initWithObjectsAndKeys:appName,@"AppName",@(gameID),@"gameID", nil];
 				// add the detection set to the custom mac games in the user defaults.
 				[[BFGamesManager sharedGamesManager] addMacGame:detectionDict forKey:detectionKey];
 				[_gamesListController reloadMacGames];

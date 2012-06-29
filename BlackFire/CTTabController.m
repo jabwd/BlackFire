@@ -82,7 +82,7 @@ const NSTimeInterval kAnimationDuration = 0.125;
 	NSUInteger i, cnt = [_tabs count];
 	for(i=0;i<cnt;i++)
 	{
-		CTTabView *view = [_tabs objectAtIndex:i];
+		CTTabView *view = _tabs[i];
 		//NSRect tabFrame = [view frame];
 		
 		[view setFrame:NSMakeRect([CTTabController defaultIndentForControls]+(i*tabWidth), 35, tabWidth, [CTTabController defaultTabHeight])];

@@ -55,7 +55,7 @@
 	NSUInteger i, cnt = [_members count];
 	for(i=0;i<cnt;i++)
 	{
-		if( member.userID == [[_members objectAtIndex:i] userID] )
+		if( member.userID == [_members[i] userID] )
 		{
 			[_members removeObjectAtIndex:i];
 			return;
@@ -80,7 +80,7 @@
 
 - (XFFriend *)memberAtIndex:(NSUInteger)index
 {
-	return [_members objectAtIndex:index];
+	return _members[index];
 }
 
 

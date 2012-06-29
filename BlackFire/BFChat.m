@@ -71,7 +71,7 @@
 			NSUInteger i, cnt = [messages count];
 			for(i=cnt;i>0;i--)
 			{
-				BFMessage *message = [messages objectAtIndex:(i-1)];
+				BFMessage *message = messages[(i-1)];
 				if( message.user == BFFriendMessageType )
 				{
 					[_webView newMessage:message.message ofType:true];
@@ -260,7 +260,7 @@
 
 - (void)friendDidChange:(NSNotification *)notification
 {
-	XFFriendNotification notificationType = [[[notification userInfo] objectForKey:@"type"] intValue];
+	XFFriendNotification notificationType = [[notification userInfo][@"type"] intValue];
 	
 	[self updateTabIcon];
 	

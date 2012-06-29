@@ -114,7 +114,7 @@
 			NSMenuItem *current = nil;
 			for(i=0;i<cnt;i++)
 			{
-				BFSoundSet *set = [_soundsets objectAtIndex:i];
+				BFSoundSet *set = _soundsets[i];
 				NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:set.name action:@selector(selectSoundset:) keyEquivalent:@""];
 				[item setTarget:self];
 				[item setTag:i];
@@ -196,7 +196,7 @@
 		NSInteger index = [item tag];
 		if( index > 0 && index < [_soundsets count] )
 		{
-			BFSoundSet *soundSet = [_soundsets objectAtIndex:index];
+			BFSoundSet *soundSet = _soundsets[index];
 			if( soundSet )
 			{
 				[[BFNotificationCenter defaultNotificationCenter] setSoundSet:soundSet];

@@ -54,7 +54,7 @@
       {
           if( [macGame isKindOfClass:[NSDictionary class]] )
           {
-              NSString *appName = [macGame objectForKey:@"AppName"];
+              NSString *appName = macGame[@"AppName"];
               if( appName && [appName length] > 0 )
               {
                   if( [[[NSWorkspace sharedWorkspace] fullPathForApplication:appName] length] > 1 )
@@ -105,7 +105,7 @@
 	{
 		if( [macGame isKindOfClass:[NSDictionary class]] )
 		{
-			NSString *appName = [macGame objectForKey:@"AppName"];
+			NSString *appName = macGame[@"AppName"];
 			if( appName && [appName length] > 0 )
 			{
 				if( [[[NSWorkspace sharedWorkspace] fullPathForApplication:appName] length] > 1 )
@@ -150,7 +150,7 @@
     id item = [tableView itemAtRow:row];
     if( [item isKindOfClass:[NSDictionary class]] )
     {
-        NSString *appName = [item objectForKey:@"AppName"];
+        NSString *appName = item[@"AppName"];
         if( [appName length] > 0 )
         {
             [[NSWorkspace sharedWorkspace] launchApplication:appName];
@@ -170,7 +170,7 @@
 	{
 		if( [item isKindOfClass:[NSDictionary class]] )
 		{
-			return [[item objectForKey:@"ID"] intValue];
+			return [item[@"ID"] intValue];
 		}
 	}
 	return 0;
@@ -194,10 +194,10 @@
     }
     else if( [item isKindOfClass:[NSDictionary class]] )
     {
-        NSString *name = [item objectForKey:@"LongName"];
+        NSString *name = item[@"LongName"];
         if( ! name )
         {
-            unsigned int gameID = [[item objectForKey:@"gameID"] intValue];
+            unsigned int gameID = [item[@"gameID"] intValue];
             if( gameID != 0 )
             {
                 // mac game
@@ -247,10 +247,10 @@
     {
         if( [item isKindOfClass:[NSDictionary class]] )
         {
-            unsigned int gameID = [[item objectForKey:@"ID"] intValue];
+            unsigned int gameID = [item[@"ID"] intValue];
             if( gameID == 0 )
             {
-                gameID = [[item objectForKey:@"gameID"] intValue];
+                gameID = [item[@"gameID"] intValue];
             }
             if( gameID == 0 )
             {
@@ -281,11 +281,11 @@
     }
     else if( item == detectedGamesGroup )
     {
-        return [detectedGamesGroup.members objectAtIndex:index];
+        return (detectedGamesGroup.members)[index];
     }
     else if( item == undetectedGamesGroup )
     {
-        return [undetectedGamesGroup.members objectAtIndex:index];
+        return (undetectedGamesGroup.members)[index];
     }
     return nil;
 }
@@ -315,7 +315,7 @@
 {
     if( [game isKindOfClass:[NSDictionary class]]  )
     {
-        return [[self objectForKey:@"AppName"] caseInsensitiveCompare:[game objectForKey:@"AppName"]];
+        return [self[@"AppName"] caseInsensitiveCompare:game[@"AppName"]];
     }
     
 	return NSOrderedSame;
@@ -325,7 +325,7 @@
 {
     if( game && [game isKindOfClass:[NSDictionary class]] )
     {
-        return [[self objectForKey:@"LongName"] caseInsensitiveCompare:[game objectForKey:@"LongName"]];
+        return [self[@"LongName"] caseInsensitiveCompare:game[@"LongName"]];
     }
     return NSOrderedSame;
 }

@@ -60,7 +60,7 @@
 			NSArray *components = [file componentsSeparatedByString:@"."];
 			if( [components count] > 1 && [[components lastObject] isEqualToString:@"xfl"] )
 			{
-				[_friends addObject:[components objectAtIndex:0]];
+				[_friends addObject:components[0]];
 			}
 		}
 	}
@@ -83,7 +83,7 @@
 			NSArray *components = [file componentsSeparatedByString:@"."];
 			if( [components count] > 1 && [[components lastObject] isEqualToString:@"xfl"] )
 			{
-				[_friends addObject:[components objectAtIndex:0]];
+				[_friends addObject:components[0]];
 			}
 		}
 	}
@@ -152,7 +152,7 @@
             {
 				NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
 									  [NSString stringWithFormat:@"%@",[NSDate dateWithTimeIntervalSince1970:timestamp]],@"name",
-									  [NSNumber numberWithUnsignedInt:chat],@"chatID",
+									  @(chat),@"chatID",
 									  nil];
 				[_chats addObject:dict];
                 [dict release];
@@ -166,7 +166,7 @@
 {
 	NSInteger selectedIndex = [_friendsList selectedRow];
 	
-	NSString *file = [NSString stringWithFormat:@"%@/%@.xfl",BFChatLogDirectoryPath(),[_friends objectAtIndex:selectedIndex]];
+	NSString *file = [NSString stringWithFormat:@"%@/%@.xfl",BFChatLogDirectoryPath(),_friends[selectedIndex]];
 	[self loadChatsForDatabase:file];
 }
 
@@ -177,11 +177,11 @@
     [[_chatlogView textStorage] setAttributedString:str];
     [str release];
     
-    NSString *username = [_friends objectAtIndex:[_friendsList selectedRow]];
+    NSString *username = _friends[[_friendsList selectedRow]];
     
     if( idx >= 0 )
     {
-        NSInteger chatID = [[[_chats objectAtIndex:idx] objectForKey:@"chatID"] integerValue];
+        NSInteger chatID = [_chats[idx][@"chatID"] integerValue];
         if( chatID )
         {
             sqlite3_stmt *statement = nil;
@@ -247,9 +247,9 @@
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
 	if( tableView == _friendsList )
-		return [_friends objectAtIndex:row];
+		return _friends[row];
 	else if( tableView == _chatlogList )
-		return [[_chats objectAtIndex:row] objectForKey:@"name"];
+		return _chats[row][@"name"];
 	return nil;
 }
 

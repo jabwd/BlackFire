@@ -66,8 +66,8 @@
 		isLoaded = YES;
 		for(NSDictionary *message in messageBuffer)
 		{
-			[self newMessage:[message objectForKey:@"message"] 
-					  ofType:[[message objectForKey:@"type"] boolValue]];
+			[self newMessage:message[@"message"] 
+					  ofType:[message[@"type"] boolValue]];
 		}
 		[messageBuffer release]; 
 		messageBuffer = nil;
@@ -102,7 +102,7 @@
 	
 	if( !isLoaded )
 	{
-		NSDictionary *messages = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",[NSNumber numberWithBool:type],@"type", nil];
+		NSDictionary *messages = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",@(type),@"type", nil];
 		[messageBuffer addObject:messages];
 		[messages release];
 		return;

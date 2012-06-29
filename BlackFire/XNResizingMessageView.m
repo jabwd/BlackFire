@@ -226,7 +226,7 @@
     if( current > [previousMessages count] ) // musnt be larger then 5
         current = [previousMessages count];
     
-    NSString *message = [previousMessages objectAtIndex:(current-1)];
+    NSString *message = previousMessages[(current-1)];
     if( ! message || current == 0 )
         message = @"";
     
@@ -246,7 +246,7 @@
 	if( current != 0 )
 	{
 		// load message here
-		message = [previousMessages objectAtIndex:(current-1)];
+		message = previousMessages[(current-1)];
 		if( ! message )
 			message = @"";
 	}

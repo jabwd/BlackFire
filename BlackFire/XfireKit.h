@@ -25,10 +25,10 @@ static inline unsigned int IPAddressFromNSString(NSString *address)
 		NSArray *components = [address componentsSeparatedByString:@"."];
 		if( [components count] == 4 ) 
 		{
-			ipAddress = (([[components objectAtIndex:0] intValue] << 24) |
-						 ([[components objectAtIndex:1] intValue] << 16) |
-						 ([[components objectAtIndex:2] intValue] <<  8) |
-						 ([[components objectAtIndex:3] intValue]));
+			ipAddress = (([components[0] intValue] << 24) |
+						 ([components[1] intValue] << 16) |
+						 ([components[2] intValue] <<  8) |
+						 ([components[3] intValue]));
 		} 
 		else 
 		{
@@ -57,12 +57,12 @@ static inline NSString *NSStringFromIPAddress(NSUInteger address)
 
 static inline NSNumber *NSNumberFromIPAddress(NSUInteger address)
 {
-	return [NSNumber numberWithUnsignedLong:address];
+	return @(address);
 }
 
 static inline NSNumber *NSNumberFromPort(UInt16 port)
 {
-	return [NSNumber numberWithUnsignedShort:port];
+	return @(port);
 }
 
 /*static inline NSString *XFSaltString() 

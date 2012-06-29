@@ -48,7 +48,7 @@
 + (id)attributeValueWithInt:(unsigned int)val
 {
 	return [[[XFPacketAttributeValue alloc]
-		initWithValue:[NSNumber numberWithUnsignedInt:val]
+		initWithValue:@(val)
 		typeID:XFPacketAttributeUInt32Type
 		arrayType:XFPacketAttributeInvalidType
 		] autorelease];
@@ -57,7 +57,7 @@
 + (id)attributeValueWithInt64:(unsigned long long)val
 {
 	return [[[XFPacketAttributeValue alloc]
-		initWithValue:[NSNumber numberWithUnsignedLongLong:val]
+		initWithValue:@(val)
 		typeID:XFPacketAttributeUInt64Type
 		arrayType:XFPacketAttributeInvalidType
 		] autorelease];
@@ -66,7 +66,7 @@
 + (id)attributeValueWithByte:(unsigned char)val
 {
 	return [[[XFPacketAttributeValue alloc]
-		initWithValue:[NSNumber numberWithUnsignedChar:val]
+		initWithValue:@(val)
 		typeID:XFPacketAttributeUInt8Type
 		arrayType:XFPacketAttributeInvalidType
 		] autorelease];
@@ -154,7 +154,7 @@
 		NSUInteger i;
 		id arrObj;
 		
-		arrObj = [arr objectAtIndex:0];
+		arrObj = arr[0];
 		objType = [XFPacketAttributeValue typeIDForObject:arrObj];
 		if( ! [arrObj isKindOfClass:[XFPacketAttributeValue class]] )
 		{
@@ -163,7 +163,7 @@
 		}
 		for( i = 1; i < cnt; i++ )
 		{
-			arrObj = [arr objectAtIndex:i];
+			arrObj = arr[i];
 			if( ! [arrObj isKindOfClass:[XFPacketAttributeValue class]] )
 			{
 				NSLog(@"XFPacketAttributeValue: array element is not a valid class");

@@ -127,9 +127,9 @@
 	id serverInfo = [serverInfoOutput propertyList];
 	if ([serverInfo isKindOfClass:[NSDictionary class]]) 
 	{
-		if(	! [[serverInfo objectForKey:@"status"] isEqualToString:@"UP"] )
+		if(	! [serverInfo[@"status"] isEqualToString:@"UP"] )
 		{
-			NSString *ip = [serverInfo objectForKey:@"address"];
+			NSString *ip = serverInfo[@"address"];
 			for(XFGameServer *server in _serverList)
 			{
 				if( [[server address] isEqualToString:ip] )
@@ -152,8 +152,8 @@
 			}
 			return; // the server is offline
 		}
-		NSString *name = removeQuakeColorCodes([serverInfo objectForKey:@"name"]);
-		NSString *ip   = [serverInfo objectForKey:@"address"];
+		NSString *name = removeQuakeColorCodes(serverInfo[@"name"]);
+		NSString *ip   = serverInfo[@"address"];
 		if( name )
 		{
 			for(XFGameServer *server in _serverList)
@@ -252,7 +252,7 @@ NSString *removeQuakeColorCodes(NSString *string)
 	NSInteger activeRow = [self activeRow];
 	if( activeRow < [_serverList count] )
 	{
-		return [_serverList objectAtIndex:activeRow];
+		return _serverList[activeRow];
 	}
 	return nil;
 }
@@ -286,7 +286,7 @@ NSString *removeQuakeColorCodes(NSString *string)
 #pragma mark EXOutlineView datasource
 
 - (id) outlineView:(NSOutlineView *)olView child:(int)index ofItem:(id)item {
-	return [_serverList objectAtIndex:index];
+	return _serverList[index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)anOutlineView isItemExpandable:(id)item {

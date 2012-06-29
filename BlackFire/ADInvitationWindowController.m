@@ -45,7 +45,7 @@
 - (IBAction)doneAction:(id)sender
 {
 	[_selectedFriend release];
-	_selectedFriend = [[_searchResults objectAtIndex:[_tableView selectedRow]] retain];
+	_selectedFriend = [_searchResults[[_tableView selectedRow]] retain];
 	[_tableView setDelegate:nil];
 	[_tableView setDataSource:nil];
 	[super doneAction:sender];
@@ -79,7 +79,7 @@
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-	XFFriend *friend = [_searchResults objectAtIndex:row];
+	XFFriend *friend = _searchResults[row];
 	if( [[tableColumn identifier] isEqualToString:@"username"] )
 		return friend.username;
 	else if( [[tableColumn identifier] isEqualToString:@"firstname"] )
