@@ -10,27 +10,14 @@
 #import "XFSession.h"
 
 @interface BFLoginViewController : BFTabViewController
-{
-	NSButton			*_reconnectButton;
-	
-	NSTextField *_usernameField;
-	NSTextField *_usernameLabel;
-	NSTextField *_passwordField;
-	NSTextField *_passwordLabel;
-	
-	NSProgressIndicator *_progressIndicator;
-	NSTextField			*_connectionStatus;
-}
 
-@property (assign) IBOutlet NSButton *reconnectButton;
-
-@property (assign) IBOutlet NSTextField *usernameField;
-@property (assign) IBOutlet NSTextField *usernameLabel;
-@property (assign) IBOutlet NSTextField *passwordField;
-@property (assign) IBOutlet NSTextField *passwordLabel;
-
-@property (assign) IBOutlet NSProgressIndicator *progressIndicator;
-@property (assign) IBOutlet NSTextField *connectionStatus;
+@property (unsafe_unretained) IBOutlet NSButton *reconnectButton;
+@property (unsafe_unretained) IBOutlet NSTextField *usernameField;
+@property (unsafe_unretained) IBOutlet NSTextField *usernameLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *passwordField;
+@property (unsafe_unretained) IBOutlet NSTextField *passwordLabel;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet NSTextField *connectionStatus;
 
 - (IBAction)reconnect:(id)sender;
 

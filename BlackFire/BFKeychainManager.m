@@ -34,7 +34,7 @@ static BFKeychainManager *sharedManager = nil;
 }
 
 
-- (id)retain {
+/*- (id)retain {
 	return self;
 }
 
@@ -46,14 +46,12 @@ static BFKeychainManager *sharedManager = nil;
 
 - (id)autorelease {
 	return self;
-}
+}*/
 
 
 - (void)dealloc 
 {
-	[sharedManager release];
 	sharedManager = nil;
-	[super dealloc];
 }
 
 
@@ -69,7 +67,7 @@ static BFKeychainManager *sharedManager = nil;
 	status = SecKeychainFindGenericPassword(NULL, (UInt32)strlen([aServiceName UTF8String]), [aServiceName UTF8String], (UInt32)strlen([anAccountName UTF8String]), [anAccountName UTF8String], &passwordLength, &passwordData, NULL);
 	
 	if (status == noErr) {
-		password = [[[NSString alloc] initWithBytes:(const void*)passwordData length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
+		password = [[NSString alloc] initWithBytes:(const void*)passwordData length:passwordLength encoding:NSUTF8StringEncoding];
 		
 		if (password) {
       			//NSLog(@"[MDKeychain passwordForServiceName:accountName:] password == %@", password);

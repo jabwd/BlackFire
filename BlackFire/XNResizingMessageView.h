@@ -15,20 +15,8 @@
 @end
 
 @interface XNResizingMessageView : NSTextView
-{
-	NSSize	lastPostedSize;
-	NSSize	_desiredSizeCached;
-	
-	id <BFChatMessageViewDelegate> _messageDelegate;
-	
-	NSMutableArray	*previousMessages;
-	NSInteger		_maxLength;
-    NSUInteger		current;
-	
-	BOOL			_resizing;
-}
 
-@property (assign) id <BFChatMessageViewDelegate> messageDelegate;
+@property (unsafe_unretained) id <BFChatMessageViewDelegate> messageDelegate;
 @property (assign) NSInteger maxLength;
 
 

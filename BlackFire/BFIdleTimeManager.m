@@ -14,9 +14,14 @@ static BFIdleTimeManager *sharedManager = nil;
 
 
 @implementation BFIdleTimeManager
-
-@synthesize delegate = _delegate;
-
+{
+	NSTimer				*timer;
+	CGEventSourceRef	eventSourceRef;
+	
+	BOOL              isIdle;
+	BOOL              setAwayStatusAutomatically;
+	
+}
 
 + (BFIdleTimeManager *)defaultManager 
 {
@@ -60,7 +65,6 @@ static BFIdleTimeManager *sharedManager = nil;
 	if (eventSourceRef != NULL) {
 		CFRelease(eventSourceRef);
 	}
-	[super dealloc];
 }
 
 

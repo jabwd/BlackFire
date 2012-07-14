@@ -9,14 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ADTableCellView : NSTableCellView
-{
-	NSImage *_image;
-	NSString *_stringValue;
-	NSString *_statusString;
-}
 
-@property (nonatomic, retain) NSImage *image;
-@property (nonatomic, retain) NSString *stringValue;
-@property (nonatomic, retain) NSString *statusString;
+@property (nonatomic, strong) NSImage *image;
+@property (nonatomic, strong) NSString *stringValue;
+@property (nonatomic, strong) NSString *statusString;
 
 @end

@@ -23,8 +23,6 @@ const NSTimeInterval kAnimationDuration = 0.125;
 
 @implementation CTTabController
 
-@synthesize window			= _window;
-@synthesize tabStripView	= _tabStripView;
 
 
 + (CGFloat)minTabWidth				{ return 31;	}

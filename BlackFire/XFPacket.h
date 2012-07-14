@@ -351,8 +351,8 @@ typedef enum  {
 	BOOL				isJumbo;
 }
 
-@property (nonatomic, retain) XFPacketDictionary *attributes;
-@property (nonatomic, retain) NSMutableData *data;
+@property (nonatomic, strong) XFPacketDictionary *attributes;
+@property (nonatomic, strong) NSMutableData *data;
 @property (nonatomic, assign) BOOL isJumbo;
 @property (nonatomic, assign) XFPacketID packetID;
 

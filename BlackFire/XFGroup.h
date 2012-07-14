@@ -21,18 +21,10 @@ typedef enum
 } XFGroupType;
 
 @interface XFGroup : NSObject
-{
-	NSString		*_groupName;
-	NSMutableArray	*_members;
-	
-	XFGroupType _type;
-	unsigned int _groupID;
-	
-}
-@property (nonatomic, retain) NSString *name;
-
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) XFGroupType groupType;
 @property (nonatomic, assign) unsigned int groupID;
+
 
 - (void)addMember:(XFFriend *)member;
 - (void)removeMember:(XFFriend *)member;

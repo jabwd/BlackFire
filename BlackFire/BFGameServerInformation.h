@@ -16,18 +16,8 @@
 @end
 
 @interface BFGameServerInformation : NSObject <TaskWrapperController>
-{
-	id <BFGameServerInformationDelegate> _delegate;
-	
-	TaskWrapper *task;
-	
-	NSMutableArray	*taskList;
-	NSMutableString *serverInfoOutput;
-	
-	XFGameServer *current;
-}
 
-@property (nonatomic, assign) id <BFGameServerInformationDelegate> delegate;
+@property (nonatomic, unsafe_unretained) id <BFGameServerInformationDelegate> delegate;
 
 + (id)sharedInformation;
 

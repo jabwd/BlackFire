@@ -27,20 +27,26 @@
 #define TIMESTAMP_INTERVAL 30
 
 @implementation BFChat
-
-@synthesize windowController	= _windowController;
-@synthesize webView = _webView;
-
-@synthesize missedMessages		= _missedMessages;
-
-@synthesize chat = _chat;
+{
+	NSDateFormatter *_dateFormatter;
+	NSMutableArray	*_messages;
+	
+	NSColor			*_userColor;
+	NSColor			*_friendColor;
+	NSFont			*_chatFont;
+	NSFont			*_boldChatFont;
+	
+	NSTimeInterval  _lastTimestamp;
+	BOOL			_typing;
+	BOOL			_animating;
+}
 
 - (id)initWithChat:(XFChat *)chat
 {
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"BFChat" owner:self];
-		_chat = [chat retain];
+		_chat = chat;
 		_missedMessages = 0;
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
@@ -48,10 +54,10 @@
 		_typing			= false;
 		_animating		= false;
 		
-		_userColor		= [[NSColor blueColor] retain];
-		_friendColor	= [[NSColor redColor] retain];
-		_chatFont		= [[NSFont fontWithName:@"Lucida Grande" size:12.0f] retain];
-		_boldChatFont	= [[[NSFontManager sharedFontManager] convertWeight:true ofFont:_chatFont] retain];
+		_userColor		= [NSColor blueColor];
+		_friendColor	= [NSColor redColor];
+		_chatFont		= [NSFont fontWithName:@"Lucida Grande" size:12.0f];
+		_boldChatFont	= [[NSFontManager sharedFontManager] convertWeight:true ofFont:_chatFont];
 		_messages		= [[NSMutableArray alloc] init];
 	
 		
@@ -83,7 +89,6 @@
 					[_webView newWarning:message.message timeStamp:@""];
 				}
 			}
-			[chatLog release];
 		}
 	}
 	return self;
@@ -94,23 +99,6 @@
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_chat setDelegate:nil];
-	[_chat release];
-	_chat = nil;
-	[_messages release];
-	_messages = nil;
-	[_windowController release];
-	_windowController = nil;
-	[_dateFormatter release];
-	_dateFormatter = nil;
-	[_userColor release];
-	_userColor = nil;
-	[_friendColor release];
-	_friendColor = nil;
-	[_chatFont release];
-	_chatFont = nil;
-	[_boldChatFont release];
-	_boldChatFont = nil;
-	[super dealloc];
 }
 
 - (void)closeChat
@@ -127,10 +115,8 @@
 		chatLog.friendUsername = _chat.remoteFriend.username;
 		chatLog.date = [NSDate date];
 		[chatLog addMessages:_messages];
-		[chatLog release];
 	}
 	
-	[_messages release];
 	_messages = nil;
 	
 	SFTabView *tab = [_windowController tabViewForChat:self];
@@ -138,7 +124,6 @@
 	[tab setNeedsDisplay:true]; // reset the missed messages count
 	[_chat setDelegate:nil];
 	[_chat closeChat];
-	[_chat release];
 	_chat = nil;
 }
 
@@ -166,9 +151,8 @@
 
 	BFMessage *msg = [[BFMessage alloc] initWithMessage:message timestamp:[[NSDate date] timeIntervalSince1970] user:BFFriendMessageType];
 	[_messages addObject:msg];
-	[msg release];
 	
-	if( ![self.windowController.window isMainWindow] || _windowController.currentChat != self )
+	if( ![self.windowController.window isMainWindow] || (_windowController.currentChat != self && _windowController.currentChat != nil) )
 	{
 		[[BFNotificationCenter defaultNotificationCenter] playReceivedSound];
 		[[BFNotificationCenter defaultNotificationCenter] postNotificationWithTitle:[NSString stringWithFormat:@"Message from %@",[_chat.remoteFriend displayName]] body:message forChatFriend:_chat.remoteFriend];
@@ -201,7 +185,6 @@
 
 	BFMessage *msg = [[BFMessage alloc] initWithMessage:message timestamp:[[NSDate date] timeIntervalSince1970] user:BFUserMessageType];
 	[_messages addObject:msg];
-	[msg release];
 	
 	[[BFNotificationCenter defaultNotificationCenter] playSendSound];
 }
@@ -351,7 +334,6 @@
 		
 		BFMessage *message = [[BFMessage alloc] initWithMessage:warningMessage timestamp:[[NSDate date] timeIntervalSince1970] user:BFWarningMessageType];
 		[_messages addObject:message];
-		[message release];
 	}
 	/*if( [warningMessage length] > 0 )
 	{

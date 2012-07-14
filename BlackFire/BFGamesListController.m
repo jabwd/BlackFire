@@ -12,11 +12,14 @@
 #import "BFImageAndTextCell.h"
 #import "BFDefaults.h"
 #import "BFGameInformationViewController.h"
+#import "BFInfoViewController.h"
 
 
 @implementation BFGamesListController
-
-@synthesize tableView;
+{
+    BFGamesGroup *detectedGamesGroup;
+    BFGamesGroup *undetectedGamesGroup;
+}
 
 - (id)init
 {
@@ -24,28 +27,27 @@
   {
       [NSBundle loadNibNamed:@"GamesList" owner:self];
       
-      NSTableColumn *col = [tableView tableColumnWithIdentifier:@"column1"];
+      NSTableColumn *col = [_tableView tableColumnWithIdentifier:@"column1"];
       BFImageAndTextCell *cell = [[BFImageAndTextCell alloc] init];
       [cell setEditable:NO];
       [cell setDisplayImageSize:NSMakeSize(18.0f,18.0f)];
       [col  setDataCell:cell];
-      [cell release];
       
-      [tableView setDoubleAction:@selector(doubleClicked:)];
-      [tableView setTarget:self];
+      [_tableView setDoubleAction:@selector(doubleClicked:)];
+      [_tableView setTarget:self];
       
       undetectedGamesGroup = [[BFGamesGroup alloc] init];
       undetectedGamesGroup.name = @"Undetected games";
 	  NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:[[[BFGamesManager sharedGamesManager] xfireGames] allValues]];
 	  [arr sortUsingSelector:@selector(compareXfireGame:)];
+
 	  undetectedGamesGroup.members = arr;
-	  [arr release];
 	  
       detectedGamesGroup = [[BFGamesGroup alloc] init];
-      detectedGamesGroup.members = [[[NSMutableArray alloc] init] autorelease];
+      detectedGamesGroup.members = [[NSMutableArray alloc] init];
       detectedGamesGroup.name = @"Detected games";
 	  
-	  _infoViewController = [[BFGameInformationViewController alloc] initWithNibName:@"BFGameInformationView" bundle:nil];
+	  self.infoViewController = [[BFGameInformationViewController alloc] initWithNibName:@"BFGameInformationView" bundle:nil];
       
       NSMutableArray *knownID = [[NSMutableArray alloc] init];
       NSMutableDictionary *macGames = [[BFGamesManager sharedGamesManager] macGames];
@@ -76,7 +78,6 @@
               }
           }
       }
-      [knownID release];
   }
   return self;
 }
@@ -84,18 +85,14 @@
 
 - (void)dealloc
 {
-    [detectedGamesGroup release];
     detectedGamesGroup = nil;
-    [undetectedGamesGroup release];
     undetectedGamesGroup = nil;
-    [super dealloc];
 }
 
 - (void)reloadMacGames
 {
-	[detectedGamesGroup release];
 	detectedGamesGroup = [[BFGamesGroup alloc] init];
-	detectedGamesGroup.members = [[[NSMutableArray alloc] init] autorelease];
+	detectedGamesGroup.members = [[NSMutableArray alloc] init];
 	detectedGamesGroup.name = @"Detected games";
 	
 	NSMutableArray *knownID = [[NSMutableArray alloc] init];
@@ -127,18 +124,17 @@
 			}
 		}
 	}
-	[knownID release];
 	[self reloadData];
 }
 
 - (void)reloadData
 {
-	[tableView reloadData];
+	[_tableView reloadData];
 }
 
 - (void)expandItem
 {
-    [tableView expandItem:detectedGamesGroup];
+    [_tableView expandItem:detectedGamesGroup];
 }
 
 /*
@@ -146,8 +142,8 @@
  */
 - (IBAction)doubleClicked:(id)sender
 {    
-    NSInteger row = [tableView selectedRow];
-    id item = [tableView itemAtRow:row];
+    NSInteger row = [_tableView selectedRow];
+    id item = [_tableView itemAtRow:row];
     if( [item isKindOfClass:[NSDictionary class]] )
     {
         NSString *appName = item[@"AppName"];
@@ -165,14 +161,9 @@
 
 - (NSUInteger)selectedGameID
 {
-	id item = [tableView itemAtRow:[tableView selectedRow]];
-	if( item )
-	{
-		if( [item isKindOfClass:[NSDictionary class]] )
-		{
-			return [item[@"ID"] intValue];
-		}
-	}
+	id item = [_tableView itemAtRow:[_tableView selectedRow]];
+	if( item && [item isKindOfClass:[NSDictionary class]] )
+		return [item[@"ID"] intValue];
 	return 0;
 }
 
@@ -298,6 +289,7 @@
     }
     else if( item == undetectedGamesGroup )
     {
+		NSLog(@"Undetected: %lu",[undetectedGamesGroup.members count]);
         return [undetectedGamesGroup.members count];
     }
     else if( item == detectedGamesGroup )

@@ -15,8 +15,6 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 
 @implementation Socket
 
-@synthesize delegate    = _delegate;
-@synthesize port        = _port;
 
 - (id)init
 {
@@ -36,7 +34,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 {
     if( (self = [super init]) )
     {
-        _delegate       = [delegate retain];
+        _delegate       = delegate;
         _cfHost         = NULL;
         _cfSocket       = NULL;
         _runLoopSource  = NULL;
@@ -48,10 +46,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 
 - (void)dealloc
 {
-	[_delegate release];
-    _delegate = nil;
     [self disconnect];
-    [super dealloc];
 }
 
 
@@ -70,8 +65,8 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
     if( _cfHost )
         CFRelease(_cfHost);
     
-    _cfHost = CFHostCreateWithName(kCFAllocatorDefault, (CFStringRef)hostName);
-    CFHostClientContext context = {0, self, NULL, NULL, NULL};
+    _cfHost = CFHostCreateWithName(kCFAllocatorDefault, (__bridge CFStringRef)hostName);
+    CFHostClientContext context = {0, (__bridge void *)(self), NULL, NULL, NULL};
     CFHostSetClient(_cfHost, hostResolveCallback, &context);
     CFHostScheduleWithRunLoop(_cfHost, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     if( ! CFHostStartInfoResolution(_cfHost, kCFHostAddresses, NULL) )
@@ -135,10 +130,10 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
     siggie.protocolFamily   = PF_INET;
     siggie.socketType       = SOCK_STREAM;
     siggie.protocol         = IPPROTO_TCP;
-    siggie.address          = (CFDataRef)[NSData dataWithBytes:in_addr length:sizeof(struct sockaddr_in)];
+    siggie.address          = (__bridge CFDataRef)[NSData dataWithBytes:in_addr length:sizeof(struct sockaddr_in)];
     
     ctx.version         = 0;
-    ctx.info            = self;
+    ctx.info            = (__bridge void *)(self);
     ctx.retain          = nil;
     ctx.release         = nil;
     ctx.copyDescription = nil;
@@ -207,7 +202,7 @@ static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 	DLog(@"[Notice] Sending some data of length %lu",[data length]);
     if( _cfSocket && _status == SocketStatusConnected )
     {
-        CFSocketError error = CFSocketSendData(_cfSocket, NULL, (CFDataRef)data, 1.0f);
+        CFSocketError error = CFSocketSendData(_cfSocket, NULL, (__bridge CFDataRef)data, 1.0f);
         if( error == kCFSocketSuccess )
         {
             return YES;
@@ -272,12 +267,12 @@ static void socketCallback(CFSocketRef sock, CFSocketCallBackType cbType, CFData
 {
 	if( cbType == kCFSocketDataCallBack )
 	{
-        [(Socket *)info receivedData:(NSData *)data];
+        [(__bridge Socket *)info receivedData:(__bridge NSData *)data];
 	}
     else if( cbType == kCFSocketConnectCallBack )
     {
 		DLog(@"[Notice] Socket did connect");
-        [(Socket *)info didConnect];
+        [(__bridge Socket *)info didConnect];
     }
 	else
 	{
@@ -292,10 +287,10 @@ static void socketCallback(CFSocketRef sock, CFSocketCallBackType cbType, CFData
  */
 static void hostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, const CFStreamError *error, void *info)
 {
-    NSArray *resolvedAddresses = (NSArray *) CFHostGetAddressing(theHost, NULL);
+    NSArray *resolvedAddresses = (__bridge NSArray *) CFHostGetAddressing(theHost, NULL);
     if( [resolvedAddresses count] > 0 )
     {
-        [(Socket *)info performConnect:resolvedAddresses[0]];
+        [(__bridge Socket *)info performConnect:resolvedAddresses[0]];
     }
 }
 

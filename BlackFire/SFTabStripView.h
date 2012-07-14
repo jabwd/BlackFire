@@ -15,14 +15,9 @@
 @end
 
 @interface SFTabStripView : NSView
-{
-	NSMutableArray *_tabs;
-	
-	id <TabStripDelegate> _delegate;
-}
 
 @property (readonly) NSMutableArray *tabs;
-@property (assign) id <TabStripDelegate> delegate;
+@property (unsafe_unretained) id <TabStripDelegate> delegate;
 
 //---------------------------------------------------------------------------------
 // Laying out the tabs

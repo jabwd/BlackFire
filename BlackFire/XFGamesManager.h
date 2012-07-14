@@ -22,7 +22,7 @@ extern NSString *XFGameIDKey;
 	NSMutableDictionary *_games;
 }
 
-@property (readonly) NSMutableDictionary *xfireGames;
+@property (unsafe_unretained, readonly) NSMutableDictionary *xfireGames;
 
 + (id)sharedGamesManager;
 

@@ -55,11 +55,11 @@
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView 
 {
-	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+	NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
 	[style setAlignment:[self alignment]];
 	
-	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+	NSShadow *shadow = [[NSShadow alloc] init];
 	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
 	[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.43]];
 	
@@ -78,7 +78,7 @@
 	
 	NSDictionary *attributes = @{NSFontAttributeName: [NSFont systemFontOfSize:[NSFont systemFontSize]], NSParagraphStyleAttributeName: style, NSShadowAttributeName: shadow, NSForegroundColorAttributeName: textColor};
 	
-	NSAttributedString *richText = [[[NSAttributedString alloc] initWithString:[self stringValue] attributes:attributes] autorelease];
+	NSAttributedString *richText = [[NSAttributedString alloc] initWithString:[self stringValue] attributes:attributes];
 	
 	NSRect richTextRect;
 	

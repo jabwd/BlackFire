@@ -10,15 +10,10 @@
 
 @implementation ADApplicationDropField
 
-@synthesize delegate = _delegate;
-@synthesize applicationPath = _applicationPath;
 
 - (void)dealloc
 {
 	_delegate = nil;
-	[_applicationPath release];
-	_applicationPath = nil;
-	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -84,8 +79,7 @@
 		{
 			if( [file hasSuffix:@".app"] )
 			{
-				[_applicationPath release];
-				_applicationPath = [file retain];
+				_applicationPath = file;
 				if( [_delegate respondsToSelector:@selector(applicationPathChanged:)] )
 					[_delegate applicationPathChanged:_applicationPath];
 			}

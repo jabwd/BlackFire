@@ -13,11 +13,14 @@
 #import "XFFriend.h"
 
 @implementation BFChatLogViewer
-
-@synthesize friendsList = _friendsList;
-@synthesize chatlogList	= _chatlogList;
-@synthesize chatlogView	= _chatlogView;
-@synthesize session = _session;
+{
+	NSMutableArray	*_friends;
+	NSMutableArray	*_chats;
+	
+	BFChatLog		*_currentChatLog;
+	
+    sqlite3 *_currentDatabase;
+}
 
 - (id)init
 {
@@ -33,9 +36,7 @@
 
 - (void)dealloc
 {
-	[_friends release];
 	_friends = nil;
-	[_chats release];
 	_chats = nil;
     _session = nil;
     if( _currentDatabase )
@@ -43,12 +44,10 @@
         sqlite3_close(_currentDatabase);
         _currentDatabase = NULL;
     }
-	[super dealloc];
 }
 
 - (void)awakeFromNib
 {
-	[_friends release];
 	_friends = [[NSMutableArray alloc] init];
 	
 	NSString *logDir = BFChatLogDirectoryPath();
@@ -67,11 +66,16 @@
 	[_friendsList reloadData];
 }
 
+- (BOOL)windowShouldClose:(id)sender
+{
+	
+	return true;
+}
+
 - (IBAction)showWindow:(id)sender
 {
 	[self.window makeKeyAndOrderFront:self];
 	
-	[_friends release];
 	_friends = [[NSMutableArray alloc] init];
 	
 	NSString *logDir = BFChatLogDirectoryPath();
@@ -112,7 +116,6 @@
 	{
 		[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation source:dirPath destination:trashDir files:contents tag:&tag];
 	}
-	[_friends release];
 	_friends = [[NSMutableArray alloc] init];
 	[_friendsList reloadData];
 }
@@ -126,7 +129,6 @@
 
 - (void)loadChatsForDatabase:(NSString *)filePath
 {
-	[_chats release];
 	_chats = [[NSMutableArray alloc] init];
 	if( _currentDatabase )
     {
@@ -155,7 +157,6 @@
 									  @(chat),@"chatID",
 									  nil];
 				[_chats addObject:dict];
-                [dict release];
             }
         }
     }
@@ -175,7 +176,6 @@
 	NSInteger idx = [_chatlogList selectedRow];
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:@""];
     [[_chatlogView textStorage] setAttributedString:str];
-    [str release];
     
     NSString *username = _friends[[_friendsList selectedRow]];
     
@@ -211,7 +211,6 @@
                             nickname = @"";
                             attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor grayColor], nil];
                         }
-						[attr release];
                         if( ! nickname )
                             nickname = @"Unknown";
 						 attr = [[NSDictionary alloc] initWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor blueColor], nil];
@@ -223,14 +222,10 @@
                         NSMutableAttributedString *mtb = [[NSMutableAttributedString alloc] initWithString:fmtStr];
                         [mtb setAttributes:attr range:NSMakeRange([newLine length], [nickname length])];
                         [storage appendAttributedString:mtb];
-                        [mtb release];
-                        [attr release];
-                        [fmtStr release];
                     }
                 }
             }
             sqlite3_finalize(statement);
-            [query release];
         }
     }
 }

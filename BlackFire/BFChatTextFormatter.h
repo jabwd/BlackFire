@@ -12,9 +12,6 @@
 
 
 @interface BFChatTextFormatter : NSObject
-{
-	BFChatLog *_chatLog;
-}
 
 - (id)initWithChatLog:(BFChatLog *)chatLog;
 

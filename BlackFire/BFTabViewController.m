@@ -7,12 +7,10 @@
 //
 
 #import "BFTabViewController.h"
+#import "BFInfoViewController.h"
 
 @implementation BFTabViewController
 
-@synthesize view		= _view;
-@synthesize delegate	= _delegate;
-@synthesize infoViewController = _infoViewController;
 
 - (void)becomeMain
 {
@@ -24,10 +22,5 @@
 	
 }
 
-- (void)dealloc{
-	[_infoViewController release];
-	_infoViewController = nil;
-	[super dealloc];
-}
 
 @end

@@ -15,28 +15,9 @@
 
 @implementation XFFriend
 
-@synthesize session		= _session;
-@synthesize receivedMessages = _receivedMessages;
 
-@synthesize username	= _username;
-@synthesize nickname	= _nickname;
-@synthesize firstName	= _firstName;
-@synthesize lastName	= _lastName;
-@synthesize status		= _statusString;
-@synthesize sessionID	= _sessionID;
-@synthesize avatar		= _avatar;
 
-@synthesize userID			= _userID;
-@synthesize messageIndex	= _messageIndex;
-@synthesize gameID			= _gameID;
-@synthesize gameIP			= _gameIP;
-@synthesize gamePort		= _gamePort;
-@synthesize teamspeakIP		= _teamspeakIP;
-@synthesize teamspeakPort	= _teamspeakPort;
 
-@synthesize online			= _online;
-@synthesize friendOfFriend	= _friendOfFriend;
-@synthesize clanFriend		= _clanFriend;
 
 - (id)initWithSession:(XFSession *)session
 {
@@ -48,7 +29,7 @@
 		_nickname		= nil;
 		_firstName		= nil;
 		_lastName		= nil;
-		_statusString	= nil;
+		_status	= nil;
 		_sessionID		= nil;
 		_receivedMessages = nil;
 		
@@ -78,7 +59,7 @@
 		_nickname		= nil;
 		_firstName		= nil;
 		_lastName		= nil;
-		_statusString	= nil;
+		_status			= nil;
 		_receivedMessages = nil;
 		_sessionID		= nil;
 		
@@ -109,7 +90,7 @@
 		_nickname		= nil;
 		_firstName		= nil;
 		_lastName		= nil;
-		_statusString	= nil;
+		_status	= nil;
 		_sessionID		= nil;
 		
 		_userID			= 0;
@@ -128,26 +109,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_avatar release];
-	_avatar = nil;
-	[_username release];
-	_username = nil;
-	[_nickname release];
-	_nickname = nil;
-	[_firstName release];
-	_firstName = nil;
-	[_lastName release];
-	_lastName = nil;
-	[_statusString release];
-	_statusString = nil;
-	[_sessionID release];
-	_sessionID = nil;
-	[_receivedMessages release];
-	_receivedMessages = nil;
-	[super dealloc];
-}
 
 #pragma mark - Handy methods
 
@@ -156,7 +117,6 @@
 	_online = online;
 	if( ! _online )
 	{
-		[_receivedMessages release];
 		_receivedMessages = nil;
 		
 		// the real client does not reset the message index here either.
@@ -170,7 +130,7 @@
 
 - (BOOL)isAFK
 {
-	if( [_statusString length] > 0 && [_statusString rangeOfString:@"AFK"].length > 2 )
+	if( [_status length] > 0 && [_status rangeOfString:@"AFK"].length > 2 )
 	{
 		return true;
 	}
@@ -217,8 +177,7 @@
 {
 	_gameIP = 0;
 	_gamePort = 0;
-	[_statusString release];
-	_statusString = nil;
+	_status = nil;
 	_teamspeakIP = 0;
 	_teamspeakPort = 0;
 	_messageIndex = 0;

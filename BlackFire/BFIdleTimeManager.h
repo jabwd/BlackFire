@@ -15,17 +15,8 @@
 @end
 
 @interface BFIdleTimeManager : NSObject 
-{
-	NSTimer				*timer;
-	CGEventSourceRef	eventSourceRef;
-    id <BFIdleTimeManagerDelegate>	_delegate;
-	
-	BOOL              isIdle;
-	BOOL              setAwayStatusAutomatically;
 
-}
-
-@property (assign) id <BFIdleTimeManagerDelegate> delegate;
+@property (unsafe_unretained) id <BFIdleTimeManagerDelegate> delegate;
 
 + (BFIdleTimeManager *)defaultManager;
 - (void)setSetAwayStatusAutomatically:(BOOL)shouldSetAutomatically;

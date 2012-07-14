@@ -10,26 +10,20 @@
 
 @implementation BFGamesGroup
 
-@synthesize name;
-@synthesize members;
-
 - (id)init
 {
     if( (self = [super init]) )
     {
-        members = nil;
-        name    = nil;
+        _members = nil;
+        _name    = nil;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [name release];
-    name = nil;
-    [members release];
-    members = nil;
-    [super dealloc];
+    _name = nil;
+    _members = nil;
 }
 
 @end

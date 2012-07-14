@@ -34,7 +34,6 @@
 	if( size < 8 )
 	{
 		NSLog(@"EXBlist -initWithSize: ( size < 8 ) Size is too small: %u | atleast 8 or bigger.",bitListSize);
-		[self release];
 		return nil;
 	}
 	
@@ -49,7 +48,6 @@
 			size = (floor(bitListSize/8)*8);
 		}
 		else {
-			[self release];
 			return nil;
 		}
 		
@@ -62,7 +60,6 @@
 	free(bitList);
 	bitList = NULL;
 	size = 0;
-	[super dealloc];
 }
 
 

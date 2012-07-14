@@ -14,7 +14,7 @@
 	BOOL _selected;
 }
 
-@property (nonatomic, retain) NSString	*name;
+@property (nonatomic, strong) NSString	*name;
 @property (nonatomic, assign) BOOL selected;
 
 - (NSSize)size;

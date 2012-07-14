@@ -11,14 +11,8 @@
 @class BFStringPromptController, BFGamesGroup;
 
 @interface BFGamesListController : BFTabViewController <NSOutlineViewDataSource, NSOutlineViewDelegate>
-{
-    BFGamesGroup *detectedGamesGroup;
-    BFGamesGroup *undetectedGamesGroup;
-	
-	NSOutlineView *tableView;
-}
 
-@property (assign) IBOutlet NSOutlineView *tableView;
+@property (unsafe_unretained) IBOutlet NSOutlineView *tableView;
 
 - (void)reloadMacGames;
 - (void)reloadData;

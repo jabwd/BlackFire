@@ -10,10 +10,6 @@
 
 @implementation ADTableCellView
 
-@synthesize image = _image;
-@synthesize stringValue = _stringValue;
-@synthesize statusString = _statusString;
-
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -24,16 +20,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[_image release];
-	_image = nil;
-	[_stringValue release];
-	_stringValue = nil;
-	[_statusString release];
-	_statusString = nil;
-	[super dealloc];
-}
 
 - (void)drawRect:(NSRect)cellFrame
 {
@@ -49,7 +35,7 @@
 		if( cellFrame.size.height == 36 )
 			[path setClip];
 		[_image setSize:NSMakeSize(27,27)];
-		[_image compositeToPoint:NSMakePoint(0, yCoordinate) operation:NSCompositeSourceOver];
+		[_image drawAtPoint:NSMakePoint(0, yCoordinate)	fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 		[[NSColor colorWithCalibratedWhite:0.1f alpha:1.0f] set];
 		[path stroke];
 		[[NSGraphicsContext currentContext] restoreGraphicsState];
@@ -83,13 +69,11 @@
 			[finalSt addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica" size:9.0f] range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [finalSt length])];
 			[finalSt drawInRect:NSMakeRect(drawPt.x, (drawPt.y)-7, cellFrame.size.width-drawPt.x-6, stringSize.height)];
-			[finalSt release];
 			drawPt.y += 7.0f;
 		}
 		
 		
 		[text drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-drawPt.x, stringSize.height)];
-		[shadow release];
 	}
 	else
 	{
@@ -102,7 +86,6 @@
 			[finalSt addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.4f alpha:1.0f] range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica" size:9.0f] range:NSMakeRange(0, [finalSt length])];
 			[finalSt drawInRect:NSMakeRect(drawPt.x, (drawPt.y)-7, cellFrame.size.width-drawPt.x-6, stringSize.height)];
-			[finalSt release];
 			drawPt.y += 7.0f;
 		}
 		
@@ -111,8 +94,6 @@
 	//[_statusImage compositeToPoint:NSMakePoint(cellFrame.origin.x+cellFrame.size.width-21.0f,cellFrame.origin.y+8.0f+(cellFrame.size.height/2.0f)) operation:NSCompositeSourceOver];
 	
 	
-	[text release];
-	[style release];
 }
 
 @end

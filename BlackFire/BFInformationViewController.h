@@ -11,21 +11,12 @@
 @class XFFriend;
 
 @interface BFInformationViewController : BFTabViewController
-{
-	XFFriend *_currentFriend;
-	
-	NSTextField *_usernameField;
-	NSTextField *_nicknameField;
-	NSTextField *_statusField;
-	
-	NSImageView *_avatarView;
-}
 
-@property (assign) IBOutlet NSTextField *usernameField;
-@property (assign) IBOutlet NSTextField *nicknameField;
-@property (assign) IBOutlet NSTextField *statusField;
+@property (unsafe_unretained) IBOutlet NSTextField *usernameField;
+@property (unsafe_unretained) IBOutlet NSTextField *nicknameField;
+@property (unsafe_unretained) IBOutlet NSTextField *statusField;
 
-@property (assign) IBOutlet NSImageView *avatarView;
+@property (unsafe_unretained) IBOutlet NSImageView *avatarView;
 
 - (void)setFriend:(XFFriend *)remoteFriend;
 

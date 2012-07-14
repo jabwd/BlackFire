@@ -10,22 +10,14 @@
 
 @implementation BFSoundSet
 
-@synthesize name				= _name;
-@synthesize path				= _path;
 
-@synthesize sendSoundPath		= _sendSoundPath;
-@synthesize receiveSoundPath	= _receiveSoundPath;
-@synthesize onlineSoundPath		= _onlineSoundPath;
-@synthesize offlineSoundPath	= _offlineSoundPath;
-@synthesize connectedSoundPath	= _connectedSoundPath;
 
-@synthesize valid				= _valid;
 
 - (id)initWithContentsOfFile:(NSString *)path
 {
 	if( (self = [super init]) )
 	{
-		_path = [path retain];
+		_path = path;
 		BOOL isDir = false;
 		if( [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] && isDir )
 		{
@@ -51,24 +43,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_name release];
-	_name = nil;
-	[_path release];
-	_path = nil;
-	[_onlineSoundPath release];
-	_onlineSoundPath = nil;
-	[_offlineSoundPath release];
-	_offlineSoundPath = nil;
-	[_sendSoundPath release];
-	_sendSoundPath = nil;
-	[_receiveSoundPath release];
-	_receiveSoundPath = nil;
-	[_connectedSoundPath release];
-	_connectedSoundPath = nil;
-	[super dealloc];
-}
 
 #pragma mark - Decoding bundles
 
@@ -98,7 +72,6 @@
 			
 			if( ! filePath )
 			{
-				[informationPath release];
 				return;
 			}
 			else
@@ -107,8 +80,6 @@
 				if( error )
 				{
 					NSLog(@"*** Unable to decode adium soundset");
-					[contents release];
-					[informationPath release];
 					return;
 				}
 				else
@@ -124,9 +95,6 @@
 					}
 					else
 					{
-						[informationPath release];
-						[information release];
-						[contents release];
 						return;
 					}
 					for(NSString *line in components)
@@ -163,12 +131,10 @@
 						}
 					}
 				}
-				[contents release];
 			}
 		}
 		else
 		{
-			[informationPath release];
 			return;
 		}
 	}
@@ -181,43 +147,37 @@
 		
 		//[_name release];
 		//_name = [name retain];
-		[_name release];
 		NSString *soundsetFile = [_path lastPathComponent];
 		NSArray *comp = [soundsetFile componentsSeparatedByString:@"."];
 		if( [comp count] > 0 )
 		{
-			_name = [comp[0] retain];
+			_name = comp[0];
 		}
 		
 		if( ! _name )
-			_name = [@"Untitled" retain];
+			_name = @"Untitled";
 		
 		
 		NSDictionary *sounds = information[@"Sounds"];
 		if( ! sounds )
 			sounds = information;
 		
-		[_receiveSoundPath release];
 		_receiveSoundPath = nil;
 		if( [sounds[@"Message Received"] length] > 0 )
 			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Message Received"]];
 		
-		[_sendSoundPath release];
 		_sendSoundPath = nil;
 		if( [sounds[@"Message Sent"] length] > 0 )
 			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Message Sent"]];
 		
-		[_onlineSoundPath release];
 		_onlineSoundPath = nil;
 		if( [sounds[@"Contact Signed On"] length] > 0 )
 			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Contact Signed On"]];
 		
-		[_offlineSoundPath release];
 		_offlineSoundPath = nil;
 		if( [sounds[@"Contact Signed Off"] length] > 0 )
 			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Contact Signed Off"]];
 		
-		[_connectedSoundPath release];
 		_connectedSoundPath = nil;
 		if( [sounds[@"Connected"] length] > 0 )
 			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,sounds[@"Connected"]];
@@ -229,8 +189,6 @@
 		NSLog(@"*** Unable to decode adium sound set at path %@",path);
 	}
 	
-	[information release];
-	[informationPath release];
 }
 
 - (void)decodeBlackFireSoundSetAtPath:(NSString *)path
@@ -244,31 +202,25 @@
 		if( ! name )
 			name = @"Untitled soundset";
 		
-		[_name release];
-		_name = [name retain];
+		_name = name;
 		
 		
-		[_receiveSoundPath release];
 		_receiveSoundPath = nil;
 		if( [information[@"receiveSound"] length] > 0 )
 			_receiveSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"receiveSound"]];
 		
-		[_sendSoundPath release];
 		_sendSoundPath = nil;
 		if( [information[@"sendSound"] length] > 0 )
 			_sendSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"sendSound"]];
 		
-		[_onlineSoundPath release];
 		_onlineSoundPath = nil;
 		if( [information[@"onlineSound"] length] > 0 )
 			_onlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"onlineSound"]];
 		
-		[_offlineSoundPath release];
 		_offlineSoundPath = nil;
 		if( [information[@"offlineSound"] length] > 0 )
 			_offlineSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"offlineSound"]];
 		
-		[_connectedSoundPath release];
 		_connectedSoundPath = nil;
 		if( [information[@"connectedSound"] length] > 0 )
 			_connectedSoundPath = [[NSString alloc] initWithFormat:@"%@/%@",path,information[@"connectedSound"]];
@@ -277,8 +229,6 @@
 
 	}
 	
-	[informationPath release];
-	[information release];
 }
 
 @end

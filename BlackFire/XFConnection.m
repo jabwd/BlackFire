@@ -11,6 +11,7 @@
 #import "XFSession.h"
 #import "XFPacket.h"
 #import "XFPacketDictionary.h"
+#import "XFPacketAttributeValue.h"
 
 #import "sha1.h"
 
@@ -24,14 +25,12 @@
 
 @implementation XFConnection
 
-@synthesize status = _status;
-@synthesize session = _session;
 
 - (id)initWithSession:(XFSession *)session
 {
 	if( (self = [super init]) )
 	{
-		_session				= [session retain];
+		_session				= session;
 		_socket					= nil;
 		_availableData			= [[NSMutableData alloc] init];
 		_keepAliveResponseTimer = nil;
@@ -59,13 +58,9 @@
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	[_socket setDelegate:nil];
-	[_socket release];
 	_socket = nil;
-	[_availableData release];
 	_availableData = nil;
 	_status = XFConnectionDisconnected;
-	[_session release];
-	_session = nil;
 	if( [_keepAliveResponseTimer isValid] )
 	{
 		[_keepAliveResponseTimer invalidate];
@@ -73,7 +68,6 @@
 	}
 	[_connectionTimer invalidate];
 	_connectionTimer = nil;
-	[super dealloc];
 }
 
 #pragma mark - Connecting
@@ -84,7 +78,7 @@
 		return;
 	
 	[_socket setDelegate:nil];
-	[_socket release]; // prevent leaking
+	 // prevent leaking
 	_socket = nil;
 	
 	_status			= XFConnectionStarting;
@@ -114,14 +108,11 @@
 		_connectionTimer = nil;
 	}
 	
-	[_availableData release];
 	_availableData = nil;
 	
 	_status = XFConnectionDisconnected;
 	[_socket setDelegate:nil];
-	[_socket release];
 	_socket = nil;
-	[_session release];
 	_session = nil;
 }
 
@@ -151,7 +142,6 @@
 {
 	_socket.delegate = nil;
 	[_session connection:self willDisconnect:XFConnectionErrorHungUp];
-	[_session release];
 	_session = nil; // the session is gone here.
 	[self disconnect];
 }
@@ -259,7 +249,6 @@
 	// it still works when its empty thuogh, so this is fine.
 	NSArray *stats = [[NSArray alloc] init];
 	[self sendPacket:[XFPacket keepAlivePacketWithValue:0 stats:stats]];
-	[stats release];
 }
 
 - (void)keepAliveResponseTimeout:(NSTimer *)aTimer
@@ -282,7 +271,6 @@
 			// it still works when its empty thuogh, so this is fine.
 			NSArray *stats = [[NSArray alloc] init];
 			[self sendPacket:[XFPacket keepAlivePacketWithValue:0 stats:stats]];
-			[stats release];
 			_firstTimeout = true;
 			return;
 		}
@@ -741,7 +729,6 @@
 			
 			[_session addFriend:friend];
 			
-			[friend release];
 		}
 		else if( friend.clanFriend )
 		{
@@ -793,7 +780,6 @@
 		
 		XFFriend *friend = [_session friendForUserID:uid];
 		
-		[friend retain];
 		
 		if( [sid isClear] )
 		{
@@ -816,7 +802,6 @@
 			{
 				friend.sessionID = sid;
 				[_session raiseFriendNotification:XFFriendNotificationSessionChanged forFriend:friend];
-				[friend release];
 				return;
 			}
 			if( [offlineGroup friendIsMember:friend] )
@@ -830,7 +815,6 @@
 			[_session raiseFriendNotification:XFFriendNotificationOnlineStatusChanged forFriend:friend];
 		}
 		
-		[friend release];
 	}
 	[offlineGroup sortMembers];
 	[onlineGroup sortMembers];
@@ -901,7 +885,6 @@
 			fof.gamePort		= ([gamePorts[i] unsignedIntValue] & 0x0000FFFF);
 			fof.friendOfFriend	= true; // can't be any one else.. as far as I know
 			[_session addFriend:fof]; // this shouldn't add the friend to any group.
-			[fof release];
 		}
 		else
 		{
@@ -949,7 +932,7 @@
 		XFPacket *packet = [XFPacket friendOfFriendRequestPacketWithSIDs:unknownSids];
 		[self sendPacket:packet];
 	}
-	[unknownSids release]; // don't leak
+	 // don't leak
 }
 
 // Contains information about our friends-of-friends
@@ -1091,10 +1074,8 @@
 		friend.lastName		= lastNames[i];
 		
 		[friends addObject:friend];
-		[friend release];
 	}
 	[_session receivedSearchResults:friends];
-	[friends release];
 }
 
 - (void)processRemoveFriendPacket:(XFPacket *)pkt
@@ -1126,12 +1107,10 @@
 		friend.status	= messages[i];
 		
 		[friends addObject:friend];
-		[friend release];
 	}
 	
 
 	[_session receivedFriendShipRequests:friends];
-	[friends release];
 }
 
 - (void)processFriendGroupNamePacket:(XFPacket *)pkt
@@ -1382,7 +1361,6 @@
 				
 				[_session addFriend:fr];
 				[clanGrp addMember:fr];
-				[fr release];
 				
 				// TODO: Add support for clan nicknames
 			}
@@ -1427,10 +1405,8 @@
 		
         [serverList addObject:server];
 		
-		[server release];
     }
 	_session.serverList =  serverList;
-    [serverList release];
 }
 
 - (void)processInvitSend:(XFPacket *)pkt

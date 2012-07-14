@@ -14,6 +14,17 @@
 static BFNotificationCenter *notificationCenter = nil;
 
 @implementation BFNotificationCenter
+{
+	NSMutableDictionary *_remoteFriends;
+	
+	NSSound *_connectSound;
+	NSSound *_onlineSound;
+	NSSound *_offlineSound;
+	NSSound *_receiveSound;
+	NSSound *_sendSound;
+	
+	NSUInteger _badgeCount;
+}
 
 + (id)defaultNotificationCenter
 {
@@ -35,7 +46,6 @@ static BFNotificationCenter *notificationCenter = nil;
 		{
 			BFSoundSet *soundSet = [[BFSoundSet alloc] initWithContentsOfFile:[[NSUserDefaults standardUserDefaults] objectForKey:BFSoundSetPath]];
 			[self setSoundSet:soundSet];
-			[soundSet release];
 		}
 	}
 	return self;
@@ -43,30 +53,18 @@ static BFNotificationCenter *notificationCenter = nil;
 
 - (void)dealloc
 {
-	[_remoteFriends release];
 	_remoteFriends = nil;
-	[_connectSound release];
 	_connectSound = nil;
-	[_sendSound release];
 	_sendSound = nil;
-	[_receiveSound release];
 	_receiveSound = nil;
-	[_offlineSound release];
 	_offlineSound = nil;
-	[_onlineSound release];
 	_onlineSound = nil;
-	[super dealloc];
 }
 
 #pragma mark - Handling sounds
 
 - (void)setSoundSet:(BFSoundSet *)soundSet
 {
-	[_connectSound release];
-	[_offlineSound release];
-	[_onlineSound release];
-	[_sendSound release];
-	[_receiveSound release];
 	_receiveSound = nil;
 	_sendSound = nil;
 	_onlineSound = nil;
@@ -242,7 +240,6 @@ static BFNotificationCenter *notificationCenter = nil;
 	
 	NSDictionary *dict = @{GROWL_NOTIFICATIONS_ALL: notes,
 						  GROWL_NOTIFICATIONS_DEFAULT: notes};
-	[notes release];
 	return dict;
 }
 
@@ -263,11 +260,10 @@ static BFNotificationCenter *notificationCenter = nil;
 {
 	if( clickContext && [clickContext isKindOfClass:[NSString class]] && [clickContext length] > 0 )
 	{
-		XFFriend *remoteFriend = [_remoteFriends[clickContext] retain];
+		XFFriend *remoteFriend = _remoteFriends[clickContext];
 		[_remoteFriends removeObjectForKey:clickContext];
 		if( remoteFriend )
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"chatFriendClicked" object:remoteFriend];
-		[remoteFriend release];
 	}
 	else
 	{

@@ -11,27 +11,13 @@
 
 @class BFChatLog, XFSession;
 
-@interface BFChatLogViewer : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
-{
-	NSMutableArray	*_friends;
-	NSMutableArray	*_chats;
-	
-	BFChatLog		*_currentChatLog;
-	
-	NSTextView *_chatlogView;
-	NSTableView *_friendsList;
-	NSTableView *_chatlogList;
-    
-    sqlite3 *_currentDatabase;
-    
-    XFSession *_session;
-}
+@interface BFChatLogViewer : NSWindowController <NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate>
 
-@property (assign) IBOutlet NSTextView *chatlogView;
-@property (assign) IBOutlet NSTableView *friendsList;
-@property (assign) IBOutlet NSTableView *chatlogList;
+@property (unsafe_unretained) IBOutlet NSTextView *chatlogView;
+@property (unsafe_unretained) IBOutlet NSTableView *friendsList;
+@property (unsafe_unretained) IBOutlet NSTableView *chatlogList;
 
-@property (assign) XFSession *session;
+@property (unsafe_unretained) XFSession *session;
 
 - (IBAction)showWindow:(id)sender;
 

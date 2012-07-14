@@ -14,8 +14,8 @@
 	NSString *_password;
 }
 
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *password;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
 
 - (id)initWithUsername:(NSString *)username;
 

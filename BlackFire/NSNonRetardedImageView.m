@@ -10,8 +10,6 @@
 
 @implementation NSNonRetardedImageView
 
-@synthesize image = _image;
-@synthesize borderColor = _borderColor;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -23,24 +21,14 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[_image release];
-	_image = nil;
-	[_borderColor release];
-	_borderColor = nil;
-	[super dealloc];
-}
 
 - (void)setImage:(NSImage *)image
 {
-	[_image release];
 	_image = nil;
-	_image = [image retain];
+	_image = image;
 	
-	[_borderColor release];
 	_borderColor = nil;
-	_borderColor = [[self proposedBorderColorForImage:_image] retain];
+	_borderColor = [self proposedBorderColorForImage:_image];
 	
 	[self setNeedsDisplay:true];
 }
@@ -56,7 +44,7 @@
 		else {
 			[_borderColor set];
 		}
-		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+		NSShadow *shadow = [[NSShadow alloc] init];
 		[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
 		[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.37]];
 		[shadow set];

@@ -15,7 +15,7 @@
 	XFFriend *_remoteFriend;
 }
 
-@property (nonatomic, retain) XFFriend *remoteFriend;
+@property (nonatomic, strong) XFFriend *remoteFriend;
 
 - (IBAction)defer:(id)sender;
 

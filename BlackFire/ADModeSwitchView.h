@@ -9,15 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ADModeSwitchView : NSView
-{
-	NSMutableArray *_items;
-	
-	SEL _selector;
-	id _target;
-}
 
 @property (assign) SEL selector;
-@property (assign) id target;
+@property (unsafe_unretained) id target;
 
 - (void)selectItemAtIndex:(NSInteger)index;
 - (NSInteger)selectedItemIndex;

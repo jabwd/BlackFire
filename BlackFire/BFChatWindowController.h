@@ -14,46 +14,23 @@
 
 
 @interface BFChatWindowController : NSObject <NSToolbarDelegate, TabStripDelegate, NSWindowDelegate, BFChatMessageViewDelegate>
-{
-	NSWindow	*_window;
-	NSView		*_switchView;
-	
-	XNBorderedScrollView	*_messageScrollView;
-	XNResizingMessageView	*_messageView;
-	NSView					*_backgroundView;
-	
-	NSView *_toolbarView;
-	NSToolbarItem *_toolbarItem;
-	
-	// chat toolbar
-	NSNonRetardedImageView *_avatarImageView;
-	NSImageView *_statusIconView;
-	NSTextField *_nicknameField;
-	NSTextField *_statusField;
-	// end chat toolbar
 
-	NSMutableArray	*_chats;
-	BFChat			*_currentlySelectedChat;
-	
-	SFTabStripView *_tabStripView;
-}
+@property (unsafe_unretained) IBOutlet NSView *switchView;
+@property (unsafe_unretained) IBOutlet NSWindow *window;
 
-@property (assign) IBOutlet NSView *switchView;
-@property (assign) IBOutlet NSWindow *window;
+@property (unsafe_unretained) IBOutlet XNBorderedScrollView *messageScrollView;
+@property (unsafe_unretained) IBOutlet XNResizingMessageView *messageView;
 
-@property (assign) IBOutlet XNBorderedScrollView *messageScrollView;
-@property (assign) IBOutlet XNResizingMessageView *messageView;
+@property (unsafe_unretained) IBOutlet NSNonRetardedImageView *avatarImageView;
+@property (unsafe_unretained) IBOutlet NSImageView *statusIconView;
+@property (unsafe_unretained) IBOutlet NSTextField *nicknameField;
+@property (unsafe_unretained) IBOutlet NSTextField *statusField;
+@property (unsafe_unretained) IBOutlet NSView *backgroundView;
 
-@property (assign) IBOutlet NSNonRetardedImageView *avatarImageView;
-@property (assign) IBOutlet NSImageView *statusIconView;
-@property (assign) IBOutlet NSTextField *nicknameField;
-@property (assign) IBOutlet NSTextField *statusField;
-@property (assign) IBOutlet NSView *backgroundView;
+@property (unsafe_unretained) IBOutlet NSView *toolbarView;
 
-@property (assign) IBOutlet NSView *toolbarView;
-
-@property (assign) IBOutlet SFTabStripView *tabStripView;
-@property (readonly) BFChat *currentChat;
+@property (unsafe_unretained) IBOutlet SFTabStripView *tabStripView;
+@property (unsafe_unretained, readonly) BFChat *currentChat;
 
 - (id)init;
 
@@ -64,7 +41,6 @@
 - (void)addChat:(BFChat *)chat;
 
 - (void)closeChat:(BFChat *)chat;
-- (void)destroy;
 - (void)tabShouldClose:(SFTabView *)tabView;
 - (void)changeSwitchView:(NSView *)newView;
 

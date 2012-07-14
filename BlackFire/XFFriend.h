@@ -17,47 +17,17 @@ typedef UIImage NSImage; // to fix the avatar property, actually not sure whethe
 @class XFSession, ADBitList;
 
 @interface XFFriend : NSObject
-{
-	XFSession	*_session;
-	ADBitList	*_receivedMessages;
-	
-	NSString	*_username;
-	NSString	*_nickname;
-	NSString	*_firstName;
-	NSString	*_lastName;
-	NSString	*_statusString;
-	NSData		*_sessionID;
-	
-	NSImage		*_avatar;
-	
-	NSUInteger	_messageIndex;
-	NSUInteger	_userID;
-	NSUInteger	_gameID;
-	NSUInteger	_gameIP;
-	NSUInteger	_gamePort;
-	NSUInteger	_teamspeakIP;
-	NSUInteger	_teamspeakPort;
-	NSUInteger	_publicIP;
-	NSUInteger	_publicPort;
-	NSUInteger	_natType;
-	
-	
-	
-	BOOL _online;
-	BOOL _friendOfFriend;
-	BOOL _clanFriend;
-}
 
-@property (nonatomic, assign) XFSession *session;
-@property (nonatomic, retain) ADBitList *receivedMessages;
+@property (nonatomic, unsafe_unretained) XFSession *session;
+@property (nonatomic, strong) ADBitList *receivedMessages;
 
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *nickname;
-@property (nonatomic, retain) NSString *firstName;
-@property (nonatomic, retain) NSString *lastName;
-@property (nonatomic, retain) NSString *status;
-@property (nonatomic, retain) NSData *sessionID;
-@property (nonatomic, retain) NSImage *avatar;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSData *sessionID;
+@property (nonatomic, strong) NSImage *avatar;
 
 @property (nonatomic, assign) NSUInteger messageIndex;
 @property (nonatomic, assign) NSUInteger userID;

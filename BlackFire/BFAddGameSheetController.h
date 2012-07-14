@@ -12,10 +12,7 @@
 @class ADApplicationDropField;
 
 @interface BFAddGameSheetController : ADStringPromptController <ADApplicationDropFieldDelegate>
-{
-	ADApplicationDropField *_dropField;
-}
 
-@property (nonatomic, assign) IBOutlet ADApplicationDropField *dropField;
+@property (nonatomic, unsafe_unretained) IBOutlet ADApplicationDropField *dropField;
 
 @end

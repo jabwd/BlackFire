@@ -14,7 +14,7 @@
 	NSDate	 *_date;
 }
 
-@property (nonatomic, retain) NSString *displayName;
-@property (nonatomic, retain) NSDate *date;
+@property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) NSDate *date;
 
 @end

@@ -28,7 +28,6 @@ char * getStuff(int pid);
 		NSString *processString = [[NSString alloc] initWithUTF8String:pString];
 		NSArray *components = [processString componentsSeparatedByString:@" "];
 		NSLog(@"Comp: %@",components);
-		[processString release];
 	}
 	return nil;
 }

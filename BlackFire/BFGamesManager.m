@@ -11,9 +11,16 @@
 #import "BFDefaults.h"
 
 @implementation BFGamesManager
-
-@synthesize delegate	= _delegate;
-@synthesize macGames	= _macGames;
+{
+	NSMutableArray		*_runningGames;
+	NSMutableArray		*_missingIcons;
+	NSMutableArray		*_knownMissing;
+	NSString			*_cachesPath;
+	
+	NSMutableDictionary *_gameIcons;
+	
+	BFDownload *_download;
+}
 
 - (id)init
 {
@@ -28,31 +35,22 @@
 		_knownMissing	= [[NSMutableArray alloc] init];
 		_gameIcons		= [[NSMutableDictionary alloc] init];
 		
-		_cachesPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
+		_cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[_gameIcons release];
 	_gameIcons = nil;
-	[_cachesPath release];
 	_cachesPath = nil;
-	[_missingIcons release];
 	_missingIcons = nil;
-	[_runningGames release];
 	_runningGames = nil;
-	[_macGames release];
-	_macGames = nil;
-	[_knownMissing release];
 	_knownMissing = nil;
-	[super dealloc];
 }
 
 - (void)reloadData
 {
-	[_macGames release];
 	_macGames		= [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MacGames" ofType:@"plist"]];
 	NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:BFCustomMacGamesList];
 	if( dict )
@@ -124,7 +122,6 @@
 		NSLog(@"*** Image for %@ could not be downloaded",game);
 		[_knownMissing addObject:game];
 	}
-	[image release];
 	
 	NSString *cacheFile = [NSString stringWithFormat:@"%@/%u.png",finalPath,[game unsignedIntValue]];
 	
@@ -135,9 +132,7 @@
 	
 	[_missingIcons removeObjectAtIndex:0];
 	
-	[_download release];
 	_download = nil;
-	[finalPath release];
 	finalPath = nil;
 	
 	[self downloadNextMissingIcon];
@@ -147,19 +142,17 @@
 {
 	if( _download )
 	{
-		[_download release];
 		_download = nil;
 	}
 	if( [_missingIcons count] < 1 )
 	{
 		return; // break the cycle
 	}
-	NSNumber *game = [_missingIcons[0] retain];
+	NSNumber *game = _missingIcons[0];
 	
-	_download = [[BFDownload imageDownload:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.exurion.com/xfire/icons/%u.png",[game unsignedIntValue]]] withDelegate:self] retain];
+	_download = [BFDownload imageDownload:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.exurion.com/xfire/icons/%u.png",[game unsignedIntValue]]] withDelegate:self];
 	_download.context = game;
 	
-	[game release];
 }
 
 - (NSImage *)imageForGame:(unsigned int)gameID
@@ -171,7 +164,7 @@
 		if( ! image )
 		{
 			NSString *path = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%u.png",_cachesPath,gameID];
-			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
+			NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
 			if( ! image )
 			{
 				//image = [NSImage imageNamed:@"xfire"];
@@ -210,17 +203,13 @@
 			{
 				// cache the image, as we actually have an image! yay :D
 				_gameIcons[key] = image;
-				[path release];
 				[image setScalesWhenResized:true];
-				[key release];
 				return image;
 			}
 			
-			[path release];
 		}
 		[image setScalesWhenResized:true];
 		
-		[key release];
 		if( ! image )
 		{
 			image = [NSImage imageNamed:@"xfire"];
@@ -244,7 +233,6 @@
 		if( old )
 			[new addEntriesFromDictionary:old];
 		[[NSUserDefaults standardUserDefaults] setObject:new forKey:BFCustomMacGamesList];
-		[new release];
 		
 		[self reloadData];
 	}
@@ -407,7 +395,6 @@
 				[arguements addObject:address];
 			}
 			[self startGame:gameName withArguments:arguements];
-			[arguements release];
 		}
 	}
 	else

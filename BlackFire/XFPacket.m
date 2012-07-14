@@ -148,10 +148,6 @@ NSString * const XFPacketDataKey			= @"data";
 
 @implementation XFPacket
 
-@synthesize attributes	= _attributes;
-@synthesize data		= _data;
-@synthesize isJumbo;
-@synthesize packetID = _packetID;
 
 // decode the raw data and build a new packet
 + (XFPacket *)decodedPacketByScanningBuffer:(NSData *)data
@@ -160,7 +156,7 @@ NSString * const XFPacketDataKey			= @"data";
 	{
 		@try
 		{
-			return [[[[XFPacket alloc] init] scan:data] autorelease];
+			return [[[XFPacket alloc] init] scan:data];
 		}
 		@catch( NSException *e )
 		{
@@ -179,7 +175,7 @@ NSString * const XFPacketDataKey			= @"data";
 		@try {
 			XFPacket *packet = [[XFPacket alloc] init];
 			[packet setIsJumbo:YES];
-			return [[packet scan:data] autorelease];
+			return [packet scan:data];
 		}
 		@catch (NSException *e) {
 			NSLog(@"*** Error while decoding UDP packet data: %@",e);
@@ -195,20 +191,12 @@ NSString * const XFPacketDataKey			= @"data";
 	{
 		isJumbo			= jumbo;
 		_packetID		= pktID;
-		_attributes		= [attrs retain];
+		_attributes		= attrs;
 		_data			= [raw copy];
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[_attributes release];
-	_attributes = nil;
-	[_data release];
-	_data = nil;
-	[super dealloc];
-}
 
 - (NSUInteger)attributeCount
 {
@@ -248,7 +236,7 @@ NSString * const XFPacketDataKey			= @"data";
 	{
 		// multiple values
 		NSArray        *mainAttrValArray = [mainAttrVal value];
-		NSMutableArray *attrValues       = [[[NSMutableArray alloc] init] autorelease];
+		NSMutableArray *attrValues       = [[NSMutableArray alloc] init];
 		
 		NSUInteger i, cnt = [mainAttrValArray count];
 		for( i = 0; i < cnt; i++ )
@@ -367,9 +355,9 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	CHECK_LENGTH_EX(len,@"key string");
 	
-	NSString *s = [[[NSString alloc] initWithBytes:&_bytes[_idx]
+	NSString *s = [[NSString alloc] initWithBytes:&_bytes[_idx]
 											length:len
-										  encoding:NSUTF8StringEncoding] autorelease];
+										  encoding:NSUTF8StringEncoding];
 	
 	_idx += len;
 	return s;
@@ -386,9 +374,9 @@ NSString * const XFPacketDataKey			= @"data";
 	
 	if( len > 0 )
 	{
-		s = [[[NSString alloc] initWithBytes:&_bytes[_idx]
+		s = [[NSString alloc] initWithBytes:&_bytes[_idx]
 									  length:len
-									encoding:NSUTF8StringEncoding] autorelease];
+									encoding:NSUTF8StringEncoding];
 		
 		
 		_idx += len;
@@ -450,13 +438,11 @@ NSString * const XFPacketDataKey			= @"data";
 #endif
     
 	// just to be sure so that we do not get any memory leaks..
-    [_attributes release];
     _attributes = nil;
-    [_data release];
     _data = nil;
     
 	// scan the primary attribute map
-	_attributes = [[self scanAttributeMapInDomain:[self keyDomainForPacketType:_packetID]] retain];
+	_attributes = [self scanAttributeMapInDomain:[self keyDomainForPacketType:_packetID]];
     
     _data        = [data copy];
 	return self;
@@ -608,7 +594,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Very similar to -scanAttributeValue, but scans a sequence of values instead of just one
 - (NSArray *)scanArray
 {
-	NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *arr = [[NSMutableArray alloc] init];
 	
 	// this is a work around to make the file transfer packets use less CPU power..
 	if( _packetID == XFClientP2PFileTransferDataPacketID )
@@ -673,7 +659,6 @@ NSString * const XFPacketDataKey			= @"data";
 				break;
 		}
 		[arr addObject:[XFPacketAttributeValue attributeValueWithData:finalData]];
-		[finalData release];
 	}
 	else
 	{
@@ -693,7 +678,6 @@ NSString * const XFPacketDataKey			= @"data";
 													 arrayType:XFPacketAttributeInvalidType
 													 ];
 					[arr addObject:value];
-					[value release];
 				}
 				break;
 				
@@ -707,8 +691,6 @@ NSString * const XFPacketDataKey			= @"data";
 													 arrayType:XFPacketAttributeInvalidType
 													 ];
 					[arr addObject:value];
-					[nr release];
-					[value release];
 				}
 				break;
 				
@@ -890,7 +872,6 @@ NSString * const XFPacketDataKey			= @"data";
 // TODO: generate attributes in specific order
 - (void)generatePacket
 {
-	[_data release];
 	_data = [[NSMutableData alloc] initWithCapacity:65536];
 	if( [_attributes count] > 255 )
 		[self raiseException:@"Too many attributes"];
@@ -912,7 +893,6 @@ NSString * const XFPacketDataKey			= @"data";
 	[_data appendData:tmp];
 	
 	
-	[tmp release];
 }
 
 - (void)generateAttributeMap:(XFPacketDictionary *)attrs
@@ -1132,13 +1112,13 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)packet
 {
-	return [[[XFPacket alloc] init] autorelease];
+	return [[XFPacket alloc] init];
 }
 
 // username/password packet (ID 1)
 + (id)loginPacketWithUsername:(NSString *)name password:(NSString *)pass flags:(unsigned int)flg
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	if( [pass length] != 40 )
 	{
@@ -1152,14 +1132,12 @@ NSString * const XFPacketDataKey			= @"data";
 									 arrayType:XFPacketAttributeInvalidType
 									 ];
 	[pkt setAttribute:value forKey:XFPacketNameKey];
-	[value release];
 	value = [[XFPacketAttributeValue alloc]
 			 initWithValue:pass
 			 typeID:XFPacketAttributeStringType
 			 arrayType:XFPacketAttributeInvalidType
 			 ];
 	[pkt setAttribute:value forKey:XFPacketPasswordKey];
-	[value release];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:flg]
 			   forKey:XFPacketFlagsKey];
 	
@@ -1170,7 +1148,7 @@ NSString * const XFPacketDataKey			= @"data";
 //Typing notification packet
 + (id)chatTypingNotificationPacketWithSID:(NSData *)sid imIndex:(unsigned int)imidx typing:(unsigned int)typing
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *peermsg = [XFPacketDictionary map];
 	
 	[pkt setPacketID:0x02];
@@ -1196,7 +1174,7 @@ NSString * const XFPacketDataKey			= @"data";
 // acknowledge receipt of a chat message
 + (id)chatAcknowledgementPacketWithSID:(NSData *)sid imIndex:(unsigned int)imidx
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *peermsg = [XFPacketDictionary map];
 	
 	[pkt setPacketID: 0x02];
@@ -1222,7 +1200,7 @@ NSString * const XFPacketDataKey			= @"data";
                                                   localPort:(unsigned short)localPort
                                                     natType:(unsigned int)natType
                                                        salt:(NSString *)salt {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *peermsg = [XFPacketDictionary map];
 	[pkt setPacketID:XFClientChatPacketID];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithUUID:sessionID] forKey:XFPacketSessionIDKey];
@@ -1242,7 +1220,7 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)chatPeerToPeerInfoResponseWithSalt:(NSString *)salt sid:(NSData *)sidd
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *peermsg = [XFPacketDictionary map];
 	
 	[pkt setPacketID:0x02];
@@ -1275,7 +1253,7 @@ NSString * const XFPacketDataKey			= @"data";
 // send an instant message
 + (id)chatInstantMessagePacketWithSID:(NSData *)sid imIndex:(unsigned int)imidx message:(NSString *)msg
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *peermsg = [XFPacketDictionary map];
 	
 	[pkt setPacketID: 0x02];
@@ -1299,7 +1277,7 @@ NSString * const XFPacketDataKey			= @"data";
 // client version packet (ID 3)
 + (id)clientVersionPacket:(unsigned int)vers
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 0x03];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:vers]
@@ -1312,7 +1290,7 @@ NSString * const XFPacketDataKey			= @"data";
 // game status change packet (ID 4)
 + (id)gameStatusChangePacketWithGameID:(unsigned)gid gameIP:(unsigned)gip gamePort:(unsigned)port
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setPacketID: 0x04];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:gid]
 			   forKey:XFPacketGameIDKey];
@@ -1345,7 +1323,7 @@ NSString * const XFPacketDataKey			= @"data";
 		[sidArray addObject:[XFPacketAttributeValue attributeValueWithUUID:sid]];
 	}
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setPacketID: 5];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithArray:sidArray emptyElementType:3]
 			   forKey:XFPacketSessionIDKey];
@@ -1357,7 +1335,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Add-friend request (ID 6)
 + (id)addFriendRequestPacketWithUserName:(NSString *)un message:(NSString *)msg
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 6];
 	
@@ -1373,7 +1351,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Accept incoming add-friend request (ID 7)
 + (id)acceptFriendRequestPacketWithUserName:(NSString *)un
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 7];
 	
@@ -1387,7 +1365,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Decline incoming add-friend request (ID 8)
 + (id)declineFriendRequestPacketWithUserName:(NSString *)un
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 8];
 	
@@ -1401,7 +1379,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Add-friend request (ID 9)
 + (id)removeFriendRequestWithUserID:(unsigned int)uid
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 9];
 	
@@ -1416,7 +1394,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Pass options with keys equal to the packet attribute map keys and values as NSNumber.bool
 + (id)changeOptionsPacket
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *map = [XFPacketDictionary map];
 	
 	[pkt setPacketID: 10];
@@ -1465,7 +1443,7 @@ NSString * const XFPacketDataKey			= @"data";
 // user search packet (ID 12)
 + (id)userSearchPacketWithName:(NSString *)name fname:(NSString *)fn lname:(NSString *)ln email:(NSString *)em
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 12];
 	
@@ -1485,7 +1463,7 @@ NSString * const XFPacketDataKey			= @"data";
 // connection keepalive packet (ID 13)
 + (id)keepAlivePacketWithValue:(unsigned)val stats:(NSArray *)stats
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 13];
 	
@@ -1501,7 +1479,7 @@ NSString * const XFPacketDataKey			= @"data";
 // Change nickname (ID 14)
 + (id)changeNicknamePacketWithName:(NSString *)nick
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 14];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:(nick?nick:@"")]
@@ -1518,7 +1496,7 @@ NSString * const XFPacketDataKey			= @"data";
 + (id)friendInfoPacket:(unsigned int)userID
 {
 	if( userID == 0 ) return nil;
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setPacketID:37];
 	
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:userID] forKey:@"0x01"];
@@ -1530,7 +1508,7 @@ NSString * const XFPacketDataKey			= @"data";
 // client information packet (ID 16)
 + (id)clientInfoPacketWithLanguage:(NSString *)lng skin:(NSString *)skn theme:(NSString *)thm partner:(NSString *)prt
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 16];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:lng]
@@ -1549,7 +1527,7 @@ NSString * const XFPacketDataKey			= @"data";
 // client network info packet (ID 17)
 + (id)networkInfoPacketWithConn:(unsigned)conn nat:(BOOL)isNat sec:(unsigned)sec ip:(unsigned)ip naterr:(BOOL)nErr uPnPInfo:(NSString *)info
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 17];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:conn]    forKey:@"conn"];
@@ -1566,7 +1544,7 @@ NSString * const XFPacketDataKey			= @"data";
 // add custom friend group packet (ID 26)
 + (id)addCustomFriendGroupPacketWithName:(NSString *)groupName
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 26];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:groupName]
@@ -1579,7 +1557,7 @@ NSString * const XFPacketDataKey			= @"data";
 // remove custom friend group packet (ID 27)
 + (id)removeCustomFriendGroupPacket:(unsigned)groupID
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 27];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:groupID]
@@ -1592,7 +1570,7 @@ NSString * const XFPacketDataKey			= @"data";
 // rename custom friend group packet (ID 28)
 + (id)renameCustomFriendGroupPacket:(unsigned)groupID newName:(NSString *)groupName
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 28];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:groupID]
@@ -1607,7 +1585,7 @@ NSString * const XFPacketDataKey			= @"data";
 // add friend to custom friend group (ID 29)
 + (id)addFriendPacket:(unsigned)friendID toCustomGroup:(unsigned)groupID
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 29];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:friendID]
@@ -1622,7 +1600,7 @@ NSString * const XFPacketDataKey			= @"data";
 // remove friend from custom friend group (ID 30)
 + (id)removeFriendPacket:(unsigned)friendID fromCustomGroup:(unsigned)groupID
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 30];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:friendID]
@@ -1637,7 +1615,7 @@ NSString * const XFPacketDataKey			= @"data";
 // status text change packet (ID 32)
 + (id)statusTextChangePacket:(NSString *)newText
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID: 32];
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithString:(newText?newText:@"")]
@@ -1648,7 +1626,7 @@ NSString * const XFPacketDataKey			= @"data";
 }
 
 + (id)addFavoriteServerPacket:(unsigned int)gameID serverIP:(NSString *)ip serverPort:(NSString *)gamePort{
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setPacketID:19];
 	unsigned int serverIP = 0;
 	inet_pton(AF_INET, [ip UTF8String], &serverIP);
@@ -1661,7 +1639,7 @@ NSString * const XFPacketDataKey			= @"data";
 }
 
 + (id)removeFavoriteServerPacket:(unsigned int)gameID serverIP:(NSString *)ip serverPort:(NSString *)gamePort{
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setPacketID:20];
 	unsigned int serverIP = 0;
 	inet_pton(AF_INET, [ip UTF8String], &serverIP);
@@ -1679,7 +1657,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( [roomName length] < 1 )
 		return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 0x0019
 	
@@ -1688,7 +1666,7 @@ NSString * const XFPacketDataKey			= @"data";
 	NSData *data = [[NSData alloc] initWithBytes:tmp length:21];
 	free(tmp);
 	[pkt setAttribute:[XFPacketAttributeValue attributeValueWithInt:0x4CF4] forKey:@"climsg"];
-	[msg setObject:[XFPacketAttributeValue attributeValueWithDid:data] forKey:@"0x04"]; [data release];
+	[msg setObject:[XFPacketAttributeValue attributeValueWithDid:data] forKey:@"0x04"]; 
 	[msg setObject:[XFPacketAttributeValue attributeValueWithInt:1] forKey:@"0x0b"];
 	[msg setObject:[XFPacketAttributeValue attributeValueWithInt:1] forKey:@"0xaa"];
 	[msg setObject:[XFPacketAttributeValue attributeValueWithString:roomName] forKey:@"0x05"];
@@ -1706,7 +1684,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( [roomSid length] != 21 ) return nil;
 	if( userID == 0 )            return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	NSArray *arr = @[[XFPacketAttributeValue attributeValueWithInt:userID]];
@@ -1726,7 +1704,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( [roomName length] < 1 ) return nil;
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 0x0019
 	
@@ -1746,7 +1724,7 @@ NSString * const XFPacketDataKey			= @"data";
 + (id)leaveChatRoomPacket:(NSData*)sid{
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 0x0019
 	
@@ -1761,7 +1739,7 @@ NSString * const XFPacketDataKey			= @"data";
 + (id)denyRoomInvitationPacket:(NSData *)roomSid{
 	if( [roomSid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	
@@ -1780,7 +1758,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( [message length] < 1 ) return nil;
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	
@@ -1801,7 +1779,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( ! newPassword )      return nil;
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19];
 	
@@ -1821,7 +1799,7 @@ NSString * const XFPacketDataKey			= @"data";
 {
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19];
 	
@@ -1841,7 +1819,7 @@ NSString * const XFPacketDataKey			= @"data";
 {
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19];
 	int flag = 0;
@@ -1863,7 +1841,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( [newName length] < 1 )  return nil;
 	if( [sid length] != 21 )    return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	
@@ -1886,7 +1864,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( [newMotd length] == 0 ) return nil;
 	if( [sid length] != 21    ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	
@@ -1907,7 +1885,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( uID   == 0 ) return nil;
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	
@@ -1928,7 +1906,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( uID   == 0         ) return nil;
 	if( [sid length] != 21 ) return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	XFPacketDictionary *msg = [XFPacketDictionary map];
 	[pkt setPacketID:0x19]; // 25
 	
@@ -1954,7 +1932,7 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)requestFileTransferPacket:(unsigned int)p_fileID fileName:(NSString *)p_fileName description:(NSString *)p_desc fileSize:(unsigned long)p_size modificationTime:(unsigned int)p_mTime
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	/*	AttrMap {
 	 fileid = [[ Packet Attribute, type = 2, arrType = -1, value = 2147483649 ]]
@@ -1979,7 +1957,7 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)fileTransferReply:(unsigned int)p_fileID reply:(unsigned char)p_reply
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID:XFClientP2PFileTransferRequestReplyPacketID];
 	[pkt setIsJumbo:YES];
@@ -1994,7 +1972,7 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)fileTransferEventPacket:(unsigned int)p_fileID event:(unsigned char)p_event
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	
 	[pkt setPacketID:XFClientP2PFileTransferEventPacketID];
 	[pkt setIsJumbo:YES];
@@ -2009,7 +1987,7 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)fileTransferCompletedPacket:(unsigned int)p_fileid
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setPacketID:XFClientP2PFileTransferCompletePacketID];
 	[pkt setIsJumbo:YES];
 	
@@ -2043,7 +2021,7 @@ NSString * const XFPacketDataKey			= @"data";
 
 + (id)fileTransferDataRequestPacket:(unsigned int)p_fileID offset:(unsigned long long)p_offset size:(unsigned int)p_size msgID:(unsigned int)p_msgID
 {
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setIsJumbo:YES];
 	[pkt setPacketID:XFClientP2PFileTransferDataRequestPacketID];
 	
@@ -2087,7 +2065,7 @@ NSString * const XFPacketDataKey			= @"data";
 	if( ! p_data )
 		return nil;
 	
-	XFPacket *pkt = [[[XFPacket alloc] init] autorelease];
+	XFPacket *pkt = [[XFPacket alloc] init];
 	[pkt setIsJumbo:YES];
 	
 	[pkt setPacketID:XFClientP2PFileTransferDataPacketID];

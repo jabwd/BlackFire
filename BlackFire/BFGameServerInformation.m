@@ -19,8 +19,14 @@ NSString *removeQuakeColorCodes(NSString *string);
 static BFGameServerInformation *sharedInstance = nil;
 
 @implementation BFGameServerInformation
-
-@synthesize delegate = _delegate;
+{
+	TaskWrapper *task;
+	
+	NSMutableArray	*taskList;
+	NSMutableString *serverInfoOutput;
+	
+	XFGameServer *current;
+}
 
 + (id)sharedInformation
 {
@@ -44,16 +50,11 @@ static BFGameServerInformation *sharedInstance = nil;
 
 - (void)dealloc
 {
-	[taskList release];
 	taskList = nil;
-	[serverInfoOutput release];
 	serverInfoOutput = nil;
 	[task stopProcess];
-	[task release];
 	task = nil;
-	[current release];
 	current = nil;
-	[super dealloc];
 }
 
 - (void)getInformationForFriend:(XFFriend *)friend
@@ -64,7 +65,6 @@ static BFGameServerInformation *sharedInstance = nil;
 	server.gameID		= friend.gameID;
 	server.port			= friend.gamePort;
 	[taskList addObject:server];
-	[server release];
 	if( ! serverInfoOutput )
 		[self nextTask];
 }
@@ -107,10 +107,8 @@ static BFGameServerInformation *sharedInstance = nil;
 		current.raw = (NSDictionary *)serverInfo;
 		if( [_delegate respondsToSelector:@selector(receivedInformationForServer:)] )
 			[_delegate receivedInformationForServer:current];
-		[current release];
 		current = nil;
 	}
-	[serverInfoOutput release];
 	serverInfoOutput = nil;
 	
 	/*
@@ -128,7 +126,6 @@ static BFGameServerInformation *sharedInstance = nil;
 		serverInfoOutput = [[NSMutableString alloc] init];
 	NSString *buffer = [[NSString alloc] initWithData:[output dataUsingEncoding:NSASCIIStringEncoding] encoding:NSASCIIStringEncoding];
 	[serverInfoOutput appendString:buffer];
-	[buffer release];
 }
 
 - (void)nextTask
@@ -140,8 +137,7 @@ static BFGameServerInformation *sharedInstance = nil;
 		
 		XFGameServer *server = [taskList lastObject];
 		[self getServerInfoWithIP:[server address] andGameName:[[BFGamesManager sharedGamesManager] serverTypeForGID:server.gameID]];
-		[current release];
-		current = [server retain];
+		current = server;
 		[taskList removeLastObject];
 	}
 }
@@ -151,7 +147,6 @@ static BFGameServerInformation *sharedInstance = nil;
 	if( task )
 	{
 		[task stopProcess];
-		[task release];
 		task = nil;
 	}
 	
@@ -171,12 +166,10 @@ static BFGameServerInformation *sharedInstance = nil;
 	{
 		NSRunAlertPanel(@"Error", @"BlackFire is not properly installed, please reinstall the application", @"OK", nil, nil);
 		NSLog(@"*** QSTAT Path invalid, application bundle is not correct");
-		[arguments release];
 		return;
 	}
 	task = [[TaskWrapper alloc] initWithController:self arguments:arguments];
 	[task startProcess:qstatPath];
-	[arguments release];
 }
 
 @end

@@ -11,27 +11,17 @@
 
 @implementation BFAccount
 
-@synthesize username = _username;
-@synthesize password = _password;
 
 - (id)initWithUsername:(NSString *)username
 {
 	if( (self = [super init]) )
 	{
-		_username = [username retain];
-		_password = [[[BFKeychainManager defaultManager] passwordForServiceName:@"BlackFire" accountName:_username] retain];
+		_username = username;
+		_password = [[BFKeychainManager defaultManager] passwordForServiceName:@"BlackFire" accountName:_username];
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[_username release];
-	_username = nil;
-	[_password release];
-	_password = nil;
-	[super dealloc];
-}
 
 #pragma mark - Saving
 

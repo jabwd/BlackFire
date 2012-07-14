@@ -9,15 +9,9 @@
 #import "ADStringPromptController.h"
 
 @implementation ADStringPromptController
-
-@synthesize sheet			= _sheet;
-@synthesize titleField		= _titleField;
-@synthesize messageField	= _messageField;
-
-@synthesize cancelButton	= _cancelButton;
-@synthesize doneButton		= _doneButton;
-
-@synthesize delegate		= _delegate;
+{
+	NSWindow *_mainWindow;
+}
 
 - (id)initWithWindow:(NSWindow *)mainWindow
 {
@@ -39,7 +33,6 @@
 	_sheet			= nil;
 	_mainWindow		= nil;
 	_delegate		= nil;
-	[super dealloc];
 }
 
 #pragma mark - Controlling the sheet

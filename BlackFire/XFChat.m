@@ -13,21 +13,19 @@
 #import "XFPacket.h"
 #import "ADBitList.h"
 #import "XFChatMessage.h"
+#import "XFPacketDictionary.h"
+#import "XFPacketAttributeValue.h"
 
 @implementation XFChat
-
-@synthesize remoteFriend	= _remoteFriend;
-@synthesize connection		= _connection;
-
-@synthesize delegate = _delegate;
-
-@synthesize isFriendTyping = _isFriendTyping;
+{
+	NSMutableArray	*_messageBuffer; // used for resending chat messages when they timeout
+}
 
 - (id)initWithRemoteFriend:(XFFriend *)remoteFriend 
 {
 	if( (self = [super init]) )
 	{
-		_remoteFriend		= [remoteFriend retain];
+		_remoteFriend		= remoteFriend;
 		_connection			= nil;
 		_messageBuffer		= [[NSMutableArray alloc] init];
 		_isFriendTyping		= false;
@@ -50,12 +48,8 @@
 - (void)dealloc
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[_remoteFriend release];
-	_remoteFriend = nil;
 	_connection = nil;
-	[_messageBuffer release];
 	_messageBuffer = nil;
-	[super dealloc];
 }
 
 #pragma mark - Handy methods
@@ -89,7 +83,6 @@
 		XFChatMessage *message = [[XFChatMessage alloc] initWithIndex:messageIndex packet:packet];
 		[_messageBuffer addObject:message];
 		[self performSelector:@selector(messageTimedOut:) withObject:message afterDelay:15.0f];
-		[message release];
 		
 		messageIndex++;
 		_remoteFriend.messageIndex = messageIndex;
@@ -150,12 +143,12 @@
 {
 	// decode the packet and notify the XFChat object
 	XFPacketDictionary *peermsg = (XFPacketDictionary *)[[packet attributeForKey:XFPacketPeerMessageKey] value];
-	switch( [[peermsg[XFPacketMessageTypeKey] value] intValue] )
+	switch( [[[peermsg objectForKey:XFPacketMessageTypeKey] value] intValue] )
 	{
 		case 0: // chat message
 		{
-			unsigned long imIndex = (unsigned long)[[peermsg[XFPacketIMIndexKey] value] longLongValue];
-			NSString *message = [peermsg[XFPacketIMKey] value];
+			unsigned long imIndex = (unsigned long)[[[peermsg objectForKey:XFPacketIMIndexKey] value] longLongValue];
+			NSString *message = [[peermsg objectForKey:XFPacketIMKey] value];
 			if( [_remoteFriend.receivedMessages isSet:(unsigned int)imIndex] )
 			{
 				NSLog(@"[Notice] Received a duplicate chat message\n\n '%@'\n\n with index: %lu",message,imIndex);
@@ -173,18 +166,19 @@
 			
 		case 1: // acknowledgement
 		{
-			NSUInteger idx = [[peermsg[XFPacketIMIndexKey] value] intValue];
+			NSUInteger idx = [[[peermsg objectForKey:XFPacketIMIndexKey] value] intValue];
 			NSInteger i, cnt = [_messageBuffer count];
 			for(i=0;i<cnt;i++)
 			{
 				XFChatMessage *message = _messageBuffer[i];
 				if( message.index == idx )
 				{
-					[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(messageTimedOut:)object:message];
+					[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(messageTimedOut:) object:message];
 					[_messageBuffer removeObjectAtIndex:i];
 					return;
 				}
 			}
+			NSLog(@"[Notice] Received a chat ACK for an unknown message");
 		}
 			break;
 			

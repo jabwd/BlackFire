@@ -20,31 +20,11 @@
 
 @implementation BFChatLog
 
-@synthesize friendUsername;
-@synthesize date;
-
-- (id)init
-{
-    if( (self = [super init]) )
-    {
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [date release];
-    date = nil;
-    [friendUsername release];
-    friendUsername = nil;
-    [super dealloc];
-}
-
 - (NSString *)getDatabasePath
 {
 	NSString *path2 = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *path = [[NSString alloc] initWithFormat:@"%@/BlackFire/ChatLogs/%@.xfl",path2,friendUsername];
-    return [path autorelease];
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/BlackFire/ChatLogs/%@.xfl",path2,_friendUsername];
+    return path;
 }
 
 /*
@@ -56,7 +36,7 @@
         return;
     if( [array count] < 1 )
         return;
-    if( ! friendUsername )
+    if( ! _friendUsername )
         return;
     
     // the messages array is filled like with BFMessage objects
@@ -98,15 +78,14 @@
         NSString *query = [[NSString alloc] initWithFormat:@"insert into chats (timestamp) values (@B)"];
         if( sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, NULL) == SQLITE_OK )
         {
-            sqlite3_bind_int64(statement, 1, [date timeIntervalSince1970]);
+            sqlite3_bind_int64(statement, 1, [_date timeIntervalSince1970]);
             sqlite3_step(statement);
             sqlite3_finalize(statement);
             statement = nil;
             
             // now get the chat id, we need it in the following qeury
             unsigned int chatID = 0;
-            [query release];
-            query = [[NSString alloc] initWithFormat:@"select * from chats where timestamp=%lu",(unsigned long)[date timeIntervalSince1970]];
+            query = [[NSString alloc] initWithFormat:@"select * from chats where timestamp=%lu",(unsigned long)[_date timeIntervalSince1970]];
             if( sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, NULL) == SQLITE_OK )
             {
                 if( sqlite3_step(statement) == SQLITE_ROW )
@@ -115,7 +94,6 @@
                     if( chatID == 0 )
                     {
                         NSLog(@"Unable to fetch chat ID");
-                        [query release];
                         sqlite3_finalize(statement);
                         sqlite3_close(database);
                         return;
@@ -126,14 +104,12 @@
             else
             {
                 NSLog(@"Unable to fetch chat ID");
-                [query release];
                 sqlite3_close(database);
                 return;
             }
             statement = nil;
             
             
-            [query release];
             query = [[NSString alloc] initWithFormat:@"insert into messages (chatID,user,timestamp,message) values (@A,@B,@C,@D);"];
             if( sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, NULL) == SQLITE_OK )
             {
@@ -157,7 +133,6 @@
                 // done modifying the database here.
             }
         }
-        [query release];
     }
     else
     {
@@ -214,17 +189,14 @@
             message.timestamp = (unsigned long)sqlite3_column_int64(statement, 3);
             message.user = sqlite3_column_int(statement, 2);
             [arr addObject:message];
-            [message release];
         }
         
 		sqlite3_finalize(statement);
         sqlite3_close(database);
-        [query release];
-        return [arr autorelease];
+        return arr;
     }
     sqlite3_finalize(statement);
     sqlite3_close(database);
-    [query release];
     return nil;
 }
 

@@ -36,7 +36,6 @@
 	[webView setFrameLoadDelegate:self];
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[[NSBundle mainBundle] URLForResource:@"template" withExtension:@"html"]];
 	[[webView mainFrame] loadRequest:req];
-    [req release];	
 	scriptObject = [webView windowScriptObject];
 }
 
@@ -69,7 +68,6 @@
 			[self newMessage:message[@"message"] 
 					  ofType:[message[@"type"] boolValue]];
 		}
-		[messageBuffer release]; 
 		messageBuffer = nil;
 	}
 }
@@ -77,11 +75,8 @@
 - (void) dealloc
 {
 	scriptObject = nil; // assigned value
-    [webView release];
     webView = nil;
-	[messageBuffer release];
 	messageBuffer = nil;
-	[super dealloc];
 }
 
 - (void)close
@@ -104,7 +99,6 @@
 	{
 		NSDictionary *messages = [[NSDictionary alloc] initWithObjectsAndKeys:message,@"message",@(type),@"type", nil];
 		[messageBuffer addObject:messages];
-		[messages release];
 		return;
 	}
 	message = [BFWebview filteredNSString:message];
@@ -120,21 +114,17 @@
 		NSRange linkRange = [link range];
 		message = [message stringByReplacingCharactersInRange:NSMakeRange(linkRange.location+padding, linkRange.length) withString:format];
 		padding = [format length] - [linkString length];
-		[format release];
 	}
-	[scanner release];
 	
 	if( type )
 	{
 		NSArray *arg = [[NSArray alloc] initWithObjects:message,nil];
 		[scriptObject callWebScriptMethod:@"insertUserMessage" withArguments:arg];
-		[arg release];
 	}
 	else 
 	{
 		NSArray *arg = [[NSArray alloc] initWithObjects:message,nil];
 		[scriptObject callWebScriptMethod:@"insertFriendMessage" withArguments:arg];
-		[arg release];
 	}
 }
 
@@ -143,7 +133,6 @@
 {
 	NSArray *arg = [[NSArray alloc] initWithObjects:timestamp, nil];
 	[scriptObject callWebScriptMethod:@"insertTimestamp" withArguments:arg];
-	[arg release];
 }
 
 - (void)newWarning:(NSString *)warning timeStamp:(NSString *)timestamp
@@ -169,13 +158,10 @@
 		NSRange linkRange = [link range];
 		warning = [warning stringByReplacingCharactersInRange:NSMakeRange(linkRange.location+padding, linkRange.length) withString:format];
 		padding = [format length] - [linkString length];
-		[format release];
 	}
-	[scanner release];
 	
 	NSArray *arg = [[NSArray alloc] initWithObjects:timestamp,warning, nil];
 	[scriptObject callWebScriptMethod:@"insertWarning" withArguments:arg];
-	[arg release];
 }
 
 + (NSString *)filteredNSString:(NSString *)p_in
@@ -294,7 +280,7 @@
 	if( newStr )
 		free(newStr);
 	
-	return [newst autorelease];
+	return newst;
 }
 
 - (void)drawRect:(NSRect)dirtyRect

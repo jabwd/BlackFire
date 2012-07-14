@@ -32,44 +32,41 @@
 
 @implementation XFPacketAttributeValue
 
-@synthesize value				= _value;
-@synthesize typeID				= _typeID;
-@synthesize arrayElementType	= _arrayElementType;
 
 + (id)attributeValueWithString:(NSString *)str
 {
-	return [[[XFPacketAttributeValue alloc]
+	return [[XFPacketAttributeValue alloc]
 		initWithValue:str
 		typeID:XFPacketAttributeStringType
 		arrayType:XFPacketAttributeInvalidType
-		] autorelease];
+		];
 }
 
 + (id)attributeValueWithInt:(unsigned int)val
 {
-	return [[[XFPacketAttributeValue alloc]
+	return [[XFPacketAttributeValue alloc]
 		initWithValue:@(val)
 		typeID:XFPacketAttributeUInt32Type
 		arrayType:XFPacketAttributeInvalidType
-		] autorelease];
+		];
 }
 
 + (id)attributeValueWithInt64:(unsigned long long)val
 {
-	return [[[XFPacketAttributeValue alloc]
+	return [[XFPacketAttributeValue alloc]
 		initWithValue:@(val)
 		typeID:XFPacketAttributeUInt64Type
 		arrayType:XFPacketAttributeInvalidType
-		] autorelease];
+		];
 }
 
 + (id)attributeValueWithByte:(unsigned char)val
 {
-	return [[[XFPacketAttributeValue alloc]
+	return [[XFPacketAttributeValue alloc]
 		initWithValue:@(val)
 		typeID:XFPacketAttributeUInt8Type
 		arrayType:XFPacketAttributeInvalidType
-		] autorelease];
+		];
 }
 
 /*
@@ -77,7 +74,7 @@
  */
 + (id)attributeValueWithData:(NSData *)data
 {
-	return [[[XFPacketAttributeValue alloc] initWithValue:data typeID:XFPacketAttributeDataType arrayType:XFPacketAttributeInvalidType] autorelease];
+	return [[XFPacketAttributeValue alloc] initWithValue:data typeID:XFPacketAttributeDataType arrayType:XFPacketAttributeInvalidType];
 }
 
 + (id)attributeValueWithNumber:(NSNumber *)nbr
@@ -87,11 +84,11 @@
 	{
 		if( strcasecmp(octype,"i") == 0 )
 		{
-			return [[[XFPacketAttributeValue alloc]
+			return [[XFPacketAttributeValue alloc]
 				initWithValue:nbr
 				typeID:XFPacketAttributeUInt32Type
 				arrayType:XFPacketAttributeInvalidType
-				] autorelease];
+				];
 		}
 	}
 	return nil;
@@ -101,11 +98,11 @@
 {
 	if( [uuid length] == 16 )
 	{
-		return [[[XFPacketAttributeValue alloc]
+		return [[XFPacketAttributeValue alloc]
 			initWithValue:uuid
 			typeID:XFPacketAttributeUUIDType
 			arrayType:XFPacketAttributeInvalidType
-			] autorelease];
+			];
 	}
 	return nil;
 }
@@ -114,11 +111,11 @@
 {
 	if( [did length] == 21 )
 	{
-		return [[[XFPacketAttributeValue alloc]
+		return [[XFPacketAttributeValue alloc]
 			initWithValue:did
 			typeID:XFPacketAttributeDIDType
 			arrayType:XFPacketAttributeInvalidType
-			] autorelease];
+			];
 	}
 	return nil;
 }
@@ -138,11 +135,11 @@
 	cnt = [arr count];
 	if( cnt == 0 )
 	{
-		return [[[XFPacketAttributeValue alloc]
+		return [[XFPacketAttributeValue alloc]
 			initWithValue:arr
 			typeID:XFPacketAttributeArrayType
 			arrayType:et
-			] autorelease];
+			];
 	}
 	
 	// Max array size supported by Xfire protocol is technically 65535, though in practice you would
@@ -179,11 +176,11 @@
 		
 		//NSLog(@"objType %d, et = %d",objType,et);
 		
-		return [[[XFPacketAttributeValue alloc]
+		return [[XFPacketAttributeValue alloc]
 			initWithValue:arr
 			typeID:XFPacketAttributeArrayType
 			arrayType:objType
-			] autorelease];
+			];
 	}
 	// else don't try
 	
@@ -192,11 +189,11 @@
 
 + (id)attributeValueWithAttributeMap:(XFPacketDictionary *)map
 {
-	return [[[XFPacketAttributeValue alloc]
+	return [[XFPacketAttributeValue alloc]
 		initWithValue:map
 		typeID:[self typeIDForObject:map]
 		arrayType:XFPacketAttributeInvalidType
-		] autorelease];
+		];
 }
 
 + (int)typeIDForObject:(id)obj
@@ -298,18 +295,13 @@
   {
 		_typeID = tid;
 		_arrayElementType = atid;
-		_value = [aVal retain];
+		_value = aVal;
 		
 		//NSLog(@"XFPacketAttributeValue -initWithValue:%@ typeID:%d arrayType:%d",aVal,tid,atid);
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[_value release];
-	[super dealloc];
-}
 
 - (int)typeID
 {

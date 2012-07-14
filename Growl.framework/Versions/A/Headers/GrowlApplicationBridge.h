@@ -156,6 +156,8 @@
 				isSticky:(BOOL)isSticky
 			clickContext:(id)clickContext;
 
++ (void)userNotificationWasClicked:(NSUserNotification *)notification;
+
 /*!
  *	@method notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:
  *	@abstract Send a Growl notification.
@@ -400,6 +402,7 @@
 + (NSDictionary *) notificationDictionaryByFillingInDictionary:(NSDictionary *)regDict;
 
 + (NSDictionary *) frameworkInfoDictionary;
+
 @end
 
 //------------------------------------------------------------------------------

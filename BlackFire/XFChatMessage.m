@@ -7,27 +7,20 @@
 //
 
 #import "XFChatMessage.h"
+#import "XFPacket.h"
 
 @implementation XFChatMessage
 
-@synthesize packet = _packet;
-@synthesize index = _index;
 
 - (id)initWithIndex:(NSUInteger)index packet:(XFPacket *)packet
 {
 	if( (self = [super init]) )
 	{
-		_packet = [packet retain];
+		_packet = packet;
 		_index	= index;
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[_packet release];
-	_packet = nil;
-	[super dealloc];
-}
 
 @end

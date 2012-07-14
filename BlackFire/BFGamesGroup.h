@@ -9,11 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface BFGamesGroup : NSObject
-{
-    NSMutableArray	*members;
-    NSString		*name;
-}
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSMutableArray *members;
+
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSMutableArray *members;
 
 @end

@@ -16,8 +16,8 @@
 	unsigned int _gameID;
 }
 
-@property (retain) NSString *longName;
-@property (retain) NSString *shortName;
+@property (strong) NSString *longName;
+@property (strong) NSString *shortName;
 @property (assign) unsigned int gameID;
 
 - (id)initWithLongName:(NSString *)longName shortName:(NSString *)shortName gameID:(unsigned int)gameID;

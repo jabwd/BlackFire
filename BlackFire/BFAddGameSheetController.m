@@ -10,15 +10,12 @@
 
 @implementation BFAddGameSheetController
 
-@synthesize dropField = _dropField;
 
 - (id)initWithWindow:(NSWindow *)mainWindow
 {
-	if( (self = [super init]) )
+	if( (self = [super initWithWindow:mainWindow]) )
 	{
 		[NSBundle loadNibNamed:@"AddGameSheet" owner:self];
-		
-		_mainWindow = mainWindow;
 		[_dropField setDelegate:self];
 	}
 	return self;
@@ -27,8 +24,6 @@
 - (void)dealloc
 {
 	[_dropField setDelegate:nil];
-	_mainWindow = nil;
-	[super dealloc];
 }
 
 - (IBAction)cancelAction:(id)sender

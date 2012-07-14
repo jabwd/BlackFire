@@ -12,17 +12,12 @@
 
 @implementation ADInvitationWindowController
 
-@synthesize searchField = _searchField;
-@synthesize tableView	= _tableView;
-@synthesize selectedFriend = _selectedFriend;
 
-@synthesize searchResults = _searchResults;
 
 - (id)initWithWindow:(NSWindow *)mainWindow
 {
-	if( (self = [super init]) )
+	if( (self = [super initWithWindow:mainWindow]) )
 	{
-		_mainWindow = mainWindow;
 		_selectedFriend = nil;
 		
 		[NSBundle loadNibNamed:@"InvitationWindow" owner:self];
@@ -35,17 +30,11 @@
 	[_tableView setDataSource:nil];
 	[_tableView setDelegate:nil];
 	_tableView = nil;
-	[_searchResults release];
-	_searchResults = nil;
-	[_selectedFriend release];
-	_selectedFriend = nil;
-	[super dealloc];
 }
 
 - (IBAction)doneAction:(id)sender
 {
-	[_selectedFriend release];
-	_selectedFriend = [_searchResults[[_tableView selectedRow]] retain];
+	_selectedFriend = _searchResults[[_tableView selectedRow]];
 	[_tableView setDelegate:nil];
 	[_tableView setDataSource:nil];
 	[super doneAction:sender];
@@ -53,10 +42,10 @@
 
 - (IBAction)startSearching:(id)sender
 {
-	if(! [_delegate isKindOfClass:[ADAppDelegate class]] )
+	if(! [self.delegate isKindOfClass:[ADAppDelegate class]] )
 		return;
 	
-	ADAppDelegate *app = (ADAppDelegate *)_delegate;
+	ADAppDelegate *app = (ADAppDelegate *)self.delegate;
 	[app startUserSearching:_searchField.stringValue];
 }
 

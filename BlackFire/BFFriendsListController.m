@@ -26,8 +26,9 @@
 #import "BFFriendInformationViewController.h"
 
 @implementation BFFriendsListController
-
-@synthesize friendsList = _friendsList;
+{
+	BFInfoViewController *_infoViewController;
+}
 
 - (id)init
 {
@@ -42,7 +43,7 @@
 		[_friendsList setDoubleAction:@selector(doubleClicked)];
 		[_friendsList setTarget:self];
 		
-		_infoViewController = [[BFFriendInformationViewController friendInformationController] retain];
+		_infoViewController = [BFFriendInformationViewController friendInformationController];
 		/*
 		NSClipView *clip = (NSClipView *)[_friendsList superview];
 		if( clip )
@@ -65,12 +66,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_rowView release];
-	_rowView = nil;
-	[super dealloc];
-}
 
 - (void)reloadData
 {
@@ -81,7 +76,7 @@
 
 - (void)friendCameOnline:(XFFriend *)friend
 {
-	XFGroupController *groupController = _delegate.session.groupController;
+	XFGroupController *groupController = self.delegate.session.groupController;
 	/*if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
 	{
 		XFGroup *onlineGroup = [groupController onlineFriendsGroup];
@@ -117,7 +112,7 @@
 
 - (void)friendWentOffline:(XFFriend *)friend
 {
-	XFGroupController *groupController = _delegate.session.groupController;
+	XFGroupController *groupController = self.delegate.session.groupController;
 	[_friendsList beginUpdates];
 	if( [[NSUserDefaults standardUserDefaults] boolForKey:BFShowOfflineFriendsGroup] )
 	{
@@ -161,14 +156,14 @@
 
 - (IBAction)removeFriend:(id)sender
 {
-	if( _delegate )
-		[_delegate removeSelectedFriend:sender];
+	if( self.delegate )
+		[self.delegate removeSelectedFriend:sender];
 }
 
 - (IBAction)showProfile:(id)sender
 {
-	if( _delegate )
-		[_delegate showProfile:sender];
+	if( self.delegate )
+		[self.delegate showProfile:sender];
 }
 
 
@@ -190,16 +185,16 @@
 	XFFriend *selectedFriend = [self selectedFriend];
 	if( selectedFriend )
 	{
-		[_delegate beginChatWithFriend:selectedFriend];
+		[self.delegate beginChatWithFriend:selectedFriend];
 	}
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
-	if( item == nil )
+	if( !item )
 	{
 		//return [_delegate.session.groupController.groups count];
-		return [_delegate.session.groupController groupsCount];
+		return [self.delegate.session.groupController groupsCount];
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{
@@ -223,10 +218,10 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-	if( item == nil )
+	if( !item )
 	{
 		//return [_delegate.session.groupController.groups objectAtIndex:index];
-		return [_delegate.session.groupController groupAtIndex:index];
+		return [self.delegate.session.groupController groupAtIndex:index];
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{
@@ -273,7 +268,7 @@
 {
 	ADTableRowView *rowView = [[ADTableRowView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
 	
-	return [rowView autorelease];
+	return rowView;
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
@@ -324,13 +319,12 @@
 				NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%@.jpg",cachesPath,friend.username];
 				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
 				{
-					image = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+					image = [[NSImage alloc] initWithContentsOfFile:imagePath];
 				}
 				else
 				{
 					image = [NSImage imageNamed:@"xfire"];
 				}
-				[imagePath release];
 				
 				[image setScalesWhenResized:true];
 				friend.avatar = image;
@@ -419,13 +413,12 @@
 				NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%@.jpg",cachesPath,friend.username];
 				if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
 				{
-					image = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+					image = [[NSImage alloc] initWithContentsOfFile:imagePath];
 				}
 				else
 				{
 					image = [NSImage imageNamed:@"xfire"];
 				}
-				[imagePath release];
 				
 				[image setScalesWhenResized:true];
 				friend.avatar = image;
@@ -488,14 +481,14 @@
 				[tooltip appendFormat:@"\nPlaying: %@",[[BFGamesManager sharedGamesManager]  longNameForGameID:friend.gameID]];
 			}
 		}
-		return [tooltip autorelease];
+		return tooltip;
 	}
 	else if( [item isKindOfClass:[XFGroup class]] )
 	{
 		XFGroup *group = (XFGroup *)item;
 		if( group.groupType == XFGroupTypeOnlineFriends )
 		{
-			XFSession *session = _delegate.session;
+			XFSession *session = self.delegate.session;
 			XFGroup *offlineFriendsGroup = [session.groupController offlineFriendsGroup];
 			return [NSString stringWithFormat:@"%lu friends are online\n%lu friends are offline",[group membersCount],[offlineFriendsGroup membersCount]];
 		}
@@ -525,7 +518,7 @@
 	XFFriend *remoteFriend = (XFFriend *)item;
 	if( [remoteFriend isKindOfClass:[XFFriend class]] )
 	{
-		[_delegate requestAvatarForFriend:remoteFriend];
+		[self.delegate requestAvatarForFriend:remoteFriend];
 		[(BFFriendInformationViewController *)_infoViewController updateForFriend:remoteFriend];
 	}
 	return true;

@@ -11,12 +11,8 @@
 @class XFSession, XFFriend, XFGroup;
 
 @interface BFFriendsListController : BFTabViewController <NSMenuDelegate ,NSOutlineViewDelegate, NSOutlineViewDataSource>
-{
-	NSOutlineView *_friendsList;
-	NSTableRowView *_rowView;
-}
 
-@property (assign) IBOutlet NSOutlineView *friendsList;
+@property (unsafe_unretained) IBOutlet NSOutlineView *friendsList;
 
 - (void)reloadData;
 - (void)expandItem:(id)item;

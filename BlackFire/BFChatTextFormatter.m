@@ -7,36 +7,25 @@
 //
 
 #import "BFChatTextFormatter.h"
+#import "BFChatLog.h"
 
 @implementation BFChatTextFormatter
-
-
-- (id)init
 {
-	if( (self = [super init]) )
-	{
-		NSLog(@"*** You cannot initialize BFChatTextFormatter without a valid BFChatLog object.");
-	}
-	[self release];
-	self = nil;
-	return nil;
+	BFChatLog *_chatLog;
 }
-
 
 - (id)initWithChatLog:(BFChatLog *)chatLog
 {
 	if( (self = [super init]) )
 	{
-		_chatLog = [chatLog retain];
+		_chatLog = chatLog;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[_chatLog release];
 	_chatLog = nil;
-	[super dealloc];
 }
 
 #pragma mark - Chat log processing

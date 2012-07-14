@@ -18,21 +18,8 @@
 @end
 
 @interface BFGamesManager : XFGamesManager <BFDownloadDelegate>
-{
-	NSMutableDictionary *_macGames;
-	NSMutableArray		*_runningGames;
-	NSMutableArray		*_missingIcons;
-	NSMutableArray		*_knownMissing;
-	NSString			*_cachesPath;
-	
-	NSMutableDictionary *_gameIcons;
-	
-	BFDownload *_download;
-	
-	id <BFGameDetectionDelegate> _delegate;
-}
 
-@property (assign) id <BFGameDetectionDelegate> delegate;
+@property (unsafe_unretained) id <BFGameDetectionDelegate> delegate;
 @property (readonly) NSMutableDictionary *macGames;
 
 - (void)reloadData;

@@ -10,48 +10,34 @@
 #import "BFChat.h"
 #import "XFChat.h"
 #import "XFFriend.h"
-
 #import "BFGamesManager.h"
 #import "NSNonRetardedImageView.h"
-
+#import "XNBorderedScrollView.h"
 #import "SFTabView.h"
 
 @implementation BFChatWindowController
+{	
+	NSToolbarItem *_toolbarItem;
+	NSMutableArray	*_chats;
+}
 
-@synthesize switchView		= _switchView;
-@synthesize window			= _window;
-
-@synthesize messageScrollView = _messageScrollView;
-@synthesize messageView = _messageView;
-@synthesize backgroundView = _backgroundView;
-
-
-@synthesize toolbarView		= _toolbarView;
-
-@synthesize avatarImageView = _avatarImageView;
-@synthesize statusIconView	= _statusIconView;
-@synthesize nicknameField	= _nicknameField;
-@synthesize statusField		= _statusField;
-
-@synthesize tabStripView	= _tabStripView;
-@synthesize currentChat		= _currentlySelectedChat;
 
 - (id)init
 {
 	if( (self = [super init]) )
 	{
 		[NSBundle loadNibNamed:@"BFChatWindow" owner:self];
-		[_window setAlphaValue:0.0f];
+		//[_window setAlphaValue:0.0f];
 		[_messageView setMessageDelegate:self];
 		_chats = [[NSMutableArray alloc] init];
-		_currentlySelectedChat = nil;
+		_currentChat = nil;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
-		
+		/*
 		[NSAnimationContext beginGrouping];
 		[[NSAnimationContext currentContext] setDuration:0.125f];
 		[[_window animator] setAlphaValue:1.0f];
-		[NSAnimationContext endGrouping];
+		[NSAnimationContext endGrouping];*/
 	}
 	return self;
 }
@@ -59,13 +45,9 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_chats release];
 	_chats = nil;
-	_currentlySelectedChat = nil;
-	[_toolbarItem release];
 	_toolbarItem = nil;
 	[_tabStripView setDelegate:nil];
-	[super dealloc];
 }
 
 - (BOOL)windowShouldClose:(id)sender
@@ -75,10 +57,9 @@
 		[chat closeChat];
 	}
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_chats release];
-	_chats = [[NSMutableArray alloc] init];
+	_chats = nil;
 	
-	NSArray *windows = [[NSApplication sharedApplication] windows];
+	/*NSArray *windows = [[NSApplication sharedApplication] windows];
 	for(NSWindow *window in windows)
 	{
 		if( window == _window )
@@ -96,28 +77,22 @@
 	if( [[NSAnimationContext currentContext] respondsToSelector:@selector(setCompletionHandler:)] )
 	{
 		[[NSAnimationContext currentContext] performSelector:@selector(setCompletionHandler:) withObject:^{
-			[self destroy];
+			[_window performClose:sender];
 		}];
 	}
 	else {
-		[self performSelector:@selector(destroy) withObject:nil afterDelay:0.125f];
+		//[self performSelector:@selector(destroy) withObject:nil afterDelay:0.125f];
 	}
 	[[_window animator] setAlphaValue:0.0f];
 	[NSAnimationContext endGrouping];
-	return false;
-}
-
-- (void)destroy
-{
-	[_window close];
-	[self release];
-	self = nil;
+	return false;*/
+	return true;
 }
 
 - (void)didBecomeMain:(NSNotification *)notification
 {
 	[_messageView becomeKey];
-	[_currentlySelectedChat becameMainChat];
+	[_currentChat becameMainChat];
 }
 
 - (void)awakeFromNib
@@ -141,7 +116,6 @@
 	[_toolbarItem setMaxSize:NSMakeSize(1920.0, NSHeight([_toolbarView frame])-5)];
 	[toolbar setDelegate:self];
 	[_window	setToolbar:toolbar];
-	[toolbar      release];
 	
 	[_window makeKeyAndOrderFront:self];
 	/*[_avatarImageView retain];
@@ -169,7 +143,7 @@
 - (void)selectChat:(BFChat *)chat
 {
 	// don't waste time, we like it if stuff works fast :D
-	if( chat == _currentlySelectedChat )
+	if( chat == _currentChat )
 		return;
 	
 	// select the correct tab
@@ -183,7 +157,7 @@
 	}
 	[_tabStripView layoutTabs];
 	
-	_currentlySelectedChat = chat;
+	_currentChat = chat;
 	[self changeSwitchView:(NSView *)chat.webView];
 	[self updateToolbar];
 }
@@ -194,7 +168,7 @@
 	{
 		if( chat.chat.remoteFriend.userID == tabView.tag )
 		{
-			_currentlySelectedChat = chat;
+			_currentChat = chat;
 			[self changeSwitchView:(NSView *)chat.webView];
 			[self updateToolbar];
 			return;
@@ -213,16 +187,15 @@
 
 	[tabView setTag:chat.chat.remoteFriend.userID];
 	
-	if( ! _currentlySelectedChat )
+	if( ! _currentChat )
 	{
-		_currentlySelectedChat = chat;
+		_currentChat = chat;
 		[self changeSwitchView:(NSView *)chat.webView];
 		tabView.selected = true;
 	}
 	[tabView setTarget:self];
 	[tabView setSelector:@selector(tabShouldClose:)];
 	[_tabStripView addTabView:tabView];
-	[tabView release];
 	[self updateToolbar];
 	[chat updateTabIcon];
 }
@@ -262,12 +235,12 @@
 			[chat closeChat];
 			[_chats removeObjectAtIndex:i];
 			[_tabStripView removeTabView:tabView];
-			if( chat == _currentlySelectedChat )
+			if( chat == _currentChat )
 			{
-				_currentlySelectedChat = nil;
+				_currentChat = nil;
 				if( [_chats count] > 0 )
 				{
-					_currentlySelectedChat = _chats[0];
+					_currentChat = _chats[0];
 				}
 			}
 			return;
@@ -288,7 +261,7 @@
 	[newView setFrame:[_switchView bounds]];
 	
 	[_messageView becomeKey];
-	[_currentlySelectedChat becameMainChat];
+	[_currentChat becameMainChat];
 }
 
 - (SFTabView *)tabViewForChat:(BFChat *)chat
@@ -311,7 +284,7 @@
 
 - (void)controlTextDidChange:(NSNotification *)obj
 {
-	[_currentlySelectedChat textDidChange:obj];
+	[_currentChat textDidChange:obj];
 }
 
 
@@ -321,7 +294,7 @@
 	for(i=0;i<cnt;i++)
 	{
 		BFChat *chat = _chats[i];
-		if( chat != _currentlySelectedChat )
+		if( chat != _currentChat )
 		{
 			continue;
 		}
@@ -346,7 +319,7 @@
 	for(i=0;i<cnt;i++)
 	{
 		BFChat *chat = _chats[i];
-		if( chat != _currentlySelectedChat )
+		if( chat != _currentChat )
 		{
 			continue;
 		}
@@ -369,7 +342,7 @@
 
 - (void)updateToolbar
 {
-	XFFriend *remoteFriend = _currentlySelectedChat.chat.remoteFriend;
+	XFFriend *remoteFriend = _currentChat.chat.remoteFriend;
 	if( remoteFriend )
 	{
 		NSImage *displayImage = nil;
@@ -406,7 +379,6 @@
 		[newImage setScalesWhenResized:true];
 		[newImage setSize:NSMakeSize(32, 32)];
 		[_avatarImageView setImage:newImage];
-		[newImage release];
 		
 		if( remoteFriend.online )
 		{
@@ -438,11 +410,11 @@
 	
 	if( remoteFriend.online )
 	{
-		[_messageScrollView setHidden:false];
+		_messageView.editable = true;
 	}
 	else
 	{
-		[_messageScrollView setHidden:true];
+		_messageView.editable = false;
 	}
 }
 
@@ -468,12 +440,12 @@
 
 - (void)controlTextChanged
 {
-	[_currentlySelectedChat textDidChange:nil];
+	[_currentChat textDidChange:nil];
 }
 
 - (void)sendMessage:(NSString *)message
 {
-	[_currentlySelectedChat sendMessage:message];
+	[_currentChat sendMessage:message];
 }
 
 - (void)resizeMessageView:(id)messageView{
@@ -496,7 +468,7 @@
 	if( heightAddition < 0 )
 	{
 		[_switchView setFrame:mainView];
-		[_currentlySelectedChat scrollAnimated:false];
+		[_currentChat scrollAnimated:false];
 	}
 	else
 		[_switchView setFrame:mainView];

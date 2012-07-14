@@ -10,9 +10,9 @@
 #import "ADModeItem.h"
 
 @implementation ADModeSwitchView
-
-@synthesize selector = _selector;
-@synthesize target = _target;
+{
+	NSMutableArray *_items;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -24,17 +24,14 @@
 		item.name = @"Friends";
 		item.selected = true;
 		[_items addObject:item];
-		[item release];
 		
 		item = [[ADModeItem alloc] init];
 		item.name = @"Games";
 		[_items addObject:item];
-		[item release];
 		
 		item = [[ADModeItem alloc] init];
 		item.name = @"Servers";
 		[_items addObject:item];
-		[item release];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NSWindowDidBecomeMainNotification object:self.window];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NSWindowDidResignMainNotification object:self.window];
@@ -44,9 +41,7 @@
 
 - (void)dealloc
 {
-	[_items release];
 	_items = nil;
-	[super dealloc];
 }
 
 - (void)update
@@ -142,7 +137,6 @@
 	{
 		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.65f alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.81 alpha:1.0f]];
 		[gradient drawInRect:dirtyRect angle:90.0f];
-		[gradient release];
 		[[NSColor colorWithCalibratedWhite:0.4f alpha:1.0f] set];
 		NSRectFill(NSMakeRect(0, dirtyRect.origin.y, dirtyRect.size.width+1, 1));
 		
@@ -151,7 +145,6 @@
 	{
 		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:.83 alpha:1.0f] endingColor:[NSColor colorWithCalibratedWhite:0.92 alpha:1.0f]];
 		[gradient drawInRect:dirtyRect angle:90.0f];
-		[gradient release];
 		[[NSColor colorWithCalibratedWhite:0.65f alpha:1.0f] set];
 		NSRectFill(NSMakeRect(0, dirtyRect.origin.y, dirtyRect.size.width+1, 1));
 	}
@@ -219,8 +212,6 @@
 		NSDictionary *attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:([NSFont systemFontSize])],NSFontAttributeName, shadow,NSShadowAttributeName, textColor,NSForegroundColorAttributeName, nil];
 		
 		NSAttributedString *str = [[NSAttributedString alloc] initWithString:item.name attributes:attributes];
-		[attributes release];
-		[shadow release];
 		NSSize size = [str size];
 		
 		if( item.selected )
@@ -237,7 +228,7 @@
 			NSBezierPath *lolPath = [NSBezierPath bezierPathWithRect:NSMakeRect(totalSize-6, 0, floor(size.width+10), dirtyRect.size.height)];
 			[lolPath setClip];
 				// Create and stroke the shadow
-			NSShadow * shadow = [[[NSShadow alloc] init] autorelease];
+			NSShadow * shadow = [[NSShadow alloc] init];
 			[shadow setShadowColor:[NSColor blackColor]];
 			[shadow setShadowBlurRadius:5.0];
 			[shadow set];
@@ -252,7 +243,6 @@
 		}
 		
 		[str drawInRect:NSMakeRect(totalSize, (dirtyRect.size.height/2 - size.height/2)+2, size.width, size.height-1)];
-		[str release];
 		
 		totalSize += floor(size.width + 10);
 	}

@@ -13,10 +13,6 @@
 
 @implementation BFImageAndTextCell
 
-@synthesize statusImage = _statusImage;
-@synthesize status;
-@synthesize image = _image;
-@synthesize groupRow;
 
 
 - (id)copyWithZone:(NSZone *)zone
@@ -36,13 +32,7 @@
 
 - (void)dealloc
 {
-	[statusString release];
 	statusString = nil;
-	[_statusImage release];
-	_statusImage = nil;
-	[_image release];
-	_image = nil;
-	[super dealloc];
 }
 
 - (void)setFriendStatus:(CellStatus)newStatus
@@ -52,25 +42,24 @@
     
     
 	status = newStatus;
-	[_statusImage release];
 	_statusImage = nil;
 
 	switch(newStatus)
 	{
 		case CellStatusAFK:
-			_statusImage = [[NSImage imageNamed:@"NSStatusUnavailable"] retain];
+			_statusImage = [NSImage imageNamed:@"NSStatusUnavailable"];
 			break;
 			
 		case CellStatusOnline:
-			_statusImage = [[NSImage imageNamed:@"NSStatusAvailable"] retain];
+			_statusImage = [NSImage imageNamed:@"NSStatusAvailable"];
 			break;
 			
 		case CellStatusOffline:
-			_statusImage = [[NSImage imageNamed:@"NSStatusNone"] retain];
+			_statusImage = [NSImage imageNamed:@"NSStatusNone"];
 			break;
             
         default:
-            _statusImage = [[NSImage imageNamed:@"NSStatusNone"] retain];
+            _statusImage = [NSImage imageNamed:@"NSStatusNone"];
             break;
 	}
 	[_statusImage setScalesWhenResized:true];
@@ -84,10 +73,10 @@
 	if( cellFrame.size.height > 20 )
 	{
 		if( ! _image )
-			_image = [[NSImage imageNamed:@"xfire"] retain];
+			_image = [NSImage imageNamed:@"xfire"];
 		if( ! _statusImage )
 		{
-			_statusImage = [[NSImage imageNamed:@"NSStatusAvailable"] retain];
+			_statusImage = [NSImage imageNamed:@"NSStatusAvailable"];
 		}
 	}
 	
@@ -176,11 +165,8 @@
 			[finalSt addAttribute:NSShadowAttributeName value:shadow range:NSMakeRange(0, [finalSt length])];
 			[finalSt addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalSt length])];
 			[finalSt drawInRect:NSMakeRect(cellFrame.origin.x+6.0f, (9.0f + cellFrame.origin.y + (cellFrame.size.height - bndSize.height)/2.0f), cellFrame.size.width-_displayImageSize.width-2.0f, _displayImageSize.height)];
-			[finalSt release];
 		}
 		[finalStr drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-_displayImageSize.width-2.0f, _displayImageSize.height)];
-		[shadow release];
-		[finalStr release];
 	}
 	else
 	{
@@ -190,17 +176,14 @@
 			NSMutableAttributedString *finalSt  = [[NSMutableAttributedString alloc] initWithAttributedString:statusString];
 			[finalSt addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalSt length])];
 			[finalSt drawInRect:NSMakeRect(cellFrame.origin.x+6.0f, (9.0f + cellFrame.origin.y + (cellFrame.size.height - bndSize.height)/2.0f), cellFrame.size.width-_displayImageSize.width-4.0f, _displayImageSize.height)];
-			[finalSt release];
 		}
 		NSMutableAttributedString *finalStr = [[NSMutableAttributedString alloc] initWithAttributedString:attrStr];
 		[finalStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, [finalStr length])];
 		[finalStr drawInRect:NSMakeRect(drawPt.x, drawPt.y, cellFrame.size.width-_displayImageSize.width-4.0f, _displayImageSize.height)];
-		[finalStr release];
 	}
 	[_statusImage compositeToPoint:NSMakePoint(cellFrame.origin.x+cellFrame.size.width-21.0f,cellFrame.origin.y+8.0f+(cellFrame.size.height/2.0f)) operation:NSCompositeSourceOver];
 	
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
-	[style release];
 }
 
 - (void)drawWithExpansionFrame:(NSRect)cellFrame inView:(NSView *)view
@@ -251,19 +234,16 @@
 	NSDictionary *attr = [[NSDictionary alloc] initWithObjectsAndKeys:aColor,NSForegroundColorAttributeName,
 						  boldFont,NSFontAttributeName,
 						  nil];
-	[statusString release];
 	statusString = [[NSAttributedString alloc] initWithString:aString attributes:attr];
 	/*AHHyperlinkScanner *scanner = [[AHHyperlinkScanner alloc] initWithAttributedString:statusString usingStrictChecking:false];
 	[statusString release];
 	statusString = [[scanner linkifiedString] retain];
 	[scanner release];*/
-	[attr release];
 }
 
 - (void)setShowsStatus:(BOOL)aBool{
 	if( aBool == NO )
 	{
-		[statusString release];
 		statusString = nil;
 	}
 	showsStatus = aBool;

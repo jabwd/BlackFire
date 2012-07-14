@@ -27,7 +27,7 @@
 
 + (id)map
 {
-	return [[[XFPacketDictionary alloc] init] autorelease];
+	return [[XFPacketDictionary alloc] init];
 }
 
 - (id)init
@@ -42,11 +42,8 @@
 
 - (void)dealloc
 {
-	[_orderedKeys release];
 	_orderedKeys = nil;
-	[_data release];
 	_data = nil;
-	[super dealloc];
 }
 
 - (void)setObject:(XFPacketAttributeValue *)value forKey:(id)aKey

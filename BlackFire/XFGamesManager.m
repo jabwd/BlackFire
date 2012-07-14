@@ -19,7 +19,6 @@ static XFGamesManager *sharedGameManager = nil;
 
 @implementation XFGamesManager
 
-@synthesize xfireGames = _games;
 
 + (id)sharedGamesManager
 {
@@ -36,7 +35,6 @@ static XFGamesManager *sharedGameManager = nil;
 		if( ! _games )
 		{
 			NSLog(@"*** Unable to open %@.plist",GAMESFILE_NAME);
-			[self release];
 			self = nil;
 			return nil;
 		}
@@ -46,15 +44,13 @@ static XFGamesManager *sharedGameManager = nil;
 
 - (void)dealloc
 {
-	[_games release];
 	_games = nil;
-	[super dealloc];
 }
 
 - (XFGame *)gameForGameID:(NSUInteger)gameID
 {
 	NSString *key = [[NSString alloc] initWithFormat:@"%lu",gameID];
-	XFGame *game = [[[XFGame alloc] init] autorelease];
+	XFGame *game = [[XFGame alloc] init];
 	NSDictionary *info = _games[key];
 	if( info )
 	{
@@ -70,7 +66,6 @@ static XFGamesManager *sharedGameManager = nil;
 		game.shortName	= @"-1";
 	}
 	
-	[key release];
 	return game;
 }
 

@@ -11,44 +11,25 @@
 @class SFTabStripView;
 
 @interface SFTabView : NSView
-{
-	SFTabStripView *_tabStrip;
-	NSString *_title;
-	NSImage *_tabImage;
-	
-	id _target;
-	SEL _selector;
-	
-	NSRect _originalRect;
-	NSPoint _originalPoint;
-	
-	NSInteger _tag;
-	
-	NSUInteger _missedMessages;
-	
-	BOOL _selected;
-	BOOL _mouseInside;
-	BOOL _dragging;
-	BOOL _mouseInsideClose;
-	BOOL _mouseDownInsideClose;
-	
-	BOOL _tabDragAction;
-	BOOL _tabRightSide; // used for the drawing, set in layoutTabs of the tabstripview
-}
 
-@property (nonatomic, assign) SFTabStripView *tabStrip;
-
-@property (nonatomic, retain) NSString *title;
+@property (nonatomic, unsafe_unretained) SFTabStripView *tabStrip;
+@property (nonatomic, strong) NSString *title;
 @property (assign) NSInteger tag;
-@property (nonatomic, retain) NSImage *image;
-
-@property (assign) id target;
+@property (readonly) BOOL animating;
+@property (readonly) NSRect proposedLocation;
+@property (nonatomic, strong) NSImage *image;
+@property (unsafe_unretained) id target;
 @property (assign) SEL selector;
-
 @property (assign) NSUInteger missedMessages;
-
 @property (assign) BOOL selected;
 @property (assign) BOOL tabDragAction;
 @property (assign) BOOL tabRightSide;
+
+/*
+ * This animates the tabview to the new location
+ * and when animating stops the current animation and 
+ * starts moving again 
+ */
+- (void)moveToFrame:(NSRect)newFrame;
 
 @end

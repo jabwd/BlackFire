@@ -22,37 +22,19 @@ NSString *removeQuakeColorCodes(NSString *string);
 
 
 @implementation BFFriendInformationViewController
-
-@synthesize avatarView			= _avatarView;
-@synthesize nicknameField		= _nicknameField;
-@synthesize usernameField		= _usernameField;
-@synthesize statusField			= _statusField;
-@synthesize serverAddressField	= _serverAddressField;
-@synthesize mapNameField		= _mapNameField;
-@synthesize playersList			= _playersList;
-@synthesize playersField		= _playersField;
-@synthesize nameField			= _nameField;
-
-@synthesize playersLabel = _playersLabel;
-@synthesize mapLabel = _mapLabel;
-@synthesize serverAddressLabel = _serverAddressLabel;
-@synthesize nameLabel			= _nameLabel;
-
-@synthesize progressIndicator	 = _progressIndicator;
-@synthesize progressLabel		= _progressLabel;
-@synthesize line				= _line;
+{
+	NSArray *players;
+}
 
 + (BFFriendInformationViewController *)friendInformationController
 {
 	BFFriendInformationViewController *controller = [[BFFriendInformationViewController alloc] initWithNibName:@"BFFriendInformationView" bundle:nil];
-	return [controller autorelease];
+	return controller;
 }
 
 - (void)dealloc
 {
-	[players release];
 	players = nil;
-	[super dealloc];
 }
 
 - (void)updateForFriend:(XFFriend *)friend
@@ -67,12 +49,11 @@ NSString *removeQuakeColorCodes(NSString *string);
 	{
 		NSImage *avatar = [friend.avatar copy];
 		if( ! avatar )
-			avatar = [[NSImage imageNamed:@"xfire"] retain];
+			avatar = [NSImage imageNamed:@"xfire"];
 		[avatar setScalesWhenResized:true];
 		[avatar setSize:[_avatarView frame].size];
 		[_avatarView setHidden:false];
 		[_avatarView setImage:avatar];
-		[avatar release];
 	}
 	else {
 		[_avatarView setImage:nil];
@@ -127,10 +108,9 @@ NSString *removeQuakeColorCodes(NSString *string);
 		[_playersField setStringValue:[server playerString]];
 		[_nameField setStringValue:[server name]];
 		
-		[players release];
 		players = nil;
 		
-		players = [[server players] retain];
+		players = [server players];
 		if( [players count] > 0 )
 		{
 			[[[_playersList superview] superview] setHidden:false];

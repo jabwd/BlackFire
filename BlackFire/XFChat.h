@@ -18,21 +18,11 @@
 @end
 
 @interface XFChat : NSObject
-{
-	XFFriend		*_remoteFriend;
-	XFConnection	*_connection;
-	
-	NSMutableArray	*_messageBuffer; // used for resending chat messages when they timeout
-	
-	id <XFChatDelegate> _delegate;
-	
-	BOOL _isFriendTyping;
-}
 
-@property (nonatomic, retain) XFFriend *remoteFriend;
-@property (nonatomic, assign) XFConnection *connection;
+@property (nonatomic, strong) XFFriend *remoteFriend;
+@property (nonatomic, unsafe_unretained) XFConnection *connection;
 
-@property (assign) id <XFChatDelegate> delegate;
+@property (unsafe_unretained) id <XFChatDelegate> delegate;
 
 @property (readonly) BOOL isFriendTyping;
 

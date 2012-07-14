@@ -14,8 +14,8 @@
 	NSColor *_borderColor;
 }
 
-@property (nonatomic, retain) NSImage *image;
-@property (nonatomic, retain) NSColor *borderColor;
+@property (nonatomic, strong) NSImage *image;
+@property (nonatomic, strong) NSColor *borderColor;
 
 //-------------------------------------------------------------------------
 // Image processing

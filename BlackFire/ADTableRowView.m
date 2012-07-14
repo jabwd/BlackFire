@@ -30,7 +30,6 @@
 															 endingColor:[NSColor colorWithCalibratedRed:0.96f green:0.96f blue:0.96f alpha:1.0f]];
 		
 		[gradient drawInRect:[self bounds] angle:90.0f];
-		[gradient release];
 	}
 	else
 	{
@@ -67,7 +66,6 @@
 		[[NSColor colorWithCalibratedRed:0.55f green:0.55f blue:0.55f alpha:1.0f] set];
 		NSRectFill(NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+cellFrame.size.height-1.0f, cellFrame.size.width, 1.0f));
 	}
-	[gradient release];
 }
 
 - (void)drawSeparatorInRect:(NSRect)dirtyRect{

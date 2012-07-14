@@ -27,63 +27,22 @@ typedef enum
 @class BFLoginViewController, BFFriendsListController, BFAccount, BFChatWindowController, BFPreferencesWindowController, BFGamesListController, BFServerListController, ADModeSwitchView, NSNonRetardedImageView, BFChatLogViewer, BFInformationViewController;
 
 @interface ADAppDelegate : NSObject <BFIdleTimeManagerDelegate,BFDownloadDelegate, ADStringPromptDelegate, BFGameDetectionDelegate ,NSToolbarDelegate, NSApplicationDelegate, XFSessionDelegate>
-{
-	NSWindow *_window;
-	NSSegmentedControl *_addButton;
-	ADModeSwitchView *_modeSwitch;
-	
-	XFSession				*_session;
-	BFAccount				*_account;
-	
-	NSView			*_mainView;
-	NSView			*_toolbarView;
-	NSToolbarItem	*_toolbarItem;
-	
-	// toolbar outlets
-	//NSImageView		*_avatarImageView;
-	NSNonRetardedImageView *_avatarImageView;
-	NSImageView		*_statusBubbleView;
-	NSPopUpButton	*_nicknamePopUpButton;
-	NSPopUpButton	*_statusPopUpButton;
-	NSButton		*_rightExtraButton;
-	NSView			*_sidebarView;
-	// end toolbar outlets
-	
-	NSMutableArray *_chatControllers;
-	NSMutableArray *_friendshipRequests;
-	
-	
-	BFDownload		*_download;
-	
-	BFLoginViewController			*_loginViewController;
-	BFFriendsListController			*_friendsListController;
-	BFPreferencesWindowController	*_preferencesWindowController;
-	BFGamesListController			*_gamesListController;
-	BFInformationViewController		*_informationViewController;
-	BFServerListController			*_serverListController;
-	BFChatLogViewer					*_chatlogViewer;
-	ADStringPromptController		*_stringPromptController;
-	
-	BFApplicationMode		_currentMode;
-	
-	BOOL _changingNickname;
-}
 
 @property (readonly) XFSession			*session;
-@property (assign) IBOutlet NSWindow	*window;
+@property (unsafe_unretained) IBOutlet NSWindow	*window;
 
-@property (assign) IBOutlet NSNonRetardedImageView	*avatarImageView;
-@property (assign) IBOutlet NSImageView		*statusBubbleView;
-@property (assign) IBOutlet NSPopUpButton	*nicknamePopUpButton;
-@property (assign) IBOutlet NSPopUpButton	*statusPopUpButton;
-@property (assign) IBOutlet NSButton		*rightExtraButton;
+@property (unsafe_unretained) IBOutlet NSNonRetardedImageView	*avatarImageView;
+@property (unsafe_unretained) IBOutlet NSImageView		*statusBubbleView;
+@property (unsafe_unretained) IBOutlet NSPopUpButton	*nicknamePopUpButton;
+@property (unsafe_unretained) IBOutlet NSPopUpButton	*statusPopUpButton;
+@property (unsafe_unretained) IBOutlet NSButton		*rightExtraButton;
 
-@property (assign) IBOutlet NSView *mainView;
-@property (assign) IBOutlet NSView *toolbarView;
-@property (assign) IBOutlet NSView *sidebarView;
+@property (unsafe_unretained) IBOutlet NSView *mainView;
+@property (unsafe_unretained) IBOutlet NSView *toolbarView;
+@property (unsafe_unretained) IBOutlet NSView *sidebarView;
 
-@property (assign) IBOutlet NSSegmentedControl *addButton;
-@property (assign) IBOutlet ADModeSwitchView *modeSwitch;
+@property (unsafe_unretained) IBOutlet NSSegmentedControl *addButton;
+@property (unsafe_unretained) IBOutlet ADModeSwitchView *modeSwitch;
 
 @property (readonly) BFApplicationMode currentMode;
 

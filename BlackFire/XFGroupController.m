@@ -12,8 +12,6 @@
 
 @implementation XFGroupController
 
-@synthesize session = _session;
-@synthesize groups = _groups;
 
 - (id)init
 {
@@ -42,19 +40,10 @@
 		[_groups addObject:offlineFriendsGroup];
 		[_groups addObject:friendsOfFriendsGroup];
 		
-		[onlineFriendsGroup		release];
-		[offlineFriendsGroup	release];
-		[friendsOfFriendsGroup	release];
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[_groups release];
-	_groups = nil;
-	[super dealloc];
-}
 
 #pragma mark - Managing groups
 
@@ -120,7 +109,6 @@
 	group.groupID	= groupID;
 	
 	[_groups addObject:group];
-	[group release];
 }
 
 - (void)addClanGroup:(NSString *)clanName groupID:(unsigned int)groupID
@@ -131,7 +119,6 @@
 	group.groupID	= groupID;
 	
 	[_groups addObject:group];
-	[group release];
 }
 
 #pragma mark - Managing group members

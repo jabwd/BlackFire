@@ -76,7 +76,6 @@
     
     // release the gradient
     
-    [grad release];
     
     [NSGraphicsContext restoreGraphicsState];
     

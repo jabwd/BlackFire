@@ -3,36 +3,30 @@
 //  BlackFire
 //
 //  Created by Antwan van Houdt on 10/31/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Exurion. All rights reserved.
 //
 
 #import "XFGroup.h"
 #import "XFFriend.h"
 
 @implementation XFGroup
-
-@synthesize name		= _groupName;
-
-@synthesize groupType	= _type;
-@synthesize groupID		= _groupID;
+{
+	NSMutableArray	*_members;
+}
 
 - (id)init
 {
 	if( (self = [super init]) )
 	{
 		_members = [[NSMutableArray alloc] init];
-		_groupName = nil;;
+		_name	 = nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[_members release];
 	_members = nil;
-	[_groupName release];
-	_groupName = nil;
-	[super dealloc];
 }
 
 - (void)addMember:(XFFriend *)member

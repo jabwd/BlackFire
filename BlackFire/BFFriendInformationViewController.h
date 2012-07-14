@@ -12,50 +12,26 @@
 @class XFFriend;
 
 @interface BFFriendInformationViewController : BFInfoViewController <BFGameServerInformationDelegate, NSTableViewDelegate, NSTableViewDataSource>
-{
-	NSImageView *_avatarView;
-	NSTextField *_nicknameField;
-	NSTextField *_usernameField;
-	NSTextField *_statusField;
-	
-	NSTextField *_serverAddressField;
-	NSTextField *_mapNameField;
-	NSTextField *_playersField;
-	NSTableView *_playersList;
-	NSTextField *_nameField;
-	
-	NSTextField *_mapLabel;
-	NSTextField *_playersLabel;
-	NSTextField *_serverAddressLabel;
-	NSTextField *_nameLabel;
-	
-	NSProgressIndicator *_progressIndicator;
-	NSTextField			*_progressLabel;
-	
-	NSBox *_line;
-	
-	NSArray *players;
-}
 
-@property (assign) IBOutlet NSImageView *avatarView;
-@property (assign) IBOutlet NSTextField *nicknameField;
-@property (assign) IBOutlet NSTextField *usernameField;
-@property (assign) IBOutlet NSTextField *statusField;
-@property (assign) IBOutlet NSTextField *serverAddressField;
-@property (assign) IBOutlet NSTextField *mapNameField;
-@property (assign) IBOutlet NSTextField *playersField;
-@property (assign) IBOutlet NSTableView *playersList;
-@property (assign) IBOutlet NSTextField *nameField;
+@property (unsafe_unretained) IBOutlet NSImageView *avatarView;
+@property (unsafe_unretained) IBOutlet NSTextField *nicknameField;
+@property (unsafe_unretained) IBOutlet NSTextField *usernameField;
+@property (unsafe_unretained) IBOutlet NSTextField *statusField;
+@property (unsafe_unretained) IBOutlet NSTextField *serverAddressField;
+@property (unsafe_unretained) IBOutlet NSTextField *mapNameField;
+@property (unsafe_unretained) IBOutlet NSTextField *playersField;
+@property (unsafe_unretained) IBOutlet NSTableView *playersList;
+@property (unsafe_unretained) IBOutlet NSTextField *nameField;
 
-@property (assign) IBOutlet NSTextField *playersLabel;
-@property (assign) IBOutlet NSTextField *mapLabel;
-@property (assign) IBOutlet NSTextField *serverAddressLabel;
-@property (assign) IBOutlet NSTextField *progressLabel;
-@property (assign) IBOutlet NSTextField *nameLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *playersLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *mapLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *serverAddressLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *progressLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *nameLabel;
 
-@property (assign) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
 
-@property (assign) IBOutlet NSBox *line;
+@property (unsafe_unretained) IBOutlet NSBox *line;
 
 + (BFFriendInformationViewController *)friendInformationController;
 

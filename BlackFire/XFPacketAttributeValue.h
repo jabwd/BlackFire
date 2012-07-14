@@ -34,7 +34,7 @@
 	int _arrayElementType; // only useful for arrays, otherwise undefined
 }
 
-@property (readonly) id		value;
+@property (unsafe_unretained, readonly) id		value;
 @property (readonly) int	typeID;
 @property (readonly) int	arrayElementType;
 

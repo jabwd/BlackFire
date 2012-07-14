@@ -28,10 +28,15 @@
 @end
 
 @implementation XNResizingMessageView
-
-@synthesize messageDelegate = _messageDelegate;
-
-@synthesize maxLength = _maxLength;
+{
+	NSSize	lastPostedSize;
+	NSSize	_desiredSizeCached;
+	
+	NSMutableArray	*previousMessages;
+    NSUInteger		current;
+	
+	BOOL			_resizing;
+}
 
 - (void)_init
 {
@@ -68,9 +73,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[previousMessages release];
 	previousMessages = nil;
-	[super dealloc];
 }
 
 - (void)update
@@ -100,14 +103,12 @@
             NSString *message = [[[self textStorage] string] copy];
 			if( [message length] < 1 )
 			{
-				[message release];
                 return; // prevent some nasty glitches
 			}
 			[_messageDelegate sendMessage:message];
 			
 			if( [[NSUserDefaults standardUserDefaults] boolForKey:BFMessageFieldHistory] )
 				[self addMessage:message];
-            [message release];
             [self setString:@""];
             [self setNeedsDisplay:YES];
 			[self resetCacheAndPostSizeChanged];

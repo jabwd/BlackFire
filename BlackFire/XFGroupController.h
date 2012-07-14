@@ -12,13 +12,8 @@
 
 
 @interface XFGroupController : NSObject
-{
-	NSMutableArray *_groups;
-	
-	XFSession		*_session;
-}
 
-@property (nonatomic, assign) XFSession *session;
+@property (nonatomic, unsafe_unretained) XFSession *session;
 @property (readonly) NSMutableArray *groups;
 
 

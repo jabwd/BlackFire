@@ -58,7 +58,6 @@
 	static NSArray			*enclosureStopArray = nil;
 	static NSArray			*encKeys = nil;
 
-@synthesize scanLocation = m_scanLocation;
 @dynamic linkifiedString;
 
 #pragma mark runtime initialization

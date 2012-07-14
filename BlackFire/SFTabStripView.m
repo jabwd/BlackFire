@@ -16,8 +16,6 @@
 
 @implementation SFTabStripView
 
-@synthesize tabs		= _tabs;
-@synthesize delegate	= _delegate;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -33,9 +31,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_tabs release];
-	_tabs = nil;
-	[super dealloc];
 }
 
 - (void)update
@@ -75,9 +70,6 @@
 	
 	
 	[NSGraphicsContext restoreGraphicsState];
-	
-	//NSUInteger i, cols = ceil((dirtyRect.size.width/64));
-	 //[image drawInRect:dirtyRect fromRect:NSMakeRect(0, 0, 0, 24.0) operation:NSCompositeSourceOver fraction:1.0f];
 }
 
 #pragma mark - Laying out the tabs
@@ -154,7 +146,6 @@
 - (void)removeTabView:(SFTabView *)tabView
 {
 	tabView.tabStrip = nil;
-	[tabView retain];
 	[tabView removeFromSuperview];
 	
 	NSUInteger i,cnt = [_tabs count];
@@ -174,7 +165,6 @@
 	}
 	
 	[self layoutTabs];
-	[tabView release];
 }
 
 - (SFTabView *)tabViewForTag:(NSUInteger)tag

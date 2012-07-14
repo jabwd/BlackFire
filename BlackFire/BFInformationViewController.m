@@ -9,18 +9,10 @@
 #import "BFInformationViewController.h"
 #import "XFFriend.h"
 
-
-@interface BFInformationViewController (Private)
-- (void)updateView;
-@end
-
 @implementation BFInformationViewController
-
-@synthesize nicknameField	= _nicknameField;
-@synthesize statusField		= _statusField;
-@synthesize usernameField	= _usernameField;
-
-@synthesize  avatarView = _avatarView;
+{
+	XFFriend *_currentFriend;
+}
 
 - (id)init
 {
@@ -33,18 +25,15 @@
 
 - (void)dealloc
 {
-	[_currentFriend release];
 	_currentFriend = nil;
-	[super dealloc];
 }
 
 #pragma mark - Implementation
 
 - (void)setFriend:(XFFriend *)remoteFriend
 {
-	[_currentFriend release];
 	_currentFriend = nil;
-	_currentFriend = [remoteFriend retain];
+	_currentFriend = remoteFriend;
 	
 	if( ! _currentFriend )
 	{
@@ -76,7 +65,6 @@
 		[avatar setScalesWhenResized:true];
 		[avatar setSize:NSMakeSize(64, 64)];
 		[_avatarView setImage:avatar];
-		[avatar release];
 	}
 }
 

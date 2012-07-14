@@ -11,18 +11,12 @@
 @class XFFriend;
 
 @interface ADInvitationWindowController : ADStringPromptController <NSTableViewDelegate, NSTableViewDataSource>
-{
-	NSMutableArray	*_searchResults;
-	NSTextField		*_searchField;
-	NSTableView		*_tableView;
-	XFFriend		*_selectedFriend;
-}
 
-@property (assign) IBOutlet NSTextField	*searchField;
-@property (assign) IBOutlet NSTableView		*tableView;
+@property (unsafe_unretained) IBOutlet NSTextField	*searchField;
+@property (unsafe_unretained) IBOutlet NSTableView		*tableView;
 @property (readonly) XFFriend *selectedFriend;
 
-@property (nonatomic, retain) NSMutableArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 
 - (IBAction)startSearching:(id)sender;
 

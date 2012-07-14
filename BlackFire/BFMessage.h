@@ -9,15 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface BFMessage : NSObject
-{
-    NSString		*message; 
-    unsigned long	timestamp;
-    unsigned int	user;
-}
 
 @property (nonatomic, assign) unsigned long timestamp;
 @property (nonatomic, assign) unsigned int user;
-@property (nonatomic, retain) NSString *message;
+@property (nonatomic, strong) NSString *message;
 
 - (id)initWithMessage:(NSString *)msg timestamp:(unsigned long)tstamp user:(unsigned int)usr;
 

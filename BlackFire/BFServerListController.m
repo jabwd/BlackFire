@@ -15,10 +15,15 @@
 
 
 @implementation BFServerListController
-
-@synthesize serverListView	= _serverListView;
-@synthesize session			= _session;
-
+{
+	NSMutableArray *_serverList;
+	
+	TaskWrapper *task;
+	unsigned int idx;
+	
+	NSMutableArray	*taskList;
+	NSMutableString *serverInfoOutput;
+}
 
 - (id)initWithSession:(XFSession *)session
 {
@@ -26,9 +31,9 @@
 	{
 		[NSBundle loadNibNamed:@"ServerList" owner:self];
 		
-		_session	= [session retain];
+		_session	= session;
 		taskList	= [[NSMutableArray alloc] init];
-		_serverList	= [session.serverList retain];
+		_serverList	= session.serverList;
 		
 		
 		NSTableColumn *col = [_serverListView tableColumnWithIdentifier:@"server"];
@@ -36,7 +41,6 @@
 		[cell setEditable:NO];
 		[cell setDisplayImageSize:NSMakeSize(24.0f,24.0f)];
 		[col  setDataCell:cell];
-		[cell release];
 		[_serverListView setDoubleAction:@selector(doubleClicked:)];
 	}
 	return self;
@@ -44,15 +48,9 @@
 
 - (void)dealloc
 {
-	[serverInfoOutput release];
 	serverInfoOutput = nil;
-	[taskList release];
 	taskList = nil;
-	[_serverList release];
 	_serverList = nil;
-	[_session release];
-	_session = nil;
-	[super dealloc];
 }
 
 - (IBAction)clicked:(id)sender
@@ -67,10 +65,8 @@
 	}
 	else if( task )
 	{
-		[taskList release];
 		taskList = [[NSMutableArray alloc] init];
 		[task stopProcess]; // to be sure
-		[task release];
 		task = nil;
 		[self clicked:sender]; // repeat the process
 	}
@@ -88,10 +84,8 @@
 	}
 	else if( task )
 	{
-		[taskList release];
 		taskList = [[NSMutableArray alloc] init];
 		[task stopProcess]; // to be sure
-		[task release];
 		task = nil;
 		[self refresh:sender]; // repeat the process
 	}
@@ -99,7 +93,6 @@
 
 - (IBAction)refreshAll:(id)sender
 {
-	[taskList release];
 	taskList = [[NSMutableArray alloc] init];
 	for(XFGameServer *dict in _serverList)
 	{
@@ -141,7 +134,6 @@
 				}
 			}
 			[_serverListView reloadData];
-			[serverInfoOutput release];
 			serverInfoOutput = nil;
 			/*
 			 * Perform all the tasks set in our tasks Que
@@ -168,7 +160,6 @@
 			}
 		}
 	}
-	[serverInfoOutput release];
 	serverInfoOutput = nil;
 	
 	/*
@@ -201,7 +192,6 @@ NSString *removeQuakeColorCodes(NSString *string)
 		serverInfoOutput = [[NSMutableString alloc] init];
 	NSString *buffer = [[NSString alloc] initWithData:[output dataUsingEncoding:NSASCIIStringEncoding] encoding:NSASCIIStringEncoding];
 	[serverInfoOutput appendString:buffer];
-	[buffer release];
 }
 
 - (void)nextTask
@@ -219,7 +209,6 @@ NSString *removeQuakeColorCodes(NSString *string)
 	if( task )
 	{
 		[task stopProcess];
-		[task release];
 		task = nil;
 	}
 	
@@ -239,12 +228,10 @@ NSString *removeQuakeColorCodes(NSString *string)
 	{
 		NSRunAlertPanel(@"Error", @"BlackFire is not properly installed, please reinstall the application", @"OK", nil, nil);
 		NSLog(@"*** QSTAT Path invalid, application bundle is not correct");
-		[arguments release];
 		return;
 	}
 	task = [[TaskWrapper alloc] initWithController:self arguments:arguments];
 	[task startProcess:qstatPath];
-	[arguments release];
 }
 
 - (XFGameServer *)selectedServer

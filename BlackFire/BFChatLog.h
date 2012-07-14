@@ -9,13 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface BFChatLog : NSObject
-{
-    NSString    *friendUsername;
-    NSDate      *date;
-}
 
-@property (nonatomic, retain) NSDate *date;
-@property (nonatomic, retain) NSString *friendUsername;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSString *friendUsername;
 
 /*
  * Adds the messages of the array to the database

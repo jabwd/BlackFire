@@ -9,33 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 @interface BFPreferencesWindowController : NSWindowController <NSToolbarDelegate> 
-{
-	NSMutableArray *_soundsets;
-	
-	NSView *_generalView;
-	NSView *_notificationsView;
-	NSView *_chatView;
-	NSView *_gamesView;
-	
-	NSToolbarItem *_generalItem;
-	NSPopUpButton *_soundsetDropDown;
-	
-	
-	NSTextField *_gamesVersionField;
-}
 
-@property (assign) IBOutlet NSView	*generalView;
-@property (assign) IBOutlet NSView	*notificationsView;
-@property (assign) IBOutlet NSView	*chatView;
-@property (assign) IBOutlet NSView  *gamesView;
+@property (unsafe_unretained) IBOutlet NSView	*generalView;
+@property (unsafe_unretained) IBOutlet NSView	*notificationsView;
+@property (unsafe_unretained) IBOutlet NSView	*chatView;
+@property (unsafe_unretained) IBOutlet NSView  *gamesView;
 
-@property (assign) IBOutlet NSToolbarItem				*generalItem;
+@property (unsafe_unretained) IBOutlet NSToolbarItem				*generalItem;
 
-@property (assign) IBOutlet NSPopUpButton *soundsetDropDown;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *soundsetDropDown;
 
 
 
-@property (assign) IBOutlet NSTextField *gamesVersionField;
+@property (unsafe_unretained) IBOutlet NSTextField *gamesVersionField;
 
 //-------------------------------------------------------------------------------------------
 // Mode switching

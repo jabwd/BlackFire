@@ -12,15 +12,8 @@
 
 @implementation BFLoginViewController
 
-@synthesize reconnectButton		= _reconnectButton;
 
-@synthesize usernameField = _usernameField;
-@synthesize usernameLabel = _usernameLabel;
-@synthesize passwordField = _passwordField;
-@synthesize passwordLabel = _passwordLabel;
 
-@synthesize progressIndicator	= _progressIndicator;
-@synthesize connectionStatus	= _connectionStatus;
 
 - (id)init
 {
@@ -36,7 +29,6 @@
 			if( ! password )
 				password = @"";
 			[_passwordField setStringValue:account.password];
-			[account release];
 		}
 	}
 	return self;
@@ -46,7 +38,7 @@
 {
 	if( [_usernameField isHidden] )
 	{
-		[_delegate disconnect:nil];
+		[self.delegate disconnect:nil];
 	}
 	else if( [[_usernameField stringValue] length] > 0 && [[_passwordField stringValue] length] > 0 )
 	{
@@ -54,8 +46,7 @@
 		[account setPassword:[_passwordField stringValue]];
 		[account save];
 		[[NSUserDefaults standardUserDefaults] setObject:account.username forKey:@"accountName"];
-		[account release];
-		[_delegate connectionCheck];
+		[self.delegate connectionCheck];
 	}
 }
 

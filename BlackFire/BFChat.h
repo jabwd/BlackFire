@@ -19,28 +19,10 @@ typedef enum
 } BFIMType;
 
 @interface BFChat : NSObject <XFChatDelegate>
-{
-	BFChatWindowController	*_windowController;
-	XFChat					*_chat;
-	
-	BFWebview				*_webView;
-	NSDateFormatter *_dateFormatter;
-	NSMutableArray	*_messages;
-	
-	NSColor			*_userColor;
-	NSColor			*_friendColor;
-	NSFont			*_chatFont;
-	NSFont			*_boldChatFont;
-	
-	NSUInteger		_missedMessages;
-	NSTimeInterval  _lastTimestamp;
-	BOOL			_typing;
-	BOOL			_animating;
-}
 
-@property (nonatomic, retain) BFChatWindowController *windowController;
-@property (assign) IBOutlet BFWebview *webView;
-@property (nonatomic, retain) XFChat *chat;
+@property (nonatomic, strong) BFChatWindowController *windowController;
+@property (unsafe_unretained) IBOutlet BFWebview *webView;
+@property (nonatomic, strong) XFChat *chat;
 
 @property (readonly) NSUInteger missedMessages;
 

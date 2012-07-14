@@ -11,15 +11,9 @@
 @class ADAppDelegate, BFInfoViewController;
 
 @interface BFTabViewController : NSObject
-{
-	NSView *_view;
-	
-	ADAppDelegate *_delegate;
-	BFInfoViewController *_infoViewController;
-}
 
-@property (assign) IBOutlet NSView *view;
-@property (assign) ADAppDelegate *delegate;
+@property (unsafe_unretained) IBOutlet NSView *view;
+@property (unsafe_unretained) ADAppDelegate *delegate;
 
 
 /*
@@ -27,7 +21,7 @@
  * the subclass needs to display its extra information. The subclass is also responsible for controlling
  * any data related to that view controller and its view
  */
-@property (assign) BFInfoViewController *infoViewController;
+@property (strong) BFInfoViewController *infoViewController;
 
 - (void)becomeMain;
 

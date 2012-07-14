@@ -12,17 +12,6 @@
 @class XFFriend, BFSoundSet;
 
 @interface BFNotificationCenter : NSObject <GrowlApplicationBridgeDelegate>
-{
-	NSMutableDictionary *_remoteFriends;
-	
-	NSSound *_connectSound;
-	NSSound *_onlineSound;
-	NSSound *_offlineSound;
-	NSSound *_receiveSound;
-	NSSound *_sendSound;
-	
-	NSUInteger _badgeCount;
-}
 
 + (id)defaultNotificationCenter;
 

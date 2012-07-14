@@ -12,20 +12,16 @@
 #import "SFTabStripView.h"
 
 @implementation SFTabView
-
-@synthesize tabStrip = _tabStrip;
-
-@synthesize title		= _title;
-@synthesize selected	= _selected;
-@synthesize tag			= _tag;
-@synthesize image		= _tabImage;
-
-@synthesize missedMessages = _missedMessages;
-
-@synthesize target			= _target;
-@synthesize selector		= _selector;
-@synthesize tabDragAction	= _tabDragAction;
-@synthesize tabRightSide	=_tabRightSide;
+{	
+	NSRect _originalRect;
+	NSRect _latestRect;
+	NSPoint _originalPoint;
+	
+	BOOL _mouseInside;
+	BOOL _dragging;
+	BOOL _mouseInsideClose;
+	BOOL _mouseDownInsideClose;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -39,23 +35,12 @@
 		
 		NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8, 0, frame.size.width-8, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 		[self addTrackingArea:trackingArea];
-		[trackingArea release];
 		
 		/*trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(10, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 		[self addTrackingArea:trackingArea];
 		[trackingArea release];*/
 	}
     return self;
-}
-
-- (void)dealloc
-{
-	_tabStrip = nil;
-	[_tabImage release];
-	_tabImage = nil;
-	[_title release];
-	_title = nil;
-	[super dealloc];
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
@@ -73,12 +58,9 @@
 - (void)drawRect:(NSRect)useless
 {
 	NSRect dirtyRect = [self bounds];
-	NSImage *left;
-	NSImage *right;
-	NSImage *fill;
-	NSImage *close;
+	NSImage *left,*right,*fill,*close;
 	
-	if( _selected )
+	if( self.selected )
 	{
 		if( [[self window] isMainWindow] )
 		{
@@ -130,7 +112,7 @@
 	}
 	
 	// improves the way the tabs are drawn on the screen
-	if( _tabDragAction || _selected )
+	if( _tabDragAction || self.selected )
 	{
 		[left drawInRect:NSMakeRect(0, 0, 11, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 		[right drawInRect:NSMakeRect(dirtyRect.size.width-11, 0, 11, 24) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
@@ -149,7 +131,7 @@
 	
 	
 	// optimizes the drawing. the tabstrip already has this fill.
-	if( _selected )
+	if( self.selected )
 	{
 		[[NSGraphicsContext currentContext] saveGraphicsState];
 		[[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint(0, [[self superview] frame].origin.y)];
@@ -158,11 +140,11 @@
 		[[NSGraphicsContext currentContext] restoreGraphicsState];
 	}
 	
-	NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+	NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
 	[style setAlignment:NSCenterTextAlignment];
 	
-	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+	NSShadow *shadow = [[NSShadow alloc] init];
 	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
 	[shadow setShadowColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.41]];
 	
@@ -179,7 +161,7 @@
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName: style, NSShadowAttributeName: shadow, NSForegroundColorAttributeName: textColor};
 	
 	if( ! _title )
-		_title = [@"" retain];
+		_title = @"";
 	
 	NSAttributedString *titleAttrStr = [[NSAttributedString alloc] initWithString:_title attributes:attributes];
 	/*CGFloat height = [titleAttrStr size].height/2;
@@ -198,21 +180,19 @@
 	CGFloat height = [titleAttrStr size].height/2;
 	NSRect stringRect = NSMakeRect(dirtyRect.origin.x+26, (dirtyRect.size.height/2)-height-2.0f, dirtyRect.size.width-52, 24-height);
 	[titleAttrStr drawInRect:stringRect];
-	[titleAttrStr release];
 	
 	// draw the close button on top of everything
 	if( _mouseInside )
 	{
 		[close drawInRect:NSMakeRect(10, 4, 12, 13) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	}
-	else if( _tabImage )
-		[_tabImage drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+	else if( _image )
+		[_image drawInRect:NSMakeRect(10, 4, 14, 13) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	
 	if( _missedMessages > 0 )
 	{
 		NSDictionary *newAttr = [[NSDictionary alloc] initWithObjectsAndKeys:[NSColor whiteColor],NSForegroundColorAttributeName,style,NSParagraphStyleAttributeName, nil];
 		NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu",_missedMessages] attributes:newAttr];
-		[newAttr release];
 		
 		// draw some sort of bezel around it
 		NSRect stringRect = NSMakeRect(dirtyRect.size.width-20-[countString size].width, 4, [countString size].width, 13);
@@ -224,7 +204,6 @@
 		[bezelPath fill];
 		
 		[countString drawInRect:NSMakeRect(dirtyRect.size.width-15-[countString size].width, 6, [countString size].width, 13)];
-		[countString release];
 	}
 }
 
@@ -283,7 +262,6 @@
 	
 	NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8, 0, frame.size.width-8, frame.size.height) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 	[self addTrackingArea:trackingArea];
-	[trackingArea release];
 	
 	/*trackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(14, 4, 12, 13) options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways) owner:self userInfo:nil];
 	[self addTrackingArea:trackingArea];
@@ -331,6 +309,12 @@
 
 	NSPoint newPoint = [NSEvent mouseLocation];
 	CGFloat deltaX = _originalPoint.x - newPoint.x;
+	SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
+	if( ![tabStrip isKindOfClass:[SFTabStripView class]] )
+	{
+		NSLog(@"*** Superview != SFTabStripView");
+		abort();
+	}
 	
 	if( ! _dragging )
 	{
@@ -341,7 +325,10 @@
 		else
 		{
 			_dragging = true;
-			SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
+			
+			// this informs other tabs that they have to draw a complete tab
+			// we are lazy when nothing is happening and only partially drawing tabs
+			// as some part is hidden under another tab anyways
 			[tabStrip aTabIsDragging];
 		}
 	}
@@ -351,8 +338,6 @@
 	_originalPoint = [NSEvent mouseLocation];
 	[self setFrame:ownFrame];
 	
-	SFTabStripView *tabStrip = (SFTabStripView *)[self superview];
-	
 	NSUInteger i, cnt = [tabStrip.tabs count];
 	for(i=0;i<cnt;i++)
 	{
@@ -361,13 +346,19 @@
 			continue;
 		
 		NSRect frame = [tabView frame];
+		if( tabView.animating )
+		{
+			frame = tabView.proposedLocation;
+		}
 		
-		// first determine on which side the other tab exists
+		// determine on which side ( relative to this tab ) the tab under this one is
+		// then act accordingly.
 		if( frame.origin.x <= ownFrame.origin.x )
 		{
 			if( (frame.origin.x+(frame.size.width/2)) >= ownFrame.origin.x )
 			{
-				[tabView setFrame:_originalRect];
+				//[tabView setFrame:_originalRect];
+				[tabView moveToFrame:_originalRect];
 				_originalRect = frame;
 				NSUInteger idx = [tabStrip.tabs indexOfObject:self];
 				[tabStrip.tabs exchangeObjectAtIndex:i withObjectAtIndex:idx];
@@ -378,39 +369,11 @@
 		{
 			if( (frame.origin.x) <= (ownFrame.origin.x+(ownFrame.size.width/2)) )
 			{
-				[tabView setFrame:_originalRect];
+				//[tabView setFrame:_originalRect];
+				[tabView moveToFrame:_originalRect];
 				_originalRect = frame;
 				NSUInteger idx = [tabStrip.tabs indexOfObject:self];
 				[tabStrip.tabs exchangeObjectAtIndex:i withObjectAtIndex:idx];
-				return;
-			}
-		}
-	}
-	return;
-	
-	for(SFTabView *tabView in tabStrip.tabs)
-	{
-		if( tabView == self )
-			continue;
-		
-		NSRect frame = [tabView frame];
-		
-		// first determine on which side the other tab exists
-		if( frame.origin.x <= ownFrame.origin.x )
-		{
-			if( (frame.origin.x+(frame.size.width/2)) >= ownFrame.origin.x )
-			{
-				[tabView setFrame:_originalRect];
-				_originalRect = frame;
-				return;
-			}
-		}
-		else if( frame.origin.x >= ownFrame.origin.x )
-		{
-			if( (frame.origin.x) <= (ownFrame.origin.x+(ownFrame.size.width/2)) )
-			{
-				[tabView setFrame:_originalRect];
-				_originalRect = frame;
 				return;
 			}
 		}
@@ -454,6 +417,35 @@
 	[self setFrame:_originalRect];
 	SFTabStripView *view = (SFTabStripView *)[self superview];
 	[view layoutTabs];
+}
+
+- (void)moveToFrame:(NSRect)newFrame
+{
+	if( _animating )
+	{
+		_latestRect = newFrame;
+		// will be handled later on.
+		return;
+	}
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:.125f];
+	_animating = true;
+	_latestRect = NSZeroRect;
+	_proposedLocation = newFrame;
+	[[self animator] setFrame:newFrame];
+	[self performSelector:@selector(animationCleanup) withObject:nil afterDelay:.125f];
+	[NSAnimationContext endGrouping];
+
+}
+
+- (void)animationCleanup
+{
+	_animating = false;
+	if( _latestRect.origin.x != NSZeroRect.origin.x )
+	{
+		//[self moveToFrame:_latestRect];
+	}
+	[self setNeedsDisplay:true];
 }
 
 @end

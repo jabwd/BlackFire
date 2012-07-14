@@ -29,7 +29,6 @@
 
 @implementation AHMarkedHyperlink
 
-@synthesize range = linkRange, URL = linkURL, parentString = pString, validationStatus = urlStatus;
 
 // jabwd test
 /*- (NSURL *)URL

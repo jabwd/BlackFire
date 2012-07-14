@@ -15,18 +15,9 @@
 #import "BFGamesManager.h"
 
 @implementation BFPreferencesWindowController
-
-@synthesize generalView			= _generalView;
-@synthesize notificationsView	= _notificationsView;
-@synthesize chatView			= _chatView;
-@synthesize gamesView			= _gamesView;
-
-@synthesize generalItem			= _generalItem;
-
-@synthesize soundsetDropDown	= _soundsetDropDown;
-
-
-@synthesize gamesVersionField = _gamesVersionField;
+{
+	NSMutableArray *_soundsets;
+}
 
 - (id)init
 {
@@ -35,13 +26,6 @@
 		_soundsets = nil;
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-	[_soundsets release];
-	_soundsets = nil;
-	[super dealloc];
 }
 
 - (void)awakeFromNib
@@ -79,14 +63,15 @@
 - (IBAction)generalMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_generalView];
+	self.window.title = @"General";
 }
 
 - (IBAction)notificationsMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_notificationsView];
+	self.window.title = @"Notifications";
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		NSString *soundsetsPath = BFSoundsetsDirectoryPath();
-		[_soundsets release];
 		_soundsets = [[NSMutableArray alloc] init];
 		NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:soundsetsPath error:nil];
 		if( [contents count] > 0 )
@@ -101,8 +86,6 @@
 				{
 					[_soundsets addObject:set];
 				}
-				[set release];
-				[finalPath release];
 			}
 		}
 		
@@ -121,7 +104,6 @@
 				[menu addItem:item];
 				if( [set.path isEqualToString:currentPath] )
 					current = item;
-				[item release];
 			}
 			[_soundsetDropDown setMenu:menu];
 			if( current )
@@ -131,7 +113,6 @@
 				[_soundsetDropDown setEnabled:true];
 			else
 				[_soundsetDropDown setEnabled:false];
-			[menu release];
 		});
 	});
 }
@@ -139,11 +120,13 @@
 - (IBAction)chatMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_chatView];
+	self.window.title = @"Chatting";
 }
 
 - (IBAction)gamesMode:(id)sender
 {
 	[self removeAllSubviewsAndReplaceWithView:_gamesView];
+	self.window.title = @"Games";
 	
 	[_gamesVersionField setStringValue:[NSString stringWithFormat:@"%lu",[[BFGamesManager sharedGamesManager] gamesVersion]]];
 }

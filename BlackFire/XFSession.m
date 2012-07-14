@@ -22,15 +22,21 @@ NSString *XFFriendDidChangeNotification		= @"XFFriendDidChangeNotification";
 NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 
 @implementation XFSession
+{	
+	NSMutableArray	*_friends;
+	NSTimer			*_keepAliveTimer;
+	
+	NSMutableArray	*_chats;
+	NSMutableArray	*_groupChats;
+	
+	NSMutableArray *_servers;
+	
+	// yeath this seems odd, but we need this in order to make sure that we aren't doing any excessive
+	// work displaying growl notifications when we are still "connecting" to xfire.
+	// yup, the protocol sucks.
+	BOOL _canPostNotifications;
+}
 
-@synthesize tcpConnection	= _tcpConnection;
-@synthesize loginIdentity	= _loginIdentity;
-@synthesize delegate		= _delegate;
-@synthesize groupController = _groupController;
-
-@synthesize serverList = _servers;
-
-@synthesize status = _status;
 
 - (id)initWithDelegate:(id<XFSessionDelegate>)delegate
 {
@@ -59,23 +65,12 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
-	[_tcpConnection release];
-	_tcpConnection = nil;
-	[_loginIdentity release];
-	_loginIdentity = nil;
-	[_groupController release];
-	_groupController = nil;
 	_status = XFSessionStatusOffline;
 	_delegate = nil;
-	[_friends release];
 	_friends = nil;
-	[_chats release];
 	_chats = nil;
-	[_groupChats release];
 	_groupChats = nil;
-	[_servers release];
 	_servers = nil;
-	[super dealloc];
 }
 
 - (void)connect
@@ -88,22 +83,16 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	
 	[self setStatus:XFSessionStatusConnecting];
 	
-	[_friends release];
 	_friends = [[NSMutableArray alloc] init];
-	[_groupController release];
 	_groupController = [[XFGroupController alloc] init];
 	
-	[_loginIdentity release];
 	_loginIdentity = [[XFFriend alloc] init];
 	
-	[_tcpConnection release];
 	_tcpConnection = [[XFConnection alloc] initWithSession:self];
 	[_tcpConnection connect];
 	
-	[_chats release];
 	_chats = [[NSMutableArray alloc] init];
 	
-	[_groupChats release];
 	_groupChats = [[NSMutableArray alloc] init];
 	
 	_canPostNotifications = false;
@@ -121,24 +110,17 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
 	[_tcpConnection disconnect];
-	[_tcpConnection autorelease];
 	_tcpConnection = nil;
-	[_groupController release];
 	_groupController = nil;
 	
-	[_loginIdentity release];
 	_loginIdentity = nil;
 	
-	[_friends release];
 	_friends = nil;
 	
-	[_chats release];
 	_chats = nil;
 	
-	[_groupChats release];
 	_groupChats = nil;
 	
-	[_servers release];
 	_servers = nil;
 	
 	[self setStatus:XFSessionStatusOffline];
@@ -279,7 +261,7 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	{
 		if( [_friends[i] userID] == userID )
 		{
-			friend = [_friends[i] retain];
+			friend = _friends[i];
 			for(XFGroup *group in _groupController.groups)
 			{
 				if( [group friendIsMember:friend] )
@@ -290,7 +272,6 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		}
 	}
 	[self raiseFriendNotification:XFFriendNotificationFriendRemoved forFriend:friend];
-	[friend release];
 }
 
 #pragma mark - Managing chats
@@ -314,7 +295,6 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 		[_delegate session:self chatDidStart:chat];
 	
 	[_chats addObject:chat];
-	[chat release];
 	
 	return chat;
 }
@@ -324,7 +304,6 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	// just to make sure that the chat isn't destroyed when we are still busy
 	// removing it, we still need it in the delegate _after_ removing it from our
 	// own storage
-	[chat retain];
 	
 	NSUInteger i, cnt = [_chats count];
 	for(i=0;i<cnt;i++)
@@ -340,7 +319,6 @@ NSString *XFFriendChangeAttribute			= @"XFFriendChangeAttribute";
 	if( [_delegate respondsToSelector:@selector(session:chatDidEnd:)] )
 		[_delegate session:self chatDidEnd:chat];
 	
-	[chat release];
 }
 
 

@@ -57,9 +57,6 @@
 		362FCBBD14A0D07000DED0DD /* TaskWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBBC14A0D07000DED0DD /* TaskWrapper.m */; };
 		362FCBFC14A16BF300DED0DD /* ADModeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBF914A16BF300DED0DD /* ADModeItem.m */; };
 		362FCBFD14A16BF300DED0DD /* ADModeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */; };
-		362FFA75146734BA007E3BD8 /* CTTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA70146734BA007E3BD8 /* CTTabController.m */; };
-		362FFA76146734BA007E3BD8 /* CTTabStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA72146734BA007E3BD8 /* CTTabStripView.m */; };
-		362FFA77146734BA007E3BD8 /* CTTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362FFA74146734BA007E3BD8 /* CTTabView.m */; };
 		362FFA99146742D0007E3BD8 /* activeTabFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 362FFA84146742D0007E3BD8 /* activeTabFill.png */; };
 		362FFA9A146742D0007E3BD8 /* activeTabFillSL.png in Resources */ = {isa = PBXBuildFile; fileRef = 362FFA85146742D0007E3BD8 /* activeTabFillSL.png */; };
 		362FFA9B146742D0007E3BD8 /* activeTabLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 362FFA86146742D0007E3BD8 /* activeTabLeft.png */; };
@@ -86,6 +83,8 @@
 		363F0FFD14F69B4800C87557 /* BFChatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 363F0FFE14F69B4800C87557 /* BFChatWindow.xib */; };
 		364088E814D01B8400902346 /* ShadowedClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 364088E714D01B8400902346 /* ShadowedClipView.m */; };
 		3645873A149937AF00460195 /* BFDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 36458739149937AF00460195 /* BFDefaults.m */; };
+		3645C4A6159DAC5B00768C64 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3645C4A5159DAC5B00768C64 /* Growl.framework */; };
+		3645C4A7159DADD200768C64 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3645C4A5159DAC5B00768C64 /* Growl.framework */; };
 		3646BBDD1464802D008FD6D4 /* XFGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBDC1464802D008FD6D4 /* XFGroupController.m */; };
 		3646BBE11464A548008FD6D4 /* XFChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE01464A548008FD6D4 /* XFChat.m */; };
 		3646BBE41464A849008FD6D4 /* XFGameServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3646BBE31464A849008FD6D4 /* XFGameServer.m */; };
@@ -106,9 +105,9 @@
 		368238EC14A0A15C00C60D5E /* BFGamesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 368238EB14A0A15C00C60D5E /* BFGamesGroup.m */; };
 		3688BB1F14F4EF340050F5E4 /* BFChatTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3688BB1E14F4EF340050F5E4 /* BFChatTextFormatter.m */; };
 		368C6B47149E00CF00723E9A /* chatting.icns in Resources */ = {isa = PBXBuildFile; fileRef = 368C6B46149E00CF00723E9A /* chatting.icns */; };
-		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; };
+		368EC5B8147172CF00EEDC07 /* AHHyperlinkScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B3147172CF00EEDC07 /* AHHyperlinkScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		368EC5B9147172CF00EEDC07 /* AHLinkLexer.l in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B5147172CF00EEDC07 /* AHLinkLexer.l */; };
-		368EC5BA147172CF00EEDC07 /* AHMarkedHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B7147172CF00EEDC07 /* AHMarkedHyperlink.m */; };
+		368EC5BA147172CF00EEDC07 /* AHMarkedHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 368EC5B7147172CF00EEDC07 /* AHMarkedHyperlink.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		368EC5C21471A1F000EEDC07 /* BFChat.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368EC5C11471A1F000EEDC07 /* BFChat.xib */; };
 		368F2A3A156E3475004F2B6D /* Games.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368F2A38156E3475004F2B6D /* Games.plist */; };
 		368F2A3B156E3475004F2B6D /* MacGames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368F2A39156E3475004F2B6D /* MacGames.plist */; };
@@ -133,9 +132,7 @@
 		36B642791484464700D9B11E /* online.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642721484464600D9B11E /* online.m4v */; };
 		36B6427A1484464700D9B11E /* receive.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642731484464600D9B11E /* receive.m4v */; };
 		36B6427B1484464700D9B11E /* Send.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 36B642741484464700D9B11E /* Send.m4v */; };
-		36B6427F1484474700D9B11E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36B64282148447EC00D9B11E /* BFNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B64281148447EC00D9B11E /* BFNotificationCenter.m */; };
-		36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36B6427E1484474700D9B11E /* Growl.framework */; };
 		36BC47F2158C53B7009C4ACB /* ADTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BC47F1158C53B7009C4ACB /* ADTableRowView.m */; };
 		36BC47F6158C53C5009C4ACB /* ADTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BC47F5158C53C5009C4ACB /* ADTableCellView.m */; };
 		36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D9C9F114659B9600C4A162 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -184,7 +181,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				36B6428714844F0B00D9B11E /* Growl.framework in CopyFiles */,
+				3645C4A7159DADD200768C64 /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,12 +272,6 @@
 		362FCBF914A16BF300DED0DD /* ADModeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModeItem.m; sourceTree = "<group>"; };
 		362FCBFA14A16BF300DED0DD /* ADModeSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADModeSwitchView.h; sourceTree = "<group>"; };
 		362FCBFB14A16BF300DED0DD /* ADModeSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModeSwitchView.m; sourceTree = "<group>"; };
-		362FFA6F146734BA007E3BD8 /* CTTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabController.h; sourceTree = "<group>"; };
-		362FFA70146734BA007E3BD8 /* CTTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTabController.m; sourceTree = "<group>"; };
-		362FFA71146734BA007E3BD8 /* CTTabStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabStripView.h; sourceTree = "<group>"; };
-		362FFA72146734BA007E3BD8 /* CTTabStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTabStripView.m; sourceTree = "<group>"; };
-		362FFA73146734BA007E3BD8 /* CTTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTabView.h; sourceTree = "<group>"; };
-		362FFA74146734BA007E3BD8 /* CTTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTabView.m; sourceTree = "<group>"; };
 		362FFA84146742D0007E3BD8 /* activeTabFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabFill.png; sourceTree = "<group>"; };
 		362FFA85146742D0007E3BD8 /* activeTabFillSL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabFillSL.png; sourceTree = "<group>"; };
 		362FFA86146742D0007E3BD8 /* activeTabLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeTabLeft.png; sourceTree = "<group>"; };
@@ -315,6 +306,7 @@
 		364088E714D01B8400902346 /* ShadowedClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowedClipView.m; sourceTree = "<group>"; };
 		36458738149937AF00460195 /* BFDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDefaults.h; sourceTree = "<group>"; };
 		36458739149937AF00460195 /* BFDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDefaults.m; sourceTree = "<group>"; };
+		3645C4A5159DAC5B00768C64 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		3646BBDB1464802D008FD6D4 /* XFGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFGroupController.h; sourceTree = "<group>"; };
 		3646BBDC1464802D008FD6D4 /* XFGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFGroupController.m; sourceTree = "<group>"; };
 		3646BBDF1464A548008FD6D4 /* XFChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFChat.h; sourceTree = "<group>"; };
@@ -389,7 +381,6 @@
 		36B642721484464600D9B11E /* online.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = online.m4v; sourceTree = "<group>"; };
 		36B642731484464600D9B11E /* receive.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = receive.m4v; sourceTree = "<group>"; };
 		36B642741484464700D9B11E /* Send.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Send.m4v; sourceTree = "<group>"; };
-		36B6427E1484474700D9B11E /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		36B64280148447EC00D9B11E /* BFNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNotificationCenter.h; sourceTree = "<group>"; };
 		36B64281148447EC00D9B11E /* BFNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNotificationCenter.m; sourceTree = "<group>"; };
 		36BC47F0158C53B7009C4ACB /* ADTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTableRowView.h; sourceTree = "<group>"; };
@@ -460,7 +451,7 @@
 				363941CC149C0E7C00DDECB4 /* libsqlite3.dylib in Frameworks */,
 				36D9C9F214659B9600C4A162 /* Security.framework in Frameworks */,
 				3616F65E145F0E5500E5066D /* Cocoa.framework in Frameworks */,
-				36B6427F1484474700D9B11E /* Growl.framework in Frameworks */,
+				3645C4A6159DAC5B00768C64 /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +472,10 @@
 		3616F64E145F0E5400E5066D = {
 			isa = PBXGroup;
 			children = (
-				3616F663145F0E5500E5066D /* Xfire for Mac */,
+				366AC22D14655E15002A1F50 /* Mac OS X */,
+				3616F6A7145F5CC500E5066D /* Resources */,
+				3616F67E145F0FF800E5066D /* XfireKit */,
+				3616F664145F0E5500E5066D /* Supporting Files */,
 				3616F65C145F0E5500E5066D /* Frameworks */,
 				3616F65A145F0E5500E5066D /* Products */,
 			);
@@ -498,10 +492,10 @@
 		3616F65C145F0E5500E5066D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3645C4A5159DAC5B00768C64 /* Growl.framework */,
 				36345A8814F5BE02006DEC4A /* WebKit.framework */,
 				368467B014EECBB6006669D5 /* WebKit.framework */,
 				363941CB149C0E7C00DDECB4 /* libsqlite3.dylib */,
-				36B6427E1484474700D9B11E /* Growl.framework */,
 				36D9C9F114659B9600C4A162 /* Security.framework */,
 				3616F65D145F0E5500E5066D /* Cocoa.framework */,
 				3616F65F145F0E5500E5066D /* Other Frameworks */,
@@ -519,18 +513,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		3616F663145F0E5500E5066D /* Xfire for Mac */ = {
-			isa = PBXGroup;
-			children = (
-				366AC22D14655E15002A1F50 /* BlackFire */,
-				3616F6A7145F5CC500E5066D /* Resources */,
-				3616F67E145F0FF800E5066D /* XfireKit */,
-				3616F664145F0E5500E5066D /* Supporting Files */,
-			);
-			name = "Xfire for Mac";
-			path = BlackFire;
-			sourceTree = "<group>";
-		};
 		3616F664145F0E5500E5066D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +527,7 @@
 				360809ED149181180081C05A /* Readme.txt */,
 			);
 			name = "Supporting Files";
+			path = BlackFire;
 			sourceTree = "<group>";
 		};
 		3616F67E145F0FF800E5066D /* XfireKit */ = {
@@ -562,6 +545,7 @@
 				36FD1185147953B5009F70DE /* XFGamesManager.m */,
 			);
 			name = XfireKit;
+			path = BlackFire;
 			sourceTree = "<group>";
 		};
 		3616F683145F104000E5066D /* Connection */ = {
@@ -639,19 +623,7 @@
 				36B6427C1484467300D9B11E /* Sounds */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		362FFA79146734BF007E3BD8 /* Chromium tabs */ = {
-			isa = PBXGroup;
-			children = (
-				362FFA6F146734BA007E3BD8 /* CTTabController.h */,
-				362FFA70146734BA007E3BD8 /* CTTabController.m */,
-				362FFA71146734BA007E3BD8 /* CTTabStripView.h */,
-				362FFA72146734BA007E3BD8 /* CTTabStripView.m */,
-				362FFA73146734BA007E3BD8 /* CTTabView.h */,
-				362FFA74146734BA007E3BD8 /* CTTabView.m */,
-			);
-			name = "Chromium tabs";
+			path = BlackFire;
 			sourceTree = "<group>";
 		};
 		362FFA7F146742B6007E3BD8 /* Safari tabs */ = {
@@ -750,7 +722,6 @@
 				36CA2B33150CBB6500D6F5AB /* Message view */,
 				361268D014A26C4300ACDEA4 /* ModeSwitchView */,
 				362FFA7F146742B6007E3BD8 /* Safari tabs */,
-				362FFA79146734BF007E3BD8 /* Chromium tabs */,
 				361268CC14A26C3E00ACDEA4 /* ADShadowScrollView.h */,
 				361268CD14A26C3E00ACDEA4 /* ADShadowScrollView.m */,
 				363DC6BF14A65C9800FBE38E /* NSNonRetardedImageView.h */,
@@ -806,7 +777,7 @@
 			name = TabViews;
 			sourceTree = "<group>";
 		};
-		366AC22D14655E15002A1F50 /* BlackFire */ = {
+		366AC22D14655E15002A1F50 /* Mac OS X */ = {
 			isa = PBXGroup;
 			children = (
 				364587361499379B00460195 /* User Defaults */,
@@ -824,7 +795,8 @@
 				36B64280148447EC00D9B11E /* BFNotificationCenter.h */,
 				36B64281148447EC00D9B11E /* BFNotificationCenter.m */,
 			);
-			name = BlackFire;
+			name = "Mac OS X";
+			path = BlackFire;
 			sourceTree = "<group>";
 		};
 		366AC22E14655E1D002A1F50 /* WindowControllers */ = {
@@ -1032,7 +1004,7 @@
 		3616F650145F0E5400E5066D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = Exurion;
 			};
 			buildConfigurationList = 3616F653145F0E5400E5066D /* Build configuration list for PBXProject "BlackFire" */;
@@ -1194,9 +1166,6 @@
 				3694B5371466AF1200D0A105 /* BFChat.m in Sources */,
 				3694B53A1466AFE700D0A105 /* BFChatWindowController.m in Sources */,
 				3694B53F1466B3EB00D0A105 /* BFMessageCell.m in Sources */,
-				362FFA75146734BA007E3BD8 /* CTTabController.m in Sources */,
-				362FFA76146734BA007E3BD8 /* CTTabStripView.m in Sources */,
-				362FFA77146734BA007E3BD8 /* CTTabView.m in Sources */,
 				362FFAAD14674363007E3BD8 /* SFTabStripView.m in Sources */,
 				36276EC71468152900F84E7B /* SFTabView.m in Sources */,
 				36276EE51468442B00F84E7B /* NSViewAdditions.m in Sources */,
@@ -1328,7 +1297,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "Mac Developer: Antwan van Houdt (YSWD3CRMG5)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1341,7 +1312,6 @@
 				LEX_SUPPRESS_WARNINGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52EDBC4E-C318-4977-80F7-C4CA2669C304";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1351,7 +1321,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "Mac Developer: Antwan van Houdt (YSWD3CRMG5)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1363,7 +1335,6 @@
 				LEX_SUPPRESS_WARNINGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52EDBC4E-C318-4977-80F7-C4CA2669C304";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};

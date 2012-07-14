@@ -10,11 +10,9 @@
 
 @implementation BFMessageCell
 
-@synthesize displayName = _displayName;
-@synthesize date		= _date;
 
 
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+/*- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	NSString *text = (NSString *)[self objectValue];
 	NSString *name = _displayName;
@@ -31,17 +29,13 @@
 	{
 		NSAttributedString *nameString = [[NSAttributedString alloc] initWithString:name];
 		[nameString drawInRect:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+4, cellFrame.size.width, 20)];
-		[nameString release];
 		
-		NSAttributedString *dateString = [[NSAttributedString alloc] initWithString:timestamp];
+		//NSAttributedString *dateString = [[NSAttributedString alloc] initWithString:timestamp];
 		
-		[dateString release];
 		
 		NSAttributedString *message = [[NSAttributedString alloc] initWithString:text];
 		[message drawInRect:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+16, cellFrame.size.width, cellFrame.size.height-20)];		
-		[message release];
 	}
-	[dateFormatter release];
-}
+}*/
 
 @end

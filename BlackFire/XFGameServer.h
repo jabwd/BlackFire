@@ -28,8 +28,8 @@ extern NSString *XFGameServerXPKey;
 	BOOL _online;
 }
 
-@property (nonatomic, retain) NSDictionary *raw;
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, strong) NSDictionary *raw;
+@property (nonatomic, strong) NSString *name;
 
 @property (nonatomic, assign) unsigned int IPAddress;
 @property (nonatomic, assign) unsigned short port;

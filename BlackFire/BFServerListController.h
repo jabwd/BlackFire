@@ -12,21 +12,9 @@
 @class XFSession, XFGameServer, ADOutlineView;
 
 @interface BFServerListController : BFTabViewController  <TaskWrapperController>
-{
-	NSMutableArray *_serverList;
-	
-	XFSession *_session;
-	TaskWrapper *task;
-	unsigned int idx;
-	
-	NSMutableArray	*taskList;
-	NSMutableString *serverInfoOutput;
-	
-	ADOutlineView *_serverListView;
-}
 
-@property (nonatomic, assign) IBOutlet ADOutlineView *serverListView;
-@property (nonatomic, retain) XFSession *session;
+@property (nonatomic, unsafe_unretained) IBOutlet ADOutlineView *serverListView;
+@property (nonatomic, strong) XFSession *session;
 
 - (id)initWithSession:(XFSession *)session;
 

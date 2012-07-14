@@ -40,23 +40,28 @@
 #import "BFDefaults.h"
 
 @implementation ADAppDelegate
+{
+	BFAccount				*_account;
+	NSToolbarItem	*_toolbarItem;
+	
+	NSMutableArray *_chatControllers;
+	NSMutableArray *_friendshipRequests;
+	
+	
+	BFDownload		*_download;
+	
+	BFLoginViewController			*_loginViewController;
+	BFFriendsListController			*_friendsListController;
+	BFPreferencesWindowController	*_preferencesWindowController;
+	BFGamesListController			*_gamesListController;
+	BFInformationViewController		*_informationViewController;
+	BFServerListController			*_serverListController;
+	BFChatLogViewer					*_chatlogViewer;
+	ADStringPromptController		*_stringPromptController;
+	
+	BOOL _changingNickname;
+}
 
-@synthesize window			= _window;
-@synthesize session			= _session;
-@synthesize mainView		= _mainView;
-@synthesize toolbarView		= _toolbarView;
-@synthesize sidebarView		= _sidebarView;
-
-@synthesize avatarImageView			= _avatarImageView;
-@synthesize statusBubbleView		= _statusBubbleView;
-@synthesize nicknamePopUpButton		= _nicknamePopUpButton;
-@synthesize statusPopUpButton		= _statusPopUpButton;
-@synthesize rightExtraButton		= _rightExtraButton;
-
-@synthesize addButton = _addButton;
-@synthesize modeSwitch = _modeSwitch;
-
-@synthesize currentMode = _currentMode;
 
 + (void)initialize
 {
@@ -84,29 +89,17 @@
 	// register the defaults
 	[[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 	
-	[dict		release];
-	[n_true		release];
-	[n_false	release];
 }
 
 - (void)dealloc
 {
-	[_download release];
 	_download = nil;
 	[_session disconnect];
-	[_session release];
-	_session = nil;
-	[_account release];
 	_account = nil;
-	[_chatControllers release];
 	_chatControllers = nil;
-	[_preferencesWindowController release];
 	_preferencesWindowController = nil;
-	[_friendshipRequests release];
 	_friendshipRequests = nil;
-	[_chatlogViewer release];
 	_chatlogViewer = nil;
-    [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -136,7 +129,6 @@
     
     [toolbar      setDelegate:self];
     [_window	setToolbar:toolbar];
-    [toolbar      release];
 	
 	[_modeSwitch setTarget:self];
 	[_modeSwitch setSelector:@selector(modeControl:)];
@@ -219,7 +211,6 @@
 			{
 				NSRunAlertPanel(@"Error", @"Could not open this soundset, sorry! :/", @"OK", nil, nil);
 			}
-			[set release];
 		}
 		else
 		{
@@ -282,7 +273,6 @@
 			if( _stringPromptController )
 			{
 				[_stringPromptController hide];
-				[_stringPromptController release];
 				_stringPromptController = nil;
 			}
 			
@@ -294,7 +284,6 @@
 				_loginViewController = [[BFLoginViewController alloc] init];
 				_loginViewController.delegate = self;
 			}
-			[_friendsListController release];
 			_friendsListController = nil;
 			[_loginViewController session:_session changedStatus:XFSessionStatusOffline];
 			
@@ -540,7 +529,6 @@
 	// not leaking, releases itself.
 	
 	[_chatControllers addObject:blackfireChat];
-	[blackfireChat release];
 }
 
 
@@ -551,7 +539,6 @@
 	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"accountName"];
 	if( [username length] < 1 )
 		return;
-	[_account release];
 	_account = [[BFAccount alloc] initWithUsername:username];
 	if( (!_session || _session.status == XFSessionStatusOffline) && [_account.username length] > 0 && [_account.password length] > 0  )
 	{
@@ -568,7 +555,6 @@
 {
 	[_session disconnect];
 	[_session setDelegate:nil];
-	[_session release];
 	_session = nil;
 	
 	[self changeToMode:BFApplicationModeOffline];
@@ -586,7 +572,6 @@
 	}
 	
 	
-	[changedFriend retain];
 	
 	if( notificationType == XFFriendNotificationOnlineStatusChanged && [[changedFriend displayName] length] > 0 )
 	{
@@ -627,10 +612,8 @@
 	// ( mainly for the chat anyways ).
 	NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:notificationType],@"type", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:XFFriendDidChangeNotification object:changedFriend userInfo:userInfo];
-	[userInfo release];
 	
 	// done with it.
-	[changedFriend release];
 }
 
 - (void)session:(XFSession *)session loginFailed:(XFLoginError)reason
@@ -706,14 +689,12 @@
 		[[BFGamesManager sharedGamesManager] stopMonitoring];
 		_friendsListController.delegate = nil;
 		[_friendsListController reloadData];
-		[_friendsListController release];
 		_friendsListController = nil;
 		[self changeToMode:BFApplicationModeOffline];
 	}
 	else if( newStatus == XFSessionStatusOffline )
 	{
 		[_session setDelegate:nil];
-		[_session release];
 		_session = nil;
 	}
 }
@@ -722,7 +703,6 @@
 
 - (void)session:(XFSession *)session didReceiveFriendShipRequests:(NSArray *)requests
 {
-	[_friendshipRequests release];
 	_friendshipRequests = [[NSMutableArray alloc] initWithArray:requests];
 	
 	[self checkForFriendRequest];
@@ -743,7 +723,6 @@
 		[_friendshipRequests removeObjectAtIndex:0];
 		if( [_friendshipRequests count] == 0 )
 		{
-			[_friendshipRequests release];
 			_friendshipRequests = nil;
 		}
 	}
@@ -806,7 +785,7 @@
 	// only allow the download if its possible at this time
 	if( !_download )
 	{
-		_download = [[BFDownload avatarDownload:url withDelegate:self] retain];
+		_download = [BFDownload avatarDownload:url withDelegate:self];
 		_download.context = remoteFriend;
 	}
 }
@@ -849,19 +828,17 @@
 
 - (void)download:(BFDownload *)download didFailWithError:(NSError *)error
 {
-	[_download release];
 	_download = nil;
 	NSLog(@"*** Unable to download avatar image %@",error);
 }
 
 - (void)download:(BFDownload *)download didFinishWithPath:(NSString *)path
 {
-	[_download release];
 	_download = nil;
 	XFFriend *remoteFriend = (XFFriend *)download.context;
 	if( remoteFriend )
 	{
-		NSString *cachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] retain];
+		NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
 		NSString *imagePath = [[NSString alloc] initWithFormat:@"%@/com.exurion.BlackFire/%@.jpg",cachePath,remoteFriend.username];
 		
 		if( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] )
@@ -880,12 +857,8 @@
 			[userImage setSize:NSMakeSize(32, 32)]; // make sure that the image view resizes the image to its own size
 			[_avatarImageView setImage:userImage];
 			
-			[userImage release];
 		}
 		
-		[cachePath release];
-		[avatarImage release];
-		[imagePath release];
 	}
 	
 	[_friendsListController reloadData];
@@ -1011,7 +984,6 @@
 	{
 		XFFriend *remoteFriend = [(BFRequestWindowController *)prompt remoteFriend];
 		[_session acceptFriendRequest:remoteFriend];
-		[_stringPromptController release];
 		_stringPromptController = nil;
 		[self checkForFriendRequest];
 		return;
@@ -1019,13 +991,10 @@
 	else if( [prompt isKindOfClass:[ADInvitationWindowController class]] )
 	{
 		XFFriend *selectedFriend = [(ADInvitationWindowController *)prompt selectedFriend];
-		[selectedFriend retain];
 		if( selectedFriend )
 		{
 			[_session sendFriendRequest:selectedFriend.username message:prompt.messageField.stringValue];
 		}
-		[selectedFriend release];
-		[_stringPromptController release];
 		_stringPromptController = nil;
 		return;
 	}
@@ -1057,17 +1026,13 @@
 				[[BFGamesManager sharedGamesManager] addMacGame:detectionDict forKey:detectionKey];
 				[_gamesListController reloadMacGames];
 				[[BFGamesManager sharedGamesManager] reCheckRunningGames];
-				[detectionDict release];
 			}
-			[appInfo release];
 		}
-		[_stringPromptController release];
 		_stringPromptController = nil;
 		return;
 	}
 	
 	NSString *nickname = [_stringPromptController.messageField.stringValue copy];
-	[_stringPromptController release];
 	_stringPromptController = nil;
 	
 	if( [nickname length] > 100 )
@@ -1076,12 +1041,10 @@
 			NSRunAlertPanel(@"incorrect nickname", @"The nickname you chose was too long. Your old nickname has been restored.", @"OK", nil, nil);
 		else
 			NSRunAlertPanel(@"incorrect status", @"The status you entered is too long. Please choose one that is shorter.", @"OK", nil, nil);
-		[nickname release];
 		return;
 	}
 	else if( [nickname length] < 1 )
 	{
-		[nickname release];
 		return;
 	}
 	
@@ -1095,7 +1058,6 @@
 		[_session setStatusString:nickname];
 	}
 	
-	[nickname release];
 }
 
 - (void)stringPromptDidCancel:(ADStringPromptController *)prompt
@@ -1105,19 +1067,16 @@
 	{
 		XFFriend *remoteFriend = [(BFRequestWindowController *)prompt remoteFriend];
 		[_session declineFriendRequest:remoteFriend];
-		[_stringPromptController release];
 		_stringPromptController = nil;
 		[self checkForFriendRequest];
 		return;
 	}
 	
-	[_stringPromptController release];
 	_stringPromptController = nil;
 }
 
 - (void)stringPromptDidDefer:(ADStringPromptController *)prompt
 {
-	[_stringPromptController release];
 	_stringPromptController = nil;
 	[self checkForFriendRequest];
 }

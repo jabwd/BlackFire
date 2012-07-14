@@ -16,20 +16,11 @@
 @end
 
 @interface BFDownload : NSObject
-{
-	NSURLConnection *_connection;
-	NSMutableData	*_data;
-	
-	NSString *_destinationPath;
-	
-	id _context;
-	id <BFDownloadDelegate> _delegate;
-}
 
-@property (assign) id <BFDownloadDelegate> delegate;
-@property (nonatomic, retain) id context;
+@property (unsafe_unretained) id <BFDownloadDelegate> delegate;
+@property (nonatomic, strong) id context;
 
-@property (nonatomic, retain) NSString *destinationPath;
+@property (nonatomic, strong) NSString *destinationPath;
 
 + (BFDownload *)imageDownload:(NSURL *)remoteURL withDelegate:(id<BFDownloadDelegate>)delegate;
 + (BFDownload *)avatarDownload:(NSURL *)remoteURL withDelegate:(id<BFDownloadDelegate>)delegate;

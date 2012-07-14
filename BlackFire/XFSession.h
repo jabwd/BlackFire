@@ -87,34 +87,12 @@ typedef enum{
 @end
 
 @interface XFSession : NSObject
-{
-	XFConnection		*_tcpConnection;
-	XFFriend			*_loginIdentity;
-	XFGroupController	*_groupController;
-	
-	id <XFSessionDelegate> _delegate;
-	
-	NSMutableArray	*_friends;
-	NSTimer			*_keepAliveTimer;
-	
-	NSMutableArray	*_chats;
-	NSMutableArray	*_groupChats;
-	
-	NSMutableArray *_servers;
-	
-	XFSessionStatus _status;
-	
-	// yeath this seems odd, but we need this in order to make sure that we aren't doing any excessive
-	// work displaying growl notifications when we are still "connecting" to xfire.
-	// yup, the protocol sucks.
-	BOOL _canPostNotifications;
-}
 
 @property (readonly) XFConnection *tcpConnection;
-@property (nonatomic, assign) XFFriend *loginIdentity;
-@property (nonatomic, assign) id <XFSessionDelegate> delegate;
-@property (nonatomic, retain) XFGroupController *groupController;
-@property (nonatomic, retain) NSMutableArray *serverList;
+@property (nonatomic, strong) XFFriend *loginIdentity;
+@property (nonatomic, unsafe_unretained) id <XFSessionDelegate> delegate;
+@property (nonatomic, strong) XFGroupController *groupController;
+@property (nonatomic, strong) NSMutableArray *serverList;
 
 @property (readonly) XFSessionStatus status;
 

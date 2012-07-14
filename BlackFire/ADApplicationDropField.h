@@ -13,14 +13,9 @@
 @end
 
 @interface ADApplicationDropField : NSView
-{
-	NSString *_applicationPath;
-	
-	id <ADApplicationDropFieldDelegate> _delegate;
-}
 
-@property (nonatomic, assign) id <ADApplicationDropFieldDelegate> delegate;
-@property (nonatomic, retain) NSString *applicationPath;
+@property (nonatomic, unsafe_unretained) id <ADApplicationDropFieldDelegate> delegate;
+@property (nonatomic, strong) NSString *applicationPath;
 
 
 

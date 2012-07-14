@@ -17,25 +17,15 @@
 @end
 
 @interface ADStringPromptController : NSObject
-{
-	NSWindow *_mainWindow;
-	NSWindow *_sheet;
-	NSTextField *_titleField;
-	NSTextField *_messageField;
-	NSButton *_cancelButton;
-	NSButton *_doneButton;
-	
-	id <ADStringPromptDelegate> _delegate;
-}
 
-@property (assign) IBOutlet NSWindow	*sheet;
-@property (assign) IBOutlet NSTextField *titleField;
-@property (assign) IBOutlet NSTextField *messageField;
+@property (unsafe_unretained) IBOutlet NSWindow	*sheet;
+@property (unsafe_unretained) IBOutlet NSTextField *titleField;
+@property (unsafe_unretained) IBOutlet NSTextField *messageField;
 
-@property (assign) IBOutlet NSButton *cancelButton;
-@property (assign) IBOutlet NSButton *doneButton;
+@property (unsafe_unretained) IBOutlet NSButton *cancelButton;
+@property (unsafe_unretained) IBOutlet NSButton *doneButton;
 
-@property (assign) id <ADStringPromptDelegate> delegate;
+@property (unsafe_unretained) id <ADStringPromptDelegate> delegate;
 
 - (id)initWithWindow:(NSWindow *)mainWindow;
 

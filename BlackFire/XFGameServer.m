@@ -20,22 +20,12 @@ NSString *removeQuakeColorCodes(NSString *string);
 
 @implementation XFGameServer
 
-@synthesize name		= _name;
 
-@synthesize IPAddress	= _IPAddress;
-@synthesize port		= _port;
-@synthesize gameID		= _gameID;
-@synthesize online		= _online;
 
-@synthesize raw = _raw;
 
 - (void)dealloc
 {
-	[_raw release];
 	_raw = nil;
-	[_name release];
-	_name = nil;
-	[super dealloc];
 }
 
 - (NSString *)description
@@ -67,8 +57,7 @@ NSString *removeQuakeColorCodes(NSString *string);
 		}
 	}
 	
-	[_raw release];
-	_raw = [raw retain];
+	_raw = raw;
 }
 
 - (NSString *)playerString

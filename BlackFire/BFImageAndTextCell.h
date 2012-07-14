@@ -29,9 +29,9 @@ typedef enum
 	CellStatus status;
 }
 
-@property (nonatomic, retain) NSImage *image;
+@property (nonatomic, strong) NSImage *image;
 @property (nonatomic, assign) CellStatus status;
-@property (nonatomic, retain) NSImage *statusImage;
+@property (nonatomic, strong) NSImage *statusImage;
 @property (assign) BOOL groupRow;
 
 
